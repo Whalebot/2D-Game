@@ -4,6 +4,7 @@
 public class Moveset : ScriptableObject
 {
     public Move dodge;
+    public Move airDodge;
     public Move dashAttack;
     public Move airDashAttack;
 

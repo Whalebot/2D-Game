@@ -81,6 +81,12 @@ ModelImporter:
   - first:
       74: -3959291351053737630
     second: Frank_Sword2@Combo08_3
+  - first:
+      74: 1511596114227024006
+    second: L2_Sword
+  - first:
+      74: 7838606046618142773
+    second: L1_Sword
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -907,6 +913,64 @@ ModelImporter:
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 100
+    - serializedVersion: 16
+      name: L2_Sword
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 200
+      lastFrame: 235
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 100
+    - serializedVersion: 16
+      name: L1_Sword
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 601
+      lastFrame: 631
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 100
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -1410,8 +1474,7 @@ ModelImporter:
     - name: ik_hand_r
       parentName: ik_hand_gun
       position: {x: -0, y: -0.000000076293944, z: 0}
-      rotation: {x: 0.000000014901158, y: -0.000000014901163, z: -0.000000029802326,
-        w: 1}
+      rotation: {x: 0.000000014901158, y: -0.000000014901163, z: -0.000000029802326, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: ik_hand_l
       parentName: ik_hand_gun
@@ -1511,8 +1574,7 @@ ModelImporter:
     - name: Bone001
       parentName: Cape_R_05
       position: {x: -0.18903334, y: -0.000000076293944, z: 0.000000009536743}
-      rotation: {x: 0.000000038882717, y: 0.0000000023283075, z: 0.000000029802322,
-        w: 1}
+      rotation: {x: 0.000000038882717, y: 0.0000000023283075, z: 0.000000029802322, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Cape_C_01
       parentName: Cape_Root
@@ -1622,8 +1684,7 @@ ModelImporter:
     - name: Sword_Bone
       parentName: R_Hand_Weapon
       position: {x: 0.00000015258789, y: 0.000000076293944, z: -0.000000114440915}
-      rotation: {x: -0.00000050663937, y: 0.000000014901158, z: 0.00000015273686,
-        w: 1}
+      rotation: {x: -0.00000050663937, y: 0.000000014901158, z: 0.00000015273686, w: 1}
       scale: {x: 1.0000001, y: 1.0000002, z: 1.0000011}
     - name: middle_01_r
       parentName: hand_r
@@ -1723,8 +1784,7 @@ ModelImporter:
     - name: lowerarm_twist_01_l
       parentName: lowerarm_l
       position: {x: -0.14000015, y: 0.000000095367426, z: 0.00000022888183}
-      rotation: {x: -0.0000000074505815, y: 0.000000014901159, z: 0.00000001117587,
-        w: 1}
+      rotation: {x: -0.0000000074505815, y: 0.000000014901159, z: 0.00000001117587, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: hand_l
       parentName: lowerarm_l
@@ -1893,8 +1953,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 1b2327132c40c7e44ac5da9a83f57e25,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 1b2327132c40c7e44ac5da9a83f57e25, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1

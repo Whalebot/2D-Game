@@ -12,10 +12,13 @@ Material:
   m_ValidKeywords:
   - N_F_CO_ON
   - N_F_EAL_ON
+  - N_F_GLOT_ON
+  - N_F_GLO_ON
   - N_F_NM_ON
   - N_F_O_ON
   - N_F_RDC_ON
   - N_F_RELGI_ON
+  - N_F_RL_ON
   - N_F_SS_ON
   - N_F_TRANSAFFSHA_ON
   - N_F_TRANS_ON
@@ -27,7 +30,6 @@ Material:
   - _GLOSSTEXTUREFOLLOWOBJECTROTATION_OFF
   - _LIGHTAFFECTOUTLINECOLOR_OFF
   - _LIGHTAFFECTRIMLIGHTCOLOR_OFF
-  - _LIGHTAFFECTSHADOW_OFF
   - _LIGHTFALLOFFAFFECTSHADOWT_OFF
   - _LIGIGNOYNORDIR_OFF
   - _MCIALO_OFF
@@ -68,9 +70,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GlossTexture:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: d950efe8551c1aa49a29e40e05ad83bd, type: 3}
         m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+        m_Offset: {x: 0, y: 0.28}
     - _MCap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -169,7 +171,7 @@ Material:
     - _Cutout: 0.4
     - _DebugMode: 0
     - _DepthThreshold: 900
-    - _DirectionalLightIntensity: 1
+    - _DirectionalLightIntensity: 0.5
     - _DoubleSidedOutline: 1
     - _DstBlend: 0
     - _DynamicNoisyOutline: 0
@@ -178,7 +180,7 @@ Material:
     - _GIFlatShade: 0
     - _GIShadeThreshold: 0
     - _GlossColorPower: 10
-    - _GlossIntensity: 1
+    - _GlossIntensity: 0.055
     - _GlossSoftness: 0
     - _GlossTextureFollowLight: 0
     - _GlossTextureFollowObjectRotation: 0
@@ -191,7 +193,7 @@ Material:
     - _LigIgnoYNorDir: 0
     - _LightAffectOutlineColor: 0
     - _LightAffectRimLightColor: 0
-    - _LightAffectShadow: 0
+    - _LightAffectShadow: 1
     - _LightColorAttenuation: 0
     - _LightFalloffAffectShadowT: 0
     - _LightFalloffSoftness: 1
@@ -210,8 +212,8 @@ Material:
     - _N_F_EAL: 1
     - _N_F_ESSAO: 0
     - _N_F_FR: 0
-    - _N_F_GLO: 0
-    - _N_F_GLOT: 0
+    - _N_F_GLO: 1
+    - _N_F_GLOT: 1
     - _N_F_HDLS: 0
     - _N_F_HPSS: 0
     - _N_F_MC: 0
@@ -223,7 +225,7 @@ Material:
     - _N_F_PT: 0
     - _N_F_R: 0
     - _N_F_RDC: 1
-    - _N_F_RL: 0
+    - _N_F_RL: 1
     - _N_F_SCT: 0
     - _N_F_SL: 0
     - _N_F_SON: 0
@@ -247,7 +249,7 @@ Material:
     - _OverallShadowColorPower: 0.7
     - _PSGLOTEX: 0
     - _PTexturePower: 1
-    - _PointSpotlightIntensity: 1
+    - _PointSpotlightIntensity: 0.5
     - _RELG: 1
     - _ReceiveShadowRate: 1
     - _ReduSha: 0.5
@@ -257,11 +259,11 @@ Material:
     - _ReflectionRoughtness: 0
     - _RimFresnelPower: 100
     - _RimLift: 0.1
-    - _RimLigInt: 1
+    - _RimLigInt: 0.056
     - _RimLightColorPower: 10
     - _RimLightInLight: 1
-    - _RimLightSoftness: 1
-    - _RimLightUnfill: 1.5
+    - _RimLightSoftness: 0.143
+    - _RimLightUnfill: 2.3
     - _RimLightingMix: 0
     - _SPECIN: 1
     - _SPECMODE: 0

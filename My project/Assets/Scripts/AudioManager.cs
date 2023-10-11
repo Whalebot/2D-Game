@@ -12,16 +12,8 @@ public class AudioManager : MonoBehaviour
     public AudioSource AS;
     public List<AudioSource> sfx;
     public AudioClip defaultBGM;
-    public AudioClip[] seasonalBGM;
     public AudioSource battleMusic;
-    public AudioSource dayAmbience;
-    public AudioSource nightAmbience;
     public float fadeSpeed;
-
-    public GameObject discoverItemSFX;
-    public GameObject pickupSFX;
-    public GameObject questStartSFX;
-    public GameObject questCompleteSFX;
 
     float ASstart;
     float battleStart;
@@ -37,7 +29,6 @@ public class AudioManager : MonoBehaviour
     {
         Instance = this;
         ASstart = AS.volume;
-        battleStart = battleMusic.volume;
         GameManager.Instance.advanceGameState += AdvanceFrames;
     }
     // Start is called before the first frame update

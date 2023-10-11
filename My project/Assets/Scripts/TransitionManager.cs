@@ -8,13 +8,12 @@ public class TransitionManager : MonoBehaviour
     public Animator fadeAnimator;
     public Animator deathAnimator;
     public Animator winAnimator;
-    public GameObject endOfDayScreen;
+    public GameObject resultScreen;
 
     public static bool isLoading;
 
     public float sceneTransitionDelay;
-    //  public GameObject resultScreen;
-    bool dayEnded = false;
+
     private void Awake()
     {
         Instance = this;
@@ -28,11 +27,6 @@ public class TransitionManager : MonoBehaviour
 
     void ButtonPress()
     {
-    }
-
-    public void LoadHub()
-    {
-        SceneManager.LoadScene(0);
     }
 
     IEnumerator TransitionDelay(int sceneIndex)
@@ -50,22 +44,6 @@ public class TransitionManager : MonoBehaviour
         Fade();
         yield return new WaitForSeconds(sceneTransitionDelay);
         SceneManager.LoadScene(sceneName);
-    }
-
-    public void LoadHouse()
-    {
-        if (isLoading) return;
-        isLoading = true;
-        StartCoroutine(SleepDelay(1));
-    }
-
-    IEnumerator SleepDelay(int sceneIndex)
-    {
-        AudioManager.Instance.FadeOutVolume();
-        Fade();
-        yield return new WaitForSeconds(sceneTransitionDelay);
-        endOfDayScreen.SetActive(true);
-        dayEnded = true;
     }
 
     public void EndDay()

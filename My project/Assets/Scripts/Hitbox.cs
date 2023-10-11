@@ -95,8 +95,6 @@ public class Hitbox : MonoBehaviour
         knockbackDirection.y = 0;
         knockbackDirection = knockbackDirection.normalized;
 
-        SkillHandler skillHandler = attack.GetComponent<SkillHandler>();
-
         //Check for block
         if (other.blocking)
         {
@@ -123,10 +121,6 @@ public class Hitbox : MonoBehaviour
 
     void ExecuteBlock(HitProperty hit, Status other, Attack atk)
     {
-        if (move.gatlingMoves.Count > 0 && move.gatlingCancelOnBlock)
-            attack.GatlingStart(true);
-        else
-            attack.GatlingStart(false);
         attack.hit = true;
         attack.specialCancel = move.specialCancelOnBlock;
         attack.jumpCancel = move.jumpCancelOnBlock;
@@ -141,7 +135,7 @@ public class Hitbox : MonoBehaviour
 
 
         //Calculate direction
-        aVector = knockbackDirection * hit.pushback.x * hit.pushback.x + Vector3.up * hit.pushback.y;
+        aVector = knockbackDirection * hit.pushback.x + Vector3.up * hit.pushback.y;
 
         int totalDamage = (int)(baseDamage *
         (atk.damage * status.currentStats.damageModifierPercentage) + status.currentStats.damageModifierFlat);
@@ -169,11 +163,6 @@ public class Hitbox : MonoBehaviour
 
     void ExecuteHit(HitProperty hit, Status other, Attack atk)
     {
-        if (move.gatlingMoves.Count > 0 && move.gatlingCancelOnHit)
-            attack.GatlingStart(true);
-        else
-            attack.GatlingStart(false);
-
         attack.hit = true;
         attack.specialCancel = move.specialCancelOnHit;
         attack.jumpCancel = move.jumpCancelOnHit;

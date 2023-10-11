@@ -98,7 +98,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (mov.ground)
         {
-            return attack.Attack(attack.moveset.lightCombo.moves[0]);
+            return attack.LightAttack();
         }
         else
         {
@@ -124,7 +124,19 @@ public class PlayerInputHandler : MonoBehaviour
 
     bool EastButton()
     {
-        Debug.Log("Test");
+        if (mov.ground)
+        {
+
+            return attack.Attack(attack.moveset.dodge);
+        }
+        else
+        {
+            return attack.Attack(attack.moveset.airDodge);
+        }
+    }
+
+    bool R1Button()
+    {
         if (mov.ground)
         {
             if (!attack.attacking || attack.attacking && attack.canTargetCombo)
@@ -133,26 +145,14 @@ public class PlayerInputHandler : MonoBehaviour
         }
         else
         {
-            //if (!attack.attacking || attack.attacking && attack.canTargetCombo)
-            //    mov.DoubleJump();
-            //else 
-            return false;
+            if (!attack.attacking || attack.attacking && attack.canTargetCombo)
+                mov.DoubleJump();
+            else
+                return false;
 
         }
         return true;
-    }
-
-    bool R1Button()
-    {
-        if (mov.ground)
-        {
-
-            return attack.Attack(attack.moveset.dodge);
-        }
-        else
-        {
-            return false;
-        }
+     
     }
 
     void NeutralInput()
@@ -234,8 +234,6 @@ public class PlayerInputHandler : MonoBehaviour
     }
     void InAnimationInput()
     {
-        mov.sprinting = false;
-
         if (InputAvailable())
         {
             if (attack.attackString) { NeutralInput(); }

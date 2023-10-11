@@ -66,7 +66,6 @@ public class Move : ScriptableObject
     [TabGroup("Move properties")] public int airInvulDuration;
 
     [TabGroup("Cancel properties")] public List<Move> targetComboMoves;
-    [TabGroup("Cancel properties")] public List<Move> gatlingMoves;
     [TabGroup("Cancel properties")] public bool fullCancel = false;
     [TabGroup("Cancel properties")] public bool gatlingCancel = false;
     [TabGroup("Cancel properties")] public bool uncancelable = false;
@@ -79,9 +78,6 @@ public class Move : ScriptableObject
     [TabGroup("Cancel properties")] public bool specialCancelOnBlock = true;
     [TabGroup("Cancel properties")] public bool specialCancelOnHit = true;
 
-
-
-    [TabGroup("Air properties")] public bool aimOnStartup;
     [TabGroup("Air properties")] public bool useAirAction;
     [TabGroup("Air properties")] public bool landCancel;
     [TabGroup("Air properties")] public bool recoverOnlyOnLand;

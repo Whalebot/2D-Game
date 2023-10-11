@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationID: 0
   icon: {fileID: 0}
-  firstStartupFrame: 20
-  lastActiveFrame: 24
-  totalMoveDuration: 44
-  firstGatlingFrame: 25
+  firstStartupFrame: 10
+  lastActiveFrame: 14
+  totalMoveDuration: 34
+  firstGatlingFrame: 15
   recoveryFrames: 20
   attacks:
   - attackLevel: 0
@@ -27,11 +27,11 @@ MonoBehaviour:
     stun: 20
     hitstop: 5
     poiseBreak: 0
-    startupFrame: 20
+    startupFrame: 10
     activeFrames: 5
     gatlingFrames: 5
     groundHitProperty:
-      pushback: {x: 0, y: 0}
+      pushback: {x: 5, y: 0}
       hitState: 0
     airHitProperty:
       pushback: {x: 0, y: 0}
@@ -43,7 +43,12 @@ MonoBehaviour:
   type: 0
   uniqueProperties: []
   screenShake: []
-  vfx: []
+  vfx:
+  - startup: 8
+    prefab: {fileID: 1320683006971348, guid: 83ea291b15cd5ed46be1077c6b047713, type: 3}
+    position: {x: 0, y: 0.4, z: 0.5}
+    rotation: {x: -5.44, y: 180, z: -189.5}
+    scale: {x: 0.4, y: 0.4, z: 0.4}
   sfx: []
   hitFX: {fileID: 0}
   blockFX: {fileID: 0}
@@ -71,10 +76,8 @@ MonoBehaviour:
   airInvulDuration: 0
   targetComboMoves:
   - {fileID: 11400000, guid: 37391d90e34a3c04d9b26278e1cbb6d9, type: 2}
-  gatlingMoves:
-  - {fileID: 11400000, guid: 37391d90e34a3c04d9b26278e1cbb6d9, type: 2}
   fullCancel: 0
-  gatlingCancel: 0
+  gatlingCancel: 1
   uncancelable: 0
   gatlingCancelOnBlock: 1
   gatlingCancelOnHit: 1
@@ -82,13 +85,12 @@ MonoBehaviour:
   jumpCancelOnHit: 1
   specialCancelOnBlock: 1
   specialCancelOnHit: 1
-  aimOnStartup: 0
   useAirAction: 0
   landCancel: 0
   recoverOnlyOnLand: 0
   m:
   - startFrame: 3
-    duration: 5
+    duration: 2
     momentum: {x: 4, y: 0}
     freeMovement: 0
     homing: 0

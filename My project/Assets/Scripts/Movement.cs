@@ -10,22 +10,19 @@ public class Movement : MonoBehaviour
 
     [Header("Movement attributes")]
     [TabGroup("Movement"), ReadOnly] public Vector3 direction;
-    [TabGroup("Movement"), ReadOnly] public Vector3 airDirection;
+    //[TabGroup("Movement"), ReadOnly] public Vector3 airDirection;
     [TabGroup("Movement"), ReadOnly] public Vector3 vel;
     [TabGroup("Movement")] public bool onlyForward = false;
     [TabGroup("Movement")] public bool isMoving = false;
     [TabGroup("Movement")] public bool forcedWalk;
     [TabGroup("Movement")] public float walkSpeed = 3;
     [TabGroup("Movement")] public float runSpeed = 8;
-    [TabGroup("Movement")] public float strafeSpeed = 5;
-
     [HideInInspector] public bool run;
 
     [TabGroup("Movement")] public float currentVel;
     [TabGroup("Movement"), ReadOnly] public float actualVelocity;
     [TabGroup("Movement")] public float smoothAcceleration = 0.5f;
     [TabGroup("Movement")] public float smoothDeacceleration = 0.5f;
-    [TabGroup("Movement")] public float walkThreshold;
 
     [TabGroup("Ground Detection")] public bool useWallDetection;
     [TabGroup("Ground Detection")] public bool ground;
@@ -50,6 +47,7 @@ public class Movement : MonoBehaviour
     [TabGroup("Ground Detection")] public float stepRayLength;
     [HeaderAttribute("Jump attributes")]
     [TabGroup("Jump")] public float jumpHeight;
+    [TabGroup("Jump")] public float airSpeed;
     [TabGroup("Jump")] public float fallMultiplier;
     [TabGroup("Jump")] public int minimumJumpTime = 2;
     [TabGroup("Jump")] int jumpCounter;
@@ -57,10 +55,6 @@ public class Movement : MonoBehaviour
     [TabGroup("Jump")] public int performedJumps;
     [TabGroup("Jump")] public float airDeceleration = 0.95F;
     [TabGroup("Jump")] public float airBrake = 0.8F;
-
-    [HeaderAttribute("Sprint attributes")]
-    [TabGroup("Movement")] public bool sprinting;
-    [TabGroup("Movement")] public float sprintSpeed = 12;
 
     public event Action jumpEvent;
     public event Action doubleJumpEvent;
@@ -82,8 +76,14 @@ public class Movement : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
         status = GetComponent<Status>();
+        status.neutralEvent += Neutral;
     }
 
+    void Neutral()
+    {
+        if (ground)
+            col.material = groundMat;
+    }
     private void OnDisable()
     {
         GameManager.Instance.advanceGameState -= ExecuteFrame;
@@ -96,9 +96,11 @@ public class Movement : MonoBehaviour
 
         if (status.currentState == Status.State.Neutral)
         {
-            ExecuteMovement();
+    
+                ExecuteMovement();
+
         }
-        //if (_rb.velocity.y < 0) SetVelocity(_rb.velocity + Physics.gravity * fallMultiplier);
+        if (_rb.velocity.y < 0) SetVelocity(_rb.velocity + Physics.gravity * fallMultiplier);
     }
 
     public void SetVelocity(Vector3 v)
@@ -124,7 +126,8 @@ public class Movement : MonoBehaviour
     {
         MovementProperties();
         Rotation();
-        PlayerMovement();
+       // if (status.alignment == Alignment.Player)
+            PlayerMovement();
     }
 
     #region Assistance functions
@@ -157,16 +160,13 @@ public class Movement : MonoBehaviour
         {
             currentVel = 0;
         }
-        else if (isMoving && ground)
-        {
-            currentVel = runSpeed;
-        }
         else
         {
-            currentVel = walkSpeed;
-
+            if (ground)
+                currentVel = runSpeed;
+            else
+                currentVel = airSpeed;
         }
-
         CalculateVelocity();
     }
 
@@ -180,8 +180,6 @@ public class Movement : MonoBehaviour
 
         if (isMoving)
         {
-            airDirection = transform.forward;
-
             if (currentVel == 0)
                 SetVelocity(new Vector3(transform.forward.x * walkSpeed, _rb.velocity.y, 0));
             else SetVelocity(new Vector3(transform.forward.x * currentVel, _rb.velocity.y, 0));
@@ -192,6 +190,9 @@ public class Movement : MonoBehaviour
     }
     public void DoubleJump()
     {
+        if (performedJumps >= multiJumps) return;
+        performedJumps++;
+        Rotation();
         jumpCounter = minimumJumpTime;
         col.material = airMat;
         ground = false;
@@ -200,9 +201,9 @@ public class Movement : MonoBehaviour
         if (isMoving)
         {
             if (currentVel == 0)
-                _rb.velocity = new Vector3(transform.forward.x * walkSpeed, _rb.velocity.y, 0);
+                _rb.velocity = new Vector3(Mathf.Sign(direction.x) * walkSpeed, _rb.velocity.y, 0);
             else
-                _rb.velocity = new Vector3(transform.forward.x * currentVel, _rb.velocity.y, 0);
+                _rb.velocity = new Vector3(Mathf.Sign(direction.x) * currentVel, _rb.velocity.y, 0);
         }
 
         _rb.velocity = new Vector3(_rb.velocity.x, jumpHeight, _rb.velocity.z);
@@ -298,8 +299,7 @@ public class Movement : MonoBehaviour
             {
                 if (check || check2)
                 {
-                    landEvent?.Invoke();
-                    ground = true;
+                    Landing();
                 }
                 bool check3 = Physics.Raycast(transform.position + Vector3.up * 0.1F, Vector3.down, out hit, preLandRayLength, groundMask);
 
@@ -315,18 +315,23 @@ public class Movement : MonoBehaviour
             if (!check && !check2)
             {
                 ground = false;
-                if (_rb.velocity.y > 0)
-                    airDirection = new Vector3(_rb.velocity.x, 0, 0).normalized;
-                else
-                    airDirection = _rb.velocity.normalized;
+                //if (_rb.velocity.y > 0)
+                //    airDirection = new Vector3(_rb.velocity.x, 0, 0).normalized;
+                //else
+                //    airDirection = _rb.velocity.normalized;
             }
         }
 
-
-        if (isMoving) col.material = groundMat;
-        else if (ground) col.material = groundMat;
+        if (ground) col.material = groundMat;
         else col.material = airMat;
         return ground;
+    }
+
+    void Landing()
+    {
+        landEvent?.Invoke();
+        performedJumps = 0;
+        ground = true;
     }
 
     public void PlayerMovement()
@@ -341,10 +346,11 @@ public class Movement : MonoBehaviour
             //Fix
             if (!isMoving)
             {
-                SetVelocity(airDirection * temp.magnitude * airDeceleration + _rb.velocity.y * Vector3.up);
+                //NEEDS TO FLY CORRECT WAY
+                SetVelocity(temp * airDeceleration + _rb.velocity.y * Vector3.up);
             }
             else
-                SetVelocity(airDirection * temp.magnitude + _rb.velocity.y * Vector3.up);
+                SetVelocity(transform.forward * actualVelocity * Mathf.Abs(direction.x) + _rb.velocity.y * Vector3.up);
         }
         else
         //Normal Walking
@@ -354,6 +360,7 @@ public class Movement : MonoBehaviour
             {
                 SetVelocity(new Vector3(transform.forward.x * actualVelocity, _rb.velocity.y, 0));
             }
+            else SetVelocity(new Vector3(transform.forward.x * actualVelocity, _rb.velocity.y, 0));
             //else
             //{
             //    temp = direction.normalized;

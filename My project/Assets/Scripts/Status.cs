@@ -18,7 +18,6 @@ public class Status : MonoBehaviour
     [TabGroup("Current Stats")] public int blockstunValue;
     [HideInInspector] public bool inBlockStun;
     [HideInInspector] public bool inHitStun;
-    [TabGroup("Current Stats")] public int staminaRegenTimer = 1;
     int staminaRegenCounter;
     [TabGroup("Current Stats")]
     [HideLabel] public Stats currentStats;
@@ -40,7 +39,6 @@ public class Status : MonoBehaviour
     int counter;
     [Header("Auto destroy on death")]
     [TabGroup("Settings")] public bool autoDeath;
-    [TabGroup("Settings")] public bool staminaDeath;
     [TabGroup("Settings")] public bool destroyParent;
     [TabGroup("Settings")] [ShowIf("autoDeath")] public float autoDeathTime = 1.5F;
     [HideInInspector] private Rigidbody rb;

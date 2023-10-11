@@ -154,7 +154,7 @@ public class GameManager : MonoBehaviour
     public void FinalHit()
     {
 
-        CameraManager.Instance.SetGroupTarget();
+       // CameraManager.Instance.SetGroupTarget();
     }
 
     IEnumerator DelayResume()
@@ -245,13 +245,6 @@ public class GameManager : MonoBehaviour
         StartCoroutine(RestartDelay());
     }
 
-    public void Sleep()
-    {
-        reloading = true;
-        StartCoroutine("DeathScreenDelay");
-        TransitionManager.Instance.LoadHouse();
-    }
-
     void RestartGame()
     {
         Time.timeScale = 1;
@@ -268,12 +261,6 @@ public class GameManager : MonoBehaviour
     IEnumerator RestartDelay()
     {
         yield return new WaitForSeconds(restartDelay);
-        TransitionManager.Instance.LoadHouse();
+        TransitionManager.Instance.LoadScene(0);
     }
-
-    public void ReturnToHub()
-    {
-        TransitionManager.Instance.LoadHub();
-    }
-
 }

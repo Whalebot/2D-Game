@@ -73,11 +73,6 @@ public class CharacterAnimator : MonoBehaviour
         }
     }
 
-    void DetectAnimation()
-    {
-        anim.SetBool("Detect", true);
-    }
-
     void ExecuteFrame()
     {
         anim.enabled = true;
@@ -91,18 +86,18 @@ public class CharacterAnimator : MonoBehaviour
         if (!GameManager.Instance.runNormally) StartCoroutine(PauseAnimation());
     }
 
-    //public void HitStop()
-    //{
-    //    StartCoroutine(HitstopStart());
-    //}
+    public void HitStop()
+    {
+        StartCoroutine(HitstopStart());
+    }
 
-    //IEnumerator HitstopStart()
-    //{
-    //    hitstop = false;
-    //    yield return new WaitForFixedUpdate();
-    //    // yield return new WaitForFixedUpdate();
-    //    hitstop = true;
-    //}
+    IEnumerator HitstopStart()
+    {
+        hitstop = false;
+        yield return new WaitForFixedUpdate();
+        // yield return new WaitForFixedUpdate();
+        hitstop = true;
+    }
 
     IEnumerator PauseAnimation()
     {
@@ -171,11 +166,9 @@ public class CharacterAnimator : MonoBehaviour
 
     private void RunSpeed()
     {
-        //runSpeed = movement.actualVelocity / movement.sprintSpeed;
         if (!movement.isMoving) runSpeed = Mathf.Lerp(runSpeed, 0, deaccelerateSpeed);
-        else if (movement.sprinting) runSpeed = Mathf.Lerp(runSpeed, 1, deaccelerateSpeed);
-        else if (movement.run) runSpeed = Mathf.Lerp(runSpeed, 0.6F, deaccelerateSpeed);
-        else if (movement.isMoving) runSpeed = Mathf.Lerp(runSpeed, 0.25F, deaccelerateSpeed);
+        else  runSpeed = Mathf.Lerp(runSpeed, 0.6F, deaccelerateSpeed);
+        //else if (movement.isMoving) runSpeed = Mathf.Lerp(runSpeed, 0.25F, deaccelerateSpeed);
 
 
         anim.SetFloat("RunSpeed", Mathf.Abs(runSpeed));

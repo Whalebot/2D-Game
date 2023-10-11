@@ -1,0 +1,12 @@
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
+using UnityEngine.InputSystem;
+public class DevCheats : MonoBehaviour
+{
+    void Update()
+    {
+        if (Keyboard.current.numpadPlusKey.wasPressedThisFrame) GameManager.Instance.AdvanceGameStateButton();
+        if (Keyboard.current.numpadMinusKey.wasPressedThisFrame) GameManager.Instance.runNormally = true;
+        if (Keyboard.current.rKey.wasPressedThisFrame) TransitionManager.Instance.LoadScene(0);
+    }
+}

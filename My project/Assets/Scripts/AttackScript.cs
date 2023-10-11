@@ -28,13 +28,11 @@ public class AttackScript : MonoBehaviour
     public MoveEvent deactivateHitboxEvent;
     public MoveEvent attackHitEvent;
     public MoveEvent attackPerformedEvent;
-
     public Moveset moveset;
     [HeaderAttribute("Attack attributes")]
     [TabGroup("Debug")] public bool attacking;
     [TabGroup("Debug")] public Move activeMove;
     [TabGroup("Debug")] public bool hit;
-    [TabGroup("Debug")] public bool gatling;
     [TabGroup("Debug")] public int gatlingFrame;
     [TabGroup("Debug")] public int attackID;
     [TabGroup("Debug")] public float attackFrames;
@@ -101,13 +99,6 @@ public class AttackScript : MonoBehaviour
     void ResetAttack()
     {
         ResetAllValues();
-    }
-
-    public void GatlingStart(bool g)
-    {
-        //canTargetCombo = true;
-        gatling = g;
-        gatlingFrame = (int)attackFrames;
     }
 
     public void ExecuteFrame()
@@ -212,30 +203,24 @@ public class AttackScript : MonoBehaviour
 
         for (int i = 0; i < activeMove.m.Length; i++)
         {
-            if (attackFrames > activeMove.m[i].startFrame && attackFrames < activeMove.m[i].startFrame + activeMove.m[i].duration) { tempMomentum = true; }
+            if (attackFrames > activeMove.m[i].startFrame && attackFrames < activeMove.m[i].startFrame + activeMove.m[i].duration)
+            {
+                tempMomentum = true;
+            }
             //Recovery
-            if (attackFrames > activeMove.m[i].startFrame + activeMove.m[i].duration || status.currentState == Status.State.Recovery)
+            if (attackFrames > activeMove.m[i].startFrame + activeMove.m[i].duration)
             {
                 movement.forcedWalk = false;
                 if (activeMove.m[i].resetVelocityDuringRecovery)
                 {
-                    //movement._rb.velocity = Vector3.zero;
+                    movement._rb.velocity = Vector3.zero;
                 }
             }
-
-
-            else
+            else if (attackFrames >= activeMove.m[i].startFrame && attackFrames < activeMove.m[i].startFrame + activeMove.m[i].duration)
             {
-                if (activeMove.m[i].freeMovement)
-                {
-                    movement.forcedWalk = true;
-                   // movement.ExecuteMovement();
-                }
-                else
-                {
-                    Debug.Log("momentum");
-                    movement._rb.velocity = activeMove.m[i].momentum.x * transform.forward + transform.up * activeMove.m[i].momentum.y;
-                }
+                //Debug.Log($"{attackFrames} + {i} + {activeMove.m[i].startFrame + activeMove.m[i].duration}");
+                if (!movement.ground) movement._rb.useGravity = false;
+                movement.SetVelocity(activeMove.m[i].momentum.x * transform.forward + transform.up * activeMove.m[i].momentum.y);
             }
         }
         inMomentum = tempMomentum;
@@ -433,7 +418,6 @@ public class AttackScript : MonoBehaviour
         attackString = false;
         canTargetCombo = false;
         hit = false;
-        gatling = false;
         jumpCancel = false;
         specialCancel = false;
         holdAttack = move.holdAttack;
@@ -473,7 +457,7 @@ public class AttackScript : MonoBehaviour
         if (move == null) return false;
 
 
-        if (jumpFrameCounter > 0) return false;
+      //  if (jumpFrameCounter > 0) return false;
         if (move.useAirAction && !attacking)
         {
             //if (movement.performedJumps <= 0)
@@ -488,34 +472,15 @@ public class AttackScript : MonoBehaviour
 
         if (activeMove != null)
         {
-
             if (activeMove.uncancelable) return false;
             else if (move.fullCancel) return true;
-        }
-
-
-        if (specialCancel)
-        {
-            if (move.type == MoveType.Special || move.type == MoveType.EX || move.type == MoveType.Super)
-                return true;
         }
 
         if (move != null && canTargetCombo)
         {
             if (move.gatlingCancel) return true;
         }
-
-        if (attacking && gatling)
-        {
-
-            if (activeMove.gatlingMoves.Count <= 0) return false;
-            if (move == null) return true;
-            if (!activeMove.gatlingMoves.Contains(move)) return false;
-            else
-            {
-                return true;
-            }
-        }
+        Debug.Log("no true");
         return false;
     }
 
@@ -540,11 +505,11 @@ public class AttackScript : MonoBehaviour
                     return true;
                 }
 
-                if (usedMoves.Contains(move) && activeMove == move || move.targetComboMoves.Contains(activeMove))
-                {
-                    Attack(move.targetComboMoves[0]);
-                    return true;
-                }
+                //if (usedMoves.Contains(move) && activeMove == move || move.targetComboMoves.Contains(activeMove))
+                //{
+                //    Attack(move.targetComboMoves[0]);
+                //    return true;
+                //}
 
             }
         }
@@ -557,10 +522,6 @@ public class AttackScript : MonoBehaviour
         if (usedMoves.Contains(move))
         {
             int duplicates = 1;
-            foreach (var item in move.gatlingMoves)
-            {
-                if (item == move) duplicates++;
-            }
             foreach (var item in usedMoves)
             {
                 if (item == move) duplicates--;
@@ -569,6 +530,24 @@ public class AttackScript : MonoBehaviour
         }
         else return false;
     }
+
+    public bool LightAttack()
+    {
+        if (moveset.lightCombo.moves.Length <= combo)
+            return false;
+        Debug.Log($"{moveset.lightCombo.moves.Length} + {combo}");
+
+        if (!CanUseMove(moveset.lightCombo.moves[combo]))
+        {
+            Debug.Log("Can't use move");
+            return false;
+        }
+
+        AttackProperties(moveset.lightCombo.moves[combo]);
+        combo++;
+        return true;
+    }
+
     public bool Attack(Move move)
     {
         if (move == null) return false;
@@ -676,7 +655,6 @@ public class AttackScript : MonoBehaviour
         jumpFrameCounter = 0;
         specialCancel = false;
         attacking = false;
-        gatling = false;
         canTargetCombo = false;
         landCancel = false;
         hit = false;

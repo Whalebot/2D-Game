@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
   m_Name: 5B
   m_EditorClassIdentifier: 
-  animationID: 1
+  animationID: 3
   icon: {fileID: 0}
   firstStartupFrame: 20
   lastActiveFrame: 24
-  totalMoveDuration: 49
+  totalMoveDuration: 34
   firstGatlingFrame: 25
-  recoveryFrames: 25
+  recoveryFrames: 10
   attacks:
-  - attackLevel: 0
+  - attackLevel: 1
     attackType: 0
     hitbox: {fileID: 5860963072138344223, guid: 6a749b7ddecd8444ea2db4afaa8c34b6, type: 3}
     damage: 1
@@ -31,7 +31,7 @@ MonoBehaviour:
     activeFrames: 5
     gatlingFrames: 5
     groundHitProperty:
-      pushback: {x: 0, y: 0}
+      pushback: {x: 2, y: 11}
       hitState: 0
     airHitProperty:
       pushback: {x: 0, y: 0}
@@ -42,7 +42,15 @@ MonoBehaviour:
     hitID: 0
   type: 0
   uniqueProperties: []
-  screenShake: []
+  screenShake:
+  - type: 0
+    startup: 20
+    amplitude: 3
+    duration: 3
+  - type: 1
+    startup: 1
+    amplitude: 5
+    duration: 5
   vfx: []
   sfx: []
   hitFX: {fileID: 0}
@@ -70,7 +78,6 @@ MonoBehaviour:
   airInvulStart: 1
   airInvulDuration: 0
   targetComboMoves: []
-  gatlingMoves: []
   fullCancel: 0
   gatlingCancel: 0
   uncancelable: 0
@@ -80,14 +87,13 @@ MonoBehaviour:
   jumpCancelOnHit: 1
   specialCancelOnBlock: 1
   specialCancelOnHit: 1
-  aimOnStartup: 0
   useAirAction: 0
   landCancel: 0
   recoverOnlyOnLand: 0
   m:
-  - startFrame: 30
-    duration: 10
-    momentum: {x: 4, y: 0}
+  - startFrame: 20
+    duration: 13
+    momentum: {x: 1, y: 6}
     freeMovement: 0
     homing: 0
     resetVelocityDuringRecovery: 0
