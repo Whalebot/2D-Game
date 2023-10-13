@@ -53,7 +53,7 @@ public class PlayerInputHandler : MonoBehaviour
             return;
         }
 
-        if (input.inputDirection != Vector2.zero)
+        if (input.inputDirection.x != 0)
         {
             mov.isMoving = true;
             mov.direction = new Vector2(input.inputDirection.x, 0);
@@ -98,11 +98,11 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (mov.ground)
         {
-            return attack.LightAttack();
+            return attack.ComboAttack(attack.moveset.lightCombo);
         }
         else
         {
-            return attack.Attack(attack.moveset.airLightCombo.moves[0]);
+            return attack.ComboAttack(attack.moveset.airLightCombo);
         }
     }
 
@@ -110,19 +110,47 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (mov.ground)
         {
-            return attack.Attack(attack.moveset.heavyCombo.moves[0]);
+            return attack.ComboAttack(attack.moveset.heavyCombo);
         }
         else
         {
-            return attack.Attack(attack.moveset.airHeavyCombo.moves[0]);
+            return attack.ComboAttack(attack.moveset.airHeavyCombo);
         }
     }
 
-    void SouthButton()
+    bool SouthButton()
     {
+        if (mov.ground)
+        {
+            if (status.NonAttackState()|| attack.attacking && attack.canTargetCombo)
+                mov.Jump();
+            else return false;
+        }
+        else
+        {
+            if (status.NonAttackState() || attack.attacking && attack.canTargetCombo)
+                mov.DoubleJump();
+            else
+                return false;
+
+        }
+        return true;
     }
 
     bool EastButton()
+    {
+        if (mov.ground)
+        {
+
+            return attack.ComboAttack(attack.moveset.skillCombo);
+        }
+        else
+        {
+            return attack.ComboAttack(attack.moveset.airSkillCombo);
+        }
+    }
+
+    bool R1Button()
     {
         if (mov.ground)
         {
@@ -133,26 +161,7 @@ public class PlayerInputHandler : MonoBehaviour
         {
             return attack.Attack(attack.moveset.airDodge);
         }
-    }
 
-    bool R1Button()
-    {
-        if (mov.ground)
-        {
-            if (!attack.attacking || attack.attacking && attack.canTargetCombo)
-                mov.Jump();
-            else return false;
-        }
-        else
-        {
-            if (!attack.attacking || attack.attacking && attack.canTargetCombo)
-                mov.DoubleJump();
-            else
-                return false;
-
-        }
-        return true;
-     
     }
 
     void NeutralInput()
@@ -176,8 +185,10 @@ public class PlayerInputHandler : MonoBehaviour
                     break;
 
                 case 3:
-                    SouthButton();
-                    DeleteInputs(i);
+                    if (SouthButton())
+                    {
+                        DeleteInputs(i);
+                    }
                     break;
                 case 4:
                     if (EastButton())

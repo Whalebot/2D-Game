@@ -10,8 +10,10 @@ public class Moveset : ScriptableObject
 
     public Combo lightCombo;
     public Combo heavyCombo;
+    public Combo skillCombo;
     public Combo airLightCombo;
     public Combo airHeavyCombo;
+    public Combo airSkillCombo;
     public Combo[] combos;
     public Combo extra;
 }

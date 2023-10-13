@@ -62,9 +62,8 @@ public class Movement : MonoBehaviour
     public event Action preLandEvent;
 
     [HideInInspector] public float zeroFloat;
-    [FoldoutGroup("Assign components")]
-    [FoldoutGroup("Assign components")] public Collider hurtbox;
-    [FoldoutGroup("Assign components")] public Collider col;
+
+
     [FoldoutGroup("Assign components")] public PhysicMaterial groundMat;
     [FoldoutGroup("Assign components")] public PhysicMaterial airMat;
     #endregion
@@ -77,12 +76,18 @@ public class Movement : MonoBehaviour
         _rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
         status = GetComponent<Status>();
         status.neutralEvent += Neutral;
-    }
 
+
+        InitializeMovement();
+    }
+    void InitializeMovement()
+    {
+        multiJumps = status.currentStats.airActions;
+    }
     void Neutral()
     {
         if (ground)
-            col.material = groundMat;
+            status.col.material = groundMat;
     }
     private void OnDisable()
     {
@@ -96,8 +101,8 @@ public class Movement : MonoBehaviour
 
         if (status.currentState == Status.State.Neutral)
         {
-    
-                ExecuteMovement();
+
+            ExecuteMovement();
 
         }
         if (_rb.velocity.y < 0) SetVelocity(_rb.velocity + Physics.gravity * fallMultiplier);
@@ -126,8 +131,8 @@ public class Movement : MonoBehaviour
     {
         MovementProperties();
         Rotation();
-       // if (status.alignment == Alignment.Player)
-            PlayerMovement();
+        // if (status.alignment == Alignment.Player)
+        PlayerMovement();
     }
 
     #region Assistance functions
@@ -137,7 +142,6 @@ public class Movement : MonoBehaviour
         SetVelocity(Vector3.zero);
         direction = Vector3.zero;
         _rb.isKinematic = true;
-        hurtbox.gameObject.SetActive(false);
         return;
 
     }
@@ -175,7 +179,7 @@ public class Movement : MonoBehaviour
         jumpEvent?.Invoke();
 
         jumpCounter = minimumJumpTime;
-        col.material = airMat;
+        status.col.material = airMat;
         ground = false;
 
         if (isMoving)
@@ -194,7 +198,7 @@ public class Movement : MonoBehaviour
         performedJumps++;
         Rotation();
         jumpCounter = minimumJumpTime;
-        col.material = airMat;
+        status.col.material = airMat;
         ground = false;
         doubleJumpEvent?.Invoke();
 
@@ -322,8 +326,8 @@ public class Movement : MonoBehaviour
             }
         }
 
-        if (ground) col.material = groundMat;
-        else col.material = airMat;
+        if (ground) status.col.material = groundMat;
+        else status.col.material = airMat;
         return ground;
     }
 
@@ -347,6 +351,8 @@ public class Movement : MonoBehaviour
             if (!isMoving)
             {
                 //NEEDS TO FLY CORRECT WAY
+                if (status.alignment == Alignment.Enemy)
+                    Debug.Log(temp);
                 SetVelocity(temp * airDeceleration + _rb.velocity.y * Vector3.up);
             }
             else
@@ -355,29 +361,17 @@ public class Movement : MonoBehaviour
         else
         //Normal Walking
         {
-
-            if (isMoving)
+            temp = _rb.velocity;
+            temp.y = 0;
+            if (!isMoving)
             {
-                SetVelocity(new Vector3(transform.forward.x * actualVelocity, _rb.velocity.y, 0));
+                if (status.alignment == Alignment.Enemy)
+                    Debug.Log(temp);
+                SetVelocity(new Vector3(Mathf.Sign(temp.x) * actualVelocity, _rb.velocity.y, 0));
+
             }
-            else SetVelocity(new Vector3(transform.forward.x * actualVelocity, _rb.velocity.y, 0));
-            //else
-            //{
-            //    temp = direction.normalized;
-
-            //    if (check2)
-            //    {
-            //        Debug.DrawRay(transform.position + Vector3.up * 0.1F, Vector3.Cross(new Vector3(temp.z, 0, -temp.x), hit2.normal) * 3, Color.red);
-            //        SetVelocity(Vector3.Cross(new Vector3(temp.z, 0, -temp.x), hit2.normal) * actualVelocity);
-            //    }
-
-            //    else if (check)
-            //    {
-            //        Debug.DrawRay(transform.position + Vector3.up * 0.1F, Vector3.Cross(new Vector3(temp.z, 0, -temp.x), hit.normal) * 3, Color.red);
-            //        SetVelocity(Vector3.Cross(new Vector3(temp.z, 0, -temp.x), hit.normal) * actualVelocity);
-            //    }
-            //    else SetVelocity(new Vector3(transform.forward.x * actualVelocity, _rb.velocity.y, transform.forward.z * actualVelocity));
-            //}
+            else
+                SetVelocity(new Vector3(transform.forward.x * actualVelocity, _rb.velocity.y, 0));
         }
 
     }

@@ -5,9 +5,11 @@ public class InputManager : MonoBehaviour
 {
     public static InputManager Instance { get; private set; }
     public static ControlScheme controlScheme = ControlScheme.PS4;
-    public delegate void InputEvent();
 
+    public delegate void InputEvent();
     public Controls controls = null;
+
+    public bool upToJump;
 
     public List<BufferedInput> bufferedInputs;
     List<BufferedInput> deleteInputs;
@@ -159,7 +161,7 @@ public class InputManager : MonoBehaviour
 
     private void OnLeft(InputAction.CallbackContext context)
     {
-        if (debug) print("Left"); 
+        if (debug) print("Left");
         ChangeControlScheme(context);
         //InputBuffer(("InputBuffer", 7);
         leftInput?.Invoke();
@@ -169,7 +171,6 @@ public class InputManager : MonoBehaviour
         if (debug) print("Right");
         ChangeControlScheme(context);
         rightInput?.Invoke();
-        // InputBuffer(("InputBuffer", 10);
     }
 
     private void OnLeft()
@@ -188,7 +189,8 @@ public class InputManager : MonoBehaviour
     {
         if (debug) print("Up");
         ChangeControlScheme(context);
-        // InputBuffer(("InputBuffer", 8);
+        if (upToJump)
+            InputBuffer(3);
     }
     private void OnDown(InputAction.CallbackContext context)
     {
@@ -200,7 +202,7 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.isPaused || GameManager.inventoryMenuOpen)
+        if (GameManager.isPaused)
         {
             inputDirection = Vector2.zero;
             lookDirection = Vector2.zero;

@@ -17,7 +17,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.01
+  m_TransitionDuration: 0.1
   m_TransitionOffset: 0
   m_ExitTime: 0.423077
   m_HasExitTime: 0
@@ -545,7 +545,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Air Light 1
-  m_Speed: 1.25
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 938074416482050977}
@@ -2711,7 +2711,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: L3
-  m_Speed: 1.4
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101001867740043048}
@@ -2970,22 +2970,22 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1102084626202304332}
-    m_Position: {x: -190, y: -130, z: 0}
+    m_Position: {x: -210, y: -260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102717098661041330}
-    m_Position: {x: -190, y: -80, z: 0}
+    m_Position: {x: -210, y: -210, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102347332936952986}
-    m_Position: {x: -190, y: -30, z: 0}
+    m_Position: {x: -210, y: -160, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102881316926238834}
-    m_Position: {x: -190, y: 100, z: 0}
+    m_Position: {x: -210, y: -30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102446424057431784}
-    m_Position: {x: -190, y: 50, z: 0}
+    m_Position: {x: -210, y: -80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7421054188580967932}
-    m_Position: {x: -190, y: -180, z: 0}
+    m_Position: {x: -210, y: 50, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5408348847417838181}
     m_Position: {x: 630, y: -160, z: 0}
@@ -3590,7 +3590,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Air Heavy 1
-  m_Speed: 1
+  m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -2090010904729341640}
@@ -3671,7 +3671,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Air Light 1 0
-  m_Speed: 1.25
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -7191962046604933238}
@@ -4377,7 +4377,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: S1
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -9191866778357417507}
@@ -4390,7 +4390,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -1057044506318937575, guid: a5f6f25e65242dd4e85b5690b7d51b1a, type: 3}
+  m_Motion: {fileID: 7097197309651345849, guid: a5f6f25e65242dd4e85b5690b7d51b1a, type: 3}
   m_Tag: 
   m_SpeedParameter: AttackSpeed
   m_MirrorParameter: 

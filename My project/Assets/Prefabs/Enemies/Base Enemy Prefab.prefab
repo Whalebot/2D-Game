@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6518288294043987321}
   - component: {fileID: 6518288294043987326}
   - component: {fileID: 6518288294043987327}
-  m_Layer: 14
+  m_Layer: 8
   m_Name: Collider
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -249,21 +249,17 @@ MonoBehaviour:
   alignment: 1
   groundState: 0
   currentState: 0
-  hitstunValue: 0
-  blockstunValue: 0
   inBlockStun: 0
   inHitStun: 0
   currentStats:
     currentHealth: 0
-    currentStamina: 0
-    experience: 0
+    maxHealth: 0
     level: 1
     attack: 0
-    maxHealth: 0
-    movementSpeedModifier: 1
     magic: 0
     attackSpeed: 1
-    staminaRegen: 1
+    airActions: 1
+    movementSpeedModifier: 1
     poiseRegen: 0
     poise: 0
     defense: 0
@@ -276,17 +272,17 @@ MonoBehaviour:
     knockbackModifier: 1
     critChance: 0
     critMultiplier: 0
+  hitstunValue: 0
+  blockstunValue: 0
   modifiedStats:
     currentHealth: 0
-    currentStamina: 0
-    experience: 0
+    maxHealth: 0
     level: 1
     attack: 0
-    maxHealth: 0
-    movementSpeedModifier: 1
     magic: 0
     attackSpeed: 1
-    staminaRegen: 1
+    airActions: 1
+    movementSpeedModifier: 1
     poiseRegen: 0
     poise: 0
     defense: 0
@@ -301,15 +297,13 @@ MonoBehaviour:
     critMultiplier: 0
   baseStats:
     currentHealth: 0
-    currentStamina: 0
-    experience: 0
+    maxHealth: 0
     level: 1
     attack: 0
-    maxHealth: 0
-    movementSpeedModifier: 1
     magic: 0
     attackSpeed: 1
-    staminaRegen: 1
+    airActions: 1
+    movementSpeedModifier: 1
     poiseRegen: 0
     poise: 0
     defense: 0
@@ -330,15 +324,17 @@ MonoBehaviour:
   airInvul: 0
   debug: 0
   wakeupInvul: 0
-  autoDeath: 0
+  autoDeath: 1
   destroyParent: 0
-  autoDeathTime: 1.5
+  autoDeathTime: 0.5
   knockbackDirection: {x: 0, y: 0, z: 0}
   isDead: 0
   blocking: 0
   parrying: 0
   poiseBroken: 0
   parryStun: 0
+  hurtbox: {fileID: 6518288294775173801}
+  col: {fileID: 6518288294043987327}
   godMode: 0
   regenStamina: 0
 --- !u!114 &763658823407521956
@@ -395,8 +391,6 @@ MonoBehaviour:
   airDeceleration: 0.95
   airBrake: 0.8
   zeroFloat: 0
-  hurtbox: {fileID: 6518288294775173801}
-  col: {fileID: 6518288294043987327}
   groundMat: {fileID: 13400000, guid: 28f1549acb295c149bce7b9fbc74c3eb, type: 2}
   airMat: {fileID: 13400000, guid: 04b4f29578986a244b8769d6c889f68a, type: 2}
 --- !u!54 &6518288295935901120

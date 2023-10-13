@@ -4,7 +4,7 @@ using UnityEngine;
 public class Hitbox : MonoBehaviour
 {
     public float baseDamage = 1;
-    [HideInInspector] public int totalDamage;
+    public int totalDamage;
     [HideInInspector] public int hitboxID;
     [HideInInspector] public AttackScript attack;
     [HideInInspector] public Move move;
@@ -137,7 +137,7 @@ public class Hitbox : MonoBehaviour
         //Calculate direction
         aVector = knockbackDirection * hit.pushback.x + Vector3.up * hit.pushback.y;
 
-        int totalDamage = (int)(baseDamage *
+        totalDamage = (int)(baseDamage *
         (atk.damage * status.currentStats.damageModifierPercentage) + status.currentStats.damageModifierFlat);
 
         int damageDealt = Mathf.RoundToInt(totalDamage - other.currentStats.resistance);
@@ -180,8 +180,8 @@ public class Hitbox : MonoBehaviour
                 CameraManager.Instance.ShakeCamera(move.screenShake[i].amplitude, move.screenShake[i].duration);
         }
 
-        int totalDamage = (int)(baseDamage *
-            (atk.damage * status.currentStats.damageModifierPercentage) + status.currentStats.damageModifierFlat);
+        totalDamage = (int)(baseDamage *
+            (atk.damage * status.currentStats.damageModifierPercentage * status.Attack) + status.currentStats.damageModifierFlat);
 
         int damageDealt = Mathf.RoundToInt(totalDamage - other.currentStats.resistance);
 

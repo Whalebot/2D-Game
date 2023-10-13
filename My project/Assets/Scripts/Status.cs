@@ -11,19 +11,23 @@ public class Status : MonoBehaviour
 
     public Alignment alignment = Alignment.Enemy;
     public GroundState groundState;
-    public enum State { Neutral, Startup, Active, Recovery, Hitstun, Blockstun, Knockdown, Wakeup, InAnimation}
+    public enum State { Neutral, Startup, Active, Recovery, Hitstun, Blockstun, Knockdown, Wakeup, InAnimation }
     public State currentState;
 
-    [TabGroup("Current Stats")] public int hitstunValue;
-    [TabGroup("Current Stats")] public int blockstunValue;
+
     [HideInInspector] public bool inBlockStun;
     [HideInInspector] public bool inHitStun;
     int staminaRegenCounter;
     [TabGroup("Current Stats")]
     [HideLabel] public Stats currentStats;
-    [TabGroup("Modified Stats")]
+    [TabGroup("Current Stats")] public int hitstunValue;
+    [TabGroup("Current Stats")] public int blockstunValue;
+
+    [TabGroup("Other Stats")]
+    [Header("Modified stats")]
     [HideLabel] public Stats modifiedStats;
-    [TabGroup("Base Stats")]
+    [TabGroup("Other Stats")]
+    [Header("Base stats")]
     [HideLabel] public Stats baseStats;
 
     [TabGroup("Properties")] public bool hasArmor;
@@ -48,6 +52,10 @@ public class Status : MonoBehaviour
     [HideInInspector] public bool parrying;
     [HideInInspector] public bool poiseBroken;
     [HideInInspector] public int parryStun;
+
+    [FoldoutGroup("Assign components")] public Collider hurtbox;
+    [FoldoutGroup("Assign components")] public Collider col;
+    MeshRenderer mr;
 
     public event Action healthEvent;
     public event Action hurtEvent;
@@ -78,6 +86,9 @@ public class Status : MonoBehaviour
 
     private void Start()
     {
+        if (hurtbox != null)
+            mr = hurtbox.GetComponent<MeshRenderer>();
+
         GameManager.Instance.advanceGameState += ExecuteFrame;
     }
 
@@ -119,6 +130,14 @@ public class Status : MonoBehaviour
             }
         }
     }
+    public int Attack
+    {
+        get { return currentStats.attack; }
+        set
+        {
+            currentStats.attack = value;
+        }
+    }
 
     public int HitStun
     {
@@ -152,8 +171,17 @@ public class Status : MonoBehaviour
         StateMachine();
     }
 
-    public void EnableCollider() { }
-    public void DisableCollider() { }
+    public void EnableCollider()
+    {
+
+        col.gameObject.layer = LayerMask.NameToLayer("Default");
+    }
+    public void DisableCollider()
+    {
+
+        col.gameObject.layer = LayerMask.NameToLayer("Noclip");
+        Debug.Log(LayerMask.LayerToName(col.gameObject.layer));
+    }
 
     public void RestoreStats()
     {
@@ -270,7 +298,7 @@ public class Status : MonoBehaviour
     }
     public bool NonAttackState()
     {
-        return currentState != State.Startup && currentState != State.Active && currentState != State.Recovery;
+        return currentState != State.Startup && currentState != State.Active && currentState != State.Recovery && currentState != State.Hitstun;
     }
     void PoiseRegen()
     {
@@ -358,6 +386,8 @@ public class Status : MonoBehaviour
 
     public void TakeHit(int damage, Vector3 kb, int stunVal, int poiseBreak, Vector3 dir, float slowDur, HitState hitState)
     {
+        if (isDead) return;
+
         if (damage == 0)
         {
 
@@ -375,9 +405,7 @@ public class Status : MonoBehaviour
             }
             else if (blocking)
             {
-                currentStats.currentStamina -= damage * 2;
                 BlockStun = stunVal;
-
                 TakePushback(kb);
                 return;
             }
@@ -436,8 +464,7 @@ public class Status : MonoBehaviour
         if (!hasArmor && !animationArmor && rb != null)
         {
             pushbackEvent?.Invoke();
-            rb.velocity = (Vector3.zero);
-            rb.AddForce(direction, ForceMode.VelocityChange);
+            rb.velocity = direction;
         }
     }
 
@@ -445,7 +472,6 @@ public class Status : MonoBehaviour
     {
         isDead = true;
         deathEvent?.Invoke();
-        Debug.Log(gameObject);
         if (autoDeath) StartCoroutine("DelayDeath");
     }
 

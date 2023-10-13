@@ -9,7 +9,6 @@ public class SkillHandler : MonoBehaviour
     Status status;
     [TabGroup("Skill Info")] public Stats modifiedStats;
     [TabGroup("Skill Info")] public List<Skill> learnedSkills;
-    [TabGroup("Skill Info")] public SkillSO appraisalSkillSO;
     [TabGroup("Components")] public DescriptionWindow window;
     [TabGroup("Components")] public GameObject skillLevelUpWindow;
     [TabGroup("Components")] public Transform skillLevelUpPanel;
@@ -28,20 +27,11 @@ public class SkillHandler : MonoBehaviour
         learnedSkills = new List<Skill>();
         status = GetComponent<Status>();
         UpdateStats();
-        //SkillEXP(appraisalSkillSO, 2000);
-    }
-    private void FixedUpdate()
-    {
-        //kbQuickslots.SetActive(!GameManager.isPaused && !GameManager.inventoryMenuOpen);
     }
 
     private void OnEnable()
     {
 
-    }
-
-    void SaveSkills()
-    {
     }
 
     void SaveSkill(SkillSO skill)
@@ -85,11 +75,6 @@ public class SkillHandler : MonoBehaviour
 
     public void SkillLevelUI(Skill skill)
     {
-        //if (!DataManager.Instance.currentSaveData.triggers.skillTutorial && skill.type == SkillType.Active)
-        //{
-        //    DataManager.Instance.currentSaveData.triggers.skillTutorial = true;
-        //   TutorialManager.Instance.StartTutorial(skillTutorial);
-        //}
         GameObject GO = Instantiate(skillLevelUpWindow, skillLevelUpPanel);
         GO.GetComponent<DescriptionWindow>().DisplayUI(skill);
 
@@ -230,12 +215,12 @@ public class SkillHandler : MonoBehaviour
                 if ((float)var2 != 0)
                     defInfo1[i].SetValue(obj, (float)var3 + (float)var2);
             }
-            //else if (var1 is bool)
-            //{
-            //    //SET VALUES
-            //    if ((bool)var2)
-            //        defInfo1[i].SetValue(obj, defInfo2[i].GetValue(obj2));
-            //}
+            else if (var1 is bool)
+            {
+                //SET VALUES
+                if ((bool)var2)
+                    defInfo1[i].SetValue(obj, defInfo2[i].GetValue(obj2));
+            }
         }
     }
 }

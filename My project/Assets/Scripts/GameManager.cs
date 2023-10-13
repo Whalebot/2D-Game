@@ -10,8 +10,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public static bool isPaused;
     public static bool cutscene;
-    public static bool inventoryMenuOpen;
-    public static bool shopOpen;
     public static bool menuOpen;
     public static bool gameOver;
 
@@ -21,6 +19,7 @@ public class GameManager : MonoBehaviour
     [TabGroup("Settings")] public bool runNormally;
 
     [TabGroup("Settings")] public bool showHitboxes;
+    [TabGroup("Settings")] public bool showHurtboxes;
     public static float inGameTime;
     [TabGroup("Settings")] public float timeDisplay;
 
@@ -140,7 +139,7 @@ public class GameManager : MonoBehaviour
         if (showDamageText)
         {
             GameObject text = Instantiate(damageText, other.position + Vector3.up * offsetCounter, Quaternion.identity);
-            text.GetComponentInChildren<TextMeshProUGUI>().text = "" + damageValue;
+            text.GetComponentInChildren<DamageText>().SetupNumber(damageValue);
             offsetCounter += numberOffset;
         }
     }

@@ -82,6 +82,8 @@ public class CharacterAnimator : MonoBehaviour
             MovementAnimation();
         if (hitstop)
             anim.enabled = false;
+        if (status != null)
+            StatusAnimation();
 
         if (!GameManager.Instance.runNormally) StartCoroutine(PauseAnimation());
     }
@@ -90,6 +92,7 @@ public class CharacterAnimator : MonoBehaviour
     {
         StartCoroutine(HitstopStart());
     }
+
 
     IEnumerator HitstopStart()
     {
@@ -167,7 +170,7 @@ public class CharacterAnimator : MonoBehaviour
     private void RunSpeed()
     {
         if (!movement.isMoving) runSpeed = Mathf.Lerp(runSpeed, 0, deaccelerateSpeed);
-        else  runSpeed = Mathf.Lerp(runSpeed, 0.6F, deaccelerateSpeed);
+        else runSpeed = Mathf.Lerp(runSpeed, 0.6F, deaccelerateSpeed);
         //else if (movement.isMoving) runSpeed = Mathf.Lerp(runSpeed, 0.25F, deaccelerateSpeed);
 
 
@@ -184,14 +187,6 @@ public class CharacterAnimator : MonoBehaviour
         anim.SetInteger("ID", attack.attackID);
 
     }
-    void StartTopAnimation()
-    {
-        anim.SetTrigger("Top");
-        anim.SetBool("Attacking", true);
-        anim.SetInteger("ID", attack.attackID);
-
-    }
-
     void AttackRecovery()
     {
         anim.SetBool("Attacking", false);

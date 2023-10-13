@@ -20,7 +20,6 @@ public class AI : MonoBehaviour
 
     public bool killOncePerDay = true;
 
-    private NavMeshPath path;
     [Space(10)]
     [HeaderAttribute("Field of View")]
     [TabGroup("Pathfinding")] [SerializeField] public float range;
@@ -104,7 +103,6 @@ public class AI : MonoBehaviour
         status.hitRecoveryEvent += RecoveryCooldown;
         status.deathEvent += DeathEvent;
 
-        path = new NavMeshPath();
         elapsed = pathUpdateTime;
         AIManager.Instance.allEnemies.Add(this);
 
@@ -242,6 +240,8 @@ public class AI : MonoBehaviour
         endDistance = 0;
 
         List<AIAction> temp = new List<AIAction>();
+        if (status.character == null) return;
+
         foreach (var item in status.character.actions)
         {
             if (Distance() < item.distance && Distance() > item.minDistance)
@@ -291,7 +291,6 @@ public class AI : MonoBehaviour
     void Attacking()
     {
         currentTarget = target.position;
-        //movement.direction = FindPath();
         if (!status.NonAttackState()) { movement.direction = TargetDirectionIgnoreTilt(); }
         else
         {
@@ -307,9 +306,6 @@ public class AI : MonoBehaviour
                 lastAttackTime = Time.time;
             }
         }
-        //else {
-        //    Idle();
-        //}
     }
 
     protected void AttackQueue()
@@ -404,7 +400,8 @@ public class AI : MonoBehaviour
         {
             Patrol();
         }
-        else {
+        else
+        {
             movement.isMoving = false;
             movement.direction = new Vector3(0, 0, 0);
         }
@@ -432,7 +429,6 @@ public class AI : MonoBehaviour
         {
             reachedCorner = 0;
             elapsed -= pathUpdateTime;
-            NavMesh.CalculatePath(transform.position, currentTarget, NavMesh.AllAreas, path);
         }
     }
 
@@ -443,62 +439,30 @@ public class AI : MonoBehaviour
         {
             reachedCorner = 0;
             elapsed -= pathUpdateTime;
-            NavMesh.CalculatePath(transform.position, v, NavMesh.AllAreas, path);
         }
-    }
-    public Vector3 FindPath(Vector3 v)
-    {
-        CalculatePath(v);
-        DebugPath();
-
-        if (path.corners.Length > 1)
-        {
-            directionVector = (path.corners[reachedCorner + 1] - path.corners[reachedCorner]).normalized;
-
-            if (isWalking) directionVector = directionVector * 0.5F;
-
-            if (Vector3.Distance(transform.position, path.corners[reachedCorner + 1]) < cornerMinDistance)
-            {
-                hasValidPath = false;
-                if (path.corners.Length > reachedCorner + 2)
-                    reachedCorner++;
-            }
-            else
-            {
-                hasValidPath = true;
-            }
-        }
-        return directionVector;
-    }
-
-    public void DebugPath()
-    {
-        for (int i = 0; i < path.corners.Length - 1; i++)
-            Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.blue);
     }
 
     public Vector3 FindPath()
     {
         CalculatePath();
-        DebugPath();
+        directionVector = target.position - transform.position;
+        //if (path.corners.Length > 1)
+        //{
+        //    directionVector = (path.corners[reachedCorner + 1] - path.corners[reachedCorner]).normalized;
+        //    movement.isMoving = true;
+        //    if (isWalking) directionVector = directionVector * 0.5F;
 
-        if (path.corners.Length > 1)
-        {
-            directionVector = (path.corners[reachedCorner + 1] - path.corners[reachedCorner]).normalized;
-            movement.isMoving = true;
-            if (isWalking) directionVector = directionVector * 0.5F;
-
-            if (Vector3.Distance(transform.position, path.corners[reachedCorner + 1]) < cornerMinDistance)
-            {
-                hasValidPath = false;
-                if (path.corners.Length > reachedCorner + 2)
-                    reachedCorner++;
-            }
-            else
-            {
-                hasValidPath = true;
-            }
-        }
+        //    if (Vector3.Distance(transform.position, path.corners[reachedCorner + 1]) < cornerMinDistance)
+        //    {
+        //        hasValidPath = false;
+        //        if (path.corners.Length > reachedCorner + 2)
+        //            reachedCorner++;
+        //    }
+        //    else
+        //    {
+        //        hasValidPath = true;
+        //    }
+        //}
 
         foreach (var item in AIManager.Instance.allEnemies)
         {

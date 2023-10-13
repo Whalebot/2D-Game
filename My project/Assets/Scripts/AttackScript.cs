@@ -75,12 +75,10 @@ public class AttackScript : MonoBehaviour
         GameManager.Instance.resetEvent += ResetAttack;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public int AttackFrame
     {
-
+        get { return (int)attackFrames; }
     }
-
     private void OnDisable()
     {
         movement.jumpEvent -= JumpCancel;
@@ -203,12 +201,12 @@ public class AttackScript : MonoBehaviour
 
         for (int i = 0; i < activeMove.m.Length; i++)
         {
-            if (attackFrames > activeMove.m[i].startFrame && attackFrames < activeMove.m[i].startFrame + activeMove.m[i].duration)
+            if (AttackFrame > activeMove.m[i].startFrame && AttackFrame < activeMove.m[i].startFrame + activeMove.m[i].duration)
             {
                 tempMomentum = true;
             }
             //Recovery
-            if (attackFrames > activeMove.m[i].startFrame + activeMove.m[i].duration)
+            if (AttackFrame > activeMove.m[i].startFrame + activeMove.m[i].duration)
             {
                 movement.forcedWalk = false;
                 if (activeMove.m[i].resetVelocityDuringRecovery)
@@ -216,9 +214,9 @@ public class AttackScript : MonoBehaviour
                     movement._rb.velocity = Vector3.zero;
                 }
             }
-            else if (attackFrames >= activeMove.m[i].startFrame && attackFrames < activeMove.m[i].startFrame + activeMove.m[i].duration)
+            else if (AttackFrame >= activeMove.m[i].startFrame && AttackFrame < activeMove.m[i].startFrame + activeMove.m[i].duration)
             {
-                //Debug.Log($"{attackFrames} + {i} + {activeMove.m[i].startFrame + activeMove.m[i].duration}");
+                //Debug.Log($"{AttackFrame} + {i} + {activeMove.m[i].startFrame + activeMove.m[i].duration}");
                 if (!movement.ground) movement._rb.useGravity = false;
                 movement.SetVelocity(activeMove.m[i].momentum.x * transform.forward + transform.up * activeMove.m[i].momentum.y);
             }
@@ -285,7 +283,7 @@ public class AttackScript : MonoBehaviour
     {
         for (int i = 0; i < activeMove.attacks.Length; i++)
         {
-            if (attackFrames < activeMove.attacks[i].startupFrame + activeMove.attacks[i].activeFrames && attackFrames >= activeMove.attacks[i].startupFrame)
+            if (AttackFrame < activeMove.attacks[i].startupFrame + activeMove.attacks[i].activeFrames && AttackFrame >= activeMove.attacks[i].startupFrame)
             {
                 status.GoToState(Status.State.Active);
 
@@ -325,7 +323,7 @@ public class AttackScript : MonoBehaviour
                     }
                 }
             }
-            else if (attackFrames > activeMove.attacks[i].startupFrame + activeMove.attacks[i].activeFrames)
+            else if (AttackFrame > activeMove.attacks[i].startupFrame + activeMove.attacks[i].activeFrames)
             {
                 if (activeMove.attacks[i].hitbox == null)
                     deactivateHitboxEvent?.Invoke(activeMove);
@@ -353,11 +351,11 @@ public class AttackScript : MonoBehaviour
         //Invul
         if (activeMove.invincible)
         {
-            if (attackFrames == activeMove.invincibleStart)
+            if (AttackFrame == activeMove.invincibleStart)
             {
                 status.invincible = true;
             }
-            else if (attackFrames >= activeMove.invincibleStart + activeMove.invincibleDuration)
+            else if (AttackFrame >= activeMove.invincibleStart + activeMove.invincibleDuration)
             {
                 status.invincible = false;
             }
@@ -365,9 +363,11 @@ public class AttackScript : MonoBehaviour
         //Noclip
         if (activeMove.noClip)
         {
-            if (attackFrames == activeMove.noClipStart)
+            if (AttackFrame == activeMove.noClipStart 
+                //&& AttackFrame < activeMove.noClipStart + activeMove.noClipDuration
+                )
                 status.DisableCollider();
-            else if (attackFrames >= activeMove.noClipStart + activeMove.noClipDuration)
+            else if (AttackFrame >= activeMove.noClipStart + activeMove.noClipDuration)
             {
                 status.EnableCollider();
             }
@@ -375,9 +375,9 @@ public class AttackScript : MonoBehaviour
         //Projectile Invul
         if (activeMove.projectileInvul)
         {
-            if (attackFrames == activeMove.projectileInvulStart)
+            if (AttackFrame == activeMove.projectileInvulStart)
                 status.projectileInvul = true;
-            else if (attackFrames >= activeMove.projectileInvulStart + activeMove.projectileInvulDuration)
+            else if (AttackFrame >= activeMove.projectileInvulStart + activeMove.projectileInvulDuration)
             {
                 status.projectileInvul = false;
             }
@@ -385,9 +385,9 @@ public class AttackScript : MonoBehaviour
         //air Invul
         if (activeMove.airInvul)
         {
-            if (attackFrames == activeMove.airInvulStart)
+            if (AttackFrame == activeMove.airInvulStart)
                 status.airInvul = true;
-            else if (attackFrames >= activeMove.airInvulStart + activeMove.airInvulDuration)
+            else if (AttackFrame >= activeMove.airInvulStart + activeMove.airInvulDuration)
             {
                 status.airInvul = false;
             }
@@ -457,7 +457,7 @@ public class AttackScript : MonoBehaviour
         if (move == null) return false;
 
 
-      //  if (jumpFrameCounter > 0) return false;
+        //  if (jumpFrameCounter > 0) return false;
         if (move.useAirAction && !attacking)
         {
             //if (movement.performedJumps <= 0)
@@ -531,19 +531,21 @@ public class AttackScript : MonoBehaviour
         else return false;
     }
 
-    public bool LightAttack()
-    {
-        if (moveset.lightCombo.moves.Length <= combo)
-            return false;
-        Debug.Log($"{moveset.lightCombo.moves.Length} + {combo}");
+    public bool ComboAttack(Combo c)
+    {        //  Debug.Log($"{c.moves.Length} + {combo}");
 
-        if (!CanUseMove(moveset.lightCombo.moves[combo]))
+        if (c.moves.Length <= combo)
+            return Attack(c.moves[0]);
+
+        if (!CanUseMove(c.moves[combo]))
         {
             Debug.Log("Can't use move");
             return false;
         }
+        else
+            Attack(c.moves[combo]);
 
-        AttackProperties(moveset.lightCombo.moves[combo]);
+        AttackProperties(c.moves[combo]);
         combo++;
         return true;
     }

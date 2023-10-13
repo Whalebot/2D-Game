@@ -3,6 +3,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class DevCheats : MonoBehaviour
 {
+    private void Start()
+    {
+        InputManager.Instance.selectInput += Restart;
+    }
+    void Restart() {
+        TransitionManager.Instance.LoadScene(0);
+    }
+
     void Update()
     {
         if (Keyboard.current.numpadPlusKey.wasPressedThisFrame) GameManager.Instance.AdvanceGameStateButton();
