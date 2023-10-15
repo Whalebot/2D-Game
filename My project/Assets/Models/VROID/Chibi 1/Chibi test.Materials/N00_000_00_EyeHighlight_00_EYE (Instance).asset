@@ -10,16 +10,9 @@ Material:
   m_Name: N00_000_00_EyeHighlight_00_EYE (Instance)
   m_Shader: {fileID: 4800000, guid: 6459b2db96a08ca41b0f9b39dc7ad59e, type: 3}
   m_ValidKeywords:
-  - N_F_CO_ON
   - N_F_EAL_ON
-  - N_F_GLOT_ON
-  - N_F_GLO_ON
-  - N_F_NM_ON
-  - N_F_O_ON
   - N_F_RDC_ON
   - N_F_RELGI_ON
-  - N_F_RL_ON
-  - N_F_SS_ON
   - N_F_TRANSAFFSHA_ON
   - N_F_TRANS_ON
   - _NORMALMAP
@@ -50,10 +43,11 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2450
+  m_CustomRenderQueue: 3000
   stringTagMap:
-    RenderType: TransparentCutout
-  disabledShaderPasses: []
+    RenderType: Transparent
+  disabledShaderPasses:
+  - SRPDEFAULTUNLIT
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -206,30 +200,30 @@ Material:
     - _MixMainTexToOutline: 0
     - _N_F_CA: 0
     - _N_F_CLD: 0
-    - _N_F_CO: 1
+    - _N_F_CO: 0
     - _N_F_COEDGL: 0
     - _N_F_DCS: 0
     - _N_F_EAL: 1
     - _N_F_ESSAO: 0
     - _N_F_FR: 0
-    - _N_F_GLO: 1
-    - _N_F_GLOT: 1
+    - _N_F_GLO: 0
+    - _N_F_GLOT: 0
     - _N_F_HDLS: 0
     - _N_F_HPSS: 0
     - _N_F_MC: 0
     - _N_F_MSSOLTFO: 0
     - _N_F_NLASOBF: 0
-    - _N_F_NM: 1
-    - _N_F_O: 1
+    - _N_F_NM: 0
+    - _N_F_O: 0
     - _N_F_OFLMB: 0
     - _N_F_PT: 0
     - _N_F_R: 0
     - _N_F_RDC: 1
-    - _N_F_RL: 1
+    - _N_F_RL: 0
     - _N_F_SCT: 0
     - _N_F_SL: 0
     - _N_F_SON: 0
-    - _N_F_SS: 1
+    - _N_F_SS: 0
     - _N_F_ST: 0
     - _N_F_STIAL: 0
     - _N_F_STIS: 0

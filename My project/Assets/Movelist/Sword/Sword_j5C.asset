@@ -23,7 +23,7 @@ MonoBehaviour:
   - attackLevel: 2
     attackType: 0
     hitbox: {fileID: 5860963072138344223, guid: 2882afa60e18a8547bd9f6cabf9ee25d, type: 3}
-    damage: 1
+    damage: 2.5
     stun: 20
     hitstop: 5
     poiseBreak: 0
@@ -42,15 +42,32 @@ MonoBehaviour:
     hitID: 0
   type: 0
   uniqueProperties: []
-  screenShake: []
-  vfx: []
+  screenShake:
+  - type: 0
+    startup: 10
+    amplitude: 5
+    duration: 2
+  vfx:
+  - startup: 4
+    prefab: {fileID: 1800976239324842, guid: c3a419073912434429f93f4f6d5369ff, type: 3}
+    deattachFromPlayer: 1
+    position: {x: 0, y: 0.2, z: 0}
+    rotation: {x: -45, y: 90, z: 0}
+    scale: {x: 1, y: 1, z: 1}
   sfx: []
-  hitFX: {fileID: 0}
+  hitFX:
+    startup: 1
+    prefab: {fileID: 1416824176164296, guid: dc1397204bb5ee84895af2b49dac2d49, type: 3}
+    deattachFromPlayer: 1
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+    scale: {x: 0.7, y: 0.7, z: 0.7}
   blockFX: {fileID: 0}
   counterhitFX: {fileID: 0}
   hitSFX: {fileID: 0}
   blockSFX: {fileID: 0}
   counterhitSFX: {fileID: 0}
+  useAttackSpeed: 1
   keepVelocity: 0
   particleID: 0
   holdAttack: 0

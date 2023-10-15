@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class HPBar : MonoBehaviour
 {
+    public int frameCounter;
+    public int delayTime;
     public bool skyrimBar;
     public bool alwaysShowName;
     public bool alwaysShowHPBar;
@@ -20,7 +22,8 @@ public class HPBar : MonoBehaviour
     public GameObject container;
     public GameObject nameContainer;
 
-    public Image bar;
+    public Image healthBar;
+    public Image delayHealthBar;
     public Image poiseBar;
     public Color poiseColor;
     public Color poiseBreakColor;
@@ -31,6 +34,8 @@ public class HPBar : MonoBehaviour
 
     private void Start()
     {
+        GameManager.Instance.advanceGameState += ExecuteFrame;
+
         if (status == null)
         {
             status = GetComponentInParent<Status>();
@@ -54,7 +59,7 @@ public class HPBar : MonoBehaviour
         SetName();
     }
 
-    private void Update()
+    private void ExecuteFrame()
     {
         if (disabled) return;
 
@@ -64,8 +69,12 @@ public class HPBar : MonoBehaviour
 
         if (nameContainer != null && alwaysShowName)
             nameContainer.SetActive(true);
-        UpdateBar();
-        // SetName();
+
+        if (frameCounter > 0)
+        {
+            frameCounter--;
+            if (frameCounter <= 0) UpdateDelayBar();
+        }
     }
 
     void DisplayInfo()
@@ -82,9 +91,9 @@ public class HPBar : MonoBehaviour
         if (container != null)
         {
             container.SetActive(false);
-            nameContainer.SetActive(false);
-            //ou to if (subTitleText != null) subTitleText.SetActive(false);
         }
+        if (nameContainer != null)
+            nameContainer.SetActive(false);
     }
 
     private void OnDisable()
@@ -100,16 +109,26 @@ public class HPBar : MonoBehaviour
         if (subTitleText != null) subTitleText.text = status.character.subTitle;
     }
 
-    // Update is called once per frame
+    void UpdateDelayBar() {
+        if (!skyrimBar)
+            delayHealthBar.fillAmount = (float)status.currentStats.currentHealth / status.currentStats.maxHealth;
+        else
+        {
+            delayHealthBar.transform.localScale = new Vector3((float)status.currentStats.currentHealth / status.currentStats.maxHealth, 1, 1);
+
+        }
+    }
     void UpdateBar()
     {
         HpText.text = "" + status.currentStats.currentHealth + "/" + status.currentStats.maxHealth;
+
+        frameCounter = delayTime;
+
         if (!skyrimBar)
-            bar.fillAmount = (float)status.currentStats.currentHealth / status.currentStats.maxHealth;
+            healthBar.fillAmount = (float)status.currentStats.currentHealth / status.currentStats.maxHealth;
         else
         {
-            bar.transform.localScale = new Vector3((float)status.currentStats.currentHealth / status.currentStats.maxHealth, 1, 1);
-
+            healthBar.transform.localScale = new Vector3((float)status.currentStats.currentHealth / status.currentStats.maxHealth, 1, 1);
         }
         if (poiseBar != null && status.baseStats.poise > 0)
         {

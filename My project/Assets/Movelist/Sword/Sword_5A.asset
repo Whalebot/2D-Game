@@ -17,7 +17,7 @@ MonoBehaviour:
   firstStartupFrame: 10
   lastActiveFrame: 14
   totalMoveDuration: 34
-  firstGatlingFrame: 15
+  firstGatlingFrame: 18
   recoveryFrames: 20
   attacks:
   - attackLevel: 0
@@ -29,7 +29,7 @@ MonoBehaviour:
     poiseBreak: 0
     startupFrame: 10
     activeFrames: 5
-    gatlingFrames: 5
+    gatlingFrames: 8
     groundHitProperty:
       pushback: {x: 2, y: 0}
       hitState: 0
@@ -46,16 +46,24 @@ MonoBehaviour:
   vfx:
   - startup: 8
     prefab: {fileID: 1320683006971348, guid: 83ea291b15cd5ed46be1077c6b047713, type: 3}
+    deattachFromPlayer: 1
     position: {x: 0, y: 0.4, z: 0.5}
     rotation: {x: -5.44, y: 180, z: -189.5}
     scale: {x: 0.4, y: 0.4, z: 0.4}
   sfx: []
-  hitFX: {fileID: 0}
+  hitFX:
+    startup: 1
+    prefab: {fileID: 1416824176164296, guid: dc1397204bb5ee84895af2b49dac2d49, type: 3}
+    deattachFromPlayer: 1
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+    scale: {x: 0.5, y: 0.5, z: 0.5}
   blockFX: {fileID: 0}
   counterhitFX: {fileID: 0}
   hitSFX: {fileID: 0}
   blockSFX: {fileID: 0}
   counterhitSFX: {fileID: 0}
+  useAttackSpeed: 1
   keepVelocity: 0
   particleID: 0
   holdAttack: 0

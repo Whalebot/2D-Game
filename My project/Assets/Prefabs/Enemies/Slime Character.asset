@@ -17,7 +17,8 @@ MonoBehaviour:
   description: 
   image: {fileID: 0}
   prefab: {fileID: 9037631907321898802, guid: 518eee88e2d9a6643952facd713e1871, type: 3}
-  actions: []
+  actions:
+  - {fileID: 11400000, guid: d4dea00e8c91c9240983c28ff41cc62d, type: 2}
   stats:
     currentHealth: 20
     maxHealth: 20
@@ -25,6 +26,7 @@ MonoBehaviour:
     attack: 0
     magic: 0
     attackSpeed: 1
+    airActions: 1
     movementSpeedModifier: 1
     poiseRegen: 0
     poise: 0

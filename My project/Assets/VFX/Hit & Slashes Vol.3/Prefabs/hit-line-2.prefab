@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4063131188553552}
   - component: {fileID: 198501441534059960}
   - component: {fileID: 199861323500264112}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4723,7 +4723,7 @@ GameObject:
   - component: {fileID: 4359912164768824}
   - component: {fileID: 198096688193858760}
   - component: {fileID: 199156049749705876}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9390,7 +9390,7 @@ GameObject:
   - component: {fileID: 4887698953731904}
   - component: {fileID: 198014158753553120}
   - component: {fileID: 199388877083792780}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14102,7 +14102,7 @@ GameObject:
   - component: {fileID: 4033938450006022}
   - component: {fileID: 198021556724332812}
   - component: {fileID: 199286522807772566}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: sw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18814,7 +18814,7 @@ GameObject:
   - component: {fileID: 4109283706424394}
   - component: {fileID: 198051250336787020}
   - component: {fileID: 199751652172492314}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: lines-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23508,9 +23508,8 @@ GameObject:
   - component: {fileID: 4808242810915838}
   - component: {fileID: 198012951959979496}
   - component: {fileID: 199482398187040210}
-  - component: {fileID: 114433139515695552}
   - component: {fileID: -3625663861756757908}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: hit-line-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28279,19 +28278,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &114433139515695552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1931391723872664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5a92ec89de1aec4281ea738f0693ff1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selfdestruct_in: 1.11
 --- !u!114 &-3625663861756757908
 MonoBehaviour:
   m_ObjectHideFlags: 0

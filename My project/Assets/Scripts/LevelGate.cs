@@ -2,19 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelGate : MonoBehaviour
+public class LevelGate : Interactable
 {
     public int levelScene;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    private void OnTriggerEnter(Collider other)
+
+    public override void South()
     {
-        if (other.CompareTag("Player"))
-            EnterGate();
+        base.South();
+        EnterGate();
     }
 
     public void EnterGate() {

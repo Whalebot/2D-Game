@@ -45,12 +45,19 @@ MonoBehaviour:
   screenShake: []
   vfx: []
   sfx: []
-  hitFX: {fileID: 0}
+  hitFX:
+    startup: 1
+    prefab: {fileID: 1416824176164296, guid: dc1397204bb5ee84895af2b49dac2d49, type: 3}
+    deattachFromPlayer: 1
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+    scale: {x: 0.7, y: 0.7, z: 0.7}
   blockFX: {fileID: 0}
   counterhitFX: {fileID: 0}
   hitSFX: {fileID: 0}
   blockSFX: {fileID: 0}
   counterhitSFX: {fileID: 0}
+  useAttackSpeed: 1
   keepVelocity: 0
   particleID: 0
   holdAttack: 0

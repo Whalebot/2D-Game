@@ -9,7 +9,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 763658823407521956, guid: 5e43fc135bd09324fa593af850605463, type: 3}
       propertyPath: runSpeed
-      value: 5
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 763658823407521956, guid: 5e43fc135bd09324fa593af850605463, type: 3}
+      propertyPath: walkSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1487943326713607884, guid: 5e43fc135bd09324fa593af850605463, type: 3}
+      propertyPath: maxSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1487943326713607884, guid: 5e43fc135bd09324fa593af850605463, type: 3}
+      propertyPath: deaccelerateSpeed
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4216160786583191769, guid: 5e43fc135bd09324fa593af850605463, type: 3}
       propertyPath: character
@@ -17,11 +29,15 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: ca9804492ee9f6d4cb502aaf166b07eb, type: 2}
     - target: {fileID: 4216160786583191769, guid: 5e43fc135bd09324fa593af850605463, type: 3}
       propertyPath: autoDeathTime
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6518288294043987325, guid: 5e43fc135bd09324fa593af850605463, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6518288294775173806, guid: 5e43fc135bd09324fa593af850605463, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6518288295935901123, guid: 5e43fc135bd09324fa593af850605463, type: 3}
       propertyPath: m_RootOrder
@@ -75,6 +91,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7393496171575576309, guid: 5e43fc135bd09324fa593af850605463, type: 3}
+      propertyPath: delayTime
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 8115606975259577352, guid: 5e43fc135bd09324fa593af850605463, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -86,61 +106,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7464143608956673379, guid: 5e43fc135bd09324fa593af850605463, type: 3}
   m_PrefabInstance: {fileID: 2817427066653252340}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &9037631907321898802 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6518288295935901126, guid: 5e43fc135bd09324fa593af850605463, type: 3}
-  m_PrefabInstance: {fileID: 2817427066653252340}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2074785456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9037631907321898802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb4858468568c2842a896e9b6aa24682, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  character: {fileID: 11400000, guid: ca9804492ee9f6d4cb502aaf166b07eb, type: 2}
-  cooldown: 0
-  recoveryCooldown: 30
-  currentAction: {fileID: 0}
-  id: 0
-  currentState: 0
-  killOncePerDay: 1
-  range: 10
-  viewAngle: 108
-  mask:
-    serializedVersion: 2
-    m_Bits: 247
-  directionVector: {x: 0, y: 0, z: 0}
-  cornerMinDistance: 0
-  minDistance: 0
-  pathUpdateTime: 0
-  detectionDelay: 0.5
-  detectionSpread: 5
-  enemyMask:
-    serializedVersion: 2
-    m_Bits: 0
-  crowdRange: 5
-  isWalking: 0
-  stoppingDistance: 4
-  enemyDetectionRadius: 8
-  willPatrol: 0
-  patrolRange: 0
-  patrolInterval: 0
-  patrolPoints: []
-  patrolID: 0
-  detected: 0
-  target: {fileID: 0}
-  currentTarget: {x: 0, y: 0, z: 0}
-  attackQueue: []
-  yOffset: 0.5
-  clearLine: 0
-  withinAngle: 0
-  inRange: 0
 --- !u!1001 &7201249455647377252
 PrefabInstance:
   m_ObjectHideFlags: 0
