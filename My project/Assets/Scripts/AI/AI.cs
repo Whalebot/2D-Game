@@ -89,7 +89,6 @@ public class AI : MonoBehaviour
 
         target = GameObject.FindGameObjectWithTag("Player").transform;
         currentTarget = target.position;
-
         currentState = State.Idle;
     }
 
@@ -287,7 +286,7 @@ public class AI : MonoBehaviour
     void Attacking()
     {
         currentTarget = target.position;
-        if (!status.NonAttackState()) { movement.direction = TargetDirectionIgnoreTilt(); }
+        if (!status.NonAttackState()) { movement.direction = FindPath(); }
         else
         {
             Idle();
@@ -297,7 +296,7 @@ public class AI : MonoBehaviour
         {
             if (attack.attackString || status.currentState == Status.State.Neutral)
             {
-                movement.direction = TargetDirectionIgnoreTilt();
+                movement.direction = FindPath();
                 AttackQueue();
                 lastAttackTime = Time.time;
             }
@@ -306,8 +305,10 @@ public class AI : MonoBehaviour
 
     protected void AttackQueue()
     {
-        attack.Attack(attackQueue[0]);
-        attackQueue.RemoveAt(0);
+        if (attack.Attack(attackQueue[0]))
+        {
+            attackQueue.RemoveAt(0);
+        }
     }
 
     public void DetectionEvent()

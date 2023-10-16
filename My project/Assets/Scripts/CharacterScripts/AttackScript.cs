@@ -264,6 +264,8 @@ public class AttackScript : MonoBehaviour
                         fx.transform.localPosition = item.position;
                         fx.transform.localRotation = Quaternion.Euler(item.rotation);
                         fx.transform.localScale = item.scale;
+                        if (item.destroyOnRecovery)
+                            fx.GetComponent<VFXScript>().SetupVFX(status);
                         if (item.deattachFromPlayer)
                             fx.transform.SetParent(null);
                     }
@@ -461,6 +463,7 @@ public class AttackScript : MonoBehaviour
         //Air properties
         if (move.useAirAction) movement.performedJumps++;
 
+        status.EnableCollider();
         Startup();
         landCancel = move.landCancel;
 
@@ -508,7 +511,7 @@ public class AttackScript : MonoBehaviour
         {
             if (move.gatlingCancel) return true;
         }
-        Debug.Log("no true");
+ //       Debug.Log("no true");
         return false;
     }
 
@@ -567,7 +570,7 @@ public class AttackScript : MonoBehaviour
 
         if (!CanUseMove(c.moves[combo]))
         {
-            Debug.Log("Can't use move");
+            //Debug.Log("Can't use move");
             return false;
         }
         else
@@ -620,6 +623,7 @@ public class AttackScript : MonoBehaviour
         {
             Debug.Log("Land Recovery");
             attackFrames = activeMove.lastActiveFrame + 1;
+
         }
         recoverOnlyOnLand = false;
         if (activeMove != null)
@@ -631,7 +635,6 @@ public class AttackScript : MonoBehaviour
 
         if (landCancel)
         {
-            Debug.Log("Land Cancel");
             newAttack = false;
             landCancelFrame = true;
             Idle();
@@ -672,9 +675,15 @@ public class AttackScript : MonoBehaviour
         recoveryEvent?.Invoke();
     }
 
+    void ClearVFX()
+    {
+        VFXManager.Instance.DestroyParticles(status);
+    }
+
     public void ResetAllValues()
     {
         ClearHitboxes();
+        ClearVFX();
         newAttack = false;
         attackString = false;
 
@@ -690,6 +699,7 @@ public class AttackScript : MonoBehaviour
         hit = false;
         status.counterhitState = false;
         status.projectileInvul = false;
+        status.EnableCollider();
         status.invincible = false;
         movement.forcedWalk = false;
 

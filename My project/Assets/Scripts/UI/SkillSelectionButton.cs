@@ -7,6 +7,7 @@ using Sirenix.OdinInspector;
 
 public class SkillSelectionButton : MonoBehaviour
 {
+    public SkillManager skillManager;
     public SkillSO skillSO;
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI descriptionText;
@@ -28,13 +29,31 @@ public class SkillSelectionButton : MonoBehaviour
     {
         titleText.text = skillSO.title;
         descriptionText.text = skillSO.description;
-        buttonBackground.sprite = skillSO.sprite;
+        switch (skillSO.skillRank)
+        {
+            case Rank.D:
+                buttonBackground.sprite = skillManager.NBackground;
+                break;
+            case Rank.C:
+                buttonBackground.sprite = skillManager.RBackground;
+                break;
+            case Rank.B:
+                buttonBackground.sprite = skillManager.SRBackground;
+                break;
+            case Rank.A:
+                buttonBackground.sprite = skillManager.SSRBackground;
+                break;
+            case Rank.S:
+                buttonBackground.sprite = skillManager.URBackground;
+                break;
+            default:
+                break;
+        }
     }
 
     public void GetSkill()
     {
-        GameManager.Instance.player.GetComponent<SkillHandler>().SkillEXP(skillSO);
-        SaveManager.Instance.saveData.learnedSkills.Add(skillSO);
+        skillManager.GetSkill(skillSO);
         UIManager.Instance.ClosePowerupPanel();
     }
 }

@@ -16,21 +16,28 @@ MonoBehaviour:
   icon: {fileID: 0}
   firstStartupFrame: 15
   lastActiveFrame: 15
-  totalMoveDuration: 19
+  totalMoveDuration: 25
   firstGatlingFrame: 15
-  recoveryFrames: 4
+  recoveryFrames: 10
   attacks: []
   type: 0
   uniqueProperties: []
   screenShake: []
   vfx: []
   sfx: []
-  hitFX: {fileID: 0}
+  hitFX:
+    startup: 1
+    prefab: {fileID: 0}
+    deattachFromPlayer: 1
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
   blockFX: {fileID: 0}
   counterhitFX: {fileID: 0}
   hitSFX: {fileID: 0}
   blockSFX: {fileID: 0}
   counterhitSFX: {fileID: 0}
+  useAttackSpeed: 1
   keepVelocity: 0
   particleID: 0
   holdAttack: 0
@@ -39,10 +46,10 @@ MonoBehaviour:
   resetGatling: 0
   noClip: 1
   noClipStart: 1
-  noClipDuration: 10
+  noClipDuration: 15
   invincible: 1
   invincibleStart: 1
-  invincibleDuration: 10
+  invincibleDuration: 15
   projectileInvul: 0
   projectileInvulStart: 1
   projectileInvulDuration: 0
@@ -70,12 +77,12 @@ MonoBehaviour:
     freeMovement: 0
     homing: 0
     resetVelocityDuringRecovery: 0
-  - startFrame: 15
+  - startFrame: 19
     duration: 1
     momentum: {x: 5, y: 0}
     freeMovement: 0
     homing: 0
     resetVelocityDuringRecovery: 0
-  instantStartupRotation: 0
+  instantStartupRotation: 1
   overrideVelocity: 1
   runMomentum: 0

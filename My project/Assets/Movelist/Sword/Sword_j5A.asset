@@ -16,9 +16,9 @@ MonoBehaviour:
   icon: {fileID: 0}
   firstStartupFrame: 10
   lastActiveFrame: 12
-  totalMoveDuration: 22
+  totalMoveDuration: 20
   firstGatlingFrame: 15
-  recoveryFrames: 10
+  recoveryFrames: 8
   attacks:
   - attackLevel: 0
     attackType: 0
@@ -43,7 +43,13 @@ MonoBehaviour:
   type: 0
   uniqueProperties: []
   screenShake: []
-  vfx: []
+  vfx:
+  - startup: 5
+    prefab: {fileID: 1320683006971348, guid: 83ea291b15cd5ed46be1077c6b047713, type: 3}
+    deattachFromPlayer: 0
+    position: {x: 0, y: 0.5, z: 0.5}
+    rotation: {x: -5.44, y: 180, z: 0}
+    scale: {x: 0.4, y: 0.4, z: 0.4}
   sfx: []
   hitFX:
     startup: 1

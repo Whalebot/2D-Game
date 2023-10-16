@@ -116,6 +116,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Camera: {fileID: 0}
   ignoreY: 1
+--- !u!1 &4604227903762765685
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2415882437873446628}
+  m_Layer: 14
+  m_Name: VFX Container
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2415882437873446628
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4604227903762765685}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6518288295935901123}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6518288294043987325
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,6 +356,7 @@ GameObject:
   - component: {fileID: 763658823407521956}
   - component: {fileID: 6518288295935901120}
   - component: {fileID: 2611016267439307869}
+  - component: {fileID: 608792622818785729}
   m_Layer: 0
   m_Name: Base Enemy Prefab
   m_TagString: Enemy
@@ -347,6 +379,7 @@ Transform:
   - {fileID: 6354472826221676585}
   - {fileID: 7464143608956673379}
   - {fileID: 8559984112062095360}
+  - {fileID: 2415882437873446628}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
@@ -376,6 +409,7 @@ MonoBehaviour:
     magic: 0
     attackSpeed: 1
     airActions: 1
+    luck: 0
     movementSpeedModifier: 1
     poiseRegen: 0
     poise: 0
@@ -399,6 +433,7 @@ MonoBehaviour:
     magic: 0
     attackSpeed: 1
     airActions: 1
+    luck: 0
     movementSpeedModifier: 1
     poiseRegen: 0
     poise: 0
@@ -420,6 +455,7 @@ MonoBehaviour:
     magic: 0
     attackSpeed: 1
     airActions: 1
+    luck: 0
     movementSpeedModifier: 1
     poiseRegen: 0
     poise: 0
@@ -576,6 +612,46 @@ MonoBehaviour:
   clearLine: 0
   withinAngle: 0
   inRange: 0
+--- !u!114 &608792622818785729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6518288295935901126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abecfcf46495f2247993f589e9a6c3ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitboxContainer: {fileID: 8559984112062095360}
+  hitboxes: []
+  vfxContainer: {fileID: 2415882437873446628}
+  moveset: {fileID: 0}
+  attacking: 0
+  activeMove: {fileID: 0}
+  hit: 0
+  gatlingFrame: 0
+  attackID: 0
+  attackFrames: 0
+  extendedBuffer: 0
+  holdAttack: 0
+  attackString: 0
+  canTargetCombo: 0
+  landCancel: 0
+  jumpCancel: 0
+  specialCancel: 0
+  recoverOnlyOnLand: 0
+  movementFrames: 0
+  projectiles: []
+  inMomentum: 0
+  jumpFrameCounter: 0
+  jumpActionDelay: 0
+  jumpActionDelayCounter: 0
+  jumpDelay: 0
+  newAttack: 0
+  landCancelFrame: 0
+  combo: 0
 --- !u!1 &7464143608956673388
 GameObject:
   m_ObjectHideFlags: 0

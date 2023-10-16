@@ -133,6 +133,7 @@ public class VFX
     public int startup = 1;
     public GameObject prefab;
     public bool deattachFromPlayer = true;
+    public bool destroyOnRecovery = false;
     public Vector3 position;
     public Vector3 rotation;
     public Vector3 scale = Vector3.one;

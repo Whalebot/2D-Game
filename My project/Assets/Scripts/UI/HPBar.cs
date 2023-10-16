@@ -45,7 +45,10 @@ public class HPBar : MonoBehaviour
 
 
         if (container != null && !alwaysShowHPBar)
+        {
             container.SetActive(false);
+            poiseBar.gameObject.SetActive(false);
+        }
 
         if (poiseBar != null && status.baseStats.poise <= 0)
             poiseBar.gameObject.SetActive(false);
@@ -69,6 +72,8 @@ public class HPBar : MonoBehaviour
 
         if (nameContainer != null && alwaysShowName)
             nameContainer.SetActive(true);
+
+        UpdateValues();
 
         if (frameCounter > 0)
         {
@@ -109,7 +114,8 @@ public class HPBar : MonoBehaviour
         if (subTitleText != null) subTitleText.text = status.character.subTitle;
     }
 
-    void UpdateDelayBar() {
+    void UpdateDelayBar()
+    {
         if (!skyrimBar)
             delayHealthBar.fillAmount = (float)status.currentStats.currentHealth / status.currentStats.maxHealth;
         else
@@ -118,11 +124,10 @@ public class HPBar : MonoBehaviour
 
         }
     }
-    void UpdateBar()
+
+    void UpdateValues()
     {
         HpText.text = "" + status.currentStats.currentHealth + "/" + status.currentStats.maxHealth;
-
-        frameCounter = delayTime;
 
         if (!skyrimBar)
             healthBar.fillAmount = (float)status.currentStats.currentHealth / status.currentStats.maxHealth;
@@ -138,7 +143,15 @@ public class HPBar : MonoBehaviour
             }
             else
                 poiseBar.color = poiseColor;
+
             poiseBar.transform.localScale = new Vector3((float)status.currentStats.poise / status.baseStats.poise, 1, 1);
         }
     }
+
+    void UpdateBar()
+    {
+        frameCounter = delayTime;
+        UpdateValues();
+    }
+
 }

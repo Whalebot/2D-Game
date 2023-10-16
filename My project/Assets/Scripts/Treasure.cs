@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class Treasure : Interactable
 {
+    public Rank rank;
+
     public SkillSO skill;
 
-    private void OnTriggerEnter(Collider other)
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag("Player"))
+    //        GivePowerup();
+    //}
+    public override void South()
     {
-        if (other.CompareTag("Player"))
-            GivePowerup();
+        base.South();
+        GivePowerup();
     }
-
     public void GivePowerup()
     {
 

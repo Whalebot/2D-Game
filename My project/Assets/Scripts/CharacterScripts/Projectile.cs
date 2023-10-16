@@ -1,25 +1,34 @@
 ﻿using UnityEngine;
-
+using Sirenix.OdinInspector;
 public class Projectile : Hitbox
 {
-    public GameObject explosionVFX;
-    public GameObject explosionSFX;
+    public enum ProjectileMovement
+    {
+        Linear, Homing
+    }
 
-    public bool destroyOnBlock;
-    public bool destroyOnHit;
+    public ProjectileMovement projectileMovement;
+    public Transform target;
+
+
     bool isDestroying;
     bool delayDestroy;
-    public int life;
-    public int lifetime;
-    public float velocity;
-    public bool onStartVelocity;
-    public bool updateVelocty;
+    [TabGroup("Settings")] public int life;
+    [TabGroup("Settings")] public int lifetime;
+    [TabGroup("Settings")] public float velocity;
+    [TabGroup("Settings")] public float updateVelocity;
+    [TabGroup("Settings")] public float rotateSpeed;
+    [TabGroup("Settings")] public bool onStartVelocity;
+    [TabGroup("Settings")] public bool updateVelocty;
 
-    public bool destroyOnCollission = true;
-    public bool destroyOnProjectileClash = true;
-    public bool destroyOnHitboxClash = true;
+    [TabGroup("Settings")] public bool destroyOnCollission = true;
+    [TabGroup("Settings")] public bool destroyOnProjectileClash = true;
+    [TabGroup("Settings")] public bool destroyOnHitboxClash = true;
 
-    public float opacity = 0.1F;
+    [TabGroup("Settings")] public bool destroyOnBlock;
+    [TabGroup("Settings")] public bool destroyOnHit;
+    [TabGroup("Components")] public GameObject explosionVFX;
+    [TabGroup("Components")] public GameObject explosionSFX;
 
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public bool hit;
@@ -35,6 +44,10 @@ public class Projectile : Hitbox
     private void Start()
     {
         GameManager.Instance.advanceGameState += ExecuteFrame;
+
+        if (status.alignment == Alignment.Enemy)
+            target = GameManager.Instance.player;
+
         if (onStartVelocity)
             rb.velocity = transform.forward * velocity;
     }
@@ -100,8 +113,29 @@ public class Projectile : Hitbox
 
     public virtual void Movement()
     {
-        if (updateVelocty)
-            rb.velocity = transform.forward * velocity;
+        switch (projectileMovement)
+        {
+            case ProjectileMovement.Linear:
+                if (updateVelocty)
+                    rb.velocity = transform.forward * velocity;
+                break;
+            case ProjectileMovement.Homing:
+                if (target != null)
+                {
+                    Vector2 direction = (target.position - transform.position).normalized;
+
+                    Vector3 rotateAmount = Vector3.Cross(direction, transform.forward) * Vector3.Angle(transform.forward, direction);
+
+                    rb.angularVelocity = -rotateAmount * rotateSpeed;
+
+                    //rb.velocity += transform.forward * updateVelocity;
+                    rb.velocity += (target.position - transform.position).normalized * updateVelocity;
+                }
+                break;
+            default:
+                break;
+        }
+
     }
 
     new void OnTriggerEnter(Collider other)

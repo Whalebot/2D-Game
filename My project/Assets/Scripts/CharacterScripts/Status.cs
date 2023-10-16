@@ -175,7 +175,7 @@ public class Status : MonoBehaviour
     public void EnableCollider()
     {
 
-       col.gameObject.layer = LayerMask.NameToLayer("Default");
+        col.gameObject.layer = LayerMask.NameToLayer("Collision");
     }
     public void DisableCollider()
     {
@@ -309,7 +309,7 @@ public class Status : MonoBehaviour
                 Poise = Mathf.Clamp(Poise + currentStats.poiseRegen, 0, baseStats.poise);
             else
             {
-                Poise = Mathf.Clamp(Poise + currentStats.poiseRegen * 2, 0, baseStats.poise);
+                Poise = Mathf.Clamp(Poise + currentStats.poiseRegen * 4, 0, baseStats.poise);
                 if (Poise >= baseStats.poise)
                     poiseBroken = false;
             }
@@ -412,6 +412,15 @@ public class Status : MonoBehaviour
             }
         }
 
+
+        GameManager.Instance.DamageNumbers(transform, damage);
+        Health -= damage;
+
+        if (hasArmor)
+        {
+            return;
+        }
+
         if (baseStats.poise > 0)
         {
             if (currentStats.poise > 0 && currentStats.poise <= poiseBreak && !poiseBroken)
@@ -428,6 +437,10 @@ public class Status : MonoBehaviour
                 hurtEvent?.Invoke();
                 GameManager.Instance.Slowmotion(slowDur);
             }
+            else
+            {
+                Poise -= poiseBreak;
+            }
         }
         else
         {
@@ -442,11 +455,7 @@ public class Status : MonoBehaviour
             GoToState(State.Knockdown);
         }
 
-        if (!poiseBroken)
-            Poise -= poiseBreak;
 
-        GameManager.Instance.DamageNumbers(transform, damage);
-        Health -= damage;
     }
     public void PoiseBreak()
     {

@@ -13,6 +13,7 @@ public class Stats
     [TabGroup("Stats")] public int magic;
     [TabGroup("Stats")] public float attackSpeed = 1;
     [TabGroup("Stats")] public int airActions = 1;
+    [TabGroup("Stats")] public int luck = 0;
 
     [Header("Modifiers")]
     [FoldoutGroup("Modifiers")] public float movementSpeedModifier = 1;
@@ -24,7 +25,7 @@ public class Stats
     [FoldoutGroup("Modifiers")] public float guardBreakModifier = 1;
     [FoldoutGroup("Modifiers")] public float sizeModifier = 1;
     [FoldoutGroup("Modifiers")] public float damageModifierPercentage = 1;
-    [FoldoutGroup("Modifiers")] public int damageModifierFlat = 1;
+    [FoldoutGroup("Modifiers")] public int damageModifierFlat = 0;
     [FoldoutGroup("Modifiers")] public float hitStunMultiplier = 1;
     [FoldoutGroup("Modifiers")] public float knockbackModifier = 1;
     [FoldoutGroup("Modifiers")] public float critChance = 0;

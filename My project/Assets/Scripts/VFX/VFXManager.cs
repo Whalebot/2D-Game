@@ -79,6 +79,31 @@ public class VFXManager : MonoBehaviour
         }
     }
 
+    public void DestroyParticles(Status status)
+    {
+        deletedParticles.Clear();
+        foreach (var item in particles)
+        {
+            if (item.status == status)
+                deletedParticles.Add(item);
+        }
+
+        for (int i = 0; i < deletedParticles.Count; i++)
+        {
+            particles.Remove(deletedParticles[deletedParticles.Count - i - 1]);
+            if (deletedParticles[deletedParticles.Count - i - 1].ps != null)
+            {
+
+
+                foreach (Transform item in deletedParticles[deletedParticles.Count - i - 1].ps.transform)
+                {
+                    item.SetParent(null);
+                }
+                Destroy(deletedParticles[deletedParticles.Count - i - 1].ps.gameObject);
+            }
+        }
+    }
+
     public void RevertParticles()
     {
         foreach (var item in particles)
@@ -90,10 +115,10 @@ public class VFXManager : MonoBehaviour
         }
     }
 
-    public void AddParticle(ParticleSystem ps, int ID)
+    public void AddParticle(ParticleSystem ps, int ID, Status status = null)
     {
 
-        ParticleObject p = new ParticleObject(ps, GameManager.Instance.gameFrameCount);
+        ParticleObject p = new ParticleObject(ps, GameManager.Instance.gameFrameCount, status);
         ps.Simulate(Time.fixedDeltaTime, true, false, true);
         ps.Pause();
         particles.Add(p);
@@ -103,11 +128,13 @@ public class VFXManager : MonoBehaviour
 [System.Serializable]
 public class ParticleObject
 {
-    public ParticleObject(ParticleSystem p, int i)
+    public ParticleObject(ParticleSystem p, int i, Status s = null)
     {
         ps = p;
         startFrame = i;
+        status = s;
     }
     public ParticleSystem ps;
     public int startFrame;
+    public Status status = null;
 }

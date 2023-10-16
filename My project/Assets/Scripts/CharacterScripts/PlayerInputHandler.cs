@@ -47,7 +47,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     void ExecuteFrame()
     {
-        if (GameManager.menuOpen || GameManager.isPaused)
+        if (GameManager.menuOpen || GameManager.isPaused || status.isDead)
         {
             mov.direction = Vector3.zero;
             //            mov._rb.velocity = Vector3.zero;

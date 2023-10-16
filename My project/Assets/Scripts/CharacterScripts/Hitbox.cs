@@ -45,17 +45,18 @@ public class Hitbox : MonoBehaviour
         Hitbox hitbox = other.GetComponent<Hitbox>();
         colPos = other.gameObject.transform;
         if (attack.landCancelFrame) return;
-        if (hitbox != null && canClash)
-        {
-            if (hitbox.GetType() == typeof(Projectile)) return;
-            if (status == enemyStatus || status.alignment == enemyStatus.alignment) return;
-            if (CheckInvul(enemyStatus) && hitbox.CheckInvul(status))
-            {
-                Clash(enemyStatus);
-                return;
-            }
-        }
-        else if (enemyStatus != null)
+        //if (hitbox != null && canClash)
+        //{
+        //    if (hitbox.GetType() == typeof(Projectile)) return;
+        //    if (status == enemyStatus || status.alignment == enemyStatus.alignment) return;
+        //    if (CheckInvul(enemyStatus) && hitbox.CheckInvul(status))
+        //    {
+        //        Clash(enemyStatus);
+        //        return;
+        //    }
+        //}
+        //else 
+        if (enemyStatus != null)
         {
             if (status == enemyStatus || status.alignment == enemyStatus.alignment) return;
 
@@ -182,8 +183,16 @@ public class Hitbox : MonoBehaviour
                 CameraManager.Instance.ShakeCamera(move.screenShake[i].amplitude, move.screenShake[i].duration);
         }
 
-        totalDamage = (int)(baseDamage *
-            (atk.damage * status.currentStats.damageModifierPercentage * status.Attack) + status.currentStats.damageModifierFlat);
+        int rng = Random.Range(1, 101);
+        if (rng <= status.currentStats.critChance * 100)
+        {
+            totalDamage = (int)(baseDamage * (atk.damage * status.currentStats.damageModifierPercentage * status.Attack * status.currentStats.critMultiplier) + status.currentStats.damageModifierFlat);
+        }
+        else
+        {
+            totalDamage = (int)(baseDamage * (atk.damage * status.currentStats.damageModifierPercentage * status.Attack) + status.currentStats.damageModifierFlat);
+
+        }
 
         int damageDealt = Mathf.RoundToInt(totalDamage - other.currentStats.resistance);
 
@@ -233,7 +242,6 @@ public class Hitbox : MonoBehaviour
 
     void Clash(Status enemyStatus)
     {
-        print("Clash");
         canClash = false;
         Collider col = GetComponent<Collider>();
         col.enabled = false;

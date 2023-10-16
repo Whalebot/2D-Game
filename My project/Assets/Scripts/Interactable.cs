@@ -11,7 +11,7 @@ public class Interactable : MonoBehaviour
 
     public enum Type
     {
-        Enter, None
+        Enter, Open, None
     }
     public Type _southType;
     public virtual Type southType
