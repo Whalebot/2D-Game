@@ -10,7 +10,6 @@ public class CharacterCreator : MonoBehaviour
 
     [TabGroup("Character Creation")] public CharacterVisualData visualData;
     [TabGroup("Character Creation")] [InlineEditor] public ColorPresetSO preset;
-    public Color c;
     [TabGroup("Character Creation")] public GameObject target;
     [TabGroup("Components")] public CharacterVisuals visuals;
 
@@ -77,6 +76,26 @@ public class CharacterCreator : MonoBehaviour
         else
             ApplyVisuals();
     }
+
+    public void ApplyMaterial()
+    {
+        foreach (var item in allPresets[visualData.colorPreset].colorPresets)
+        {
+            Debug.Log(item.color);
+            item.material.SetColor("_MainColor", item.color * item.color);
+            Debug.Log(item.material.GetColor("_MainColor"));
+        }
+    }
+
+    [Button]
+    public void SaveMaterial()
+    {
+        foreach (var item in preset.colorPresets)
+        {
+            Debug.Log(item.material.GetColor("_MainColor"));
+            item.color = item.material.GetColor("_MainColor");
+        }
+    }
     [Button]
     public void GetMaterials()
     {
@@ -105,24 +124,4 @@ public class CharacterCreator : MonoBehaviour
         }
     }
 
-    [Button]
-    public void ApplyMaterial()
-    {
-        foreach (var item in allPresets[visualData.colorPreset].colorPresets)
-        {
-            Debug.Log(item.color);
-            item.material.SetColor("_MainColor", item.color * item.color);
-            Debug.Log(item.material.GetColor("_MainColor"));
-        }
-    }
-
-    [Button]
-    public void SaveMaterial()
-    {
-        foreach (var item in preset.colorPresets)
-        {
-            Debug.Log(item.material.GetColor("_MainColor"));
-            item.color = item.material.GetColor("_MainColor");
-        }
-    }
 }
