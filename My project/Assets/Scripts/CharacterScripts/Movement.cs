@@ -102,7 +102,12 @@ public class Movement : MonoBehaviour
             isMoving = false;
             return;
         }
+
         GroundDetection();
+        if (ground)
+            status.groundState = GroundState.Grounded;
+        else
+            status.groundState = GroundState.Airborne;
 
         if (status.currentState == Status.State.Neutral)
         {
@@ -186,7 +191,7 @@ public class Movement : MonoBehaviour
         jumpCounter = minimumJumpTime;
         status.col.material = airMat;
         ground = false;
-
+        status.groundState = GroundState.Airborne;
         if (isMoving)
         {
             if (currentVel == 0)

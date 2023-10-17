@@ -44,6 +44,7 @@ public class Hitbox : MonoBehaviour
         Status enemyStatus = other.GetComponentInParent<Status>();
         Hitbox hitbox = other.GetComponent<Hitbox>();
         colPos = other.gameObject.transform;
+
         if (attack.landCancelFrame) return;
         //if (hitbox != null && canClash)
         //{
@@ -82,6 +83,9 @@ public class Hitbox : MonoBehaviour
         {
             return false;
         }
+        if (enemyStatus.groundState != GroundState.Grounded && move.hitsGroundOnly)
+            return false;
+
         return true;
     }
 
@@ -184,12 +188,16 @@ public class Hitbox : MonoBehaviour
         }
 
         int rng = Random.Range(1, 101);
+        bool crit = false;
         if (rng <= status.currentStats.critChance * 100)
         {
+            crit = true;
+            status.Meter += (int)(move.meterGain * status.currentStats.meterGainModifier * status.currentStats.critMultiplier);
             totalDamage = (int)(baseDamage * (atk.damage * status.currentStats.damageModifierPercentage * status.Attack * status.currentStats.critMultiplier) + status.currentStats.damageModifierFlat);
         }
         else
         {
+            status.Meter += (int)(move.meterGain * status.currentStats.meterGainModifier);
             totalDamage = (int)(baseDamage * (atk.damage * status.currentStats.damageModifierPercentage * status.Attack) + status.currentStats.damageModifierFlat);
 
         }
@@ -208,7 +216,7 @@ public class Hitbox : MonoBehaviour
         else
         {
             //Hit FX
-            if (move.hitFX != null)
+            if (move.hitFX.prefab != null)
             {
                 GameObject VFX = Instantiate(move.hitFX.prefab, colPos.position, colPos.rotation);
                 VFX.transform.localScale = move.hitFX.scale;
@@ -226,16 +234,16 @@ public class Hitbox : MonoBehaviour
         switch (atk.attackLevel)
         {
             case AttackLevel.Level1:
-                other.TakeHit(damageDealt, aVector, CombatManager.Instance.lvl1.stun, CombatManager.Instance.lvl1.poiseBreak, aVector, CombatManager.Instance.lvl1.hitstop, hit.hitState);
+                other.TakeHit(damageDealt, aVector, CombatManager.Instance.lvl1.stun, CombatManager.Instance.lvl1.poiseBreak, aVector, CombatManager.Instance.lvl1.hitstop, hit.hitState, crit);
                 break;
             case AttackLevel.Level2:
-                other.TakeHit(damageDealt, aVector, CombatManager.Instance.lvl2.stun, CombatManager.Instance.lvl2.poiseBreak, aVector, CombatManager.Instance.lvl2.hitstop, hit.hitState);
+                other.TakeHit(damageDealt, aVector, CombatManager.Instance.lvl2.stun, CombatManager.Instance.lvl2.poiseBreak, aVector, CombatManager.Instance.lvl2.hitstop, hit.hitState, crit);
                 break;
             case AttackLevel.Level3:
-                other.TakeHit(damageDealt, aVector, CombatManager.Instance.lvl3.stun, CombatManager.Instance.lvl3.poiseBreak, aVector, CombatManager.Instance.lvl3.hitstop, hit.hitState);
+                other.TakeHit(damageDealt, aVector, CombatManager.Instance.lvl3.stun, CombatManager.Instance.lvl3.poiseBreak, aVector, CombatManager.Instance.lvl3.hitstop, hit.hitState, crit);
                 break;
             case AttackLevel.Custom:
-                other.TakeHit(damageDealt, aVector, atk.stun, atk.poiseBreak, aVector, atk.hitstop, hit.hitState);
+                other.TakeHit(damageDealt, aVector, atk.stun, atk.poiseBreak, aVector, atk.hitstop, hit.hitState, crit);
                 break;
         }
     }

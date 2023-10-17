@@ -97,6 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autoLoad: 1
   saveData:
+    currentLevel: 1
     learnedSkills: []
 --- !u!1 &399436146491855168
 GameObject:
@@ -170,6 +171,7 @@ MonoBehaviour:
   offsetCounter: 0
   offsetTime: 0
   damageText: {fileID: 8179864821030936357, guid: dcf68f350c94a434a9cb45c4a3ebba8a, type: 3}
+  critDamageText: {fileID: 8179864821030936357, guid: de09023761c359946952f4f44ded613d, type: 3}
   healingText: {fileID: 0}
   slowMotionValue: 0.1
   slowMotionDuration: 0.1
@@ -632,6 +634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5808b6fc1ca66da4998883b51ee85a37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentLevel: 1
 --- !u!1 &399436147799149813
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,15 +734,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allSkills:
+  - {fileID: 11400000, guid: 1dafec9d89828be428ba26b1ef3de6cc, type: 2}
   - {fileID: 11400000, guid: ec9caaf0499c95a4a954431920b95ba1, type: 2}
   - {fileID: 11400000, guid: 4e95f6e28dc6be542952a949e1ee6ef0, type: 2}
   - {fileID: 11400000, guid: acda88d7eff0d894f8e227d16aeec41d, type: 2}
   - {fileID: 11400000, guid: 99a185ad878da0b499519391bcb066db, type: 2}
   - {fileID: 11400000, guid: c42053881fec75a4c8703c81798b41d7, type: 2}
   - {fileID: 11400000, guid: f507784169174c848a4b125034aa4278, type: 2}
+  - {fileID: 11400000, guid: 6680f3426c9eb8543ab94a0fbb178886, type: 2}
   - {fileID: 11400000, guid: 55a99e97e30722a47b82068ebb5d6633, type: 2}
+  - {fileID: 11400000, guid: c6e84d7430030174086d8240539c3566, type: 2}
+  - {fileID: 11400000, guid: be8c299522efc044a934eb94c43b0e80, type: 2}
   - {fileID: 11400000, guid: 39b8471307eafa04498d1d4558e4a976, type: 2}
   foundSkills: []
+  DSkills:
+  - {fileID: 11400000, guid: c6e84d7430030174086d8240539c3566, type: 2}
+  - {fileID: 11400000, guid: 39b8471307eafa04498d1d4558e4a976, type: 2}
+  - {fileID: 11400000, guid: c6e84d7430030174086d8240539c3566, type: 2}
+  - {fileID: 11400000, guid: 39b8471307eafa04498d1d4558e4a976, type: 2}
+  CSkills:
+  - {fileID: 11400000, guid: ec9caaf0499c95a4a954431920b95ba1, type: 2}
+  - {fileID: 11400000, guid: acda88d7eff0d894f8e227d16aeec41d, type: 2}
+  - {fileID: 11400000, guid: 99a185ad878da0b499519391bcb066db, type: 2}
+  - {fileID: 11400000, guid: f507784169174c848a4b125034aa4278, type: 2}
+  - {fileID: 11400000, guid: 6680f3426c9eb8543ab94a0fbb178886, type: 2}
+  - {fileID: 11400000, guid: 55a99e97e30722a47b82068ebb5d6633, type: 2}
+  - {fileID: 11400000, guid: ec9caaf0499c95a4a954431920b95ba1, type: 2}
+  - {fileID: 11400000, guid: acda88d7eff0d894f8e227d16aeec41d, type: 2}
+  - {fileID: 11400000, guid: 99a185ad878da0b499519391bcb066db, type: 2}
+  - {fileID: 11400000, guid: f507784169174c848a4b125034aa4278, type: 2}
+  - {fileID: 11400000, guid: 6680f3426c9eb8543ab94a0fbb178886, type: 2}
+  - {fileID: 11400000, guid: 55a99e97e30722a47b82068ebb5d6633, type: 2}
+  BSkills:
+  - {fileID: 11400000, guid: c42053881fec75a4c8703c81798b41d7, type: 2}
+  - {fileID: 11400000, guid: be8c299522efc044a934eb94c43b0e80, type: 2}
+  - {fileID: 11400000, guid: 1dafec9d89828be428ba26b1ef3de6cc, type: 2}
+  - {fileID: 11400000, guid: c42053881fec75a4c8703c81798b41d7, type: 2}
+  - {fileID: 11400000, guid: be8c299522efc044a934eb94c43b0e80, type: 2}
+  ASkills:
+  - {fileID: 11400000, guid: 4e95f6e28dc6be542952a949e1ee6ef0, type: 2}
+  - {fileID: 11400000, guid: 4e95f6e28dc6be542952a949e1ee6ef0, type: 2}
+  SSkills: []
+  activeSkills:
+  - {fileID: 11400000, guid: 1dafec9d89828be428ba26b1ef3de6cc, type: 2}
   skillButtons:
   - {fileID: 0}
   - {fileID: 0}

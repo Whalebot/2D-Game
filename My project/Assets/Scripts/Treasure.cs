@@ -4,9 +4,23 @@ using UnityEngine;
 
 public class Treasure : Interactable
 {
+
     public Rank rank;
 
-    public SkillSO skill;
+    public GameObject treasure;
+
+    public override void Start()
+    {
+        base.Start();
+        AIManager.Instance.allEnemiesKilled += SpawnTreasure;
+        treasure.SetActive(false);
+    }
+
+    void SpawnTreasure()
+    {
+        if (treasure != null)
+            treasure.SetActive(true);
+    }
 
     //private void OnTriggerEnter(Collider other)
     //{
@@ -20,7 +34,7 @@ public class Treasure : Interactable
     }
     public void GivePowerup()
     {
-
+        SkillManager.Instance.RollSkills(rank);
         GameManager.Instance.OpenGetSkillWindow();
         Destroy(gameObject);
     }

@@ -12,6 +12,7 @@ public class SkillSO : ScriptableObject
     public string title;
  [PreviewField(50)]   public Sprite sprite;
     [ShowIf("@type == SkillType.Active")] public Move move;
+    [ShowIf("@type == SkillType.Active")] public Combo combo;
     [TextArea(15, 20)]
     public string description;
     [ShowIf("@type == SkillType.Passive")]

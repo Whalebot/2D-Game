@@ -402,6 +402,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""95f3d0d7-6471-458b-b420-74c56d755ce2"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse"",
+                    ""action"": ""East"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""3b68eddd-39e3-49d2-aa36-1191a563cff1"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
@@ -446,6 +457,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""614c50ba-306e-4d14-a135-2e860c8c3785"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse"",
+                    ""action"": ""West"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""ed677a22-5573-4c1a-aa31-02ec7aead5cd"",
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
@@ -459,6 +481,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""f077e372-b389-4e63-9021-a868715b1d6f"",
                     ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse"",
+                    ""action"": ""North"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c7eac90e-43a4-4b9a-981b-0d6b0d1bffde"",
+                    ""path"": ""<Keyboard>/k"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mouse"",

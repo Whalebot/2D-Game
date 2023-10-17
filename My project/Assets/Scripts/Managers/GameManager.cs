@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
     [TabGroup("Feedback")] [SerializeField] int offsetCounter;
     [TabGroup("Feedback")] [SerializeField] int offsetTime;
     [TabGroup("Feedback")] public GameObject damageText;
+    [TabGroup("Feedback")] public GameObject critDamageText;
     [TabGroup("Feedback")] public GameObject healingText;
     [TabGroup("Feedback")] public float slowMotionValue;
     [TabGroup("Feedback")] public float slowMotionDuration;
@@ -63,6 +64,9 @@ public class GameManager : MonoBehaviour
             SetPlayerPosition(startPosition, startRotation);
             startPosition = Vector3.zero;
         }
+
+        isPaused = false;
+        menuOpen = false;
     }
     // Start is called before the first frame update
     void Start()
@@ -74,7 +78,7 @@ public class GameManager : MonoBehaviour
             saveOnce = true;
         }
 
-        //AIManager.Instance.allEnemiesKilled += FinalHit;
+        player.GetComponent<Status>().deathEvent += LoseGame;
         startTimeStep = Time.fixedDeltaTime;
     }
 
@@ -149,11 +153,16 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void DamageNumbers(Transform other, int damageValue)
+    public void DamageNumbers(Transform other, int damageValue, bool crit)
     {
         if (showDamageText)
         {
-            GameObject text = Instantiate(damageText, other.position + Vector3.up * offsetCounter * numberOffset, Quaternion.identity);
+            GameObject text = null;
+            if (crit)
+                text = Instantiate(critDamageText, other.position + Vector3.up * offsetCounter * numberOffset, Quaternion.identity);
+            else
+                text = Instantiate(damageText, other.position + Vector3.up * offsetCounter * numberOffset, Quaternion.identity);
+
             text.GetComponentInChildren<DamageText>().SetupNumber(damageValue);
             offsetCounter++;
             offsetTime = offsetResetSpeed;
@@ -280,6 +289,7 @@ public class GameManager : MonoBehaviour
     IEnumerator RestartDelay()
     {
         yield return new WaitForSeconds(restartDelay);
-        TransitionManager.Instance.LoadScene(0);
+        SaveManager.Instance.DeleteData();
+        TransitionManager.Instance.RestartGame();
     }
 }

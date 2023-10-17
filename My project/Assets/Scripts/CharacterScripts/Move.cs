@@ -6,6 +6,8 @@ using UnityEngine;
 public class Move : ScriptableObject
 {
     public int animationID;
+    public int meterCost;
+    public int meterGain = 10;
     public Sprite icon;
     [Header("Read Only")]
     public int firstStartupFrame;
@@ -21,7 +23,7 @@ public class Move : ScriptableObject
     [Header("Hit properties")]
     [TabGroup("Attacks")] public MoveType type;
 
- public MoveUniqueProperty[] uniqueProperties;
+    public MoveUniqueProperty[] uniqueProperties;
 
     [Header("Screen shake")]
     [TabGroup("Group 2", "FX")]
@@ -43,6 +45,7 @@ public class Move : ScriptableObject
     [TabGroup("Move properties")] public bool autoAim;
     [TabGroup("Move properties")] public bool armor;
     [TabGroup("Move properties")] public bool resetGatling;
+    [TabGroup("Move properties")] public bool hitsGroundOnly;
 
     [TabGroup("Move properties")] public bool noClip;
     [ShowIf("noClip")]

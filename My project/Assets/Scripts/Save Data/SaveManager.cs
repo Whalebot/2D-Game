@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,11 +10,13 @@ public class SaveManager : MonoBehaviour
     public static SaveManager Instance;
     public bool autoLoad;
     public SaveData saveData;
+    public event Action saveEvent;
+    public event Action loadEvent;
 
     private void Awake()
     {
         Instance = this;
-
+ 
     }
 
     private void Start()
@@ -30,6 +33,8 @@ public class SaveManager : MonoBehaviour
 
     public void LoadData()
     {
+        loadEvent?.Invoke();
+
         SkillHandler skillHandler = GameManager.Instance.player.GetComponent<SkillHandler>();
         skillHandler.RemoveAllSkills();
         saveData = new SaveData();
@@ -42,8 +47,10 @@ public class SaveManager : MonoBehaviour
  
             foreach (var item in saveData.learnedSkills)
             {
-                skillHandler.SkillEXP(item);
+                skillHandler.LearnSkill(item);
             }
+
+            LevelManager.Instance.currentLevel = saveData.currentLevel;
         }
 
         StartCoroutine(DelaySetup());
@@ -60,6 +67,9 @@ public class SaveManager : MonoBehaviour
 
     public void SaveData()
     {
+        saveEvent?.Invoke();
+        saveData.currentLevel = LevelManager.Instance.currentLevel;
+
         string jsonData = JsonUtility.ToJson(saveData, true);
         File.WriteAllText(Application.persistentDataPath + "/saveData.json", jsonData);
         PlayerPrefs.SetString("Save", jsonData);
@@ -71,5 +81,6 @@ public class SaveManager : MonoBehaviour
 [System.Serializable]
 public class SaveData
 {
+    public int currentLevel = 1;
     public List<SkillSO> learnedSkills;
 }

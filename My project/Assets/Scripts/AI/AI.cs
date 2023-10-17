@@ -184,10 +184,10 @@ public class AI : MonoBehaviour
 
     private void LoseAggro()
     {
-        detected = false;
-        detectOnce = false;
-        currentState = State.Idle;
-        SetupPatrolPoints();
+        //detected = false;
+        //detectOnce = false;
+        //currentState = State.Idle;
+        //SetupPatrolPoints();
     }
 
     protected bool InCooldown()

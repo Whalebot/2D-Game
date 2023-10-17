@@ -328,12 +328,12 @@ public class InputManager : MonoBehaviour
         westInput?.Invoke();
         if (!GameManager.isPaused && !GameManager.menuOpen)
         {
-            if (R2Hold)
-            {
-                InputBuffer(7);
-            }
-            else
-                InputBuffer(1);
+            //if (inputDirection.y > 0)
+            //{
+            //    InputBuffer(81);
+            //}
+            //else
+            InputBuffer(1);
         }
 
     }
@@ -350,10 +350,12 @@ public class InputManager : MonoBehaviour
         northInput?.Invoke();
         if (!GameManager.isPaused && !GameManager.menuOpen)
         {
-            if (R2Hold)
-            { InputBuffer(8); }
-            else
-                InputBuffer(2);
+            //if (inputDirection.y > 0)
+            //{
+            //    InputBuffer(82);
+            //}
+            //else
+            InputBuffer(2);
         }
 
     }
@@ -367,10 +369,8 @@ public class InputManager : MonoBehaviour
 
         if (!GameManager.isPaused && !GameManager.menuOpen)
         {
-            if (R2Hold)
-            { InputBuffer(9); }
-            else
-                InputBuffer(3);
+
+            InputBuffer(3);
         }
 
     }
@@ -386,10 +386,12 @@ public class InputManager : MonoBehaviour
 
         if (!GameManager.isPaused && !GameManager.menuOpen)
         {
-            if (R2Hold)
-            { InputBuffer(10); }
-            else
-                InputBuffer(4);
+            //if (inputDirection.y > 0)
+            //{
+            //    InputBuffer(84);
+            //}
+            //else
+            InputBuffer(4);
         }
     }
 
@@ -522,6 +524,9 @@ public class InputManager : MonoBehaviour
     }
     public int Direction()
     {
+        if (inputDirection.y > 0) return 8;
+        if (inputDirection.y < 0) return 2;
+        return 5;
 
         //if (netDirectionals[0])
         //{
@@ -548,7 +553,7 @@ public class InputManager : MonoBehaviour
         //    else return 6;
         //}
         //else
-        return 5;
+        //    return 5;
     }
     public void InputBuffer(int inputID)
     {

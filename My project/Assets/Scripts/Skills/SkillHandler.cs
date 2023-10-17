@@ -58,7 +58,8 @@ public class SkillHandler : MonoBehaviour
         //}
     }
 
-    public void RemoveAllSkills() {
+    public void RemoveAllSkills()
+    {
         learnedSkills.Clear();
         status.ReplaceStats(status.currentStats, status.baseStats);
         UpdateStats();
@@ -103,7 +104,7 @@ public class SkillHandler : MonoBehaviour
         return null;
     }
 
-    public void SkillEXP(SkillSO skill)
+    public void LearnSkill(SkillSO skill)
     {
 
         Skill temp = null;
@@ -113,6 +114,13 @@ public class SkillHandler : MonoBehaviour
             temp.skillSO = skill;
             learnedSkills.Add(temp);
         }
+
+        if (skill.move != null && skill.combo != null)
+        {
+            //skill.combo.moves = new Move[1];
+            skill.combo.moves[0] = skill.move;
+        }
+
 
         expEvent?.Invoke();
 

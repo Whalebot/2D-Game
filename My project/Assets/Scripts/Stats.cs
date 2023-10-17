@@ -8,6 +8,8 @@ public class Stats
 {
     [TabGroup("Stats")] public int currentHealth = 0;
     [TabGroup("Stats")] public int maxHealth = 0;
+    [TabGroup("Stats")] public int currentMeter = 0;
+    [TabGroup("Stats")] public int maxMeter = 0;
     [TabGroup("Stats")] public int level = 1;
     [TabGroup("Stats")] public int attack;
     [TabGroup("Stats")] public int magic;
@@ -17,6 +19,7 @@ public class Stats
 
     [Header("Modifiers")]
     [FoldoutGroup("Modifiers")] public float movementSpeedModifier = 1;
+    [FoldoutGroup("Modifiers")] public float meterGainModifier = 1;
     [FoldoutGroup("Modifiers")] public float poiseRegen = 0;
     [FoldoutGroup("Modifiers")] public float poise = 0;
     [FoldoutGroup("Modifiers")] public float defense = 0;

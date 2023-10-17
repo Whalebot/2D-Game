@@ -46,11 +46,18 @@ public class TransitionManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-    public void EndDay()
-    {
-        SceneManager.LoadScene(1);
+
+    public void ReloadScene() {
+        LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void RestartGame()
+    {
+        if (isLoading) return;
+
+        isLoading = true;
+        StartCoroutine(TransitionDelay(0));
+    }
     public void LoadScene(int sceneIndex)
     {
         if (isLoading) return;

@@ -131,6 +131,16 @@ public class Status : MonoBehaviour
             }
         }
     }
+    public int Meter
+    {
+        get { return currentStats.currentMeter; }
+        set
+        {
+            currentStats.currentMeter = Mathf.Clamp(value, 0, currentStats.maxMeter);
+        }
+    }
+
+
     public int Attack
     {
         get { return currentStats.attack; }
@@ -385,7 +395,7 @@ public class Status : MonoBehaviour
     }
 
 
-    public void TakeHit(int damage, Vector3 kb, int stunVal, int poiseBreak, Vector3 dir, float slowDur, HitState hitState)
+    public void TakeHit(int damage, Vector3 kb, int stunVal, int poiseBreak, Vector3 dir, float slowDur, HitState hitState, bool crit = false)
     {
         if (isDead) return;
 
@@ -412,8 +422,7 @@ public class Status : MonoBehaviour
             }
         }
 
-
-        GameManager.Instance.DamageNumbers(transform, damage);
+        GameManager.Instance.DamageNumbers(transform, damage, crit);
         Health -= damage;
 
         if (hasArmor)

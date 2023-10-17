@@ -11,6 +11,7 @@ public class SkillManager : MonoBehaviour
     public static SkillManager Instance;
     public List<SkillSO> allSkills;
     public List<SkillSO> foundSkills;
+    public List<SkillSO> DSkills, CSkills, BSkills, ASkills, SSkills;
     public List<SkillSO> activeSkills;
 
     public List<SkillSelectionButton> skillButtons;
@@ -27,37 +28,67 @@ public class SkillManager : MonoBehaviour
 
     private void Start()
     {
-        AIManager.Instance.allEnemiesKilled += SpawnTreasure;
+        //AIManager.Instance.allEnemiesKilled += RollSkills;
     }
 
     public void GetSkill(SkillSO skillSO)
     {
         pickedSkillEvent?.Invoke(skillSO);
-        GameManager.Instance.player.GetComponent<SkillHandler>().SkillEXP(skillSO);
+        GameManager.Instance.player.GetComponent<SkillHandler>().LearnSkill(skillSO);
         SaveManager.Instance.saveData.learnedSkills.Add(skillSO);
         foundSkills.Add(skillSO);
         activeSkills.Clear();
     }
-    void SpawnTreasure()
-    {
-        if (treasure != null)
-            treasure.SetActive(true);
-    }
+
 
     [Button]
-    public void RollSkills()
+    public void RollSkills(Rank r)
     {
+        bool foundRank = false;
         activeSkills.Clear();
-        foreach (var item in skillButtons)
+        for (int i = 0; i < skillButtons.Count; i++)
         {
-            SkillSO skill = RollSkill();
-            while (skill == null && foundSkills.Count < allSkills.Count)
+            SkillSO skill = null;
+            //If last skill and haven't found sufficiently high skill
+            if (!foundRank && i == skillButtons.Count - 1)
+            {
+                switch (r)
+                {
+                    case Rank.D:
+                        skill = RollSkill(DSkills);
+                        break;
+                    case Rank.C:
+                        skill = RollSkill(CSkills);
+                        break;
+                    case Rank.B:
+                        skill = RollSkill(BSkills);
+                        break;
+                    case Rank.A:
+                        skill = RollSkill(ASkills);
+                        break;
+                    case Rank.S:
+                        skill = RollSkill(SSkills);
+                        break;
+                    default:
+                        break;
+                }
+
+                if (skill.skillRank >= r)
+                    foundRank = true;
+
+                skillButtons[i].skillSO = skill;
+                if (skill != null)
+                    skillButtons[i].SetupSkill();
+            }
+            else
             {
                 skill = RollSkill();
+                if (skill.skillRank >= r)
+                    foundRank = true;
             }
-            item.skillSO = skill;
+            skillButtons[i].skillSO = skill;
             if (skill != null)
-                item.SetupSkill();
+                skillButtons[i].SetupSkill();
         }
     }
     [Button]
@@ -65,25 +96,50 @@ public class SkillManager : MonoBehaviour
     {
         foundSkills.Clear();
         activeSkills.Clear();
-        
+    }
+
+    public SkillSO RollSkill(List<SkillSO> skillList)
+    {
+        List<SkillSO> availableSkills = new List<SkillSO>();
+        foreach (var item in skillList)
+        {
+            if (!foundSkills.Contains(item) && !activeSkills.Contains(item))
+                availableSkills.Add(item);
+        }
+
+        int RNG = UnityEngine.Random.Range(0, availableSkills.Count);
+
+
+        if (availableSkills.Count > 0)
+        {
+            activeSkills.Add(availableSkills[RNG]);
+            return availableSkills[RNG];
+        }
+        else
+        {
+            Debug.Log("Found from this rank, rolling generic");
+            return RollSkill();
+        }
     }
 
     public SkillSO RollSkill()
     {
-        int RNG = UnityEngine.Random.Range(0, allSkills.Count);
-
-        if (!foundSkills.Contains(allSkills[RNG]) && !activeSkills.Contains(allSkills[RNG]))
+        List<SkillSO> availableSkills = new List<SkillSO>();
+        foreach (var item in allSkills)
         {
-            activeSkills.Add(allSkills[RNG]);
-            return allSkills[RNG];
+            if (!foundSkills.Contains(item) && !activeSkills.Contains(item))
+                availableSkills.Add(item);
         }
-        else if (foundSkills.Count + activeSkills.Count < allSkills.Count)
+
+        int RNG = UnityEngine.Random.Range(0, availableSkills.Count);
+        if (availableSkills.Count > 0)
         {
-            return null;
+            activeSkills.Add(availableSkills[RNG]);
+            return availableSkills[RNG];
         }
         else
         {
-            Debug.Log("Found all");
+            Debug.Log("Found all skills");
             return null;
         }
     }
@@ -99,6 +155,26 @@ public class SkillManager : MonoBehaviour
             var SOpath = AssetDatabase.GUIDToAssetPath(SOName);
             var item = AssetDatabase.LoadAssetAtPath<SkillSO>(SOpath);
             allSkills.Add(item);
+            switch (item.skillRank)
+            {
+                case Rank.D:
+                    DSkills.Add(item);
+                    break;
+                case Rank.C:
+                    CSkills.Add(item);
+                    break;
+                case Rank.B:
+                    BSkills.Add(item);
+                    break;
+                case Rank.A:
+                    ASkills.Add(item);
+                    break;
+                case Rank.S:
+                    SSkills.Add(item);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 #endif

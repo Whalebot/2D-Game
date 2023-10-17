@@ -128,7 +128,7 @@ public class PlayerInputHandler : MonoBehaviour
         }
         if (mov.ground)
         {
-            if (status.NonAttackState()|| attack.attacking && attack.canTargetCombo)
+            if (status.NonAttackState() || attack.attacking && attack.canTargetCombo)
                 mov.Jump();
             else return false;
         }
@@ -155,7 +155,14 @@ public class PlayerInputHandler : MonoBehaviour
             return attack.ComboAttack(attack.moveset.airSkillCombo);
         }
     }
-
+    bool UpEastButton()
+    {
+        return attack.ComboAttack(attack.moveset.upSkillCombo);
+    }
+    bool DownEastButton()
+    {
+        return attack.ComboAttack(attack.moveset.downSkillCombo);
+    }
     bool R1Button()
     {
         if (mov.ground)
@@ -197,6 +204,23 @@ public class PlayerInputHandler : MonoBehaviour
                     }
                     break;
                 case 4:
+                    if (input.bufferedInputs[i].dir == 8)
+                    {
+                        if (UpEastButton())
+                        {
+                            DeleteInputs(i);
+                            break;
+                        }
+                    }
+                    if (input.bufferedInputs[i].dir == 2)
+                    {
+                        if (DownEastButton())
+                        {
+                            DeleteInputs(i);
+                            break;
+                        }
+                    }
+
                     if (EastButton())
                     {
                         DeleteInputs(i);
@@ -217,34 +241,33 @@ public class PlayerInputHandler : MonoBehaviour
                         //Delete();
                     }
                     break;
-                case 7:
-                    if (mov.ground)
-                    {
-                        attack.Attack(attack.moveset.combos[0].moves[0]);
-                        DeleteInputs(i);
-                    }
-                    break;
-                case 8:
-                    if (mov.ground)
-                    {
-                        attack.Attack(attack.moveset.combos[1].moves[0]);
-                        DeleteInputs(i);
-                    }
-                    break;
-                case 9:
-                    if (mov.ground)
-                    {
-                        attack.Attack(attack.moveset.combos[2].moves[0]);
-                        DeleteInputs(i);
-                    }
-                    break;
-                case 10:
-                    if (mov.ground)
-                    {
-                        attack.Attack(attack.moveset.combos[3].moves[0]);
-                        DeleteInputs(i);
-                    }
-                    break;
+                //case 81:
+                //    if (mov.ground)
+                //    {
+
+                //        DeleteInputs(i);
+                //    }
+                //    break;
+                //case 82:
+                //    if (mov.ground)
+                //    {
+
+                //        DeleteInputs(i);
+                //    }
+                //    break;
+                //case 83:
+                //    if (mov.ground)
+                //    {
+
+                //        DeleteInputs(i);
+                //    }
+                //    break;
+                //case 84:
+                //    if (UpEastButton())
+                //    {
+                //        DeleteInputs(i);
+                //    }
+                //    break;
                 default: break;
             }
         }

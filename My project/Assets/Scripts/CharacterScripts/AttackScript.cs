@@ -441,6 +441,8 @@ public class AttackScript : MonoBehaviour
             movementFrames = GameManager.Instance.gameFrameCount;
         }
 
+        status.Meter -= move.meterCost;
+
         recoverOnlyOnLand = move.recoverOnlyOnLand;
         activeMove = move;
         attackID = move.animationID;
@@ -488,15 +490,16 @@ public class AttackScript : MonoBehaviour
         if (move == null) return false;
 
 
-        //  if (jumpFrameCounter > 0) return false;
+          if (status.currentStats.currentMeter < move.meterCost) return false;
+          //if (jumpFrameCounter > 0) return false;
         if (move.useAirAction && !attacking)
         {
-            //if (movement.performedJumps <= 0)
-            //{
-            //    movement.performedJumps++;
-            //    return true;
-            //}
-            //else return false;
+            if (movement.performedJumps <= 0)
+            {
+                movement.performedJumps++;
+                return true;
+            }
+            else return false;
         }
 
         if (!attacking) return true;
@@ -563,7 +566,8 @@ public class AttackScript : MonoBehaviour
     }
 
     public bool ComboAttack(Combo c)
-    {        //  Debug.Log($"{c.moves.Length} + {combo}");
+    {
+        if (c.moves.Length <= 0) return false;
 
         if (c.moves.Length <= combo)
             return Attack(c.moves[0]);

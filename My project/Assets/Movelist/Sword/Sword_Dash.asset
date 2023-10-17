@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Sword_Dash
   m_EditorClassIdentifier: 
   animationID: 100
+  meterCost: 0
+  meterGain: 10
   icon: {fileID: 0}
   firstStartupFrame: 15
   lastActiveFrame: 15
@@ -29,6 +31,7 @@ MonoBehaviour:
     startup: 1
     prefab: {fileID: 0}
     deattachFromPlayer: 1
+    destroyOnRecovery: 0
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0}
     scale: {x: 1, y: 1, z: 1}
@@ -79,7 +82,7 @@ MonoBehaviour:
     resetVelocityDuringRecovery: 0
   - startFrame: 19
     duration: 1
-    momentum: {x: 10, y: 0}
+    momentum: {x: 5, y: 0}
     freeMovement: 0
     homing: 0
     resetVelocityDuringRecovery: 0

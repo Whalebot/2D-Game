@@ -29,6 +29,8 @@ MonoBehaviour:
   stats:
     currentHealth: 1000
     maxHealth: 1000
+    currentMeter: 0
+    maxMeter: 0
     level: 1
     attack: 5
     magic: 0
@@ -36,8 +38,9 @@ MonoBehaviour:
     airActions: 1
     luck: 0
     movementSpeedModifier: 1
-    poiseRegen: 1
-    poise: 300
+    meterGainModifier: 1
+    poiseRegen: 0.1
+    poise: 150
     defense: 0
     resistance: 0
     guardBreakModifier: 1

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Sword_5C
   m_EditorClassIdentifier: 
   animationID: 5
+  meterCost: 50
+  meterGain: 10
   icon: {fileID: 0}
   firstStartupFrame: 2
   lastActiveFrame: 21
@@ -51,6 +53,7 @@ MonoBehaviour:
   - startup: 4
     prefab: {fileID: 1800976239324842, guid: c3a419073912434429f93f4f6d5369ff, type: 3}
     deattachFromPlayer: 1
+    destroyOnRecovery: 0
     position: {x: 0, y: 0.5, z: 0}
     rotation: {x: -5, y: 90, z: 0}
     scale: {x: 1, y: 1, z: 1}
@@ -59,6 +62,7 @@ MonoBehaviour:
     startup: 1
     prefab: {fileID: 1416824176164296, guid: dc1397204bb5ee84895af2b49dac2d49, type: 3}
     deattachFromPlayer: 1
+    destroyOnRecovery: 0
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0}
     scale: {x: 0.7, y: 0.7, z: 0.7}
@@ -77,9 +81,9 @@ MonoBehaviour:
   noClip: 1
   noClipStart: 1
   noClipDuration: 20
-  invincible: 0
+  invincible: 1
   invincibleStart: 1
-  invincibleDuration: 0
+  invincibleDuration: 10
   projectileInvul: 0
   projectileInvulStart: 1
   projectileInvulDuration: 0
