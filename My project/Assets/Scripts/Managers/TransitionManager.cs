@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class TransitionManager : MonoBehaviour
 {
     public static TransitionManager Instance { get; private set; }
+    public static int levelIndex = 1;
     public Animator fadeAnimator;
     public Animator deathAnimator;
     public Animator winAnimator;
@@ -18,6 +19,8 @@ public class TransitionManager : MonoBehaviour
     {
         Instance = this;
         InputManager.Instance.southInput += ButtonPress;
+        levelIndex = SceneManager.GetActiveScene().buildIndex;
+        Debug.Log(SceneManager.GetActiveScene().buildIndex);
     }
 
     void Start()

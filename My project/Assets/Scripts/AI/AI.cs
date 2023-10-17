@@ -262,7 +262,7 @@ public class AI : MonoBehaviour
         {
             case AIAction.ActionType.Attack:
 
-                for (int i = 0; i < aiAction.combo.moves.Length; i++)
+                for (int i = 0; i < aiAction.combo.moves.Count; i++)
                 {
                     attackQueue.Add(aiAction.combo.moves[i]);
                 }

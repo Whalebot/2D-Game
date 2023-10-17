@@ -9,14 +9,14 @@ using UnityEditor;
 public class SkillManager : MonoBehaviour
 {
     public static SkillManager Instance;
-    public List<SkillSO> allSkills;
-    public List<SkillSO> foundSkills;
-    public List<SkillSO> DSkills, CSkills, BSkills, ASkills, SSkills;
-    public List<SkillSO> activeSkills;
-
-    public List<SkillSelectionButton> skillButtons;
-    public GameObject treasure;
-    public Sprite NBackground, RBackground, SRBackground, SSRBackground, URBackground;
+    [TabGroup("Debug")] public List<SkillSO> allSkills;
+    [TabGroup("Debug")] public List<SkillSO> foundSkills;
+    [TabGroup("Debug")] public List<SkillSO> DSkills, CSkills, BSkills, ASkills, SSkills;
+    [TabGroup("Debug")] public List<SkillSO> activeSkills;
+    [TabGroup("Components")] public List<Moveset> allMovesets;
+    [TabGroup("Components")] public List<SkillSelectionButton> skillButtons;
+    [TabGroup("Components")] public List<ShopButton> shopButtons;
+    [TabGroup("Components")] public Sprite NBackground, RBackground, SRBackground, SSRBackground, URBackground;
 
     public event Action<SkillSO> pickedSkillEvent;
 
@@ -24,13 +24,21 @@ public class SkillManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        ResetAllMovesets();
     }
 
     private void Start()
     {
         //AIManager.Instance.allEnemiesKilled += RollSkills;
     }
-
+    void ResetAllMovesets()
+    {
+        foreach (var item in allMovesets)
+        {
+            item.upSkillCombo.moves.Clear();
+            item.downSkillCombo.moves.Clear();
+        }
+    }
     public void GetSkill(SkillSO skillSO)
     {
         pickedSkillEvent?.Invoke(skillSO);
@@ -40,7 +48,56 @@ public class SkillManager : MonoBehaviour
         activeSkills.Clear();
     }
 
+    [Button]
+    public void RollShop(Rank r)
+    {
+        bool foundRank = false;
+        activeSkills.Clear();
+        for (int i = 0; i < shopButtons.Count; i++)
+        {
+            SkillSO skill = null;
+            //If last skill and haven't found sufficiently high skill
+            if (!foundRank && i == shopButtons.Count - 1)
+            {
+                switch (r)
+                {
+                    case Rank.D:
+                        skill = RollSkill(DSkills);
+                        break;
+                    case Rank.C:
+                        skill = RollSkill(CSkills);
+                        break;
+                    case Rank.B:
+                        skill = RollSkill(BSkills);
+                        break;
+                    case Rank.A:
+                        skill = RollSkill(ASkills);
+                        break;
+                    case Rank.S:
+                        skill = RollSkill(SSkills);
+                        break;
+                    default:
+                        break;
+                }
 
+                if (skill.skillRank >= r)
+                    foundRank = true;
+
+                shopButtons[i].skillSO = skill;
+                if (skill != null)
+                    shopButtons[i].SetupSkill();
+            }
+            else
+            {
+                skill = RollSkill();
+                if (skill.skillRank >= r)
+                    foundRank = true;
+            }
+            shopButtons[i].skillSO = skill;
+            if (skill != null)
+                shopButtons[i].SetupSkill();
+        }
+    }
     [Button]
     public void RollSkills(Rank r)
     {

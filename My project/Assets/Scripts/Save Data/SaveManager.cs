@@ -16,7 +16,7 @@ public class SaveManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
- 
+
     }
 
     private void Start()
@@ -24,6 +24,12 @@ public class SaveManager : MonoBehaviour
         if (autoLoad)
             LoadData();
     }
+
+    public bool HasSaveData()
+    {
+        return (PlayerPrefs.HasKey("Save"));
+    }
+
 
     [Button]
     public void DeleteData()
@@ -33,24 +39,15 @@ public class SaveManager : MonoBehaviour
 
     public void LoadData()
     {
-        loadEvent?.Invoke();
-
-        SkillHandler skillHandler = GameManager.Instance.player.GetComponent<SkillHandler>();
-        skillHandler.RemoveAllSkills();
         saveData = new SaveData();
         saveData.learnedSkills = new List<SkillSO>();
+        saveData.visuals = new CharacterVisualData();
 
         if (PlayerPrefs.HasKey("Save"))
         {
             string saveJson = PlayerPrefs.GetString("Save");
             saveData = JsonUtility.FromJson<SaveData>(saveJson);
- 
-            foreach (var item in saveData.learnedSkills)
-            {
-                skillHandler.LearnSkill(item);
-            }
-
-            LevelManager.Instance.currentLevel = saveData.currentLevel;
+            loadEvent?.Invoke();
         }
 
         StartCoroutine(DelaySetup());
@@ -68,7 +65,6 @@ public class SaveManager : MonoBehaviour
     public void SaveData()
     {
         saveEvent?.Invoke();
-        saveData.currentLevel = LevelManager.Instance.currentLevel;
 
         string jsonData = JsonUtility.ToJson(saveData, true);
         File.WriteAllText(Application.persistentDataPath + "/saveData.json", jsonData);
@@ -81,6 +77,17 @@ public class SaveManager : MonoBehaviour
 [System.Serializable]
 public class SaveData
 {
+    public int gold = 100;
+    public int health = 0;
+    public int meter = 0;
     public int currentLevel = 1;
+    public CharacterVisualData visuals;
     public List<SkillSO> learnedSkills;
+}
+[System.Serializable]
+public class CharacterVisualData
+{
+    public int colorPreset;
+    public int topID;
+    public int bottomID;
 }

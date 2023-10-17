@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public static Vector3 startPosition;
     public static Quaternion startRotation;
 
+    [TabGroup("Settings")] public int gold;
     [TabGroup("Settings")] public bool runNormally;
 
     [TabGroup("Settings")] public bool showHitboxes;
@@ -26,9 +27,7 @@ public class GameManager : MonoBehaviour
     [TabGroup("Settings")] public bool showNames = true;
     [TabGroup("Settings")] public bool showHPBar = true;
 
-    static bool saveOnce = false;
-
-    [TabGroup("Settings")] public float restartDelay = 5;
+    [TabGroup("Settings")] public float restartDelay = 2;
 
     [TabGroup("Settings")] public int gameFrameCount;
     [TabGroup("Settings")] public bool hideMouse;
@@ -37,9 +36,11 @@ public class GameManager : MonoBehaviour
     public event Action resetEvent;
     public event Action playerDeath;
     public event Action getSkillEvent;
+    public event Action openShopEvent;
 
     [TabGroup("Components")] public GameObject playerUI;
     [TabGroup("Components")] public Transform player;
+    [TabGroup("Components")] public Status playerStatus;
 
     [TabGroup("Feedback")] public bool showDamageText;
     [TabGroup("Feedback")] public float numberOffset;
@@ -67,19 +68,57 @@ public class GameManager : MonoBehaviour
 
         isPaused = false;
         menuOpen = false;
+
+        playerStatus = player.GetComponent<Status>();
+        playerStatus.deathEvent += LoseGame;
+        SaveManager.Instance.saveEvent += SaveData;
+        SaveManager.Instance.loadEvent += LoadData;
     }
     // Start is called before the first frame update
     void Start()
     {
         gameOver = false;
 
-        if (!saveOnce)
+        startTimeStep = Time.fixedDeltaTime;
+        AIManager.Instance.allEnemiesKilled += RoomCleared;
+   
+    }
+
+    void SaveData()
+    {
+        SaveManager.Instance.saveData.gold = gold;
+        SaveManager.Instance.saveData.health = playerStatus.Health;
+        SaveManager.Instance.saveData.meter = playerStatus.Meter;
+    }
+
+    void LoadData()
+    {
+       gold = SaveManager.Instance.saveData.gold;
+        playerStatus.Health = SaveManager.Instance.saveData.health;
+        playerStatus.Meter = SaveManager.Instance.saveData.meter;
+    }
+
+    void RoomCleared()
+    {
+        switch (LevelManager.Instance.currentRoomType)
         {
-            saveOnce = true;
+            case RoomTypes.Normal:
+                gold += 20;
+                break;
+            case RoomTypes.Boss:
+                gold += 100;
+                break;
+            case RoomTypes.Treasure:
+                gold += 35;
+                break;
+            case RoomTypes.Shop:
+                break;
+            case RoomTypes.Disabled:
+                break;
+            default:
+                break;
         }
 
-        player.GetComponent<Status>().deathEvent += LoseGame;
-        startTimeStep = Time.fixedDeltaTime;
     }
 
     public void OpenGetSkillWindow()
@@ -87,6 +126,13 @@ public class GameManager : MonoBehaviour
         getSkillEvent?.Invoke();
         ToggleMenu();
     }
+
+    public void OpenShopWindow()
+    {
+        openShopEvent?.Invoke();
+        ToggleMenu();
+    }
+
 
     public void SetPlayerPosition(Vector3 pos, Quaternion rot)
     {
@@ -121,37 +167,10 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void SaveData()
-    {
-        //  SaveManager.Instance.SaveData();
-    }
-
     public void KillPlayer()
     {
         playerDeath?.Invoke();
     }
-
-    public void SetTrigger(string n)
-    {
-        //GameTriggers triggers = DataManager.Instance.currentSaveData.triggers;
-
-        //FieldInfo[] defInfo = triggers.GetType().GetFields();
-
-        //for (int i = 0; i < defInfo.Length; i++)
-        //{
-
-        //    object obj = triggers;
-        //    if (defInfo[i].GetValue(obj) is bool)
-        //    {
-
-        //        if (defInfo[i].Name.Contains(n))
-        //        {
-        //            defInfo[i].SetValue(obj, true);
-        //        }
-        //    }
-        //}
-    }
-
 
     public void DamageNumbers(Transform other, int damageValue, bool crit)
     {
@@ -229,10 +248,14 @@ public class GameManager : MonoBehaviour
 
     public void ToggleMenu()
     {
-        GameManager.menuOpen = !GameManager.menuOpen;
+        menuOpen = !menuOpen;
         Physics.autoSimulation = !Physics.autoSimulation;
     }
-
+    public void CloseMenu()
+    {
+        menuOpen = false;
+        Physics.autoSimulation = true;
+    }
     void FixedUpdate()
     {
         isPaused = menuOpen;

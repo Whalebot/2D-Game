@@ -16,6 +16,7 @@ public class Stats
     [TabGroup("Stats")] public float attackSpeed = 1;
     [TabGroup("Stats")] public int airActions = 1;
     [TabGroup("Stats")] public int luck = 0;
+    [TabGroup("Stats")] public int rerolls = 0;
 
     [Header("Modifiers")]
     [FoldoutGroup("Modifiers")] public float movementSpeedModifier = 1;

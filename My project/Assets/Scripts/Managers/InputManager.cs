@@ -22,6 +22,8 @@ public class InputManager : MonoBehaviour
     public InputEvent keyboardEvent;
     public InputEvent gamepadEvent;
 
+    public InputEvent interactInput;
+
     public InputEvent westInput;
     public InputEvent northInput;
     public InputEvent eastInput;
@@ -95,6 +97,8 @@ public class InputManager : MonoBehaviour
         controls.Default.R1.performed += context => OnR1(context);
         controls.Default.R1.canceled += _ => OnR1Release();
 
+        controls.Default.Interact.performed += context => OnInteract(context);
+
         controls.Default.R2.performed += _ => OnR2Press();
         controls.Default.R2.canceled += _ => OnR2Release();
 
@@ -158,7 +162,12 @@ public class InputManager : MonoBehaviour
     {
         //  DataManager.Instance.currentSaveData.settings.controls = controlScheme;
     }
-
+    private void OnInteract(InputAction.CallbackContext context)
+    {
+        if (debug) print("Interact");
+        ChangeControlScheme(context);
+        interactInput?.Invoke();
+    }
     private void OnLeft(InputAction.CallbackContext context)
     {
         if (debug) print("Left");

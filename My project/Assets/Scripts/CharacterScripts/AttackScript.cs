@@ -567,9 +567,9 @@ public class AttackScript : MonoBehaviour
 
     public bool ComboAttack(Combo c)
     {
-        if (c.moves.Length <= 0) return false;
+        if (c.moves.Count <= 0) return false;
 
-        if (c.moves.Length <= combo)
+        if (c.moves.Count <= combo)
             return Attack(c.moves[0]);
 
         if (!CanUseMove(c.moves[combo]))

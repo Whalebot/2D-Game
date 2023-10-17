@@ -22,6 +22,8 @@ public class SkillHandler : MonoBehaviour
     {
         learnedSkills = new List<Skill>();
         status = GetComponent<Status>();
+
+        SaveManager.Instance.loadEvent += LoadData;
     }
 
     void Start()
@@ -30,11 +32,15 @@ public class SkillHandler : MonoBehaviour
         UpdateStats();
     }
 
-    private void OnEnable()
-    {
+    void LoadData() {
+       RemoveAllSkills();
+
+        foreach (var item in SaveManager.Instance.saveData.learnedSkills)
+        {
+            LearnSkill(item);
+        }
 
     }
-
 
     void SaveSkill(SkillSO skill)
     {
@@ -118,7 +124,7 @@ public class SkillHandler : MonoBehaviour
         if (skill.move != null && skill.combo != null)
         {
             //skill.combo.moves = new Move[1];
-            skill.combo.moves[0] = skill.move;
+            skill.combo.moves.Add(skill.move);
         }
 
 

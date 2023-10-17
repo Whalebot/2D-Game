@@ -54,6 +54,7 @@ public class SkillSelectionButton : MonoBehaviour
     public void GetSkill()
     {
         skillManager.GetSkill(skillSO);
-        UIManager.Instance.ClosePowerupPanel();
+
+        UIManager.Instance.CloseRewardPanels();
     }
 }

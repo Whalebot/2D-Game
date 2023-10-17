@@ -15,7 +15,7 @@ public class SkillSO : ScriptableObject
     [ShowIf("@type == SkillType.Active")] public Combo combo;
     [TextArea(15, 20)]
     public string description;
-    [ShowIf("@type == SkillType.Passive")]
+    [ShowIf("@type == SkillType.Passive || type == SkillType.Item")]
     public Stats stats;
 
     public virtual void ActivateBehaviour(SkillHandler handler)
@@ -52,4 +52,4 @@ public class SkillSO : ScriptableObject
 
 public enum Rank { D, C, B , A , S}
 
-public enum SkillType { Active, Passive }
+public enum SkillType { Active, Passive, Item }

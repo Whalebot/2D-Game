@@ -118,6 +118,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""f3edb4da-c578-45e1-ad34-1b31e5d13eb2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""R1"",
                     ""type"": ""Button"",
                     ""id"": ""e550389c-a3e5-49f6-9023-b64457cd2d40"",
@@ -1048,6 +1057,28 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""LAnalog"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c269512c-4db5-4b9a-b247-5bff800598dd"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""353f915a-79fd-47ee-9a84-d28f9f5594d3"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1099,6 +1130,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Default_Console = m_Default.FindAction("Console", throwIfNotFound: true);
         m_Default_Start = m_Default.FindAction("Start", throwIfNotFound: true);
         m_Default_Select = m_Default.FindAction("Select", throwIfNotFound: true);
+        m_Default_Interact = m_Default.FindAction("Interact", throwIfNotFound: true);
         m_Default_R1 = m_Default.FindAction("R1", throwIfNotFound: true);
         m_Default_R2 = m_Default.FindAction("R2", throwIfNotFound: true);
         m_Default_L1 = m_Default.FindAction("L1", throwIfNotFound: true);
@@ -1187,6 +1219,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Default_Console;
     private readonly InputAction m_Default_Start;
     private readonly InputAction m_Default_Select;
+    private readonly InputAction m_Default_Interact;
     private readonly InputAction m_Default_R1;
     private readonly InputAction m_Default_R2;
     private readonly InputAction m_Default_L1;
@@ -1220,6 +1253,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Console => m_Wrapper.m_Default_Console;
         public InputAction @Start => m_Wrapper.m_Default_Start;
         public InputAction @Select => m_Wrapper.m_Default_Select;
+        public InputAction @Interact => m_Wrapper.m_Default_Interact;
         public InputAction @R1 => m_Wrapper.m_Default_R1;
         public InputAction @R2 => m_Wrapper.m_Default_R2;
         public InputAction @L1 => m_Wrapper.m_Default_L1;
@@ -1278,6 +1312,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Select.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnSelect;
                 @Select.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnSelect;
                 @Select.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnSelect;
+                @Interact.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnInteract;
                 @R1.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnR1;
                 @R1.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnR1;
                 @R1.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnR1;
@@ -1369,6 +1406,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Select.started += instance.OnSelect;
                 @Select.performed += instance.OnSelect;
                 @Select.canceled += instance.OnSelect;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
                 @R1.started += instance.OnR1;
                 @R1.performed += instance.OnR1;
                 @R1.canceled += instance.OnR1;
@@ -1460,6 +1500,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnConsole(InputAction.CallbackContext context);
         void OnStart(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
         void OnR1(InputAction.CallbackContext context);
         void OnR2(InputAction.CallbackContext context);
         void OnL1(InputAction.CallbackContext context);

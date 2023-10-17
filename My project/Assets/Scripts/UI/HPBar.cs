@@ -11,7 +11,7 @@ public class HPBar : MonoBehaviour
     public bool alwaysShowHPBar;
     public bool isBoss = false;
     public bool disabled;
-    [SerializeField] Status status;
+    [SerializeField] public Status status;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI subTitleText;
     public TextMeshProUGUI HpText;

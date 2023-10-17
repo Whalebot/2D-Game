@@ -33,6 +33,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         GameManager.Instance.advanceGameState += ExecuteFrame;
         input = InputManager.Instance;
+        input.interactInput += InteractButton;
         status = GetComponent<Status>();
         mov = GetComponent<Movement>();
 
@@ -42,6 +43,7 @@ public class PlayerInputHandler : MonoBehaviour
     private void OnDisable()
     {
         GameManager.Instance.advanceGameState -= ExecuteFrame;
+        input.interactInput -= InteractButton;
     }
 
 
@@ -95,6 +97,15 @@ public class PlayerInputHandler : MonoBehaviour
 
 
     }
+
+    public void InteractButton()
+    {
+        if (interact.CanSouth())
+        {
+            interact.South();
+        }
+    }
+
     bool WestButton()
     {
         if (mov.ground)
@@ -121,11 +132,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     bool SouthButton()
     {
-        if (interact.CanSouth())
-        {
-            interact.South();
-            return true;
-        }
+
         if (mov.ground)
         {
             if (status.NonAttackState() || attack.attacking && attack.canTargetCombo)

@@ -42,18 +42,28 @@ public class TransferVRMColliders : MonoBehaviour
     {
         foreach (VRMSpringBoneColliderGroup item in colliderGroups)
         {
-            string transformName = item.gameObject.name;
-            if (ReturnChildOfName(transformName) != null)
+            for (int i = 0; i < item.Colliders.Length; i++)
             {
-                VRMSpringBoneColliderGroup temp = ReturnChildOfName(transformName).GetComponent<VRMSpringBoneColliderGroup>();
-                for (int i = 0; i < temp.Colliders.Length; i++)
-                {
 
-                    Vector3 vec = Quaternion.Inverse(temp.transform.rotation) * item.Colliders[i].Offset;
-                    Debug.Log(item.Colliders[i].Offset + " " + vec);
-                    temp.Colliders[i].Offset = vec;
+                //Vector3 vec = Quaternion.Inverse(temp.transform.rotation) * item.Colliders[i].Offset;
+                //Debug.Log(item.Colliders[i].Offset + " " + vec);
+                Vector3 temp = item.Colliders[i].Offset;
+
+                if (item.gameObject.name.Contains("Right"))
+                {
+                    temp.x = item.Colliders[i].Offset.z;
+                    temp.z = item.Colliders[i].Offset.y;
+                    temp.y = item.Colliders[i].Offset.x;
+                }
+                else
+                if (item.gameObject.name.Contains("Left"))
+                {
+                    temp.x = item.Colliders[i].Offset.z;
+                    temp.z = item.Colliders[i].Offset.y;
+                    temp.y = -item.Colliders[i].Offset.x;
                 }
 
+                item.Colliders[i].Offset = temp;
             }
         }
     }
