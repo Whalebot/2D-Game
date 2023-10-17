@@ -41,7 +41,7 @@ public class SaveManager : MonoBehaviour
     {
         saveData = new SaveData();
         saveData.learnedSkills = new List<SkillSO>();
-        saveData.visuals = new CharacterVisualData();
+        saveData.visualData = new CharacterVisualData();
 
         if (PlayerPrefs.HasKey("Save"))
         {
@@ -81,13 +81,14 @@ public class SaveData
     public int health = 0;
     public int meter = 0;
     public int currentLevel = 1;
-    public CharacterVisualData visuals;
+    public CharacterVisualData visualData;
     public List<SkillSO> learnedSkills;
 }
 [System.Serializable]
 public class CharacterVisualData
 {
-    public int colorPreset;
-    public int topID;
-    public int bottomID;
+    [Range(0, 10)] public int colorPreset;
+    [Range(0, 10)] public int hairID;
+    [Range(0, 10)] public int topID;
+    [Range(0, 10)] public int bottomID;
 }

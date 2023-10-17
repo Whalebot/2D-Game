@@ -101,8 +101,9 @@ MonoBehaviour:
     health: 50
     meter: 0
     currentLevel: 1
-    visuals:
+    visualData:
       colorPreset: 0
+      hairID: 0
       topID: 0
       bottomID: 0
     learnedSkills: []
@@ -764,10 +765,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 39b8471307eafa04498d1d4558e4a976, type: 2}
   foundSkills: []
   DSkills:
-  - {fileID: 11400000, guid: c6e84d7430030174086d8240539c3566, type: 2}
-  - {fileID: 11400000, guid: 39b8471307eafa04498d1d4558e4a976, type: 2}
-  - {fileID: 11400000, guid: c6e84d7430030174086d8240539c3566, type: 2}
-  - {fileID: 11400000, guid: 39b8471307eafa04498d1d4558e4a976, type: 2}
   - {fileID: 11400000, guid: 6238866ccabae5c4ca4e8712560abca2, type: 2}
   - {fileID: 11400000, guid: c6e84d7430030174086d8240539c3566, type: 2}
   - {fileID: 11400000, guid: 39b8471307eafa04498d1d4558e4a976, type: 2}
@@ -778,36 +775,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f507784169174c848a4b125034aa4278, type: 2}
   - {fileID: 11400000, guid: 6680f3426c9eb8543ab94a0fbb178886, type: 2}
   - {fileID: 11400000, guid: 55a99e97e30722a47b82068ebb5d6633, type: 2}
-  - {fileID: 11400000, guid: ec9caaf0499c95a4a954431920b95ba1, type: 2}
-  - {fileID: 11400000, guid: acda88d7eff0d894f8e227d16aeec41d, type: 2}
-  - {fileID: 11400000, guid: 99a185ad878da0b499519391bcb066db, type: 2}
-  - {fileID: 11400000, guid: f507784169174c848a4b125034aa4278, type: 2}
-  - {fileID: 11400000, guid: 6680f3426c9eb8543ab94a0fbb178886, type: 2}
-  - {fileID: 11400000, guid: 55a99e97e30722a47b82068ebb5d6633, type: 2}
-  - {fileID: 11400000, guid: ec9caaf0499c95a4a954431920b95ba1, type: 2}
-  - {fileID: 11400000, guid: acda88d7eff0d894f8e227d16aeec41d, type: 2}
-  - {fileID: 11400000, guid: 99a185ad878da0b499519391bcb066db, type: 2}
-  - {fileID: 11400000, guid: f507784169174c848a4b125034aa4278, type: 2}
-  - {fileID: 11400000, guid: 6680f3426c9eb8543ab94a0fbb178886, type: 2}
-  - {fileID: 11400000, guid: 55a99e97e30722a47b82068ebb5d6633, type: 2}
   BSkills:
-  - {fileID: 11400000, guid: c42053881fec75a4c8703c81798b41d7, type: 2}
-  - {fileID: 11400000, guid: be8c299522efc044a934eb94c43b0e80, type: 2}
-  - {fileID: 11400000, guid: 1dafec9d89828be428ba26b1ef3de6cc, type: 2}
-  - {fileID: 11400000, guid: c42053881fec75a4c8703c81798b41d7, type: 2}
-  - {fileID: 11400000, guid: be8c299522efc044a934eb94c43b0e80, type: 2}
   - {fileID: 11400000, guid: 42885b7bc3441524999e3ea6f7d13ed1, type: 2}
   - {fileID: 11400000, guid: 1dafec9d89828be428ba26b1ef3de6cc, type: 2}
   - {fileID: 11400000, guid: c42053881fec75a4c8703c81798b41d7, type: 2}
   - {fileID: 11400000, guid: be8c299522efc044a934eb94c43b0e80, type: 2}
   ASkills:
-  - {fileID: 11400000, guid: 4e95f6e28dc6be542952a949e1ee6ef0, type: 2}
-  - {fileID: 11400000, guid: 4e95f6e28dc6be542952a949e1ee6ef0, type: 2}
   - {fileID: 11400000, guid: 0a877baa64b4003499036eca74984c81, type: 2}
   - {fileID: 11400000, guid: 4e95f6e28dc6be542952a949e1ee6ef0, type: 2}
   SSkills: []
-  activeSkills:
-  - {fileID: 11400000, guid: 1dafec9d89828be428ba26b1ef3de6cc, type: 2}
+  activeSkills: []
   allMovesets:
   - {fileID: 11400000, guid: 2826d0597ec5e0043902c1b26627bd60, type: 2}
   skillButtons:
@@ -1119,6 +1096,22 @@ PrefabInstance:
       propertyPath: skillManager
       value: 
       objectReference: {fileID: 399436148029251711}
+    - target: {fileID: 3339059319948805815, guid: 1f6846fbf3d1a2a42935257776871191, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3339059319948805815, guid: 1f6846fbf3d1a2a42935257776871191, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3339059319948805815, guid: 1f6846fbf3d1a2a42935257776871191, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3339059319948805815, guid: 1f6846fbf3d1a2a42935257776871191, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3607192756639341609, guid: 1f6846fbf3d1a2a42935257776871191, type: 3}
       propertyPath: skillManager
       value: 

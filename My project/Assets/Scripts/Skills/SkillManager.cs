@@ -206,6 +206,11 @@ public class SkillManager : MonoBehaviour
     void LoadItemSO()
     {
         allSkills.Clear();
+        DSkills.Clear();
+        CSkills.Clear();
+        BSkills.Clear();
+        ASkills.Clear();
+        SSkills.Clear();
         string[] skillNames = AssetDatabase.FindAssets("t:SkillSO", new[] { "Assets/Scriptable Objects" });
         foreach (var SOName in skillNames)
         {

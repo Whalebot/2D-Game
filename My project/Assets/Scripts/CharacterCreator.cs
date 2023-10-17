@@ -8,15 +8,13 @@ public class CharacterCreator : MonoBehaviour
 {
     public static CharacterCreator Instance;
 
-    [TabGroup("Debug")] public CharacterVisualData visuals;
+    [TabGroup("Character Creation")] public CharacterVisualData visualData;
+    [TabGroup("Character Creation")] [InlineEditor] public ColorPresetSO preset;
+    public Color c;
+    [TabGroup("Character Creation")] public GameObject target;
+    [TabGroup("Components")] public CharacterVisuals visuals;
 
     [TabGroup("Components")] public List<ColorPresetSO> allPresets;
-    [TabGroup("Character Creation")] [InlineEditor] public ColorPresetSO preset;
-
-    [TabGroup("Character Creation")] public GameObject target;
-    [TabGroup("Character Creation")] public List<GameObject> outfit1Objects;
-    [TabGroup("Character Creation")] public List<GameObject> outfit2Objects;
-
     public event Action visualsUpdateEvent;
 
     private void Awake()
@@ -30,74 +28,78 @@ public class CharacterCreator : MonoBehaviour
         if (!SaveManager.Instance.HasSaveData())
             RandomizeVisuals();
     }
-
-    void SaveVisuals() { SaveManager.Instance.saveData.visuals = visuals; }
+    private void OnValidate()
+    {
+        ApplyVisuals();
+    }
+    void SaveVisuals()
+    {
+        if (Application.isPlaying)
+            SaveManager.Instance.saveData.visualData = visualData;
+    }
+    [Button]
+    void ApplyVisuals()
+    {
+        SaveVisuals();
+        ApplyMaterial();
+        visualsUpdateEvent?.Invoke();
+        if (Application.isEditor)
+        {
+            visuals.visualData = visualData;
+            visuals.UpdateVisuals();
+            if (visualData.colorPreset > allPresets.Count)
+                preset = allPresets[allPresets.Count - 1];
+            else
+                preset = allPresets[visualData.colorPreset];
+        }
+    }
 
     [Button]
     public void RandomizeVisuals()
     {
-        visuals.colorPreset = UnityEngine.Random.Range(0, allPresets.Count);
-        visuals.topID = UnityEngine.Random.Range(0, 2);
-        visuals.bottomID = UnityEngine.Random.Range(0, 2);
+        visualData.colorPreset = UnityEngine.Random.Range(0, allPresets.Count);
+        visualData.hairID = UnityEngine.Random.Range(0, 2);
+        visualData.topID = UnityEngine.Random.Range(0, 3);
+        visualData.bottomID = UnityEngine.Random.Range(0, 2);
 
-        SaveVisuals();
-        ApplyMaterial();
-        visualsUpdateEvent?.Invoke();
+        ApplyVisuals();
     }
 
     [Button]
     void SwitchPreset()
     {
-        visuals.colorPreset++;
-        if (visuals.colorPreset >= allPresets.Count)
-            visuals.colorPreset = 0;
-        preset = allPresets[visuals.colorPreset];
-        ApplyMaterial();
-    }
-    [Button]
-    void Outfit1()
-    {
-        foreach (var item in outfit1Objects)
-        {
-            item.SetActive(true);
-        }
-        foreach (var item in outfit2Objects)
-        {
-            item.SetActive(false);
-        }
-    }
-    [Button]
-    void Outfit2()
-    {
-        foreach (var item in outfit1Objects)
-        {
-            item.SetActive(false);
-        }
-        foreach (var item in outfit2Objects)
-        {
-            item.SetActive(true);
-        }
+        visualData.colorPreset++;
+        if (visualData.colorPreset >= allPresets.Count)
+            visualData.colorPreset = 0;
+
+        if (visualData.colorPreset > allPresets.Count)
+            preset = allPresets[allPresets.Count - 1];
+        else
+            ApplyVisuals();
     }
     [Button]
     public void GetMaterials()
     {
         SkinnedMeshRenderer[] mr = target.GetComponentsInChildren<SkinnedMeshRenderer>();
-        foreach (var item in mr)
+        foreach (var thing in allPresets)
         {
-            foreach (var mat in item.sharedMaterials)
+            foreach (var item in mr)
             {
-                bool isDuplicate = false;
-                foreach (var pres in preset.colorPresets)
+                foreach (var mat in item.sharedMaterials)
                 {
-                    if (pres.material == mat)
-                        isDuplicate = true;
-                }
-                if (!isDuplicate)
-                {
-                    ColorPreset temp = new ColorPreset();
-                    temp.material = mat;
-                    temp.color = Color.white;
-                    preset.colorPresets.Add(temp);
+                    bool isDuplicate = false;
+                    foreach (var pres in thing.colorPresets)
+                    {
+                        if (pres.material == mat)
+                            isDuplicate = true;
+                    }
+                    if (!isDuplicate)
+                    {
+                        ColorPreset temp = new ColorPreset();
+                        temp.material = mat;
+                        temp.color = Color.white;
+                        thing.colorPresets.Add(temp);
+                    }
                 }
             }
         }
@@ -106,9 +108,11 @@ public class CharacterCreator : MonoBehaviour
     [Button]
     public void ApplyMaterial()
     {
-        foreach (var item in allPresets[visuals.colorPreset].colorPresets)
+        foreach (var item in allPresets[visualData.colorPreset].colorPresets)
         {
-            item.material.SetColor("_MainColor", item.color);
+            Debug.Log(item.color);
+            item.material.SetColor("_MainColor", item.color * item.color);
+            Debug.Log(item.material.GetColor("_MainColor"));
         }
     }
 

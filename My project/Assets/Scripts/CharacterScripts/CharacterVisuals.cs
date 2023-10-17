@@ -5,23 +5,26 @@ using Sirenix.OdinInspector;
 
 public class CharacterVisuals : MonoBehaviour
 {
-    public CharacterVisualData visuals;
+    public CharacterVisualData visualData;
     public List<ColorPresetSO> allPresets;
+    public List<GameObject> hairVariations;
     public List<GameObject> topOutifts;
     public List<GameObject> bottomOutfits;
 
     private void Start()
     {
-        CharacterCreator.Instance.visualsUpdateEvent += UpdateVisuals;    }
+        CharacterCreator.Instance.visualsUpdateEvent += UpdateVisuals;
+    }
 
     private void OnDisable()
     {
         CharacterCreator.Instance.visualsUpdateEvent -= UpdateVisuals;
     }
 
-    void UpdateVisuals()
+    public void UpdateVisuals()
     {
-        visuals = SaveManager.Instance.saveData.visuals;
+        if (Application.isPlaying)
+            visualData = SaveManager.Instance.saveData.visualData;
         RemoveAllClothing();
         SetupOutfit();
     }
@@ -29,6 +32,10 @@ public class CharacterVisuals : MonoBehaviour
     [Button]
     void RemoveAllClothing()
     {
+        foreach (var item in hairVariations)
+        {
+            item.SetActive(false);
+        }
         foreach (var item in topOutifts)
         {
             item.SetActive(false);
@@ -39,15 +46,20 @@ public class CharacterVisuals : MonoBehaviour
         }
     }
     [Button]
-    void SetupOutfit()
+    public void SetupOutfit()
     {
-        if (topOutifts.Count > visuals.topID)
-            topOutifts[visuals.topID].SetActive(true);
+        if (hairVariations.Count > visualData.hairID)
+            hairVariations[visualData.hairID].SetActive(true);
+        else
+            hairVariations[hairVariations.Count - 1].SetActive(true);
+
+        if (topOutifts.Count > visualData.topID)
+            topOutifts[visualData.topID].SetActive(true);
         else
             topOutifts[topOutifts.Count - 1].SetActive(true);
 
-        if (bottomOutfits.Count > visuals.bottomID)
-            bottomOutfits[visuals.bottomID].SetActive(true);
+        if (bottomOutfits.Count > visualData.bottomID)
+            bottomOutfits[visualData.bottomID].SetActive(true);
         else
             bottomOutfits[bottomOutfits.Count - 1].SetActive(true);
 
@@ -57,7 +69,7 @@ public class CharacterVisuals : MonoBehaviour
     [Button]
     public void ApplyMaterial()
     {
-        foreach (var item in allPresets[visuals.colorPreset].colorPresets)
+        foreach (var item in allPresets[visualData.colorPreset].colorPresets)
         {
             item.material.SetColor("_MainColor", item.color);
         }
