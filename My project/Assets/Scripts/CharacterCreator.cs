@@ -7,7 +7,7 @@ using Sirenix.OdinInspector;
 public class CharacterCreator : MonoBehaviour
 {
     public static CharacterCreator Instance;
-
+    public bool liveUpdate;
     [TabGroup("Character Creation")] public CharacterVisualData visualData;
     [TabGroup("Character Creation")] [InlineEditor] public ColorPresetSO preset;
     [TabGroup("Character Creation")] public GameObject target;
@@ -27,10 +27,97 @@ public class CharacterCreator : MonoBehaviour
         if (!SaveManager.Instance.HasSaveData())
             RandomizeVisuals();
     }
+    public int ColorPreset
+    {
+        get
+        {
+            return visualData.colorPreset;
+        }
+        set
+        {
+            visualData.colorPreset = value;
+
+            if (visualData.colorPreset >= allPresets.Count)
+                visualData.colorPreset = 0;
+            if (visualData.colorPreset < 0)
+                visualData.colorPreset = allPresets.Count - 1;
+        }
+    }
+    public int HairID
+    {
+        get
+        {
+            return visualData.hairID;
+        }
+        set
+        {
+            visualData.hairID = value;
+
+            if (visualData.hairID >= visuals.hairVariations.Count)
+                visualData.hairID = 0;
+            if (visualData.hairID < 0)
+                visualData.hairID = visuals.hairVariations.Count - 1;
+        }
+    }
+    public int TopID
+    {
+        get
+        {
+            return visualData.topID;
+        }
+        set
+        {
+            visualData.topID = value;
+
+            if (visualData.topID >= visuals.topOutifts.Count)
+                visualData.topID = 0;
+            if (visualData.topID < 0)
+                visualData.topID = visuals.topOutifts.Count - 1;
+        }
+    }
+    public int BottomID
+    {
+        get
+        {
+            return visualData.bottomID;
+        }
+        set
+        {
+            visualData.bottomID = value;
+
+            if (visualData.bottomID >= visuals.bottomOutfits.Count)
+                visualData.bottomID = 0;
+            if (visualData.bottomID < 0)
+                visualData.bottomID = visuals.bottomOutfits.Count - 1;
+        }
+    }
     private void OnValidate()
+    {
+        if (liveUpdate && !Application.isPlaying)
+            ApplyVisuals();
+    }
+
+    private void FixedUpdate()
     {
         ApplyVisuals();
     }
+
+    private void OnDrawGizmos()
+    {
+#if UNITY_EDITOR
+        if (liveUpdate)
+            ApplyVisuals();
+
+
+        // Ensure continuous Update calls.
+        if (!Application.isPlaying)
+        {
+            UnityEditor.EditorApplication.QueuePlayerLoopUpdate();
+            UnityEditor.SceneView.RepaintAll();
+        }
+#endif
+    }
+
     void SaveVisuals()
     {
         if (Application.isPlaying)
@@ -42,11 +129,11 @@ public class CharacterCreator : MonoBehaviour
         SaveVisuals();
         ApplyMaterial();
         visualsUpdateEvent?.Invoke();
-        if (Application.isEditor)
+        if (liveUpdate)
         {
             visuals.visualData = visualData;
             visuals.UpdateVisuals();
-            if (visualData.colorPreset > allPresets.Count)
+            if (visualData.colorPreset >= allPresets.Count)
                 preset = allPresets[allPresets.Count - 1];
             else
                 preset = allPresets[visualData.colorPreset];
@@ -79,11 +166,14 @@ public class CharacterCreator : MonoBehaviour
 
     public void ApplyMaterial()
     {
-        foreach (var item in allPresets[visualData.colorPreset].colorPresets)
+
+        int currentPreset = visualData.colorPreset;
+        if (visualData.colorPreset >= allPresets.Count)
+            currentPreset = allPresets.Count - 1;
+
+        foreach (var item in allPresets[currentPreset].colorPresets)
         {
-            Debug.Log(item.color);
             item.material.SetColor("_MainColor", item.color * item.color);
-            Debug.Log(item.material.GetColor("_MainColor"));
         }
     }
 

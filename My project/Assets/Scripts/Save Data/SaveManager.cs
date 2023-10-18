@@ -19,6 +19,7 @@ public class SaveManager : MonoBehaviour
 
     }
 
+ 
     private void Start()
     {
         if (autoLoad)
