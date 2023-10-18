@@ -10,7 +10,6 @@ public class Projectile : Hitbox
     public ProjectileMovement projectileMovement;
     public Transform target;
 
-
     bool isDestroying;
     bool delayDestroy;
     [TabGroup("Settings")] public int life;
@@ -21,11 +20,11 @@ public class Projectile : Hitbox
     [TabGroup("Settings")] public bool onStartVelocity;
     [TabGroup("Settings")] public bool updateVelocty;
 
+    [TabGroup("Settings")] public GameObject explosion;
+    [TabGroup("Settings")] public bool onlyExplosionDamage;
     [TabGroup("Settings")] public bool destroyOnCollission = true;
     [TabGroup("Settings")] public bool destroyOnProjectileClash = true;
     [TabGroup("Settings")] public bool destroyOnHitboxClash = true;
-
-    [TabGroup("Settings")] public bool destroyOnBlock;
     [TabGroup("Settings")] public bool destroyOnHit;
     [TabGroup("Components")] public GameObject explosionVFX;
     [TabGroup("Components")] public GameObject explosionSFX;
@@ -70,17 +69,18 @@ public class Projectile : Hitbox
             GameManager.Instance.advanceGameState += FramePassed;
 
         delayDestroy = true;
-        //Hit FX
-        //if (explosionVFX != null)
-        //    Instantiate(explosionVFX, transform.position, transform.rotation);
-        //else
-        //    Instantiate(VFXManager.Instance.defaultProjectileVFX, transform.position, transform.rotation);
 
-        //if (explosionSFX != null)
-        //    Instantiate(explosionSFX, transform.position, transform.rotation);
-        //else
-        //    Instantiate(VFXManager.Instance.defaultProjectileSFX, transform.position, transform.rotation);
-        //Hit FX
+        if (explosion != null)
+        {
+            GameObject GO = Instantiate(explosion, transform.position, transform.rotation, transform);
+            GO.transform.localPosition = explosion.transform.localPosition;
+            Projectile proj = GO.GetComponent<Projectile>();
+            proj.status = status;
+            proj.attack = attack;
+            proj.move = move;
+            proj.hitboxID = hitboxID;
+        }
+
         if (explosionVFX != null)
             Instantiate(explosionVFX, transform.position, transform.rotation);
         else
@@ -141,12 +141,13 @@ public class Projectile : Hitbox
     new void OnTriggerEnter(Collider other)
     {
         if (delayDestroy) return;
+        bool foundTarget = false;
         colPos = other.gameObject.transform;
         Projectile proj = other.GetComponentInParent<Projectile>();
         if (proj != null && destroyOnProjectileClash && proj.status != status)
         {
             life--;
-
+            foundTarget = true;
             DestroyProjectile();
             return;
         }
@@ -155,6 +156,7 @@ public class Projectile : Hitbox
         if (hitbox != null && destroyOnHitboxClash && hitbox.status != status)
         {
             life--;
+            foundTarget = true;
             DestroyProjectile();
             return;
         }
@@ -170,25 +172,25 @@ public class Projectile : Hitbox
             {
                 if (enemyStatus.invincible) return;
                 else if (enemyStatus.projectileInvul) return;
-
+                foundTarget = true;
                 enemyList.Add(enemyStatus);
                 DoDamage(enemyStatus, 1);
                 return;
             }
         }
 
-        if (destroyOnCollission)
+        if (destroyOnCollission && !foundTarget)
         {
-
             DestroyProjectile();
         }
     }
 
     public override void DoDamage(Status other, float dmgMod)
     {
-        if (!hit)
+        if (!hit && !onlyExplosionDamage)
             base.DoDamage(other, dmgMod);
-        hit = true;
-        DestroyProjectile();
+        //      hit = true;
+        if (destroyOnHit)
+            DestroyProjectile();
     }
 }

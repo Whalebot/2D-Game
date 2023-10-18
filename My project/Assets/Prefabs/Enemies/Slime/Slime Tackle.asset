@@ -67,6 +67,7 @@ MonoBehaviour:
   autoAim: 0
   armor: 0
   resetGatling: 0
+  hitsGroundOnly: 0
   noClip: 0
   noClipStart: 1
   noClipDuration: 0
@@ -98,14 +99,14 @@ MonoBehaviour:
     momentum: {x: -5, y: 0}
     freeMovement: 0
     homing: 0
-    resetVelocityDuringRecovery: 1
+    resetVelocityDuringRecovery: 0
   - startFrame: 35
     duration: 2
     momentum: {x: 10, y: 0}
     freeMovement: 0
     homing: 0
     resetVelocityDuringRecovery: 0
-  - startFrame: 40
+  - startFrame: 45
     duration: 2
     momentum: {x: 5, y: 0}
     freeMovement: 0

@@ -20,7 +20,7 @@ public class SkillManager : MonoBehaviour
 
     public event Action<SkillSO> pickedSkillEvent;
 
-
+    SkillHandler skillHandler;
     private void Awake()
     {
         Instance = this;
@@ -29,6 +29,7 @@ public class SkillManager : MonoBehaviour
 
     private void Start()
     {
+        skillHandler = GameManager.Instance.player.GetComponent<SkillHandler>();
         //AIManager.Instance.allEnemiesKilled += RollSkills;
     }
     void ResetAllMovesets()
@@ -42,7 +43,7 @@ public class SkillManager : MonoBehaviour
     public void GetSkill(SkillSO skillSO)
     {
         pickedSkillEvent?.Invoke(skillSO);
-        GameManager.Instance.player.GetComponent<SkillHandler>().LearnSkill(skillSO);
+        skillHandler.LearnSkill(skillSO);
         SaveManager.Instance.saveData.learnedSkills.Add(skillSO);
         foundSkills.Add(skillSO);
         activeSkills.Clear();
@@ -160,7 +161,7 @@ public class SkillManager : MonoBehaviour
         List<SkillSO> availableSkills = new List<SkillSO>();
         foreach (var item in skillList)
         {
-            if (!foundSkills.Contains(item) && !activeSkills.Contains(item))
+            if (!foundSkills.Contains(item) && !activeSkills.Contains(item) && skillHandler.CanGetSkill(item))
                 availableSkills.Add(item);
         }
 
@@ -184,7 +185,7 @@ public class SkillManager : MonoBehaviour
         List<SkillSO> availableSkills = new List<SkillSO>();
         foreach (var item in allSkills)
         {
-            if (!foundSkills.Contains(item) && !activeSkills.Contains(item))
+            if (!foundSkills.Contains(item) && !activeSkills.Contains(item) && skillHandler.CanGetSkill(item))
                 availableSkills.Add(item);
         }
 

@@ -1,15 +1,20 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 public class DevCheats : MonoBehaviour
 {
+    public SkillSO skill;
     private void Start()
     {
         InputManager.Instance.selectInput += Restart;
     }
-    void Restart() {
+    void Restart()
+    {
         TransitionManager.Instance.LoadScene(0);
     }
+    [Button]
+    public void GiveSkillSkill() { SkillManager.Instance.GetSkill(skill); }
 
     void Update()
     {

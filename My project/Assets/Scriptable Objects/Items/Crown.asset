@@ -16,32 +16,35 @@ MonoBehaviour:
   type: 2
   title: Crown
   sprite: {fileID: 21300000, guid: 733509327cf56e04aa8020431447de08, type: 3}
-  move: {fileID: 0}
-  combo: {fileID: 0}
+  prerequisiteSkills: []
+  prerequisiteMoves: []
+  newMoves: []
+  upgradedMove: {fileID: 0}
+  oldMove: {fileID: 0}
   description: Boost all stats with 10%
   stats:
-    currentHealth: 0
-    maxHealth: 0
-    currentMeter: 0
-    maxMeter: 0
+    currentHealth: 10
+    maxHealth: 10
+    currentMeter: 10
+    maxMeter: 10
     level: 0
     attack: 0
     magic: 0
-    attackSpeed: 0
+    attackSpeed: 0.1
     airActions: 0
     luck: 0
     rerolls: 0
-    movementSpeedModifier: 0
-    meterGainModifier: 0
-    poiseRegen: 0
-    poise: 0
-    defense: 0
+    movementSpeedModifier: 0.1
+    meterGainModifier: 0.1
+    poiseRegen: 0.1
+    poise: 0.1
+    defense: 0.1
     resistance: 0
-    guardBreakModifier: 0
-    sizeModifier: 0
-    damageModifierPercentage: 0
+    guardBreakModifier: 0.1
+    sizeModifier: 0.1
+    damageModifierPercentage: 0.1
     damageModifierFlat: 0
-    hitStunMultiplier: 0
+    hitStunMultiplier: 0.1
     knockbackModifier: 0
-    critChance: 0
-    critMultiplier: 0
+    critChance: 0.1
+    critMultiplier: 0.1

@@ -8,7 +8,8 @@ public class SkillHandler : MonoBehaviour
 {
     Status status;
     [TabGroup("Skill Info")] public Stats modifiedStats;
-    [TabGroup("Skill Info")] public List<Skill> learnedSkills;
+    [TabGroup("Skill Info")] public List<SkillSO> learnedSkills;
+    [TabGroup("Components")] public AttackScript attackScript;
     [TabGroup("Components")] public DescriptionWindow window;
     [TabGroup("Components")] public GameObject skillLevelUpWindow;
     [TabGroup("Components")] public Transform skillLevelUpPanel;
@@ -20,26 +21,71 @@ public class SkillHandler : MonoBehaviour
 
     private void Awake()
     {
-        learnedSkills = new List<Skill>();
+        learnedSkills = new List<SkillSO>();
         status = GetComponent<Status>();
 
         SaveManager.Instance.loadEvent += LoadData;
+        DuplicateMoveset();
     }
 
+    void DuplicateMoveset()
+    {
+        Moveset moveset = Instantiate(attackScript.moveset);
+        moveset.name = attackScript.moveset.name;
+        Combo skillCombo = Instantiate(moveset.skillCombo);
+        skillCombo.name = moveset.skillCombo.name;
+        moveset.skillCombo = skillCombo;
+        attackScript.moveset = moveset;
+    }
+    public void ReplaceMove(Move newMove, Move oldMove)
+    {
+        Moveset def1 = attackScript.moveset;
+        FieldInfo[] defInfo1 = def1.GetType().GetFields();
+
+        for (int i = 0; i < defInfo1.Length; i++)
+        {
+            object obj = def1;
+            object var1 = defInfo1[i].GetValue(obj);
+
+            if (var1 is Combo)
+            {
+                Combo tempCombo = (Combo)var1;
+                //Debug.Log(tempCombo);
+                for (int j = 0; j < tempCombo.moves.Count; j++)
+                {
+                    //Debug.Log(tempCombo.moves[j]);
+                    if (tempCombo.moves[j].name == oldMove.name)
+                    {
+                        //Debug.Log(newMove);
+                        tempCombo.moves[j] = newMove;
+                    }
+                }
+            }
+        }
+    }
     void Start()
     {
-
         UpdateStats();
+        LateBehaviour();
     }
-
-    void LoadData() {
-       RemoveAllSkills();
+    void ActivateBehaviour()
+    {
+    }
+    void LateBehaviour()
+    {
+        foreach (var item in learnedSkills)
+        {
+            item.LateBehaviour(this);
+        }
+    }
+    void LoadData()
+    {
+        RemoveAllSkills();
 
         foreach (var item in SaveManager.Instance.saveData.learnedSkills)
         {
             LearnSkill(item);
         }
-
     }
 
     void SaveSkill(SkillSO skill)
@@ -75,9 +121,9 @@ public class SkillHandler : MonoBehaviour
     {
         modifiedStats = new Stats();
         modifiedStats.ResetValues();
-        foreach (Skill skill in learnedSkills)
+        foreach (SkillSO skill in learnedSkills)
         {
-            if (skill.skillSO.type == SkillType.Passive)
+            if (skill.type == SkillType.Passive)
                 CalculateSkillStats(skill);
         }
         ApplySkillEffects();
@@ -96,46 +142,91 @@ public class SkillHandler : MonoBehaviour
         GO.GetComponent<DescriptionWindow>().DisplayUI(skill);
 
     }
-
-    public Skill GetSkill(SkillSO so)
+    public bool CanGetSkill(SkillSO skillSO)
     {
+        bool hasRequiredSkill = false;
+        bool hasRequiredMove = false;
 
-        foreach (var item in learnedSkills)
+        if (skillSO.prerequisiteSkills.Count > 0)
         {
-            if (item.skillSO == so)
+            foreach (var item in learnedSkills)
             {
-                return item;
+                if (item == skillSO)
+                {
+                    hasRequiredSkill = true;
+                }
+            }
+        }
+        else hasRequiredSkill = true;
+
+        Moveset def1 = attackScript.moveset;
+        FieldInfo[] defInfo1 = def1.GetType().GetFields();
+        if (skillSO.prerequisiteMoves.Count > 0)
+        {
+            for (int i = 0; i < defInfo1.Length; i++)
+            {
+                object obj = def1;
+                object var1 = defInfo1[i].GetValue(obj);
+
+                if (var1 is Combo)
+                {
+                    Combo temp = (Combo)var1;
+                    foreach (var move in skillSO.prerequisiteMoves)
+                    {
+                        foreach (var item in temp.moves)
+                        {
+                            if (item == move)
+                                hasRequiredMove = true;
+                        }
+                    }
+                }
+            }
+        }
+        else hasRequiredMove = true;
+
+
+        return hasRequiredMove && hasRequiredSkill;
+    }
+    public void LearnSkill(SkillSO skill)
+    {
+        if (skill != null)
+        {
+            learnedSkills.Add(skill);
+        }
+
+        if (skill.newMoves.Count > 0)
+        {
+            foreach (var item in skill.newMoves)
+            {
+                GetCombo(item.combo).moves.Add(item.move);
+            }
+
+        }
+
+        expEvent?.Invoke();
+        lvlEvent?.Invoke();
+        UpdateSkillSlot();
+        UpdateStats();
+        LateBehaviour();
+    }
+    public Combo GetCombo(Combo originalCombo)
+    {
+        Moveset def1 = attackScript.moveset;
+        FieldInfo[] defInfo1 = def1.GetType().GetFields();
+
+        for (int i = 0; i < defInfo1.Length; i++)
+        {
+            object obj = def1;
+            object var1 = defInfo1[i].GetValue(obj);
+
+            if (var1 is Combo)
+            {
+                Combo temp = (Combo)var1;
+                if (temp.name == originalCombo.name)
+                    return temp;
             }
         }
         return null;
-    }
-
-    public void LearnSkill(SkillSO skill)
-    {
-
-        Skill temp = null;
-        if (temp == null)
-        {
-            temp = new Skill();
-            temp.skillSO = skill;
-            learnedSkills.Add(temp);
-        }
-
-        if (skill.move != null && skill.combo != null)
-        {
-            //skill.combo.moves = new Move[1];
-            skill.combo.moves.Add(skill.move);
-        }
-
-
-        expEvent?.Invoke();
-
-        temp.level++;
-        temp.experience = 0;
-        lvlEvent?.Invoke();
-        SkillLevelUI(temp);
-        UpdateSkillSlot();
-        UpdateStats();
     }
 
     public void SkillUI(Skill skill)
@@ -149,10 +240,10 @@ public class SkillHandler : MonoBehaviour
         }
     }
 
-    public void CalculateSkillStats(Skill temp)
+    public void CalculateSkillStats(SkillSO temp)
     {
         Stats def1 = modifiedStats;
-        Stats def2 = temp.skillSO.stats;
+        Stats def2 = temp.stats;
         FieldInfo[] defInfo1 = def1.GetType().GetFields();
         FieldInfo[] defInfo2 = def2.GetType().GetFields();
 

@@ -13,25 +13,25 @@ MonoBehaviour:
   m_Name: Sword_5C
   m_EditorClassIdentifier: 
   animationID: 5
-  meterCost: 50
+  meterCost: 0
   meterGain: 10
   icon: {fileID: 0}
-  firstStartupFrame: 2
-  lastActiveFrame: 21
-  totalMoveDuration: 39
-  firstGatlingFrame: 12
-  recoveryFrames: 18
+  firstStartupFrame: 20
+  lastActiveFrame: 20
+  totalMoveDuration: 45
+  firstGatlingFrame: 25
+  recoveryFrames: 25
   attacks:
   - attackLevel: 2
-    attackType: 0
-    hitbox: {fileID: 5860963072138344223, guid: 2882afa60e18a8547bd9f6cabf9ee25d, type: 3}
-    damage: 2.5
+    attackType: 1
+    hitbox: {fileID: 5860963072138344223, guid: fdaed30a4102f4b4aa435277a0e4a9de, type: 3}
+    damage: 2
     stun: 20
     hitstop: 5
     poiseBreak: 0
-    startupFrame: 2
-    activeFrames: 20
-    gatlingFrames: 10
+    startupFrame: 20
+    activeFrames: 1
+    gatlingFrames: 5
     groundHitProperty:
       pushback: {x: 2, y: 8}
       hitState: 0
@@ -46,17 +46,17 @@ MonoBehaviour:
   uniqueProperties: []
   screenShake:
   - type: 0
-    startup: 2
-    amplitude: 5
-    duration: 2
+    startup: 20
+    amplitude: 2
+    duration: 1
   vfx:
-  - startup: 4
-    prefab: {fileID: 1800976239324842, guid: c3a419073912434429f93f4f6d5369ff, type: 3}
-    deattachFromPlayer: 1
+  - startup: 15
+    prefab: {fileID: 3595050330844811134, guid: 2c70ba2d625df0541965d239fd82e7e6, type: 3}
+    deattachFromPlayer: 0
     destroyOnRecovery: 0
-    position: {x: 0, y: 0.5, z: 0}
-    rotation: {x: -5, y: 90, z: 0}
-    scale: {x: 1, y: 1, z: 1}
+    position: {x: 0, y: 0.6, z: 0.7}
+    rotation: {x: 0, y: 0, z: 90}
+    scale: {x: 0.3, y: 0.3, z: 0.3}
   sfx: []
   hitFX:
     startup: 1
@@ -78,12 +78,13 @@ MonoBehaviour:
   autoAim: 0
   armor: 0
   resetGatling: 0
-  noClip: 1
+  hitsGroundOnly: 0
+  noClip: 0
   noClipStart: 1
-  noClipDuration: 20
-  invincible: 1
+  noClipDuration: 0
+  invincible: 0
   invincibleStart: 1
-  invincibleDuration: 10
+  invincibleDuration: 0
   projectileInvul: 0
   projectileInvulStart: 1
   projectileInvulDuration: 0
@@ -91,7 +92,7 @@ MonoBehaviour:
   airInvulStart: 1
   airInvulDuration: 0
   targetComboMoves: []
-  fullCancel: 1
+  fullCancel: 0
   gatlingCancel: 1
   uncancelable: 0
   gatlingCancelOnBlock: 1
@@ -104,18 +105,18 @@ MonoBehaviour:
   landCancel: 0
   recoverOnlyOnLand: 0
   m:
-  - startFrame: 2
-    duration: 2
-    momentum: {x: 25, y: 0}
-    freeMovement: 0
-    homing: 0
-    resetVelocityDuringRecovery: 0
-  - startFrame: 12
-    duration: 2
+  - startFrame: 10
+    duration: 5
     momentum: {x: 0, y: 0}
     freeMovement: 0
     homing: 0
     resetVelocityDuringRecovery: 0
+  - startFrame: 20
+    duration: 2
+    momentum: {x: -5, y: 0}
+    freeMovement: 0
+    homing: 0
+    resetVelocityDuringRecovery: 0
   instantStartupRotation: 1
-  overrideVelocity: 1
+  overrideVelocity: 0
   runMomentum: 0

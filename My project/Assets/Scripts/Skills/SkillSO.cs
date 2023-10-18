@@ -10,9 +10,13 @@ public class SkillSO : ScriptableObject
     public Rank skillRank;
     public SkillType type;
     public string title;
- [PreviewField(50)]   public Sprite sprite;
-    [ShowIf("@type == SkillType.Active")] public Move move;
-    [ShowIf("@type == SkillType.Active")] public Combo combo;
+    [PreviewField(50)] public Sprite sprite;
+    public List<SkillSO> prerequisiteSkills;
+    public List<Move> prerequisiteMoves;
+    public List<NewMove> newMoves;
+    public Move upgradedMove;
+    public Move oldMove;
+
     [TextArea(15, 20)]
     public string description;
     [ShowIf("@type == SkillType.Passive || type == SkillType.Item")]
@@ -22,7 +26,11 @@ public class SkillSO : ScriptableObject
     {
         //Debug.Log("Set behaviour");
     }
-
+    public virtual void LateBehaviour(SkillHandler handler)
+    {
+        if (upgradedMove != null)
+            handler.ReplaceMove(upgradedMove, oldMove);
+    }
     public virtual void RepeatBehaviour(SkillHandler handler)
     {
         //Debug.Log("Base behaviour");
@@ -49,7 +57,12 @@ public class SkillSO : ScriptableObject
         title = this.name;
     }
 }
+[System.Serializable]
+public class NewMove {
+    public Move move;
+    public Combo combo;
+}
 
-public enum Rank { D, C, B , A , S}
+public enum Rank { D, C, B, A, S }
 
 public enum SkillType { Active, Passive, Item }

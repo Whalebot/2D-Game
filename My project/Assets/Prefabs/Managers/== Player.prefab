@@ -561,6 +561,7 @@ MonoBehaviour:
   gatlingFrame: 0
   attackID: 0
   attackFrames: 0
+  lastFrame: 0
   extendedBuffer: 0
   holdAttack: 0
   attackString: 0
@@ -618,6 +619,7 @@ MonoBehaviour:
     critChance: 0
     critMultiplier: 1.5
   learnedSkills: []
+  attackScript: {fileID: 7781932958552145060}
   window: {fileID: 0}
   skillLevelUpWindow: {fileID: 0}
   skillLevelUpPanel: {fileID: 0}
@@ -788,6 +790,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7781932958552145057}
     m_Modifications:
+    - target: {fileID: 1769705478907156500, guid: bae229889eb92774aa7bf09a98b11a1b, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3217097240122615958, guid: bae229889eb92774aa7bf09a98b11a1b, type: 3}
       propertyPath: m_Name
       value: Graphics

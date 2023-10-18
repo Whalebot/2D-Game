@@ -18,9 +18,7 @@ public class TransitionManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        InputManager.Instance.southInput += ButtonPress;
         levelIndex = SceneManager.GetActiveScene().buildIndex;
-        Debug.Log(SceneManager.GetActiveScene().buildIndex);
     }
 
     void Start()
@@ -28,12 +26,9 @@ public class TransitionManager : MonoBehaviour
         isLoading = false;
     }
 
-    void ButtonPress()
-    {
-    }
-
     IEnumerator TransitionDelay(int sceneIndex)
     {
+        if(AudioManager.Instance != null)
         AudioManager.Instance.FadeOutVolume();
         Fade();
         yield return new WaitForSeconds(sceneTransitionDelay);
@@ -43,7 +38,8 @@ public class TransitionManager : MonoBehaviour
 
     IEnumerator TransitionDelay(string sceneName)
     {
-        AudioManager.Instance.FadeOutVolume();
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.FadeOutVolume();
         Fade();
         yield return new WaitForSeconds(sceneTransitionDelay);
         SceneManager.LoadScene(sceneName);
@@ -68,7 +64,13 @@ public class TransitionManager : MonoBehaviour
         isLoading = true;
         StartCoroutine(TransitionDelay(sceneIndex));
     }
-
+    public void LoadScene(string sceneName)
+    {
+        if (isLoading) return;
+        SaveManager.Instance.SaveData();
+        isLoading = true;
+        StartCoroutine(TransitionDelay(sceneName));
+    }
     public void ResultScreen()
     {
         //  resultScreen.SetActive(true);

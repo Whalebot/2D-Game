@@ -7,6 +7,7 @@ public class CharacterVisuals : MonoBehaviour
 {
     public CharacterVisualData visualData;
     public List<ColorPresetSO> allPresets;
+    public List<GameObject> weapons;
     public List<GameObject> hairVariations;
     public List<GameObject> topOutifts;
     public List<GameObject> bottomOutfits;
@@ -14,6 +15,7 @@ public class CharacterVisuals : MonoBehaviour
     private void Start()
     {
         CharacterCreator.Instance.visualsUpdateEvent += UpdateVisuals;
+        UpdateVisuals();
     }
 
     private void OnDisable()
@@ -32,6 +34,10 @@ public class CharacterVisuals : MonoBehaviour
     [Button]
     void RemoveAllClothing()
     {
+        foreach (var item in weapons)
+        {
+            item.SetActive(false);
+        }
         foreach (var item in hairVariations)
         {
             item.SetActive(false);
@@ -48,6 +54,12 @@ public class CharacterVisuals : MonoBehaviour
     [Button]
     public void SetupOutfit()
     {
+        Debug.Log(visualData.colorPreset);
+        if (weapons.Count > visualData.characterJob)
+            weapons[visualData.characterJob].SetActive(true);
+        else
+            weapons[weapons.Count - 1].SetActive(true);
+
         if (hairVariations.Count > visualData.hairID)
             hairVariations[visualData.hairID].SetActive(true);
         else

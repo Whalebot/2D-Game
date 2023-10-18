@@ -56,11 +56,18 @@ public class VFXManager : MonoBehaviour
             float tempTime = 0;
             tempTime = (GameManager.Instance.gameFrameCount - item.startFrame) * Time.fixedDeltaTime;
             item.ps.Simulate(Time.fixedDeltaTime, true, false, true);
-            if (item.ps.time >= item.ps.main.duration)
+            int currentFrame = (int)((item.ps.main.duration + item.ps.main.startLifetimeMultiplier) / Time.fixedDeltaTime);
+            //Debug.Log($"{item.ps.time} {item.ps.main.duration + item.ps.main.startLifetimeMultiplier}");
+            if (GameManager.Instance.gameFrameCount >= item.startFrame + currentFrame)
             {
                 deletedParticles.Add(item);
                 //Delete shit
             }
+            //if (item.ps.time >= item.ps.main.duration + item.ps.main.startLifetimeMultiplier)
+            //{
+            //    deletedParticles.Add(item);
+            //    //Delete shit
+            //}
 
         }
         for (int i = 0; i < deletedParticles.Count; i++)

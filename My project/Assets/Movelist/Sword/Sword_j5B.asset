@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: Sword_j5B
   m_EditorClassIdentifier: 
   animationID: 10
+  meterCost: 0
+  meterGain: 10
   icon: {fileID: 0}
   firstStartupFrame: 15
   lastActiveFrame: 17
-  totalMoveDuration: 27
+  totalMoveDuration: 37
   firstGatlingFrame: 20
-  recoveryFrames: 10
+  recoveryFrames: 20
   attacks:
   - attackLevel: 0
     attackType: 0
@@ -49,6 +51,7 @@ MonoBehaviour:
     startup: 1
     prefab: {fileID: 1416824176164296, guid: dc1397204bb5ee84895af2b49dac2d49, type: 3}
     deattachFromPlayer: 1
+    destroyOnRecovery: 0
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0}
     scale: {x: 0.7, y: 0.7, z: 0.7}
@@ -64,6 +67,7 @@ MonoBehaviour:
   autoAim: 0
   armor: 0
   resetGatling: 0
+  hitsGroundOnly: 0
   noClip: 0
   noClipStart: 1
   noClipDuration: 0

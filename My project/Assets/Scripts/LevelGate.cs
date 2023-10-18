@@ -6,7 +6,7 @@ public class LevelGate : Interactable
 {
     public int gateID;
     public RoomTypes roomType;
-    public int levelScene;
+    public string nextSceneName;
     public GameObject levelGates;
     public TextMeshProUGUI levelName;
 
@@ -14,7 +14,7 @@ public class LevelGate : Interactable
     {
         LevelManager.Instance.spawnLevelGates += SpawnLevelGates;
         roomType = LevelManager.Instance.NextRoomType(gateID);
-        levelScene = LevelManager.Instance.NextLevelIndex(roomType);
+        nextSceneName = LevelManager.Instance.NextLevelName(roomType);
         SetupGate();
 
         if (LevelManager.Instance.currentRoomType != RoomTypes.Shop || roomType == RoomTypes.Disabled)
@@ -41,6 +41,6 @@ public class LevelGate : Interactable
     public void EnterGate()
     {
         LevelManager.Instance.GoToNextLevel();
-        TransitionManager.Instance.LoadScene(levelScene);
+        TransitionManager.Instance.LoadScene(nextSceneName);
     }
 }

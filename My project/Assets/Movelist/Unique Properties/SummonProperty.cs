@@ -11,6 +11,7 @@ public class SummonProperty : MoveUniqueProperty
     public override void OnStartupFrame(AttackScript atk)
     {
         base.OnStartupFrame(atk);
+        Debug.Log($"Summon slimé at {atk.AttackFrame}");
         Instantiate(summon, atk.transform.position + atk.transform.forward * offset.z + atk.transform.right * offset.x + atk.transform.up* offset.y, atk.transform.rotation);
     }
 

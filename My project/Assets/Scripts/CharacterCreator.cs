@@ -23,9 +23,28 @@ public class CharacterCreator : MonoBehaviour
     private void Start()
     {
         SaveManager.Instance.saveEvent += SaveVisuals;
+        SaveManager.Instance.loadEvent += SaveVisuals;
 
         if (!SaveManager.Instance.HasSaveData())
             RandomizeVisuals();
+    }
+    public int Class
+    {
+        get
+        {
+            return visualData.characterJob;
+        }
+        set
+        {
+            visualData.characterJob = value;
+
+            if (visualData.characterJob >= 2)
+                visualData.characterJob = 0;
+            if (visualData.characterJob < 0)
+                visualData.characterJob = 1;
+
+            ApplyVisuals();
+        }
     }
     public int ColorPreset
     {
@@ -41,6 +60,8 @@ public class CharacterCreator : MonoBehaviour
                 visualData.colorPreset = 0;
             if (visualData.colorPreset < 0)
                 visualData.colorPreset = allPresets.Count - 1;
+
+            ApplyVisuals();
         }
     }
     public int HairID
@@ -57,6 +78,8 @@ public class CharacterCreator : MonoBehaviour
                 visualData.hairID = 0;
             if (visualData.hairID < 0)
                 visualData.hairID = visuals.hairVariations.Count - 1;
+
+            ApplyVisuals();
         }
     }
     public int TopID
@@ -73,6 +96,8 @@ public class CharacterCreator : MonoBehaviour
                 visualData.topID = 0;
             if (visualData.topID < 0)
                 visualData.topID = visuals.topOutifts.Count - 1;
+
+            ApplyVisuals();
         }
     }
     public int BottomID
@@ -89,6 +114,8 @@ public class CharacterCreator : MonoBehaviour
                 visualData.bottomID = 0;
             if (visualData.bottomID < 0)
                 visualData.bottomID = visuals.bottomOutfits.Count - 1;
+
+            ApplyVisuals();
         }
     }
     private void OnValidate()
@@ -99,34 +126,45 @@ public class CharacterCreator : MonoBehaviour
 
     private void FixedUpdate()
     {
-        ApplyVisuals();
-    }
-
-    private void OnDrawGizmos()
-    {
-#if UNITY_EDITOR
-        if (liveUpdate)
+        if (liveUpdate && !Application.isPlaying)
             ApplyVisuals();
-
-
-        // Ensure continuous Update calls.
-        if (!Application.isPlaying)
-        {
-            UnityEditor.EditorApplication.QueuePlayerLoopUpdate();
-            UnityEditor.SceneView.RepaintAll();
-        }
-#endif
     }
+
+    //    private void OnDrawGizmos()
+    //    {
+    //#if UNITY_EDITOR
+    //        if (liveUpdate)
+    //            ApplyVisuals();
+
+
+    //        // Ensure continuous Update calls.
+    //        if (!Application.isPlaying)
+    //        {
+    //            UnityEditor.EditorApplication.QueuePlayerLoopUpdate();
+    //            UnityEditor.SceneView.RepaintAll();
+    //        }
+    //#endif
+    //    }
 
     void SaveVisuals()
     {
         if (Application.isPlaying)
+        {
+            Debug.Log("Saving visuals");
             SaveManager.Instance.saveData.visualData = visualData;
+        }
+    }
+    void LoadVisuals()
+    {
+        if (Application.isPlaying)
+        {
+           visualData = SaveManager.Instance.saveData.visualData;
+            ApplyVisuals();
+        }
     }
     [Button]
     void ApplyVisuals()
     {
-        SaveVisuals();
         ApplyMaterial();
         visualsUpdateEvent?.Invoke();
         if (liveUpdate)
@@ -148,6 +186,7 @@ public class CharacterCreator : MonoBehaviour
         visualData.topID = UnityEngine.Random.Range(0, 3);
         visualData.bottomID = UnityEngine.Random.Range(0, 2);
 
+        SaveVisuals();
         ApplyVisuals();
     }
 

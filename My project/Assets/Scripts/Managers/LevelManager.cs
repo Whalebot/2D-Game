@@ -7,16 +7,15 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance;
     public RoomTypes currentRoomType = RoomTypes.Normal;
-
+    public List<SceneSO> sceneObjects;
     public int currentLevel = 1;
-    public int nextLevelIndex;
 
     public event Action spawnLevelGates;
 
     private void Awake()
     {
         Instance = this;
-        switch (TransitionManager.levelIndex)
+        switch (TransitionManager.levelIndex - 1)
         {
             case 0: currentRoomType = RoomTypes.Normal; break;
             case 1: currentRoomType = RoomTypes.Treasure; break;
@@ -51,23 +50,25 @@ public class LevelManager : MonoBehaviour
         currentLevel++;
     }
 
-    public int NextLevelIndex(RoomTypes roomType)
+    public string NextLevelName(RoomTypes roomType)
     {
-        switch (roomType)
-        {
-            case RoomTypes.Normal:
-                return 0;
-            case RoomTypes.Boss:
-                return 2;
-            case RoomTypes.Treasure:
-                return 1;
-            case RoomTypes.Shop:
-                return 3;
-            case RoomTypes.Disabled:
-                return 0;
-            default:
-                return 0;
-        }
+        if ((int)roomType >= sceneObjects.Count) return "";
+        return sceneObjects[(int)roomType].sceneName;
+        //switch (roomType)
+        //{
+        //    case RoomTypes.Normal:
+        //        return sceneObjects[(int)roomType].sceneName;
+        //    case RoomTypes.Boss:
+        //        return 2;
+        //    case RoomTypes.Treasure:
+        //        return 1;
+        //    case RoomTypes.Shop:
+        //        return 3;
+        //    case RoomTypes.Disabled:
+        //        return 0;
+        //    default:
+        //        return 0;
+        //}
     }
 
     [Button]

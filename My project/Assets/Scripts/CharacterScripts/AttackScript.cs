@@ -37,6 +37,7 @@ public class AttackScript : MonoBehaviour
     [TabGroup("Debug")] public int gatlingFrame;
     [TabGroup("Debug")] public int attackID;
     [TabGroup("Debug")] public float attackFrames;
+    [TabGroup("Debug")] public int lastFrame;
     [TabGroup("Debug")] public int extendedBuffer;
 
     [TabGroup("Debug")] public bool holdAttack;
@@ -172,10 +173,13 @@ public class AttackScript : MonoBehaviour
                 if (recoverOnlyOnLand) attackFrames--;
             }
 
+
             else if (attackFrames <= activeMove.totalMoveDuration)
             {
                 RecoveryFrames();
             }
+
+            lastFrame = AttackFrame;
         }
 
         if (status.currentState == Status.State.Neutral || status.currentState == Status.State.Blockstun || status.currentState == Status.State.Hitstun) usedMoves.Clear();
@@ -183,6 +187,7 @@ public class AttackScript : MonoBehaviour
     }
     void ExecuteUniqueProperties(int frame)
     {
+        if (lastFrame == AttackFrame) return;
         foreach (var item in activeMove.uniqueProperties)
         {
             if ((int)frame == item.frame)
@@ -490,8 +495,8 @@ public class AttackScript : MonoBehaviour
         if (move == null) return false;
 
 
-          if (status.currentStats.currentMeter < move.meterCost) return false;
-          //if (jumpFrameCounter > 0) return false;
+        if (status.currentStats.currentMeter < move.meterCost) return false;
+        //if (jumpFrameCounter > 0) return false;
         if (move.useAirAction && !attacking)
         {
             if (movement.performedJumps <= 0)
@@ -514,7 +519,7 @@ public class AttackScript : MonoBehaviour
         {
             if (move.gatlingCancel) return true;
         }
- //       Debug.Log("no true");
+        //       Debug.Log("no true");
         return false;
     }
 

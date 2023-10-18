@@ -103,6 +103,5 @@ public class AIManager : MonoBehaviour
         //    Instantiate(clearSFX);
         encounterFinished = true;
         allEnemiesKilled?.Invoke();
-        Debug.Log("INVOKED");
     }
 }

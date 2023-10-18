@@ -79,7 +79,7 @@ public class SaveManager : MonoBehaviour
 public class SaveData
 {
     public int gold = 100;
-    public int health = 0;
+    public int health = 50;
     public int meter = 0;
     public int currentLevel = 1;
     public CharacterVisualData visualData;
@@ -88,6 +88,7 @@ public class SaveData
 [System.Serializable]
 public class CharacterVisualData
 {
+    [Range(0, 10)] public int characterJob;
     [Range(0, 10)] public int colorPreset;
     [Range(0, 10)] public int hairID;
     [Range(0, 10)] public int topID;
