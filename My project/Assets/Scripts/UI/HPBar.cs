@@ -67,8 +67,13 @@ public class HPBar : MonoBehaviour
         if (disabled) return;
 
         if (!alwaysShowHPBar && GameManager.Instance.showHPBar)
+        {
             if (status.currentStats.currentHealth < status.currentStats.maxHealth)
                 container.SetActive(true);
+
+            if (poiseBar != null && status.baseStats.poise > status.currentStats.poise)
+                poiseBar.gameObject.SetActive(true);
+        }
 
         if (nameContainer != null && alwaysShowName)
             nameContainer.SetActive(true);
@@ -88,6 +93,9 @@ public class HPBar : MonoBehaviour
         activated = true;
         container.SetActive(true);
         nameContainer.SetActive(true);
+
+        if (poiseBar != null && status.baseStats.poise > 0)
+            poiseBar.gameObject.SetActive(true);
     }
 
     void DisableHPBar()

@@ -16,14 +16,15 @@ public class SaveManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-
+        if (autoLoad)
+            LoadData();
     }
 
  
     private void Start()
     {
-        if (autoLoad)
-            LoadData();
+        if (autoLoad && HasSaveData())
+            loadEvent?.Invoke();
     }
 
     public bool HasSaveData()
@@ -48,7 +49,7 @@ public class SaveManager : MonoBehaviour
         {
             string saveJson = PlayerPrefs.GetString("Save");
             saveData = JsonUtility.FromJson<SaveData>(saveJson);
-            loadEvent?.Invoke();
+
         }
 
         StartCoroutine(DelaySetup());

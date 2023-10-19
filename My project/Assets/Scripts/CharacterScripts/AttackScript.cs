@@ -44,12 +44,11 @@ public class AttackScript : MonoBehaviour
     [TabGroup("Debug")] public bool attackString;
     [TabGroup("Debug")] public bool canTargetCombo;
     [TabGroup("Debug")] public bool landCancel;
-    [TabGroup("Debug")] public bool jumpCancel;
-    [TabGroup("Debug")] public bool specialCancel;
     [TabGroup("Debug")] public bool recoverOnlyOnLand;
     [TabGroup("Debug")] public int movementFrames;
     [TabGroup("Debug")] public List<GameObject> projectiles;
     [TabGroup("Debug")] public bool inMomentum;
+    [TabGroup("Debug")] public int combo;
     [TabGroup("Jump Startup")] public int jumpFrameCounter;
     [TabGroup("Jump Startup")] public int jumpActionDelay;
     [TabGroup("Jump Startup")] public int jumpActionDelayCounter;
@@ -57,7 +56,7 @@ public class AttackScript : MonoBehaviour
 
     [HideInInspector] public bool newAttack;
     [HideInInspector] public bool landCancelFrame;
-    [HideInInspector] public int combo;
+  
     List<Move> usedMoves;
 
     private void Awake()
@@ -72,7 +71,7 @@ public class AttackScript : MonoBehaviour
         movement.landEvent += Land;
         status.neutralEvent += ResetCombo;
         status.hurtEvent += HitstunEvent;
-        status.deathEvent += HitstunEvent;
+        status.deathEvent += DeathEvent;
         GameManager.Instance.advanceGameState += ExecuteFrame;
         GameManager.Instance.resetEvent += ResetAttack;
     }
@@ -84,7 +83,7 @@ public class AttackScript : MonoBehaviour
         movement.landEvent -= Land;
         status.neutralEvent -= ResetCombo;
         status.hurtEvent -= HitstunEvent;
-        status.deathEvent -= HitstunEvent;
+        status.deathEvent -= DeathEvent;
 
         GameManager.Instance.advanceGameState -= ExecuteFrame;
         GameManager.Instance.resetEvent -= ResetAttack;
@@ -102,102 +101,102 @@ public class AttackScript : MonoBehaviour
 
     public void ExecuteFrame()
     {
+        if (status.isDead) return;
         ExecutePreJump();
 
         if (attacking)
         {
+            if (activeMove == null) { Debug.Log("No move"); }
             //Advance frame
+            //Execute skipped frames if using attack speed
+
+            float deltaFrame = (1 / 0.01666666F * Time.fixedDeltaTime);
             if (activeMove.useAttackSpeed)
             {
-                float deltaFrame = (1 / 0.01666666F * Time.fixedDeltaTime) * status.currentStats.attackSpeed;
-                int frameSkips = (int)(attackFrames + deltaFrame - AttackFrame);
+                deltaFrame *= status.currentStats.attackSpeed;
+            }
+            int frameSkips = (int)(attackFrames + deltaFrame - AttackFrame);
 
-                //Execute skipped frames if using attack speed
-                if (frameSkips > 1)
+            if (frameSkips >= 1)
+            {
+                for (int i = frameSkips - 1; i >= 0; i--)
                 {
-                    for (int i = frameSkips - 1; i > 0; i--)
+                    int frameToExecute = (int)(attackFrames + deltaFrame - i);
+
+                    //Debug.Log(frameToExecute);
+                    if (frameToExecute > activeMove.totalMoveDuration)
                     {
-                        int frameToExecute = (int)(attackFrames + deltaFrame - i);
-
-                        ExecuteUniqueProperties(frameToExecute);
-
-                        ProcessInvul(frameToExecute);
-                        ApplyScreenShake(frameToExecute);
-                        SpawnFX(frameToExecute);
-
-                        //Execute momentum
-                        ExecuteMomentum(frameToExecute, frameSkips);
+                        Idle();
+                        break;
                     }
                     //replay skipped frames
+                    ExecuteAttackFrame(frameToExecute);
+                    lastFrame = frameToExecute;
                 }
-                attackFrames = attackFrames + deltaFrame;
             }
-            else attackFrames++;
+            attackFrames = attackFrames + deltaFrame;
 
-            if (activeMove.attacks.Length > 0)
-            {
-                if (attackFrames > gatlingFrame + activeMove.attacks[0].gatlingFrames)
-                {
-                    attackString = true;
-                    newAttack = false;
-                }
-                if (attackFrames > activeMove.firstStartupFrame + activeMove.attacks[0].gatlingFrames)
-                {
-                    canTargetCombo = true;
-                }
-                if (extendedBuffer > 0)
-                    extendedBuffer--;
-            }
-            //Execute properties
-            ExecuteUniqueProperties(AttackFrame);
-
-            ProcessInvul(AttackFrame);
-            ApplyScreenShake(AttackFrame);
-            SpawnFX(AttackFrame);
-
-            //Execute momentum
-            ExecuteMomentum(AttackFrame);
-
-
-            if (attackFrames > activeMove.totalMoveDuration)
-            {
-                Idle();
-            }
-            else if (attackFrames < activeMove.firstStartupFrame)
-            {
-                StartupFrames();
-            }
-            else if (attackFrames <= activeMove.lastActiveFrame)
-            {
-                ActiveFrames();
-                if (recoverOnlyOnLand) attackFrames--;
-            }
-
-
-            else if (attackFrames <= activeMove.totalMoveDuration)
-            {
-                RecoveryFrames();
-            }
-
-            lastFrame = AttackFrame;
+            //lastFrame = AttackFrame;
         }
-
         if (status.currentState == Status.State.Neutral || status.currentState == Status.State.Blockstun || status.currentState == Status.State.Hitstun) usedMoves.Clear();
-
     }
+
+    void ExecuteAttackFrame(int frame)
+    {
+
+
+        //Execute properties
+        ExecuteUniqueProperties(frame);
+
+        ProcessInvul(frame);
+        ApplyScreenShake(frame);
+        SpawnFX(frame);
+
+        //Execute momentum
+        ExecuteMomentum(frame);
+
+        if (activeMove.attacks.Length > 0)
+        {
+            if (frame > gatlingFrame + activeMove.attacks[0].gatlingFrames)
+            {
+                attackString = true;
+                newAttack = false;
+            }
+            if (frame > activeMove.firstStartupFrame + activeMove.attacks[0].gatlingFrames)
+            {
+                canTargetCombo = true;
+            }
+            if (extendedBuffer > 0)
+                extendedBuffer--;
+        }
+        if (frame < activeMove.firstStartupFrame)
+        {
+            StartupFrames();
+        }
+        else if (frame <= activeMove.lastActiveFrame)
+        {
+            ActiveFrames(frame);
+            if (recoverOnlyOnLand) attackFrames--;
+        }
+        else if (frame <= activeMove.totalMoveDuration)
+        {
+            RecoveryFrames();
+        }
+    }
+
     void ExecuteUniqueProperties(int frame)
     {
-        if (lastFrame == AttackFrame) return;
+        if (lastFrame == frame) { Debug.Log($"{lastFrame} {frame}"); }
         foreach (var item in activeMove.uniqueProperties)
         {
-            if ((int)frame == item.frame)
+            if (frame == item.frame)
             {
-                item.OnStartupFrame(this);
+                item.OnStartupFrame(this, frame);
             }
         }
         foreach (var item in activeMove.uniqueProperties)
         {
-            if ((int)frame <= activeMove.lastActiveFrame && (int)frame >= activeMove.firstStartupFrame)
+            if (frame <= activeMove.lastActiveFrame && (int)frame >= activeMove.firstStartupFrame)
             {
                 item.OnActiveFrames(this);
             }
@@ -232,12 +231,12 @@ public class AttackScript : MonoBehaviour
 
         for (int i = 0; i < activeMove.m.Length; i++)
         {
-            if (AttackFrame > activeMove.m[i].startFrame && AttackFrame < activeMove.m[i].startFrame + activeMove.m[i].duration)
+            if (frame > activeMove.m[i].startFrame && frame < activeMove.m[i].startFrame + activeMove.m[i].duration)
             {
                 tempMomentum = true;
             }
             //Recovery
-            if (AttackFrame > activeMove.m[i].startFrame + activeMove.m[i].duration)
+            if (frame > activeMove.m[i].startFrame + activeMove.m[i].duration)
             {
                 movement.forcedWalk = false;
                 if (activeMove.m[i].resetVelocityDuringRecovery)
@@ -245,7 +244,7 @@ public class AttackScript : MonoBehaviour
                     movement._rb.velocity = Vector3.zero;
                 }
             }
-            else if (AttackFrame >= activeMove.m[i].startFrame && AttackFrame < activeMove.m[i].startFrame + activeMove.m[i].duration)
+            else if (frame >= activeMove.m[i].startFrame && frame < activeMove.m[i].startFrame + activeMove.m[i].duration)
             {
                 //Debug.Log($"{AttackFrame} + {i} + {activeMove.m[i].startFrame + activeMove.m[i].duration}");
                 if (!movement.ground) movement._rb.useGravity = false;
@@ -293,7 +292,7 @@ public class AttackScript : MonoBehaviour
     {
         for (int i = 0; i < activeMove.screenShake.Length; i++)
         {
-            if (attackFrames == activeMove.screenShake[i].startup && activeMove.screenShake[i].type == ScreenShakeType.OnStartup)
+            if (frame == activeMove.screenShake[i].startup && activeMove.screenShake[i].type == ScreenShakeType.OnStartup)
                 CameraManager.Instance.ShakeCamera(activeMove.screenShake[i].amplitude, activeMove.screenShake[i].duration);
         }
     }
@@ -314,11 +313,11 @@ public class AttackScript : MonoBehaviour
         hitboxes.Clear();
     }
 
-    public void ActiveFrames()
+    public void ActiveFrames(int frame)
     {
         for (int i = 0; i < activeMove.attacks.Length; i++)
         {
-            if (AttackFrame < activeMove.attacks[i].startupFrame + activeMove.attacks[i].activeFrames && AttackFrame >= activeMove.attacks[i].startupFrame)
+            if (frame < activeMove.attacks[i].startupFrame + activeMove.attacks[i].activeFrames && frame >= activeMove.attacks[i].startupFrame)
             {
                 status.GoToState(Status.State.Active);
 
@@ -352,13 +351,14 @@ public class AttackScript : MonoBehaviour
                         hitbox.move = activeMove;
                         if (activeMove.attacks[i].attackType == AttackType.Projectile)
                         {
+                            Debug.Log(frame);
                             projectiles.Add(hitboxes[i]);
                             hitboxes[i] = null;
                         }
                     }
                 }
             }
-            else if (AttackFrame > activeMove.attacks[i].startupFrame + activeMove.attacks[i].activeFrames)
+            else if (frame > activeMove.attacks[i].startupFrame + activeMove.attacks[i].activeFrames)
             {
                 if (activeMove.attacks[i].hitbox == null)
                     deactivateHitboxEvent?.Invoke(activeMove);
@@ -439,7 +439,13 @@ public class AttackScript : MonoBehaviour
         usedMoves.Add(move);
         ClearHitboxes();
 
-        if (move.resetGatling) usedMoves.Clear();
+        combo++;
+
+        if (move.resetGatling)
+        {
+            combo = 0;
+            usedMoves.Clear();
+        }
 
         if (move.type == MoveType.Movement)
         {
@@ -455,8 +461,7 @@ public class AttackScript : MonoBehaviour
         attackString = false;
         canTargetCombo = false;
         hit = false;
-        jumpCancel = false;
-        specialCancel = false;
+
         holdAttack = move.holdAttack;
         attackFrames = 0;
 
@@ -519,7 +524,6 @@ public class AttackScript : MonoBehaviour
         {
             if (move.gatlingCancel) return true;
         }
-        //       Debug.Log("no true");
         return false;
     }
 
@@ -579,14 +583,14 @@ public class AttackScript : MonoBehaviour
 
         if (!CanUseMove(c.moves[combo]))
         {
-            //Debug.Log("Can't use move");
+            Debug.Log("Can't use move");
             return false;
         }
-        else
-            Attack(c.moves[combo]);
+        //else
+        //    Attack(c.moves[combo]);
 
         AttackProperties(c.moves[combo]);
-        combo++;
+
         return true;
     }
 
@@ -659,6 +663,11 @@ public class AttackScript : MonoBehaviour
     {
         ResetAllValues();
     }
+    void DeathEvent()
+    {
+        
+    }
+
 
     public void JumpCancel()
     {
@@ -701,7 +710,6 @@ public class AttackScript : MonoBehaviour
         combo = 0;
         recoverOnlyOnLand = false;
         jumpFrameCounter = 0;
-        specialCancel = false;
         attacking = false;
         canTargetCombo = false;
         landCancel = false;

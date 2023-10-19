@@ -8,9 +8,11 @@ public class CharacterCreator : MonoBehaviour
 {
     public static CharacterCreator Instance;
     public bool liveUpdate;
+
     [TabGroup("Character Creation")] public CharacterVisualData visualData;
     [TabGroup("Character Creation")] [InlineEditor] public ColorPresetSO preset;
     [TabGroup("Character Creation")] public GameObject target;
+    [TabGroup("Components")] public List<Character> characters;
     [TabGroup("Components")] public CharacterVisuals visuals;
 
     [TabGroup("Components")] public List<ColorPresetSO> allPresets;
@@ -19,11 +21,22 @@ public class CharacterCreator : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        SaveManager.Instance.saveEvent += SaveVisuals;
+        SaveManager.Instance.loadEvent += LoadVisuals;
+
+        if (GameManager.Instance != null)
+        {
+            Debug.Log(characters[SaveManager.Instance.saveData.visualData.characterJob].moveset);
+            GameManager.Instance.playerStatus.character = characters[SaveManager.Instance.saveData.visualData.characterJob];
+            GameManager.Instance.player.GetComponent<AttackScript>().moveset = characters[SaveManager.Instance.saveData.visualData.characterJob].moveset;
+        }
     }
     private void Start()
     {
-        SaveManager.Instance.saveEvent += SaveVisuals;
-        SaveManager.Instance.loadEvent += SaveVisuals;
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.player.GetComponentInChildren<Animator>().runtimeAnimatorController = characters[SaveManager.Instance.saveData.visualData.characterJob].controller;
+        }
 
         if (!SaveManager.Instance.HasSaveData())
             RandomizeVisuals();
@@ -38,7 +51,7 @@ public class CharacterCreator : MonoBehaviour
         {
             visualData.characterJob = value;
 
-            if (visualData.characterJob >= 2)
+            if (visualData.characterJob >= 3)
                 visualData.characterJob = 0;
             if (visualData.characterJob < 0)
                 visualData.characterJob = 1;
@@ -158,7 +171,7 @@ public class CharacterCreator : MonoBehaviour
     {
         if (Application.isPlaying)
         {
-           visualData = SaveManager.Instance.saveData.visualData;
+            visualData = SaveManager.Instance.saveData.visualData;
             ApplyVisuals();
         }
     }

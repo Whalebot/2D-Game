@@ -54,7 +54,6 @@ public class CharacterVisuals : MonoBehaviour
     [Button]
     public void SetupOutfit()
     {
-        Debug.Log(visualData.colorPreset);
         if (weapons.Count > visualData.characterJob)
             weapons[visualData.characterJob].SetActive(true);
         else

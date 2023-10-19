@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     [TabGroup("Settings")] public int gold;
     [TabGroup("Settings")] public bool runNormally;
 
+    [TabGroup("Settings")] public bool flipGraphics;
     [TabGroup("Settings")] public bool showHitboxes;
     [TabGroup("Settings")] public bool showHurtboxes;
     public static float inGameTime;

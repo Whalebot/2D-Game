@@ -17,6 +17,8 @@ MonoBehaviour:
   description: 
   image: {fileID: 21300000, guid: 36d9e77a21a8cf74a97dde02584b0e14, type: 3}
   prefab: {fileID: 0}
+  controller: {fileID: 9100000, guid: b772dad1f16982e42ad216d049d76522, type: 2}
+  moveset: {fileID: 11400000, guid: 2826d0597ec5e0043902c1b26627bd60, type: 2}
   actions: []
   stats:
     currentHealth: 50
@@ -24,11 +26,15 @@ MonoBehaviour:
     currentMeter: 0
     maxMeter: 100
     level: 1
+    strength: 5
+    intelligence: 5
+    agility: 5
+    luck: 5
+    gold: 150
     attack: 5
     magic: 0
     attackSpeed: 1
     airActions: 0
-    luck: 0
     rerolls: 0
     movementSpeedModifier: 1
     meterGainModifier: 1

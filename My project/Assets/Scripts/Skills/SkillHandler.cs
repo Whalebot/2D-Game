@@ -27,7 +27,11 @@ public class SkillHandler : MonoBehaviour
         SaveManager.Instance.loadEvent += LoadData;
         DuplicateMoveset();
     }
-
+    void Start()
+    {
+        UpdateStats();
+        LateBehaviour();
+    }
     void DuplicateMoveset()
     {
         Moveset moveset = Instantiate(attackScript.moveset);
@@ -63,11 +67,7 @@ public class SkillHandler : MonoBehaviour
             }
         }
     }
-    void Start()
-    {
-        UpdateStats();
-        LateBehaviour();
-    }
+
     void ActivateBehaviour()
     {
     }
@@ -175,7 +175,8 @@ public class SkillHandler : MonoBehaviour
                     {
                         foreach (var item in temp.moves)
                         {
-                            if (item == move)
+                            Debug.Log($"{item.name} {move.name}");
+                            if (item.name == move.name)
                                 hasRequiredMove = true;
                         }
                     }

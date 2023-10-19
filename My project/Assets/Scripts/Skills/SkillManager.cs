@@ -110,6 +110,7 @@ public class SkillManager : MonoBehaviour
             //If last skill and haven't found sufficiently high skill
             if (!foundRank && i == skillButtons.Count - 1)
             {
+                Debug.Log("Pity roll");
                 switch (r)
                 {
                     case Rank.D:
@@ -161,6 +162,7 @@ public class SkillManager : MonoBehaviour
         List<SkillSO> availableSkills = new List<SkillSO>();
         foreach (var item in skillList)
         {
+            Debug.Log(item);
             if (!foundSkills.Contains(item) && !activeSkills.Contains(item) && skillHandler.CanGetSkill(item))
                 availableSkills.Add(item);
         }

@@ -127,8 +127,6 @@ public class Hitbox : MonoBehaviour
     void ExecuteBlock(HitProperty hit, Status other, Attack atk)
     {
         attack.hit = true;
-        attack.specialCancel = move.specialCancelOnBlock;
-        attack.jumpCancel = move.jumpCancelOnBlock;
 
         //Block FX
         if (move.blockFX != null)
@@ -171,8 +169,6 @@ public class Hitbox : MonoBehaviour
     void ExecuteHit(HitProperty hit, Status other, Attack atk)
     {
         attack.hit = true;
-        attack.specialCancel = move.specialCancelOnHit;
-        attack.jumpCancel = move.jumpCancelOnHit;
 
         attack.attackHitEvent?.Invoke(move);
 
@@ -189,6 +185,9 @@ public class Hitbox : MonoBehaviour
 
         int rng = Random.Range(1, 101);
         bool crit = false;
+
+
+
         if (rng <= status.currentStats.critChance * 100)
         {
             crit = true;
@@ -201,7 +200,11 @@ public class Hitbox : MonoBehaviour
             totalDamage = (int)(baseDamage * (atk.damage * status.currentStats.damageModifierPercentage * status.Attack) + status.currentStats.damageModifierFlat);
 
         }
-
+        //BACKSTAB
+        if (Mathf.Sign(status.transform.localScale.x) == Mathf.Sign(other.transform.localScale.x))
+        {
+            totalDamage = (int)(totalDamage * (1 + status.currentStats.backstabModifier));
+        }
         int damageDealt = Mathf.RoundToInt(totalDamage - other.currentStats.resistance);
 
 

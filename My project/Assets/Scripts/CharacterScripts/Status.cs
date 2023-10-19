@@ -184,12 +184,12 @@ public class Status : MonoBehaviour
 
     public void EnableCollider()
     {
-
-        col.gameObject.layer = LayerMask.NameToLayer("Collision");
+        if (!isDead)
+            col.gameObject.layer = LayerMask.NameToLayer("Collision");
     }
     public void DisableCollider()
     {
-
+        if(!isDead)
         col.gameObject.layer = LayerMask.NameToLayer("Noclip");
         //Debug.Log(LayerMask.LayerToName(col.gameObject.layer));
     }
@@ -490,8 +490,13 @@ public class Status : MonoBehaviour
     public void Death()
     {
         isDead = true;
+
         deathEvent?.Invoke();
-        if (autoDeath) StartCoroutine("DelayDeath");
+        invincible = true;
+        hurtbox.enabled = false;
+        col.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+        Debug.Log(col.gameObject.layer);
+        if (autoDeath) StartCoroutine(DelayDeath());
     }
 
     IEnumerator DelayDeath()

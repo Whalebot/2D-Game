@@ -74,14 +74,6 @@ public class Move : ScriptableObject
     [TabGroup("Cancel properties")] public bool gatlingCancel = false;
     [TabGroup("Cancel properties")] public bool uncancelable = false;
 
-
-    [TabGroup("Cancel properties")] public bool gatlingCancelOnBlock = true;
-    [TabGroup("Cancel properties")] public bool gatlingCancelOnHit = true;
-    [TabGroup("Cancel properties")] public bool jumpCancelOnBlock;
-    [TabGroup("Cancel properties")] public bool jumpCancelOnHit = true;
-    [TabGroup("Cancel properties")] public bool specialCancelOnBlock = true;
-    [TabGroup("Cancel properties")] public bool specialCancelOnHit = true;
-
     [TabGroup("Air properties")] public bool useAirAction;
     [TabGroup("Air properties")] public bool landCancel;
     [TabGroup("Air properties")] public bool recoverOnlyOnLand;

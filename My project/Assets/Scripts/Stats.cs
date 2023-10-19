@@ -11,11 +11,17 @@ public class Stats
     [TabGroup("Stats")] public int currentMeter = 0;
     [TabGroup("Stats")] public int maxMeter = 0;
     [TabGroup("Stats")] public int level = 1;
+    [TabGroup("Stats")] public int strength = 0;
+    [TabGroup("Stats")] public int intelligence = 0;
+    [TabGroup("Stats")] public int agility = 0;
+    [TabGroup("Stats")] public int luck = 0;
+    [TabGroup("Stats")] public int gold = 0;
+
     [TabGroup("Stats")] public int attack;
     [TabGroup("Stats")] public int magic;
     [TabGroup("Stats")] public float attackSpeed = 1;
     [TabGroup("Stats")] public int airActions = 1;
-    [TabGroup("Stats")] public int luck = 0;
+
     [TabGroup("Stats")] public int rerolls = 0;
 
     [Header("Modifiers")]
@@ -29,6 +35,7 @@ public class Stats
     [FoldoutGroup("Modifiers")] public float guardBreakModifier = 1;
     [FoldoutGroup("Modifiers")] public float sizeModifier = 1;
     [FoldoutGroup("Modifiers")] public float damageModifierPercentage = 1;
+    [FoldoutGroup("Modifiers")] public float backstabModifier = 0;
     [FoldoutGroup("Modifiers")] public int damageModifierFlat = 0;
     [FoldoutGroup("Modifiers")] public float hitStunMultiplier = 1;
     [FoldoutGroup("Modifiers")] public float knockbackModifier = 1;

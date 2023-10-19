@@ -22,6 +22,8 @@ public class Character : ScriptableObject
     [HorizontalGroup("Game Data", 75)]
     [PreviewField(75)]
     public GameObject prefab;
+    public RuntimeAnimatorController controller;
+    public Moveset moveset; 
 
     [InlineEditor] public List<AIAction> actions;
     [HideLabel] public Stats stats;

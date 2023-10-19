@@ -32,8 +32,8 @@ public class AI : MonoBehaviour
     [TabGroup("Pathfinding")] [HideInInspector] public float cornerMinDistance;
     [TabGroup("Pathfinding")] public float minDistance;
     private bool hasValidPath;
-    [TabGroup("Pathfinding")] private float elapsed = 0.0f;
-    [TabGroup("Pathfinding")] public float pathUpdateTime;
+    [TabGroup("Pathfinding")] public int elapsed = 0;
+    [TabGroup("Pathfinding")] public int pathUpdateTime;
     public delegate void AIEvent();
     [TabGroup("Pathfinding")] public AIEvent detectEvent;
     [TabGroup("Pathfinding")] public float detectionDelay = 0.5F;
@@ -166,6 +166,7 @@ public class AI : MonoBehaviour
     private void ExecuteFrame()
     {
         DetectionEvent();
+        CalculatePath();
         if (status.NonAttackState())
             if (!InCooldown() && detected || ReachedNewDistance())
             {
@@ -421,9 +422,10 @@ public class AI : MonoBehaviour
     #region Pathfinding
     void CalculatePath()
     {
-        elapsed += Time.deltaTime;
-        if (elapsed > pathUpdateTime && currentTarget != null)
+        elapsed++;
+        if (elapsed > pathUpdateTime && target != null)
         {
+            currentTarget = target.position;
             reachedCorner = 0;
             elapsed -= pathUpdateTime;
         }
@@ -431,9 +433,9 @@ public class AI : MonoBehaviour
 
     public Vector3 FindPath()
     {
-        CalculatePath();
+        //CalculatePath();
 
-        directionVector = (target.position - transform.position).normalized;
+        directionVector = (currentTarget - transform.position).normalized;
         //if (path.corners.Length > 1)
         //{
         //    directionVector = (path.corners[reachedCorner + 1] - path.corners[reachedCorner]).normalized;
@@ -452,17 +454,18 @@ public class AI : MonoBehaviour
         //    }
         //}
 
-        foreach (var item in AIManager.Instance.allEnemies)
-        {
-            if (item != this)
-            {
-                float f = Vector3.Distance(transform.position, item.transform.position);
-                if (f < crowdRange && f != 0)
-                {
-                    directionVector += (transform.position - item.transform.position).normalized * (1 - (f / crowdRange));
-                }
-            }
-        }
+        //foreach (var item in AIManager.Instance.allEnemies)
+        //{
+        //    if (item != this)
+        //    {
+        //        float f = Vector3.Distance(transform.position, item.transform.position);
+        //        if (f < crowdRange && f != 0)
+        //        {
+        //            directionVector += (transform.position - item.transform.position).normalized * (1 - (f / crowdRange));
+        //        }
+        //    }
+        //}
+
         if (Mathf.Abs(directionVector.x) > 0)
             movement.isMoving = true;
         return directionVector;

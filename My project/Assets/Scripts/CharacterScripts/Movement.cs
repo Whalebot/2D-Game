@@ -77,6 +77,7 @@ public class Movement : MonoBehaviour
         status = GetComponent<Status>();
         status.neutralEvent += Neutral;
         status.statEvent += InitializeMovement;
+        status.deathEvent += DeathEvent;
 
 
         InitializeMovement();
@@ -90,10 +91,19 @@ public class Movement : MonoBehaviour
         if (ground)
             status.col.material = groundMat;
     }
+
     private void OnDisable()
     {
         GameManager.Instance.advanceGameState -= ExecuteFrame;
+        status.neutralEvent -= Neutral;
+        status.statEvent -= InitializeMovement;
+        status.deathEvent -= DeathEvent;
     }
+    void DeathEvent()
+    {
+
+    }
+
     void ExecuteFrame()
     {
         vel = _rb.velocity;
@@ -161,6 +171,8 @@ public class Movement : MonoBehaviour
         if (isMoving)
             if (direction != Vector3.zero)
             {
+                if (GameManager.Instance.flipGraphics)
+                    transform.localScale = new Vector3(Mathf.Sign(direction.x), 1, 1);
                 //Desired rotation, updated every (fixed) frame
                 Quaternion desiredRotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, new Vector3(direction.x, 0, direction.z), Vector3.up), 0);
                 transform.rotation = desiredRotation;

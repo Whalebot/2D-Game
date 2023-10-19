@@ -8,14 +8,17 @@ using Sirenix.OdinInspector;
 public class HubMenu : MonoBehaviour
 {
     public Animator animator;
-    public List<RuntimeAnimatorController> animatorControllers;
-    public List<Character> characters;
     [TabGroup("Components")] public Image classImage;
     [TabGroup("Components")] public TextMeshProUGUI classText;
     [TabGroup("Components")] public TextMeshProUGUI colorNumber;
     [TabGroup("Components")] public TextMeshProUGUI hairNumber;
     [TabGroup("Components")] public TextMeshProUGUI topNumber;
     [TabGroup("Components")] public TextMeshProUGUI bottomNumber;
+    [TabGroup("Components")] public TextMeshProUGUI strengthStat;
+    [TabGroup("Components")] public TextMeshProUGUI agilityStat;
+    [TabGroup("Components")] public TextMeshProUGUI intStat;
+    [TabGroup("Components")] public TextMeshProUGUI luckStat;
+    [TabGroup("Components")] public TextMeshProUGUI gold;
     [TabGroup("Components")] public Button colorPlusButton;
     [TabGroup("Components")] public Button colorMinusButton;
     [TabGroup("Components")] public Button hairPlusButton;
@@ -39,12 +42,20 @@ public class HubMenu : MonoBehaviour
         BottomRemoveButton.onClick.AddListener(() => ChangeBottom(false));
         classPlusButton.onClick.AddListener(() => ChangeClass(true));
         classRemoveButton.onClick.AddListener(() => ChangeClass(false));
+
+        animator.runtimeAnimatorController = CharacterCreator.Instance.characters[CharacterCreator.Instance.Class].controller;
     }
 
     private void FixedUpdate()
     {
-        classImage.sprite = characters[CharacterCreator.Instance.visualData.characterJob].image;
-        classText.text = "" + characters[CharacterCreator.Instance.visualData.characterJob].characterName;
+        classImage.sprite = CharacterCreator.Instance.characters[CharacterCreator.Instance.visualData.characterJob].image;
+        strengthStat.text = "" +  CharacterCreator.Instance.characters[CharacterCreator.Instance.visualData.characterJob].stats.strength;
+        agilityStat.text = "" + CharacterCreator.Instance.characters[CharacterCreator.Instance.visualData.characterJob].stats.agility;
+        intStat.text = "" + CharacterCreator.Instance.characters[CharacterCreator.Instance.visualData.characterJob].stats.intelligence;
+        luckStat.text = "" + CharacterCreator.Instance.characters[CharacterCreator.Instance.visualData.characterJob].stats.luck;
+        gold.text = "" + CharacterCreator.Instance.characters[CharacterCreator.Instance.visualData.characterJob].stats.gold;
+
+        classText.text = "" + CharacterCreator.Instance.characters[CharacterCreator.Instance.visualData.characterJob].characterName;
         colorNumber.text = "" + CharacterCreator.Instance.visualData.colorPreset;
         hairNumber.text = "" + CharacterCreator.Instance.visualData.hairID;
         topNumber.text = "" + CharacterCreator.Instance.visualData.topID;
@@ -64,7 +75,7 @@ public class HubMenu : MonoBehaviour
         else
             CharacterCreator.Instance.Class--;
 
-        animator.runtimeAnimatorController = animatorControllers[CharacterCreator.Instance.Class];
+        animator.runtimeAnimatorController = CharacterCreator.Instance.characters[CharacterCreator.Instance.Class].controller;
     }
     public void ChangeColor(bool add)
     {

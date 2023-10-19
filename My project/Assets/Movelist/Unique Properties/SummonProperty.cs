@@ -8,10 +8,9 @@ public class SummonProperty : MoveUniqueProperty
     public GameObject summon;
     public Vector3 offset;
 
-    public override void OnStartupFrame(AttackScript atk)
+    public override void OnStartupFrame(AttackScript atk, int frame)
     {
-        base.OnStartupFrame(atk);
-        Debug.Log($"Summon slimé at {atk.AttackFrame}");
+        base.OnStartupFrame(atk, frame);
         Instantiate(summon, atk.transform.position + atk.transform.forward * offset.z + atk.transform.right * offset.x + atk.transform.up* offset.y, atk.transform.rotation);
     }
 

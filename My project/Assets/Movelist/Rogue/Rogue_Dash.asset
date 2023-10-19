@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
+  m_Name: Rogue_Dash
+  m_EditorClassIdentifier: 
+  animationID: 100
+  meterCost: 0
+  meterGain: 10
+  icon: {fileID: 0}
+  firstStartupFrame: 15
+  lastActiveFrame: 15
+  totalMoveDuration: 20
+  firstGatlingFrame: 15
+  recoveryFrames: 5
+  attacks: []
+  type: 0
+  uniqueProperties: []
+  screenShake: []
+  vfx:
+  - startup: 3
+    prefab: {fileID: 107242, guid: 4f01e09274ab093448d46ac4916288cf, type: 3}
+    deattachFromPlayer: 1
+    destroyOnRecovery: 0
+    position: {x: 0, y: 0.2, z: 0}
+    rotation: {x: 0, y: 180, z: 0}
+    scale: {x: 0.5, y: 0.5, z: 0.5}
+  sfx: []
+  hitFX:
+    startup: 1
+    prefab: {fileID: 0}
+    deattachFromPlayer: 1
+    destroyOnRecovery: 0
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+  blockFX: {fileID: 0}
+  counterhitFX: {fileID: 0}
+  hitSFX: {fileID: 0}
+  blockSFX: {fileID: 0}
+  counterhitSFX: {fileID: 0}
+  useAttackSpeed: 1
+  keepVelocity: 0
+  particleID: 0
+  holdAttack: 0
+  autoAim: 0
+  armor: 0
+  resetGatling: 0
+  hitsGroundOnly: 0
+  noClip: 1
+  noClipStart: 1
+  noClipDuration: 12
+  invincible: 1
+  invincibleStart: 1
+  invincibleDuration: 12
+  projectileInvul: 0
+  projectileInvulStart: 1
+  projectileInvulDuration: 0
+  airInvul: 0
+  airInvulStart: 1
+  airInvulDuration: 0
+  targetComboMoves:
+  - {fileID: 11400000, guid: df1073dd76b4ed643a3cd6d80673bcfa, type: 2}
+  fullCancel: 0
+  gatlingCancel: 1
+  uncancelable: 0
+  useAirAction: 0
+  landCancel: 0
+  recoverOnlyOnLand: 0
+  m:
+  - startFrame: 3
+    duration: 2
+    momentum: {x: 20, y: 0}
+    freeMovement: 0
+    homing: 0
+    resetVelocityDuringRecovery: 0
+  - startFrame: 12
+    duration: 1
+    momentum: {x: 5, y: 0}
+    freeMovement: 0
+    homing: 0
+    resetVelocityDuringRecovery: 0
+  instantStartupRotation: 1
+  overrideVelocity: 1
+  runMomentum: 0

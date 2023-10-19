@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rogue_j5C
   m_EditorClassIdentifier: 
   animationID: 12
-  meterCost: 50
+  meterCost: 0
   meterGain: 10
   icon: {fileID: 0}
   firstStartupFrame: 10
@@ -46,7 +46,7 @@ MonoBehaviour:
   uniqueProperties: []
   screenShake:
   - type: 0
-    startup: 10
+    startup: 2
     amplitude: 5
     duration: 2
   vfx:
@@ -78,6 +78,7 @@ MonoBehaviour:
   autoAim: 0
   armor: 0
   resetGatling: 0
+  hitsGroundOnly: 0
   noClip: 1
   noClipStart: 1
   noClipDuration: 100
@@ -94,25 +95,19 @@ MonoBehaviour:
   fullCancel: 1
   gatlingCancel: 0
   uncancelable: 0
-  gatlingCancelOnBlock: 0
-  gatlingCancelOnHit: 0
-  jumpCancelOnBlock: 0
-  jumpCancelOnHit: 0
-  specialCancelOnBlock: 0
-  specialCancelOnHit: 0
   useAirAction: 0
   landCancel: 0
   recoverOnlyOnLand: 1
   m:
-  - startFrame: 10
-    duration: 100
-    momentum: {x: 25, y: -20}
-    freeMovement: 0
-    homing: 0
-    resetVelocityDuringRecovery: 0
   - startFrame: 1
     duration: 9
     momentum: {x: -2, y: 2}
+    freeMovement: 0
+    homing: 0
+    resetVelocityDuringRecovery: 0
+  - startFrame: 10
+    duration: 100
+    momentum: {x: 25, y: -20}
     freeMovement: 0
     homing: 0
     resetVelocityDuringRecovery: 0

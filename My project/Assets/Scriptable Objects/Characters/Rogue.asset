@@ -15,8 +15,10 @@ MonoBehaviour:
   characterName: Rogue
   subTitle: 
   description: 
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 8dae7d3945db11a438c5a02650f0e7ef, type: 3}
   prefab: {fileID: 0}
+  controller: {fileID: 22100000, guid: a89189f3b3bc8ac44bcd63fe2e529ed9, type: 2}
+  moveset: {fileID: 11400000, guid: 3188588abb03fea4f93c3f80ef360ef0, type: 2}
   actions: []
   stats:
     currentHealth: 50
@@ -24,13 +26,17 @@ MonoBehaviour:
     currentMeter: 0
     maxMeter: 100
     level: 1
-    attack: 5
+    strength: 3
+    intelligence: 5
+    agility: 7
+    luck: 6
+    gold: 100
+    attack: 4
     magic: 0
     attackSpeed: 1
-    airActions: 0
-    luck: 0
+    airActions: 1
     rerolls: 0
-    movementSpeedModifier: 1
+    movementSpeedModifier: 1.1
     meterGainModifier: 1
     poiseRegen: 0
     poise: 0
@@ -38,10 +44,11 @@ MonoBehaviour:
     resistance: 0
     guardBreakModifier: 1
     sizeModifier: 1
-    damageModifierPercentage: 1
+    damageModifierPercentage: 0.5
+    backstabModifier: 0.5
     damageModifierFlat: 0
     hitStunMultiplier: 1
     knockbackModifier: 1
-    critChance: 0.1
-    critMultiplier: 1.5
+    critChance: 0.25
+    critMultiplier: 1.75
   skills: []

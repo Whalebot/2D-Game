@@ -9,7 +9,7 @@ public class MoveUniqueProperty : ScriptableObject
 
     [HideIf("@propertyType != UniquePropertyType.StartupFrame")] public int frame;
 
-    public virtual void OnStartupFrame(AttackScript atk)
+    public virtual void OnStartupFrame(AttackScript atk, int frame)
     {
         if (propertyType != UniquePropertyType.StartupFrame) return;
     }

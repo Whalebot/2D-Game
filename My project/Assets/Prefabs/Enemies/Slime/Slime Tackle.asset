@@ -84,12 +84,6 @@ MonoBehaviour:
   fullCancel: 0
   gatlingCancel: 0
   uncancelable: 0
-  gatlingCancelOnBlock: 1
-  gatlingCancelOnHit: 1
-  jumpCancelOnBlock: 0
-  jumpCancelOnHit: 1
-  specialCancelOnBlock: 1
-  specialCancelOnHit: 1
   useAirAction: 0
   landCancel: 0
   recoverOnlyOnLand: 0
@@ -102,7 +96,7 @@ MonoBehaviour:
     resetVelocityDuringRecovery: 0
   - startFrame: 35
     duration: 2
-    momentum: {x: 10, y: 0}
+    momentum: {x: 15, y: 0}
     freeMovement: 0
     homing: 0
     resetVelocityDuringRecovery: 0
