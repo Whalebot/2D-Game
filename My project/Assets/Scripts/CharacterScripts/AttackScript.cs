@@ -351,7 +351,6 @@ public class AttackScript : MonoBehaviour
                         hitbox.move = activeMove;
                         if (activeMove.attacks[i].attackType == AttackType.Projectile)
                         {
-                            Debug.Log(frame);
                             projectiles.Add(hitboxes[i]);
                             hitboxes[i] = null;
                         }

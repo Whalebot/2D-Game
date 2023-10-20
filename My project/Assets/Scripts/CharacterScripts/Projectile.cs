@@ -144,19 +144,25 @@ public class Projectile : Hitbox
         bool foundTarget = false;
         colPos = other.gameObject.transform;
         Projectile proj = other.GetComponentInParent<Projectile>();
+        Hitbox hitbox = other.GetComponent<Hitbox>();
+
+        if (proj != null || hitbox != null)
+        {
+            foundTarget = true;
+        }
+
         if (proj != null && destroyOnProjectileClash && proj.status != status)
         {
             life--;
-            foundTarget = true;
+         
             DestroyProjectile();
             return;
         }
 
-        Hitbox hitbox = other.GetComponent<Hitbox>();
+
         if (hitbox != null && destroyOnHitboxClash && hitbox.status != status)
         {
             life--;
-            foundTarget = true;
             DestroyProjectile();
             return;
         }

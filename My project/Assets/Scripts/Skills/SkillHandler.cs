@@ -36,11 +36,28 @@ public class SkillHandler : MonoBehaviour
     {
         Moveset moveset = Instantiate(attackScript.moveset);
         moveset.name = attackScript.moveset.name;
-        Combo skillCombo = Instantiate(moveset.skillCombo);
-        skillCombo.name = moveset.skillCombo.name;
-        moveset.skillCombo = skillCombo;
+        DuplicateCombos(moveset);
         attackScript.moveset = moveset;
     }
+    void DuplicateCombos(Moveset moveset) {
+        Moveset def1 = moveset;
+        FieldInfo[] defInfo1 = def1.GetType().GetFields();
+
+        for (int i = 0; i < defInfo1.Length; i++)
+        {
+            object obj = def1;
+            object var1 = defInfo1[i].GetValue(obj);
+
+            if (var1 is Combo)
+            {
+                Combo tempCombo = (Combo)var1;
+                Combo newCombo = Instantiate(tempCombo);
+                newCombo.name = tempCombo.name;
+                defInfo1[i].SetValue(obj, newCombo);
+            }
+        }
+    }
+
     public void ReplaceMove(Move newMove, Move oldMove)
     {
         Moveset def1 = attackScript.moveset;
@@ -123,16 +140,11 @@ public class SkillHandler : MonoBehaviour
         modifiedStats.ResetValues();
         foreach (SkillSO skill in learnedSkills)
         {
-            if (skill.type == SkillType.Passive)
+            if (skill.type != SkillType.Active)
                 CalculateSkillStats(skill);
         }
         ApplySkillEffects();
         status.UpdateStats();
-    }
-
-    void UpdateSkillSlot()
-    {
-
     }
 
     public void SkillLevelUI(Skill skill)
@@ -190,6 +202,11 @@ public class SkillHandler : MonoBehaviour
     }
     public void LearnSkill(SkillSO skill)
     {
+        if (skill == null)
+        {
+            Debug.Log("null skill");
+            return;
+        }
         if (skill != null)
         {
             learnedSkills.Add(skill);
@@ -199,14 +216,14 @@ public class SkillHandler : MonoBehaviour
         {
             foreach (var item in skill.newMoves)
             {
-                GetCombo(item.combo).moves.Add(item.move);
+                if (item.combo != null)
+                    GetCombo(item.combo).moves.Add(item.move);
             }
 
         }
 
         expEvent?.Invoke();
         lvlEvent?.Invoke();
-        UpdateSkillSlot();
         UpdateStats();
         LateBehaviour();
     }
@@ -291,7 +308,14 @@ public class SkillHandler : MonoBehaviour
             if (var1 is int)
             {
                 if ((int)var2 != 0)
-                    defInfo1[i].SetValue(obj, (int)var3 + (int)var2);
+                {
+                    if (defInfo1[i].Name == "currentHealth" || defInfo1[i].Name == "currentMeter")
+                    {
+                        defInfo1[i].SetValue(obj, (int)var1 + (int)var2);
+                    }
+                    else
+                        defInfo1[i].SetValue(obj, (int)var3 + (int)var2);
+                }
             }
             else if (var1 is float)
             {

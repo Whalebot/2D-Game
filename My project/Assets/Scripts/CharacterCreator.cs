@@ -54,7 +54,7 @@ public class CharacterCreator : MonoBehaviour
             if (visualData.characterJob >= 3)
                 visualData.characterJob = 0;
             if (visualData.characterJob < 0)
-                visualData.characterJob = 1;
+                visualData.characterJob = 2;
 
             ApplyVisuals();
         }

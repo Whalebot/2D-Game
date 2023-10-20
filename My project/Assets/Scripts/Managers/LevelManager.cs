@@ -52,8 +52,15 @@ public class LevelManager : MonoBehaviour
 
     public string NextLevelName(RoomTypes roomType)
     {
+        if (roomType == RoomTypes.Boss)
+        {
+            if (currentLevel > 6)
+                return sceneObjects[sceneObjects.Count - 1].sceneName;
+        }
         if ((int)roomType >= sceneObjects.Count) return "";
+
         return sceneObjects[(int)roomType].sceneName;
+
         //switch (roomType)
         //{
         //    case RoomTypes.Normal:

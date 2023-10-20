@@ -126,6 +126,22 @@ public class PlayerInputHandler : MonoBehaviour
             return attack.ComboAttack(attack.moveset.airHeavyCombo);
         }
     }
+    bool UpNorthButton()
+    {
+        return attack.ComboAttack(attack.moveset.upHeavyCombo);
+    }
+    bool DownNorthButton()
+    {
+        if (mov.ground)
+        {
+            return attack.ComboAttack(attack.moveset.downHeavyCombo);
+        }
+        else
+        {
+            return attack.ComboAttack(attack.moveset.downAirHeavyCombo);
+        }
+      
+    }
 
     bool SouthButton()
     {
@@ -167,6 +183,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         return attack.ComboAttack(attack.moveset.downSkillCombo);
     }
+
     bool R1Button()
     {
         if (mov.ground)
@@ -195,6 +212,23 @@ public class PlayerInputHandler : MonoBehaviour
                     }
                     break;
                 case 2:
+
+                    if (input.bufferedInputs[i].dir == 8)
+                    {
+                        if (UpNorthButton())
+                        {
+                            DeleteInputs(i);
+                            break;
+                        }
+                    }
+                    if (input.bufferedInputs[i].dir == 2)
+                    {
+                        if (DownNorthButton())
+                        {
+                            DeleteInputs(i);
+                            break;
+                        }
+                    }
                     if (NorthButton())
                     {
                         DeleteInputs(i);

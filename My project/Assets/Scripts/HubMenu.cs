@@ -49,7 +49,7 @@ public class HubMenu : MonoBehaviour
     private void FixedUpdate()
     {
         classImage.sprite = CharacterCreator.Instance.characters[CharacterCreator.Instance.visualData.characterJob].image;
-        strengthStat.text = "" +  CharacterCreator.Instance.characters[CharacterCreator.Instance.visualData.characterJob].stats.strength;
+        strengthStat.text = "" + CharacterCreator.Instance.characters[CharacterCreator.Instance.visualData.characterJob].stats.strength;
         agilityStat.text = "" + CharacterCreator.Instance.characters[CharacterCreator.Instance.visualData.characterJob].stats.agility;
         intStat.text = "" + CharacterCreator.Instance.characters[CharacterCreator.Instance.visualData.characterJob].stats.intelligence;
         luckStat.text = "" + CharacterCreator.Instance.characters[CharacterCreator.Instance.visualData.characterJob].stats.luck;
@@ -64,8 +64,10 @@ public class HubMenu : MonoBehaviour
     public void StartGame()
     {
         SaveManager.Instance.DeleteData();
-        SaveManager.Instance.saveData.health = 50;
-        
+        SaveManager.Instance.saveData.health = CharacterCreator.Instance.characters[CharacterCreator.Instance.Class].stats.maxHealth;
+        SaveManager.Instance.saveData.gold = CharacterCreator.Instance.characters[CharacterCreator.Instance.Class].stats.gold;
+
+
         TransitionManager.Instance.LoadScene(1);
     }
     public void ChangeClass(bool add)

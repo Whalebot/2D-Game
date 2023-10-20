@@ -14,8 +14,6 @@ public class SkillSO : ScriptableObject
     public List<SkillSO> prerequisiteSkills;
     public List<Move> prerequisiteMoves;
     public List<NewMove> newMoves;
-    public Move upgradedMove;
-    public Move oldMove;
 
     [TextArea(15, 20)]
     public string description;
@@ -28,8 +26,17 @@ public class SkillSO : ScriptableObject
     }
     public virtual void LateBehaviour(SkillHandler handler)
     {
-        if (upgradedMove != null)
-            handler.ReplaceMove(upgradedMove, oldMove);
+        if (newMoves.Count > 0)
+        {
+ 
+            foreach (var item in newMoves)
+            {
+                if (item.oldMove != null)
+                    handler.ReplaceMove(item.move, item.oldMove);
+            }
+
+        }
+
     }
     public virtual void RepeatBehaviour(SkillHandler handler)
     {
@@ -59,8 +66,10 @@ public class SkillSO : ScriptableObject
 }
 [System.Serializable]
 public class NewMove {
-    public Move move;
+    public Move move; 
     public Combo combo;
+    public Move oldMove;
+
 }
 
 public enum Rank { D, C, B, A, S }
