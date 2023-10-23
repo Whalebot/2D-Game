@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        goldText.text = "" + GameManager.Instance.gold;
+        goldText.text = "" + GameManager.Instance.Gold;
         rerollButton.interactable = GameManager.Instance.playerStatus.currentStats.rerolls > 0;
         rerollText.text = "x" + GameManager.Instance.playerStatus.currentStats.rerolls;
     }

@@ -426,6 +426,7 @@ MonoBehaviour:
     guardBreakModifier: 1
     sizeModifier: 1
     damageModifierPercentage: 1
+    backstabModifier: 0
     damageModifierFlat: 1
     hitStunMultiplier: 1
     knockbackModifier: 1
@@ -458,6 +459,7 @@ MonoBehaviour:
     guardBreakModifier: 1
     sizeModifier: 1
     damageModifierPercentage: 1
+    backstabModifier: 0
     damageModifierFlat: 1
     hitStunMultiplier: 1
     knockbackModifier: 1
@@ -488,6 +490,7 @@ MonoBehaviour:
     guardBreakModifier: 1
     sizeModifier: 1
     damageModifierPercentage: 1
+    backstabModifier: 0
     damageModifierFlat: 1
     hitStunMultiplier: 1
     knockbackModifier: 1
@@ -512,9 +515,6 @@ MonoBehaviour:
   parryStun: 0
   hurtbox: {fileID: 6518288294775173801}
   col: {fileID: 6518288294043987327}
-  deathMask:
-    serializedVersion: 2
-    m_Bits: 4
   godMode: 0
   regenStamina: 0
 --- !u!114 &763658823407521956
@@ -549,16 +549,19 @@ MonoBehaviour:
   groundRayLength: 0.2
   frontGroundRayLength: 0.3
   preLandRayLength: 0.3
+  groundFrontOffset: 0
+  checkEdgeOffset: 0.15
+  groundBackOffset: 0.15
   groundMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 2049
   wallMask:
     serializedVersion: 2
     m_Bits: 0
   wallSideOffset: 0
-  groundFrontOffset: 0
   check: 0
   check2: 0
+  checkEdge: 0
   stepHeight: 0
   stepAngle: 0
   stepRayLength: 0
@@ -570,6 +573,9 @@ MonoBehaviour:
   performedJumps: 0
   airDeceleration: 0.95
   airBrake: 0.8
+  passthroughPlatforms: 0
+  passthroughDuration: 0
+  passthroughCounter: 0
   zeroFloat: 0
   groundMat: {fileID: 13400000, guid: 28f1549acb295c149bce7b9fbc74c3eb, type: 2}
   airMat: {fileID: 13400000, guid: 04b4f29578986a244b8769d6c889f68a, type: 2}
@@ -616,7 +622,8 @@ MonoBehaviour:
   directionVector: {x: 0, y: 0, z: 0}
   cornerMinDistance: 0
   minDistance: 1
-  pathUpdateTime: 0.5
+  elapsed: 0
+  pathUpdateTime: 0
   detectionDelay: 0.5
   detectionSpread: 5
   enemyMask:

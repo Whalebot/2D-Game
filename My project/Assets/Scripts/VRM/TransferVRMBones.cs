@@ -7,6 +7,7 @@ using Sirenix.OdinInspector;
 
 public class TransferVRMBones : MonoBehaviour
 {
+    public string hairTranslation;
     public VRMSpringBone[] springBones;
     public Transform root;
 
@@ -20,6 +21,15 @@ public class TransferVRMBones : MonoBehaviour
     void GetAllSpringBones()
     {
         springBones = GetComponentsInChildren<VRMSpringBone>();
+    }
+    [Button]
+    void ChangeCenter()
+    {
+
+        foreach (VRMSpringBone item in springBones)
+        {
+            item.m_center = transform;
+        }
     }
 
     [Button]
@@ -63,6 +73,7 @@ public class TransferVRMBones : MonoBehaviour
 
                 }
             }
+            ChangeCenter();
         }
     }
 
@@ -79,9 +90,9 @@ public class TransferVRMBones : MonoBehaviour
         if (s.Contains("R_UpperLeg")) return "Right leg";
         if (s.Contains("L_Hand")) return "Left wrist";
         if (s.Contains("R_Hand")) return "Right wrist";
-        if (s.Contains("UpperChest")) return "Upper Chest";
-                 
-               
+        if (s.Contains("UpperChest")) { Debug.Log("chest"); return "Upper Chest"; }
+
+
         if (s.Contains("J_Bip_C_"))
         {
             temp = temp.Replace("J_Bip_C_", "");
@@ -160,6 +171,12 @@ public class TransferVRMBones : MonoBehaviour
 
     string ReturnStringName(string s)
     {
+        string temp = s;
+        if (s.Contains("J_Sec_Hair"))
+        {
+            temp = temp.Replace("J_Sec_Hair", hairTranslation);
+            return temp;
+        }
         if (s.Contains("L_Bust1")) return "Breast_L";
         if (s.Contains("R_Bust1")) return "Breast_R";
 

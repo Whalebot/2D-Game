@@ -65,7 +65,7 @@ public class ShopButton : MonoBehaviour
         }
 
         priceText.text = "" + price;
-        if (price > GameManager.Instance.gold)
+        if (price > GameManager.Instance.Gold)
             priceText.color = Color.red;
 
         titleText.text = skillSO.title;
@@ -77,9 +77,9 @@ public class ShopButton : MonoBehaviour
 
     public void BuySkill()
     {
-        if (GameManager.Instance.gold > price)
+        if (GameManager.Instance.Gold > price)
         {
-            GameManager.Instance.gold -= price;
+            GameManager.Instance.Gold -= price;
             skillManager.GetSkill(skillSO);
             gameObject.SetActive(false);
         }

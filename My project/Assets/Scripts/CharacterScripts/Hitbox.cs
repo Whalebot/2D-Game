@@ -46,17 +46,7 @@ public class Hitbox : MonoBehaviour
         colPos = other.gameObject.transform;
 
         if (attack.landCancelFrame) return;
-        //if (hitbox != null && canClash)
-        //{
-        //    if (hitbox.GetType() == typeof(Projectile)) return;
-        //    if (status == enemyStatus || status.alignment == enemyStatus.alignment) return;
-        //    if (CheckInvul(enemyStatus) && hitbox.CheckInvul(status))
-        //    {
-        //        Clash(enemyStatus);
-        //        return;
-        //    }
-        //}
-        //else 
+
         if (enemyStatus != null)
         {
             if (status == enemyStatus || status.alignment == enemyStatus.alignment) return;
@@ -205,7 +195,7 @@ public class Hitbox : MonoBehaviour
         {
             totalDamage = (int)(totalDamage * (1 + status.currentStats.backstabModifier));
         }
-        int damageDealt = Mathf.RoundToInt(totalDamage - other.currentStats.resistance);
+        int damageDealt = Mathf.RoundToInt((totalDamage * (1 - other.currentStats.defense)) - other.currentStats.resistance);
 
 
         if (damageDealt <= 0)

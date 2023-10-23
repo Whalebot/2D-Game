@@ -4,10 +4,11 @@ public class Projectile : Hitbox
 {
     public enum ProjectileMovement
     {
-        Linear, Homing
+        Linear, Homing, SpawnOnTarget
     }
 
     public ProjectileMovement projectileMovement;
+    public Vector3 targetPosition;
     public Transform target;
 
     bool isDestroying;
@@ -15,10 +16,18 @@ public class Projectile : Hitbox
     [TabGroup("Settings")] public int life;
     [TabGroup("Settings")] public int lifetime;
     [TabGroup("Settings")] public float velocity;
+
+    [TabGroup("Settings")] public bool willDelayReaim;
+    [TabGroup("Settings")] public int projectileDelay;
+    [TabGroup("Settings")] public float delayVelocity;
+
     [TabGroup("Settings")] public float updateVelocity;
     [TabGroup("Settings")] public float rotateSpeed;
     [TabGroup("Settings")] public bool onStartVelocity;
     [TabGroup("Settings")] public bool updateVelocty;
+
+    [TabGroup("Settings")] public LayerMask searchMask;
+    [TabGroup("Settings")] public float searchSize;
 
     [TabGroup("Settings")] public GameObject explosion;
     [TabGroup("Settings")] public bool onlyExplosionDamage;
@@ -44,14 +53,49 @@ public class Projectile : Hitbox
     {
         GameManager.Instance.advanceGameState += ExecuteFrame;
 
+
         if (status.alignment == Alignment.Enemy)
             target = GameManager.Instance.player;
+        else
+        {
+            //Look for enemy
+            FindTarget();
+        }
 
         if (onStartVelocity)
             rb.velocity = transform.forward * velocity;
     }
+    public void FindTarget()
+    {
+        Collider[] col = Physics.OverlapSphere(transform.position, searchSize * 0.5F, searchMask);
+        float closestDistance = 100;
+        foreach (Collider item in col)
+        {
+            Status tempStatus = item.GetComponentInParent<Status>();
+            if (tempStatus == null || tempStatus == status) continue;
 
+            RaycastHit hit;
+            bool clearLine = Physics.Raycast(transform.position, tempStatus.transform.position - transform.position.normalized, out hit, 1000, searchMask);
+            Debug.DrawLine(transform.position, hit.point, Color.yellow);
 
+            if (clearLine)
+            {
+                float dist = Vector2.Distance(tempStatus.transform.position, transform.position);
+                if (dist < closestDistance)
+                {
+                    target = tempStatus.transform;
+                }
+            }
+        }
+
+        if (target != null)
+        {
+            if (projectileMovement == ProjectileMovement.SpawnOnTarget)
+                transform.position = target.position;
+
+            targetPosition = target.position + Vector3.up * 0.5F;
+        }
+    }
     public virtual void ExecuteFrame()
     {
         if (lifetime > 0)
@@ -60,6 +104,29 @@ public class Projectile : Hitbox
             if (lifetime <= 0) DestroyProjectile();
         }
 
+        if (target != null)
+        {
+            targetPosition = target.position + Vector3.up * 0.5F;
+        }
+
+        if (projectileDelay > 0)
+        {
+            projectileDelay--;
+            if (projectileDelay <= 0 && willDelayReaim)
+            {
+                if (target == null)
+                    FindTarget();
+
+                transform.LookAt(targetPosition);
+                rb.velocity = transform.forward * delayVelocity;
+            }
+            return;
+        }
+
+        if (projectileMovement == ProjectileMovement.Homing && target == null)
+        {
+            FindTarget();
+        }
         Movement();
     }
 
@@ -79,6 +146,7 @@ public class Projectile : Hitbox
             proj.attack = attack;
             proj.move = move;
             proj.hitboxID = hitboxID;
+            GO.transform.parent = null;
         }
 
         if (explosionVFX != null)
@@ -120,17 +188,18 @@ public class Projectile : Hitbox
                     rb.velocity = transform.forward * velocity;
                 break;
             case ProjectileMovement.Homing:
-                if (target != null)
+                if (target != null && !updateVelocty)
                 {
-                    Vector2 direction = (target.position - transform.position).normalized;
+                    Vector2 direction = (targetPosition - transform.position).normalized;
 
                     Vector3 rotateAmount = Vector3.Cross(direction, transform.forward) * Vector3.Angle(transform.forward, direction);
 
                     rb.angularVelocity = -rotateAmount * rotateSpeed;
-
                     //rb.velocity += transform.forward * updateVelocity;
-                    rb.velocity += (target.position - transform.position).normalized * updateVelocity;
+                    rb.velocity += (targetPosition - transform.position).normalized * updateVelocity;
                 }
+                else
+                    rb.velocity += transform.forward * updateVelocity;
                 break;
             default:
                 break;
@@ -154,7 +223,7 @@ public class Projectile : Hitbox
         if (proj != null && destroyOnProjectileClash && proj.status != status)
         {
             life--;
-         
+
             DestroyProjectile();
             return;
         }

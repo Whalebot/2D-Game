@@ -25,6 +25,7 @@ public class SkillManager : MonoBehaviour
     {
         Instance = this;
         ResetAllMovesets();
+        foundSkills = SaveManager.Instance.saveData.learnedSkills;
     }
 
     private void Start()

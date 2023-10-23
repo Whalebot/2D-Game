@@ -6,11 +6,11 @@ using Sirenix.OdinInspector;
 public class CharacterVisuals : MonoBehaviour
 {
     public CharacterVisualData visualData;
-    public List<ColorPresetSO> allPresets;
     public List<GameObject> weapons;
     public List<GameObject> hairVariations;
     public List<GameObject> topOutifts;
     public List<GameObject> bottomOutfits;
+    public List<GameObject> shoes;
 
     private void Start()
     {
@@ -22,7 +22,7 @@ public class CharacterVisuals : MonoBehaviour
     {
         CharacterCreator.Instance.visualsUpdateEvent -= UpdateVisuals;
     }
-
+    [Button]
     public void UpdateVisuals()
     {
         if (Application.isPlaying)
@@ -50,6 +50,10 @@ public class CharacterVisuals : MonoBehaviour
         {
             item.SetActive(false);
         }
+        foreach (var item in shoes)
+        {
+            item.SetActive(false);
+        }
     }
     [Button]
     public void SetupOutfit()
@@ -74,15 +78,19 @@ public class CharacterVisuals : MonoBehaviour
         else
             bottomOutfits[bottomOutfits.Count - 1].SetActive(true);
 
+        if (shoes.Count > visualData.shoesID)
+            shoes[visualData.shoesID].SetActive(true);
+        else
+            shoes[shoes.Count - 1].SetActive(true);
         //ApplyMaterial();
     }
 
-    [Button]
+   // [Button]
     public void ApplyMaterial()
     {
-        foreach (var item in allPresets[visualData.colorPreset].colorPresets)
-        {
-            item.material.SetColor("_MainColor", item.color);
-        }
+        //foreach (var item in allPresets[visualData.colorPreset].colorPresets)
+        //{
+        //    item.material.SetColor("_MainColor", item.color);
+        //}
     }
 }

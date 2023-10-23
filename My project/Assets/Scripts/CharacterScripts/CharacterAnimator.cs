@@ -10,7 +10,10 @@ public class CharacterAnimator : MonoBehaviour
     private Movement movement;
     private AttackScript attack;
     [TabGroup("Debug")] public int frame;
+    [TabGroup("Debug")] public float normalizedTime;
     [TabGroup("Debug")] public bool hitstop;
+    [TabGroup("Debug")] public bool blend;
+
     private float runSpeed;
     float x, y;
     float zeroFloat = 0f;
@@ -47,6 +50,7 @@ public class CharacterAnimator : MonoBehaviour
         if (attack != null)
         {
             attack.startupEvent += StartAttack;
+            attack.blendAttackEvent += BlendAttack;
             attack.emptyAttackEvent += EmptyAttack;
             attack.recoveryEvent += AttackRecovery;
         }
@@ -76,7 +80,23 @@ public class CharacterAnimator : MonoBehaviour
     void ExecuteFrame()
     {
         anim.enabled = true;
-        frame = Mathf.RoundToInt(anim.GetCurrentAnimatorStateInfo(0).normalizedTime * anim.GetCurrentAnimatorStateInfo(0).length / (1f / 60f));
+        normalizedTime = anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+        frame = Mathf.RoundToInt(anim.GetCurrentAnimatorStateInfo(0).normalizedTime * anim.GetCurrentAnimatorStateInfo(0).length / (1f / 60f) / anim.GetCurrentAnimatorStateInfo(0).speed);
+
+        if (blend)
+        {
+            if (anim.GetNextAnimatorStateInfo(0).speed > 0 )
+            {
+                Debug.Log($"{attack.attackFrames} {attack.attackFrames/60} {anim.GetNextAnimatorStateInfo(0).length} {((attack.attackFrames / 60))/ anim.GetNextAnimatorStateInfo(0).length}");
+                anim.Play(anim.GetNextAnimatorStateInfo(0).fullPathHash, 0,
+                    (((attack.attackFrames / 60)))
+                    / anim.GetNextAnimatorStateInfo(0).length);
+
+                blend = false;
+            }
+
+            //anim.SetFloat("AnimationStartTime", (float)(attack.attackFrames / 60) / anim.GetCurrentAnimatorStateInfo(0).speed * anim.GetCurrentAnimatorStateInfo(0).length);
+        }
 
         if (movement != null)
             MovementAnimation();
@@ -84,6 +104,9 @@ public class CharacterAnimator : MonoBehaviour
             anim.enabled = false;
         if (status != null)
             StatusAnimation();
+
+        //if(!attack.attacking)
+        //    anim.SetFloat("AnimationStartTime", 0);
 
         if (!GameManager.Instance.runNormally) StartCoroutine(PauseAnimation());
     }
@@ -117,15 +140,14 @@ public class CharacterAnimator : MonoBehaviour
 
 
     }
-    public void UnequipAnimation()
-    {
-        anim.SetInteger("ID", 101);
-        anim.SetTrigger("Top");
-        anim.SetBool("Attacking", true);
-    }
-
     void StatusAnimation()
     {
+        if (status.NonAttackState())
+        {
+            blend = false;
+            anim.SetFloat("AnimationStartTime", 0);
+        }
+
         anim.SetBool("Dead", status.isDead);
         anim.SetBool("Hitstun", status.inHitStun);
         anim.SetBool("Knockdown", status.currentState == Status.State.Knockdown);
@@ -181,12 +203,20 @@ public class CharacterAnimator : MonoBehaviour
 
     void StartAttack()
     {
-
+        blend = false;
+        //anim.SetFloat("AnimationStartTime", 0);
         anim.SetTrigger("Attack");
         anim.SetBool("Attacking", true);
         anim.SetInteger("ID", attack.attackID);
-
     }
+    void BlendAttack()
+    {
+        anim.SetTrigger("Attack");
+        anim.SetBool("Attacking", true);
+        anim.SetInteger("ID", attack.attackID);
+        blend = true;
+    }
+
     void AttackRecovery()
     {
         anim.SetBool("Attacking", false);

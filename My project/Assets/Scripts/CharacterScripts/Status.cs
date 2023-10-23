@@ -189,14 +189,27 @@ public class Status : MonoBehaviour
     }
     public void DisableCollider()
     {
-        if(!isDead)
-        col.gameObject.layer = LayerMask.NameToLayer("Noclip");
+        if (!isDead)
+            col.gameObject.layer = LayerMask.NameToLayer("Noclip");
         //Debug.Log(LayerMask.LayerToName(col.gameObject.layer));
     }
 
     public void RestoreStats()
     {
-        ReplaceStats(currentStats, baseStats);
+        //Get stat definition and replace 1 with 2
+        Stats def1 = currentStats;
+        Stats def2 = baseStats;
+
+        FieldInfo[] defInfo1 = def1.GetType().GetFields();
+        FieldInfo[] defInfo2 = def2.GetType().GetFields();
+
+        for (int i = 0; i < defInfo1.Length; i++)
+        {
+            object obj = def1;
+            object obj2 = def2;
+            if (defInfo1[i].Name != "currentHealth" && defInfo1[i].Name != "currentMeter" && defInfo1[i].Name != "gold")
+                defInfo1[i].SetValue(obj, defInfo2[i].GetValue(obj2));
+        }
     }
 
     public void CalculateStats()
@@ -390,8 +403,10 @@ public class Status : MonoBehaviour
         if (character != null)
         {
             ReplaceStats(baseStats, character.stats);
+            Debug.Log("Status");
         }
-        ReplaceStats(currentStats, baseStats);
+        if (alignment != Alignment.Player || !SaveManager.Instance.HasSaveData())
+            ReplaceStats(currentStats, baseStats);
     }
 
 
@@ -401,7 +416,6 @@ public class Status : MonoBehaviour
 
         if (damage == 0)
         {
-
             return;
         }
         float angle = Mathf.Abs(Vector3.SignedAngle(transform.forward, dir, Vector3.up));
@@ -432,7 +446,7 @@ public class Status : MonoBehaviour
 
         if (baseStats.poise > 0)
         {
-            if (currentStats.poise > 0 && currentStats.poise <= poiseBreak && !poiseBroken)
+            if (baseStats.poise > 0 && currentStats.poise <= poiseBreak && !poiseBroken)
             {
                 TakePushback(kb);
                 HitStun = stunVal;
@@ -442,9 +456,13 @@ public class Status : MonoBehaviour
             else if (currentStats.poise <= 0 || poiseBroken)
             {
                 TakePushback(kb);
-                HitStun = stunVal;
-                hurtEvent?.Invoke();
-                GameManager.Instance.Slowmotion(slowDur);
+
+                if (stunVal > 0)
+                {
+                    HitStun = stunVal;
+                    hurtEvent?.Invoke();
+                    GameManager.Instance.Slowmotion(slowDur);
+                }
             }
             else
             {
@@ -453,10 +471,14 @@ public class Status : MonoBehaviour
         }
         else
         {
+
             TakePushback(kb);
-            HitStun = stunVal;
-            hurtEvent?.Invoke();
-            GameManager.Instance.Slowmotion(slowDur);
+            if (stunVal > 0)
+            {
+                HitStun = stunVal;
+                hurtEvent?.Invoke();
+                GameManager.Instance.Slowmotion(slowDur);
+            }
         }
 
         if (hitState == HitState.Knockdown)
@@ -475,6 +497,8 @@ public class Status : MonoBehaviour
 
     public void TakePushback(Vector3 direction)
     {
+        if (direction == Vector3.zero) return;
+
         float temp = Vector3.SignedAngle(new Vector3(direction.x, 0, direction.z), transform.forward, Vector3.up);
         Vector3 tempVector = (Quaternion.Euler(0, temp, 0) * new Vector3(direction.x, 0, direction.z)).normalized;
         knockbackDirection = new Vector2(tempVector.x, tempVector.z);
@@ -553,7 +577,8 @@ public class Status : MonoBehaviour
 public enum Alignment
 {
     Player,
-    Enemy
+    Enemy,
+    Neutral
 }
 public enum StatusEffect { Burning, Frozen };
 public enum GroundState { Grounded, Airborne, Knockdown }

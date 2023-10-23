@@ -42,6 +42,23 @@ public class Stats
     [FoldoutGroup("Modifiers")] public float critChance = 0;
     [FoldoutGroup("Modifiers")] public float critMultiplier = 1.5f;
 
+    public void ReplaceStats(Stats newStats)
+    {
+
+        //Get stat definition and replace 1 with 2
+        Stats def1 = this;
+        Stats def2 = newStats;
+
+        FieldInfo[] defInfo1 = def1.GetType().GetFields();
+        FieldInfo[] defInfo2 = def2.GetType().GetFields();
+
+        for (int i = 0; i < defInfo1.Length; i++)
+        {
+            object obj = def1;
+            object obj2 = def2;
+            defInfo1[i].SetValue(obj, defInfo2[i].GetValue(obj2));
+        }
+    }
 
     [Button]
     public void ResetValues()

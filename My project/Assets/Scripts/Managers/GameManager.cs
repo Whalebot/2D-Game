@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
     public static Vector3 startPosition;
     public static Quaternion startRotation;
 
-    [TabGroup("Settings")] public int gold;
     [TabGroup("Settings")] public bool runNormally;
 
     [TabGroup("Settings")] public bool flipGraphics;
@@ -58,6 +57,15 @@ public class GameManager : MonoBehaviour
     bool reloading;
     float startTimeStep;
 
+    public int Gold
+    {
+        get { return playerStatus.currentStats.gold; }
+        set
+        {
+            playerStatus.currentStats.gold = value;
+        }
+    }
+
     private void Awake()
     {
         Instance = this;
@@ -73,7 +81,7 @@ public class GameManager : MonoBehaviour
         playerStatus = player.GetComponent<Status>();
         playerStatus.deathEvent += LoseGame;
         SaveManager.Instance.saveEvent += SaveData;
-        SaveManager.Instance.loadEvent += LoadData;
+        SaveManager.Instance.startLoadEvent += LoadData;
     }
     // Start is called before the first frame update
     void Start()
@@ -82,21 +90,19 @@ public class GameManager : MonoBehaviour
 
         startTimeStep = Time.fixedDeltaTime;
         AIManager.Instance.allEnemiesKilled += RoomCleared;
-   
+
     }
 
     void SaveData()
     {
-        SaveManager.Instance.saveData.gold = gold;
-        SaveManager.Instance.saveData.health = playerStatus.Health;
-        SaveManager.Instance.saveData.meter = playerStatus.Meter;
+        SaveManager.Instance.saveData.stats.ReplaceStats(playerStatus.currentStats);
     }
 
     void LoadData()
     {
-       gold = SaveManager.Instance.saveData.gold;
-        playerStatus.Health = SaveManager.Instance.saveData.health;
-        playerStatus.Meter = SaveManager.Instance.saveData.meter;
+        //Load temp stats
+        playerStatus.currentStats.ReplaceStats(SaveManager.Instance.saveData.stats);
+        Debug.Log($"{playerStatus.currentStats.gold} {SaveManager.Instance.saveData.stats.gold}");
     }
 
     void RoomCleared()
@@ -104,13 +110,13 @@ public class GameManager : MonoBehaviour
         switch (LevelManager.Instance.currentRoomType)
         {
             case RoomTypes.Normal:
-                gold += 20;
+                Gold += 20;
                 break;
             case RoomTypes.Boss:
-                gold += 100;
+                Gold += 100;
                 break;
             case RoomTypes.Treasure:
-                gold += 35;
+                Gold += 35;
                 break;
             case RoomTypes.Shop:
                 break;

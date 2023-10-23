@@ -34,6 +34,10 @@ public class PlayerInputHandler : MonoBehaviour
         GameManager.Instance.advanceGameState += ExecuteFrame;
         input = InputManager.Instance;
         input.interactInput += InteractButton;
+        input.northRelease += ReleaseNorthButton;
+        input.westRelease += ReleaseWestButton;
+
+
         status = GetComponent<Status>();
         mov = GetComponent<Movement>();
 
@@ -44,6 +48,8 @@ public class PlayerInputHandler : MonoBehaviour
     {
         GameManager.Instance.advanceGameState -= ExecuteFrame;
         input.interactInput -= InteractButton;
+        input.northRelease -= ReleaseNorthButton;
+        input.westRelease -= ReleaseWestButton;
     }
 
 
@@ -51,17 +57,20 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (GameManager.menuOpen || GameManager.isPaused || status.isDead)
         {
-            mov.direction = Vector3.zero;
-            //            mov._rb.velocity = Vector3.zero;
+            mov.direction = Vector3.zero; 
+            mov.isMoving = false;
             return;
         }
 
-        if (input.inputDirection.x != 0)
+        if (input.inputDirection.x == 0)
         {
+            mov.isMoving = false;
+
+        }
+        else {
             mov.isMoving = true;
             mov.direction = new Vector2(input.inputDirection.x, 0);
         }
-        else mov.isMoving = false;
 
         switch (status.currentState)
         {
@@ -140,7 +149,17 @@ public class PlayerInputHandler : MonoBehaviour
         {
             return attack.ComboAttack(attack.moveset.downAirHeavyCombo);
         }
-      
+    }
+
+    void ReleaseNorthButton()
+    {
+        if (attack.IsHoldAttack())
+            attack.ReleaseButton();
+    }
+    void ReleaseWestButton()
+    {
+        if (attack.IsHoldAttack())
+            attack.ReleaseButton();
     }
 
     bool SouthButton()
@@ -236,6 +255,16 @@ public class PlayerInputHandler : MonoBehaviour
                     break;
 
                 case 3:
+                    if (input.bufferedInputs[i].dir == 2)
+                    {
+
+                        if (mov.ground)
+                        {
+                            mov.FallThroughPlatforms();
+                            DeleteInputs(i);
+                            break;
+                        }
+                    }
                     if (SouthButton())
                     {
                         DeleteInputs(i);

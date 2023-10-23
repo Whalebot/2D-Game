@@ -8,6 +8,8 @@ public class Move : ScriptableObject
     public int animationID;
     public int meterCost;
     public int meterGain = 10;
+    public bool consumeMeterOnActiveFrame;
+
     public Sprite icon;
     [Header("Read Only")]
     public int firstStartupFrame;
@@ -42,6 +44,8 @@ public class Move : ScriptableObject
     [TabGroup("Move properties")] public bool keepVelocity = false;
     [TabGroup("Move properties")] public int particleID;
     [TabGroup("Move properties")] public bool holdAttack;
+    [TabGroup("Move properties")] public Move releaseAttackMove;
+
     [TabGroup("Move properties")] public bool autoAim;
     [TabGroup("Move properties")] public bool armor;
     [TabGroup("Move properties")] public bool resetGatling;
@@ -83,6 +87,7 @@ public class Move : ScriptableObject
     [TabGroup("Momentum")] public bool instantStartupRotation = true;
     [TabGroup("Momentum")] public bool overrideVelocity = true;
     [TabGroup("Momentum")] public bool runMomentum = true;
+    [TabGroup("Momentum")] public bool stopAtEdges = true;
 
     private void OnValidate()
     {
@@ -164,8 +169,6 @@ public class Momentum
     public int startFrame = 1;
     public int duration;
     public Vector2 momentum;
-    public bool freeMovement = false;
-    public bool homing = false;
     public bool resetVelocityDuringRecovery = true;
 
 }

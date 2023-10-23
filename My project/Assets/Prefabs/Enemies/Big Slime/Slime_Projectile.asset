@@ -16,20 +16,20 @@ MonoBehaviour:
   meterCost: 0
   meterGain: 10
   icon: {fileID: 0}
-  firstStartupFrame: 46
-  lastActiveFrame: 50
-  totalMoveDuration: 70
-  firstGatlingFrame: 48
+  firstStartupFrame: 40
+  lastActiveFrame: 44
+  totalMoveDuration: 64
+  firstGatlingFrame: 42
   recoveryFrames: 20
   attacks:
   - attackLevel: 0
     attackType: 1
-    hitbox: {fileID: 5860963072138344223, guid: 0ee0ac272839ce34ab26a6d283b5d2a1, type: 3}
+    hitbox: {fileID: 5860963072138344223, guid: 7cf3d64ca1e71d24bad3e3adfe843a4a, type: 3}
     damage: 1
     stun: 20
     hitstop: 5
     poiseBreak: 0
-    startupFrame: 46
+    startupFrame: 40
     activeFrames: 5
     gatlingFrames: 2
     groundHitProperty:
@@ -102,15 +102,12 @@ MonoBehaviour:
   - startFrame: 40
     duration: 2
     momentum: {x: 8, y: 0}
-    freeMovement: 0
-    homing: 0
     resetVelocityDuringRecovery: 0
   - startFrame: 50
     duration: 2
     momentum: {x: 4, y: 0}
-    freeMovement: 0
-    homing: 0
     resetVelocityDuringRecovery: 1
   instantStartupRotation: 1
   overrideVelocity: 1
   runMomentum: 0
+  stopAtEdges: 1

@@ -20,12 +20,12 @@ MonoBehaviour:
   prerequisiteMoves:
   - {fileID: 11400000, guid: 563dbcef377e05e4dbb20357ac1e4d38, type: 2}
   newMoves:
-  - move: {fileID: 11400000, guid: 563dbcef377e05e4dbb20357ac1e4d38, type: 2}
+  - move: {fileID: 11400000, guid: ee8e9d17f6f7a1944b9d61b7b079bf04, type: 2}
     combo: {fileID: 11400000, guid: 1da570c556c735949b476255aeed4464, type: 2}
-  - move: {fileID: 11400000, guid: 563dbcef377e05e4dbb20357ac1e4d38, type: 2}
+    oldMove: {fileID: 0}
+  - move: {fileID: 11400000, guid: ee8e9d17f6f7a1944b9d61b7b079bf04, type: 2}
     combo: {fileID: 11400000, guid: 1da570c556c735949b476255aeed4464, type: 2}
-  upgradedMove: {fileID: 0}
-  oldMove: {fileID: 0}
+    oldMove: {fileID: 0}
   description: Can do 3 consecutive Alpha Blades
   stats:
     currentHealth: 0
@@ -33,11 +33,15 @@ MonoBehaviour:
     currentMeter: 0
     maxMeter: 0
     level: 0
+    strength: 0
+    intelligence: 0
+    agility: 0
+    luck: 0
+    gold: 0
     attack: 0
     magic: 0
     attackSpeed: 0
     airActions: 0
-    luck: 0
     rerolls: 0
     movementSpeedModifier: 0
     meterGainModifier: 0
@@ -48,6 +52,7 @@ MonoBehaviour:
     guardBreakModifier: 0
     sizeModifier: 0
     damageModifierPercentage: 0.2
+    backstabModifier: 0
     damageModifierFlat: 0
     hitStunMultiplier: 0
     knockbackModifier: 0

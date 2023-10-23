@@ -17,6 +17,8 @@ MonoBehaviour:
   description: 
   image: {fileID: 0}
   prefab: {fileID: 9037631907321898802, guid: 518eee88e2d9a6643952facd713e1871, type: 3}
+  controller: {fileID: 0}
+  moveset: {fileID: 0}
   actions:
   - {fileID: 11400000, guid: d4dea00e8c91c9240983c28ff41cc62d, type: 2}
   - {fileID: 11400000, guid: c0317d87c5cea2046abb8fc5f72a48c5, type: 2}
@@ -28,21 +30,26 @@ MonoBehaviour:
     currentMeter: 0
     maxMeter: 0
     level: 1
+    strength: 0
+    intelligence: 0
+    agility: 0
+    luck: 0
+    gold: 0
     attack: 5
     magic: 0
     attackSpeed: 1
     airActions: 1
-    luck: 0
     rerolls: 0
     movementSpeedModifier: 1
     meterGainModifier: 1
-    poiseRegen: 0.04
+    poiseRegen: 0.1
     poise: 100
     defense: 0
     resistance: 0
     guardBreakModifier: 1
     sizeModifier: 1
     damageModifierPercentage: 1
+    backstabModifier: 0
     damageModifierFlat: 1
     hitStunMultiplier: 1
     knockbackModifier: 1

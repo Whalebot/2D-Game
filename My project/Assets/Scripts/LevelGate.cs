@@ -13,11 +13,27 @@ public class LevelGate : Interactable
     public override void Start()
     {
         LevelManager.Instance.spawnLevelGates += SpawnLevelGates;
-        roomType = LevelManager.Instance.NextRoomType(gateID);
+        switch (gateID)
+        {
+            case 0:
+                roomType = LevelManager.Instance.room1;
+                break;
+            case 1:
+                roomType = LevelManager.Instance.room2;
+                break;
+            case 2:
+                roomType = LevelManager.Instance.room3;
+                break;
+            default:
+                roomType = LevelManager.Instance.room1;
+                break;
+        }
+
+      
         nextSceneName = LevelManager.Instance.NextLevelName(roomType);
         SetupGate();
 
-        if (LevelManager.Instance.currentRoomType != RoomTypes.Shop || roomType == RoomTypes.Disabled)
+        if (LevelManager.Instance.currentRoomType != RoomTypes.Shop && LevelManager.Instance.currentRoomType != RoomTypes.Treasure|| roomType == RoomTypes.Disabled)
             levelGates.SetActive(false);
     }
 

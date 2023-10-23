@@ -14,34 +14,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillRank: 2
   type: 2
-  title: Shuriken
+  title: Glasses
   sprite: {fileID: 0}
-  move: {fileID: 0}
-  combo: {fileID: 0}
+  prerequisiteSkills: []
+  prerequisiteMoves: []
+  newMoves: []
   description: 'Gain 30% crit chance and 50% crit damage
 
-    Lose 20% damage modifier'
+    Take 50% more damage'
   stats:
     currentHealth: 0
     maxHealth: 0
     currentMeter: 0
     maxMeter: 0
     level: 0
+    strength: 0
+    intelligence: 0
+    agility: 0
+    luck: 0
+    gold: 0
     attack: 0
     magic: 0
     attackSpeed: 0
     airActions: 0
-    luck: 0
     rerolls: 0
     movementSpeedModifier: 0
     meterGainModifier: 0
     poiseRegen: 0
     poise: 0
-    defense: 0
+    defense: -0.5
     resistance: 0
     guardBreakModifier: 0
     sizeModifier: 0
-    damageModifierPercentage: -0.2
+    damageModifierPercentage: 0
+    backstabModifier: 0
     damageModifierFlat: 0
     hitStunMultiplier: 0
     knockbackModifier: 0

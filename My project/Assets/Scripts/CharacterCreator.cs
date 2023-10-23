@@ -22,10 +22,11 @@ public class CharacterCreator : MonoBehaviour
     {
         Instance = this;
         SaveManager.Instance.saveEvent += SaveVisuals;
-        SaveManager.Instance.loadEvent += LoadVisuals;
+        //SaveManager.Instance.awakeLoadEvent += LoadVisuals;
 
         if (GameManager.Instance != null)
         {
+            LoadVisuals();
             Debug.Log(characters[SaveManager.Instance.saveData.visualData.characterJob].moveset);
             GameManager.Instance.playerStatus.character = characters[SaveManager.Instance.saveData.visualData.characterJob];
             GameManager.Instance.player.GetComponent<AttackScript>().moveset = characters[SaveManager.Instance.saveData.visualData.characterJob].moveset;
@@ -131,6 +132,24 @@ public class CharacterCreator : MonoBehaviour
             ApplyVisuals();
         }
     }
+    public int ShoesID
+    {
+        get
+        {
+            return visualData.shoesID;
+        }
+        set
+        {
+            visualData.shoesID = value;
+
+            if (visualData.shoesID >= visuals.shoes.Count)
+                visualData.shoesID = 0;
+            if (visualData.shoesID < 0)
+                visualData.shoesID = visuals.shoes.Count - 1;
+
+            ApplyVisuals();
+        }
+    }
     private void OnValidate()
     {
         if (liveUpdate && !Application.isPlaying)
@@ -180,10 +199,14 @@ public class CharacterCreator : MonoBehaviour
     {
         ApplyMaterial();
         visualsUpdateEvent?.Invoke();
-        if (liveUpdate)
+        if (visuals != null)
         {
             visuals.visualData = visualData;
             visuals.UpdateVisuals();
+        }
+
+        if (liveUpdate)
+        {
             if (visualData.colorPreset >= allPresets.Count)
                 preset = allPresets[allPresets.Count - 1];
             else

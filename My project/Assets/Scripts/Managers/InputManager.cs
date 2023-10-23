@@ -83,10 +83,13 @@ public class InputManager : MonoBehaviour
 
         controls.Default.West.performed += context => OnWest(context);
         controls.Default.West.canceled += context => OnWest(context);
+
         controls.Default.North.performed += context => OnNorth(context);
         controls.Default.North.canceled += context => OnNorth(context);
+
         controls.Default.South.performed += context => OnSouth(context);
         controls.Default.South.canceled += _ => OnSouthRelease();
+
         controls.Default.East.performed += context => OnEast(context);
 
         controls.Default.Up.performed += context => OnUp(context);
@@ -441,24 +444,6 @@ public class InputManager : MonoBehaviour
         southRelease?.Invoke();
         R1Hold = false;
     }
-
-    void OnWestRelease()
-    {
-        westRelease?.Invoke();
-    }
-
-    void OnNorthRelease()
-    {
-        northRelease?.Invoke();
-
-    }
-
-    void OnEastRelease()
-    {
-        eastRelease?.Invoke();
-
-    }
-
 
     public void OnL1(InputAction.CallbackContext context)
     {

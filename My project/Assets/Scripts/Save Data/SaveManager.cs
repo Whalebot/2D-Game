@@ -11,7 +11,8 @@ public class SaveManager : MonoBehaviour
     public bool autoLoad;
     public SaveData saveData;
     public event Action saveEvent;
-    public event Action loadEvent;
+    public event Action awakeLoadEvent;
+    public event Action startLoadEvent;
 
     private void Awake()
     {
@@ -24,7 +25,7 @@ public class SaveManager : MonoBehaviour
     private void Start()
     {
         if (autoLoad && HasSaveData())
-            loadEvent?.Invoke();
+            startLoadEvent?.Invoke();
     }
 
     public bool HasSaveData()
@@ -41,15 +42,16 @@ public class SaveManager : MonoBehaviour
 
     public void LoadData()
     {
-        saveData = new SaveData();
-        saveData.learnedSkills = new List<SkillSO>();
-        saveData.visualData = new CharacterVisualData();
 
         if (PlayerPrefs.HasKey("Save"))
         {
+            saveData = new SaveData();
+            saveData.learnedSkills = new List<SkillSO>();
+            saveData.visualData = new CharacterVisualData();
+
             string saveJson = PlayerPrefs.GetString("Save");
             saveData = JsonUtility.FromJson<SaveData>(saveJson);
-
+            awakeLoadEvent?.Invoke();
         }
 
         StartCoroutine(DelaySetup());
@@ -79,9 +81,7 @@ public class SaveManager : MonoBehaviour
 [System.Serializable]
 public class SaveData
 {
-    public int gold = 100;
-    public int health = 50;
-    public int meter = 0;
+    public Stats stats;
     public int currentLevel = 1;
     public CharacterVisualData visualData;
     public List<SkillSO> learnedSkills;
@@ -94,4 +94,5 @@ public class CharacterVisualData
     [Range(0, 10)] public int hairID;
     [Range(0, 10)] public int topID;
     [Range(0, 10)] public int bottomID;
+    [Range(0, 10)] public int shoesID;
 }

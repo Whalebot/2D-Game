@@ -24,7 +24,7 @@ public class SkillHandler : MonoBehaviour
         learnedSkills = new List<SkillSO>();
         status = GetComponent<Status>();
 
-        SaveManager.Instance.loadEvent += LoadData;
+        SaveManager.Instance.startLoadEvent += LoadData;
         DuplicateMoveset();
     }
     void Start()
@@ -74,10 +74,8 @@ public class SkillHandler : MonoBehaviour
                 //Debug.Log(tempCombo);
                 for (int j = 0; j < tempCombo.moves.Count; j++)
                 {
-                    //Debug.Log(tempCombo.moves[j]);
                     if (tempCombo.moves[j].name == oldMove.name)
                     {
-                        //Debug.Log(newMove);
                         tempCombo.moves[j] = newMove;
                     }
                 }
@@ -130,7 +128,7 @@ public class SkillHandler : MonoBehaviour
     public void RemoveAllSkills()
     {
         learnedSkills.Clear();
-        status.ReplaceStats(status.currentStats, status.baseStats);
+        status.RestoreStats();
         UpdateStats();
     }
 
@@ -147,13 +145,7 @@ public class SkillHandler : MonoBehaviour
         status.UpdateStats();
     }
 
-    public void SkillLevelUI(Skill skill)
-    {
-        return;
-        GameObject GO = Instantiate(skillLevelUpWindow, skillLevelUpPanel);
-        GO.GetComponent<DescriptionWindow>().DisplayUI(skill);
 
-    }
     public bool CanGetSkill(SkillSO skillSO)
     {
         bool hasRequiredSkill = false;
@@ -187,7 +179,7 @@ public class SkillHandler : MonoBehaviour
                     {
                         foreach (var item in temp.moves)
                         {
-                            Debug.Log($"{item.name} {move.name}");
+                            //Debug.Log($"{item.name} {move.name}");
                             if (item.name == move.name)
                                 hasRequiredMove = true;
                         }
@@ -197,6 +189,7 @@ public class SkillHandler : MonoBehaviour
         }
         else hasRequiredMove = true;
 
+        Debug.Log($"{skillSO} Has required move {hasRequiredMove} & has required skill{hasRequiredSkill}"); 
 
         return hasRequiredMove && hasRequiredSkill;
     }

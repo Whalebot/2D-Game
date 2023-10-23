@@ -14,6 +14,7 @@ public class HubMenu : MonoBehaviour
     [TabGroup("Components")] public TextMeshProUGUI hairNumber;
     [TabGroup("Components")] public TextMeshProUGUI topNumber;
     [TabGroup("Components")] public TextMeshProUGUI bottomNumber;
+    [TabGroup("Components")] public TextMeshProUGUI shoesNumber;
     [TabGroup("Components")] public TextMeshProUGUI strengthStat;
     [TabGroup("Components")] public TextMeshProUGUI agilityStat;
     [TabGroup("Components")] public TextMeshProUGUI intStat;
@@ -23,12 +24,14 @@ public class HubMenu : MonoBehaviour
     [TabGroup("Components")] public Button colorMinusButton;
     [TabGroup("Components")] public Button hairPlusButton;
     [TabGroup("Components")] public Button hairMinusButton;
-    [TabGroup("Components")] public Button TopPlusButton;
-    [TabGroup("Components")] public Button TopRemoveButton;
-    [TabGroup("Components")] public Button BottomPlusButton;
-    [TabGroup("Components")] public Button BottomRemoveButton;
+    [TabGroup("Components")] public Button topPlusButton;
+    [TabGroup("Components")] public Button topMinusButton;
+    [TabGroup("Components")] public Button bottomPlusButton;
+    [TabGroup("Components")] public Button bottomMinusButton;
+    [TabGroup("Components")] public Button shoesPlusButton;
+    [TabGroup("Components")] public Button shoesMinusButton;
     [TabGroup("Components")] public Button classPlusButton;
-    [TabGroup("Components")] public Button classRemoveButton;
+    [TabGroup("Components")] public Button classMinusButton;
 
     private void Start()
     {
@@ -36,12 +39,14 @@ public class HubMenu : MonoBehaviour
         colorMinusButton.onClick.AddListener(() => ChangeColor(false));
         hairPlusButton.onClick.AddListener(() => ChangeHair(true));
         hairMinusButton.onClick.AddListener(() => ChangeHair(false));
-        TopPlusButton.onClick.AddListener(() => ChangeTop(true));
-        TopRemoveButton.onClick.AddListener(() => ChangeTop(false));
-        BottomPlusButton.onClick.AddListener(() => ChangeBottom(true));
-        BottomRemoveButton.onClick.AddListener(() => ChangeBottom(false));
+        topPlusButton.onClick.AddListener(() => ChangeTop(true));
+        topMinusButton.onClick.AddListener(() => ChangeTop(false));
+        bottomPlusButton.onClick.AddListener(() => ChangeBottom(true));
+        bottomMinusButton.onClick.AddListener(() => ChangeBottom(false));
+        bottomPlusButton.onClick.AddListener(() => ChangeBottom(true));
+        bottomMinusButton.onClick.AddListener(() => ChangeBottom(false));
         classPlusButton.onClick.AddListener(() => ChangeClass(true));
-        classRemoveButton.onClick.AddListener(() => ChangeClass(false));
+        classMinusButton.onClick.AddListener(() => ChangeClass(false));
 
         animator.runtimeAnimatorController = CharacterCreator.Instance.characters[CharacterCreator.Instance.Class].controller;
     }
@@ -60,13 +65,12 @@ public class HubMenu : MonoBehaviour
         hairNumber.text = "" + CharacterCreator.Instance.visualData.hairID;
         topNumber.text = "" + CharacterCreator.Instance.visualData.topID;
         bottomNumber.text = "" + CharacterCreator.Instance.visualData.bottomID;
+        shoesNumber.text = "" + CharacterCreator.Instance.visualData.shoesID;
     }
     public void StartGame()
     {
         SaveManager.Instance.DeleteData();
-        SaveManager.Instance.saveData.health = CharacterCreator.Instance.characters[CharacterCreator.Instance.Class].stats.maxHealth;
-        SaveManager.Instance.saveData.gold = CharacterCreator.Instance.characters[CharacterCreator.Instance.Class].stats.gold;
-
+        SaveManager.Instance.saveData.stats.ReplaceStats(CharacterCreator.Instance.characters[CharacterCreator.Instance.Class].stats);
 
         TransitionManager.Instance.LoadScene(1);
     }
@@ -101,6 +105,13 @@ public class HubMenu : MonoBehaviour
             CharacterCreator.Instance.TopID--;
     }
     public void ChangeBottom(bool add)
+    {
+        if (add)
+            CharacterCreator.Instance.BottomID++;
+        else
+            CharacterCreator.Instance.BottomID--;
+    }
+    public void ChangeShoes(bool add)
     {
         if (add)
             CharacterCreator.Instance.BottomID++;

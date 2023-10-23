@@ -17,6 +17,7 @@ public class AttackScript : MonoBehaviour
     public delegate void AttackEvent();
     public AttackEvent emptyAttackEvent;
     public AttackEvent startupEvent;
+    public AttackEvent blendAttackEvent;
     public AttackEvent topAnimationEvent;
     public AttackEvent activeEvent;
     public AttackEvent recoveryEvent;
@@ -33,6 +34,8 @@ public class AttackScript : MonoBehaviour
     [HeaderAttribute("Attack attributes")]
     [TabGroup("Debug")] public bool attacking;
     [TabGroup("Debug")] public Move activeMove;
+    [TabGroup("Debug")] public int releaseMinimum;
+    [TabGroup("Debug")] public bool delayRelease;
     [TabGroup("Debug")] public bool hit;
     [TabGroup("Debug")] public int gatlingFrame;
     [TabGroup("Debug")] public int attackID;
@@ -56,7 +59,7 @@ public class AttackScript : MonoBehaviour
 
     [HideInInspector] public bool newAttack;
     [HideInInspector] public bool landCancelFrame;
-  
+
     List<Move> usedMoves;
 
     private void Awake()
@@ -135,16 +138,18 @@ public class AttackScript : MonoBehaviour
                 }
             }
             attackFrames = attackFrames + deltaFrame;
-
-            //lastFrame = AttackFrame;
         }
+
         if (status.currentState == Status.State.Neutral || status.currentState == Status.State.Blockstun || status.currentState == Status.State.Hitstun) usedMoves.Clear();
     }
 
     void ExecuteAttackFrame(int frame)
     {
 
-
+        if (delayRelease && frame >= releaseMinimum)
+        {
+            ReleaseButton();
+        }
         //Execute properties
         ExecuteUniqueProperties(frame);
 
@@ -169,6 +174,12 @@ public class AttackScript : MonoBehaviour
             if (extendedBuffer > 0)
                 extendedBuffer--;
         }
+
+        if (frame == activeMove.firstStartupFrame && activeMove.consumeMeterOnActiveFrame)
+        {
+            status.Meter -= activeMove.meterCost;
+        }
+
         if (frame < activeMove.firstStartupFrame)
         {
             StartupFrames();
@@ -241,16 +252,19 @@ public class AttackScript : MonoBehaviour
                 movement.forcedWalk = false;
                 if (activeMove.m[i].resetVelocityDuringRecovery)
                 {
-                    movement._rb.velocity = Vector3.zero;
+                    movement.SetVelocity(Vector3.zero);
                 }
             }
             else if (frame >= activeMove.m[i].startFrame && frame < activeMove.m[i].startFrame + activeMove.m[i].duration)
             {
-                //Debug.Log($"{AttackFrame} + {i} + {activeMove.m[i].startFrame + activeMove.m[i].duration}");
                 if (!movement.ground) movement._rb.useGravity = false;
-                //Debug.Log(status.currentStats.attackSpeed *  activeMove.m[i].duration/ activeMove.m[i].duration);
+
                 movement.SetVelocity((activeMove.m[i].momentum.x * transform.forward + transform.up * activeMove.m[i].momentum.y));
             }
+        }
+        if (movement.CheckEdge() && activeMove.stopAtEdges)
+        {
+            movement.SetVelocity(Vector3.zero);
         }
         inMomentum = tempMomentum;
     }
@@ -451,7 +465,13 @@ public class AttackScript : MonoBehaviour
             movementFrames = GameManager.Instance.gameFrameCount;
         }
 
-        status.Meter -= move.meterCost;
+        if (status.Meter <= move.meterCost)
+        {
+            delayRelease = true; 
+        }
+
+        if (!move.consumeMeterOnActiveFrame)
+            status.Meter -= move.meterCost;
 
         recoverOnlyOnLand = move.recoverOnlyOnLand;
         activeMove = move;
@@ -474,7 +494,8 @@ public class AttackScript : MonoBehaviour
         //Air properties
         if (move.useAirAction) movement.performedJumps++;
 
-        status.EnableCollider();
+        if (!movement.passthroughPlatforms)
+            status.EnableCollider();
         Startup();
         landCancel = move.landCancel;
 
@@ -493,12 +514,92 @@ public class AttackScript : MonoBehaviour
         newAttack = true;
         ExecuteFrame();
     }
+    public bool IsHoldAttack()
+    {
+        if (activeMove == null)
+            return false;
+
+        return activeMove.holdAttack;
+    }
+    public bool ReleaseButton()
+    {
+        if (activeMove == null) return false;
+        if (activeMove.releaseAttackMove == null || AttackFrame >= activeMove.firstStartupFrame)
+        {
+            return false;
+        }
+
+        if (AttackFrame < releaseMinimum)
+        {
+            delayRelease = true;
+            return true;
+        }
+
+        Move move = activeMove.releaseAttackMove;
+
+        usedMoves.Add(move);
+        ClearHitboxes();
+
+        if (move.resetGatling)
+        {
+            combo = 0;
+            usedMoves.Clear();
+        }
+
+        if (move.type == MoveType.Movement)
+        {
+            movementFrames = GameManager.Instance.gameFrameCount;
+        }
+
+        if(!move.consumeMeterOnActiveFrame)
+        status.Meter -= move.meterCost;
+
+        if (AttackFrame > move.firstStartupFrame)
+            attackFrames = move.firstStartupFrame - 1;
+
+        recoverOnlyOnLand = move.recoverOnlyOnLand;
+        activeMove = move;
+        attackID = move.animationID;
+
+        attackString = false;
+        canTargetCombo = false;
+        hit = false;
+
+        holdAttack = move.holdAttack;
+
+        if (move.instantStartupRotation) movement.Rotation();
+
+
+        //Run momentum
+        //if (move.overrideVelocity) movement._rb.velocity = Vector3.zero;
+        //else if (move.runMomentum) movement._rb.velocity = movement._rb.velocity * 0.5F;
+
+        //Air properties
+        if (move.useAirAction) movement.performedJumps++;
+
+        if (!movement.passthroughPlatforms)
+            status.EnableCollider();
+
+        Startup();
+        landCancel = move.landCancel;
+
+        attackPerformedEvent?.Invoke(move);
+        blendAttackEvent?.Invoke();
+
+        attacking = true;
+        ExecuteFrame();
+        return true;
+    }
 
     public bool CanUseMove(Move move)
     {
         if (move == null) return false;
 
-
+        if (move.releaseAttackMove != null)
+        {
+            if (status.currentStats.currentMeter < move.releaseAttackMove.meterCost) return false;
+        }
+        else
         if (status.currentStats.currentMeter < move.meterCost) return false;
         //if (jumpFrameCounter > 0) return false;
         if (move.useAirAction && !attacking)
@@ -620,14 +721,14 @@ public class AttackScript : MonoBehaviour
     {
         status.GoToState(Status.State.Startup);
     }
-    public void ReleaseButton()
-    {
-        if (holdAttack && attacking)
-        {
-            Debug.Log("Release Hold Move");
-            attackFrames = activeMove.lastActiveFrame + 1;
-        }
-    }
+    //public void ReleaseButton()
+    //{
+    //    if (holdAttack && attacking)
+    //    {
+    //        Debug.Log("Release Hold Move");
+    //        attackFrames = activeMove.lastActiveFrame + 1;
+    //    }
+    //}
 
     void Land()
     {
@@ -664,7 +765,7 @@ public class AttackScript : MonoBehaviour
     }
     void DeathEvent()
     {
-        
+
     }
 
 
@@ -704,7 +805,7 @@ public class AttackScript : MonoBehaviour
         newAttack = false;
         attackString = false;
 
-
+        delayRelease = false;
         extendedBuffer = 0;
         combo = 0;
         recoverOnlyOnLand = false;

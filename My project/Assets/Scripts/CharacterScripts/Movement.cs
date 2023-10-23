@@ -31,6 +31,9 @@ public class Movement : MonoBehaviour
     [TabGroup("Ground Detection")] public float groundRayLength = 0.2f;
     [TabGroup("Ground Detection")] public float frontGroundRayLength = 0.3f;
     [TabGroup("Ground Detection")] public float preLandRayLength = 0.3f;
+    [TabGroup("Ground Detection")] public float groundFrontOffset = 0.15F;
+    [TabGroup("Ground Detection")] public float checkEdgeOffset = 0.15F;
+    [TabGroup("Ground Detection")] public float groundBackOffset = 0.15F;
     [TabGroup("Ground Detection")] public LayerMask groundMask;
 
     [Header("Wall")]
@@ -38,10 +41,11 @@ public class Movement : MonoBehaviour
 
     [TabGroup("Ground Detection")] public float wallSideOffset;
     RaycastHit hit, hit2;
-    [TabGroup("Ground Detection")] public float groundFrontOffset;
+
 
     [TabGroup("Ground Detection")] public bool check;
     [TabGroup("Ground Detection")] public bool check2;
+    [TabGroup("Ground Detection")] public bool checkEdge;
     [TabGroup("Ground Detection")] public float stepHeight;
     [TabGroup("Ground Detection")] public float stepAngle;
     [TabGroup("Ground Detection")] public float stepRayLength;
@@ -55,6 +59,9 @@ public class Movement : MonoBehaviour
     [TabGroup("Jump")] public int performedJumps;
     [TabGroup("Jump")] public float airDeceleration = 0.95F;
     [TabGroup("Jump")] public float airBrake = 0.8F;
+    [TabGroup("Jump")] public bool passthroughPlatforms = false;
+    [TabGroup("Jump")] public int passthroughDuration = 0;
+    [TabGroup("Jump")] public int passthroughCounter = 0;
 
     public event Action jumpEvent;
     public event Action doubleJumpEvent;
@@ -151,7 +158,6 @@ public class Movement : MonoBehaviour
     {
         MovementProperties();
         Rotation();
-        // if (status.alignment == Alignment.Player)
         PlayerMovement();
     }
 
@@ -203,6 +209,7 @@ public class Movement : MonoBehaviour
         jumpCounter = minimumJumpTime;
         status.col.material = airMat;
         ground = false;
+        CollisionPassthrough();
         status.groundState = GroundState.Airborne;
         if (isMoving)
         {
@@ -218,6 +225,7 @@ public class Movement : MonoBehaviour
     {
         if (performedJumps >= multiJumps) return;
         performedJumps++;
+        CollisionPassthrough();
         Rotation();
         jumpCounter = minimumJumpTime;
         status.col.material = airMat;
@@ -237,7 +245,7 @@ public class Movement : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Debug.DrawRay(transform.position + Vector3.up * 0.1F - transform.forward * 0.1f, Vector3.down * groundRayLength, Color.blue);
+        Debug.DrawRay(transform.position + Vector3.up * 0.1F - transform.forward * groundBackOffset, Vector3.down * groundRayLength, Color.blue);
         Debug.DrawRay(hit.point, hit.normal * 2f, Color.gray);
         Debug.DrawRay(transform.position + Vector3.up * 0.1F + transform.forward * groundFrontOffset, Vector3.down * frontGroundRayLength, Color.blue);
         Debug.DrawRay(hit2.point, hit2.normal * 2f, Color.gray);
@@ -296,9 +304,18 @@ public class Movement : MonoBehaviour
             Debug.DrawRay(transform.position + stepHeight * Vector3.up, _rb.velocity / 2, Color.green);
         }
     }
+    public bool CheckEdge()
+    {
+        checkEdge = !Physics.Raycast(transform.position + Vector3.up * 0.1F + transform.forward * checkEdgeOffset, Vector3.down, out hit2, frontGroundRayLength, groundMask);
+        if (ground)
+            return checkEdge;
+        else
+            return false;
+    }
+
     public bool GroundDetection()
     {
-        check = Physics.Raycast(transform.position + Vector3.up * 0.1F - transform.forward * 0.1f, Vector3.down, out hit, groundRayLength, groundMask);
+        check = Physics.Raycast(transform.position + Vector3.up * 0.1F - transform.forward * groundBackOffset, Vector3.down, out hit, groundRayLength, groundMask);
         check2 = Physics.Raycast(transform.position + Vector3.up * 0.1F + transform.forward * groundFrontOffset, Vector3.down, out hit2, frontGroundRayLength, groundMask);
 
         if (jumpCounter > 0)
@@ -318,10 +335,38 @@ public class Movement : MonoBehaviour
             if (angle2 > stepAngle) check2 = false;
         }
 
+        if (passthroughCounter > 0)
+            passthroughCounter--;
+
+        if (!ground && status.NonAttackState())
+        {
+            if (_rb.velocity.y <= 0.01f && passthroughCounter <= 0)
+            {
+                passthroughPlatforms = false;
+                status.EnableCollider();
+
+            }
+            else
+            {
+
+                CollisionPassthrough();
+            }
+        }
+        else if (status.NonAttackState() && passthroughCounter <= 0)
+        {
+            if (status.NonAttackState())
+            {
+                passthroughPlatforms = false;
+                status.EnableCollider();
+            }
+        }
+
+
+
         //Check collission for landing
         if (!ground)
         {
-            if (_rb.velocity.y <= 0)
+            if (_rb.velocity.y <= 0.01f)
             {
                 if (check || check2)
                 {
@@ -341,16 +386,25 @@ public class Movement : MonoBehaviour
             if (!check && !check2)
             {
                 ground = false;
-                //if (_rb.velocity.y > 0)
-                //    airDirection = new Vector3(_rb.velocity.x, 0, 0).normalized;
-                //else
-                //    airDirection = _rb.velocity.normalized;
             }
         }
 
         if (ground) status.col.material = groundMat;
         else status.col.material = airMat;
         return ground;
+    }
+
+    public void CollisionPassthrough()
+    {
+        status.col.gameObject.layer = LayerMask.NameToLayer("CollisionPassthrough");
+        passthroughPlatforms = true;
+    }
+    public void FallThroughPlatforms()
+    {
+        SetVelocity(new Vector3(_rb.velocity.x, -2, 0));
+        passthroughPlatforms = true;
+        passthroughCounter = passthroughDuration;
+        status.col.gameObject.layer = LayerMask.NameToLayer("CollisionPassthrough");
     }
 
     void Landing()

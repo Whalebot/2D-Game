@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Rogue_j5C
   m_EditorClassIdentifier: 
   animationID: 12
-  meterCost: 0
+  meterCost: 50
   meterGain: 10
+  consumeMeterOnActiveFrame: 0
   icon: {fileID: 0}
   firstStartupFrame: 10
   lastActiveFrame: 109
@@ -75,6 +76,7 @@ MonoBehaviour:
   keepVelocity: 0
   particleID: 0
   holdAttack: 0
+  releaseAttackMove: {fileID: 0}
   autoAim: 0
   armor: 0
   resetGatling: 0
@@ -102,15 +104,12 @@ MonoBehaviour:
   - startFrame: 1
     duration: 9
     momentum: {x: -2, y: 2}
-    freeMovement: 0
-    homing: 0
     resetVelocityDuringRecovery: 0
   - startFrame: 10
     duration: 100
     momentum: {x: 25, y: -20}
-    freeMovement: 0
-    homing: 0
     resetVelocityDuringRecovery: 0
   instantStartupRotation: 1
   overrideVelocity: 1
   runMomentum: 0
+  stopAtEdges: 1

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Knight_Projectile
   m_EditorClassIdentifier: 
   animationID: 0
+  meterCost: 0
+  meterGain: 10
   icon: {fileID: 0}
   firstStartupFrame: 46
   lastActiveFrame: 50
@@ -45,14 +47,15 @@ MonoBehaviour:
   screenShake:
   - type: 0
     startup: 40
-    amplitude: 2
-    duration: 10
+    amplitude: 1
+    duration: 1
   vfx: []
   sfx: []
   hitFX:
     startup: 1
     prefab: {fileID: 1416824176164296, guid: dc1397204bb5ee84895af2b49dac2d49, type: 3}
     deattachFromPlayer: 1
+    destroyOnRecovery: 0
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0}
     scale: {x: 0.5, y: 0.5, z: 0.5}
@@ -68,6 +71,7 @@ MonoBehaviour:
   autoAim: 0
   armor: 0
   resetGatling: 0
+  hitsGroundOnly: 0
   noClip: 0
   noClipStart: 1
   noClipDuration: 0
@@ -84,28 +88,15 @@ MonoBehaviour:
   fullCancel: 0
   gatlingCancel: 1
   uncancelable: 0
-  gatlingCancelOnBlock: 1
-  gatlingCancelOnHit: 1
-  jumpCancelOnBlock: 0
-  jumpCancelOnHit: 1
-  specialCancelOnBlock: 1
-  specialCancelOnHit: 1
   useAirAction: 0
   landCancel: 0
   recoverOnlyOnLand: 0
   m:
   - startFrame: 40
     duration: 2
-    momentum: {x: 8, y: 0}
-    freeMovement: 0
-    homing: 0
+    momentum: {x: -2, y: 0}
     resetVelocityDuringRecovery: 0
-  - startFrame: 50
-    duration: 2
-    momentum: {x: 4, y: 0}
-    freeMovement: 0
-    homing: 0
-    resetVelocityDuringRecovery: 1
   instantStartupRotation: 1
   overrideVelocity: 1
   runMomentum: 0
+  stopAtEdges: 1
