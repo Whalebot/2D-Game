@@ -197,7 +197,7 @@ public class AttackScript : MonoBehaviour
 
     void ExecuteUniqueProperties(int frame)
     {
-        if (lastFrame == frame) { Debug.Log($"{lastFrame} {frame}"); }
+        //if (lastFrame == frame) { Debug.Log($"{lastFrame} {frame}"); }
         foreach (var item in activeMove.uniqueProperties)
         {
             if (frame == item.frame)
@@ -246,21 +246,33 @@ public class AttackScript : MonoBehaviour
             {
                 tempMomentum = true;
             }
-            //Recovery
-            if (frame > activeMove.m[i].startFrame + activeMove.m[i].duration)
+
+            if (activeMove.m[i].teleport)
             {
-                movement.forcedWalk = false;
-                if (activeMove.m[i].resetVelocityDuringRecovery)
+                if (frame == activeMove.m[i].startFrame)
+                    transform.position = transform.position + (transform.forward * activeMove.m[i].momentum.x + transform.up * activeMove.m[i].momentum.y);
+            }
+            else
+            {
+
+                //Recovery
+                if (frame == activeMove.m[i].startFrame + activeMove.m[i].duration)
                 {
-                    movement.SetVelocity(Vector3.zero);
+                    movement.forcedWalk = false;
+                    if (activeMove.m[i].resetVelocityDuringRecovery)
+                    {
+                        movement.SetVelocity(Vector3.zero);
+                    }
+                }
+                else
+                if (frame >= activeMove.m[i].startFrame && frame < activeMove.m[i].startFrame + activeMove.m[i].duration)
+                {
+                    if (!movement.ground) movement._rb.useGravity = false;
+
+                    movement.SetVelocity((activeMove.m[i].momentum.x * transform.forward + transform.up * activeMove.m[i].momentum.y));
                 }
             }
-            else if (frame >= activeMove.m[i].startFrame && frame < activeMove.m[i].startFrame + activeMove.m[i].duration)
-            {
-                if (!movement.ground) movement._rb.useGravity = false;
 
-                movement.SetVelocity((activeMove.m[i].momentum.x * transform.forward + transform.up * activeMove.m[i].momentum.y));
-            }
         }
         if (movement.CheckEdge() && activeMove.stopAtEdges)
         {
@@ -467,7 +479,7 @@ public class AttackScript : MonoBehaviour
 
         if (status.Meter <= move.meterCost)
         {
-            delayRelease = true; 
+            delayRelease = true;
         }
 
         if (!move.consumeMeterOnActiveFrame)
@@ -551,8 +563,8 @@ public class AttackScript : MonoBehaviour
             movementFrames = GameManager.Instance.gameFrameCount;
         }
 
-        if(!move.consumeMeterOnActiveFrame)
-        status.Meter -= move.meterCost;
+        if (!move.consumeMeterOnActiveFrame)
+            status.Meter -= move.meterCost;
 
         if (AttackFrame > move.firstStartupFrame)
             attackFrames = move.firstStartupFrame - 1;

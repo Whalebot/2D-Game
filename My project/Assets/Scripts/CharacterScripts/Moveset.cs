@@ -3,32 +3,31 @@
 [CreateAssetMenu(fileName = "New Moveset", menuName = "ScriptableObjects/Moveset")]
 public class Moveset : ScriptableObject
 {
-    public Move dodge;
-    public Move airDodge;
+    [Header("Dodge Button")]
+    public Combo dodgeCombo;
+    public Combo airDodgeCombo;
     public Move dashAttack;
     public Move airDashAttack;
 
-    public Combo lightCombo;
-    public Combo heavyCombo;
+    [Header("A Button")]
+    public Combo lightCombo; 
+    public Combo upLightCombo;
+    public Combo downLightCombo;
+    public Combo airLightCombo;
+    public Combo downAirLightCombo;
 
+    [Header("B Button")]
+    public Combo heavyCombo;
     public Combo upHeavyCombo;
     public Combo downHeavyCombo;
-
-
-    public Combo skillCombo;
-
-    public Combo upSkillCombo;
-    public Combo downSkillCombo;
-
-    public Combo airLightCombo;
     public Combo airHeavyCombo;
-
     public Combo downAirHeavyCombo;
 
-
+    [Header("C Button")]
+    public Combo skillCombo;
+    public Combo upSkillCombo;
+    public Combo downSkillCombo;
     public Combo airSkillCombo;
-
-    public Combo[] combos;
-    public Combo extra;
+    public Combo downAirSkillCombo;
 }
 

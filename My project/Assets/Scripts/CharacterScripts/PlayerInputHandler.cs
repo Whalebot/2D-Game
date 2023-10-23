@@ -57,7 +57,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (GameManager.menuOpen || GameManager.isPaused || status.isDead)
         {
-            mov.direction = Vector3.zero; 
+            mov.direction = Vector3.zero;
             mov.isMoving = false;
             return;
         }
@@ -67,7 +67,8 @@ public class PlayerInputHandler : MonoBehaviour
             mov.isMoving = false;
 
         }
-        else {
+        else
+        {
             mov.isMoving = true;
             mov.direction = new Vector2(input.inputDirection.x, 0);
         }
@@ -123,7 +124,21 @@ public class PlayerInputHandler : MonoBehaviour
             return attack.ComboAttack(attack.moveset.airLightCombo);
         }
     }
-
+    bool UpWestButton()
+    {
+        return attack.ComboAttack(attack.moveset.upLightCombo);
+    }
+    bool DownWestButton()
+    {
+        if (mov.ground)
+        {
+            return attack.ComboAttack(attack.moveset.downLightCombo);
+        }
+        else
+        {
+            return attack.ComboAttack(attack.moveset.downAirLightCombo);
+        }
+    }
     bool NorthButton()
     {
         if (mov.ground)
@@ -207,12 +222,11 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (mov.ground)
         {
-
-            return attack.Attack(attack.moveset.dodge);
+            return attack.ComboAttack(attack.moveset.dodgeCombo);
         }
         else
         {
-            return attack.Attack(attack.moveset.airDodge);
+            return attack.ComboAttack(attack.moveset.airDodgeCombo);
         }
 
     }
@@ -225,6 +239,22 @@ public class PlayerInputHandler : MonoBehaviour
             {
                 //Interact button
                 case 1:
+                    if (input.bufferedInputs[i].dir == 8)
+                    {
+                        if (UpWestButton())
+                        {
+                            DeleteInputs(i);
+                            break;
+                        }
+                    }
+                    if (input.bufferedInputs[i].dir == 2)
+                    {
+                        if (DownWestButton())
+                        {
+                            DeleteInputs(i);
+                            break;
+                        }
+                    }
                     if (WestButton())
                     {
                         DeleteInputs(i);

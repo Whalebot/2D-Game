@@ -15,6 +15,7 @@ MonoBehaviour:
   animationID: 1
   meterCost: 0
   meterGain: 10
+  consumeMeterOnActiveFrame: 0
   icon: {fileID: 0}
   firstStartupFrame: 18
   lastActiveFrame: 22
@@ -71,6 +72,7 @@ MonoBehaviour:
   keepVelocity: 0
   particleID: 0
   holdAttack: 0
+  releaseAttackMove: {fileID: 0}
   autoAim: 0
   armor: 0
   resetGatling: 0
@@ -98,10 +100,10 @@ MonoBehaviour:
   m:
   - startFrame: 3
     duration: 2
-    momentum: {x: 6, y: 0}
-    freeMovement: 0
-    homing: 0
+    momentum: {x: 3, y: 0}
     resetVelocityDuringRecovery: 0
+    teleport: 0
   instantStartupRotation: 1
   overrideVelocity: 1
   runMomentum: 0
+  stopAtEdges: 1

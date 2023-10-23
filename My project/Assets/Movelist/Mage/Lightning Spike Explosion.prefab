@@ -81,6 +81,12 @@ MonoBehaviour:
   destroyOnHit: 0
   explosionVFX: {fileID: 6221875919659914540, guid: 2e93bb8f6b9308046876c71285120417, type: 3}
   explosionSFX: {fileID: 6221875919659914540, guid: 2e93bb8f6b9308046876c71285120417, type: 3}
+  teleportMask:
+    serializedVersion: 2
+    m_Bits: 0
+  airTeleport: 0
+  teleportYRange: 5
+  teleportYOffset: 1
   rb: {fileID: 0}
   hit: 0
 --- !u!54 &-6229484424086246374
@@ -148,7 +154,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8476170062866757661}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

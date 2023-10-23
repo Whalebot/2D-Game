@@ -170,6 +170,7 @@ public class Momentum
     public int duration;
     public Vector2 momentum;
     public bool resetVelocityDuringRecovery = true;
+    public bool teleport = false;
 
 }
 

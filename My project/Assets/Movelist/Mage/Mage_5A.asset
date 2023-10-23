@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
   m_Name: Mage_5A
   m_EditorClassIdentifier: 
-  animationID: 3
+  animationID: 1
   meterCost: 0
   meterGain: 20
   consumeMeterOnActiveFrame: 1
   icon: {fileID: 0}
-  firstStartupFrame: 24
-  lastActiveFrame: 28
-  totalMoveDuration: 48
-  firstGatlingFrame: 32
+  firstStartupFrame: 17
+  lastActiveFrame: 21
+  totalMoveDuration: 41
+  firstGatlingFrame: 25
   recoveryFrames: 20
   attacks:
   - attackLevel: 0
@@ -30,7 +30,7 @@ MonoBehaviour:
     stun: 20
     hitstop: 5
     poiseBreak: 0
-    startupFrame: 24
+    startupFrame: 17
     activeFrames: 5
     gatlingFrames: 8
     groundHitProperty:
@@ -47,7 +47,7 @@ MonoBehaviour:
   uniqueProperties: []
   screenShake: []
   vfx:
-  - startup: 24
+  - startup: 16
     prefab: {fileID: 1320683006971348, guid: 83ea291b15cd5ed46be1077c6b047713, type: 3}
     deattachFromPlayer: 1
     destroyOnRecovery: 0
@@ -102,10 +102,12 @@ MonoBehaviour:
     duration: 2
     momentum: {x: 3, y: 0}
     resetVelocityDuringRecovery: 0
+    teleport: 0
   - startFrame: 24
     duration: 2
     momentum: {x: 2, y: 0}
     resetVelocityDuringRecovery: 0
+    teleport: 0
   instantStartupRotation: 0
   overrideVelocity: 1
   runMomentum: 0

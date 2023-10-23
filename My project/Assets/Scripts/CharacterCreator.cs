@@ -27,7 +27,6 @@ public class CharacterCreator : MonoBehaviour
         if (GameManager.Instance != null)
         {
             LoadVisuals();
-            Debug.Log(characters[SaveManager.Instance.saveData.visualData.characterJob].moveset);
             GameManager.Instance.playerStatus.character = characters[SaveManager.Instance.saveData.visualData.characterJob];
             GameManager.Instance.player.GetComponent<AttackScript>().moveset = characters[SaveManager.Instance.saveData.visualData.characterJob].moveset;
         }

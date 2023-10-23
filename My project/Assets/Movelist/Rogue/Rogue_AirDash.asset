@@ -15,6 +15,7 @@ MonoBehaviour:
   animationID: 100
   meterCost: 0
   meterGain: 10
+  consumeMeterOnActiveFrame: 0
   icon: {fileID: 0}
   firstStartupFrame: 15
   lastActiveFrame: 15
@@ -51,6 +52,7 @@ MonoBehaviour:
   keepVelocity: 0
   particleID: 0
   holdAttack: 0
+  releaseAttackMove: {fileID: 0}
   autoAim: 0
   armor: 0
   resetGatling: 0
@@ -72,7 +74,7 @@ MonoBehaviour:
   fullCancel: 0
   gatlingCancel: 1
   uncancelable: 0
-  useAirAction: 0
+  useAirAction: 1
   landCancel: 0
   recoverOnlyOnLand: 0
   m:
@@ -80,10 +82,12 @@ MonoBehaviour:
     duration: 2
     momentum: {x: 15, y: 0}
     resetVelocityDuringRecovery: 0
+    teleport: 0
   - startFrame: 12
     duration: 1
     momentum: {x: 5, y: 0}
     resetVelocityDuringRecovery: 0
+    teleport: 0
   instantStartupRotation: 1
   overrideVelocity: 1
   runMomentum: 0

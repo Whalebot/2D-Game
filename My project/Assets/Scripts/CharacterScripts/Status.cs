@@ -403,7 +403,6 @@ public class Status : MonoBehaviour
         if (character != null)
         {
             ReplaceStats(baseStats, character.stats);
-            Debug.Log("Status");
         }
         if (alignment != Alignment.Player || !SaveManager.Instance.HasSaveData())
             ReplaceStats(currentStats, baseStats);

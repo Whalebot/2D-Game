@@ -133,6 +133,12 @@ MonoBehaviour:
   destroyOnHit: 0
   explosionVFX: {fileID: 6221875919659914540, guid: 2e93bb8f6b9308046876c71285120417, type: 3}
   explosionSFX: {fileID: 6221875919659914540, guid: 2e93bb8f6b9308046876c71285120417, type: 3}
+  teleportMask:
+    serializedVersion: 2
+    m_Bits: 0
+  airTeleport: 0
+  teleportYRange: 5
+  teleportYOffset: 1
   rb: {fileID: 0}
   hit: 0
 --- !u!54 &-6229484424086246374
@@ -261,7 +267,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 117360, guid: 93dde01820cd8a44bbb998ba21c24e43, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 428554, guid: 93dde01820cd8a44bbb998ba21c24e43, type: 3}
       propertyPath: m_RootOrder
@@ -342,3 +348,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 428554, guid: 93dde01820cd8a44bbb998ba21c24e43, type: 3}
   m_PrefabInstance: {fileID: 443373306644821806}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &443373306644905310 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 117360, guid: 93dde01820cd8a44bbb998ba21c24e43, type: 3}
+  m_PrefabInstance: {fileID: 443373306644821806}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3864359191029379897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443373306644905310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 328c17e9e504aed4992970e71c71eb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resetRotation: 0
+  defaultRotation: {x: 0, y: 0, z: 0}

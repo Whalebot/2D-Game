@@ -102,7 +102,6 @@ public class GameManager : MonoBehaviour
     {
         //Load temp stats
         playerStatus.currentStats.ReplaceStats(SaveManager.Instance.saveData.stats);
-        Debug.Log($"{playerStatus.currentStats.gold} {SaveManager.Instance.saveData.stats.gold}");
     }
 
     void RoomCleared()

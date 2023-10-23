@@ -4,7 +4,7 @@ public class Projectile : Hitbox
 {
     public enum ProjectileMovement
     {
-        Linear, Homing, SpawnOnTarget
+        Linear, Homing, SpawnOnTarget, Teleport
     }
 
     public ProjectileMovement projectileMovement;
@@ -27,7 +27,9 @@ public class Projectile : Hitbox
     [TabGroup("Settings")] public bool updateVelocty;
 
     [TabGroup("Settings")] public LayerMask searchMask;
+
     [TabGroup("Settings")] public float searchSize;
+
 
     [TabGroup("Settings")] public GameObject explosion;
     [TabGroup("Settings")] public bool onlyExplosionDamage;
@@ -37,10 +39,15 @@ public class Projectile : Hitbox
     [TabGroup("Settings")] public bool destroyOnHit;
     [TabGroup("Components")] public GameObject explosionVFX;
     [TabGroup("Components")] public GameObject explosionSFX;
+    [TabGroup("Teleport")] public LayerMask teleportMask;
 
+    [TabGroup("Teleport")] public bool airTeleport;
+
+    [TabGroup("Teleport")] public float teleportYRange = 5f;
+    [TabGroup("Teleport")] public float teleportYOffset = 1f;
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public bool hit;
-
+    RaycastHit teleportHit;
 
     private void Awake()
     {
@@ -64,7 +71,52 @@ public class Projectile : Hitbox
 
         if (onStartVelocity)
             rb.velocity = transform.forward * velocity;
+
+        if (projectileMovement == ProjectileMovement.Teleport)
+        {
+            Teleport();
+        }
     }
+    void Teleport()
+    {
+        Collider[] col = Physics.OverlapSphere(transform.position + Vector3.up * (0.5F), 0.005F, teleportMask);
+
+        int i = 1;
+
+        if (col.Length > 0)
+        {
+            i++;
+        }
+
+        bool foundHit = Physics.Raycast(transform.position + Vector3.up * teleportYOffset * i, Vector3.down, out teleportHit, teleportYRange * i, teleportMask);
+
+        Collider[] col2 = Physics.OverlapSphere(transform.position + Vector3.up * (teleportYOffset * i + 0.2F), 0.005F, teleportMask);
+
+        if (airTeleport && col.Length <= 0)
+        {
+            status.transform.position = transform.position;
+        }
+        else if (foundHit && col2.Length <= 0)
+        {
+            transform.position = teleportHit.point;
+            status.transform.position = transform.position;
+        }
+        else
+        {
+            if (life > 0)
+            {
+                life--;
+                transform.position -= transform.forward * 0.5F;
+                Teleport();
+            }
+            else
+            {
+                transform.position = status.transform.position;
+                status.transform.position = transform.position;
+            }
+        }
+    }
+
     public void FindTarget()
     {
         Collider[] col = Physics.OverlapSphere(transform.position, searchSize * 0.5F, searchMask);
@@ -253,11 +305,15 @@ public class Projectile : Hitbox
                 return;
             }
         }
-
-        if (destroyOnCollission && !foundTarget)
+        if (!foundTarget)
         {
-            DestroyProjectile();
+            // Found Collission
+            if (destroyOnCollission)
+            {
+                DestroyProjectile();
+            }
         }
+
     }
 
     public override void DoDamage(Status other, float dmgMod)

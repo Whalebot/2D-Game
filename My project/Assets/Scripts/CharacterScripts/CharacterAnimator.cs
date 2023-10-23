@@ -87,7 +87,7 @@ public class CharacterAnimator : MonoBehaviour
         {
             if (anim.GetNextAnimatorStateInfo(0).speed > 0 )
             {
-                Debug.Log($"{attack.attackFrames} {attack.attackFrames/60} {anim.GetNextAnimatorStateInfo(0).length} {((attack.attackFrames / 60))/ anim.GetNextAnimatorStateInfo(0).length}");
+                //Debug.Log($"{attack.attackFrames} {attack.attackFrames/60} {anim.GetNextAnimatorStateInfo(0).length} {((attack.attackFrames / 60))/ anim.GetNextAnimatorStateInfo(0).length}");
                 anim.Play(anim.GetNextAnimatorStateInfo(0).fullPathHash, 0,
                     (((attack.attackFrames / 60)))
                     / anim.GetNextAnimatorStateInfo(0).length);
