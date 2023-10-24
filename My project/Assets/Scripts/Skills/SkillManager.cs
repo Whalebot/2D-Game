@@ -158,7 +158,6 @@ public class SkillManager : MonoBehaviour
         List<SkillSO> availableSkills = new List<SkillSO>();
         foreach (var item in skillList)
         {
-            Debug.Log(item);
             if (!foundSkills.Contains(item) && !activeSkills.Contains(item) && skillHandler.CanGetSkill(item))
                 availableSkills.Add(item);
         }

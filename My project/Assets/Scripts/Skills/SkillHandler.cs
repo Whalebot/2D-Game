@@ -140,24 +140,27 @@ public class SkillHandler : MonoBehaviour
 
         Moveset def1 = attackScript.moveset;
         FieldInfo[] defInfo1 = def1.GetType().GetFields();
-        if (skillSO.prerequisiteMoves.Count > 0)
+        if (skillSO.newMoves.Count > 0)
         {
             for (int i = 0; i < defInfo1.Length; i++)
             {
                 object obj = def1;
                 object var1 = defInfo1[i].GetValue(obj);
-
                 if (var1 is Combo)
                 {
                     Combo temp = (Combo)var1;
-                    foreach (var move in skillSO.prerequisiteMoves)
+                    foreach (var newMove in skillSO.newMoves)
                     {
-                        foreach (var item in temp.moves)
-                        {
-                            //Debug.Log($"{item.name} {move.name}");
-                            if (item.name == move.name)
+                        if (newMove.oldMove != null)
+                            foreach (var item in temp.moves)
+                            {
+                                if (item.name == newMove.oldMove.name)
+                                    hasRequiredMove = true;
+                            }
+
+                        if (newMove.combo != null)
+                            if (temp.name == newMove.combo.name)
                                 hasRequiredMove = true;
-                        }
                     }
                 }
             }
@@ -188,7 +191,7 @@ public class SkillHandler : MonoBehaviour
                     GetCombo(item.combo).moves.Add(item.move);
             }
         }
-        
+
         if (!loading)
         {
             status.Health += skill.stats.maxHealth;

@@ -122,7 +122,17 @@ public class Projectile : Hitbox
             }
         }
     }
+    public bool ClearLine(Transform t)
+    {
+        RaycastHit hit;
+        bool clearLine = Physics.Raycast(transform.position, (t.position - transform.position).normalized, out hit, 1000, searchMask);
+        Debug.DrawLine(transform.position, hit.point, Color.yellow);
 
+        if (clearLine)
+            return hit.transform.IsChildOf(t);
+        else
+            return false;
+    }
     public void FindTarget()
     {
         Collider[] col = Physics.OverlapSphere(transform.position, searchSize * 0.5F, searchMask);
@@ -132,13 +142,10 @@ public class Projectile : Hitbox
             Status tempStatus = item.GetComponentInParent<Status>();
             if (tempStatus == null || tempStatus == status) continue;
 
-            RaycastHit hit;
-            bool clearLine = Physics.Raycast(transform.position, (tempStatus.transform.position - transform.position).normalized, out hit, 1000, searchMask);
-            Debug.DrawLine(transform.position, hit.point, Color.yellow);
-
-            if (clearLine)
+            if (ClearLine(tempStatus.transform))
             {
-                float dist = Vector2.Distance(tempStatus.transform.position, transform.position);
+                Vector2 v = tempStatus.transform.position - transform.position;
+                float dist = v.x + (v.y * v.y);
                 if (dist < closestDistance)
                 {
                     target = tempStatus.transform;
