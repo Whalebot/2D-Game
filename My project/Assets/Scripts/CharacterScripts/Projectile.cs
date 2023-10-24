@@ -133,7 +133,7 @@ public class Projectile : Hitbox
             if (tempStatus == null || tempStatus == status) continue;
 
             RaycastHit hit;
-            bool clearLine = Physics.Raycast(transform.position, tempStatus.transform.position - transform.position.normalized, out hit, 1000, searchMask);
+            bool clearLine = Physics.Raycast(transform.position, (tempStatus.transform.position - transform.position).normalized, out hit, 1000, searchMask);
             Debug.DrawLine(transform.position, hit.point, Color.yellow);
 
             if (clearLine)

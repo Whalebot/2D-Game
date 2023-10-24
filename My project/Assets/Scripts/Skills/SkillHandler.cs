@@ -15,10 +15,6 @@ public class SkillHandler : MonoBehaviour
     [TabGroup("Components")] public Transform skillLevelUpPanel;
     [TabGroup("Components")] public GameObject kbQuickslots;
 
-    public delegate void SkillEvent();
-    public SkillEvent expEvent;
-    public SkillEvent lvlEvent;
-
     private void Awake()
     {
         learnedSkills = new List<SkillSO>();
@@ -29,7 +25,7 @@ public class SkillHandler : MonoBehaviour
     }
     void Start()
     {
-        UpdateStats();
+        //UpdateStats();
         LateBehaviour();
     }
     void DuplicateMoveset()
@@ -39,7 +35,8 @@ public class SkillHandler : MonoBehaviour
         DuplicateCombos(moveset);
         attackScript.moveset = moveset;
     }
-    void DuplicateCombos(Moveset moveset) {
+    void DuplicateCombos(Moveset moveset)
+    {
         Moveset def1 = moveset;
         FieldInfo[] defInfo1 = def1.GetType().GetFields();
 
@@ -99,30 +96,8 @@ public class SkillHandler : MonoBehaviour
 
         foreach (var item in SaveManager.Instance.saveData.learnedSkills)
         {
-            LearnSkill(item);
+            LearnSkill(item, true);
         }
-    }
-
-    void SaveSkill(SkillSO skill)
-    {
-        //if (skill == null) return;
-        //SkillData data = new SkillData
-        //{
-        //    skillID = ItemDatabase.Instance.GetSkillID(skill),
-        //    level = skill.level,
-        //    experience = skill.experience
-        //};
-        //DataManager.Instance.currentSaveData.skillData.Add(data);
-    }
-
-    void LoadSkills()
-    {
-        //foreach (SkillData data in DataManager.Instance.currentSaveData.skillData)
-        //{
-        //    Skill skill = ItemDatabase.Instance.GetSkill(data.skillID);
-        //    skill.level = data.level;
-        //    skill.experience = data.experience;
-        //}
     }
 
     public void RemoveAllSkills()
@@ -132,7 +107,7 @@ public class SkillHandler : MonoBehaviour
         UpdateStats();
     }
 
-    public void UpdateStats()
+    public void UpdateStats(bool loading = false)
     {
         modifiedStats = new Stats();
         modifiedStats.ResetValues();
@@ -141,7 +116,7 @@ public class SkillHandler : MonoBehaviour
             if (skill.type != SkillType.Active)
                 CalculateSkillStats(skill);
         }
-        ApplySkillEffects();
+        ApplySkillEffects(loading);
         status.UpdateStats();
     }
 
@@ -189,11 +164,11 @@ public class SkillHandler : MonoBehaviour
         }
         else hasRequiredMove = true;
 
-        Debug.Log($"{skillSO} Has required move {hasRequiredMove} & has required skill{hasRequiredSkill}"); 
+        Debug.Log($"{skillSO} Has required move {hasRequiredMove} & has required skill{hasRequiredSkill}");
 
         return hasRequiredMove && hasRequiredSkill;
     }
-    public void LearnSkill(SkillSO skill)
+    public void LearnSkill(SkillSO skill, bool loading = false)
     {
         if (skill == null)
         {
@@ -212,12 +187,14 @@ public class SkillHandler : MonoBehaviour
                 if (item.combo != null)
                     GetCombo(item.combo).moves.Add(item.move);
             }
-
         }
-
-        expEvent?.Invoke();
-        lvlEvent?.Invoke();
-        UpdateStats();
+        
+        if (!loading)
+        {
+            status.Health += skill.stats.maxHealth;
+            status.Meter += skill.stats.maxMeter;
+        }
+        UpdateStats(loading);
         LateBehaviour();
     }
     public Combo GetCombo(Combo originalCombo)
@@ -240,17 +217,6 @@ public class SkillHandler : MonoBehaviour
         return null;
     }
 
-    public void SkillUI(Skill skill)
-    {
-        return;
-        if (skill == null) window.gameObject.SetActive(false);
-        else
-        {
-            window.gameObject.SetActive(true);
-            window.DisplayUI(skill);
-        }
-    }
-
     public void CalculateSkillStats(SkillSO temp)
     {
         Stats def1 = modifiedStats;
@@ -269,7 +235,11 @@ public class SkillHandler : MonoBehaviour
             if (var1 is int)
             {
                 if ((int)var2 != 0)
-                    defInfo1[i].SetValue(obj, (int)var1 + (int)var2);
+                {
+                    if (defInfo1[i].Name != "currentHealth" && defInfo1[i].Name != "currentMeter")
+                        defInfo1[i].SetValue(obj, (int)var1 + (int)var2);
+                }
+
             }
             else if (var1 is float)
             {
@@ -279,7 +249,7 @@ public class SkillHandler : MonoBehaviour
         }
     }
 
-    public void ApplySkillEffects()
+    public void ApplySkillEffects(bool loading = false)
     {
         Stats def1 = status.currentStats;
         Stats def2 = modifiedStats;
@@ -304,7 +274,8 @@ public class SkillHandler : MonoBehaviour
                 {
                     if (defInfo1[i].Name == "currentHealth" || defInfo1[i].Name == "currentMeter")
                     {
-                        defInfo1[i].SetValue(obj, (int)var1 + (int)var2);
+                        if (!loading)
+                            defInfo1[i].SetValue(obj, (int)var1 + (int)var2);
                     }
                     else
                         defInfo1[i].SetValue(obj, (int)var3 + (int)var2);

@@ -24,7 +24,7 @@ public class SkillManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        ResetAllMovesets();
+        SaveManager.Instance.saveEvent += SaveSkills;
         foundSkills = SaveManager.Instance.saveData.learnedSkills;
     }
 
@@ -33,23 +33,18 @@ public class SkillManager : MonoBehaviour
         skillHandler = GameManager.Instance.player.GetComponent<SkillHandler>();
         //AIManager.Instance.allEnemiesKilled += RollSkills;
     }
-    void ResetAllMovesets()
-    {
-        foreach (var item in allMovesets)
-        {
-            item.upSkillCombo.moves.Clear();
-            item.downSkillCombo.moves.Clear();
-        }
-    }
+
     public void GetSkill(SkillSO skillSO)
     {
         pickedSkillEvent?.Invoke(skillSO);
         skillHandler.LearnSkill(skillSO);
-        SaveManager.Instance.saveData.learnedSkills.Add(skillSO);
         foundSkills.Add(skillSO);
         activeSkills.Clear();
     }
-
+    void SaveSkills()
+    {
+        SaveManager.Instance.saveData.learnedSkills = new List<SkillSO>(foundSkills);
+    }
     [Button]
     public void RollShop(Rank r)
     {
