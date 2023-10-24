@@ -122,14 +122,22 @@ MonoBehaviour:
   body: {fileID: 0}
   enemyList: []
   projectileMovement: 0
+  targetPosition: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
   life: 10
   lifetime: 90
   velocity: 12
+  willDelayReaim: 0
+  projectileDelay: 0
+  delayVelocity: 0
   updateVelocity: 0
   rotateSpeed: 0
   onStartVelocity: 1
   updateVelocty: 1
+  searchMask:
+    serializedVersion: 2
+    m_Bits: 0
+  searchSize: 0
   explosion: {fileID: 5860963072138344223, guid: 72beceec97621e742bca0a5f4c651a88, type: 3}
   onlyExplosionDamage: 1
   destroyOnCollission: 1
@@ -138,8 +146,16 @@ MonoBehaviour:
   destroyOnHit: 1
   explosionVFX: {fileID: 136414, guid: d59fb75f8c3c18040903bc802beec898, type: 3}
   explosionSFX: {fileID: 0}
+  teleportMask:
+    serializedVersion: 2
+    m_Bits: 0
+  airTeleport: 0
+  teleportYRange: 5
+  teleportYOffset: 1
   rb: {fileID: 0}
   hit: 0
+  resetTimer: 0
+  col: {fileID: 0}
 --- !u!54 &-6229484424086246374
 Rigidbody:
   m_ObjectHideFlags: 0

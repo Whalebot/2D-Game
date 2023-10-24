@@ -34,10 +34,10 @@ MonoBehaviour:
     activeFrames: 5
     gatlingFrames: 5
     groundHitProperty:
-      pushback: {x: 0, y: 0}
+      pushback: {x: 2, y: 1}
       hitState: 0
     airHitProperty:
-      pushback: {x: 0, y: 0}
+      pushback: {x: 2, y: 1}
       hitState: 0
     blockProperty:
       pushback: {x: 0, y: 0}
@@ -89,8 +89,7 @@ MonoBehaviour:
   airInvul: 0
   airInvulStart: 1
   airInvulDuration: 0
-  targetComboMoves:
-  - {fileID: 11400000, guid: 37391d90e34a3c04d9b26278e1cbb6d9, type: 2}
+  targetComboMoves: []
   fullCancel: 0
   gatlingCancel: 1
   uncancelable: 0

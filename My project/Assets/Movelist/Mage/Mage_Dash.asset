@@ -62,8 +62,7 @@ MonoBehaviour:
   airInvul: 0
   airInvulStart: 1
   airInvulDuration: 0
-  targetComboMoves:
-  - {fileID: 11400000, guid: 37391d90e34a3c04d9b26278e1cbb6d9, type: 2}
+  targetComboMoves: []
   fullCancel: 0
   gatlingCancel: 1
   uncancelable: 0
@@ -71,14 +70,11 @@ MonoBehaviour:
   landCancel: 0
   recoverOnlyOnLand: 0
   m:
-  - startFrame: 2
-    duration: 25
-    momentum: {x: 6, y: 0}
-    resetVelocityDuringRecovery: 0
-  - startFrame: 28
+  - startFrame: 5
     duration: 5
-    momentum: {x: 3, y: 0}
+    momentum: {x: 8, y: 0}
     resetVelocityDuringRecovery: 0
+    teleport: 0
   instantStartupRotation: 1
   overrideVelocity: 1
   runMomentum: 0

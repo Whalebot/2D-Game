@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     [TabGroup("Settings")] public float restartDelay = 2;
 
     [TabGroup("Settings")] public int gameFrameCount;
+    [TabGroup("Settings")] public float realFrameCount;
     [TabGroup("Settings")] public bool hideMouse;
 
     public event Action advanceGameState;
@@ -159,6 +160,7 @@ public class GameManager : MonoBehaviour
             if (offsetTime <= 0) offsetCounter = 0;
         }
 
+        realFrameCount += Time.timeScale;
         gameFrameCount++;
         //frameCounterEvent?.Invoke(gameFrameCount);
     }
@@ -190,6 +192,7 @@ public class GameManager : MonoBehaviour
 
             text.GetComponentInChildren<DamageText>().SetupNumber(damageValue);
             offsetCounter++;
+            offsetCounter = Mathf.Clamp(offsetCounter, 0, 2);
             offsetTime = offsetResetSpeed;
         }
     }
@@ -197,6 +200,7 @@ public class GameManager : MonoBehaviour
 
     public void Slowmotion(float dur)
     {
+        if (dur <= 0) return;
         StartCoroutine(SetSlowmotion(dur));
     }
 
@@ -229,6 +233,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator SetSlowmotion(float dur)
     {
+
         Time.timeScale = slowMotionValue;
         Time.fixedDeltaTime = startTimeStep * Time.timeScale;
         yield return new WaitForSecondsRealtime(dur * (1F / 60F));
@@ -300,13 +305,6 @@ public class GameManager : MonoBehaviour
         reloading = true;
         StartCoroutine(DeathScreenDelay());
         StartCoroutine(RestartDelay());
-    }
-
-    void RestartGame()
-    {
-        Time.timeScale = 1;
-        isPaused = false;
-        inGameTime = 0;
     }
 
     IEnumerator DeathScreenDelay()

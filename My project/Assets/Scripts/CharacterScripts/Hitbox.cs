@@ -1,19 +1,20 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-
+using Sirenix.OdinInspector;
 public class Hitbox : MonoBehaviour
 {
-    public float baseDamage = 1;
-    public int totalDamage;
+    [TabGroup("Settings")] public float baseDamage = 1;
+    [TabGroup("Settings")] public int totalDamage;
     [HideInInspector] public int hitboxID;
     [HideInInspector] public AttackScript attack;
     [HideInInspector] public Move move;
     [HideInInspector] public Status status;
-    [SerializeField] protected bool canClash = true;
+    [TabGroup("Settings")] public bool canClash = true;
+    [TabGroup("Settings")] public bool relativePushback = false;
     Vector3 knockbackDirection;
     Vector3 aVector;
     public Transform body;
-    [SerializeField] public List<Status> enemyList;
+    [HideInInspector] public List<Status> enemyList;
     MeshRenderer mr;
     protected Transform colPos;
 
@@ -86,7 +87,14 @@ public class Hitbox : MonoBehaviour
 
     public virtual void CheckAttack(Status other, Attack tempAttack)
     {
-        knockbackDirection = body.forward;
+        if (relativePushback)
+        {
+            knockbackDirection = (other.transform.position-transform.position).normalized;
+        }
+        else
+        {
+            knockbackDirection = body.forward;
+        }
         knockbackDirection.y = 0;
         knockbackDirection = knockbackDirection.normalized;
 
@@ -161,8 +169,6 @@ public class Hitbox : MonoBehaviour
         attack.hit = true;
 
         attack.attackHitEvent?.Invoke(move);
-
-
         //Calculate direction
         aVector = knockbackDirection * hit.pushback.x + Vector3.up * hit.pushback.y;
 

@@ -38,6 +38,7 @@ public class LevelManager : MonoBehaviour
 
         SaveManager.Instance.saveEvent += SaveData;
         SaveManager.Instance.startLoadEvent += LoadData;
+        NextRoomType();
     }
     private void Start()
     {

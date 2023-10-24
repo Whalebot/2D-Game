@@ -500,8 +500,8 @@ public class AttackScript : MonoBehaviour
 
 
         //Run momentum
-        //if (move.overrideVelocity) movement._rb.velocity = Vector3.zero;
-        //else if (move.runMomentum) movement._rb.velocity = movement._rb.velocity * 0.5F;
+        if (move.overrideVelocity) movement._rb.velocity = Vector3.zero;
+        else if (move.runMomentum) movement._rb.velocity = movement._rb.velocity * 0.5F;
 
         //Air properties
         if (move.useAirAction) movement.performedJumps++;
@@ -546,7 +546,7 @@ public class AttackScript : MonoBehaviour
             delayRelease = true;
             return true;
         }
-
+        delayRelease = false;
         Move move = activeMove.releaseAttackMove;
 
         usedMoves.Add(move);
@@ -581,10 +581,9 @@ public class AttackScript : MonoBehaviour
 
         if (move.instantStartupRotation) movement.Rotation();
 
-
         //Run momentum
-        //if (move.overrideVelocity) movement._rb.velocity = Vector3.zero;
-        //else if (move.runMomentum) movement._rb.velocity = movement._rb.velocity * 0.5F;
+        if (move.overrideVelocity) movement._rb.velocity = Vector3.zero;
+        else if (move.runMomentum) movement._rb.velocity = movement._rb.velocity * 0.5F;
 
         //Air properties
         if (move.useAirAction) movement.performedJumps++;
@@ -614,7 +613,7 @@ public class AttackScript : MonoBehaviour
         else
         if (status.currentStats.currentMeter < move.meterCost) return false;
         //if (jumpFrameCounter > 0) return false;
-        if (move.useAirAction && !attacking)
+        if (move.useAirAction)
         {
             if (movement.performedJumps <= 0)
             {

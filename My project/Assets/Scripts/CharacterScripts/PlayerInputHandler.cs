@@ -6,6 +6,8 @@ public class PlayerInputHandler : MonoBehaviour
 {
     public static PlayerInputHandler Instance { get; private set; }
     public bool flipPlayer;
+    public bool holdWest;
+    public bool holdNorth;
     [HideInInspector] public InputManager input;
     [HideInInspector] public Camera cam;
     [HideInInspector] public Movement mov;
@@ -34,6 +36,8 @@ public class PlayerInputHandler : MonoBehaviour
         GameManager.Instance.advanceGameState += ExecuteFrame;
         input = InputManager.Instance;
         input.interactInput += InteractButton;
+        input.northInput += HoldNorthButton;
+        input.westInput += HoldWestButton;
         input.northRelease += ReleaseNorthButton;
         input.westRelease += ReleaseWestButton;
 
@@ -48,6 +52,8 @@ public class PlayerInputHandler : MonoBehaviour
     {
         GameManager.Instance.advanceGameState -= ExecuteFrame;
         input.interactInput -= InteractButton;
+        input.northInput -= HoldNorthButton;
+        input.westInput -= HoldWestButton;
         input.northRelease -= ReleaseNorthButton;
         input.westRelease -= ReleaseWestButton;
     }
@@ -165,14 +171,23 @@ public class PlayerInputHandler : MonoBehaviour
             return attack.ComboAttack(attack.moveset.downAirHeavyCombo);
         }
     }
-
+    void HoldNorthButton()
+    {
+        holdNorth = true;
+    }
+    void HoldWestButton()
+    {
+        holdWest = true;
+    }
     void ReleaseNorthButton()
     {
+        holdNorth = false;
         if (attack.IsHoldAttack())
             attack.ReleaseButton();
     }
     void ReleaseWestButton()
     {
+        holdWest = false;
         if (attack.IsHoldAttack())
             attack.ReleaseButton();
     }
@@ -215,7 +230,15 @@ public class PlayerInputHandler : MonoBehaviour
     }
     bool DownEastButton()
     {
-        return attack.ComboAttack(attack.moveset.downSkillCombo);
+        if (mov.ground)
+        {
+
+            return attack.ComboAttack(attack.moveset.downSkillCombo);
+        }
+        else
+        {
+            return attack.ComboAttack(attack.moveset.downAirSkillCombo);
+        }
     }
 
     bool R1Button()
@@ -371,6 +394,10 @@ public class PlayerInputHandler : MonoBehaviour
     }
     void InAnimationInput()
     {
+        if (attack.IsHoldAttack() && !holdNorth && !holdWest)
+            attack.ReleaseButton();
+
+
         if (InputAvailable())
         {
             if (attack.attackString) { NeutralInput(); }

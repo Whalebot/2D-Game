@@ -54,6 +54,7 @@ MonoBehaviour:
   move: {fileID: 0}
   status: {fileID: 0}
   canClash: 0
+  relativePushback: 1
   body: {fileID: 0}
   enemyList: []
   projectileMovement: 0
@@ -81,6 +82,10 @@ MonoBehaviour:
   destroyOnHit: 0
   explosionVFX: {fileID: 6221875919659914540, guid: 2e93bb8f6b9308046876c71285120417, type: 3}
   explosionSFX: {fileID: 6221875919659914540, guid: 2e93bb8f6b9308046876c71285120417, type: 3}
+  willAttract: 0
+  attractPower: {x: 0, y: 0}
+  resetTimer: 0
+  col: {fileID: 0}
   teleportMask:
     serializedVersion: 2
     m_Bits: 0

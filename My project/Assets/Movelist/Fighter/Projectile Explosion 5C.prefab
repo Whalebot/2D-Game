@@ -145,8 +145,16 @@ MonoBehaviour:
   destroyOnHit: 0
   explosionVFX: {fileID: 100010, guid: 87698b9d467306440a17655d9c528f3a, type: 3}
   explosionSFX: {fileID: 6221875919659914540, guid: 2e93bb8f6b9308046876c71285120417, type: 3}
+  teleportMask:
+    serializedVersion: 2
+    m_Bits: 0
+  airTeleport: 0
+  teleportYRange: 5
+  teleportYOffset: 1
   rb: {fileID: 0}
   hit: 0
+  resetTimer: 0
+  col: {fileID: 0}
 --- !u!54 &-6229484424086246374
 Rigidbody:
   m_ObjectHideFlags: 0

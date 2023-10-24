@@ -7,9 +7,9 @@ public class Projectile : Hitbox
         Linear, Homing, SpawnOnTarget, Teleport
     }
 
-    public ProjectileMovement projectileMovement;
-    public Vector3 targetPosition;
-    public Transform target;
+    [TabGroup("Settings")] public ProjectileMovement projectileMovement;
+    [TabGroup("Settings")] public Vector3 targetPosition;
+    [TabGroup("Settings")] public Transform target;
 
     bool isDestroying;
     bool delayDestroy;
@@ -39,15 +39,21 @@ public class Projectile : Hitbox
     [TabGroup("Settings")] public bool destroyOnHit;
     [TabGroup("Components")] public GameObject explosionVFX;
     [TabGroup("Components")] public GameObject explosionSFX;
+
+    [TabGroup("Attraction")] public bool willAttract;
+    [TabGroup("Attraction")] public Vector2 attractPower;
+    [TabGroup("Attraction")] public int resetTimer = 0;
+    int resetCounter;
+    [TabGroup("Attraction")] public GameObject col;
+
     [TabGroup("Teleport")] public LayerMask teleportMask;
-
     [TabGroup("Teleport")] public bool airTeleport;
-
     [TabGroup("Teleport")] public float teleportYRange = 5f;
     [TabGroup("Teleport")] public float teleportYOffset = 1f;
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public bool hit;
     RaycastHit teleportHit;
+
 
     private void Awake()
     {
@@ -59,7 +65,7 @@ public class Projectile : Hitbox
     private void Start()
     {
         GameManager.Instance.advanceGameState += ExecuteFrame;
-
+        resetCounter = resetTimer;
 
         if (status.alignment == Alignment.Enemy)
             target = GameManager.Instance.player;
@@ -156,6 +162,26 @@ public class Projectile : Hitbox
             if (lifetime <= 0) DestroyProjectile();
         }
 
+        if (resetTimer > 0)
+        {
+            if (enemyList.Count > 0)
+            {
+                resetCounter--;
+                if (resetCounter <= 0)
+                {
+                    col.gameObject.SetActive(false);
+                    enemyList.Clear();
+                    resetCounter = resetTimer;
+                }
+            }
+            else
+            {
+                col.gameObject.SetActive(true);
+            }
+        }
+
+        AttractBehaviour();
+
         if (target != null)
         {
             targetPosition = target.position + Vector3.up * 0.5F;
@@ -180,6 +206,23 @@ public class Projectile : Hitbox
             FindTarget();
         }
         Movement();
+    }
+
+    void AttractBehaviour()
+    {
+        if (willAttract)
+        {
+            Collider[] col = Physics.OverlapSphere(transform.position, searchSize * 0.5F, searchMask);
+            foreach (Collider item in col)
+            {
+                Status tempStatus = item.GetComponentInParent<Status>();
+                if (tempStatus == null || tempStatus == status) continue;
+                Vector3 dir = (transform.position - item.transform.position).normalized * attractPower;
+                if (tempStatus.GetComponent<Movement>().ground)
+                    dir.y = 0;
+                tempStatus.GetComponent<Rigidbody>().velocity += dir;
+            }
+        }
     }
 
     public void DestroyProjectile()

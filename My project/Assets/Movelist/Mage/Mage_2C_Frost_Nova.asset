@@ -34,10 +34,10 @@ MonoBehaviour:
     activeFrames: 1
     gatlingFrames: 5
     groundHitProperty:
-      pushback: {x: 2, y: 0}
+      pushback: {x: 8, y: 5}
       hitState: 0
     airHitProperty:
-      pushback: {x: 0, y: 0}
+      pushback: {x: 8, y: 5}
       hitState: 0
     blockProperty:
       pushback: {x: 0, y: 0}
@@ -53,21 +53,21 @@ MonoBehaviour:
   vfx:
   - startup: 1
     prefab: {fileID: 9143454445820708258, guid: 413257cc1651f9f44a0acc09067a1c17, type: 3}
-    deattachFromPlayer: 0
+    deattachFromPlayer: 1
     destroyOnRecovery: 0
     position: {x: 0, y: 0.01, z: 0}
     rotation: {x: -90, y: 0, z: 0}
     scale: {x: 0.3, y: 0.3, z: 0.3}
   - startup: 40
     prefab: {fileID: 9143454445820708258, guid: 413257cc1651f9f44a0acc09067a1c17, type: 3}
-    deattachFromPlayer: 0
+    deattachFromPlayer: 1
     destroyOnRecovery: 0
     position: {x: 0, y: 0.6, z: 0.7}
     rotation: {x: 0, y: 0, z: 90}
     scale: {x: 0.5, y: 0.5, z: 0.5}
   - startup: 40
     prefab: {fileID: 117360, guid: 93dde01820cd8a44bbb998ba21c24e43, type: 3}
-    deattachFromPlayer: 0
+    deattachFromPlayer: 1
     destroyOnRecovery: 0
     position: {x: 0, y: 0, z: 0}
     rotation: {x: -90, y: 0, z: 0}

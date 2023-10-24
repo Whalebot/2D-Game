@@ -15,6 +15,7 @@ MonoBehaviour:
   animationID: 25
   meterCost: 0
   meterGain: 20
+  consumeMeterOnActiveFrame: 0
   icon: {fileID: 0}
   firstStartupFrame: 40
   lastActiveFrame: 40
@@ -25,7 +26,7 @@ MonoBehaviour:
   - attackLevel: 2
     attackType: 1
     hitbox: {fileID: 5860963072138344223, guid: ebae092aedc0a1542b8a01879d01b2e7, type: 3}
-    damage: 1
+    damage: 3
     stun: 20
     hitstop: 5
     poiseBreak: 0
@@ -112,6 +113,7 @@ MonoBehaviour:
     duration: 2
     momentum: {x: -3, y: 0}
     resetVelocityDuringRecovery: 0
+    teleport: 0
   instantStartupRotation: 0
   overrideVelocity: 1
   runMomentum: 0

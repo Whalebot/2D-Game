@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5860963072138344223}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.01, z: 4}
+  m_LocalPosition: {x: 0, y: 0.1, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -107,7 +107,7 @@ MonoBehaviour:
   canClash: 1
   body: {fileID: 0}
   enemyList: []
-  projectileMovement: 1
+  projectileMovement: 2
   targetPosition: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
   life: 10
@@ -122,9 +122,9 @@ MonoBehaviour:
   updateVelocty: 1
   searchMask:
     serializedVersion: 2
-    m_Bits: 0
-  searchSize: 0
-  explosion: {fileID: 5860963072138344223, guid: c43b27195da20f9449612bfcf5a2a629, type: 3}
+    m_Bits: 128
+  searchSize: 20
+  explosion: {fileID: 5860963072138344223, guid: 3f802dad4db1b194fb49335a9cc90d3e, type: 3}
   onlyExplosionDamage: 1
   destroyOnCollission: 0
   destroyOnProjectileClash: 0
@@ -132,6 +132,16 @@ MonoBehaviour:
   destroyOnHit: 0
   explosionVFX: {fileID: 6221875919659914540, guid: 2e93bb8f6b9308046876c71285120417, type: 3}
   explosionSFX: {fileID: 6221875919659914540, guid: 2e93bb8f6b9308046876c71285120417, type: 3}
+  willAttract: 0
+  attractPower: {x: 0, y: 0}
+  resetTimer: 0
+  col: {fileID: 0}
+  teleportMask:
+    serializedVersion: 2
+    m_Bits: 0
+  airTeleport: 0
+  teleportYRange: 5
+  teleportYOffset: 1
   rb: {fileID: 0}
   hit: 0
 --- !u!54 &-6229484424086246374

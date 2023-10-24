@@ -19,9 +19,9 @@ MonoBehaviour:
   icon: {fileID: 0}
   firstStartupFrame: 17
   lastActiveFrame: 44
-  totalMoveDuration: 64
-  firstGatlingFrame: 25
-  recoveryFrames: 20
+  totalMoveDuration: 45
+  firstGatlingFrame: 41
+  recoveryFrames: 1
   attacks:
   - attackLevel: 0
     attackType: 0
@@ -32,7 +32,7 @@ MonoBehaviour:
     poiseBreak: 0
     startupFrame: 17
     activeFrames: 5
-    gatlingFrames: 8
+    gatlingFrames: 24
     groundHitProperty:
       pushback: {x: 2, y: 1}
       hitState: 0
@@ -121,7 +121,7 @@ MonoBehaviour:
   airInvulStart: 1
   airInvulDuration: 0
   targetComboMoves:
-  - {fileID: 11400000, guid: 37391d90e34a3c04d9b26278e1cbb6d9, type: 2}
+  - {fileID: 11400000, guid: 846265f9525a33948b942cb5e5fc0ae3, type: 2}
   fullCancel: 0
   gatlingCancel: 1
   uncancelable: 0

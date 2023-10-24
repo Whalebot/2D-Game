@@ -38,7 +38,7 @@ public class CharacterCreator : MonoBehaviour
             GameManager.Instance.player.GetComponentInChildren<Animator>().runtimeAnimatorController = characters[SaveManager.Instance.saveData.visualData.characterJob].controller;
         }
 
-        if (!SaveManager.Instance.HasSaveData())
+        if (!SaveManager.Instance.HasSaveData() && visuals != null)
             RandomizeVisuals();
     }
     public int Class
@@ -217,9 +217,10 @@ public class CharacterCreator : MonoBehaviour
     public void RandomizeVisuals()
     {
         visualData.colorPreset = UnityEngine.Random.Range(0, allPresets.Count);
-        visualData.hairID = UnityEngine.Random.Range(0, 2);
-        visualData.topID = UnityEngine.Random.Range(0, 3);
-        visualData.bottomID = UnityEngine.Random.Range(0, 2);
+        visualData.hairID = UnityEngine.Random.Range(0, visuals.hairVariations.Count);
+        visualData.topID = UnityEngine.Random.Range(0, visuals.topOutifts.Count);
+        visualData.bottomID = UnityEngine.Random.Range(0, visuals.bottomOutfits.Count);
+        visualData.bottomID = UnityEngine.Random.Range(0, visuals.shoes.Count);
 
         SaveVisuals();
         ApplyVisuals();
