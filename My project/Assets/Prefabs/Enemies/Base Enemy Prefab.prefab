@@ -623,7 +623,7 @@ MonoBehaviour:
   cornerMinDistance: 0
   minDistance: 1
   elapsed: 0
-  pathUpdateTime: 0
+  pathUpdateTime: 15
   detectionDelay: 0.5
   detectionSpread: 5
   enemyMask:
@@ -664,6 +664,8 @@ MonoBehaviour:
   moveset: {fileID: 0}
   attacking: 0
   activeMove: {fileID: 0}
+  releaseMinimum: 0
+  delayRelease: 0
   hit: 0
   gatlingFrame: 0
   attackID: 0
@@ -753,7 +755,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frame: 0
+  normalizedTime: 0
   hitstop: 0
+  blend: 0
   maxSpeed: 0
   deaccelerateSpeed: 0
   fallThreshold: 0

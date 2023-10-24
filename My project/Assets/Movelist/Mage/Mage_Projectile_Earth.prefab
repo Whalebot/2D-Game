@@ -54,6 +54,7 @@ MonoBehaviour:
   move: {fileID: 0}
   status: {fileID: 0}
   canClash: 1
+  relativePushback: 0
   body: {fileID: 0}
   enemyList: []
   projectileMovement: 0
@@ -215,7 +216,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -353086647292785911, guid: da5b218f99284e34ab7f7865855c3675, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 113442, guid: da5b218f99284e34ab7f7865855c3675, type: 3}
       propertyPath: m_IsActive

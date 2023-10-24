@@ -167,7 +167,7 @@ public class SkillHandler : MonoBehaviour
         }
         else hasRequiredMove = true;
 
-        Debug.Log($"{skillSO} Has required move {hasRequiredMove} & has required skill{hasRequiredSkill}");
+        //Debug.Log($"{skillSO} Has required move {hasRequiredMove} & has required skill{hasRequiredSkill}");
 
         return hasRequiredMove && hasRequiredSkill;
     }
