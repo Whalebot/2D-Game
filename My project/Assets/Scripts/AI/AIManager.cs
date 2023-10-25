@@ -37,17 +37,6 @@ public class AIManager : MonoBehaviour
 
     }
 
-    [Button]
-    public void GetAllAI()
-    {
-        AI[] temp = FindObjectsOfType<AI>();
-        respawningEnemies = new List<AI>(temp);
-        for (int i = 0; i < respawningEnemies.Count; i++)
-        {
-            respawningEnemies[i].id = respawningEnemies.Count - i - 1;
-        }
-    }
-
     // Update is called once per frame
     private void FixedUpdate()
     {

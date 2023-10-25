@@ -10,17 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd0f521e490d135408b5fbd75180cbbf, type: 3}
-  m_Name: Practice Slime Character 1
+  m_Name: Pure Vessel
   m_EditorClassIdentifier: 
-  characterName: Slime
+  characterName: Boss
   subTitle: 
   description: 
   image: {fileID: 0}
-  prefab: {fileID: 9037631907321898802, guid: 518eee88e2d9a6643952facd713e1871, type: 3}
+  prefab: {fileID: 8388588922180980836, guid: 188d45628656db8448c88c94d1429e49, type: 3}
   controller: {fileID: 0}
   moveset: {fileID: 0}
   actions:
-  - {fileID: 11400000, guid: d4dea00e8c91c9240983c28ff41cc62d, type: 2}
+  - {fileID: 11400000, guid: 1de55d8b36280e34c82b47db6e5f1901, type: 2}
+  - {fileID: 11400000, guid: d0220ab07ed155e4b8ef29478a3dab2d, type: 2}
   stats:
     currentHealth: 1000
     maxHealth: 1000
@@ -34,13 +35,13 @@ MonoBehaviour:
     gold: 0
     attack: 5
     magic: 0
-    attackSpeed: 1
+    attackSpeed: 1.2
     airActions: 1
     rerolls: 0
     movementSpeedModifier: 1
     meterGainModifier: 1
-    poiseRegen: 0
-    poise: 0
+    poiseRegen: 0.1
+    poise: 150
     defense: 0
     resistance: 0
     guardBreakModifier: 1

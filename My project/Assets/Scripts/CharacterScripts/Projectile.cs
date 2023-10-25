@@ -7,44 +7,59 @@ public class Projectile : Hitbox
         Linear, Homing, SpawnOnTarget, Teleport
     }
 
-    [TabGroup("Settings")] public ProjectileMovement projectileMovement;
-    [TabGroup("Settings")] public Vector3 targetPosition;
-    [TabGroup("Settings")] public Transform target;
 
+
+    [TabGroup("Debug")] public Transform target;
+
+    [TabGroup("Debug")] public Vector3 targetPosition;
     bool isDestroying;
     bool delayDestroy;
     [TabGroup("Settings")] public int life;
     [TabGroup("Settings")] public int lifetime;
+
+    [Header("Movement")] 
+    [TabGroup("Settings")] public ProjectileMovement projectileMovement;
     [TabGroup("Settings")] public float velocity;
-
-    [TabGroup("Settings")] public bool willDelayReaim;
-    [TabGroup("Settings")] public int projectileDelay;
-    [TabGroup("Settings")] public float delayVelocity;
-
-    [TabGroup("Settings")] public float updateVelocity;
-    [TabGroup("Settings")] public float rotateSpeed;
+    [TabGroup("Settings")] public Vector3 rotationVector;
     [TabGroup("Settings")] public bool onStartVelocity;
     [TabGroup("Settings")] public bool updateVelocty;
+    [TabGroup("Settings")] public float updateVelocity;
+
+    [Header("Homing")]
+    [TabGroup("Settings")] public float rotateSpeed;
+
+    [Header("Re-Aim")]
+    [TabGroup("Unique")] public bool willDelayReaim;
+    [TabGroup("Unique")] public int projectileDelay;
+    [TabGroup("Unique")] public float delayVelocity;
+
+    [Header("Projectiles")]
+    [TabGroup("Unique")] public GameObject projectile;
+    [TabGroup("Unique")] public int projectileTimer = 15;
+    [TabGroup("Unique")] public int maxProjectiles = 0;
+    int projectileCounter;
+    int projectilesShot;
 
     [TabGroup("Settings")] public LayerMask searchMask;
-
     [TabGroup("Settings")] public float searchSize;
 
+    [TabGroup("Unique")]
+    [Header("Explosion")] public GameObject explosion;
+    [TabGroup("Unique")] public bool onlyExplosionDamage;
+    [TabGroup("Unique")] public GameObject explosionVFX;
+    [TabGroup("Unique")] public GameObject explosionSFX;
 
-    [TabGroup("Settings")] public GameObject explosion;
-    [TabGroup("Settings")] public bool onlyExplosionDamage;
+    [Header("Collision")]
     [TabGroup("Settings")] public bool destroyOnCollission = true;
     [TabGroup("Settings")] public bool destroyOnProjectileClash = true;
     [TabGroup("Settings")] public bool destroyOnHitboxClash = true;
     [TabGroup("Settings")] public bool destroyOnHit;
-    [TabGroup("Components")] public GameObject explosionVFX;
-    [TabGroup("Components")] public GameObject explosionSFX;
 
-    [TabGroup("Attraction")] public bool willAttract;
-    [TabGroup("Attraction")] public Vector2 attractPower;
-    [TabGroup("Attraction")] public int resetTimer = 0;
-    int resetCounter;
-    [TabGroup("Attraction")] public GameObject col;
+
+
+    [TabGroup("Unique")] public bool willAttract;
+    [TabGroup("Unique")] public Vector2 attractPower;
+
 
     [TabGroup("Teleport")] public LayerMask teleportMask;
     [TabGroup("Teleport")] public bool airTeleport;
@@ -59,15 +74,13 @@ public class Projectile : Hitbox
     {
         rb = GetComponent<Rigidbody>();
         body = transform;
-
     }
-
     private void Start()
     {
         GameManager.Instance.advanceGameState += ExecuteFrame;
         resetCounter = resetTimer;
 
-        if (status.alignment == Alignment.Enemy)
+        if (status.alignment == Alignment.Enemy && projectileMovement != ProjectileMovement.Homing)
             target = GameManager.Instance.player;
         else
         {
@@ -82,6 +95,11 @@ public class Projectile : Hitbox
         {
             Teleport();
         }
+    }
+    protected void OnDestroy()
+    {
+        GameManager.Instance.advanceGameState -= FramePassed;
+        GameManager.Instance.advanceGameState -= ExecuteFrame;
     }
     void Teleport()
     {
@@ -141,7 +159,7 @@ public class Projectile : Hitbox
         {
             Status tempStatus = item.GetComponentInParent<Status>();
             if (tempStatus == null || tempStatus == status) continue;
-
+            if (tempStatus.alignment == status.alignment) continue;
             if (ClearLine(tempStatus.transform))
             {
                 Vector2 v = tempStatus.transform.position - transform.position;
@@ -169,24 +187,9 @@ public class Projectile : Hitbox
             if (lifetime <= 0) DestroyProjectile();
         }
 
-        if (resetTimer > 0)
-        {
-            if (enemyList.Count > 0)
-            {
-                resetCounter--;
-                if (resetCounter <= 0)
-                {
-                    col.gameObject.SetActive(false);
-                    enemyList.Clear();
-                    resetCounter = resetTimer;
-                }
-            }
-            else
-            {
-                col.gameObject.SetActive(true);
-            }
-        }
 
+        MultiHitProperty();
+        ShootProjectiles();
         AttractBehaviour();
 
         if (target != null)
@@ -215,6 +218,25 @@ public class Projectile : Hitbox
         Movement();
     }
 
+    void ShootProjectiles()
+    {
+        if (projectile == null) return;
+
+        projectileCounter--;
+        if (projectileCounter <= 0 && projectilesShot < maxProjectiles)
+        {
+            projectilesShot++;
+            projectileCounter = projectileTimer;
+            GameObject proj = Instantiate(projectile, transform.position, transform.rotation, transform);
+            Hitbox hitbox = proj.GetComponent<Hitbox>();
+
+            hitbox.SetupHitbox(hitboxID, attack, status, move);
+
+            proj.transform.localPosition = projectile.transform.localPosition;
+            proj.transform.localRotation = projectile.transform.rotation;
+            proj.transform.SetParent(null);
+        }
+    }
     void AttractBehaviour()
     {
         if (willAttract)
@@ -231,7 +253,6 @@ public class Projectile : Hitbox
             }
         }
     }
-
     public void DestroyProjectile()
     {
         if (!delayDestroy)
@@ -261,7 +282,6 @@ public class Projectile : Hitbox
         else
             Instantiate(VFXManager.Instance.defaultProjectileSFX, transform.position, transform.rotation);
     }
-
     void FramePassed()
     {
         if (isDestroying)
@@ -270,23 +290,18 @@ public class Projectile : Hitbox
 
     }
 
-    private void OnEnable()
-    {
-
-    }
-
-    protected void OnDestroy()
-    {
-        GameManager.Instance.advanceGameState -= FramePassed;
-        GameManager.Instance.advanceGameState -= ExecuteFrame;
-    }
-
     public virtual void Movement()
     {
+        transform.Rotate(rotationVector, Space.Self);
+
         switch (projectileMovement)
         {
             case ProjectileMovement.Linear:
                 if (updateVelocty)
+                {
+                    rb.velocity += transform.forward * updateVelocity;
+                }
+                else
                     rb.velocity = transform.forward * velocity;
                 break;
             case ProjectileMovement.Homing:
@@ -306,7 +321,6 @@ public class Projectile : Hitbox
             default:
                 break;
         }
-
     }
 
     new void OnTriggerEnter(Collider other)
@@ -363,7 +377,6 @@ public class Projectile : Hitbox
                 DestroyProjectile();
             }
         }
-
     }
 
     public override void DoDamage(Status other, float dmgMod)
@@ -374,4 +387,9 @@ public class Projectile : Hitbox
         if (destroyOnHit)
             DestroyProjectile();
     }
+}
+public class ProjectileItem
+{
+    public GameObject prefab;
+
 }

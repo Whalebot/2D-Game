@@ -371,10 +371,7 @@ public class AttackScript : MonoBehaviour
                             hitboxes[i].transform.localRotation = activeMove.attacks[i].hitbox.transform.rotation;
                         }
                         Hitbox hitbox = hitboxes[i].GetComponentInChildren<Hitbox>();
-                        hitbox.hitboxID = i;
-                        hitbox.attack = this;
-                        hitbox.status = status;
-                        hitbox.move = activeMove;
+                        hitbox.SetupHitbox(i, this, status, activeMove);
                         if (activeMove.attacks[i].attackType == AttackType.Projectile)
                         {
                             projectiles.Add(hitboxes[i]);

@@ -4,16 +4,22 @@ using Sirenix.OdinInspector;
 public class Hitbox : MonoBehaviour
 {
     [TabGroup("Settings")] public float baseDamage = 1;
-    [TabGroup("Settings")] public int totalDamage;
+    [HideInInspector] public int totalDamage;
     [HideInInspector] public int hitboxID;
     [HideInInspector] public AttackScript attack;
     [HideInInspector] public Move move;
     [HideInInspector] public Status status;
     [TabGroup("Settings")] public bool canClash = true;
     [TabGroup("Settings")] public bool relativePushback = false;
+
+    [Header("Multihit")]
+
+    [TabGroup("Settings")] public int resetTimer = 0;
+    protected int resetCounter;
+    [TabGroup("Debug")] public GameObject col;
     Vector3 knockbackDirection;
     Vector3 aVector;
-    public Transform body;
+    [HideInInspector] protected Transform body;
     [HideInInspector] public List<Status> enemyList;
     MeshRenderer mr;
     protected Transform colPos;
@@ -32,11 +38,13 @@ public class Hitbox : MonoBehaviour
     {
         if (GameManager.Instance.showHitboxes)
         {
-            mr.enabled = true;
+            if (mr != null)
+                mr.enabled = true;
         }
         else
         {
-            mr.enabled = false;
+            if (mr != null)
+                mr.enabled = false;
         }
     }
 
@@ -62,7 +70,36 @@ public class Hitbox : MonoBehaviour
             }
         }
     }
+    protected void MultiHitProperty()
+    {
+        if (resetTimer > 0)
+        {
+            if (enemyList.Count > 0)
+            {
+                resetCounter--;
+                if (resetCounter <= 0)
+                {
+                    if (col != null)
+                        col.gameObject.SetActive(false);
 
+                    enemyList.Clear();
+                    resetCounter = resetTimer;
+                }
+            }
+            else
+            {
+                if (col != null)
+                    col.gameObject.SetActive(true);
+            }
+        }
+    }
+    public void SetupHitbox(int i, AttackScript a, Status s, Move m)
+    {
+        hitboxID = i;
+        attack = a;
+        status = s;
+        move = m;
+    }
     public void ResetHitbox()
     {
         enemyList.Clear();
@@ -89,7 +126,7 @@ public class Hitbox : MonoBehaviour
     {
         if (relativePushback)
         {
-            knockbackDirection = (other.transform.position-transform.position).normalized;
+            knockbackDirection = (other.transform.position - transform.position).normalized;
         }
         else
         {

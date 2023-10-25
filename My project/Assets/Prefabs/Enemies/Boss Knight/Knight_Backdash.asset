@@ -13,12 +13,15 @@ MonoBehaviour:
   m_Name: Knight_Backdash
   m_EditorClassIdentifier: 
   animationID: 3
+  meterCost: 0
+  meterGain: 10
+  consumeMeterOnActiveFrame: 0
   icon: {fileID: 0}
-  firstStartupFrame: 30
-  lastActiveFrame: 30
-  totalMoveDuration: 48
-  firstGatlingFrame: 49
-  recoveryFrames: 18
+  firstStartupFrame: 35
+  lastActiveFrame: 35
+  totalMoveDuration: 65
+  firstGatlingFrame: 26
+  recoveryFrames: 30
   attacks: []
   type: 0
   uniqueProperties: []
@@ -33,6 +36,7 @@ MonoBehaviour:
     startup: 1
     prefab: {fileID: 1416824176164296, guid: dc1397204bb5ee84895af2b49dac2d49, type: 3}
     deattachFromPlayer: 1
+    destroyOnRecovery: 0
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0}
     scale: {x: 0.7, y: 0.7, z: 0.7}
@@ -45,9 +49,11 @@ MonoBehaviour:
   keepVelocity: 0
   particleID: 0
   holdAttack: 0
+  releaseAttackMove: {fileID: 0}
   autoAim: 0
   armor: 0
   resetGatling: 0
+  hitsGroundOnly: 0
   noClip: 1
   noClipStart: 1
   noClipDuration: 20
@@ -64,22 +70,16 @@ MonoBehaviour:
   fullCancel: 1
   gatlingCancel: 1
   uncancelable: 0
-  gatlingCancelOnBlock: 1
-  gatlingCancelOnHit: 1
-  jumpCancelOnBlock: 0
-  jumpCancelOnHit: 1
-  specialCancelOnBlock: 1
-  specialCancelOnHit: 1
   useAirAction: 0
   landCancel: 0
   recoverOnlyOnLand: 0
   m:
   - startFrame: 5
     duration: 2
-    momentum: {x: -5, y: 7}
-    freeMovement: 0
-    homing: 0
+    momentum: {x: -6, y: 6}
     resetVelocityDuringRecovery: 0
+    teleport: 0
   instantStartupRotation: 1
-  overrideVelocity: 1
+  overrideVelocity: 0
   runMomentum: 0
+  stopAtEdges: 0

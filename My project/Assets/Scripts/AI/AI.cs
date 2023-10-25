@@ -6,20 +6,16 @@ using Pathfinding;
 
 public class AI : MonoBehaviour
 {
-    public Character character;
-    public int cooldown = 0;
-    public int recoveryCooldown = 30;
-    public AIAction currentAction;
+    [HideInInspector] public Character character;
+
+  public AIAction currentAction;
 
     float startDistance = 0;
     float endDistance = 0;
 
-    public int id;
     public enum State { Idle, Move, Alert, Combat, Passive, Flee };
     public State currentState = State.Idle;
     private Seeker seeker;
-
-    public bool killOncePerDay = true;
 
     [Space(10)]
     [HeaderAttribute("Field of View")]
@@ -27,28 +23,30 @@ public class AI : MonoBehaviour
     [TabGroup("Pathfinding")] [Range(0, 360)] public float viewAngle;
     [TabGroup("Pathfinding")] [SerializeField] LayerMask mask;
     RaycastHit hit;
-
-    [FoldoutGroup("Debug")] public Vector3 directionVector;
-    int reachedCorner;
+    [TabGroup("Pathfinding")] public Vector3 movementDirection;
+    [TabGroup("Pathfinding")] public Vector3 directionVector;
     [TabGroup("Pathfinding")] [HideInInspector] public float cornerMinDistance;
     [TabGroup("Pathfinding")] public float minDistance;
-    private bool hasValidPath;
+    [TabGroup("Pathfinding")] public int movementChangeTime = 30;
+    [TabGroup("Pathfinding")] int movementChangeCounter;
     [TabGroup("Pathfinding")] public int elapsed = 0;
     [TabGroup("Pathfinding")] public int pathUpdateTime;
     public delegate void AIEvent();
     [TabGroup("Pathfinding")] public AIEvent detectEvent;
     [TabGroup("Pathfinding")] public float detectionDelay = 0.5F;
     [TabGroup("Pathfinding")] public float detectionSpread = 5F;
+    [TabGroup("Pathfinding")] public float nextWaypointDistance = 3;
+    [TabGroup("Pathfinding")] public bool reachedEndOfPath;
+    [TabGroup("Pathfinding")] public Path path;
+    private int currentWaypoint = 0;
 
     [TabGroup("Pathfinding")] public LayerMask enemyMask;
     [TabGroup("Pathfinding")] public float crowdRange = 5F;
-    public bool isWalking;
+    [TabGroup("Pathfinding")] public bool isWalking;
+    [TabGroup("Pathfinding")] public float stoppingDistance = 4;
+    [TabGroup("Pathfinding")] public float enemyDetectionRadius = 8;
+    [TabGroup("Pathfinding")] public bool detected;
 
-    protected Movement movement;
-    protected bool run;
-
-    public float stoppingDistance = 4;
-    public float enemyDetectionRadius = 8;
 
     [TabGroup("Patrol")] public bool willPatrol;
     [TabGroup("Patrol")] public float patrolRange;
@@ -56,38 +54,33 @@ public class AI : MonoBehaviour
     [TabGroup("Patrol")] public List<Vector3> patrolPoints;
     [TabGroup("Patrol")] public int patrolID;
 
+    protected Movement movement;
     protected Status status;
     protected AttackScript attack;
     protected AIManager manager;
 
     bool detectOnce;
-    public bool detected;
     protected float lastAttackTime;
 
-    [FoldoutGroup("Debug")] public Transform target;
-    [FoldoutGroup("Debug")] public Vector3 currentTarget;
-    [FoldoutGroup("Debug")] public List<Move> attackQueue;
-
-    [FoldoutGroup("Debug")] [SerializeField] public float yOffset = 0.5F;
-    [FoldoutGroup("Debug")] public bool clearLine;
-    [FoldoutGroup("Debug")] public bool withinAngle;
-    [FoldoutGroup("Debug")] public bool inRange;
+    [TabGroup("Debug")] public Transform target;
+    [TabGroup("Debug")] public Vector3 currentTarget;
+    [TabGroup("Debug")] public List<Move> attackQueue;
+    [TabGroup("Debug")] public int cooldown = 0;
+    [TabGroup("Debug")] public int recoveryCooldown = 30;
+    [TabGroup("Debug")] [SerializeField] public float yOffset = 0.5F;
+    [TabGroup("Debug")] public bool clearLine;
+    [TabGroup("Debug")] public bool withinAngle;
+    [TabGroup("Debug")] public bool inRange;
 
     protected void Awake()
     {
-        //tree = tree.Clone();
-        // context = CreateBehaviourTreeContext();
-        // tree.Bind(context);
-
-
-
         status = GetComponent<Status>();
         attack = GetComponent<AttackScript>();
 
         if (character == null)
             character = status.character;
 
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        target = GameManager.Instance.playerStatus.col.transform;
         currentTarget = target.position;
         currentState = State.Idle;
     }
@@ -180,17 +173,6 @@ public class AI : MonoBehaviour
         clearLine = ClearLine();
         withinAngle = WithinAngle();
         inRange = TargetInRange();
-
-        if (!inRange && detected)
-            LoseAggro();
-    }
-
-    private void LoseAggro()
-    {
-        //detected = false;
-        //detectOnce = false;
-        //currentState = State.Idle;
-        //SetupPatrolPoints();
     }
 
     protected bool InCooldown()
@@ -242,7 +224,7 @@ public class AI : MonoBehaviour
 
         foreach (var item in status.character.actions)
         {
-            if (Distance() < item.distance && Distance() > item.minDistance)
+            if (Distance() < item.distance && Distance() > item.minDistance && HeightDistance() < item.maxHeight)
                 temp.Add(item);
         }
 
@@ -253,12 +235,11 @@ public class AI : MonoBehaviour
             currentAction = temp[RNG];
             ExecuteAction(temp[RNG]);
         }
-        //else Approach();
-
     }
 
     private void ExecuteAction(AIAction aiAction)
     {
+        Debug.Log(HeightDistance());
         startDistance = Distance();
         cooldown = aiAction.cooldown;
         switch (aiAction.actionType)
@@ -353,6 +334,18 @@ public class AI : MonoBehaviour
         detected = true;
     }
 
+    Vector3 MovementDirection()
+    {
+        movementChangeCounter--;
+
+        if (movementChangeCounter <= 0)
+        {
+            movementChangeCounter = movementChangeTime;
+            movementDirection = FindPath();
+        }
+        return movementDirection;
+    }
+
     protected void Approach()
     {
         if (target != null)
@@ -361,7 +354,7 @@ public class AI : MonoBehaviour
 
             if (Vector3.Distance(transform.position, target.transform.position) > stoppingDistance)
             {
-                movement.direction = FindPath();
+                movement.direction = MovementDirection();
             }
             else
             {
@@ -369,7 +362,7 @@ public class AI : MonoBehaviour
                     Idle();
                 else
                 {
-                    movement.direction = FindPath();
+                    movement.direction = MovementDirection();
                     //movement.RotateInPlace((target.position - transform.position).normalized);
                 }
             }
@@ -422,39 +415,87 @@ public class AI : MonoBehaviour
     }
 
     #region Pathfinding
+    public void OnPathComplete(Path p)
+    {
+        // Path pooling. To avoid unnecessary allocations paths are reference counted.
+        // Calling Claim will increase the reference count by 1 and Release will reduce
+        // it by one, when it reaches zero the path will be pooled and then it may be used
+        // by other scripts. The ABPath.Construct and Seeker.StartPath methods will
+        // take a path from the pool if possible. See also the documentation page about path pooling.
+        p.Claim(this);
+        if (!p.error)
+        {
+            if (path != null) path.Release(this);
+            path = p;
+            // Reset the waypoint counter so that we start to move towards the first point in the path
+            currentWaypoint = 0;
+        }
+        else
+        {
+            p.Release(this);
+        }
+    }
     void CalculatePath()
     {
         elapsed++;
-        if (elapsed > pathUpdateTime && target != null)
+        if (elapsed > pathUpdateTime && target != null && seeker.IsDone())
         {
             currentTarget = target.position;
-            reachedCorner = 0;
             elapsed -= pathUpdateTime;
+            seeker.StartPath(transform.position, currentTarget, OnPathComplete);
         }
     }
 
     public Vector3 FindPath()
     {
-        //CalculatePath();
+        CalculatePath();
 
-        directionVector = (currentTarget - transform.position).normalized;
-        //if (path.corners.Length > 1)
-        //{
-        //    directionVector = (path.corners[reachedCorner + 1] - path.corners[reachedCorner]).normalized;
-        //    movement.isMoving = true;
-        //    if (isWalking) directionVector = directionVector * 0.5F;
+        //directionVector = (currentTarget - transform.position).normalized;
 
-        //    if (Vector3.Distance(transform.position, path.corners[reachedCorner + 1]) < cornerMinDistance)
-        //    {
-        //        hasValidPath = false;
-        //        if (path.corners.Length > reachedCorner + 2)
-        //            reachedCorner++;
-        //    }
-        //    else
-        //    {
-        //        hasValidPath = true;
-        //    }
-        //}
+
+
+        if (path == null)
+        {
+            Debug.Log("No path");
+            return (currentTarget - transform.position).normalized;
+        }
+
+        // Check in a loop if we are close enough to the current waypoint to switch to the next one.
+        // We do this in a loop because many waypoints might be close to each other and we may reach
+        // several of them in the same frame.
+        reachedEndOfPath = false;
+        // The distance to the next waypoint in the path
+        float distanceToWaypoint;
+        while (true)
+        {
+            // If you want maximum performance you can check the squared distance instead to get rid of a
+            // square root calculation. But that is outside the scope of this tutorial.
+            distanceToWaypoint = Vector3.Distance(transform.position, path.vectorPath[currentWaypoint]);
+            if (distanceToWaypoint < nextWaypointDistance)
+            {
+                // Check if there is another waypoint or if we have reached the end of the path
+                if (currentWaypoint + 1 < path.vectorPath.Count)
+                {
+                    currentWaypoint++;
+                }
+                else
+                {
+                    // Set a status variable to indicate that the agent has reached the end of the path.
+                    // You can use this to trigger some special code if your game requires that.
+                    reachedEndOfPath = true;
+                    break;
+                }
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        Vector3 temp = (path.vectorPath[currentWaypoint] - transform.position);
+        temp.y = 0;
+        temp.z = 0;
+        directionVector = temp.normalized;
 
         //foreach (var item in AIManager.Instance.allEnemies)
         //{
@@ -485,6 +526,14 @@ public class AI : MonoBehaviour
         v2.y = 0;
 
         return Vector3.Distance(v1, v2);
+    }
+    public float HeightDistance()
+    {
+        if (target == null) return 0;
+        Vector3 v1 = transform.position;
+        Vector3 v2 = target.transform.position;
+
+        return Mathf.Abs(v1.y - v2.y);
     }
     public float DistanceIncludeHeight()
     {
@@ -542,13 +591,14 @@ public class AI : MonoBehaviour
 
     public bool ClearLine()
     {
-        bool clearLine = Physics.Raycast(transform.position + Vector3.up * yOffset, ((target.transform.position + Vector3.up) - (transform.position + Vector3.up * yOffset)).normalized, out hit, 1000, mask);
+        bool tempLine = Physics.Raycast(transform.position + Vector3.up * yOffset, (target.transform.position - (transform.position + Vector3.up * yOffset)).normalized, out hit, 1000, mask);
 
-        Debug.DrawLine(transform.position + Vector3.up * yOffset, hit.point, Color.yellow);
+        Debug.DrawLine(transform.position + Vector3.up * yOffset, hit.point, Color.red);
         //if (hit.transform.IsChildOf(target))
-        // Debug.Log(hit.transform.gameObject);
-        if (clearLine)
-            return hit.transform.IsChildOf(target);
+        //clearLine = tempLine;
+        // Debug.Log(hit.transform.gameObject + " " + tempLine);
+        if (tempLine)
+            return target.IsChildOf(hit.transform);
         else
             return false;
     }
