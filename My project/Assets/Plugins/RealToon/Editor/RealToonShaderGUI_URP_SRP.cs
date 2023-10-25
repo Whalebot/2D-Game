@@ -1,6 +1,6 @@
 //RealToonGUI URP
 //MJQStudioWorks
-//2021
+//2022
 
 #if UNITY_EDITOR
 
@@ -30,6 +30,7 @@ namespace RealToon.GUIInspector
         static bool ShowReflection;
         static bool ShowRimLight;
         static bool ShowSeeThrough;
+        static bool NearFadeDithering;
         //static bool ShowTessellation; In Progress
         static bool ShowDisableEnable;
         static bool ShowSettings;
@@ -99,6 +100,7 @@ static string dots_lbs_cd_string = "DOTS|HR - Use Compute Deformation";
         MaterialProperty _BleModSour = null;
         MaterialProperty _BleModDest = null;
 
+        MaterialProperty _SimTrans = null;
         MaterialProperty _TransAffSha = null;
 
         MaterialProperty _NormalMap = null;
@@ -223,6 +225,9 @@ static string dots_lbs_cd_string = "DOTS|HR - Use Compute Deformation";
         MaterialProperty _RimLightInLight = null;
         MaterialProperty _LightAffectRimLightColor = null;
 
+        MaterialProperty _MinFadDistance = null;
+        MaterialProperty _MaxFadDistance = null;
+
         //MaterialProperty _TessellationSmoothness = null;
         //MaterialProperty _TessellationTransition = null;
         //MaterialProperty _TessellationNear = null;
@@ -258,6 +263,8 @@ static string dots_lbs_cd_string = "DOTS|HR - Use Compute Deformation";
         MaterialProperty _N_F_DCS = null;
         MaterialProperty _N_F_NLASOBF = null;
         MaterialProperty _N_F_RDC = null;
+        MaterialProperty _N_F_DDMD = null;
+        MaterialProperty _N_F_NFD = null;
 
         MaterialProperty _N_F_OFLMB = null;
 
@@ -299,7 +306,10 @@ static string dots_lbs_cd_string = "DOTS|HR - Use Compute Deformation";
             N_F_OFLMB_ON,
             N_F_ESSAO_ON,
             N_F_RDC_ON,
-            N_F_COEDGL_ON
+            N_F_COEDGL_ON,
+            N_F_DDMD_ON,
+            N_F_SIMTRANS_ON,
+            N_F_NFD_ON
         }
 
         #endregion
@@ -757,7 +767,20 @@ static string dots_lbs_cd_string = "DOTS|HR - Use Compute Deformation";
     "Glow edge color.",
 
     //Glow Edge Width [149]
-    "The width of the glow."
+    "The width of the glow.",
+
+    //Simple Transparency Mode[150]
+    "Common simple transparency.\nOnly 'Opacity', 'Blend Modes' and 'Affect Shadow' are available.\n\n'Transparent Threshold' and 'Mask Transparency' not available on this mode.",
+
+    //Disable DOTS Mesh Deformation[151]
+    "Disable DOTS Mesh Deformation: 'Linear Blend Skinning and Compute Deformation'.\n\n*For Static Objects, enabled this.",
+
+    //Near Fade Dithering - Min Distance[152]
+    "The minimum near distance.",
+
+    //Near Fade Dithering - Max Distance[153]
+    "The maximum near distance."
+
 
 };
 
@@ -817,6 +840,9 @@ static string dots_lbs_cd_string = "DOTS|HR - Use Compute Deformation";
 
     //Rim Light [16]
     "Rim light or fresnel effect.",
+
+    //Near Fade Dithering [17]
+    "Object fades when the camera near."
 
 };
 
@@ -905,6 +931,7 @@ static string dots_lbs_cd_string = "DOTS|HR - Use Compute Deformation";
             _BleModSour = ShaderGUI.FindProperty("_BleModSour", properties);
             _BleModDest = ShaderGUI.FindProperty("_BleModDest", properties);
 
+            _SimTrans = ShaderGUI.FindProperty("_SimTrans", properties);
             _TransAffSha = ShaderGUI.FindProperty("_TransAffSha", properties);
 
             _NormalMap = ShaderGUI.FindProperty("_NormalMap", properties);
@@ -1032,6 +1059,9 @@ static string dots_lbs_cd_string = "DOTS|HR - Use Compute Deformation";
             _RimLightInLight = ShaderGUI.FindProperty("_RimLightInLight", properties);
             _LightAffectRimLightColor = ShaderGUI.FindProperty("_LightAffectRimLightColor", properties);
 
+            _MinFadDistance = ShaderGUI.FindProperty("_MinFadDistance", properties);
+            _MaxFadDistance = ShaderGUI.FindProperty("_MaxFadDistance", properties);
+
             //if (shader_name == "tessellation_d" || shader_name == "tessellation_ft" || shader_name == "tessellation_ref")
             //{
             //    _TessellationSmoothness = ShaderGUI.FindProperty("_TessellationSmoothness", properties);
@@ -1070,6 +1100,7 @@ static string dots_lbs_cd_string = "DOTS|HR - Use Compute Deformation";
             _N_F_R = ShaderGUI.FindProperty("_N_F_R", properties);
             _N_F_FR = ShaderGUI.FindProperty("_N_F_FR", properties);
             _N_F_RL = ShaderGUI.FindProperty("_N_F_RL", properties);
+            _N_F_NFD = ShaderGUI.FindProperty("_N_F_NFD", properties);
 
             _N_F_HDLS = ShaderGUI.FindProperty("_N_F_HDLS", properties);
             _N_F_HPSS = ShaderGUI.FindProperty("_N_F_HPSS", properties);
@@ -1089,6 +1120,8 @@ static string dots_lbs_cd_string = "DOTS|HR - Use Compute Deformation";
             _SSAOColor = ShaderGUI.FindProperty("_SSAOColor", properties);
 
             _N_F_RDC = ShaderGUI.FindProperty("_N_F_RDC", properties);
+
+            _N_F_DDMD = ShaderGUI.FindProperty("_N_F_DDMD", properties);
 
             #endregion
 
@@ -1355,9 +1388,15 @@ static string dots_lbs_cd_string = "DOTS|HR - Use Compute Deformation";
                     {
 
                         GUILayout.Space(10);
+                        materialEditor.ShaderProperty(_SimTrans, new GUIContent(_SimTrans.displayName, TOTIPS[150]));
+
+                        GUILayout.Space(10);
 
                         materialEditor.ShaderProperty(_Opacity, new GUIContent(_Opacity.displayName, TOTIPS[21]));
+
+                        EditorGUI.BeginDisabledGroup(_SimTrans.floatValue == 1);
                         materialEditor.ShaderProperty(_TransparentThreshold, new GUIContent(_TransparentThreshold.displayName, TOTIPS[22]));
+                        EditorGUI.EndDisabledGroup();
 
                         GUILayout.Space(10);
 
@@ -1370,7 +1409,9 @@ static string dots_lbs_cd_string = "DOTS|HR - Use Compute Deformation";
 
                         GUILayout.Space(10);
 
+                        EditorGUI.BeginDisabledGroup(_SimTrans.floatValue == 1);
                         materialEditor.ShaderProperty(_MaskTransparency, new GUIContent(_MaskTransparency.displayName, TOTIPS[23]));
+                        EditorGUI.EndDisabledGroup();
 
                         GUILayout.Space(10);
 
@@ -1462,7 +1503,9 @@ static string dots_lbs_cd_string = "DOTS|HR - Use Compute Deformation";
 
                             GUILayout.Space(10);
 
+                            EditorGUI.BeginDisabledGroup(_TRANSMODE.floatValue == 1 && _N_F_CO.floatValue == 0 && UseSSOL == false);
                             materialEditor.ShaderProperty(_OutlineWidth, new GUIContent(_OutlineWidth.displayName, TOTIPS[8]));
+                            EditorGUI.EndDisabledGroup();
 
                             if (UseSSOL == true)
                             {
@@ -1508,6 +1551,7 @@ static string dots_lbs_cd_string = "DOTS|HR - Use Compute Deformation";
                             }
                             else
                             {
+                                EditorGUI.BeginDisabledGroup(_TRANSMODE.floatValue == 1 && _N_F_CO.floatValue == 0);
                                 materialEditor.ShaderProperty(_OutlineColor, new GUIContent(_OutlineColor.displayName, TOTIPS[28]));
 
                                 GUILayout.Space(10);
@@ -1517,6 +1561,7 @@ static string dots_lbs_cd_string = "DOTS|HR - Use Compute Deformation";
                                 EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
 
                                 materialEditor.ShaderProperty(_DepthThreshold, new GUIContent(_DepthThreshold.displayName, TOTIPS[122]));
+                                EditorGUI.EndDisabledGroup();
                             }
 
                             EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
@@ -2127,6 +2172,35 @@ static string dots_lbs_cd_string = "DOTS|HR - Use Compute Deformation";
 
                 #endregion
 
+                //Near Fade Dithering
+
+                #region Near Fade Dithering
+
+                if (_N_F_NFD.floatValue == 1)
+                {
+                    EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+
+                    Rect r_nerfaddithe = EditorGUILayout.BeginVertical("Button");
+                    NearFadeDithering = EditorGUILayout.Foldout(NearFadeDithering, "(Near Fade Dithering)", true, EditorStyles.foldout);
+
+                    if (NearFadeDithering)
+                    {
+
+                        GUILayout.Space(10);
+
+                        materialEditor.ShaderProperty(_MinFadDistance, new GUIContent(_MinFadDistance.displayName, TOTIPS[152]));
+                        materialEditor.ShaderProperty(_MaxFadDistance, new GUIContent(_MaxFadDistance.displayName, TOTIPS[153]));
+
+                        GUILayout.Space(10);
+
+                    }
+
+                    EditorGUILayout.EndVertical();
+
+                }
+
+                #endregion
+
                 //Tessellation (In Progress)
 
                 #region Tessellation
@@ -2409,6 +2483,10 @@ static string dots_lbs_cd_string = "DOTS|HR - Use Compute Deformation";
                     materialEditor.ShaderProperty(_N_F_RL, new GUIContent(_N_F_RL.displayName, TOTIPSEDF[16]));
                     EditorGUILayout.EndVertical();
 
+                    Rect r_nfd = EditorGUILayout.BeginVertical("HelpBox");
+                    materialEditor.ShaderProperty(_N_F_NFD, new GUIContent(_N_F_NFD.displayName, TOTIPSEDF[17]));
+                    EditorGUILayout.EndVertical();
+
                 }
 
                 EditorGUILayout.EndVertical();
@@ -2501,6 +2579,11 @@ static string dots_lbs_cd_string = "DOTS|HR - Use Compute Deformation";
                 GUILayout.Space(10);
 
                 materialEditor.EnableInstancingField();
+
+#if ENABLE_HYBRID_RENDERER_V2
+                materialEditor.ShaderProperty(_N_F_DDMD, new GUIContent(_N_F_DDMD.displayName, TOTIPS[151]));
+#endif
+
                 materialEditor.ShaderProperty(_N_F_RDC, new GUIContent(_N_F_RDC.displayName, TOTIPS[147]));
                 materialEditor.ShaderProperty(_N_F_OFLMB, new GUIContent(_N_F_OFLMB.displayName, TOTIPS[141]));
                 aruskw = EditorGUILayout.Toggle(new GUIContent("Automatic Remove Unused Shader Keywords (Global)", TOTIPS[121]), aruskw);
@@ -2686,6 +2769,28 @@ static string dots_lbs_cd_string = "DOTS|HR - Use Compute Deformation";
             {
                 material.DisableKeyword("N_F_OFLMB_ON");
                 material.SetFloat("_N_F_OFLMB", 0.0f);
+            }
+
+            if ((material.IsKeywordEnabled("N_F_SIMTRANS_ON") || material.GetFloat("_SimTrans") == 1.0f))
+            {
+                material.EnableKeyword("N_F_SIMTRANS_ON");
+                material.SetFloat("_SimTrans", 1.0f);
+            }
+            else if ((!material.IsKeywordEnabled("N_F_SIMTRANS_ON") || material.GetFloat("_SimTrans") == 0.0f))
+            {
+                material.DisableKeyword("N_F_SIMTRANS_ON");
+                material.SetFloat("_SimTrans", 0.0f);
+            }
+
+            if ((material.IsKeywordEnabled("N_F_DDMD_ON") || material.GetFloat("_N_F_DDMD") == 1.0f))
+            {
+                material.EnableKeyword("N_F_DDMD_ON");
+                material.SetFloat("_N_F_DDMD", 1.0f);
+            }
+            else if ((!material.IsKeywordEnabled("N_F_DDMD_ON") || material.GetFloat("_N_F_DDMD") == 0.0f))
+            {
+                material.DisableKeyword("N_F_DDMD_ON");
+                material.SetFloat("_N_F_DDMD", 0.0f);
             }
 
             //======================================================================================================
@@ -2903,6 +3008,17 @@ static string dots_lbs_cd_string = "DOTS|HR - Use Compute Deformation";
             {
                 material.DisableKeyword("N_F_RL_ON");
                 material.SetFloat("_N_F_RL", 0.0f);
+            }
+
+            if ((material.IsKeywordEnabled("N_F_NFD_ON") || material.GetFloat("_N_F_NFD") == 1.0f))
+            {
+                material.EnableKeyword("N_F_NFD_ON");
+                material.SetFloat("_N_F_NFD", 1.0f);
+            }
+            else if ((!material.IsKeywordEnabled("N_F_NFD_ON") || material.GetFloat("_N_F_NFD") == 0.0f))
+            {
+                material.DisableKeyword("N_F_NFD_ON");
+                material.SetFloat("_N_F_NFD", 0.0f);
             }
 
             //======================================================================================================
@@ -3243,6 +3359,7 @@ static string dots_lbs_cd_string = "DOTS|HR - Use Compute Deformation";
                 ChanLi("#pragma target 2.0 //targetol", "#pragma target 4.5 //targetol", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
                 ChanLi("#pragma target 2.0 //targetfl", "#pragma target 4.5 //targetfl", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
                 ChanLi("#pragma target 2.0 //targetsc", "#pragma target 4.5 //targetsc", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
+                ChanLi("#pragma target 2.0 //targetgb", "#pragma target 4.5 //targetgb", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
                 ChanLi("#pragma target 2.0 //targetdo", "#pragma target 4.5 //targetdo", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
                 ChanLi("#pragma target 2.0 //targetdn", "#pragma target 4.5 //targetdn", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
                 ChanLi("#pragma target 2.0 //targetm", "#pragma target 4.5 //targetm", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
@@ -3259,6 +3376,7 @@ static string dots_lbs_cd_string = "DOTS|HR - Use Compute Deformation";
                 ChanLi("#pragma target 4.5 //targetol", "#pragma target 2.0 //targetol", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
                 ChanLi("#pragma target 4.5 //targetfl", "#pragma target 2.0 //targetfl", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
                 ChanLi("#pragma target 4.5 //targetsc", "#pragma target 2.0 //targetsc", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
+                ChanLi("#pragma target 4.5 //targetgb", "#pragma target 2.0 //targetgb", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
                 ChanLi("#pragma target 4.5 //targetdo", "#pragma target 2.0 //targetdo", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
                 ChanLi("#pragma target 4.5 //targetdn", "#pragma target 2.0 //targetdn", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
                 ChanLi("#pragma target 4.5 //targetm", "#pragma target 2.0 //targetm", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
@@ -3295,6 +3413,13 @@ static string dots_lbs_cd_string = "DOTS|HR - Use Compute Deformation";
         ChanLi("//uint vertexID : SV_VertexID;//DOTS_CompDef_FL", "uint vertexID : SV_VertexID;//DOTS_CompDef_FL", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
         ChanLi("//DOTS_CompDef(input.vertexID, (float3)_LBS_CD_Position, _LBS_CD_Normal, (float3)_LBS_CD_Tangent);//DOTS_CompDef_FL", "DOTS_CompDef(input.vertexID, (float3)_LBS_CD_Position, _LBS_CD_Normal, (float3)_LBS_CD_Tangent);//DOTS_CompDef_FL", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
         ChanLi("DOTS_LiBleSki(input.indices, input.weights, input.positionOS.xyz, input.normalOS.xyz, input.tangentOS.xyz, (float3)_LBS_CD_Position, _LBS_CD_Normal, (float3)_LBS_CD_Tangent);//DOTS_LiBleSki_FL", "//DOTS_LiBleSki(input.indices, input.weights, input.positionOS.xyz, input.normalOS.xyz, input.tangentOS.xyz, (float3)_LBS_CD_Position, _LBS_CD_Normal, (float3)_LBS_CD_Tangent);//DOTS_LiBleSki_FL", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
+
+
+        ChanLi("float4 weights : BLENDWEIGHTS;//DOTS_LiBleSki_GB", "//float4 weights : BLENDWEIGHTS;//DOTS_LiBleSki_GB", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
+        ChanLi("uint4 indices : BLENDINDICES;//DOTS_LiBleSki_GB", "//uint4 indices : BLENDINDICES;//DOTS_LiBleSki_GB", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
+        ChanLi("//uint vertexID : SV_VertexID;//DOTS_CompDef_GB", "uint vertexID : SV_VertexID;//DOTS_CompDef_GB", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
+        ChanLi("//DOTS_CompDef(input.vertexID, (float3)_LBS_CD_Position, _LBS_CD_Normal, (float3)_LBS_CD_Tangent);//DOTS_CompDef_GB", "DOTS_CompDef(input.vertexID, (float3)_LBS_CD_Position, _LBS_CD_Normal, (float3)_LBS_CD_Tangent);//DOTS_CompDef_GB", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
+        ChanLi("DOTS_LiBleSki(input.indices, input.weights, input.positionOS.xyz, input.normalOS.xyz, input.tangentOS.xyz, (float3)_LBS_CD_Position, _LBS_CD_Normal, (float3)_LBS_CD_Tangent);//DOTS_LiBleSki_GB", "//DOTS_LiBleSki(input.indices, input.weights, input.positionOS.xyz, input.normalOS.xyz, input.tangentOS.xyz, (float3)_LBS_CD_Position, _LBS_CD_Normal, (float3)_LBS_CD_Tangent);//DOTS_LiBleSki_GB", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
 
 
         ChanLi("float4 weights : BLENDWEIGHTS;//DOTS_LiBleSki_SC", "//float4 weights : BLENDWEIGHTS;//DOTS_LiBleSki_SC", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
@@ -3345,6 +3470,13 @@ static string dots_lbs_cd_string = "DOTS|HR - Use Compute Deformation";
                 ChanLi("uint vertexID : SV_VertexID;//DOTS_CompDef_FL", "//uint vertexID : SV_VertexID;//DOTS_CompDef_FL", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
                 ChanLi("DOTS_CompDef(input.vertexID, (float3)_LBS_CD_Position, _LBS_CD_Normal, (float3)_LBS_CD_Tangent);//DOTS_CompDef_FL", "//DOTS_CompDef(input.vertexID, (float3)_LBS_CD_Position, _LBS_CD_Normal, (float3)_LBS_CD_Tangent);//DOTS_CompDef_FL", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
                 ChanLi("//DOTS_LiBleSki(input.indices, input.weights, input.positionOS.xyz, input.normalOS.xyz, input.tangentOS.xyz, (float3)_LBS_CD_Position, _LBS_CD_Normal, (float3)_LBS_CD_Tangent);//DOTS_LiBleSki_FL", "DOTS_LiBleSki(input.indices, input.weights, input.positionOS.xyz, input.normalOS.xyz, input.tangentOS.xyz, (float3)_LBS_CD_Position, _LBS_CD_Normal, (float3)_LBS_CD_Tangent);//DOTS_LiBleSki_FL", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
+
+
+                ChanLi("//float4 weights : BLENDWEIGHTS;//DOTS_LiBleSki_GB", "float4 weights : BLENDWEIGHTS;//DOTS_LiBleSki_GB", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
+                ChanLi("//uint4 indices : BLENDINDICES;//DOTS_LiBleSki_GB", "uint4 indices : BLENDINDICES;//DOTS_LiBleSki_GB", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
+                ChanLi("uint vertexID : SV_VertexID;//DOTS_CompDef_GB", "//uint vertexID : SV_VertexID;//DOTS_CompDef_GB", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
+                ChanLi("DOTS_CompDef(input.vertexID, (float3)_LBS_CD_Position, _LBS_CD_Normal, (float3)_LBS_CD_Tangent);//DOTS_CompDef_GB", "//DOTS_CompDef(input.vertexID, (float3)_LBS_CD_Position, _LBS_CD_Normal, (float3)_LBS_CD_Tangent);//DOTS_CompDef_GB", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
+                ChanLi("//DOTS_LiBleSki(input.indices, input.weights, input.positionOS.xyz, input.normalOS.xyz, input.tangentOS.xyz, (float3)_LBS_CD_Position, _LBS_CD_Normal, (float3)_LBS_CD_Tangent);//DOTS_LiBleSki_GB", "DOTS_LiBleSki(input.indices, input.weights, input.positionOS.xyz, input.normalOS.xyz, input.tangentOS.xyz, (float3)_LBS_CD_Position, _LBS_CD_Normal, (float3)_LBS_CD_Tangent);//DOTS_LiBleSki_GB", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");
 
 
                 ChanLi("//float4 weights : BLENDWEIGHTS;//DOTS_LiBleSki_SC", "float4 weights : BLENDWEIGHTS;//DOTS_LiBleSki_SC", "Assets/RealToon/RealToon Shaders/Version 5/URP/Default/D_Default_URP.shader");

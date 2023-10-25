@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 using Sirenix.OdinInspector;
+using Pathfinding;
 
 public class AI : MonoBehaviour
 {
@@ -17,6 +17,7 @@ public class AI : MonoBehaviour
     public int id;
     public enum State { Idle, Move, Alert, Combat, Passive, Flee };
     public State currentState = State.Idle;
+    private Seeker seeker;
 
     public bool killOncePerDay = true;
 
@@ -48,7 +49,6 @@ public class AI : MonoBehaviour
 
     public float stoppingDistance = 4;
     public float enemyDetectionRadius = 8;
-    private bool isClose;
 
     [TabGroup("Patrol")] public bool willPatrol;
     [TabGroup("Patrol")] public float patrolRange;
@@ -94,6 +94,7 @@ public class AI : MonoBehaviour
 
     protected void Start()
     {
+        seeker = GetComponent<Seeker>();
         movement = GetComponent<Movement>();
         GameManager.Instance.advanceGameState += ExecuteFrame;
 
@@ -146,6 +147,7 @@ public class AI : MonoBehaviour
 
     void DeathEvent()
     {
+        GameManager.Instance.Gold += status.currentStats.gold;
         RemoveFromAIManager();
     }
 

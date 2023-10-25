@@ -28,9 +28,6 @@ public class HPBar : MonoBehaviour
     public Color poiseColor;
     public Color poiseBreakColor;
 
-    AI AI;
-
-
 
     private void Start()
     {
@@ -39,10 +36,7 @@ public class HPBar : MonoBehaviour
         if (status == null)
         {
             status = GetComponentInParent<Status>();
-            AI = GetComponentInParent<AI>();
         }
-        if (AI != null) AI.detectEvent += DisplayInfo;
-
 
         if (container != null && !alwaysShowHPBar)
         {

@@ -9,12 +9,13 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: N00_000_00_EyeHighlight_00_EYE (Instance)
   m_Shader: {fileID: 4800000, guid: 6459b2db96a08ca41b0f9b39dc7ad59e, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - N_F_CO_ON
   - N_F_EAL_ON
   - N_F_RDC_ON
   - N_F_RELGI_ON
-  - N_F_SL_ON
   - N_F_TRANSAFFSHA_ON
   - N_F_TRANS_ON
   - _NORMALMAP
@@ -42,7 +43,7 @@ Material:
   - _VERTEXCOLORBLUEAFFECTOUTLINEWITDH_OFF
   - _VERTEXCOLORGREENCONTROLSELFSHADOWTHRESHOLD_OFF
   - _VERTEXCOLORREDCONTROLSMOOTHOBJECTNORMAL_OFF
-  m_LightmapFlags: 2
+  m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2450
@@ -50,6 +51,7 @@ Material:
     RenderType: TransparentCutout
   disabledShaderPasses:
   - SRPDEFAULTUNLIT
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -199,12 +201,15 @@ Material:
     - _MToonVersion: 38
     - _MVCOL: 0
     - _MaiColPo: 0.8
+    - _MaxFadDistance: 2
+    - _MinFadDistance: 0
     - _MixMainTexToOutline: 0
     - _N_F_CA: 0
     - _N_F_CLD: 0
     - _N_F_CO: 1
     - _N_F_COEDGL: 0
     - _N_F_DCS: 0
+    - _N_F_DDMD: 0
     - _N_F_EAL: 1
     - _N_F_ESSAO: 0
     - _N_F_FR: 0
@@ -214,6 +219,7 @@ Material:
     - _N_F_HPSS: 0
     - _N_F_MC: 0
     - _N_F_MSSOLTFO: 0
+    - _N_F_NFD: 0
     - _N_F_NLASOBF: 0
     - _N_F_NM: 0
     - _N_F_O: 0
@@ -223,7 +229,7 @@ Material:
     - _N_F_RDC: 1
     - _N_F_RL: 0
     - _N_F_SCT: 0
-    - _N_F_SL: 1
+    - _N_F_SL: 0
     - _N_F_SON: 0
     - _N_F_SS: 0
     - _N_F_ST: 0
@@ -287,6 +293,7 @@ Material:
     - _ShowInAmbientLightShadowIntensity: 1
     - _ShowInAmbientLightShadowThreshold: 0.4
     - _ShowNormal: 0
+    - _SimTrans: 0
     - _SkinMatrixIndex: 0
     - _SmoothObjectNormal: 0
     - _SrcBlend: 5
@@ -303,7 +310,7 @@ Material:
     - _VertexColorBlueAffectOutlineWitdh: 0
     - _VertexColorGreenControlSelfShadowThreshold: 0
     - _VertexColorRedControlSmoothObjectNormal: 0
-    - _ZWrite: 0
+    - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _CustomLightDirection: {r: 0, g: 0, b: 10, a: 0}
