@@ -13,7 +13,6 @@ public class Hitbox : MonoBehaviour
     [TabGroup("Settings")] public bool relativePushback = false;
 
     [Header("Multihit")]
-
     [TabGroup("Settings")] public int resetTimer = 0;
     protected int resetCounter;
     [TabGroup("Debug")] public GameObject col;
@@ -198,14 +197,10 @@ public class Hitbox : MonoBehaviour
                 break;
         }
     }
-
-
-
     void ExecuteHit(HitProperty hit, Status other, Attack atk)
     {
         attack.hit = true;
 
-        attack.attackHitEvent?.Invoke(move);
         //Calculate direction
         aVector = knockbackDirection * hit.pushback.x + Vector3.up * hit.pushback.y;
 
@@ -231,15 +226,22 @@ public class Hitbox : MonoBehaviour
         {
             status.Meter += (int)(move.meterGain * status.currentStats.meterGainModifier);
             totalDamage = (int)(baseDamage * (atk.damage * status.currentStats.damageModifierPercentage * status.Attack) + status.currentStats.damageModifierFlat);
-
         }
+
+        //Send info to skill manager
+        bool backstab = false;
         //BACKSTAB
         if (Mathf.Sign(status.transform.localScale.x) == Mathf.Sign(other.transform.localScale.x))
         {
+            backstab = true;
             totalDamage = (int)(totalDamage * (1 + status.currentStats.backstabModifier));
         }
         int damageDealt = Mathf.RoundToInt((totalDamage * (1 - other.currentStats.defense)) - other.currentStats.resistance);
 
+
+        HitInfo hitInfo = new HitInfo(crit, backstab, other, move);
+        attack.HitEvent(hitInfo);
+       
 
         if (damageDealt <= 0)
         {

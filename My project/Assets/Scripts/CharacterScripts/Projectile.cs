@@ -358,6 +358,7 @@ public class Projectile : Hitbox
         if (enemyStatus != null && hitbox == null)
         {
             if (status == enemyStatus) return;
+            if (status.alignment == enemyStatus.alignment) return;
 
             if (!enemyList.Contains(enemyStatus))
             {

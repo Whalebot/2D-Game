@@ -26,7 +26,7 @@ MonoBehaviour:
   - attackLevel: 2
     attackType: 1
     hitbox: {fileID: 5860963072138344223, guid: fdaed30a4102f4b4aa435277a0e4a9de, type: 3}
-    damage: 2
+    damage: 4
     stun: 20
     hitstop: 5
     poiseBreak: 0
@@ -105,11 +105,41 @@ MonoBehaviour:
     duration: 5
     momentum: {x: 0, y: 0}
     resetVelocityDuringRecovery: 0
+    xMovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    movementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    useCurve: 0
+    teleport: 0
   - startFrame: 20
     duration: 2
     momentum: {x: -5, y: 0}
     resetVelocityDuringRecovery: 0
+    xMovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    movementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    useCurve: 0
+    teleport: 0
   instantStartupRotation: 1
   overrideVelocity: 0
   runMomentum: 0
+  inheritForwardVelocity: 0
   stopAtEdges: 1
+  homing: 0

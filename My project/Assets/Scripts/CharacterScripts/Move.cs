@@ -87,7 +87,9 @@ public class Move : ScriptableObject
     [TabGroup("Momentum")] public bool instantStartupRotation = true;
     [TabGroup("Momentum")] public bool overrideVelocity = true;
     [TabGroup("Momentum")] public bool runMomentum = true;
+    [TabGroup("Momentum")] public bool inheritForwardVelocity = false;
     [TabGroup("Momentum")] public bool stopAtEdges = true;
+    [TabGroup("Momentum")] public bool homing = false;
 
     private void OnValidate()
     {
@@ -170,6 +172,9 @@ public class Momentum
     public int duration;
     public Vector2 momentum;
     public bool resetVelocityDuringRecovery = true;
+    [ShowIf("useCurve")] public AnimationCurve xMovementCurve;
+    [ShowIf("useCurve")] public AnimationCurve movementCurve;
+   public bool useCurve = false;
     public bool teleport = false;
 
 }

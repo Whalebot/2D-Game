@@ -19,6 +19,8 @@ public class Status : MonoBehaviour
     [HideInInspector] public bool inHitStun;
     int staminaRegenCounter;
     [TabGroup("Current Stats")]
+    public List<StatusEffect> statusEffects;
+    [HideInInspector] public List<StatusEffect> removedEffects;
     [HideLabel] public Stats currentStats;
     [TabGroup("Current Stats")] public int hitstunValue;
     [TabGroup("Current Stats")] public int blockstunValue;
@@ -30,6 +32,7 @@ public class Status : MonoBehaviour
     [Header("Base stats")]
     [HideLabel] public Stats baseStats;
 
+    [TabGroup("Properties")] public bool isFlying;
     [TabGroup("Properties")] public bool hasArmor;
     [HideInInspector] public bool animationArmor;
     [TabGroup("Properties")] public bool counterhitState = false;
@@ -70,8 +73,6 @@ public class Status : MonoBehaviour
     public event Action hitRecoveryEvent;
     public event Action invincibleEvent;
 
-    CharacterSFX characterSFX;
-
     [HideInInspector] public bool godMode;
     [HideInInspector] public bool regenStamina;
 
@@ -79,7 +80,6 @@ public class Status : MonoBehaviour
     {
 
         rb = GetComponent<Rigidbody>();
-        characterSFX = GetComponentInChildren<CharacterSFX>();
         currentState = State.Neutral;
 
         ApplyCharacter();
@@ -179,9 +179,46 @@ public class Status : MonoBehaviour
     void ExecuteFrame()
     {
         PoiseRegen();
+        ResolveStatusEffects();
         StateMachine();
     }
+    public void ApplyStatusEffect(StatusEffect effect)
+    {
+        statusEffects.Add(effect);
+        effect.ActivateBehaviour(this);
+    }
+    public bool HasStatusEffect(StatusEffect effect)
+    {
+        if (statusEffects.Contains(effect)) return true;
 
+        return false;
+    }
+    public void RefreshStatusEffect(StatusEffect effect)
+    {
+        if (statusEffects.Contains(effect))
+            effect.RefreshBehaviour();
+    }
+    void ResolveStatusEffects()
+    {
+        //Do stuff every frame
+        foreach (var item in statusEffects)
+        {
+            item.ExecuteFrame();
+        }
+        if (removedEffects.Count > 0)
+        {
+            foreach (var item in removedEffects)
+            {
+                if (statusEffects.Contains(item))
+                    statusEffects.Remove(item);
+            }
+            removedEffects.Clear();
+        }
+    }
+    public void RemoveStatusEffect(StatusEffect effect)
+    {
+        removedEffects.Add(effect);
+    }
     public void EnableCollider()
     {
         if (!isDead)
@@ -193,116 +230,6 @@ public class Status : MonoBehaviour
             col.gameObject.layer = LayerMask.NameToLayer("Noclip");
         //Debug.Log(LayerMask.LayerToName(col.gameObject.layer));
     }
-
-    public void RestoreStats()
-    {
-        //Get stat definition and replace 1 with 2
-        Stats def1 = currentStats;
-        Stats def2 = baseStats;
-
-        FieldInfo[] defInfo1 = def1.GetType().GetFields();
-        FieldInfo[] defInfo2 = def2.GetType().GetFields();
-
-        for (int i = 0; i < defInfo1.Length; i++)
-        {
-            object obj = def1;
-            object obj2 = def2;
-            if (defInfo1[i].Name != "currentHealth" && defInfo1[i].Name != "currentMeter" && defInfo1[i].Name != "gold")
-                defInfo1[i].SetValue(obj, defInfo2[i].GetValue(obj2));
-        }
-    }
-
-    public void CalculateStats()
-    {
-        Stats tempStats = new Stats();
-        tempStats.ResetValues();
-        AddStats(tempStats, baseStats);
-        AddStats(tempStats, modifiedStats);
-
-        tempStats.currentHealth = Health;
-        ReplaceStats(currentStats, tempStats);
-    }
-
-    public void ReplaceStats(Stats oldStats, Stats newStats)
-    {
-
-        //Get stat definition and replace 1 with 2
-        Stats def1 = oldStats;
-        Stats def2 = newStats;
-
-        FieldInfo[] defInfo1 = def1.GetType().GetFields();
-        FieldInfo[] defInfo2 = def2.GetType().GetFields();
-
-        for (int i = 0; i < defInfo1.Length; i++)
-        {
-            object obj = def1;
-            object obj2 = def2;
-            defInfo1[i].SetValue(obj, defInfo2[i].GetValue(obj2));
-        }
-    }
-
-    public void AddStats(Stats oldStats, Stats newStats)
-    {
-        //Get stat definition and add 1 to 2
-        Stats def1 = oldStats;
-        Stats def2 = newStats;
-
-        FieldInfo[] defInfo1 = def1.GetType().GetFields();
-        FieldInfo[] defInfo2 = def2.GetType().GetFields();
-
-        for (int i = 0; i < defInfo1.Length; i++)
-        {
-            object obj = def1;
-            object obj2 = def2;
-
-            object var1 = defInfo1[i].GetValue(obj);
-            object var2 = defInfo2[i].GetValue(obj2);
-
-            if (var1 is int)
-            {
-                if ((int)var2 != 0)
-                    defInfo1[i].SetValue(obj, (int)var1 + (int)var2);
-            }
-            else if (var1 is float)
-            {
-                if ((float)var2 != 0)
-                    defInfo1[i].SetValue(obj, (float)var1 + (float)var2);
-            }
-        }
-    }
-
-
-    public void RemoveStats(Stats oldStats, Stats newStats)
-    {
-        //Get stat definition and remove 2 from 1
-        Stats def1 = oldStats;
-        Stats def2 = newStats;
-
-        FieldInfo[] defInfo1 = def1.GetType().GetFields();
-        FieldInfo[] defInfo2 = def2.GetType().GetFields();
-
-        for (int i = 0; i < defInfo1.Length; i++)
-        {
-            object obj = def1;
-            object obj2 = def2;
-
-            object var1 = defInfo1[i].GetValue(obj);
-            object var2 = defInfo2[i].GetValue(obj2);
-
-            if (var1 is int)
-            {
-                if ((int)var2 != 0)
-                    defInfo1[i].SetValue(obj, (int)var1 - (int)var2);
-            }
-            else if (var1 is float)
-            {
-                if ((float)var2 != 0)
-                    defInfo1[i].SetValue(obj, (float)var1 - (float)var2);
-            }
-        }
-    }
-
-
 
     void StateMachine()
     {
@@ -353,7 +280,7 @@ public class Status : MonoBehaviour
                 blocking = false;
                 break;
             case State.Recovery:
-                if (rb != null)
+                if (rb != null && !isFlying)
                     rb.useGravity = true;
                 blocking = false;
                 break;
@@ -371,7 +298,7 @@ public class Status : MonoBehaviour
                     rb.useGravity = true;
                 break;
             case State.Neutral:
-                if (rb != null)
+                if (rb != null && !isFlying)
                     rb.useGravity = true;
                 invincible = false;
                 currentState = State.Neutral;
@@ -407,8 +334,6 @@ public class Status : MonoBehaviour
         if (alignment != Alignment.Player || !SaveManager.Instance.HasSaveData())
             ReplaceStats(currentStats, baseStats);
     }
-
-
     public void TakeHit(int damage, Vector3 kb, int stunVal, int poiseBreak, Vector3 dir, float slowDur, HitState hitState, bool crit = false)
     {
         if (isDead) return;
@@ -493,7 +418,6 @@ public class Status : MonoBehaviour
         poiseBroken = true;
         GameManager.Instance.Slowmotion(15);
     }
-
     public void TakePushback(Vector3 direction)
     {
         if (direction == Vector3.zero) return;
@@ -509,7 +433,6 @@ public class Status : MonoBehaviour
             rb.velocity = direction;
         }
     }
-
     public void Death()
     {
         isDead = true;
@@ -518,10 +441,8 @@ public class Status : MonoBehaviour
         invincible = true;
         hurtbox.enabled = false;
         col.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
-        Debug.Log(col.gameObject.layer);
         if (autoDeath) StartCoroutine(DelayDeath());
     }
-
     IEnumerator DelayDeath()
     {
         yield return new WaitForFixedUpdate();
@@ -530,7 +451,6 @@ public class Status : MonoBehaviour
             Destroy(gameObject);
         else Destroy(transform.parent.gameObject);
     }
-
     void ResolveBlockstun()
     {
         if (blockstunValue > 0)
@@ -571,6 +491,111 @@ public class Status : MonoBehaviour
             inHitStun = false;
         }
     }
+
+    #region Calculate Stats
+    public void RestoreStats()
+    {
+        //Get stat definition and replace 1 with 2
+        Stats def1 = currentStats;
+        Stats def2 = baseStats;
+
+        FieldInfo[] defInfo1 = def1.GetType().GetFields();
+        FieldInfo[] defInfo2 = def2.GetType().GetFields();
+
+        for (int i = 0; i < defInfo1.Length; i++)
+        {
+            object obj = def1;
+            object obj2 = def2;
+            if (defInfo1[i].Name != "currentHealth" && defInfo1[i].Name != "currentMeter" && defInfo1[i].Name != "gold")
+                defInfo1[i].SetValue(obj, defInfo2[i].GetValue(obj2));
+        }
+    }
+    public void CalculateStats()
+    {
+        Stats tempStats = new Stats();
+        tempStats.ResetValues();
+        AddStats(tempStats, baseStats);
+        AddStats(tempStats, modifiedStats);
+
+        tempStats.currentHealth = Health;
+        ReplaceStats(currentStats, tempStats);
+    }
+    public void ReplaceStats(Stats oldStats, Stats newStats)
+    {
+
+        //Get stat definition and replace 1 with 2
+        Stats def1 = oldStats;
+        Stats def2 = newStats;
+
+        FieldInfo[] defInfo1 = def1.GetType().GetFields();
+        FieldInfo[] defInfo2 = def2.GetType().GetFields();
+
+        for (int i = 0; i < defInfo1.Length; i++)
+        {
+            object obj = def1;
+            object obj2 = def2;
+            defInfo1[i].SetValue(obj, defInfo2[i].GetValue(obj2));
+        }
+    }
+    public void AddStats(Stats oldStats, Stats newStats)
+    {
+        //Get stat definition and add 1 to 2
+        Stats def1 = oldStats;
+        Stats def2 = newStats;
+
+        FieldInfo[] defInfo1 = def1.GetType().GetFields();
+        FieldInfo[] defInfo2 = def2.GetType().GetFields();
+
+        for (int i = 0; i < defInfo1.Length; i++)
+        {
+            object obj = def1;
+            object obj2 = def2;
+
+            object var1 = defInfo1[i].GetValue(obj);
+            object var2 = defInfo2[i].GetValue(obj2);
+
+            if (var1 is int)
+            {
+                if ((int)var2 != 0)
+                    defInfo1[i].SetValue(obj, (int)var1 + (int)var2);
+            }
+            else if (var1 is float)
+            {
+                if ((float)var2 != 0)
+                    defInfo1[i].SetValue(obj, (float)var1 + (float)var2);
+            }
+        }
+    }
+    public void RemoveStats(Stats oldStats, Stats newStats)
+    {
+        //Get stat definition and remove 2 from 1
+        Stats def1 = oldStats;
+        Stats def2 = newStats;
+
+        FieldInfo[] defInfo1 = def1.GetType().GetFields();
+        FieldInfo[] defInfo2 = def2.GetType().GetFields();
+
+        for (int i = 0; i < defInfo1.Length; i++)
+        {
+            object obj = def1;
+            object obj2 = def2;
+
+            object var1 = defInfo1[i].GetValue(obj);
+            object var2 = defInfo2[i].GetValue(obj2);
+
+            if (var1 is int)
+            {
+                if ((int)var2 != 0)
+                    defInfo1[i].SetValue(obj, (int)var1 - (int)var2);
+            }
+            else if (var1 is float)
+            {
+                if ((float)var2 != 0)
+                    defInfo1[i].SetValue(obj, (float)var1 - (float)var2);
+            }
+        }
+    }
+    #endregion
 }
 
 public enum Alignment
@@ -579,5 +604,4 @@ public enum Alignment
     Enemy,
     Neutral
 }
-public enum StatusEffect { Burning, Frozen };
 public enum GroundState { Grounded, Airborne, Knockdown }

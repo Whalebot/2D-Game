@@ -12,28 +12,32 @@ public class AttackScript : MonoBehaviour
     [FoldoutGroup("Components")] public Transform vfxContainer;
 
     Movement movement;
-    CharacterSFX sfx;
 
-    public delegate void AttackEvent();
-    public AttackEvent emptyAttackEvent;
-    public AttackEvent startupEvent;
-    public AttackEvent blendAttackEvent;
-    public AttackEvent topAnimationEvent;
-    public AttackEvent activeEvent;
-    public AttackEvent recoveryEvent;
-    public AttackEvent parryEvent;
-    public AttackEvent blockEvent;
-    public AttackEvent jumpEvent;
-    public AttackEvent jumpCancelEvent;
+    public event Action emptyAttackEvent;
+    public event Action startupEvent;
+    public event Action blendAttackEvent;
+    public event Action topAnimationEvent;
+    public event Action activeEvent;
+    public event Action recoveryEvent;
+    public event Action parryEvent;
+    public event Action blockEvent;
+    public event Action jumpEvent;
+    public event Action jumpCancelEvent;
+
+    public event Action<HitInfo> hitEvent;
+
     public delegate void MoveEvent(Move move);
     public MoveEvent activateHitboxEvent;
     public MoveEvent deactivateHitboxEvent;
     public MoveEvent attackHitEvent;
     public MoveEvent attackPerformedEvent;
+
     public Moveset moveset;
     [HeaderAttribute("Attack attributes")]
     [TabGroup("Debug")] public bool attacking;
     [TabGroup("Debug")] public Move activeMove;
+    [TabGroup("Debug")] public Combo activeCombo;
+    [TabGroup("Debug")] public Vector3 homingDirection;
     [TabGroup("Debug")] public int releaseMinimum;
     [TabGroup("Debug")] public bool delayRelease;
     [TabGroup("Debug")] public bool hit;
@@ -68,7 +72,6 @@ public class AttackScript : MonoBehaviour
 
         status = GetComponent<Status>();
         movement = GetComponent<Movement>();
-        sfx = GetComponentInChildren<CharacterSFX>();
         movement.jumpEvent += JumpCancel;
         movement.doubleJumpEvent += JumpCancel;
         movement.landEvent += Land;
@@ -78,7 +81,6 @@ public class AttackScript : MonoBehaviour
         GameManager.Instance.advanceGameState += ExecuteFrame;
         GameManager.Instance.resetEvent += ResetAttack;
     }
-
     private void OnDisable()
     {
         movement.jumpEvent -= JumpCancel;
@@ -91,17 +93,14 @@ public class AttackScript : MonoBehaviour
         GameManager.Instance.advanceGameState -= ExecuteFrame;
         GameManager.Instance.resetEvent -= ResetAttack;
     }
-
     public int AttackFrame
     {
         get { return (int)attackFrames; }
     }
-
     void ResetAttack()
     {
         ResetAllValues();
     }
-
     public void ExecuteFrame()
     {
         if (status.isDead) return;
@@ -142,7 +141,6 @@ public class AttackScript : MonoBehaviour
 
         if (status.currentState == Status.State.Neutral || status.currentState == Status.State.Blockstun || status.currentState == Status.State.Hitstun) usedMoves.Clear();
     }
-
     void ExecuteAttackFrame(int frame)
     {
 
@@ -194,7 +192,6 @@ public class AttackScript : MonoBehaviour
             RecoveryFrames();
         }
     }
-
     void ExecuteUniqueProperties(int frame)
     {
         //if (lastFrame == frame) { Debug.Log($"{lastFrame} {frame}"); }
@@ -235,7 +232,6 @@ public class AttackScript : MonoBehaviour
             }
         }
     }
-
     void ExecuteMomentum(int frame = 0, int skippedFrames = 1)
     {
         bool tempMomentum = false;
@@ -268,19 +264,50 @@ public class AttackScript : MonoBehaviour
                 if (frame >= activeMove.m[i].startFrame && frame < activeMove.m[i].startFrame + activeMove.m[i].duration)
                 {
                     if (!movement.ground) movement._rb.useGravity = false;
+                    if (frame == activeMove.m[i].startFrame && activeMove.m[i].momentum.y > 0)
+                    {
+                        movement.CollisionPassthrough();
+                    }
+                    //else if (activeMove.m[i].momentum.y < 0 && activeMove.noClip == false)
+                    //    status.EnableCollider();
 
-                    movement.SetVelocity((activeMove.m[i].momentum.x * transform.forward + transform.up * activeMove.m[i].momentum.y));
+
+                    if (activeMove.homing)
+                        movement.SetVelocity(activeMove.m[i].momentum.x * (Mathf.Abs(homingDirection.x) * transform.forward + transform.up * homingDirection.y));
+                    else
+                    {
+                        if (activeMove.inheritForwardVelocity && activeMove.m[i].momentum.x == 0)
+                        {
+                            movement.SetVelocity(Mathf.Abs(movement._rb.velocity.x) * transform.forward + transform.up * activeMove.m[i].momentum.y);
+                        }
+                        else
+                        {
+                            if (activeMove.m[i].useCurve)
+                            {
+                                float curvetime = ((float)frame - activeMove.m[i].startFrame) / (activeMove.m[i].startFrame + activeMove.m[i].duration);
+                                float deltaCurve =
+                                    activeMove.m[i].movementCurve.Evaluate((float)1 + frame - activeMove.m[i].startFrame) / (activeMove.m[i].startFrame + activeMove.m[i].duration) -
+                                    activeMove.m[i].movementCurve.Evaluate((float)frame - activeMove.m[i].startFrame) / (activeMove.m[i].startFrame + activeMove.m[i].duration);
+                                //Debug.Log(deltaCurve + " " + activeMove.m[i].movementCurve.Evaluate((float)1 + frame - activeMove.m[i].startFrame) / (activeMove.m[i].startFrame + activeMove.m[i].duration) + " " + activeMove.m[i].movementCurve.Evaluate((float)frame - activeMove.m[i].startFrame) / (activeMove.m[i].startFrame + activeMove.m[i].duration));
+                                movement.SetVelocity(activeMove.m[i].xMovementCurve.Evaluate(curvetime) * transform.forward + transform.up * (activeMove.m[i].movementCurve.Evaluate(curvetime)));
+                                if (activeMove.m[i].movementCurve.Evaluate(curvetime) < 0 && activeMove.noClip == false)
+                                    status.EnableCollider();
+                            }
+                            else
+                                movement.SetVelocity((activeMove.m[i].momentum.x * transform.forward + transform.up * activeMove.m[i].momentum.y));
+                        }
+
+                    }
                 }
             }
 
         }
         if (movement.CheckEdge() && activeMove.stopAtEdges)
         {
-            movement.SetVelocity(Vector3.zero);
+            movement.SetVelocity(new Vector3(0, movement._rb.velocity.y));
         }
         inMomentum = tempMomentum;
     }
-
     public void SpawnFX(int frame = 0)
     {
         if (activeMove != null)
@@ -313,7 +340,6 @@ public class AttackScript : MonoBehaviour
                 }
         }
     }
-
     void ApplyScreenShake(int frame = 0)
     {
         for (int i = 0; i < activeMove.screenShake.Length; i++)
@@ -338,7 +364,6 @@ public class AttackScript : MonoBehaviour
         }
         hitboxes.Clear();
     }
-
     public void ActiveFrames(int frame)
     {
         for (int i = 0; i < activeMove.attacks.Length; i++)
@@ -394,14 +419,12 @@ public class AttackScript : MonoBehaviour
             }
         }
     }
-
     public void RecoveryFrames()
     {
         newAttack = false;
         status.GoToState(Status.State.Recovery);
         ClearHitboxes();
     }
-
     void ProcessInvul(int frame = 0)
     {
         //Execute properties
@@ -450,7 +473,6 @@ public class AttackScript : MonoBehaviour
             }
         }
     }
-
     public void AttackProperties(Move move)
     {
         if (move == null)
@@ -495,7 +517,6 @@ public class AttackScript : MonoBehaviour
 
         if (move.instantStartupRotation) movement.Rotation();
 
-
         //Run momentum
         if (move.overrideVelocity) movement._rb.velocity = Vector3.zero;
         else if (move.runMomentum) movement._rb.velocity = movement._rb.velocity * 0.5F;
@@ -505,6 +526,10 @@ public class AttackScript : MonoBehaviour
 
         if (!movement.passthroughPlatforms)
             status.EnableCollider();
+
+        if (move.homing)
+            homingDirection = movement.direction.normalized;
+
         Startup();
         landCancel = move.landCancel;
 
@@ -517,7 +542,6 @@ public class AttackScript : MonoBehaviour
         else
         {
             startupEvent?.Invoke();
-            //emptyAttackEvent?.Invoke();
         }
         attacking = true;
         newAttack = true;
@@ -598,8 +622,7 @@ public class AttackScript : MonoBehaviour
         ExecuteFrame();
         return true;
     }
-
-    public bool CanUseMove(Move move)
+    public bool CanUseMove(Move move, bool isCombo = false)
     {
         if (move == null) return false;
 
@@ -631,43 +654,30 @@ public class AttackScript : MonoBehaviour
         if (move != null && canTargetCombo)
         {
             if (move.gatlingCancel) return true;
+            if (isCombo) return true;
+            if (CanTargetCombo(move)) return true;
         }
         return false;
     }
-
-    public bool TargetCombo(Move move)
+    public bool CanTargetCombo(Move move)
     {
-        //if (jumpFrameCounter > 0) return false;
-        if (move == null) return false;
-        if (move.useAirAction)
-        {
-            if (movement.performedJumps > movement.multiJumps)
-            {
-                return false;
-            }
-        }
         if (attacking && canTargetCombo)
         {
             if (activeMove.targetComboMoves.Count > 0)
             {
-                if (activeMove.targetComboMoves.Contains(move))
+                if (activeMove.targetComboMoves.Contains(move) && !usedMoves.Contains(move))
                 {
-                    AttackProperties(move);
                     return true;
                 }
 
                 //if (usedMoves.Contains(move) && activeMove == move || move.targetComboMoves.Contains(activeMove))
                 //{
-                //    Attack(move.targetComboMoves[0]);
                 //    return true;
                 //}
-
             }
         }
         return false;
-
     }
-
     public bool HasBeenUsed(Move move)
     {
         if (usedMoves.Contains(move))
@@ -681,32 +691,40 @@ public class AttackScript : MonoBehaviour
         }
         else return false;
     }
-
     public bool ComboAttack(Combo c)
     {
         if (c.moves.Count <= 0) return false;
 
-        if (c.moves.Count <= combo)
-            return Attack(c.moves[0]);
-
-        if (!CanUseMove(c.moves[combo]))
+        if (c == activeCombo)
         {
-            Debug.Log("Can't use move");
-            return false;
+            if (c.moves.Count <= combo)
+                return false;
+            if (!CanUseMove(c.moves[combo], true))
+            {
+                //Debug.Log("Can't use move");
+                return false;
+            }
         }
-        //else
-        //    Attack(c.moves[combo]);
+        else
+        {
+            if (!CanUseMove(c.moves[0]))
+            {
+                //Debug.Log("Can't use move");
+                return false;
+            }
+            combo = 0;
+        }
 
+        activeCombo = c;
         AttackProperties(c.moves[combo]);
-
         return true;
     }
-
     public bool Attack(Move move)
     {
         if (move == null) return false;
-        if (TargetCombo(move))
+        if (CanTargetCombo(move))
         {
+            AttackProperties(move);
             return true;
         }
         if (HasBeenUsed(move))
@@ -722,27 +740,15 @@ public class AttackScript : MonoBehaviour
             AttackProperties(move);
             return true;
         }
-
     }
-
     void Startup()
     {
         status.GoToState(Status.State.Startup);
     }
-    //public void ReleaseButton()
-    //{
-    //    if (holdAttack && attacking)
-    //    {
-    //        Debug.Log("Release Hold Move");
-    //        attackFrames = activeMove.lastActiveFrame + 1;
-    //    }
-    //}
-
     void Land()
     {
         if (recoverOnlyOnLand)
         {
-            Debug.Log("Land Recovery");
             attackFrames = activeMove.lastActiveFrame + 1;
 
         }
@@ -761,12 +767,10 @@ public class AttackScript : MonoBehaviour
             Idle();
         }
     }
-
     void ResetCombo()
     {
         combo = 0;
     }
-
     void HitstunEvent()
     {
         ResetAllValues();
@@ -775,8 +779,6 @@ public class AttackScript : MonoBehaviour
     {
 
     }
-
-
     public void JumpCancel()
     {
         if (attacking)
@@ -800,12 +802,10 @@ public class AttackScript : MonoBehaviour
         landCancel = false;
         recoveryEvent?.Invoke();
     }
-
     void ClearVFX()
     {
         VFXManager.Instance.DestroyParticles(status);
     }
-
     public void ResetAllValues()
     {
         ClearHitboxes();
@@ -828,6 +828,7 @@ public class AttackScript : MonoBehaviour
         status.invincible = false;
         movement.forcedWalk = false;
 
+        activeCombo = null;
         if (activeMove != null)
         {
             if (movement.ground && !activeMove.keepVelocity)
@@ -842,10 +843,30 @@ public class AttackScript : MonoBehaviour
         recoveryEvent?.Invoke();
         usedMoves.Clear();
     }
-
     public void Idle()
     {
         ResetAllValues();
         status.GoToState(Status.State.Neutral);
     }
+    #region powerup stuff
+    public void HitEvent(HitInfo hitInfo)
+    {
+        hitEvent?.Invoke(hitInfo);
+    }
+    #endregion
+}
+
+public class HitInfo
+{
+    public HitInfo(bool c = false, bool b = false, Status s = null, Move m = null)
+    {
+        crit = c;
+        backstab = b;
+        status = s;
+        move = m;
+    }
+    public bool crit = false;
+    public bool backstab = false;
+    public Status status = null;
+    public Move move = null;
 }

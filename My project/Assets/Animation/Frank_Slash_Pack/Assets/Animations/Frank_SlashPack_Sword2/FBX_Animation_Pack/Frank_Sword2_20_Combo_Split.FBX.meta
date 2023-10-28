@@ -1,14 +1,14 @@
 fileFormatVersion: 2
 guid: a5f6f25e65242dd4e85b5690b7d51b1a
 ModelImporter:
-  serializedVersion: 21300
+  serializedVersion: 22200
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
     second: Frank_Sword2@Combo01_1
   - first:
       74: -1224373816641221967
-    second: Frank_Sword2@Combo01_2
+    second: Fighter_5B
   - first:
       74: -6779336190702763101
     second: Frank_Sword2@Combo01_3
@@ -62,7 +62,7 @@ ModelImporter:
     second: 'Frank_Sword2@Combo06_2 '
   - first:
       74: -1057044506318937575
-    second: L3_Sword
+    second: Fighter_5AA
   - first:
       74: 1121370822338599192
     second: Frank_Sword2@Combo07_1
@@ -83,7 +83,7 @@ ModelImporter:
     second: Frank_Sword2@Combo08_3
   - first:
       74: 1511596114227024006
-    second: L2_Sword
+    second: Fighter_5AAA
   - first:
       74: 7838606046618142773
     second: L1_Sword
@@ -189,10 +189,10 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 100
     - serializedVersion: 16
-      name: Frank_Sword2@Combo01_2
+      name: Fighter_5B
       takeName: Take 001
       internalID: 0
-      firstFrame: 200
+      firstFrame: 203
       lastFrame: 270
       wrapMode: 0
       orientationOffsetY: 0
@@ -711,7 +711,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 100
     - serializedVersion: 16
-      name: L3_Sword
+      name: Fighter_5AA
       takeName: Take 001
       internalID: 0
       firstFrame: 2820
@@ -914,7 +914,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 100
     - serializedVersion: 16
-      name: L2_Sword
+      name: Fighter_5AAA
       takeName: Take 001
       internalID: 0
       firstFrame: 200
@@ -943,11 +943,40 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 100
     - serializedVersion: 16
-      name: L1_Sword
+      name: Fighter_5A
       takeName: Take 001
       internalID: 0
       firstFrame: 601
       lastFrame: 631
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 100
+    - serializedVersion: 16
+      name: Fighter_j5B
+      takeName: Take 001
+      internalID: -1575870232519893168
+      firstFrame: 1815
+      lastFrame: 1842
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -979,6 +1008,7 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -1006,6 +1036,7 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -1959,6 +1990,7 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 2
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 0
   remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 

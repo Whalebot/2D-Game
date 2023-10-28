@@ -12,11 +12,15 @@ public class AIManager : MonoBehaviour
 
     public static float aimOffset = 1F;
 
-    public event Action allEnemiesKilled;
+
     public GameObject clearSFX;
     public event Action noEnemiesRoom;
     public event Action<Character> killEvent;
 
+    public event Action allEnemiesKilledEvent;
+    public event Action roomClearEvent;
+
+    public List<EnemySummoner> wave1;
     public List<AI> respawningEnemies;
     public List<AI> allEnemies;
     public List<AI> activeEnemies;
@@ -55,7 +59,8 @@ public class AIManager : MonoBehaviour
 
     }
 
-    public void EnemyKilled(AI temp) {
+    public void EnemyKilled(AI temp)
+    {
         if (allEnemies.Contains(temp))
             allEnemies.Remove(temp);
 
@@ -63,6 +68,7 @@ public class AIManager : MonoBehaviour
             activeEnemies.Remove(temp);
 
         killEvent?.Invoke(temp.character);
+
         if (allEnemies.Count == 0)
             AllEnemiesKilled();
     }
@@ -88,9 +94,17 @@ public class AIManager : MonoBehaviour
 
     public void AllEnemiesKilled()
     {
-        //if (combatEncounter)
-        //    Instantiate(clearSFX);
-        encounterFinished = true;
-        allEnemiesKilled?.Invoke();
+        if (wave1.Count > 0)
+        {
+            //Spawn Wave
+            allEnemiesKilledEvent?.Invoke();
+        }
+        else
+        {
+            //if (combatEncounter)
+            //    Instantiate(clearSFX);
+            encounterFinished = true;
+            roomClearEvent?.Invoke();
+        }
     }
 }

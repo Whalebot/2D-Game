@@ -28,13 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5860963072138344223}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 3, y: 2.5, z: 3}
+  m_LocalScale: {x: 3, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7135228236847557431
 MeshFilter:
@@ -94,9 +94,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5860963072138344223}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-5636471450885373852
@@ -118,37 +126,41 @@ MonoBehaviour:
   move: {fileID: 0}
   status: {fileID: 0}
   canClash: 0
-  body: {fileID: 0}
+  relativePushback: 0
+  resetTimer: 0
+  col: {fileID: 0}
   enemyList: []
-  projectileMovement: 0
-  targetPosition: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
   life: 39
   lifetime: 2
+  projectileMovement: 0
   velocity: 0
+  rotationVector: {x: 0, y: 0, z: 0}
+  onStartVelocity: 0
+  updateVelocty: 0
+  updateVelocity: 0
+  rotateSpeed: 0
   willDelayReaim: 0
   projectileDelay: 0
   delayVelocity: 0
-  updateVelocity: 0
-  rotateSpeed: 0
-  onStartVelocity: 0
-  updateVelocty: 0
+  projectile: {fileID: 0}
+  projectileTimer: 15
+  maxProjectiles: 0
   searchMask:
     serializedVersion: 2
     m_Bits: 0
   searchSize: 0
   explosion: {fileID: 0}
   onlyExplosionDamage: 0
+  explosionVFX: {fileID: 118354, guid: deddf22d4e65a7447b851e66ff6c334c, type: 3}
+  explosionSFX: {fileID: 6221875919659914540, guid: 2e93bb8f6b9308046876c71285120417, type: 3}
   destroyOnCollission: 0
   destroyOnProjectileClash: 0
   destroyOnHitboxClash: 0
   destroyOnHit: 0
-  explosionVFX: {fileID: 118354, guid: deddf22d4e65a7447b851e66ff6c334c, type: 3}
-  explosionSFX: {fileID: 6221875919659914540, guid: 2e93bb8f6b9308046876c71285120417, type: 3}
   willAttract: 0
   attractPower: {x: 0, y: 0}
-  resetTimer: 0
-  col: {fileID: 0}
   teleportMask:
     serializedVersion: 2
     m_Bits: 0
@@ -164,10 +176,21 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5860963072138344223}
-  serializedVersion: 2
+  serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0

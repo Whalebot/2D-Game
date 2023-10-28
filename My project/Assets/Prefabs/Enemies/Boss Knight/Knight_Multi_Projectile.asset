@@ -50,7 +50,21 @@ MonoBehaviour:
     startup: 40
     amplitude: 1
     duration: 1
-  vfx: []
+  vfx:
+  - startup: 1
+    prefab: {fileID: 9143454445820708258, guid: 413257cc1651f9f44a0acc09067a1c17, type: 3}
+    deattachFromPlayer: 1
+    destroyOnRecovery: 0
+    position: {x: 0, y: 0.01, z: 0}
+    rotation: {x: -90, y: 0, z: 0}
+    scale: {x: 0.3, y: 0.3, z: 0.3}
+  - startup: 40
+    prefab: {fileID: 9143454445820708258, guid: 413257cc1651f9f44a0acc09067a1c17, type: 3}
+    deattachFromPlayer: 1
+    destroyOnRecovery: 0
+    position: {x: 0, y: 0.6, z: 0.7}
+    rotation: {x: 0, y: 0, z: 90}
+    scale: {x: 0.5, y: 0.5, z: 0.5}
   sfx: []
   hitFX:
     startup: 1
@@ -102,4 +116,5 @@ MonoBehaviour:
   instantStartupRotation: 1
   overrideVelocity: 0
   runMomentum: 0
-  stopAtEdges: 1
+  stopAtEdges: 0
+  homing: 0

@@ -37,7 +37,7 @@ MonoBehaviour:
       pushback: {x: 2, y: 0}
       hitState: 0
     airHitProperty:
-      pushback: {x: 0, y: 0}
+      pushback: {x: 1, y: 2}
       hitState: 0
     blockProperty:
       pushback: {x: 0, y: 0}
@@ -89,8 +89,7 @@ MonoBehaviour:
   airInvul: 0
   airInvulStart: 1
   airInvulDuration: 0
-  targetComboMoves:
-  - {fileID: 11400000, guid: 87ce976be1e36da4597e87f94ae4b279, type: 2}
+  targetComboMoves: []
   fullCancel: 0
   gatlingCancel: 0
   uncancelable: 0
@@ -101,4 +100,6 @@ MonoBehaviour:
   instantStartupRotation: 0
   overrideVelocity: 0
   runMomentum: 0
+  inheritForwardVelocity: 0
   stopAtEdges: 1
+  homing: 0

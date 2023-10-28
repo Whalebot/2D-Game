@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
   m_Name: Mage_5A_Hold
   m_EditorClassIdentifier: 
-  animationID: 1
+  animationID: 2
   meterCost: 0
   meterGain: 5
   consumeMeterOnActiveFrame: 1
@@ -123,7 +123,7 @@ MonoBehaviour:
   targetComboMoves:
   - {fileID: 11400000, guid: 846265f9525a33948b942cb5e5fc0ae3, type: 2}
   fullCancel: 0
-  gatlingCancel: 1
+  gatlingCancel: 0
   uncancelable: 0
   useAirAction: 0
   landCancel: 0
@@ -133,13 +133,41 @@ MonoBehaviour:
     duration: 2
     momentum: {x: 3, y: 0}
     resetVelocityDuringRecovery: 0
+    xMovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    movementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    useCurve: 0
     teleport: 0
   - startFrame: 24
     duration: 2
     momentum: {x: 2, y: 0}
     resetVelocityDuringRecovery: 0
+    xMovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    movementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    useCurve: 0
     teleport: 0
   instantStartupRotation: 1
   overrideVelocity: 1
   runMomentum: 0
+  inheritForwardVelocity: 0
   stopAtEdges: 1
+  homing: 0

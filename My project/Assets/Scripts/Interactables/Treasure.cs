@@ -12,7 +12,7 @@ public class Treasure : Interactable
     public override void Start()
     {
         base.Start();
-        AIManager.Instance.allEnemiesKilled += SpawnTreasure;
+        AIManager.Instance.roomClearEvent += SpawnTreasure;
         if(LevelManager.Instance.currentRoomType != RoomTypes.Treasure)
         treasure.SetActive(false);
     }

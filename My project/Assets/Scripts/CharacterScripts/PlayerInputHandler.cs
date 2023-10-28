@@ -132,7 +132,14 @@ public class PlayerInputHandler : MonoBehaviour
     }
     bool UpWestButton()
     {
-        return attack.ComboAttack(attack.moveset.upLightCombo);
+        if (mov.ground)
+        {
+            return attack.ComboAttack(attack.moveset.upLightCombo);
+        }
+        else
+        {
+            return attack.ComboAttack(attack.moveset.airLightCombo);
+        }
     }
     bool DownWestButton()
     {
@@ -158,7 +165,14 @@ public class PlayerInputHandler : MonoBehaviour
     }
     bool UpNorthButton()
     {
-        return attack.ComboAttack(attack.moveset.upHeavyCombo);
+        if (mov.ground)
+        {
+            return attack.ComboAttack(attack.moveset.upHeavyCombo);
+        }
+        else
+        {
+            return attack.ComboAttack(attack.moveset.airHeavyCombo);
+        }
     }
     bool DownNorthButton()
     {

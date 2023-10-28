@@ -518,8 +518,8 @@ public class InputManager : MonoBehaviour
     }
     public int Direction()
     {
-        if (inputDirection.y > 0) return 8;
-        if (inputDirection.y < 0) return 2;
+        if (inputDirection.y > 0.7) return 8;
+        if (inputDirection.y < -0.7) return 2;
         return 5;
 
         //if (netDirectionals[0])

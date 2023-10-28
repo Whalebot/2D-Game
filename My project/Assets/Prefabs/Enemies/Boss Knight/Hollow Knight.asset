@@ -17,6 +17,8 @@ MonoBehaviour:
   description: 
   image: {fileID: 0}
   prefab: {fileID: 8388588922180980836, guid: 188d45628656db8448c88c94d1429e49, type: 3}
+  controller: {fileID: 0}
+  moveset: {fileID: 0}
   actions:
   - {fileID: 11400000, guid: d4dea00e8c91c9240983c28ff41cc62d, type: 2}
   - {fileID: 11400000, guid: 7fbdbfc8d6086a943b106fbe9ad702af, type: 2}
@@ -27,16 +29,21 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 49f6fd2e339224e4aaa91cb7b42140f5, type: 2}
   - {fileID: 11400000, guid: d0220ab07ed155e4b8ef29478a3dab2d, type: 2}
   stats:
-    currentHealth: 1000
-    maxHealth: 1000
+    currentHealth: 750
+    maxHealth: 750
     currentMeter: 0
     maxMeter: 0
     level: 1
+    strength: 0
+    intelligence: 0
+    agility: 0
+    luck: 0
+    gold: 0
     attack: 5
     magic: 0
     attackSpeed: 1
     airActions: 1
-    luck: 0
+    rerolls: 0
     movementSpeedModifier: 1
     meterGainModifier: 1
     poiseRegen: 0.1
@@ -46,6 +53,7 @@ MonoBehaviour:
     guardBreakModifier: 1
     sizeModifier: 1
     damageModifierPercentage: 1
+    backstabModifier: 0
     damageModifierFlat: 0
     hitStunMultiplier: 1
     knockbackModifier: 1

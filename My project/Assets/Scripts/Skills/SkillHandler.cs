@@ -27,6 +27,7 @@ public class SkillHandler : MonoBehaviour
     {
         //UpdateStats();
         LateBehaviour();
+        attackScript.hitEvent += OnHitBehaviour;
     }
     void DuplicateMoveset()
     {
@@ -88,6 +89,16 @@ public class SkillHandler : MonoBehaviour
         foreach (var item in learnedSkills)
         {
             item.LateBehaviour(this);
+        }
+    }
+    void OnHitBehaviour(HitInfo hitInfo)
+    {
+        foreach (var item in learnedSkills)
+        {
+            foreach (var prop in item.skillProperties)
+            {
+                prop.HitBehaviour(hitInfo);
+            }
         }
     }
     void LoadData()
@@ -219,7 +230,6 @@ public class SkillHandler : MonoBehaviour
         }
         return null;
     }
-
     public void CalculateSkillStats(SkillSO temp)
     {
         Stats def1 = modifiedStats;
@@ -251,7 +261,6 @@ public class SkillHandler : MonoBehaviour
             }
         }
     }
-
     public void ApplySkillEffects(bool loading = false)
     {
         Stats def1 = status.currentStats;

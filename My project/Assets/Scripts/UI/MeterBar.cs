@@ -25,7 +25,7 @@ public class MeterBar : MonoBehaviour
         meterText.text = "" + (int)(status.Meter / 100);
 
         if (status.currentStats.maxMeter > 0)
-            meterBar.fillAmount = ((float)(status.currentStats.currentMeter % (status.currentStats.maxMeter + 1f)) / status.currentStats.maxMeter);
+            meterBar.fillAmount = ((float)(status.currentStats.currentMeter % (100 + 1f)) / 100);
 
     }
 

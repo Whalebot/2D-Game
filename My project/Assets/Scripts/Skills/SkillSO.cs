@@ -14,6 +14,7 @@ public class SkillSO : ScriptableObject
     public List<SkillSO> prerequisiteSkills;
     public List<Move> prerequisiteMoves;
     public List<NewMove> newMoves;
+    public List<UniqueSkillProperty> skillProperties;
 
     [TextArea(15, 20)]
     public string description;
@@ -28,15 +29,13 @@ public class SkillSO : ScriptableObject
     {
         if (newMoves.Count > 0)
         {
- 
+
             foreach (var item in newMoves)
             {
                 if (item.oldMove != null)
                     handler.ReplaceMove(item.move, item.oldMove);
             }
-
         }
-
     }
     public virtual void RepeatBehaviour(SkillHandler handler)
     {
@@ -65,8 +64,9 @@ public class SkillSO : ScriptableObject
     }
 }
 [System.Serializable]
-public class NewMove {
-    public Move move; 
+public class NewMove
+{
+    public Move move;
     public Combo combo;
     public Move oldMove;
 

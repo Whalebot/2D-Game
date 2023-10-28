@@ -8,7 +8,7 @@ public class AI : MonoBehaviour
 {
     [HideInInspector] public Character character;
 
-  public AIAction currentAction;
+    public AIAction currentAction;
 
     float startDistance = 0;
     float endDistance = 0;
@@ -16,6 +16,7 @@ public class AI : MonoBehaviour
     public enum State { Idle, Move, Alert, Combat, Passive, Flee };
     public State currentState = State.Idle;
     private Seeker seeker;
+    public bool flying;
 
     [Space(10)]
     [HeaderAttribute("Field of View")]
@@ -25,6 +26,7 @@ public class AI : MonoBehaviour
     RaycastHit hit;
     [TabGroup("Pathfinding")] public Vector3 movementDirection;
     [TabGroup("Pathfinding")] public Vector3 directionVector;
+    [TabGroup("Pathfinding")] public Vector3 movementOffset;
     [TabGroup("Pathfinding")] [HideInInspector] public float cornerMinDistance;
     [TabGroup("Pathfinding")] public float minDistance;
     [TabGroup("Pathfinding")] public int movementChangeTime = 30;
@@ -47,27 +49,23 @@ public class AI : MonoBehaviour
     [TabGroup("Pathfinding")] public float enemyDetectionRadius = 8;
     [TabGroup("Pathfinding")] public bool detected;
 
-
-    [TabGroup("Patrol")] public bool willPatrol;
-    [TabGroup("Patrol")] public float patrolRange;
-    [TabGroup("Patrol")] public int patrolInterval;
-    [TabGroup("Patrol")] public List<Vector3> patrolPoints;
-    [TabGroup("Patrol")] public int patrolID;
-
     protected Movement movement;
     protected Status status;
     protected AttackScript attack;
     protected AIManager manager;
 
     bool detectOnce;
-    protected float lastAttackTime;
 
+    [TabGroup("Debug")] public bool debug = true;
     [TabGroup("Debug")] public Transform target;
     [TabGroup("Debug")] public Vector3 currentTarget;
     [TabGroup("Debug")] public List<Move> attackQueue;
     [TabGroup("Debug")] public int cooldown = 0;
     [TabGroup("Debug")] public int recoveryCooldown = 30;
     [TabGroup("Debug")] [SerializeField] public float yOffset = 0.5F;
+    [TabGroup("Debug")] public float distance;
+    [TabGroup("Debug")] public float horizontalDistance;
+    [TabGroup("Debug")] public float verticalDistance;
     [TabGroup("Debug")] public bool clearLine;
     [TabGroup("Debug")] public bool withinAngle;
     [TabGroup("Debug")] public bool inRange;
@@ -98,11 +96,6 @@ public class AI : MonoBehaviour
 
         elapsed = pathUpdateTime;
         AIManager.Instance.allEnemies.Add(this);
-
-        if (willPatrol)
-        {
-            SetupPatrolPoints();
-        }
     }
     protected void OnDisable()
     {
@@ -113,22 +106,6 @@ public class AI : MonoBehaviour
 
         if (AIManager.Instance.allEnemies.Contains(this))
             AIManager.Instance.allEnemies.Remove(this);
-    }
-
-    void SetupPatrolPoints()
-    {
-        // if (patrolPoints.Count == 0)
-        {
-            patrolPoints.Clear();
-
-
-            for (int i = 0; i < 5; i++)
-            {
-                Vector2 RNG = Random.insideUnitCircle * patrolRange;
-                Vector3 temp = new Vector3(transform.position.x + RNG.x, transform.position.y, transform.position.z);
-                patrolPoints.Add(temp);
-            }
-        }
     }
 
     void ResetAttack()
@@ -162,13 +139,25 @@ public class AI : MonoBehaviour
     {
         DetectionEvent();
         CalculatePath();
+
+        //FindPath();
         if (status.NonAttackState())
+        {
             if (!InCooldown() && detected || ReachedNewDistance())
             {
                 RollAction();
             }
-        StateMachine();
+        }
+
         ResolveCooldown();
+        StateMachine();
+
+        if (debug)
+        {
+            distance = Distance();
+            horizontalDistance = HorizontalDistance();
+            verticalDistance = HeightDistance();
+        }
 
         clearLine = ClearLine();
         withinAngle = WithinAngle();
@@ -187,7 +176,7 @@ public class AI : MonoBehaviour
 
     public virtual void StateMachine()
     {
-        if (movement.ground && !status.inHitStun)
+        if (movement.ground && !status.inHitStun || flying && !status.inHitStun)
             switch (currentState)
             {
                 case State.Idle:
@@ -225,7 +214,10 @@ public class AI : MonoBehaviour
         foreach (var item in status.character.actions)
         {
             if (Distance() < item.distance && Distance() > item.minDistance && HeightDistance() < item.maxHeight)
+            {
+                if (item.actionType == AIAction.ActionType.Attack && !ClearLine()) continue;
                 temp.Add(item);
+            }
         }
 
         int RNG = Random.Range(0, temp.Count);
@@ -239,7 +231,6 @@ public class AI : MonoBehaviour
 
     private void ExecuteAction(AIAction aiAction)
     {
-        Debug.Log(HeightDistance());
         startDistance = Distance();
         cooldown = aiAction.cooldown;
         switch (aiAction.actionType)
@@ -270,20 +261,26 @@ public class AI : MonoBehaviour
     void Attacking()
     {
         currentTarget = target.position;
-        if (!status.NonAttackState()) { movement.direction = FindPath(); }
-        else
-        {
-            Idle();
-        }
 
         if (attackQueue.Count > 0)
         {
             if (attack.attackString || status.currentState == Status.State.Neutral)
             {
-                movement.direction = FindPath();
+                movement.direction = DirectDirection();
                 AttackQueue();
-                lastAttackTime = Time.time;
+                return;
             }
+        }
+
+        if (!status.NonAttackState())
+        {
+            FindPath();
+            movement.direction = DirectDirection();
+        }
+        else
+        {
+            FindPath();
+            Idle();
         }
     }
 
@@ -363,7 +360,6 @@ public class AI : MonoBehaviour
                 else
                 {
                     movement.direction = MovementDirection();
-                    //movement.RotateInPlace((target.position - transform.position).normalized);
                 }
             }
         }
@@ -379,7 +375,7 @@ public class AI : MonoBehaviour
             currentTarget = target.position;
 
             movement.isMoving = true;
-            movement.direction -= TargetDirectionIgnoreTilt();
+            movement.direction = (-TargetDirectionIgnoreTilt() + movementOffset).normalized;
         }
         else
         {
@@ -388,30 +384,8 @@ public class AI : MonoBehaviour
     }
     protected void Idle()
     {
-
-        if (willPatrol && !detected)
-        {
-            Patrol();
-        }
-        else
-        {
-            movement.isMoving = false;
-            movement.direction = new Vector3(0, 0, 0);
-        }
-    }
-
-    void Patrol()
-    {
-        currentTarget = patrolPoints[patrolID];
-        if (Vector3.Distance(transform.position, patrolPoints[patrolID]) < 1 && !InCooldown())
-        {
-            cooldown = patrolInterval;
-            patrolID++;
-            if (patrolID >= patrolPoints.Count) patrolID = 0;
-        }
-
-        if (Vector3.Distance(transform.position, patrolPoints[patrolID]) > 1)
-            movement.direction = FindPath();
+        movement.isMoving = false;
+        movement.direction = new Vector3(0, 0, 0);
     }
 
     #region Pathfinding
@@ -438,21 +412,19 @@ public class AI : MonoBehaviour
     void CalculatePath()
     {
         elapsed++;
+
         if (elapsed > pathUpdateTime && target != null && seeker.IsDone())
         {
-            currentTarget = target.position;
+            if (currentState != State.Combat)
+                currentTarget = target.position + movementOffset;
+            else currentTarget = target.position;
             elapsed -= pathUpdateTime;
             seeker.StartPath(transform.position, currentTarget, OnPathComplete);
         }
     }
-
     public Vector3 FindPath()
     {
         CalculatePath();
-
-        //directionVector = (currentTarget - transform.position).normalized;
-
-
 
         if (path == null)
         {
@@ -460,28 +432,19 @@ public class AI : MonoBehaviour
             return (currentTarget - transform.position).normalized;
         }
 
-        // Check in a loop if we are close enough to the current waypoint to switch to the next one.
-        // We do this in a loop because many waypoints might be close to each other and we may reach
-        // several of them in the same frame.
         reachedEndOfPath = false;
-        // The distance to the next waypoint in the path
         float distanceToWaypoint;
         while (true)
         {
-            // If you want maximum performance you can check the squared distance instead to get rid of a
-            // square root calculation. But that is outside the scope of this tutorial.
             distanceToWaypoint = Vector3.Distance(transform.position, path.vectorPath[currentWaypoint]);
             if (distanceToWaypoint < nextWaypointDistance)
             {
-                // Check if there is another waypoint or if we have reached the end of the path
                 if (currentWaypoint + 1 < path.vectorPath.Count)
                 {
                     currentWaypoint++;
                 }
                 else
                 {
-                    // Set a status variable to indicate that the agent has reached the end of the path.
-                    // You can use this to trigger some special code if your game requires that.
                     reachedEndOfPath = true;
                     break;
                 }
@@ -493,7 +456,7 @@ public class AI : MonoBehaviour
         }
 
         Vector3 temp = (path.vectorPath[currentWaypoint] - transform.position);
-        temp.y = 0;
+        if (!flying) temp.y = 0;
         temp.z = 0;
         directionVector = temp.normalized;
 
@@ -513,11 +476,23 @@ public class AI : MonoBehaviour
             movement.isMoving = true;
         return directionVector;
     }
+    public Vector3 DirectDirection()
+    {
+        movement.isMoving = true;
+        return (target.position - transform.position).normalized;
+    }
     #endregion
 
     #region Help Functions
-
     public float Distance()
+    {
+        if (target == null) return 0;
+        Vector3 v1 = transform.position;
+        Vector3 v2 = target.transform.position;
+
+        return Vector3.Distance(v1, v2);
+    }
+    public float HorizontalDistance()
     {
         if (target == null) return 0;
         Vector3 v1 = transform.position;
@@ -550,10 +525,10 @@ public class AI : MonoBehaviour
         }
         if (startDistance > endDistance)
         {
-            return Distance() < endDistance;
+            return HorizontalDistance() < endDistance;
         }
         else
-            return Distance() > endDistance;
+            return HorizontalDistance() > endDistance;
     }
 
     public bool TargetInRange()

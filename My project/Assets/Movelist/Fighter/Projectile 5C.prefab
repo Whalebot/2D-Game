@@ -28,6 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5860963072138344223}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.7, z: 0.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -35,7 +36,6 @@ Transform:
   m_Children:
   - {fileID: 9088626105428194228}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7135228236847557431
 MeshFilter:
@@ -95,9 +95,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5860963072138344223}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-5636471450885373852
@@ -119,33 +127,41 @@ MonoBehaviour:
   move: {fileID: 0}
   status: {fileID: 0}
   canClash: 1
-  body: {fileID: 0}
+  relativePushback: 0
+  resetTimer: 0
+  col: {fileID: 0}
   enemyList: []
-  projectileMovement: 0
-  targetPosition: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
   life: 10
   lifetime: 90
+  projectileMovement: 0
   velocity: 8
+  rotationVector: {x: 0, y: 0, z: 0}
+  onStartVelocity: 1
+  updateVelocty: 1
+  updateVelocity: 0
+  rotateSpeed: 0
   willDelayReaim: 0
   projectileDelay: 0
   delayVelocity: 0
-  updateVelocity: 0
-  rotateSpeed: 0
-  onStartVelocity: 1
-  updateVelocty: 1
+  projectile: {fileID: 0}
+  projectileTimer: 15
+  maxProjectiles: 0
   searchMask:
     serializedVersion: 2
     m_Bits: 0
   searchSize: 0
   explosion: {fileID: 5860963072138344223, guid: 4d639e8a72c001447b7f909220824094, type: 3}
   onlyExplosionDamage: 1
+  explosionVFX: {fileID: 100010, guid: 87698b9d467306440a17655d9c528f3a, type: 3}
+  explosionSFX: {fileID: 0}
   destroyOnCollission: 1
   destroyOnProjectileClash: 1
   destroyOnHitboxClash: 0
   destroyOnHit: 1
-  explosionVFX: {fileID: 100010, guid: 87698b9d467306440a17655d9c528f3a, type: 3}
-  explosionSFX: {fileID: 0}
+  willAttract: 0
+  attractPower: {x: 0, y: 0}
   teleportMask:
     serializedVersion: 2
     m_Bits: 0
@@ -154,8 +170,6 @@ MonoBehaviour:
   teleportYOffset: 1
   rb: {fileID: 0}
   hit: 0
-  resetTimer: 0
-  col: {fileID: 0}
 --- !u!54 &-6229484424086246374
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -163,10 +177,21 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5860963072138344223}
-  serializedVersion: 2
+  serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -177,6 +202,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6395638579328327229}
     m_Modifications:
     - target: {fileID: 100010, guid: b32f835e658efa1419ad0ae6b033b81f, type: 3}
@@ -244,6 +270,9 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b32f835e658efa1419ad0ae6b033b81f, type: 3}
 --- !u!4 &9088626105428194228 stripped
 Transform:

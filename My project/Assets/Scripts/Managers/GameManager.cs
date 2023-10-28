@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
         gameOver = false;
 
         startTimeStep = Time.fixedDeltaTime;
-        AIManager.Instance.allEnemiesKilled += RoomCleared;
+        AIManager.Instance.roomClearEvent += RoomCleared;
 
     }
 

@@ -9,6 +9,11 @@ using UnityEditor;
 public class SkillManager : MonoBehaviour
 {
     public static SkillManager Instance;
+
+    [TabGroup("Chemistry")] public int poisonDamage;
+    [TabGroup("Chemistry")] public int poisonTickTime;
+    int poisonCounter;
+
     [TabGroup("Debug")] public List<SkillSO> allSkills;
     [TabGroup("Debug")] public List<SkillSO> foundSkills;
     [TabGroup("Debug")] public List<SkillSO> DSkills, CSkills, BSkills, ASkills, SSkills;
@@ -26,14 +31,24 @@ public class SkillManager : MonoBehaviour
         Instance = this;
         SaveManager.Instance.saveEvent += SaveSkills;
         foundSkills = SaveManager.Instance.saveData.learnedSkills;
+        GameManager.Instance.advanceGameState += ExecuteFrame;
     }
 
     private void Start()
     {
         skillHandler = GameManager.Instance.player.GetComponent<SkillHandler>();
-        //AIManager.Instance.allEnemiesKilled += RollSkills;
     }
 
+    void ExecuteFrame()
+    {
+        poisonCounter--;
+        if (poisonCounter <= 0)
+        {
+            poisonCounter = poisonTickTime;
+        }
+    }
+
+    #region Roll Skills
     public void GetSkill(SkillSO skillSO)
     {
         pickedSkillEvent?.Invoke(skillSO);
@@ -238,4 +253,6 @@ public class SkillManager : MonoBehaviour
         }
     }
 #endif
+    #endregion
+
 }

@@ -12,7 +12,7 @@ public class Movement : MonoBehaviour
     [TabGroup("Movement"), ReadOnly] public Vector3 direction;
     //[TabGroup("Movement"), ReadOnly] public Vector3 airDirection;
     [TabGroup("Movement"), ReadOnly] public Vector3 vel;
-    [TabGroup("Movement")] public bool onlyForward = false;
+    [TabGroup("Movement")] public bool isFlying = false;
     [TabGroup("Movement")] public bool isMoving = false;
     [TabGroup("Movement")] public bool forcedWalk;
     [TabGroup("Movement")] public float walkSpeed = 3;
@@ -348,7 +348,6 @@ public class Movement : MonoBehaviour
             }
             else
             {
-
                 CollisionPassthrough();
             }
         }
@@ -418,38 +417,44 @@ public class Movement : MonoBehaviour
     {
         Vector3 temp;
 
-        if (!ground)
-        //Airborne
+        if (isFlying)
         {
-            temp = _rb.velocity;
-            temp.y = 0;
-            //Fix
-            if (!isMoving)
-            {
-                //NEEDS TO FLY CORRECT WAY
-                //if (status.alignment == Alignment.Enemy)
-                //    Debug.Log(temp);
-                SetVelocity(temp * airDeceleration + _rb.velocity.y * Vector3.up);
-            }
-            else
-                SetVelocity(transform.forward * actualVelocity * Mathf.Abs(direction.x) + _rb.velocity.y * Vector3.up);
+            SetVelocity((transform.forward * Mathf.Abs(direction.x) + transform.up * direction.y) * actualVelocity);
         }
         else
-        //Normal Walking
         {
-            temp = _rb.velocity;
-            temp.y = 0;
-            if (!isMoving)
+            if (!ground)
+            //Airborne
             {
-                //if (status.alignment == Alignment.Enemy)
-                //    Debug.Log(temp);
-                SetVelocity(new Vector3(Mathf.Sign(temp.x) * actualVelocity, _rb.velocity.y, 0));
-
+                temp = _rb.velocity;
+                temp.y = 0;
+                //Fix
+                if (!isMoving)
+                {
+                    //NEEDS TO FLY CORRECT WAY
+                    //if (status.alignment == Alignment.Enemy)
+                    //    Debug.Log(temp);
+                    SetVelocity(temp * airDeceleration + _rb.velocity.y * Vector3.up);
+                }
+                else
+                    SetVelocity(transform.forward * actualVelocity * Mathf.Abs(direction.x) + _rb.velocity.y * Vector3.up);
             }
             else
-                SetVelocity(new Vector3(transform.forward.x * actualVelocity, _rb.velocity.y, 0));
-        }
+            //Normal Walking
+            {
+                temp = _rb.velocity;
+                temp.y = 0;
+                if (!isMoving)
+                {
+                    //if (status.alignment == Alignment.Enemy)
+                    //    Debug.Log(temp);
+                    SetVelocity(new Vector3(Mathf.Sign(temp.x) * actualVelocity, _rb.velocity.y, 0));
 
+                }
+                else
+                    SetVelocity(new Vector3(transform.forward.x * actualVelocity, _rb.velocity.y, 0));
+            }
+        }
     }
 
 
