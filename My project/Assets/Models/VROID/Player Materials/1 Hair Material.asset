@@ -9,6 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: 1 Hair Material
   m_Shader: {fileID: 4800000, guid: 6459b2db96a08ca41b0f9b39dc7ad59e, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - N_F_CO_ON
   - N_F_EAL_ON
@@ -54,6 +56,7 @@ Material:
   stringTagMap:
     RenderType: TransparentCutout
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -203,12 +206,15 @@ Material:
     - _MToonVersion: 38
     - _MVCOL: 0
     - _MaiColPo: 1
+    - _MaxFadDistance: 2
+    - _MinFadDistance: 0
     - _MixMainTexToOutline: 0
     - _N_F_CA: 0
     - _N_F_CLD: 0
     - _N_F_CO: 1
     - _N_F_COEDGL: 0
     - _N_F_DCS: 0
+    - _N_F_DDMD: 0
     - _N_F_EAL: 1
     - _N_F_ESSAO: 0
     - _N_F_FR: 0
@@ -218,6 +224,7 @@ Material:
     - _N_F_HPSS: 0
     - _N_F_MC: 0
     - _N_F_MSSOLTFO: 0
+    - _N_F_NFD: 0
     - _N_F_NLASOBF: 0
     - _N_F_NM: 1
     - _N_F_O: 1
@@ -291,6 +298,7 @@ Material:
     - _ShowInAmbientLightShadowIntensity: 1
     - _ShowInAmbientLightShadowThreshold: 0.4
     - _ShowNormal: 0
+    - _SimTrans: 0
     - _SkinMatrixIndex: 0
     - _SmoothObjectNormal: 0
     - _SrcBlend: 1
@@ -315,7 +323,7 @@ Material:
     - _GlossColor: {r: 1, g: 1, b: 1, a: 1}
     - _Glow_Color: {r: 1, g: 1, b: 1, a: 1}
     - _HighlightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MainColor: {r: 1, g: 0.105931826, b: 0.105931826, a: 1}
+    - _MainColor: {r: 0.08009969, g: 0.06675058, b: 0.065016836, a: 1}
     - _OutlineColor: {r: 0.27450973, g: 0.09019599, b: 0.1254901, a: 1}
     - _OutlineOffset: {r: 0, g: 0, b: 0, a: 1}
     - _OverallShadowColor: {r: 1, g: 1, b: 1, a: 1}

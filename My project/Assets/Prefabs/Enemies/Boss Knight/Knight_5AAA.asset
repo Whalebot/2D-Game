@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Knight_5AAA
   m_EditorClassIdentifier: 
   animationID: 1
+  meterCost: 0
+  meterGain: 10
+  consumeMeterOnActiveFrame: 0
   icon: {fileID: 0}
   firstStartupFrame: 18
   lastActiveFrame: 22
@@ -47,6 +50,7 @@ MonoBehaviour:
   - startup: 15
     prefab: {fileID: 1320683006971348, guid: 83ea291b15cd5ed46be1077c6b047713, type: 3}
     deattachFromPlayer: 1
+    destroyOnRecovery: 0
     position: {x: 0, y: 0.5, z: 0.7}
     rotation: {x: 155.66, y: 0, z: 90}
     scale: {x: 0.7, y: 0.7, z: 0.7}
@@ -55,6 +59,7 @@ MonoBehaviour:
     startup: 1
     prefab: {fileID: 1416824176164296, guid: dc1397204bb5ee84895af2b49dac2d49, type: 3}
     deattachFromPlayer: 1
+    destroyOnRecovery: 0
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0}
     scale: {x: 0.5, y: 0.5, z: 0.5}
@@ -67,9 +72,11 @@ MonoBehaviour:
   keepVelocity: 0
   particleID: 0
   holdAttack: 0
+  releaseAttackMove: {fileID: 0}
   autoAim: 0
   armor: 0
   resetGatling: 0
+  hitsGroundOnly: 0
   noClip: 0
   noClipStart: 1
   noClipDuration: 0
@@ -86,12 +93,6 @@ MonoBehaviour:
   fullCancel: 0
   gatlingCancel: 1
   uncancelable: 0
-  gatlingCancelOnBlock: 1
-  gatlingCancelOnHit: 1
-  jumpCancelOnBlock: 0
-  jumpCancelOnHit: 1
-  specialCancelOnBlock: 1
-  specialCancelOnHit: 1
   useAirAction: 0
   landCancel: 0
   recoverOnlyOnLand: 0
@@ -99,15 +100,14 @@ MonoBehaviour:
   - startFrame: 3
     duration: 2
     momentum: {x: 8, y: 0}
-    freeMovement: 0
-    homing: 0
     resetVelocityDuringRecovery: 0
+    teleport: 0
   - startFrame: 15
     duration: 2
     momentum: {x: 4, y: 0}
-    freeMovement: 0
-    homing: 0
     resetVelocityDuringRecovery: 1
+    teleport: 0
   instantStartupRotation: 0
-  overrideVelocity: 1
+  overrideVelocity: 0
   runMomentum: 0
+  stopAtEdges: 1

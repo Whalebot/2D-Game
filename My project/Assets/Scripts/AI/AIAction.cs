@@ -15,6 +15,7 @@ public class AIAction : ScriptableObject
     public ActionType actionType;
     //Conditions
     public float minDistance;
+    public float maxHeight = 2;
     public float distance;
     [HideIf("@actionType == ActionType.Attack")] public float targetDistance;
     public int cooldown;

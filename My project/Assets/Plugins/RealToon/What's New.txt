@@ -1,21 +1,28 @@
-What's New to RealToon V5.0.8p5 (Patch#5) (April 2022)
+What's New to RealToon V5.0.8p8 (Patch#8) (October 2023)
 =====================================
+
 [New]
-- AO/Ambient Occlusion Support. (HDRP and [URP 10 to later]) 
-  *To use just enable "Enable Screen Space AO" under the Category shadow.
-- Glow/Emission effect for Cutout. (URP and HDRP)
-- Decal Support (URP 12 to later)
-- 1 Simple Example Package. (HDRP)
+- APV (Adaptive Probe Volume) [URP 15 to later]
+- Arealight out of beta. [HDRP 16 to later]
+- DeNorSob Outline does not need a separate Depth-Normals Render Feature [URP 15 to later]
+- URP Deferred Support [URP 12 to later]
+
+[Improvements]
+- DeNorSob Outline can now be affected by the Cutout feature. [URP 15 to later]
+- Arealight light falloff is improved and can now be set to any XY size without any noise. [HDRP 16]
+
+[Changes]
+- DeNorSob Outline will not affect transparency [URP and HDRP]
+- In Transparent Mode, On Shader Screen Space Outline will be disabled except Cutout Feature. [URP and HDRP]
+- DeNorSob Outline Injection is now AfterOpaqueAndSky and transparent object will not affected by the outline. [HDRP]
+- URP 7 - 8 and HDRP 7 - 8 are not supported and removed.
 
 [Fix]
-- SSR/Screen Space Reflection waterfall look when decal is behind the object. (HDRP)
-- RealToon Inspector error when there is no "Render Pipeline Asset" on the Current selected
-  "Quality Level". (HDRP 12)
-- Transparent is not working properly. (Playstation) (URP and HDRP)
-
-[Change]
-- Add namespace on all RealToon scripts and editors. (All Render Pipeline)
-
+- Blinking/Flashing when using Cutout Feature [HDRP]
+- Blinking/Flashing colors [HDRP 14 to later]
+- "INDIRECTDIFFUSEMODE_RAYTRACE" error [HDRP 14 to later]
+- Arealight errors [HDRP 16 to later]
+- DeNorSob Outline not working [URP 15 to later]
 
 
 
