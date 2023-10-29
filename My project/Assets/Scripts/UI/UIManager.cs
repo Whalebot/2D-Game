@@ -10,6 +10,8 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
     public GameObject powerupPanel;
     public GameObject shopPanel;
+    public OrganizeChildren skillPanelOrganizer;
+    [TabGroup("Components")] public GameObject skillUIPrefab;
     [TabGroup("Components")] public HPBar playerHPBar;
     [TabGroup("Components")] public ButtonPrompt southPrompt;
     [TabGroup("Components")] public ButtonPrompt westPrompt;
@@ -33,6 +35,7 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.getSkillEvent += OpenPowerupPanel;
         GameManager.Instance.openShopEvent += OpenShopPanel;
         rerollButton.onClick.AddListener(() => RerollButton());
+        SetupSkillPanel();
     }
 
     void FixedUpdate()
@@ -41,7 +44,21 @@ public class UIManager : MonoBehaviour
         rerollButton.interactable = GameManager.Instance.playerStatus.currentStats.rerolls > 0;
         rerollText.text = "x" + GameManager.Instance.playerStatus.currentStats.rerolls;
     }
+    [Button]
+    public void SetupSkillPanel()
+    {
+        foreach (Transform child in skillPanelOrganizer.transform)
+        {
+            Destroy(child.gameObject);
+        }
 
+        foreach (var item in SaveManager.Instance.saveData.learnedSkills)
+        {
+            GameObject temp = Instantiate(skillUIPrefab, skillPanelOrganizer.transform, false);
+            temp.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = item.sprite;
+        }
+        skillPanelOrganizer.SetupPosition();
+    }
     public void RerollButton()
     {
         GameManager.Instance.playerStatus.currentStats.rerolls--;

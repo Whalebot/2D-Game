@@ -5,15 +5,18 @@ using Sirenix.OdinInspector;
 
 public class CharacterVisuals : MonoBehaviour
 {
+
     public CharacterVisualData visualData;
     public List<GameObject> weapons;
     public List<GameObject> hairVariations;
     public List<GameObject> topOutifts;
     public List<GameObject> bottomOutfits;
     public List<GameObject> shoes;
-
+    public List<Material> materials;
+    public Animator anim;
     private void Start()
     {
+        GetMaterials();
         CharacterCreator.Instance.visualsUpdateEvent += UpdateVisuals;
         UpdateVisuals();
     }
@@ -23,9 +26,40 @@ public class CharacterVisuals : MonoBehaviour
         CharacterCreator.Instance.visualsUpdateEvent -= UpdateVisuals;
     }
     [Button]
+    public void GetMaterials()
+    {
+        SkinnedMeshRenderer[] renderers = GetComponentsInChildren<SkinnedMeshRenderer>(true);
+
+        if (Application.isPlaying)
+            foreach (var item in renderers)
+            {
+                for (int i = 0; i < item.materials.Length; i++)
+                {
+                    materials.Add(item.materials[i]);
+                    item.materials[i].name.Replace(" (Instance)", "");
+                    Debug.Log(item.materials[i].name);
+
+                }
+            }
+    }
+    [Button]
+    public void ApplyMaterial()
+    {
+        ColorPresetSO preset = CharacterCreator.Instance.allPresets[visualData.colorPreset];
+        foreach (var item in preset.colorPresets)
+        {
+            foreach (var mat in materials)
+            {
+                if (mat.name.Contains(item.material.name))
+                    mat.SetColor("_MainColor", item.color * item.color);
+            }
+        }
+    }
+
+    [Button]
     public void UpdateVisuals()
     {
-        if (Application.isPlaying)
+        if (Application.isPlaying && SaveManager.Instance != null)
             visualData = SaveManager.Instance.saveData.visualData;
         RemoveAllClothing();
         SetupOutfit();
@@ -58,6 +92,8 @@ public class CharacterVisuals : MonoBehaviour
     [Button]
     public void SetupOutfit()
     {
+        anim.runtimeAnimatorController = CharacterCreator.Instance.characters[visualData.characterJob].controller;
+
         if (weapons.Count > visualData.characterJob)
             weapons[visualData.characterJob].SetActive(true);
         else
@@ -82,15 +118,9 @@ public class CharacterVisuals : MonoBehaviour
             shoes[visualData.shoesID].SetActive(true);
         else
             shoes[shoes.Count - 1].SetActive(true);
-        //ApplyMaterial();
+
+        ApplyMaterial();
     }
 
-   // [Button]
-    public void ApplyMaterial()
-    {
-        //foreach (var item in allPresets[visualData.colorPreset].colorPresets)
-        //{
-        //    item.material.SetColor("_MainColor", item.color);
-        //}
-    }
+
 }

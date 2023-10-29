@@ -21,7 +21,8 @@ public class CharacterCreator : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        SaveManager.Instance.saveEvent += SaveVisuals;
+        if (SaveManager.Instance != null)
+            SaveManager.Instance.saveEvent += SaveVisuals;
         //SaveManager.Instance.awakeLoadEvent += LoadVisuals;
 
         if (GameManager.Instance != null)
@@ -33,13 +34,13 @@ public class CharacterCreator : MonoBehaviour
     }
     private void Start()
     {
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.player.GetComponentInChildren<Animator>().runtimeAnimatorController = characters[SaveManager.Instance.saveData.visualData.characterJob].controller;
-        }
-
-        if (!SaveManager.Instance.HasSaveData() && visuals != null)
-            RandomizeVisuals();
+        //if (GameManager.Instance != null)
+        //{
+        //    GameManager.Instance.player.GetComponentInChildren<Animator>().runtimeAnimatorController = characters[SaveManager.Instance.saveData.visualData.characterJob].controller;
+        //}
+        if (SaveManager.Instance != null)
+            if (!SaveManager.Instance.HasSaveData() && visuals != null)
+                RandomizeVisuals();
     }
     public int Class
     {
@@ -176,6 +177,18 @@ public class CharacterCreator : MonoBehaviour
     //        }
     //#endif
     //    }
+
+
+    //public Color GetMaterialColor(string materialName, int colorPreset)
+    //{
+    //    foreach (var item in allPresets[colorPreset].colorPresets)
+    //    {
+    //        if (materialName.Contains(item.material.name)) { 
+    //        return 
+    //        }
+    //    }
+    //    return Color.white;
+    //}
 
     void SaveVisuals()
     {

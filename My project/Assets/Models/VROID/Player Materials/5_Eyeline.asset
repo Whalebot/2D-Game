@@ -7,13 +7,19 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: N00_000_00_FaceBrow_00_FACE (Instance)
+  m_Name: 5_Eyeline
   m_Shader: {fileID: 4800000, guid: 6459b2db96a08ca41b0f9b39dc7ad59e, type: 3}
   m_ValidKeywords:
   - N_F_CO_ON
   - N_F_EAL_ON
+  - N_F_GLOT_ON
+  - N_F_GLO_ON
+  - N_F_NM_ON
+  - N_F_O_ON
   - N_F_RDC_ON
   - N_F_RELGI_ON
+  - N_F_RL_ON
+  - N_F_SS_ON
   - N_F_TRANSAFFSHA_ON
   - N_F_TRANS_ON
   - _NORMALMAP
@@ -47,8 +53,7 @@ Material:
   m_CustomRenderQueue: 2450
   stringTagMap:
     RenderType: TransparentCutout
-  disabledShaderPasses:
-  - SRPDEFAULTUNLIT
+  disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -77,7 +82,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 145cc9ac3e6dc34408635dea8cc502e3, type: 3}
+        m_Texture: {fileID: 2800000, guid: aba5e0c2fa98295449ccadbdb27e48bf, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskGloss:
@@ -125,7 +130,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ShadeTexture:
-        m_Texture: {fileID: 2800000, guid: 145cc9ac3e6dc34408635dea8cc502e3, type: 3}
+        m_Texture: {fileID: 2800000, guid: aba5e0c2fa98295449ccadbdb27e48bf, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ShadingGradeTexture:
@@ -207,24 +212,24 @@ Material:
     - _N_F_EAL: 1
     - _N_F_ESSAO: 0
     - _N_F_FR: 0
-    - _N_F_GLO: 0
-    - _N_F_GLOT: 0
+    - _N_F_GLO: 1
+    - _N_F_GLOT: 1
     - _N_F_HDLS: 0
     - _N_F_HPSS: 0
     - _N_F_MC: 0
     - _N_F_MSSOLTFO: 0
     - _N_F_NLASOBF: 0
-    - _N_F_NM: 0
-    - _N_F_O: 0
+    - _N_F_NM: 1
+    - _N_F_O: 1
     - _N_F_OFLMB: 0
     - _N_F_PT: 0
     - _N_F_R: 0
     - _N_F_RDC: 1
-    - _N_F_RL: 0
+    - _N_F_RL: 1
     - _N_F_SCT: 0
     - _N_F_SL: 0
     - _N_F_SON: 0
-    - _N_F_SS: 0
+    - _N_F_SS: 1
     - _N_F_ST: 0
     - _N_F_STIAL: 0
     - _N_F_STIS: 0
@@ -236,7 +241,7 @@ Material:
     - _OutlineCullMode: 1
     - _OutlineExtrudeMethod: 0
     - _OutlineLightingMix: 1
-    - _OutlineScaledMaxDistance: 4.63
+    - _OutlineScaledMaxDistance: 1
     - _OutlineWidth: 0.12
     - _OutlineWidthAffectedByViewDistance: 0
     - _OutlineWidthMode: 0

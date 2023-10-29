@@ -7,24 +7,16 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: N00_000_00_FaceEyeline_00_FACE (Instance)
+  m_Name: 5_Eye_White
   m_Shader: {fileID: 4800000, guid: 6459b2db96a08ca41b0f9b39dc7ad59e, type: 3}
   m_ValidKeywords:
-  - N_F_CO_ON
   - N_F_EAL_ON
-  - N_F_GLOT_ON
-  - N_F_GLO_ON
-  - N_F_NM_ON
-  - N_F_O_ON
   - N_F_RDC_ON
   - N_F_RELGI_ON
-  - N_F_RL_ON
-  - N_F_SS_ON
   - N_F_TRANSAFFSHA_ON
-  - N_F_TRANS_ON
+  - _ALPHATEST_ON
   - _NORMALMAP
   m_InvalidKeywords:
-  - _ALPHABLEND_ON
   - _CUSTOMLIGHTDIRECTIONFOLLOWOBJECTROTATION_OFF
   - _GIFLATSHADE_OFF
   - _GLOSSTEXTUREFOLLOWOBJECTROTATION_OFF
@@ -50,10 +42,11 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2450
+  m_CustomRenderQueue: -1
   stringTagMap:
-    RenderType: TransparentCutout
-  disabledShaderPasses: []
+    RenderType: Opaque
+  disabledShaderPasses:
+  - SRPDEFAULTUNLIT
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -82,7 +75,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: aba5e0c2fa98295449ccadbdb27e48bf, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1f45dcf169a770f4897e39d728a98ac0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskGloss:
@@ -130,7 +123,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ShadeTexture:
-        m_Texture: {fileID: 2800000, guid: aba5e0c2fa98295449ccadbdb27e48bf, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1f45dcf169a770f4897e39d728a98ac0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ShadingGradeTexture:
@@ -146,7 +139,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SphereAdd:
-        m_Texture: {fileID: 2800000, guid: 1d3686e5e9451c148b8d1ba10b1c2c62, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6c1f32e1eb6c0db41b8390d2e0f21435, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _UvAnimMaskTexture:
@@ -157,14 +150,14 @@ Material:
     m_Floats:
     - _AlphaBaseCutout: 1
     - _AlphaToMask: 0
-    - _BleModDest: 10
-    - _BleModSour: 5
-    - _BlendMode: 2
+    - _BleModDest: 0
+    - _BleModSour: 1
+    - _BlendMode: 1
     - _BumpScale: 1
     - _Compa: 4
     - _ComputeMeshIndex: 0
-    - _CullMode: 0
-    - _Culling: 0
+    - _CullMode: 2
+    - _Culling: 2
     - _CustomLightDirectionFollowObjectRotation: 0
     - _CustomLightDirectionIntensity: 0
     - _Cutoff: 0.5
@@ -173,7 +166,7 @@ Material:
     - _DepthThreshold: 900
     - _DirectionalLightIntensity: 0.5
     - _DoubleSidedOutline: 1
-    - _DstBlend: 10
+    - _DstBlend: 0
     - _DynamicNoisyOutline: 0
     - _EnvironmentalLightingIntensity: 0.5
     - _FarDistanceMaxWidth: 10
@@ -206,30 +199,30 @@ Material:
     - _MixMainTexToOutline: 0
     - _N_F_CA: 0
     - _N_F_CLD: 0
-    - _N_F_CO: 1
+    - _N_F_CO: 0
     - _N_F_COEDGL: 0
     - _N_F_DCS: 0
     - _N_F_EAL: 1
     - _N_F_ESSAO: 0
     - _N_F_FR: 0
-    - _N_F_GLO: 1
-    - _N_F_GLOT: 1
+    - _N_F_GLO: 0
+    - _N_F_GLOT: 0
     - _N_F_HDLS: 0
     - _N_F_HPSS: 0
     - _N_F_MC: 0
     - _N_F_MSSOLTFO: 0
     - _N_F_NLASOBF: 0
-    - _N_F_NM: 1
-    - _N_F_O: 1
+    - _N_F_NM: 0
+    - _N_F_O: 0
     - _N_F_OFLMB: 0
     - _N_F_PT: 0
     - _N_F_R: 0
     - _N_F_RDC: 1
-    - _N_F_RL: 1
+    - _N_F_RL: 0
     - _N_F_SCT: 0
     - _N_F_SL: 0
     - _N_F_SON: 0
-    - _N_F_SS: 1
+    - _N_F_SS: 0
     - _N_F_ST: 0
     - _N_F_STIAL: 0
     - _N_F_STIS: 0
@@ -293,9 +286,9 @@ Material:
     - _ShowNormal: 0
     - _SkinMatrixIndex: 0
     - _SmoothObjectNormal: 0
-    - _SrcBlend: 5
+    - _SrcBlend: 1
     - _TEXMCOLINT: 1
-    - _TRANSMODE: 1
+    - _TRANSMODE: 0
     - _TexturePatternStyle: 0
     - _TransAffSha: 1
     - _TransparentThreshold: 0
@@ -307,7 +300,7 @@ Material:
     - _VertexColorBlueAffectOutlineWitdh: 0
     - _VertexColorGreenControlSelfShadowThreshold: 0
     - _VertexColorRedControlSmoothObjectNormal: 0
-    - _ZWrite: 0
+    - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _CustomLightDirection: {r: 0, g: 0, b: 10, a: 0}
