@@ -28,8 +28,8 @@ public class CharacterCreator : MonoBehaviour
         if (GameManager.Instance != null)
         {
             LoadVisuals();
-            GameManager.Instance.playerStatus.character = characters[SaveManager.Instance.saveData.visualData.characterJob];
-            GameManager.Instance.player.GetComponent<AttackScript>().moveset = characters[SaveManager.Instance.saveData.visualData.characterJob].moveset;
+            GameManager.Instance.playerStatus.character = characters[SaveManager.Instance.VisualData.characterJob];
+            GameManager.Instance.player.GetComponent<AttackScript>().moveset = characters[SaveManager.Instance.VisualData.characterJob].moveset;
         }
     }
     private void Start()
@@ -195,14 +195,14 @@ public class CharacterCreator : MonoBehaviour
         if (Application.isPlaying)
         {
             Debug.Log("Saving visuals");
-            SaveManager.Instance.saveData.visualData = visualData;
+            SaveManager.Instance.VisualData = visualData;
         }
     }
     void LoadVisuals()
     {
         if (Application.isPlaying)
         {
-            visualData = SaveManager.Instance.saveData.visualData;
+            visualData = SaveManager.Instance.VisualData;
             ApplyVisuals();
         }
     }

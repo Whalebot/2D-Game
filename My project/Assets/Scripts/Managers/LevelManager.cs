@@ -13,65 +13,86 @@ public class LevelManager : MonoBehaviour
     public List<SceneSO> bossRoomLvl1;
     public List<SceneSO> shopRoomLvl1;
     public List<SceneSO> treasureRoomLvl1;
+    public List<SceneSO> eventRoomLvl1;
     public int currentLevel = 1;
     public int treasureChance = 10;
     public int shopChance = 20;
     public int eliteChance = 20;
-    public RoomTypes room1;
-    public RoomTypes room2;
-    public RoomTypes room3;
+    public MapNode room1;
+    public MapNode room2;
+    public MapNode room3;
 
     public event Action spawnLevelGates;
+    public MapGenerator mapGenerator;
+    public MapNode currentMapNode;
 
     private void Awake()
     {
         Instance = this;
-        //switch (TransitionManager.levelIndex - 1)
-        //{
-        //    case 0: currentRoomType = RoomTypes.Normal; break;
-        //    case 1: currentRoomType = RoomTypes.Treasure; break;
-        //    case 2: currentRoomType = RoomTypes.Boss; break;
-        //    case 3: currentRoomType = RoomTypes.Shop; break;
-        //    default:
-        //        break;
-        //}
+
 
         SaveManager.Instance.saveEvent += SaveData;
         SaveManager.Instance.startLoadEvent += LoadData;
+        if (SaveManager.Instance.HasSaveData())
+        {
+            currentMapNode = mapGenerator.mapNodes[SaveManager.Instance.CurrentLevel];
+        }
+        else
+        {
+            currentMapNode = mapGenerator.startNode;
+        }
         NextRoomType();
+
     }
     private void Start()
     {
+        MarkVisitedRooms();
+    }
 
+    void MarkVisitedRooms()
+    {
+
+        for (int i = 0; i < mapGenerator.mapNodes.Count; i++)
+        {
+            foreach (var item in SaveManager.Instance.saveData.currrentCharacter.visitedRooms)
+            {
+                if (i == item)
+                    mapGenerator.mapNodes[i].Visited();
+            }
+
+        }
+
+    }
+
+    public void GoToNextLevel(MapNode node)
+    {
+        int index = -1;
+        for (int i = 0; i < mapGenerator.mapNodes.Count; i++)
+        {
+            if (mapGenerator.mapNodes[i] == node)
+                index = i;
+        }
+        SaveManager.Instance.saveData.currrentCharacter.visitedRooms.Add(index);
+        SaveManager.Instance.CurrentLevel = index;
     }
 
     void SaveData()
     {
-        SaveManager.Instance.saveData.currentLevel = currentLevel;
+        //SaveManager.Instance.CurrentLevel = currentLevel;
     }
     void LoadData()
     {
-        currentLevel = SaveManager.Instance.saveData.currentLevel;
+        currentLevel = SaveManager.Instance.CurrentLevel;
+        NextRoomType();
     }
+
     public void SpawnLevelGates()
     {
         spawnLevelGates?.Invoke();
     }
-    public void GoToNextLevel()
-    {
-        currentLevel++;
-    }
 
     public string NextLevelName(RoomTypes roomType)
     {
-        //if (roomType == RoomTypes.Boss)
-        //{
-        //    if (currentLevel > 6)
-        //        return sceneObjects[sceneObjects.Count - 1].sceneName;
-        //}
-        //if ((int)roomType >= sceneObjects.Count) return "";
-
-        //return sceneObjects[(int)roomType].sceneName;
         int RNG = 0;
         switch (roomType)
         {
@@ -90,51 +111,28 @@ public class LevelManager : MonoBehaviour
             case RoomTypes.Shop:
                 RNG = UnityEngine.Random.Range(0, shopRoomLvl1.Count);
                 return shopRoomLvl1[RNG].sceneName;
-
+            case RoomTypes.Event:
+                RNG = UnityEngine.Random.Range(0, eventRoomLvl1.Count);
+                return eventRoomLvl1[RNG].sceneName;
 
             case RoomTypes.Disabled:
                 return "";
             default:
-                return "";
+                RNG = UnityEngine.Random.Range(0, normalRoomLvl1.Count);
+                return normalRoomLvl1[RNG].sceneName;
         }
     }
 
     [Button]
     public void NextRoomType()
     {
-        //Next level is a boss
-        if (currentLevel % 4 == 0)
-        {
-            room1 = RoomTypes.Boss;
-            room2 = RoomTypes.Disabled;
-            room3 = RoomTypes.Disabled;
-            return;
-        }
-
-        room1 = RollRoomType();
-        room2 = RollRoomType();
-        room3 = RollRoomType();
-    }
-
-    RoomTypes RollRoomType()
-    {
-        int RNG = UnityEngine.Random.Range(0, 100);
-        if (RNG <= treasureChance)
-            return RoomTypes.Treasure;
-
-        RNG = UnityEngine.Random.Range(0, 100);
-        if (RNG <= eliteChance)
-
-            return RoomTypes.Elite;
-        RNG = UnityEngine.Random.Range(0, 100);
-        if (RNG <= shopChance)
-            return RoomTypes.Shop;
-
-        return RoomTypes.Normal;
+        room1 = currentMapNode.GetExitNode(1);
+        room2 = currentMapNode.GetExitNode(2);
+        room3 = currentMapNode.GetExitNode(3);
     }
 }
 
 public enum RoomTypes
 {
-    Normal, Elite, Boss, Treasure, Shop, Disabled
+    Normal, Elite, Boss, Treasure, Shop, Event, Disabled
 }

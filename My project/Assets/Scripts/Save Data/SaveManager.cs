@@ -21,19 +21,62 @@ public class SaveManager : MonoBehaviour
             LoadData();
     }
 
- 
+
     private void Start()
     {
         if (autoLoad && HasSaveData())
             startLoadEvent?.Invoke();
     }
 
+    public CharacterVisualData VisualData
+    {
+        get
+        {
+            return saveData.currrentCharacter.visualData;
+        }
+        set
+        {
+            saveData.currrentCharacter.visualData = value;
+        }
+    }
+    public List<SkillSO> LearnedSkills
+    {
+        get
+        {
+            return saveData.currrentCharacter.learnedSkills;
+        }
+        set
+        {
+            saveData.currrentCharacter.learnedSkills = value;
+        }
+    }
+    public Stats Stats
+    {
+        get
+        {
+            return saveData.currrentCharacter.stats;
+        }
+        set
+        {
+            saveData.currrentCharacter.stats = value;
+        }
+    }
+    public int CurrentLevel
+    {
+        get
+        {
+            return saveData.currrentCharacter.currentRoomID;
+        }
+        set
+        {
+            saveData.currrentCharacter.currentRoomID = value;
+        }
+    }
+
     public bool HasSaveData()
     {
         return (PlayerPrefs.HasKey("Save"));
     }
-
-
     [Button]
     public void DeleteData()
     {
@@ -46,23 +89,18 @@ public class SaveManager : MonoBehaviour
         if (PlayerPrefs.HasKey("Save"))
         {
             saveData = new SaveData();
-            saveData.learnedSkills = new List<SkillSO>();
-            saveData.visualData = new CharacterVisualData();
+            saveData.currrentCharacter = new CharacterData();
+            saveData.currrentCharacter.visitedRooms = new List<int>();
+            saveData.currrentCharacter.learnedSkills = new List<SkillSO>();
+            saveData.currrentCharacter.visualData = new CharacterVisualData();
 
             string saveJson = PlayerPrefs.GetString("Save");
             saveData = JsonUtility.FromJson<SaveData>(saveJson);
             awakeLoadEvent?.Invoke();
         }
-
-        StartCoroutine(DelaySetup());
         //if (File.Exists(Application.persistentDataPath + "/saveData.json"))
         //{
         //    saveData = JsonUtility.FromJson<SaveData>(File.ReadAllText(Application.persistentDataPath + "/saveData.json"));
-
-    }
-    IEnumerator DelaySetup()
-    {
-        yield return new WaitForFixedUpdate();
 
     }
 
@@ -81,11 +119,21 @@ public class SaveManager : MonoBehaviour
 [System.Serializable]
 public class SaveData
 {
+    public CharacterData currrentCharacter;
+
+    public List<CharacterData> oldCharacters;
+}
+[System.Serializable]
+public class CharacterData
+{
+    public int rngSeed;
     public Stats stats;
-    public int currentLevel = 1;
+    public int currentRoomID = 0;
+    public List<int> visitedRooms;
     public CharacterVisualData visualData;
     public List<SkillSO> learnedSkills;
 }
+
 [System.Serializable]
 public class CharacterVisualData
 {

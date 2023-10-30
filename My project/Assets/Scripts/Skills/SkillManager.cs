@@ -30,7 +30,7 @@ public class SkillManager : MonoBehaviour
     {
         Instance = this;
         SaveManager.Instance.saveEvent += SaveSkills;
-        foundSkills = SaveManager.Instance.saveData.learnedSkills;
+        foundSkills = SaveManager.Instance.LearnedSkills;
         GameManager.Instance.advanceGameState += ExecuteFrame;
     }
 
@@ -58,7 +58,7 @@ public class SkillManager : MonoBehaviour
     }
     void SaveSkills()
     {
-        SaveManager.Instance.saveData.learnedSkills = new List<SkillSO>(foundSkills);
+        SaveManager.Instance.LearnedSkills = new List<SkillSO>(foundSkills);
     }
     [Button]
     public void RollShop(Rank r)

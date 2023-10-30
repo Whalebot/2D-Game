@@ -60,7 +60,7 @@ public class CharacterVisuals : MonoBehaviour
     public void UpdateVisuals()
     {
         if (Application.isPlaying && SaveManager.Instance != null)
-            visualData = SaveManager.Instance.saveData.visualData;
+            visualData = SaveManager.Instance.VisualData;
         RemoveAllClothing();
         SetupOutfit();
     }

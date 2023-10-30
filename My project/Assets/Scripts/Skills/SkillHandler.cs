@@ -105,7 +105,7 @@ public class SkillHandler : MonoBehaviour
     {
         RemoveAllSkills();
 
-        foreach (var item in SaveManager.Instance.saveData.learnedSkills)
+        foreach (var item in SaveManager.Instance.LearnedSkills)
         {
             LearnSkill(item, true);
         }

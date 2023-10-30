@@ -21,6 +21,12 @@ public class ShopButton : MonoBehaviour
     {
         button = GetComponent<Button>();
         button.onClick.AddListener(() => BuySkill());
+        GameManager.Instance.goldChangeEvent += SetupSkill;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.goldChangeEvent -= SetupSkill;
     }
 
     private void OnEnable()
@@ -65,7 +71,7 @@ public class ShopButton : MonoBehaviour
         }
 
         priceText.text = "" + price;
-        if (price > GameManager.Instance.Gold)
+        if (price >= GameManager.Instance.Gold)
             priceText.color = Color.red;
 
         titleText.text = skillSO.title;
@@ -77,7 +83,7 @@ public class ShopButton : MonoBehaviour
 
     public void BuySkill()
     {
-        if (GameManager.Instance.Gold > price)
+        if (GameManager.Instance.Gold >= price)
         {
             GameManager.Instance.Gold -= price;
             skillManager.GetSkill(skillSO);

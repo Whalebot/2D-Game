@@ -70,7 +70,7 @@ public class HubMenu : MonoBehaviour
     public void StartGame()
     {
         SaveManager.Instance.DeleteData();
-        SaveManager.Instance.saveData.stats.ReplaceStats(CharacterCreator.Instance.characters[CharacterCreator.Instance.Class].stats);
+        SaveManager.Instance.Stats.ReplaceStats(CharacterCreator.Instance.characters[CharacterCreator.Instance.Class].stats);
 
         TransitionManager.Instance.LoadScene(1);
     }

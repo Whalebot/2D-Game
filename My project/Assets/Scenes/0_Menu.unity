@@ -2353,46 +2353,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autoLoad: 0
   saveData:
-    stats:
-      currentHealth: 0
-      maxHealth: 0
-      currentMeter: 0
-      maxMeter: 0
-      level: 1
-      strength: 0
-      intelligence: 0
-      agility: 0
-      luck: 0
-      gold: 0
-      attack: 0
-      magic: 0
-      attackSpeed: 1
-      airActions: 1
-      rerolls: 0
-      movementSpeedModifier: 1
-      meterGainModifier: 1
-      poiseRegen: 0
-      poise: 0
-      defense: 0
-      resistance: 0
-      guardBreakModifier: 1
-      sizeModifier: 1
-      damageModifierPercentage: 1
-      backstabModifier: 0
-      damageModifierFlat: 0
-      hitStunMultiplier: 1
-      knockbackModifier: 1
-      critChance: 0
-      critMultiplier: 1.5
-    currentLevel: 1
-    visualData:
-      characterJob: 0
-      colorPreset: 0
-      hairID: 0
-      topID: 0
-      bottomID: 0
-      shoesID: 0
-    learnedSkills: []
+    currrentCharacter:
+      rngSeed: 0
+      stats:
+        currentHealth: 0
+        maxHealth: 0
+        currentMeter: 0
+        maxMeter: 0
+        level: 1
+        strength: 0
+        intelligence: 0
+        agility: 0
+        luck: 0
+        gold: 0
+        attack: 0
+        magic: 0
+        attackSpeed: 1
+        airActions: 1
+        rerolls: 0
+        movementSpeedModifier: 1
+        meterGainModifier: 1
+        poiseRegen: 0
+        poise: 0
+        defense: 0
+        resistance: 0
+        guardBreakModifier: 1
+        sizeModifier: 1
+        damageModifierPercentage: 1
+        backstabModifier: 0
+        damageModifierFlat: 0
+        hitStunMultiplier: 1
+        knockbackModifier: 1
+        critChance: 0
+        critMultiplier: 1.5
+      currentRoomID: 0
+      visitedRooms: 
+      visualData:
+        characterJob: 0
+        colorPreset: 0
+        hairID: 0
+        topID: 0
+        bottomID: 0
+        shoesID: 0
+      learnedSkills: []
+    oldCharacters: []
 --- !u!4 &381238271
 Transform:
   m_ObjectHideFlags: 0
@@ -3445,6 +3449,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1251693329}
     m_Modifications:
+    - target: {fileID: 2489079533925665682, guid: ddf89d6ef45a9604694920621dcbf310, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4815059389588673362, guid: ddf89d6ef45a9604694920621dcbf310, type: 3}
       propertyPath: m_Name
       value: Transition Manager
@@ -8806,7 +8814,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8527237191093226347, guid: fa51d6cfaefcea5468ba135388bbc2dd, type: 3}
       propertyPath: visualData.topID
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8527237191093226347, guid: fa51d6cfaefcea5468ba135388bbc2dd, type: 3}
       propertyPath: visualData.hairID
@@ -8814,15 +8822,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8527237191093226347, guid: fa51d6cfaefcea5468ba135388bbc2dd, type: 3}
       propertyPath: visualData.bottomID
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8527237191093226347, guid: fa51d6cfaefcea5468ba135388bbc2dd, type: 3}
       propertyPath: visualData.colorPreset
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8527237191093226347, guid: fa51d6cfaefcea5468ba135388bbc2dd, type: 3}
       propertyPath: visualData.characterJob
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

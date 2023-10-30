@@ -52,7 +52,7 @@ public class UIManager : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        foreach (var item in SaveManager.Instance.saveData.learnedSkills)
+        foreach (var item in SaveManager.Instance.LearnedSkills)
         {
             GameObject temp = Instantiate(skillUIPrefab, skillPanelOrganizer.transform, false);
             temp.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = item.sprite;

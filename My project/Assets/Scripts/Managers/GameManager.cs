@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     public event Action playerDeath;
     public event Action getSkillEvent;
     public event Action openShopEvent;
+    public event Action goldChangeEvent;
 
     [TabGroup("Components")] public GameObject playerUI;
     [TabGroup("Components")] public Transform player;
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour
         set
         {
             playerStatus.currentStats.gold = value;
+            goldChangeEvent?.Invoke();
         }
     }
 
@@ -96,13 +98,13 @@ public class GameManager : MonoBehaviour
 
     void SaveData()
     {
-        SaveManager.Instance.saveData.stats.ReplaceStats(playerStatus.currentStats);
+        SaveManager.Instance.Stats.ReplaceStats(playerStatus.currentStats);
     }
 
     void LoadData()
     {
         //Load temp stats
-        playerStatus.currentStats.ReplaceStats(SaveManager.Instance.saveData.stats);
+        playerStatus.currentStats.ReplaceStats(SaveManager.Instance.Stats);
     }
 
     void RoomCleared()

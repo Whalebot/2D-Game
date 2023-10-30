@@ -98,46 +98,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autoLoad: 1
   saveData:
-    stats:
-      currentHealth: 0
-      maxHealth: 0
-      currentMeter: 0
-      maxMeter: 0
-      level: 1
-      strength: 0
-      intelligence: 0
-      agility: 0
-      luck: 0
-      gold: 0
-      attack: 0
-      magic: 0
-      attackSpeed: 1
-      airActions: 1
-      rerolls: 0
-      movementSpeedModifier: 1
-      meterGainModifier: 1
-      poiseRegen: 0
-      poise: 0
-      defense: 0
-      resistance: 0
-      guardBreakModifier: 1
-      sizeModifier: 1
-      damageModifierPercentage: 1
-      backstabModifier: 0
-      damageModifierFlat: 0
-      hitStunMultiplier: 1
-      knockbackModifier: 1
-      critChance: 0
-      critMultiplier: 1.5
-    currentLevel: 1
-    visualData:
-      characterJob: 0
-      colorPreset: 0
-      hairID: 0
-      topID: 0
-      bottomID: 0
-      shoesID: 0
-    learnedSkills: []
+    currrentCharacter:
+      rngSeed: 379983
+      stats:
+        currentHealth: 0
+        maxHealth: 0
+        currentMeter: 0
+        maxMeter: 0
+        level: 1
+        strength: 0
+        intelligence: 0
+        agility: 0
+        luck: 0
+        gold: 0
+        attack: 0
+        magic: 0
+        attackSpeed: 1
+        airActions: 1
+        rerolls: 0
+        movementSpeedModifier: 1
+        meterGainModifier: 1
+        poiseRegen: 0
+        poise: 0
+        defense: 0
+        resistance: 0
+        guardBreakModifier: 1
+        sizeModifier: 1
+        damageModifierPercentage: 1
+        backstabModifier: 0
+        damageModifierFlat: 0
+        hitStunMultiplier: 1
+        knockbackModifier: 1
+        critChance: 0
+        critMultiplier: 1.5
+      currentRoomID: 0
+      visitedRooms: 
+      visualData:
+        characterJob: 0
+        colorPreset: 0
+        hairID: 0
+        topID: 0
+        bottomID: 0
+        shoesID: 0
+      learnedSkills: []
+    oldCharacters: []
 --- !u!1 &399436146491855168
 GameObject:
   m_ObjectHideFlags: 0
@@ -688,23 +692,31 @@ MonoBehaviour:
   normalRoomLvl1:
   - {fileID: 11400000, guid: a0ee5fdd8e8581740aef6527f7f1a153, type: 2}
   - {fileID: 11400000, guid: c3bee202c2f012548a8441482b3a4bfa, type: 2}
+  - {fileID: 11400000, guid: 0b803382d3012104da799fe7c7d0c531, type: 2}
+  - {fileID: 11400000, guid: c81a3fd2ab10a584bafac4a4d24586bb, type: 2}
   eliteRoomLvl1:
   - {fileID: 11400000, guid: d55bc49fff8351d4192a07b5f0831f91, type: 2}
   - {fileID: 11400000, guid: cd65eb591a13ba8468376ab75c7f5f9b, type: 2}
   - {fileID: 11400000, guid: 910e4d589d290af48917a0187f763174, type: 2}
+  - {fileID: 11400000, guid: c11249f0a0a967641974ea9e22bb8dcf, type: 2}
   bossRoomLvl1:
   - {fileID: 11400000, guid: 69d3a605ca30d4844b1708140bdc6d0e, type: 2}
   shopRoomLvl1:
   - {fileID: 11400000, guid: 02b878c58e247f040a5a022b4404a926, type: 2}
   treasureRoomLvl1:
   - {fileID: 11400000, guid: 24a4bcd54472639428088d33d56b8c94, type: 2}
+  - {fileID: 11400000, guid: 7ec88067dc8679d4d9560e9bf519ddf0, type: 2}
+  eventRoomLvl1:
+  - {fileID: 11400000, guid: 24a4bcd54472639428088d33d56b8c94, type: 2}
   currentLevel: 1
   treasureChance: 10
   shopChance: 30
   eliteChance: 40
-  room1: 0
-  room2: 0
-  room3: 0
+  room1: {fileID: 0}
+  room2: {fileID: 0}
+  room3: {fileID: 0}
+  mapGenerator: {fileID: 8253522108118082025}
+  currentMapNode: {fileID: 0}
 --- !u!1 &399436147799149813
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,10 +790,6 @@ PrefabInstance:
     - target: {fileID: 4815059389588673366, guid: ddf89d6ef45a9604694920621dcbf310, type: 3}
       propertyPath: m_Pivot.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4815059389588673366, guid: ddf89d6ef45a9604694920621dcbf310, type: 3}
-      propertyPath: m_RootOrder
-      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4815059389588673366, guid: ddf89d6ef45a9604694920621dcbf310, type: 3}
       propertyPath: m_AnchorMax.x
@@ -865,6 +873,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4815059389588673366, guid: ddf89d6ef45a9604694920621dcbf310, type: 3}
   m_PrefabInstance: {fileID: 399436147044443372}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8253522108118082025 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8575262364960474373, guid: ddf89d6ef45a9604694920621dcbf310, type: 3}
+  m_PrefabInstance: {fileID: 399436147044443372}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9224d5464072224d80d20d61605e905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &991043256960245320
 PrefabInstance:
   m_ObjectHideFlags: 0
