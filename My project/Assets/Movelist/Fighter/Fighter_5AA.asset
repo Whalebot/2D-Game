@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
   m_Name: Fighter_5AA
   m_EditorClassIdentifier: 
-  animationID: 2
+  animationID: 511
   meterCost: 0
   meterGain: 10
   consumeMeterOnActiveFrame: 0
@@ -103,11 +103,39 @@ MonoBehaviour:
     duration: 2
     momentum: {x: 5, y: 0}
     resetVelocityDuringRecovery: 0
+    xMovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    movementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    freeMovement: 0
+    useCurve: 0
     teleport: 0
   - startFrame: 15
     duration: 1
     momentum: {x: 2, y: 0}
     resetVelocityDuringRecovery: 0
+    xMovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    movementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    freeMovement: 0
+    useCurve: 0
     teleport: 0
   instantStartupRotation: 1
   overrideVelocity: 1

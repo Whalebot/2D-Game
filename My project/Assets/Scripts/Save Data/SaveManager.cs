@@ -8,6 +8,7 @@ using System.IO;
 public class SaveManager : MonoBehaviour
 {
     public static SaveManager Instance;
+    public int seed;
     public bool autoLoad;
     public SaveData saveData;
     public event Action saveEvent;
@@ -19,8 +20,23 @@ public class SaveManager : MonoBehaviour
         Instance = this;
         if (autoLoad)
             LoadData();
+
+        SetupRNG();
     }
 
+    public void SetupRNG()
+    {
+        if (HasSaveData())
+        {
+            seed = saveData.currrentCharacter.rngSeed;
+        }
+        else
+        {
+            seed = (int)DateTime.Now.Ticks;
+        }
+
+        UnityEngine.Random.InitState(seed);
+    }
 
     private void Start()
     {
@@ -81,6 +97,7 @@ public class SaveManager : MonoBehaviour
     public void DeleteData()
     {
         PlayerPrefs.DeleteKey("Save");
+        SetupRNG();
     }
 
     public void LoadData()
@@ -107,7 +124,7 @@ public class SaveManager : MonoBehaviour
     public void SaveData()
     {
         saveEvent?.Invoke();
-
+        saveData.currrentCharacter.rngSeed = seed;
         string jsonData = JsonUtility.ToJson(saveData, true);
         File.WriteAllText(Application.persistentDataPath + "/saveData.json", jsonData);
         PlayerPrefs.SetString("Save", jsonData);

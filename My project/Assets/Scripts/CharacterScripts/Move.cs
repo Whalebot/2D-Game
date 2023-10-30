@@ -86,7 +86,7 @@ public class Move : ScriptableObject
     [TabGroup("Momentum")] public Momentum[] m;
     [TabGroup("Momentum")] public bool instantStartupRotation = true;
     [TabGroup("Momentum")] public bool overrideVelocity = true;
-    [TabGroup("Momentum")] public bool runMomentum = true;
+    [TabGroup("Momentum")] public bool runMomentum = false;
     [TabGroup("Momentum")] public bool inheritForwardVelocity = false;
     [TabGroup("Momentum")] public bool stopAtEdges = true;
     [TabGroup("Momentum")] public bool homing = false;
@@ -174,7 +174,8 @@ public class Momentum
     public bool resetVelocityDuringRecovery = true;
     [ShowIf("useCurve")] public AnimationCurve xMovementCurve;
     [ShowIf("useCurve")] public AnimationCurve movementCurve;
-   public bool useCurve = false;
+    public bool freeMovement = false;
+    public bool useCurve = false;
     public bool teleport = false;
 
 }

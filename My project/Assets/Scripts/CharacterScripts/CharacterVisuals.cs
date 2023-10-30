@@ -37,7 +37,7 @@ public class CharacterVisuals : MonoBehaviour
                 {
                     materials.Add(item.materials[i]);
                     item.materials[i].name.Replace(" (Instance)", "");
-                    Debug.Log(item.materials[i].name);
+                   // Debug.Log(item.materials[i].name);
 
                 }
             }

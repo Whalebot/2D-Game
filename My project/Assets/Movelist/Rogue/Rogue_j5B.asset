@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
   m_Name: Rogue_j5B
   m_EditorClassIdentifier: 
-  animationID: 10
+  animationID: 152
   meterCost: 0
   meterGain: 10
   consumeMeterOnActiveFrame: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
   vfx:
   - startup: 15
     prefab: {fileID: 3495573824567096830, guid: 3fd8f98a6e1a44f4ab278e40d273923a, type: 3}
-    deattachFromPlayer: 0
+    deattachFromPlayer: 1
     destroyOnRecovery: 0
     position: {x: 0, y: 0.6, z: 0.7}
     rotation: {x: 0, y: 0, z: 90}
@@ -113,6 +113,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    freeMovement: 0
     useCurve: 0
     teleport: 0
   - startFrame: 20
@@ -131,6 +132,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    freeMovement: 0
     useCurve: 0
     teleport: 0
   instantStartupRotation: 1

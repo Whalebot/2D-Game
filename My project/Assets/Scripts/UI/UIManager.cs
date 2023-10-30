@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     public GameObject powerupPanel;
     public GameObject shopPanel;
     public OrganizeChildren skillPanelOrganizer;
+    [TabGroup("Components")] public GameObject pauseMenu;
     [TabGroup("Components")] public GameObject skillUIPrefab;
     [TabGroup("Components")] public HPBar playerHPBar;
     [TabGroup("Components")] public ButtonPrompt southPrompt;
@@ -33,11 +34,22 @@ public class UIManager : MonoBehaviour
     {
         //GameManager.Instance.advanceGameState += ExecuteFrame;
         GameManager.Instance.getSkillEvent += OpenPowerupPanel;
+
+        GameManager.Instance.pauseEvent += OpenPauseMenu;
+        GameManager.Instance.resumeEvent += ClosePauseMenu;
+
         GameManager.Instance.openShopEvent += OpenShopPanel;
         rerollButton.onClick.AddListener(() => RerollButton());
         SetupSkillPanel();
     }
-
+    void OpenPauseMenu()
+    {
+        pauseMenu.SetActive(true);
+    }
+    void ClosePauseMenu()
+    {
+        pauseMenu.SetActive(false);
+    }
     void FixedUpdate()
     {
         goldText.text = "" + GameManager.Instance.Gold;

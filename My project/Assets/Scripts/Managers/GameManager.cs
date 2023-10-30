@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
     [TabGroup("Settings")] public float realFrameCount;
     [TabGroup("Settings")] public bool hideMouse;
 
+    public event Action pauseEvent;
+    public event Action resumeEvent;
     public event Action advanceGameState;
     public event Action resetEvent;
     public event Action playerDeath;
@@ -81,6 +83,8 @@ public class GameManager : MonoBehaviour
         isPaused = false;
         menuOpen = false;
 
+
+        InputManager.Instance.startInput += TogglePause;
         playerStatus = player.GetComponent<Status>();
         playerStatus.deathEvent += LoseGame;
         SaveManager.Instance.saveEvent += SaveData;
@@ -218,10 +222,17 @@ public class GameManager : MonoBehaviour
         isPaused = false;
     }
 
-    public void PauseGame()
+    public void TogglePause()
     {
-        isPaused = true;
-
+        if (menuOpen)
+            menuOpen = false;
+        else
+            menuOpen = true;
+   
+        if (menuOpen)
+            pauseEvent?.Invoke();
+        else
+            resumeEvent?.Invoke();
         //Time.timeScale = 0;
     }
 

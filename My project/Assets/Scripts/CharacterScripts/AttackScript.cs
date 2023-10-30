@@ -263,11 +263,19 @@ public class AttackScript : MonoBehaviour
                 else
                 if (frame >= activeMove.m[i].startFrame && frame < activeMove.m[i].startFrame + activeMove.m[i].duration)
                 {
-                    if (!movement.ground) movement._rb.useGravity = false;
                     if (frame == activeMove.m[i].startFrame && activeMove.m[i].momentum.y > 0)
                     {
                         movement.CollisionPassthrough();
                     }
+
+                    if (activeMove.m[i].freeMovement)
+                    {
+                        movement.ExecuteMovement();
+                        return;
+                    }
+
+                    if (!movement.ground) movement._rb.useGravity = false;
+       
                     //else if (activeMove.m[i].momentum.y < 0 && activeMove.noClip == false)
                     //    status.EnableCollider();
 

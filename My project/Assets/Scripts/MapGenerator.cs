@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 
 public class MapGenerator : MonoBehaviour
 {
-    public int seed;
+    public int inEditorSeed;
     RectTransform rectTransform;
     public Vector3 scrollPosition;
     public Vector3 clampPosition;
@@ -49,7 +49,8 @@ public class MapGenerator : MonoBehaviour
     [Button]
     public void RandomizeMap()
     {
-        seed = Random.Range(0, 1000000);
+        inEditorSeed = Random.Range(0, 1000000);
+
         SetupNodes();
     }
 
@@ -67,7 +68,8 @@ public class MapGenerator : MonoBehaviour
 
         }
 
-        Random.InitState(seed);
+        if (Application.isEditor && !Application.isPlaying)
+            Random.InitState(inEditorSeed);
 
         //Entry Node
         GameObject entryGO = Instantiate(mapNodePrefab, mapContainer.transform.position, Quaternion.identity, mapContainer.transform);

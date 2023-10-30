@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
   m_Name: Rogue_Shuriken_j5A
   m_EditorClassIdentifier: 
-  animationID: 11
+  animationID: 151
   meterCost: 0
   meterGain: 10
   consumeMeterOnActiveFrame: 0
@@ -47,11 +47,11 @@ MonoBehaviour:
   uniqueProperties: []
   screenShake: []
   vfx:
-  - startup: 15
+  - startup: 12
     prefab: {fileID: 3495573824567096830, guid: 3fd8f98a6e1a44f4ab278e40d273923a, type: 3}
-    deattachFromPlayer: 0
+    deattachFromPlayer: 1
     destroyOnRecovery: 0
-    position: {x: 0, y: 0.6, z: 0.5}
+    position: {x: 0, y: 0.6, z: 1}
     rotation: {x: 0, y: 0, z: 90}
     scale: {x: 0.2, y: 0.2, z: 0.2}
   sfx: []
@@ -96,7 +96,26 @@ MonoBehaviour:
   useAirAction: 0
   landCancel: 1
   recoverOnlyOnLand: 0
-  m: []
+  m:
+  - startFrame: 14
+    duration: 23
+    momentum: {x: 0, y: 0}
+    resetVelocityDuringRecovery: 0
+    xMovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    movementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    freeMovement: 1
+    useCurve: 0
+    teleport: 0
   instantStartupRotation: 1
   overrideVelocity: 0
   runMomentum: 0

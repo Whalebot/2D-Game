@@ -33,6 +33,9 @@ public class LevelManager : MonoBehaviour
 
         SaveManager.Instance.saveEvent += SaveData;
         SaveManager.Instance.startLoadEvent += LoadData;
+
+        mapGenerator.SetupNodes();
+
         if (SaveManager.Instance.HasSaveData())
         {
             currentMapNode = mapGenerator.mapNodes[SaveManager.Instance.CurrentLevel];

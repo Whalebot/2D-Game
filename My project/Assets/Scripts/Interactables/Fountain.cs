@@ -9,9 +9,11 @@ public class Fountain : Interactable
     {
         base.South();
         GiveStats();
+        gameObject.SetActive(false);
     }
 
-    public void GiveStats() {
+    public void GiveStats()
+    {
         GameManager.Instance.playerStatus.AddStats(GameManager.Instance.playerStatus.currentStats, stats);
     }
 }
