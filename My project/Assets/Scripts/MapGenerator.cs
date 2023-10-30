@@ -70,6 +70,8 @@ public class MapGenerator : MonoBehaviour
 
         if (Application.isEditor && !Application.isPlaying)
             Random.InitState(inEditorSeed);
+        else
+            Random.InitState(SaveManager.Instance.seed);
 
         //Entry Node
         GameObject entryGO = Instantiate(mapNodePrefab, mapContainer.transform.position, Quaternion.identity, mapContainer.transform);
