@@ -6,17 +6,33 @@ using UnityEngine;
 public class StatusEffect : ScriptableObject
 {
     public int duration;
+    public int stacks = 0;
+    public int maxStacks = 1;
     int durationCounter;
     public int tickInterval;
     int tickCounter;
     protected Status status;
+    public VFX statusVFX;
+    public GameObject currentVFX;
 
     public virtual void ActivateBehaviour(Status s)
     {
         status = s;
         durationCounter = duration;
-        tickCounter =  0;
+        tickCounter = 0;
+        SpawnVFX();
     }
+    void SpawnVFX()
+    {
+        if (statusVFX.prefab != null)
+        {
+            currentVFX = Instantiate(statusVFX.prefab, status.transform.position, status.transform.rotation, status.transform);
+            currentVFX.transform.localScale = statusVFX.scale;
+            currentVFX.transform.localPosition = statusVFX.position;
+            currentVFX.transform.localRotation = Quaternion.Euler(statusVFX.rotation);
+        }
+    }
+
     public virtual void ExecuteFrame()
     {
         durationCounter--;
@@ -43,6 +59,8 @@ public class StatusEffect : ScriptableObject
     public virtual void EndBehaviour()
     {
         status.RemoveStatusEffect(this);
+        if (currentVFX != null)
+            Destroy(currentVFX);
         //Remove status effect
     }
     public virtual void TickBehaviour()

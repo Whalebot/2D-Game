@@ -13,13 +13,24 @@ MonoBehaviour:
   m_Name: Poison Status Effect
   m_EditorClassIdentifier: 
   duration: 300
+  stacks: 0
+  maxStacks: 1
   tickInterval: 60
+  statusVFX:
+    startup: 1
+    prefab: {fileID: 155376, guid: e621264aa6bdcc246bd8b5ab2404cb31, type: 3}
+    deattachFromPlayer: 1
+    destroyOnRecovery: 0
+    position: {x: 0, y: 0.5, z: 0}
+    rotation: {x: -90, y: 0, z: 0}
+    scale: {x: 0.3, y: 0.3, z: 0.3}
+  currentVFX: {fileID: 0}
   damagePerTick: 2
   poisonVFX:
     startup: 1
-    prefab: {fileID: 113502, guid: 0dd4c52b0a3d02e4abff5da76fd7969e, type: 3}
+    prefab: {fileID: 175766, guid: 2ac7eddae0753da4b877a2b170a622d0, type: 3}
     deattachFromPlayer: 1
     destroyOnRecovery: 0
-    position: {x: 0, y: 0, z: 0}
-    rotation: {x: 0, y: 0, z: 0}
-    scale: {x: 0.4, y: 0.4, z: 0.4}
+    position: {x: 0, y: 0.5, z: 0}
+    rotation: {x: -90, y: 0, z: 0}
+    scale: {x: 0.5, y: 0.5, z: 0.5}

@@ -15,11 +15,11 @@ public class PoisonStatusEffect : StatusEffect
 
     void PoisonDamage()
     {
-        GameObject fx = Instantiate(poisonVFX.prefab, status.transform.position, status.transform.rotation);
+        GameObject fx = Instantiate(poisonVFX.prefab, status.transform.position, status.transform.rotation, status.transform);
         status.Health -= damagePerTick;
         GameManager.Instance.DamageNumbers(status.transform, damagePerTick, false);
-        //fx.transform.localPosition = item.position;
-        //fx.transform.localRotation = Quaternion.Euler(item.rotation);
+        fx.transform.localPosition = poisonVFX.position;
+        fx.transform.localRotation = Quaternion.Euler(poisonVFX.rotation);
         fx.transform.localScale = poisonVFX.scale;
         //if (item.destroyOnRecovery)
         //    fx.GetComponent<VFXScript>().SetupVFX(status);

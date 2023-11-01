@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
   m_Name: Fighter_j5A
   m_EditorClassIdentifier: 
-  animationID: 11
+  animationID: 151
   meterCost: 0
   meterGain: 10
   consumeMeterOnActiveFrame: 0
@@ -37,7 +37,7 @@ MonoBehaviour:
       pushback: {x: 2, y: 0}
       hitState: 0
     airHitProperty:
-      pushback: {x: 1, y: 2}
+      pushback: {x: 0, y: 4}
       hitState: 0
     blockProperty:
       pushback: {x: 0, y: 0}
@@ -89,7 +89,8 @@ MonoBehaviour:
   airInvul: 0
   airInvulStart: 1
   airInvulDuration: 0
-  targetComboMoves: []
+  targetComboMoves:
+  - {fileID: 11400000, guid: 87ce976be1e36da4597e87f94ae4b279, type: 2}
   fullCancel: 0
   gatlingCancel: 0
   uncancelable: 0
@@ -97,7 +98,7 @@ MonoBehaviour:
   landCancel: 1
   recoverOnlyOnLand: 0
   m:
-  - startFrame: 17
+  - startFrame: 15
     duration: 12
     momentum: {x: 0, y: 0}
     resetVelocityDuringRecovery: 0

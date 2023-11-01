@@ -13,8 +13,8 @@ public class Treasure : Interactable
     {
         base.Start();
         AIManager.Instance.roomClearEvent += SpawnTreasure;
-        if(LevelManager.Instance.currentRoomType != RoomTypes.Treasure)
-        treasure.SetActive(false);
+        if (LevelManager.Instance.currentRoomType != RoomTypes.Treasure && LevelManager.Instance.currentRoomType != RoomTypes.Event)
+            treasure.SetActive(false);
     }
 
     void SpawnTreasure()

@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f2923ec284c6840a8cd468af82cb4d, type: 3}
+  m_Name: Stinger
+  m_EditorClassIdentifier: 
+  skillRank: 0
+  type: 0
+  title: Stinger
+  sprite: {fileID: 0}
+  prerequisiteSkills: []
+  prerequisiteMoves: []
+  newMoves:
+  - move: {fileID: 11400000, guid: 5e52501160f49414c8796227ca368980, type: 2}
+    combo: {fileID: 11400000, guid: e3af0458edf246e4bab972e8fa7bdedb, type: 2}
+    oldMove: {fileID: 0}
+  - move: {fileID: 11400000, guid: 5e52501160f49414c8796227ca368980, type: 2}
+    combo: {fileID: 11400000, guid: cc975f67e2c60c64ba6386a522e94d42, type: 2}
+    oldMove: {fileID: 0}
+  - move: {fileID: 11400000, guid: 5e52501160f49414c8796227ca368980, type: 2}
+    combo: {fileID: 11400000, guid: 9fece5b6f5a46ec46980f5737367b912, type: 2}
+    oldMove: {fileID: 0}
+  - move: {fileID: 11400000, guid: 5e52501160f49414c8796227ca368980, type: 2}
+    combo: {fileID: 11400000, guid: f9f3f074a701e2b48be3f5e939dcd90d, type: 2}
+    oldMove: {fileID: 0}
+  skillProperties: []
+  description: Pressing attack after dashing performs an long range approaching attack.
+  stats:
+    currentHealth: 0
+    maxHealth: 0
+    currentMeter: 0
+    maxMeter: 0
+    level: 1
+    strength: 0
+    intelligence: 0
+    agility: 0
+    luck: 0
+    gold: 0
+    attack: 0
+    magic: 0
+    attackSpeed: 1
+    airActions: 1
+    rerolls: 0
+    movementSpeedModifier: 1
+    meterGainModifier: 1
+    poiseRegen: 0
+    poise: 0
+    defense: 0
+    resistance: 0
+    guardBreakModifier: 1
+    sizeModifier: 1
+    damageModifierPercentage: 1
+    backstabModifier: 0
+    damageModifierFlat: 0
+    hitStunMultiplier: 1
+    knockbackModifier: 1
+    critChance: 0
+    critMultiplier: 1.5

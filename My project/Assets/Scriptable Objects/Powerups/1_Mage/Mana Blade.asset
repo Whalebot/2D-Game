@@ -17,10 +17,17 @@ MonoBehaviour:
   title: Mana Blade
   sprite: {fileID: 0}
   prerequisiteSkills: []
-  prerequisiteMoves: []
+  prerequisiteMoves:
+  - {fileID: 11400000, guid: 846265f9525a33948b942cb5e5fc0ae3, type: 2}
   newMoves:
-  - move: {fileID: 11400000, guid: 846265f9525a33948b942cb5e5fc0ae3, type: 2}
+  - move: {fileID: 11400000, guid: 734dc6cfe1e2a2a4f84f62bc322b4444, type: 2}
     combo: {fileID: 0}
+    oldMove: {fileID: 11400000, guid: 846265f9525a33948b942cb5e5fc0ae3, type: 2}
+  - move: {fileID: 11400000, guid: 4e277103ab20b16439654c0287b46331, type: 2}
+    combo: {fileID: 11400000, guid: 2fa62335648613c4c87188b50bc5b9c7, type: 2}
+    oldMove: {fileID: 0}
+  - move: {fileID: 11400000, guid: 7754b0b4613ee7b43bec789a46af0a4f, type: 2}
+    combo: {fileID: 11400000, guid: 2fa62335648613c4c87188b50bc5b9c7, type: 2}
     oldMove: {fileID: 0}
   skillProperties: []
   description: 

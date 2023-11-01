@@ -24,5 +24,12 @@ public class DevCheats : MonoBehaviour
         if (Keyboard.current.f1Key.wasPressedThisFrame) SaveManager.Instance.SaveData();
         if (Keyboard.current.f2Key.wasPressedThisFrame) SaveManager.Instance.LoadData();
         if (Keyboard.current.f3Key.wasPressedThisFrame) SaveManager.Instance.DeleteData();
+        if (Keyboard.current.f5Key.wasPressedThisFrame)
+        {
+            GameManager.Instance.playerStatus.currentStats.maxHealth = 1000000;
+            GameManager.Instance.playerStatus.currentStats.currentHealth = 1000000;
+            GameManager.Instance.playerStatus.currentStats.maxMeter = 1000000;
+            GameManager.Instance.playerStatus.currentStats.currentMeter = 1000000;
+        }
     }
 }

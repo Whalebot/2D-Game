@@ -38,7 +38,7 @@ public class LevelGate : Interactable
             levelGates.SetActive(false);
             return;
         }
-        if (LevelManager.Instance.currentRoomType != RoomTypes.Shop && LevelManager.Instance.currentRoomType != RoomTypes.Treasure)
+        if (LevelManager.Instance.currentRoomType != RoomTypes.Shop && LevelManager.Instance.currentRoomType != RoomTypes.Treasure && LevelManager.Instance.currentRoomType != RoomTypes.Event)
             levelGates.SetActive(false);
     }
 

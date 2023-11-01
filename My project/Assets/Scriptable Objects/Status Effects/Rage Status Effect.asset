@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93023db5799a9c94a9fe60b40fdd1e9a, type: 3}
+  m_Name: Rage Status Effect
+  m_EditorClassIdentifier: 
+  duration: 600
+  stacks: 0
+  maxStacks: 1
+  tickInterval: 0
+  statusVFX:
+    startup: 1
+    prefab: {fileID: 119402, guid: b0a7c039263a459439f74cfba0685d31, type: 3}
+    deattachFromPlayer: 0
+    destroyOnRecovery: 0
+    position: {x: 0, y: 0.01, z: 0}
+    rotation: {x: -90, y: 0, z: 0}
+    scale: {x: 0.1, y: 0.1, z: 0.1}
+  currentVFX: {fileID: 0}
+  stats:
+    currentHealth: 0
+    maxHealth: 0
+    currentMeter: 0
+    maxMeter: 0
+    level: 0
+    strength: 0
+    intelligence: 0
+    agility: 0
+    luck: 0
+    gold: 0
+    attack: 0
+    magic: 0
+    attackSpeed: 0
+    airActions: 0
+    rerolls: 0
+    movementSpeedModifier: 0.5
+    meterGainModifier: 0
+    poiseRegen: 0
+    poise: 0
+    defense: 0
+    resistance: 0
+    guardBreakModifier: 0
+    sizeModifier: 0
+    damageModifierPercentage: 0.3
+    backstabModifier: 0
+    damageModifierFlat: 0
+    hitStunMultiplier: 0
+    knockbackModifier: 0
+    critChance: 0
+    critMultiplier: 0

@@ -99,6 +99,25 @@ MonoBehaviour:
   recoverOnlyOnLand: 0
   m:
   - startFrame: 1
+    duration: 3
+    momentum: {x: 0, y: 0}
+    resetVelocityDuringRecovery: 0
+    xMovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    movementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    freeMovement: 1
+    useCurve: 0
+    teleport: 0
+  - startFrame: 11
     duration: 24
     momentum: {x: 0, y: 0}
     resetVelocityDuringRecovery: 0

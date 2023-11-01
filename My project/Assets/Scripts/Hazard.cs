@@ -10,6 +10,7 @@ public class Hazard : MonoBehaviour
     int resetcounter;
     public Alignment alignment;
     public Attack attack;
+    public StatusEffect effect;
     public VFX hitVFX;
     public GameObject hitSFX;
     public GameObject collider;
@@ -58,6 +59,8 @@ public class Hazard : MonoBehaviour
             {
                 if (!CheckInvul(enemyStatus)) return;
                 enemyList.Add(enemyStatus);
+                if (effect != null)
+                    enemyStatus.ApplyStatusEffect(effect);
                 ExecuteHit(attack.groundHitProperty, enemyStatus, attack);
                 return;
             }

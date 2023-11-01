@@ -1,7 +1,6 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "MoveUniqueProperty", menuName = "MoveUniqueProperty")]
 public class MoveUniqueProperty : ScriptableObject
 {
     public UniquePropertyType propertyType;
@@ -18,9 +17,13 @@ public class MoveUniqueProperty : ScriptableObject
     {
         if (propertyType != UniquePropertyType.ActiveFrames) return;
     }
+
+    public virtual void HitBehaviour(HitInfo hitInfo)
+    {
+    }
 }
 
 public enum UniquePropertyType
 {
-    StartupFrame, ActiveFrames
+    StartupFrame, ActiveFrames, OnHit
 }

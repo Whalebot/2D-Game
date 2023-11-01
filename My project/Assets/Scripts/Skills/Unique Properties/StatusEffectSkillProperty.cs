@@ -15,13 +15,6 @@ public class StatusEffectSkillProperty : UniqueSkillProperty
 
         foreach (var item in appliedEffects)
         {
-           
-            if (hitInfo.status.HasStatusEffect(item))
-            {
-                //Refresh effect
-                hitInfo.status.RefreshStatusEffect(item);
-            }
-            else
                 hitInfo.status.ApplyStatusEffect(item);
         }
     }

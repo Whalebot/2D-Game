@@ -6,8 +6,8 @@ public class Moveset : ScriptableObject
     [Header("Dodge Button")]
     public Combo dodgeCombo;
     public Combo airDodgeCombo;
-    public Move dashAttack;
-    public Move airDashAttack;
+    public Combo dashAttackCombo;
+    public Combo airDashAttackCombo;
 
     [Header("A Button")]
     public Combo lightCombo; 

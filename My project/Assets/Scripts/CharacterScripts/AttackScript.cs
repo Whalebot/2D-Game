@@ -6,7 +6,7 @@ using System;
 
 public class AttackScript : MonoBehaviour
 {
-    private Status status;
+    [HideInInspector] public Status status;
     [FoldoutGroup("Components")] public Transform hitboxContainer;
     [FoldoutGroup("Components")] public List<GameObject> hitboxes;
     [FoldoutGroup("Components")] public Transform vfxContainer;
@@ -158,20 +158,17 @@ public class AttackScript : MonoBehaviour
         //Execute momentum
         ExecuteMomentum(frame);
 
-        if (activeMove.attacks.Length > 0)
+
+        if (frame > activeMove.firstGatlingFrame)
         {
-            if (frame > gatlingFrame + activeMove.attacks[0].gatlingFrames)
-            {
-                attackString = true;
-                newAttack = false;
-            }
-            if (frame > activeMove.firstStartupFrame + activeMove.attacks[0].gatlingFrames)
-            {
-                canTargetCombo = true;
-            }
-            if (extendedBuffer > 0)
-                extendedBuffer--;
+            attackString = true;
+            newAttack = false;
+            canTargetCombo = true;
         }
+
+        if (extendedBuffer > 0)
+            extendedBuffer--;
+
 
         if (frame == activeMove.firstStartupFrame && activeMove.consumeMeterOnActiveFrame)
         {
@@ -275,7 +272,7 @@ public class AttackScript : MonoBehaviour
                     }
 
                     if (!movement.ground) movement._rb.useGravity = false;
-       
+
                     //else if (activeMove.m[i].momentum.y < 0 && activeMove.noClip == false)
                     //    status.EnableCollider();
 
@@ -515,7 +512,7 @@ public class AttackScript : MonoBehaviour
         recoverOnlyOnLand = move.recoverOnlyOnLand;
         activeMove = move;
         attackID = move.animationID;
-
+        status.animationArmor = move.armor;
         attackString = false;
         canTargetCombo = false;
         hit = false;
@@ -543,14 +540,9 @@ public class AttackScript : MonoBehaviour
 
         attackPerformedEvent?.Invoke(move);
 
-        if (move.attacks.Length > 0)
-        {
-            startupEvent?.Invoke();
-        }
-        else
-        {
-            startupEvent?.Invoke();
-        }
+
+        startupEvent?.Invoke();
+
         attacking = true;
         newAttack = true;
         ExecuteFrame();
@@ -835,7 +827,7 @@ public class AttackScript : MonoBehaviour
         status.EnableCollider();
         status.invincible = false;
         movement.forcedWalk = false;
-
+        status.animationArmor = false;
         activeCombo = null;
         if (activeMove != null)
         {

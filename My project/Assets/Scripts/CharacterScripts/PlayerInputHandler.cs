@@ -6,6 +6,7 @@ public class PlayerInputHandler : MonoBehaviour
 {
     public static PlayerInputHandler Instance { get; private set; }
     public bool flipPlayer;
+    public bool isDashing;
     public bool holdWest;
     public bool holdNorth;
     [HideInInspector] public InputManager input;
@@ -41,6 +42,8 @@ public class PlayerInputHandler : MonoBehaviour
         input.northRelease += ReleaseNorthButton;
         input.westRelease += ReleaseWestButton;
 
+        attack.recoveryEvent += ResetDash;
+        attack.startupEvent += ResetDash;
 
         status = GetComponent<Status>();
         mov = GetComponent<Movement>();
@@ -56,8 +59,15 @@ public class PlayerInputHandler : MonoBehaviour
         input.westInput -= HoldWestButton;
         input.northRelease -= ReleaseNorthButton;
         input.westRelease -= ReleaseWestButton;
+
+        attack.recoveryEvent -= ResetDash;
+        attack.startupEvent -= ResetDash;
     }
 
+    void ResetDash()
+    {
+        isDashing = false;
+    }
 
     void ExecuteFrame()
     {
@@ -123,10 +133,22 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (mov.ground)
         {
+            if (isDashing)
+                if (attack.ComboAttack(attack.moveset.dashAttackCombo))
+                {
+                    isDashing = true;
+                    return true;
+                }
             return attack.ComboAttack(attack.moveset.lightCombo);
         }
         else
         {
+            if (isDashing)
+                if (attack.ComboAttack(attack.moveset.airDashAttackCombo))
+                {
+                    isDashing = true;
+                    return true;
+                }
             return attack.ComboAttack(attack.moveset.airLightCombo);
         }
     }
@@ -259,11 +281,21 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (mov.ground)
         {
-            return attack.ComboAttack(attack.moveset.dodgeCombo);
+            if (attack.ComboAttack(attack.moveset.dodgeCombo))
+            {
+                isDashing = true;
+                return true;
+            }
+            else return false;
         }
         else
         {
-            return attack.ComboAttack(attack.moveset.airDodgeCombo);
+            if (attack.ComboAttack(attack.moveset.airDodgeCombo))
+            {
+                isDashing = true;
+                return true;
+            }
+            else return false;
         }
 
     }

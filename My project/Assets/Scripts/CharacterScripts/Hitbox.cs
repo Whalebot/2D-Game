@@ -241,7 +241,12 @@ public class Hitbox : MonoBehaviour
 
         HitInfo hitInfo = new HitInfo(crit, backstab, other, move);
         attack.HitEvent(hitInfo);
-       
+
+        foreach (var item in move.uniqueProperties)
+        {
+            item.HitBehaviour(hitInfo);
+        }
+
 
         if (damageDealt <= 0)
         {

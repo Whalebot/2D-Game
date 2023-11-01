@@ -15,11 +15,11 @@ public class BurningStatusEffect : StatusEffect
 
     void FireDamage()
     {
-        GameObject fx = Instantiate(fireVFX.prefab, status.transform.position, status.transform.rotation);
+        GameObject fx = Instantiate(fireVFX.prefab, status.transform.position, status.transform.rotation, status.transform);
         status.Health -= damagePerTick;
         GameManager.Instance.DamageNumbers(status.transform, damagePerTick, false);
-        //fx.transform.localPosition = item.position;
-        //fx.transform.localRotation = Quaternion.Euler(item.rotation);
+        fx.transform.localPosition = fireVFX.position;
+        fx.transform.localRotation = Quaternion.Euler(fireVFX.rotation);
         fx.transform.localScale = fireVFX.scale;
         //if (item.destroyOnRecovery)
         //    fx.GetComponent<VFXScript>().SetupVFX(status);

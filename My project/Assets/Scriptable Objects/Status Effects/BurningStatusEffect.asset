@@ -13,13 +13,24 @@ MonoBehaviour:
   m_Name: BurningStatusEffect
   m_EditorClassIdentifier: 
   duration: 150
+  stacks: 0
+  maxStacks: 1
   tickInterval: 50
-  damagePerTick: 2
-  fireVFX:
+  statusVFX:
     startup: 1
-    prefab: {fileID: 123764, guid: 5077e2ec8ec48d247af6fecd8d5bb756, type: 3}
+    prefab: {fileID: 0}
     deattachFromPlayer: 1
     destroyOnRecovery: 0
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0}
     scale: {x: 1, y: 1, z: 1}
+  currentVFX: {fileID: 0}
+  damagePerTick: 2
+  fireVFX:
+    startup: 1
+    prefab: {fileID: 187646, guid: 01f42707f167b8b4ca766683fa96d652, type: 3}
+    deattachFromPlayer: 1
+    destroyOnRecovery: 0
+    position: {x: 0, y: 0.5, z: 0}
+    rotation: {x: -90, y: 0, z: 0}
+    scale: {x: 0.5, y: 0.5, z: 0.5}

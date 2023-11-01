@@ -9,11 +9,6 @@ using UnityEditor;
 public class SkillManager : MonoBehaviour
 {
     public static SkillManager Instance;
-
-    [TabGroup("Chemistry")] public int poisonDamage;
-    [TabGroup("Chemistry")] public int poisonTickTime;
-    int poisonCounter;
-
     [TabGroup("Debug")] public List<SkillSO> allSkills;
     [TabGroup("Debug")] public List<SkillSO> foundSkills;
     [TabGroup("Debug")] public List<SkillSO> DSkills, CSkills, BSkills, ASkills, SSkills;
@@ -41,11 +36,6 @@ public class SkillManager : MonoBehaviour
 
     void ExecuteFrame()
     {
-        poisonCounter--;
-        if (poisonCounter <= 0)
-        {
-            poisonCounter = poisonTickTime;
-        }
     }
 
     #region Roll Skills

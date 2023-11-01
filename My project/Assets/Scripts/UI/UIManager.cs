@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,8 @@ public class UIManager : MonoBehaviour
     [TabGroup("Components")] public Button rerollButton;
     [TabGroup("Components")] public TextMeshProUGUI rerollText;
     [TabGroup("Components")] public TextMeshProUGUI goldText;
+    [TabGroup("Components")] public TextMeshProUGUI floorText;
+    [TabGroup("Components")] public TextMeshProUGUI timeText;
 
 
     private void Awake()
@@ -55,6 +58,23 @@ public class UIManager : MonoBehaviour
         goldText.text = "" + GameManager.Instance.Gold;
         rerollButton.interactable = GameManager.Instance.playerStatus.currentStats.rerolls > 0;
         rerollText.text = "x" + GameManager.Instance.playerStatus.currentStats.rerolls;
+        floorText.text = "Floor " + LevelManager.Instance.currentMapNode.y;
+        timeText.text = "" + TimeFormatter(GameManager.time, true);
+    }
+    public static string TimeFormatter(float seconds, bool forceHHMMSS = false)
+    {
+        float secondsRemainder = Mathf.Floor((seconds % 60) * 100) / 100.0f;
+        int minutes = ((int)(seconds / 60)) % 60;
+        int hours = (int)(seconds / 3600);
+
+        if (!forceHHMMSS)
+        {
+            if (hours == 0)
+            {
+                return System.String.Format("{0:00}:{1:00.00}", minutes, secondsRemainder);
+            }
+        }
+        return System.String.Format("{0}:{1:00}:{2:00}", hours, minutes, secondsRemainder);
     }
     [Button]
     public void SetupSkillPanel()

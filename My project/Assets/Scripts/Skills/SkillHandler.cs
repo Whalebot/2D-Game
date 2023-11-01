@@ -199,7 +199,11 @@ public class SkillHandler : MonoBehaviour
             foreach (var item in skill.newMoves)
             {
                 if (item.combo != null)
-                    GetCombo(item.combo).moves.Add(item.move);
+                {
+                    Combo c = GetCombo(item.combo);
+                    if (c != null)
+                        c.moves.Add(item.move);
+                }
             }
         }
 

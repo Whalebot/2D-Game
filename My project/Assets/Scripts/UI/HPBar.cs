@@ -105,6 +105,7 @@ public class HPBar : MonoBehaviour
 
     private void OnDisable()
     {
+        GameManager.Instance.advanceGameState -= ExecuteFrame;
         if (status != null)
             status.healthEvent -= UpdateBar;
     }

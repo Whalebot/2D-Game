@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public static bool menuOpen;
     public static bool gameOver;
 
+    public static float time;
+
     public static Vector3 startPosition;
     public static Quaternion startRotation;
 
@@ -82,7 +84,7 @@ public class GameManager : MonoBehaviour
 
         isPaused = false;
         menuOpen = false;
-
+        player = GameObject.FindGameObjectWithTag("Player").transform;
 
         InputManager.Instance.startInput += TogglePause;
         playerStatus = player.GetComponent<Status>();
@@ -168,6 +170,7 @@ public class GameManager : MonoBehaviour
 
         realFrameCount += Time.timeScale;
         gameFrameCount++;
+        time++;
         //frameCounterEvent?.Invoke(gameFrameCount);
     }
 
@@ -228,7 +231,7 @@ public class GameManager : MonoBehaviour
             menuOpen = false;
         else
             menuOpen = true;
-   
+
         if (menuOpen)
             pauseEvent?.Invoke();
         else

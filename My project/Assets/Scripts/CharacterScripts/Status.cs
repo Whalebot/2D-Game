@@ -184,8 +184,26 @@ public class Status : MonoBehaviour
     }
     public void ApplyStatusEffect(StatusEffect effect)
     {
-        statusEffects.Add(effect);
-        effect.ActivateBehaviour(this);
+        StatusEffect clone = null;
+        foreach (var item in statusEffects)
+        {
+            if (effect.name == item.name)
+            {
+                clone = item;
+            }
+        }
+
+        if (clone != null)
+        {
+            RefreshStatusEffect(clone);
+        }
+        else
+        {
+            clone = Instantiate(effect);
+            clone.name = effect.name;
+            statusEffects.Add(clone);
+            clone.ActivateBehaviour(this);
+        }
     }
     public bool HasStatusEffect(StatusEffect effect)
     {
