@@ -63,7 +63,7 @@ public class StatDisplay : MonoBehaviour
         damageText.text = (s.damageModifierPercentage * 100).ToString("F0") + "%";
 
         attackText.text = "" + s.attack;
-        magicText.text = "" + s.attack;
+        magicText.text = "" + s.magic;
 
         defenseText.text = (s.defense * 100).ToString("F0") + "%";
         mDefenseText.text = (s.defense * 100).ToString("F0") + "%";

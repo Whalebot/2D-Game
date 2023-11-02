@@ -209,7 +209,7 @@ public class CharacterCreator : MonoBehaviour
     [Button]
     void ApplyVisuals()
     {
-        ApplyMaterial();
+        //ApplyMaterial();
         visualsUpdateEvent?.Invoke();
         if (visuals != null)
         {
