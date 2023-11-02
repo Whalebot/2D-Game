@@ -9,7 +9,7 @@ public class BossGate : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!isUsed)
-            if (other.gameObject.CompareTag("Player"))
+            if (other.attachedRigidbody.gameObject.CompareTag("Player"))
             {
                 isUsed = true;
                 gate.SetActive(true);

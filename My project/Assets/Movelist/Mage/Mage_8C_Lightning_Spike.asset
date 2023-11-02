@@ -25,6 +25,7 @@ MonoBehaviour:
   attacks:
   - attackLevel: 2
     attackType: 1
+    damageType: 1
     hitbox: {fileID: 5860963072138344223, guid: ebae092aedc0a1542b8a01879d01b2e7, type: 3}
     damage: 3
     stun: 20
@@ -39,10 +40,6 @@ MonoBehaviour:
     airHitProperty:
       pushback: {x: 0, y: 0}
       hitState: 0
-    blockProperty:
-      pushback: {x: 0, y: 0}
-      hitState: 0
-    hitID: 0
   type: 0
   uniqueProperties: []
   screenShake:
@@ -51,14 +48,16 @@ MonoBehaviour:
     amplitude: 2
     duration: 2
   vfx:
-  - startup: 1
+  - type: 0
+    startup: 1
     prefab: {fileID: 696211589295866031, guid: 0b2f1ef8d24b93947bb610a7f39f05e8, type: 3}
     deattachFromPlayer: 0
     destroyOnRecovery: 0
     position: {x: 0, y: 0.01, z: 0}
     rotation: {x: -90, y: 0, z: 0}
     scale: {x: 0.3, y: 0.3, z: 0.3}
-  - startup: 40
+  - type: 0
+    startup: 40
     prefab: {fileID: 696211589295866031, guid: 0b2f1ef8d24b93947bb610a7f39f05e8, type: 3}
     deattachFromPlayer: 0
     destroyOnRecovery: 1
@@ -67,6 +66,7 @@ MonoBehaviour:
     scale: {x: 0.5, y: 0.5, z: 0.5}
   sfx: []
   hitFX:
+    type: 0
     startup: 1
     prefab: {fileID: 1416824176164296, guid: dc1397204bb5ee84895af2b49dac2d49, type: 3}
     deattachFromPlayer: 1
@@ -113,9 +113,24 @@ MonoBehaviour:
     duration: 2
     momentum: {x: -3, y: 0}
     resetVelocityDuringRecovery: 0
+    xMovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    movementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    freeMovement: 0
+    useCurve: 0
     teleport: 0
   instantStartupRotation: 0
   overrideVelocity: 1
   runMomentum: 0
+  inheritForwardVelocity: 0
   stopAtEdges: 1
   homing: 0

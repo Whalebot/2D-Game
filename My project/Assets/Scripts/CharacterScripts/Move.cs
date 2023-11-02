@@ -108,7 +108,9 @@ public class Move : ScriptableObject
     }
 }
 
-public enum DamageType { Slash, Blunt, Thrust, Chop, Fire, Water, Earth, Wind }
+public enum DamageType { Physical, Magic
+      //  , Fire, Water, Earth, Wind, Lightning 
+}
 
 
 [System.Serializable]
@@ -132,7 +134,8 @@ public class ScreenShake
 [System.Serializable]
 public class VFX
 {
-    public int startup = 1;
+    public ScreenShakeType type = ScreenShakeType.OnStartup;
+    [HideIf("@type != ScreenShakeType.OnStartup")] public int startup = 1;
     public GameObject prefab;
     public bool deattachFromPlayer = true;
     public bool destroyOnRecovery = false;
@@ -147,6 +150,7 @@ public class Attack
 {
     public AttackLevel attackLevel = AttackLevel.Level1;
     public AttackType attackType = AttackType.Normal;
+    [EnumToggleButtons] public DamageType damageType = DamageType.Physical;
     public GameObject hitbox;
     public float damage = 1;
     [ShowIf("@attackLevel == AttackLevel.Custom")]
@@ -161,8 +165,6 @@ public class Attack
     public int gatlingFrames = 5;
     public HitProperty groundHitProperty;
     public HitProperty airHitProperty;
-    public HitProperty blockProperty;
-    public int hitID = 0;
 }
 
 [System.Serializable]
@@ -190,7 +192,8 @@ public class HitProperty
 
 public enum ScreenShakeType { OnStartup, OnHit, OnLand }
 
+
 public enum AttackType { Normal, Projectile, Throw, Ground }
 public enum AttackLevel { Level1, Level2, Level3, Custom }
 public enum HitState { None, Knockdown, Launch };
-public enum MoveType { Normal, Special, UniversalMechanics, Movement, EX, Super }
+public enum MoveType { Normal, Movement }

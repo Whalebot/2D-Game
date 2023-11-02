@@ -134,69 +134,22 @@ public class Hitbox : MonoBehaviour
         knockbackDirection.y = 0;
         knockbackDirection = knockbackDirection.normalized;
 
-        //Check for block
-        if (other.blocking)
+
+        if (other.groundState == GroundState.Grounded)
         {
-            ExecuteBlock(tempAttack.blockProperty, other, tempAttack);
+            ExecuteHit(tempAttack.groundHitProperty, other, tempAttack);
         }
-        else
+        else if (other.groundState == GroundState.Airborne && tempAttack.attackType == AttackType.Ground)
         {
-            if (other.groundState == GroundState.Grounded)
-            {
-                ExecuteHit(tempAttack.groundHitProperty, other, tempAttack);
-            }
-            else if (other.groundState == GroundState.Airborne && tempAttack.attackType == AttackType.Ground)
-            {
-                //Miss on airborne
-            }
-            //Check for airborne or knockdown state
-            else if (other.groundState == GroundState.Airborne || other.groundState == GroundState.Knockdown)
-            {
-                ExecuteHit(tempAttack.airHitProperty, other, tempAttack);
-            }
+            //Miss on airborne
+        }
+        //Check for airborne or knockdown state
+        else if (other.groundState == GroundState.Airborne || other.groundState == GroundState.Knockdown)
+        {
+            ExecuteHit(tempAttack.airHitProperty, other, tempAttack);
         }
     }
 
-
-    void ExecuteBlock(HitProperty hit, Status other, Attack atk)
-    {
-        attack.hit = true;
-
-        //Block FX
-        if (move.blockFX != null)
-        { Instantiate(move.blockFX, colPos.position, colPos.rotation); }
-        else
-            Instantiate(VFXManager.Instance.defaultBlockVFX, colPos.position, colPos.rotation);
-        if (move.blockSFX != null)
-        { Instantiate(move.blockSFX, colPos.position, colPos.rotation); }
-        else
-            Instantiate(VFXManager.Instance.defaultBlockSFX, colPos.position, colPos.rotation);
-
-
-        //Calculate direction
-        aVector = knockbackDirection * hit.pushback.x + Vector3.up * hit.pushback.y;
-
-        totalDamage = (int)(baseDamage *
-        (atk.damage * status.currentStats.damageModifierPercentage) + status.currentStats.damageModifierFlat);
-
-        int damageDealt = Mathf.RoundToInt(totalDamage - other.currentStats.resistance);
-
-        switch (atk.attackLevel)
-        {
-            case AttackLevel.Level1:
-                other.TakeHit(damageDealt, aVector, CombatManager.Instance.lvl1.stun, CombatManager.Instance.lvl1.poiseBreak, aVector, CombatManager.Instance.lvl1.hitstop, hit.hitState);
-                break;
-            case AttackLevel.Level2:
-                other.TakeHit(damageDealt, aVector, CombatManager.Instance.lvl2.stun, CombatManager.Instance.lvl2.poiseBreak, aVector, CombatManager.Instance.lvl2.hitstop, hit.hitState);
-                break;
-            case AttackLevel.Level3:
-                other.TakeHit(damageDealt, aVector, CombatManager.Instance.lvl3.stun, CombatManager.Instance.lvl3.poiseBreak, aVector, CombatManager.Instance.lvl3.hitstop, hit.hitState);
-                break;
-            case AttackLevel.Custom:
-                other.TakeHit(damageDealt, aVector, atk.stun, atk.poiseBreak, aVector, atk.hitstop, hit.hitState);
-                break;
-        }
-    }
     void ExecuteHit(HitProperty hit, Status other, Attack atk)
     {
         attack.hit = true;
@@ -213,19 +166,27 @@ public class Hitbox : MonoBehaviour
 
         int rng = Random.Range(1, 101);
         bool crit = false;
-
+        bool magicDamage = atk.damageType != DamageType.Physical;
 
 
         if (rng <= status.currentStats.critChance * 100)
         {
             crit = true;
             status.Meter += (int)(move.meterGain * status.currentStats.meterGainModifier * status.currentStats.critMultiplier);
-            totalDamage = (int)(baseDamage * (atk.damage * status.currentStats.damageModifierPercentage * status.Attack * status.currentStats.critMultiplier) + status.currentStats.damageModifierFlat);
+            if (magicDamage)
+                totalDamage = (int)(baseDamage * (atk.damage * status.currentStats.damageModifierPercentage * status.Magic * status.currentStats.critMultiplier) + status.currentStats.damageModifierFlat);
+            else
+                totalDamage = (int)(baseDamage * (atk.damage * status.currentStats.damageModifierPercentage * status.Attack * status.currentStats.critMultiplier) + status.currentStats.damageModifierFlat);
+
         }
         else
         {
             status.Meter += (int)(move.meterGain * status.currentStats.meterGainModifier);
-            totalDamage = (int)(baseDamage * (atk.damage * status.currentStats.damageModifierPercentage * status.Attack) + status.currentStats.damageModifierFlat);
+
+            if (magicDamage)
+                totalDamage = (int)(baseDamage * (atk.damage * status.currentStats.damageModifierPercentage * status.Magic) + status.currentStats.damageModifierFlat);
+            else
+                totalDamage = (int)(baseDamage * (atk.damage * status.currentStats.damageModifierPercentage * status.Attack) + status.currentStats.damageModifierFlat);
         }
 
         //Send info to skill manager

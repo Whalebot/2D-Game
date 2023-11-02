@@ -17,7 +17,7 @@ public class Projectile : Hitbox
     [TabGroup("Settings")] public int life;
     [TabGroup("Settings")] public int lifetime;
 
-    [Header("Movement")] 
+    [Header("Movement")]
     [TabGroup("Settings")] public ProjectileMovement projectileMovement;
     [TabGroup("Settings")] public float velocity;
     [TabGroup("Settings")] public Vector3 rotationVector;
@@ -249,7 +249,8 @@ public class Projectile : Hitbox
                 Vector3 dir = (transform.position - item.transform.position).normalized * attractPower;
                 if (tempStatus.GetComponent<Movement>().ground)
                     dir.y = 0;
-                tempStatus.GetComponent<Rigidbody>().velocity += dir;
+                Rigidbody rb = tempStatus.GetComponent<Rigidbody>();
+                rb.velocity += dir / rb.mass;
             }
         }
     }

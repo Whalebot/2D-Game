@@ -440,6 +440,7 @@ MonoBehaviour:
   lvl1:
     attackLevel: 3
     attackType: 0
+    damageType: 0
     hitbox: {fileID: 0}
     damage: 1
     stun: 30
@@ -454,13 +455,10 @@ MonoBehaviour:
     airHitProperty:
       pushback: {x: 0, y: 0}
       hitState: 0
-    blockProperty:
-      pushback: {x: 0, y: 0}
-      hitState: 0
-    hitID: 0
   lvl2:
     attackLevel: 3
     attackType: 0
+    damageType: 0
     hitbox: {fileID: 0}
     damage: 1
     stun: 45
@@ -475,13 +473,10 @@ MonoBehaviour:
     airHitProperty:
       pushback: {x: 0, y: 0}
       hitState: 0
-    blockProperty:
-      pushback: {x: 0, y: 0}
-      hitState: 0
-    hitID: 0
   lvl3:
     attackLevel: 3
     attackType: 0
+    damageType: 0
     hitbox: {fileID: 0}
     damage: 1
     stun: 60
@@ -496,10 +491,6 @@ MonoBehaviour:
     airHitProperty:
       pushback: {x: 0, y: 0}
       hitState: 0
-    blockProperty:
-      pushback: {x: 0, y: 0}
-      hitState: 0
-    hitID: 0
 --- !u!1 &399436146872368883
 GameObject:
   m_ObjectHideFlags: 0

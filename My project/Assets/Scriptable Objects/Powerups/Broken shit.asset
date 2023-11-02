@@ -20,7 +20,7 @@ MonoBehaviour:
   prerequisiteMoves: []
   newMoves: []
   skillProperties: []
-  description: Boosts some random stats
+  description: Reduce movement speed with 10% and increase damage with 50%
   stats:
     currentHealth: 0
     maxHealth: 0
@@ -32,12 +32,12 @@ MonoBehaviour:
     agility: 0
     luck: 0
     gold: 0
-    attack: 1
+    attack: 0
     magic: 0
-    attackSpeed: 0.1
+    attackSpeed: 0
     airActions: 0
     rerolls: 0
-    movementSpeedModifier: 0.1
+    movementSpeedModifier: -0.2
     meterGainModifier: 0
     poiseRegen: 0
     poise: 0
@@ -50,5 +50,5 @@ MonoBehaviour:
     damageModifierFlat: 0
     hitStunMultiplier: 0
     knockbackModifier: 0
-    critChance: 0.1
-    critMultiplier: 0.2
+    critChance: 0
+    critMultiplier: 0

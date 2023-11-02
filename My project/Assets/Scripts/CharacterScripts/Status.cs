@@ -58,6 +58,7 @@ public class Status : MonoBehaviour
 
     [FoldoutGroup("Assign components")] public Collider hurtbox;
     [FoldoutGroup("Assign components")] public Collider col;
+    [FoldoutGroup("Assign components")] public Collider _airCol;
     MeshRenderer mr;
 
     public event Action healthEvent;
@@ -147,6 +148,14 @@ public class Status : MonoBehaviour
         set
         {
             currentStats.attack = value;
+        }
+    }
+    public int Magic
+    {
+        get { return currentStats.magic; }
+        set
+        {
+            currentStats.magic = value;
         }
     }
 
@@ -240,13 +249,44 @@ public class Status : MonoBehaviour
     public void EnableCollider()
     {
         if (!isDead)
+        {
             col.gameObject.layer = LayerMask.NameToLayer("Collision");
+            airCol.gameObject.layer = LayerMask.NameToLayer("Collision");
+        }
     }
     public void DisableCollider()
     {
         if (!isDead)
+        {
             col.gameObject.layer = LayerMask.NameToLayer("Noclip");
-        //Debug.Log(LayerMask.LayerToName(col.gameObject.layer));
+            airCol.gameObject.layer = LayerMask.NameToLayer("Noclip");
+        }
+    }
+    public Collider airCol
+    {
+        get
+        {
+            if (_airCol == null)
+                return col;
+            return _airCol;
+        }
+        set { _airCol = value; }
+    }
+    public void GroundCollider()
+    {
+        if (_airCol != null)
+        {
+            col.gameObject.SetActive(true);
+            airCol.gameObject.SetActive(false);
+        }
+    }
+    public void AirCollider()
+    {
+        if (_airCol != null)
+        {
+            col.gameObject.SetActive(false);
+            airCol.gameObject.SetActive(true);
+        }
     }
 
     void StateMachine()
@@ -381,7 +421,7 @@ public class Status : MonoBehaviour
         GameManager.Instance.DamageNumbers(transform, damage, crit);
         Health -= damage;
 
-        if (hasArmor)
+        if (hasArmor || animationArmor)
         {
             return;
         }

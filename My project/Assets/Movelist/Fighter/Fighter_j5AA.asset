@@ -17,20 +17,21 @@ MonoBehaviour:
   meterGain: 10
   consumeMeterOnActiveFrame: 0
   icon: {fileID: 0}
-  firstStartupFrame: 16
-  lastActiveFrame: 18
-  totalMoveDuration: 33
-  firstGatlingFrame: 21
+  firstStartupFrame: 12
+  lastActiveFrame: 14
+  totalMoveDuration: 29
+  firstGatlingFrame: 17
   recoveryFrames: 15
   attacks:
   - attackLevel: 0
     attackType: 0
+    damageType: 0
     hitbox: {fileID: 5860963072138344223, guid: 7a8aadc17b1b6ab458170e823c7ced3b, type: 3}
     damage: 0.75
     stun: 20
     hitstop: 5
     poiseBreak: 0
-    startupFrame: 16
+    startupFrame: 12
     activeFrames: 3
     gatlingFrames: 5
     groundHitProperty:
@@ -39,15 +40,12 @@ MonoBehaviour:
     airHitProperty:
       pushback: {x: 0, y: 4}
       hitState: 0
-    blockProperty:
-      pushback: {x: 0, y: 0}
-      hitState: 0
-    hitID: 0
   type: 0
   uniqueProperties: []
   screenShake: []
   vfx:
-  - startup: 10
+  - type: 0
+    startup: 10
     prefab: {fileID: 1320683006971348, guid: 83ea291b15cd5ed46be1077c6b047713, type: 3}
     deattachFromPlayer: 0
     destroyOnRecovery: 1
@@ -56,6 +54,7 @@ MonoBehaviour:
     scale: {x: 0.4, y: 0.4, z: 0.4}
   sfx: []
   hitFX:
+    type: 0
     startup: 1
     prefab: {fileID: 1416824176164296, guid: dc1397204bb5ee84895af2b49dac2d49, type: 3}
     deattachFromPlayer: 1
@@ -99,9 +98,28 @@ MonoBehaviour:
   recoverOnlyOnLand: 0
   m:
   - startFrame: 1
-    duration: 14
+    duration: 11
     momentum: {x: 0, y: 0}
-    resetVelocityDuringRecovery: 1
+    resetVelocityDuringRecovery: 0
+    xMovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    movementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    freeMovement: 1
+    useCurve: 0
+    teleport: 0
+  - startFrame: 12
+    duration: 2
+    momentum: {x: 0, y: 2}
+    resetVelocityDuringRecovery: 0
     xMovementCurve:
       serializedVersion: 2
       m_Curve: []
@@ -139,6 +157,6 @@ MonoBehaviour:
   instantStartupRotation: 0
   overrideVelocity: 0
   runMomentum: 0
-  inheritForwardVelocity: 0
+  inheritForwardVelocity: 1
   stopAtEdges: 1
   homing: 0

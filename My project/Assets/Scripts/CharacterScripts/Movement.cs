@@ -31,10 +31,13 @@ public class Movement : MonoBehaviour
     [TabGroup("Ground Detection")] public float groundRayLength = 0.2f;
     [TabGroup("Ground Detection")] public float frontGroundRayLength = 0.3f;
     [TabGroup("Ground Detection")] public float preLandRayLength = 0.3f;
+    [TabGroup("Ground Detection")] public float groundCheckHeightOffset = 0.15F;
     [TabGroup("Ground Detection")] public float groundFrontOffset = 0.15F;
     [TabGroup("Ground Detection")] public float checkEdgeOffset = 0.15F;
     [TabGroup("Ground Detection")] public float groundBackOffset = 0.15F;
     [TabGroup("Ground Detection")] public LayerMask groundMask;
+    [TabGroup("Ground Detection")] public LayerMask enemyMask;
+    [TabGroup("Ground Detection")] public float enemyPush;
 
     [Header("Wall")]
     [TabGroup("Ground Detection")] public LayerMask wallMask;
@@ -122,9 +125,15 @@ public class Movement : MonoBehaviour
 
         GroundDetection();
         if (ground)
+        {
+            status.GroundCollider();
             status.groundState = GroundState.Grounded;
+        }
         else
+        {
+            status.AirCollider();
             status.groundState = GroundState.Airborne;
+        }
 
         if (status.currentState == Status.State.Neutral)
         {
@@ -315,9 +324,34 @@ public class Movement : MonoBehaviour
 
     public bool GroundDetection()
     {
-        check = Physics.Raycast(transform.position + Vector3.up * 0.1F - transform.forward * groundBackOffset, Vector3.down, out hit, groundRayLength, groundMask);
-        check2 = Physics.Raycast(transform.position + Vector3.up * 0.1F + transform.forward * groundFrontOffset, Vector3.down, out hit2, frontGroundRayLength, groundMask);
+        check = Physics.Raycast(transform.position + Vector3.up * groundCheckHeightOffset - transform.forward * groundBackOffset, Vector3.down, out hit, groundRayLength, groundMask);
+        check2 = Physics.Raycast(transform.position + Vector3.up * groundCheckHeightOffset + transform.forward * groundFrontOffset, Vector3.down, out hit2, frontGroundRayLength, groundMask);
 
+        RaycastHit enemyHit;
+        if (Physics.Raycast(transform.position + Vector3.up * groundCheckHeightOffset + transform.forward * groundFrontOffset, Vector3.down, out enemyHit, frontGroundRayLength * 2, enemyMask) || Physics.Raycast(transform.position + Vector3.up * groundCheckHeightOffset - transform.forward * groundBackOffset, Vector3.down, out enemyHit, frontGroundRayLength * 2, enemyMask))
+        {
+            if (_rb.velocity.y <= 0)
+            {
+                Vector3 tempDir = enemyHit.collider.attachedRigidbody.transform.position - transform.position;
+                tempDir.y = 0;
+                tempDir.z = 0;
+
+                //If target is to the right of player
+                if (tempDir.x > 0)
+                {
+                    transform.position += (-tempDir.normalized * enemyPush);
+                    enemyHit.collider.attachedRigidbody.transform.position += (tempDir.normalized * enemyPush);
+                }
+                //If target is to the left of player
+                else if (tempDir.x < 0)
+                {
+                    transform.position += (-tempDir.normalized * enemyPush);
+                    enemyHit.collider.attachedRigidbody.transform.position += (tempDir.normalized * enemyPush);
+                }
+                // enemyHit.collider.attachedRigidbody.transform.Translate(transform.right * enemyPush);
+            }
+
+        }
         if (jumpCounter > 0)
         {
             jumpCounter--;
@@ -344,7 +378,6 @@ public class Movement : MonoBehaviour
             {
                 passthroughPlatforms = false;
                 status.EnableCollider();
-
             }
             else
             {
@@ -396,6 +429,7 @@ public class Movement : MonoBehaviour
     public void CollisionPassthrough()
     {
         status.col.gameObject.layer = LayerMask.NameToLayer("CollisionPassthrough");
+        status.airCol.gameObject.layer = LayerMask.NameToLayer("CollisionPassthrough");
         passthroughPlatforms = true;
     }
     public void FallThroughPlatforms()
@@ -404,6 +438,7 @@ public class Movement : MonoBehaviour
         passthroughPlatforms = true;
         passthroughCounter = passthroughDuration;
         status.col.gameObject.layer = LayerMask.NameToLayer("CollisionPassthrough");
+        status.airCol.gameObject.layer = LayerMask.NameToLayer("CollisionPassthrough");
     }
 
     void Landing()
