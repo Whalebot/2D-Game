@@ -162,21 +162,21 @@ public class CharacterCreator : MonoBehaviour
             ApplyVisuals();
     }
 
-    //    private void OnDrawGizmos()
-    //    {
-    //#if UNITY_EDITOR
-    //        if (liveUpdate)
-    //            ApplyVisuals();
+    private void OnDrawGizmos()
+    {
+#if UNITY_EDITOR
+        if (liveUpdate)
+            ApplyVisuals();
 
 
-    //        // Ensure continuous Update calls.
-    //        if (!Application.isPlaying)
-    //        {
-    //            UnityEditor.EditorApplication.QueuePlayerLoopUpdate();
-    //            UnityEditor.SceneView.RepaintAll();
-    //        }
-    //#endif
-    //    }
+        // Ensure continuous Update calls.
+        if (!Application.isPlaying)
+        {
+            UnityEditor.EditorApplication.QueuePlayerLoopUpdate();
+            UnityEditor.SceneView.RepaintAll();
+        }
+#endif
+    }
 
 
     //public Color GetMaterialColor(string materialName, int colorPreset)
@@ -209,7 +209,7 @@ public class CharacterCreator : MonoBehaviour
     [Button]
     void ApplyVisuals()
     {
-        //ApplyMaterial();
+        if (!Application.isPlaying && Application.isEditor) ApplyMaterial();
         visualsUpdateEvent?.Invoke();
         if (visuals != null)
         {
@@ -237,6 +237,19 @@ public class CharacterCreator : MonoBehaviour
 
         SaveVisuals();
         ApplyVisuals();
+    }
+    [Button]
+    public void FullRandomize()
+    {
+        visualData.colorPreset = UnityEngine.Random.Range(0, allPresets.Count);
+        visualData.hairID = UnityEngine.Random.Range(0, visuals.hairVariations.Count);
+        visualData.topID = UnityEngine.Random.Range(0, visuals.topOutifts.Count);
+        visualData.bottomID = UnityEngine.Random.Range(0, visuals.bottomOutfits.Count);
+        visualData.bottomID = UnityEngine.Random.Range(0, visuals.shoes.Count);
+
+        visuals.UpdateVisuals();
+        visuals.RandomizeMaterials();
+       
     }
 
     [Button]
@@ -270,7 +283,6 @@ public class CharacterCreator : MonoBehaviour
     {
         foreach (var item in preset.colorPresets)
         {
-            Debug.Log(item.material.GetColor("_MainColor"));
             item.color = item.material.GetColor("_MainColor");
         }
     }

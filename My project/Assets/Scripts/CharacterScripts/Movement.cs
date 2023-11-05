@@ -94,7 +94,7 @@ public class Movement : MonoBehaviour
     }
     void InitializeMovement()
     {
-        multiJumps = status.currentStats.airActions;
+        multiJumps = status.currentStats.jumps;
     }
     void Neutral()
     {

@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Treasure : Interactable
 {
 
     public Rank rank;
-
+    public TextMeshProUGUI treasureText;
     public GameObject treasure;
 
     public override void Start()
     {
         base.Start();
+        treasureText.text = rank + " Rank Treasure";
         AIManager.Instance.roomClearEvent += SpawnTreasure;
         if (LevelManager.Instance.currentRoomType != RoomTypes.Treasure && LevelManager.Instance.currentRoomType != RoomTypes.Event)
             treasure.SetActive(false);

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
   m_Name: Fighter_2C_Rage
   m_EditorClassIdentifier: 
-  animationID: 51
+  animationID: 553
   meterCost: 0
   meterGain: 20
   consumeMeterOnActiveFrame: 0
@@ -32,14 +32,16 @@ MonoBehaviour:
     amplitude: 2
     duration: 2
   vfx:
-  - startup: 1
+  - type: 0
+    startup: 1
     prefab: {fileID: 696211589295866031, guid: 0b2f1ef8d24b93947bb610a7f39f05e8, type: 3}
     deattachFromPlayer: 0
     destroyOnRecovery: 0
     position: {x: 0, y: 0.01, z: 0}
     rotation: {x: -90, y: 0, z: 0}
     scale: {x: 0.3, y: 0.3, z: 0.3}
-  - startup: 40
+  - type: 0
+    startup: 40
     prefab: {fileID: 696211589295866031, guid: 0b2f1ef8d24b93947bb610a7f39f05e8, type: 3}
     deattachFromPlayer: 0
     destroyOnRecovery: 1
@@ -48,6 +50,7 @@ MonoBehaviour:
     scale: {x: 0.5, y: 0.5, z: 0.5}
   sfx: []
   hitFX:
+    type: 0
     startup: 1
     prefab: {fileID: 1416824176164296, guid: dc1397204bb5ee84895af2b49dac2d49, type: 3}
     deattachFromPlayer: 1

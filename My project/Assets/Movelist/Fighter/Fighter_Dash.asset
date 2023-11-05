@@ -27,7 +27,8 @@ MonoBehaviour:
   uniqueProperties: []
   screenShake: []
   vfx:
-  - startup: 3
+  - type: 0
+    startup: 3
     prefab: {fileID: 107242, guid: 4f01e09274ab093448d46ac4916288cf, type: 3}
     deattachFromPlayer: 1
     destroyOnRecovery: 0
@@ -36,6 +37,7 @@ MonoBehaviour:
     scale: {x: 0.5, y: 0.5, z: 0.5}
   sfx: []
   hitFX:
+    type: 0
     startup: 1
     prefab: {fileID: 0}
     deattachFromPlayer: 1

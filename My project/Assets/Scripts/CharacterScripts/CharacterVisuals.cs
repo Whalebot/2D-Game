@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 
 public class CharacterVisuals : MonoBehaviour
 {
-
+    public bool loadVisuals = false;
     public CharacterVisualData visualData;
     public List<GameObject> weapons;
     public List<GameObject> hairVariations;
@@ -37,7 +37,7 @@ public class CharacterVisuals : MonoBehaviour
                 {
                     materials.Add(item.materials[i]);
                     item.materials[i].name.Replace(" (Instance)", "");
-                   // Debug.Log(item.materials[i].name);
+                    // Debug.Log(item.materials[i].name);
 
                 }
             }
@@ -55,11 +55,27 @@ public class CharacterVisuals : MonoBehaviour
             }
         }
     }
+    [Button]
+    public void RandomizeMaterials()
+    {
+
+        foreach (var mat in materials)
+        {
+            int RNG = Random.Range(0, CharacterCreator.Instance.allPresets.Count);
+            ColorPresetSO preset = CharacterCreator.Instance.allPresets[RNG];
+            foreach (var item in preset.colorPresets)
+            {
+                if (mat.name.Contains(item.material.name))
+                    mat.SetColor("_MainColor", item.color * item.color);
+            }
+        }
+
+    }
 
     [Button]
     public void UpdateVisuals()
     {
-        if (Application.isPlaying && SaveManager.Instance != null)
+        if (Application.isPlaying && SaveManager.Instance != null && loadVisuals)
             visualData = SaveManager.Instance.VisualData;
         RemoveAllClothing();
         SetupOutfit();
@@ -92,7 +108,6 @@ public class CharacterVisuals : MonoBehaviour
     [Button]
     public void SetupOutfit()
     {
-        anim.runtimeAnimatorController = CharacterCreator.Instance.characters[visualData.characterJob].controller;
 
         if (weapons.Count > visualData.characterJob)
             weapons[visualData.characterJob].SetActive(true);
@@ -119,8 +134,11 @@ public class CharacterVisuals : MonoBehaviour
         else
             shoes[shoes.Count - 1].SetActive(true);
 
-        ApplyMaterial();
+        if (Application.isPlaying)
+        {
+            anim.runtimeAnimatorController = CharacterCreator.Instance.characters[visualData.characterJob].controller;
+            ApplyMaterial();
+        }
+
     }
-
-
 }

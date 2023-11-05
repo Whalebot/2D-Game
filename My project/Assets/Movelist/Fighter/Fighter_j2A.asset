@@ -25,7 +25,8 @@ MonoBehaviour:
   attacks:
   - attackLevel: 2
     attackType: 0
-    hitbox: {fileID: 5860963072138344223, guid: 7a8aadc17b1b6ab458170e823c7ced3b, type: 3}
+    damageType: 0
+    hitbox: {fileID: 5860963072138344223, guid: d06842a275e4e674fab9e8a08d958294, type: 3}
     damage: 1.5
     stun: 20
     hitstop: 5
@@ -39,10 +40,6 @@ MonoBehaviour:
     airHitProperty:
       pushback: {x: 5, y: -10}
       hitState: 0
-    blockProperty:
-      pushback: {x: 0, y: 0}
-      hitState: 0
-    hitID: 0
   type: 0
   uniqueProperties: []
   screenShake:
@@ -51,7 +48,8 @@ MonoBehaviour:
     amplitude: 5
     duration: 2
   vfx:
-  - startup: 20
+  - type: 0
+    startup: 20
     prefab: {fileID: 1439497813189136, guid: fce9ea9114d643c468165a2b10c919f9, type: 3}
     deattachFromPlayer: 1
     destroyOnRecovery: 0
@@ -60,6 +58,7 @@ MonoBehaviour:
     scale: {x: 0.7, y: 1, z: 0.7}
   sfx: []
   hitFX:
+    type: 0
     startup: 1
     prefab: {fileID: 1416824176164296, guid: dc1397204bb5ee84895af2b49dac2d49, type: 3}
     deattachFromPlayer: 1

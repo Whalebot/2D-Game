@@ -25,6 +25,7 @@ MonoBehaviour:
   attacks:
   - attackLevel: 0
     attackType: 0
+    damageType: 0
     hitbox: {fileID: 5860963072138344223, guid: d291246c7a8042b4f973efd10f686d66, type: 3}
     damage: 1
     stun: 20
@@ -39,12 +40,9 @@ MonoBehaviour:
     airHitProperty:
       pushback: {x: 5, y: 5}
       hitState: 0
-    blockProperty:
-      pushback: {x: 0, y: 0}
-      hitState: 0
-    hitID: 0
   - attackLevel: 0
     attackType: 0
+    damageType: 0
     hitbox: {fileID: 5860963072138344223, guid: d291246c7a8042b4f973efd10f686d66, type: 3}
     damage: 1
     stun: 20
@@ -59,12 +57,9 @@ MonoBehaviour:
     airHitProperty:
       pushback: {x: 5, y: 0}
       hitState: 0
-    blockProperty:
-      pushback: {x: 0, y: 0}
-      hitState: 0
-    hitID: 0
   - attackLevel: 0
     attackType: 0
+    damageType: 0
     hitbox: {fileID: 5860963072138344223, guid: d291246c7a8042b4f973efd10f686d66, type: 3}
     damage: 1
     stun: 20
@@ -79,12 +74,9 @@ MonoBehaviour:
     airHitProperty:
       pushback: {x: 5, y: -5}
       hitState: 0
-    blockProperty:
-      pushback: {x: 0, y: 0}
-      hitState: 0
-    hitID: 0
   - attackLevel: 2
     attackType: 0
+    damageType: 0
     hitbox: {fileID: 5860963072138344223, guid: d291246c7a8042b4f973efd10f686d66, type: 3}
     damage: 1
     stun: 20
@@ -99,10 +91,6 @@ MonoBehaviour:
     airHitProperty:
       pushback: {x: 5, y: -5}
       hitState: 0
-    blockProperty:
-      pushback: {x: 0, y: 0}
-      hitState: 0
-    hitID: 0
   type: 0
   uniqueProperties: []
   screenShake:
@@ -111,43 +99,49 @@ MonoBehaviour:
     amplitude: 3
     duration: 2
   vfx:
-  - startup: 15
+  - type: 0
+    startup: 15
     prefab: {fileID: 1320683006971348, guid: 83ea291b15cd5ed46be1077c6b047713, type: 3}
     deattachFromPlayer: 0
     destroyOnRecovery: 0
     position: {x: 0, y: 0.5, z: 0}
     rotation: {x: 0, y: 180, z: 90}
     scale: {x: 0.5, y: 0.5, z: 0.6}
-  - startup: 24
+  - type: 0
+    startup: 24
     prefab: {fileID: 1320683006971348, guid: 83ea291b15cd5ed46be1077c6b047713, type: 3}
     deattachFromPlayer: 0
     destroyOnRecovery: 0
     position: {x: 0, y: 0.5, z: 0}
     rotation: {x: 0, y: 180, z: 90}
     scale: {x: 0.5, y: 0.5, z: 0.6}
-  - startup: 33
+  - type: 0
+    startup: 33
     prefab: {fileID: 1320683006971348, guid: 83ea291b15cd5ed46be1077c6b047713, type: 3}
     deattachFromPlayer: 0
     destroyOnRecovery: 0
     position: {x: 0, y: 0.5, z: 0}
     rotation: {x: 0, y: 180, z: 90}
     scale: {x: 0.5, y: 0.5, z: 0.6}
-  - startup: 44
+  - type: 0
+    startup: 44
     prefab: {fileID: 1320683006971348, guid: 83ea291b15cd5ed46be1077c6b047713, type: 3}
     deattachFromPlayer: 0
     destroyOnRecovery: 0
     position: {x: 0, y: 0.7, z: 0}
     rotation: {x: 0, y: 180, z: 90}
     scale: {x: 0.75, y: 0.75, z: 0.91}
-  - startup: 44
+  - type: 2
+    startup: 44
     prefab: {fileID: 160150, guid: 135baa54467718346b4ec3b679824e50, type: 3}
     deattachFromPlayer: 0
     destroyOnRecovery: 0
-    position: {x: 0, y: 0.55, z: 1}
+    position: {x: 0, y: 0.8, z: 1}
     rotation: {x: 0, y: 0, z: 0}
     scale: {x: 1, y: 1, z: 1}
   sfx: []
   hitFX:
+    type: 0
     startup: 1
     prefab: {fileID: 1416824176164296, guid: dc1397204bb5ee84895af2b49dac2d49, type: 3}
     deattachFromPlayer: 1

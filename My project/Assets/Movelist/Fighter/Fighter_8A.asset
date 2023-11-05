@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
   m_Name: Fighter_8A
   m_EditorClassIdentifier: 
-  animationID: 3
+  animationID: 81
   meterCost: 0
   meterGain: 10
   consumeMeterOnActiveFrame: 0
@@ -25,8 +25,9 @@ MonoBehaviour:
   attacks:
   - attackLevel: 1
     attackType: 0
-    hitbox: {fileID: 5860963072138344223, guid: 79389daff8b2e6948a60914e518b8502, type: 3}
-    damage: 2
+    damageType: 0
+    hitbox: {fileID: 5860963072138344223, guid: c5250ea5498c5814a872e7f48b7b47df, type: 3}
+    damage: 1
     stun: 20
     hitstop: 5
     poiseBreak: 0
@@ -34,15 +35,11 @@ MonoBehaviour:
     activeFrames: 5
     gatlingFrames: 10
     groundHitProperty:
-      pushback: {x: 2, y: 8}
+      pushback: {x: 2, y: 8.5}
       hitState: 0
     airHitProperty:
-      pushback: {x: 0, y: 0}
+      pushback: {x: 1, y: 8.5}
       hitState: 0
-    blockProperty:
-      pushback: {x: 0, y: 0}
-      hitState: 0
-    hitID: 0
   type: 0
   uniqueProperties: []
   screenShake:
@@ -51,7 +48,8 @@ MonoBehaviour:
     amplitude: 2
     duration: 1
   vfx:
-  - startup: 15
+  - type: 0
+    startup: 15
     prefab: {fileID: 1320683006971348, guid: 83ea291b15cd5ed46be1077c6b047713, type: 3}
     deattachFromPlayer: 0
     destroyOnRecovery: 0
@@ -60,6 +58,7 @@ MonoBehaviour:
     scale: {x: 0.5, y: 1, z: 0.5}
   sfx: []
   hitFX:
+    type: 0
     startup: 1
     prefab: {fileID: 1416824176164296, guid: dc1397204bb5ee84895af2b49dac2d49, type: 3}
     deattachFromPlayer: 1
@@ -103,11 +102,26 @@ MonoBehaviour:
   m:
   - startFrame: 20
     duration: 10
-    momentum: {x: 0.5, y: 6}
+    momentum: {x: 0.5, y: 7}
     resetVelocityDuringRecovery: 0
+    xMovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    movementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    freeMovement: 0
+    useCurve: 0
     teleport: 0
   instantStartupRotation: 1
   overrideVelocity: 1
   runMomentum: 0
+  inheritForwardVelocity: 0
   stopAtEdges: 1
   homing: 0

@@ -21,20 +21,21 @@ public class SaveManager : MonoBehaviour
         if (autoLoad)
             LoadData();
 
-        SetupRNG();
+        LoadRNG();
     }
 
-    public void SetupRNG()
+    void LoadRNG()
     {
-        if (HasSaveData())
+        if (HasCurrentCharacter())
         {
             seed = saveData.currrentCharacter.rngSeed;
+            UnityEngine.Random.InitState(seed);
         }
-        else
-        {
-            seed = (int)DateTime.Now.Ticks;
-        }
-
+        else SetupRNG();
+    }
+    public void SetupRNG()
+    {
+        seed = (int)DateTime.Now.Ticks;
         UnityEngine.Random.InitState(seed);
     }
 
@@ -88,7 +89,10 @@ public class SaveManager : MonoBehaviour
             saveData.currrentCharacter.currentRoomID = value;
         }
     }
-
+    public bool HasCurrentCharacter()
+    {
+        return saveData.currrentCharacter.rngSeed != 0;
+    }
     public bool HasSaveData()
     {
         return (PlayerPrefs.HasKey("Save"));
@@ -99,7 +103,30 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.DeleteKey("Save");
         SetupRNG();
     }
+    public void SetupCharacter()
+    {
 
+        saveData.currrentCharacter = new CharacterData();
+        saveData.currrentCharacter.visitedRooms = new List<int>();
+        saveData.currrentCharacter.learnedSkills = new List<SkillSO>();
+        saveData.currrentCharacter.visualData = new CharacterVisualData();
+        saveData.currrentCharacter.stats = new Stats();
+
+        SetupRNG();
+    }
+    [Button]
+    public void KillCharacter()
+    {
+        saveData.oldCharacters.Add(saveData.currrentCharacter);
+        saveData.currrentCharacter = new CharacterData();
+
+        saveData.currrentCharacter.rngSeed = 0;
+        string jsonData = JsonUtility.ToJson(saveData, true);
+        File.WriteAllText(Application.persistentDataPath + "/saveData.json", jsonData);
+        PlayerPrefs.SetString("Save", jsonData);
+
+        PlayerPrefs.Save();
+    }
     public void LoadData()
     {
 
@@ -115,10 +142,6 @@ public class SaveManager : MonoBehaviour
             saveData = JsonUtility.FromJson<SaveData>(saveJson);
             awakeLoadEvent?.Invoke();
         }
-        //if (File.Exists(Application.persistentDataPath + "/saveData.json"))
-        //{
-        //    saveData = JsonUtility.FromJson<SaveData>(File.ReadAllText(Application.persistentDataPath + "/saveData.json"));
-
     }
 
     public void SaveData()
@@ -143,6 +166,7 @@ public class SaveData
 [System.Serializable]
 public class CharacterData
 {
+    public string characterName;
     public int rngSeed;
     public Stats stats;
     public int currentRoomID = 0;

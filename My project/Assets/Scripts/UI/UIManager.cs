@@ -87,7 +87,8 @@ public class UIManager : MonoBehaviour
         foreach (var item in SaveManager.Instance.LearnedSkills)
         {
             GameObject temp = Instantiate(skillUIPrefab, skillPanelOrganizer.transform, false);
-            temp.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = item.sprite;
+            Image img = temp.transform.GetChild(0).gameObject.GetComponent<Image>();
+            if (img != null) img.sprite = item.sprite;
         }
         skillPanelOrganizer.SetupPosition();
     }

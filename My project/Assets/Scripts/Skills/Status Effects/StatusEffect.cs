@@ -18,6 +18,7 @@ public class StatusEffect : ScriptableObject
     public virtual void ActivateBehaviour(Status s)
     {
         status = s;
+        stacks = 1;
         durationCounter = duration;
         tickCounter = 0;
         SpawnVFX();
@@ -54,10 +55,13 @@ public class StatusEffect : ScriptableObject
     public virtual void RefreshBehaviour()
     {
         tickCounter = 0;
+        if (stacks < maxStacks)
+            stacks++;
         durationCounter = duration;
     }
     public virtual void EndBehaviour()
     {
+        stacks = 0;
         status.RemoveStatusEffect(this);
         if (currentVFX != null)
             Destroy(currentVFX);

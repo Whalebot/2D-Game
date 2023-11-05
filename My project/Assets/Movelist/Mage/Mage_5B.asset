@@ -52,6 +52,14 @@ MonoBehaviour:
     position: {x: 0, y: 0.6, z: 0.5}
     rotation: {x: 0, y: 0, z: 90}
     scale: {x: 0.2, y: 0.2, z: 0.2}
+  - type: 0
+    startup: 20
+    prefab: {fileID: 696211589295866031, guid: 0b2f1ef8d24b93947bb610a7f39f05e8, type: 3}
+    deattachFromPlayer: 1
+    destroyOnRecovery: 1
+    position: {x: 0, y: 0.6, z: 0.5}
+    rotation: {x: 0, y: 0, z: 90}
+    scale: {x: 0.15, y: 0.15, z: 0.15}
   sfx: []
   hitFX:
     type: 0
@@ -95,7 +103,26 @@ MonoBehaviour:
   useAirAction: 0
   landCancel: 0
   recoverOnlyOnLand: 0
-  m: []
+  m:
+  - startFrame: 19
+    duration: 5
+    momentum: {x: -1, y: 0}
+    resetVelocityDuringRecovery: 0
+    xMovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    movementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    freeMovement: 0
+    useCurve: 0
+    teleport: 0
   instantStartupRotation: 1
   overrideVelocity: 0
   runMomentum: 0

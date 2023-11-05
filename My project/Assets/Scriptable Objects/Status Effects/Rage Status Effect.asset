@@ -17,6 +17,7 @@ MonoBehaviour:
   maxStacks: 1
   tickInterval: 0
   statusVFX:
+    type: 0
     startup: 1
     prefab: {fileID: 119402, guid: b0a7c039263a459439f74cfba0685d31, type: 3}
     deattachFromPlayer: 0
@@ -39,9 +40,10 @@ MonoBehaviour:
     attack: 0
     magic: 0
     attackSpeed: 0
+    jumps: 1
     airActions: 0
     rerolls: 0
-    movementSpeedModifier: 0.5
+    movementSpeedModifier: 0.2
     meterGainModifier: 0
     poiseRegen: 0
     poise: 0

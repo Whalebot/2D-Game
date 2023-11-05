@@ -14,6 +14,7 @@ public class Fountain : Interactable
 
     public void GiveStats()
     {
-        GameManager.Instance.playerStatus.AddStats(GameManager.Instance.playerStatus.currentStats, stats);
+        GameManager.Instance.playerStatus.Health += stats.currentHealth;
+        GameManager.Instance.playerStatus.Meter += stats.currentMeter;
     }
 }

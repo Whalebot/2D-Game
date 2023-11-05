@@ -17,21 +17,22 @@ MonoBehaviour:
   meterGain: 10
   consumeMeterOnActiveFrame: 0
   icon: {fileID: 0}
-  firstStartupFrame: 13
-  lastActiveFrame: 14
-  totalMoveDuration: 34
-  firstGatlingFrame: 28
+  firstStartupFrame: 10
+  lastActiveFrame: 19
+  totalMoveDuration: 39
+  firstGatlingFrame: 25
   recoveryFrames: 20
   attacks:
   - attackLevel: 0
     attackType: 0
+    damageType: 0
     hitbox: {fileID: 5860963072138344223, guid: 90e29b448ab86814eb94f028ac521cff, type: 3}
     damage: 1.5
     stun: 20
     hitstop: 5
     poiseBreak: 0
-    startupFrame: 13
-    activeFrames: 2
+    startupFrame: 10
+    activeFrames: 10
     gatlingFrames: 15
     groundHitProperty:
       pushback: {x: 3, y: 2}
@@ -39,15 +40,12 @@ MonoBehaviour:
     airHitProperty:
       pushback: {x: 3, y: 2}
       hitState: 0
-    blockProperty:
-      pushback: {x: 0, y: 0}
-      hitState: 0
-    hitID: 0
   type: 0
   uniqueProperties: []
   screenShake: []
   vfx:
-  - startup: 13
+  - type: 0
+    startup: 13
     prefab: {fileID: 1800976239324842, guid: c3a419073912434429f93f4f6d5369ff, type: 3}
     deattachFromPlayer: 1
     destroyOnRecovery: 0
@@ -56,6 +54,7 @@ MonoBehaviour:
     scale: {x: 1, y: 1, z: 1}
   sfx: []
   hitFX:
+    type: 0
     startup: 1
     prefab: {fileID: 1416824176164296, guid: dc1397204bb5ee84895af2b49dac2d49, type: 3}
     deattachFromPlayer: 1

@@ -20,6 +20,7 @@ public class Stats
     [TabGroup("Stats")] public int attack;
     [TabGroup("Stats")] public int magic;
     [TabGroup("Stats")] public float attackSpeed = 1;
+    [TabGroup("Stats")] public int jumps = 1;
     [TabGroup("Stats")] public int airActions = 1;
 
     [TabGroup("Stats")] public int rerolls = 0;

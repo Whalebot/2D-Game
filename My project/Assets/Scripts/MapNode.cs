@@ -12,7 +12,7 @@ public class MapNode : MonoBehaviour
     public TextMeshProUGUI roomName;
     public List<MapNode> entryRooms;
     public List<MapNode> exitRooms;
-    public Sprite normalSprite, eliteSprite, bossSprite, treasureSprite, shopSprite, eventSprite;
+    public Sprite normalSprite, eliteSprite, bossSprite, treasureSprite, shopSprite, eventSprite, restSprite;
     public void SetupNode(RoomTypes room)
     {
         roomName.text = "" + room;
@@ -36,6 +36,9 @@ public class MapNode : MonoBehaviour
                 break;
             case RoomTypes.Event:
                 img.sprite = eventSprite;
+                break;
+            case RoomTypes.Rest:
+                img.sprite = restSprite;
                 break;
             case RoomTypes.Disabled:
                 break;

@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8527237191093226344}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8527237191093226347
 MonoBehaviour:
@@ -47,11 +47,12 @@ MonoBehaviour:
   liveUpdate: 0
   visualData:
     characterJob: 0
-    colorPreset: 3
+    colorPreset: 2
     hairID: 0
-    topID: 1
+    topID: 2
     bottomID: 0
-  preset: {fileID: 11400000, guid: fd06051f779ff924fbca41c909e4bbfa, type: 2}
+    shoesID: 0
+  preset: {fileID: 11400000, guid: 42ebfd779b007bb4ca01483f90dc343a, type: 2}
   target: {fileID: 0}
   characters:
   - {fileID: 11400000, guid: 12809cbeb7fa7514595cf45844648d6a, type: 2}
@@ -67,3 +68,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7113807a0528c4a4a8aad8cdef7d1322, type: 2}
   - {fileID: 11400000, guid: 9389dec9804219541b02b613965fd2e8, type: 2}
   - {fileID: 11400000, guid: f39a820e734df1540b669c8548b7e3f5, type: 2}
+  - {fileID: 11400000, guid: 750107b1aa0574247a7e4b04f5f18ad5, type: 2}
+  - {fileID: 11400000, guid: c106c3e1fe33a90439e37f61ce979f62, type: 2}

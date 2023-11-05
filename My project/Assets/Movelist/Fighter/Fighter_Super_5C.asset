@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationID: 5
   meterCost: 50
-  meterGain: 10
+  meterGain: 0
   consumeMeterOnActiveFrame: 0
   icon: {fileID: 0}
   firstStartupFrame: 20
@@ -25,6 +25,7 @@ MonoBehaviour:
   attacks:
   - attackLevel: 2
     attackType: 1
+    damageType: 0
     hitbox: {fileID: 5860963072138344223, guid: 4ab446a05e85ab64eab5ab69d245f31a, type: 3}
     damage: 5
     stun: 20
@@ -39,10 +40,6 @@ MonoBehaviour:
     airHitProperty:
       pushback: {x: 0, y: 0}
       hitState: 0
-    blockProperty:
-      pushback: {x: 0, y: 0}
-      hitState: 0
-    hitID: 0
   type: 0
   uniqueProperties:
   - {fileID: 11400000, guid: a58dd1a964224964a94a170f73b5bca2, type: 2}
@@ -52,7 +49,8 @@ MonoBehaviour:
     amplitude: 2
     duration: 1
   vfx:
-  - startup: 15
+  - type: 0
+    startup: 15
     prefab: {fileID: 3595050330844811134, guid: 2c70ba2d625df0541965d239fd82e7e6, type: 3}
     deattachFromPlayer: 0
     destroyOnRecovery: 0
@@ -61,6 +59,7 @@ MonoBehaviour:
     scale: {x: 0.3, y: 0.3, z: 0.3}
   sfx: []
   hitFX:
+    type: 0
     startup: 1
     prefab: {fileID: 1416824176164296, guid: dc1397204bb5ee84895af2b49dac2d49, type: 3}
     deattachFromPlayer: 1

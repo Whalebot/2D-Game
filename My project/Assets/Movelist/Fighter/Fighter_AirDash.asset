@@ -27,7 +27,8 @@ MonoBehaviour:
   uniqueProperties: []
   screenShake: []
   vfx:
-  - startup: 3
+  - type: 0
+    startup: 3
     prefab: {fileID: 107242, guid: 4f01e09274ab093448d46ac4916288cf, type: 3}
     deattachFromPlayer: 1
     destroyOnRecovery: 0
@@ -36,6 +37,7 @@ MonoBehaviour:
     scale: {x: 0.5, y: 0.5, z: 0.5}
   sfx: []
   hitFX:
+    type: 0
     startup: 1
     prefab: {fileID: 0}
     deattachFromPlayer: 1
@@ -79,7 +81,7 @@ MonoBehaviour:
   recoverOnlyOnLand: 0
   m:
   - startFrame: 3
-    duration: 2
+    duration: 3
     momentum: {x: 12, y: 0.2}
     resetVelocityDuringRecovery: 0
     xMovementCurve:
@@ -99,8 +101,8 @@ MonoBehaviour:
     teleport: 0
   - startFrame: 19
     duration: 1
-    momentum: {x: 5, y: 0}
-    resetVelocityDuringRecovery: 1
+    momentum: {x: 5, y: 0.2}
+    resetVelocityDuringRecovery: 0
     xMovementCurve:
       serializedVersion: 2
       m_Curve: []
@@ -117,7 +119,7 @@ MonoBehaviour:
     useCurve: 0
     teleport: 0
   instantStartupRotation: 1
-  overrideVelocity: 1
+  overrideVelocity: 0
   runMomentum: 0
   inheritForwardVelocity: 0
   stopAtEdges: 0

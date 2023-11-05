@@ -146,7 +146,10 @@ public class Hitbox : MonoBehaviour
         //Check for airborne or knockdown state
         else if (other.groundState == GroundState.Airborne || other.groundState == GroundState.Knockdown)
         {
-            ExecuteHit(tempAttack.airHitProperty, other, tempAttack);
+            if (tempAttack.airHitProperty.pushback.x == 0 && tempAttack.airHitProperty.pushback.y == 0)
+                ExecuteHit(tempAttack.groundHitProperty, other, tempAttack);
+            else
+                ExecuteHit(tempAttack.airHitProperty, other, tempAttack);
         }
     }
 

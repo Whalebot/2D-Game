@@ -12,44 +12,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
   m_Name: Fighter_8B
   m_EditorClassIdentifier: 
-  animationID: 5111
+  animationID: 82
   meterCost: 0
   meterGain: 10
   consumeMeterOnActiveFrame: 0
   icon: {fileID: 0}
-  firstStartupFrame: 18
-  lastActiveFrame: 22
-  totalMoveDuration: 37
-  firstGatlingFrame: 23
-  recoveryFrames: 15
+  firstStartupFrame: 25
+  lastActiveFrame: 29
+  totalMoveDuration: 54
+  firstGatlingFrame: 30
+  recoveryFrames: 25
   attacks:
   - attackLevel: 0
     attackType: 0
     damageType: 0
     hitbox: {fileID: 5860963072138344223, guid: 3425941b3688a014ab23ef7fd461808d, type: 3}
-    damage: 1
+    damage: 1.5
     stun: 20
     hitstop: 5
     poiseBreak: 0
-    startupFrame: 18
+    startupFrame: 25
     activeFrames: 5
     gatlingFrames: 5
     groundHitProperty:
-      pushback: {x: 1, y: 6}
+      pushback: {x: 1, y: 8.5}
       hitState: 0
     airHitProperty:
-      pushback: {x: 0, y: 0}
+      pushback: {x: 1, y: 8.5}
       hitState: 0
   type: 0
   uniqueProperties: []
   screenShake: []
   vfx:
   - type: 0
-    startup: 18
+    startup: 25
     prefab: {fileID: 1320683006971348, guid: 83ea291b15cd5ed46be1077c6b047713, type: 3}
     deattachFromPlayer: 1
     destroyOnRecovery: 0
-    position: {x: 0, y: 0.6, z: 0.4}
+    position: {x: 0, y: 0.8, z: 0.4}
     rotation: {x: 155.66, y: 0, z: 90}
     scale: {x: 0.5, y: 0.5, z: 0.4}
   sfx: []

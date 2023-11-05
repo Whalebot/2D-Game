@@ -91,6 +91,7 @@ public class GameManager : MonoBehaviour
         playerStatus.deathEvent += LoseGame;
         SaveManager.Instance.saveEvent += SaveData;
         SaveManager.Instance.startLoadEvent += LoadData;
+        Physics.simulationMode = SimulationMode.Script;
     }
     // Start is called before the first frame update
     void Start()
@@ -159,7 +160,8 @@ public class GameManager : MonoBehaviour
     public void AdvanceGameState()
     {
 
-        Physics.autoSimulation = runNormally;
+        if (runNormally) Physics.Simulate(Time.fixedDeltaTime);
+
         advanceGameState?.Invoke();
 
         if (offsetTime > 0)
@@ -178,7 +180,6 @@ public class GameManager : MonoBehaviour
     public void AdvanceGameStateButton()
     {
         runNormally = false;
-        Physics.autoSimulation = false;
         AdvanceGameState();
         Physics.Simulate(Time.fixedDeltaTime);
 
@@ -276,12 +277,10 @@ public class GameManager : MonoBehaviour
     public void ToggleMenu()
     {
         menuOpen = !menuOpen;
-        Physics.autoSimulation = !Physics.autoSimulation;
     }
     public void CloseMenu()
     {
         menuOpen = false;
-        Physics.autoSimulation = true;
     }
     void FixedUpdate()
     {
@@ -332,7 +331,7 @@ public class GameManager : MonoBehaviour
     IEnumerator RestartDelay()
     {
         yield return new WaitForSeconds(restartDelay);
-        SaveManager.Instance.DeleteData();
+        SaveManager.Instance.KillCharacter();
         TransitionManager.Instance.RestartGame();
     }
 }

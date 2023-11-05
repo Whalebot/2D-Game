@@ -17,6 +17,7 @@ MonoBehaviour:
   maxStacks: 4
   tickInterval: 0
   statusVFX:
+    type: 0
     startup: 1
     prefab: {fileID: 137782, guid: f620dcbbd4313344789d692fe328d540, type: 3}
     deattachFromPlayer: 1
@@ -27,6 +28,7 @@ MonoBehaviour:
   currentVFX: {fileID: 0}
   damageOnApply: 3
   iceVFX:
+    type: 0
     startup: 1
     prefab: {fileID: 6005380274324750408, guid: 375494e7ef4210e4794c803acf2bf199, type: 3}
     deattachFromPlayer: 1
@@ -34,5 +36,5 @@ MonoBehaviour:
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0}
     scale: {x: 0.5, y: 0.5, z: 0.5}
-  attackSpeedReduction: 0.1
-  movementSpeedReduction: 0.2
+  attackSpeedReduction: 0
+  movementSpeedReduction: 0.1

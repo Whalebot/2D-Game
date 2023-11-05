@@ -45,6 +45,7 @@ public class AttackScript : MonoBehaviour
     [TabGroup("Debug")] public int attackID;
     [TabGroup("Debug")] public float attackFrames;
     [TabGroup("Debug")] public int lastFrame;
+    [TabGroup("Debug")] public int airActionCounter;
     [TabGroup("Debug")] public int extendedBuffer;
 
     [TabGroup("Debug")] public bool holdAttack;
@@ -283,7 +284,12 @@ public class AttackScript : MonoBehaviour
                     {
                         if (activeMove.inheritForwardVelocity && activeMove.m[i].momentum.x == 0)
                         {
-                            movement.SetVelocity(Mathf.Abs(movement._rb.velocity.x) * transform.forward + transform.up * activeMove.m[i].momentum.y);
+                            if (activeMove.m[i].momentum.y == 0 && movement._rb.velocity.y > 0)
+                            {
+                                movement.SetVelocity(Mathf.Abs(movement._rb.velocity.x) * transform.forward + transform.up * movement._rb.velocity.y);
+                            }
+                            else
+                                movement.SetVelocity(Mathf.Abs(movement._rb.velocity.x) * transform.forward + transform.up * activeMove.m[i].momentum.y);
                         }
                         else
                         {
@@ -320,7 +326,7 @@ public class AttackScript : MonoBehaviour
             if (activeMove.vfx.Length > 0)
                 foreach (var item in activeMove.vfx)
                 {
-                    if (frame == item.startup)
+                    if (frame == item.startup && item.type == ScreenShakeType.OnStartup)
                     {
                         GameObject fx = Instantiate(item.prefab, transform.position, transform.rotation, vfxContainer);
                         fx.transform.localPosition = item.position;
@@ -527,7 +533,7 @@ public class AttackScript : MonoBehaviour
         else if (move.runMomentum) movement._rb.velocity = movement._rb.velocity * 0.5F;
 
         //Air properties
-        if (move.useAirAction) movement.performedJumps++;
+        if (move.useAirAction) airActionCounter++;
 
         if (!movement.passthroughPlatforms)
             status.EnableCollider();
@@ -607,7 +613,7 @@ public class AttackScript : MonoBehaviour
         else if (move.runMomentum) movement._rb.velocity = movement._rb.velocity * 0.5F;
 
         //Air properties
-        if (move.useAirAction) movement.performedJumps++;
+        if (move.useAirAction) airActionCounter++;
 
         if (!movement.passthroughPlatforms)
             status.EnableCollider();
@@ -635,10 +641,8 @@ public class AttackScript : MonoBehaviour
         //if (jumpFrameCounter > 0) return false;
         if (move.useAirAction)
         {
-            if (movement.performedJumps <= 0)
+            if (airActionCounter < status.currentStats.airActions)
             {
-                movement.performedJumps++;
-                return true;
             }
             else return false;
         }
@@ -752,13 +756,20 @@ public class AttackScript : MonoBehaviour
             attackFrames = activeMove.lastActiveFrame + 1;
 
         }
+        airActionCounter = 0;
+
         recoverOnlyOnLand = false;
         if (activeMove != null)
+        {
             for (int i = 0; i < activeMove.screenShake.Length; i++)
             {
                 if (activeMove.screenShake[i].type == ScreenShakeType.OnLand)
                     CameraManager.Instance.ShakeCamera(activeMove.screenShake[i].amplitude, activeMove.screenShake[i].duration);
             }
+            LandVFX();
+
+
+        }
 
         if (landCancel)
         {
@@ -766,6 +777,24 @@ public class AttackScript : MonoBehaviour
             landCancelFrame = true;
             Idle();
         }
+    }
+    void LandVFX()
+    {
+        if (activeMove.vfx.Length > 0)
+            foreach (var item in activeMove.vfx)
+            {
+                if (item.type == ScreenShakeType.OnLand)
+                {
+                    GameObject fx = Instantiate(item.prefab, transform.position, transform.rotation, vfxContainer);
+                    fx.transform.localPosition = item.position;
+                    fx.transform.localRotation = Quaternion.Euler(item.rotation);
+                    fx.transform.localScale = item.scale;
+                    if (item.destroyOnRecovery)
+                        fx.GetComponent<VFXScript>().SetupVFX(status);
+                    if (item.deattachFromPlayer)
+                        fx.transform.SetParent(null);
+                }
+            }
     }
     void ResetCombo()
     {

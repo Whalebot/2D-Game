@@ -141,5 +141,5 @@ public class LevelManager : MonoBehaviour
 
 public enum RoomTypes
 {
-    Normal, Elite, Boss, Treasure, Shop, Event, Disabled
+    Normal, Elite, Boss, Treasure, Shop, Event, Rest, Disabled
 }

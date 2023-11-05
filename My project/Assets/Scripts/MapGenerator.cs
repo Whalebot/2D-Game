@@ -18,6 +18,7 @@ public class MapGenerator : MonoBehaviour
     public int roomsPerFloor = 5;
     public int roomChoices = 3;
     public int treasureChance = 10;
+    public int restChance = 10;
     public int shopChance = 20;
     public int eliteChance = 20;
     public int eventChance = 40;
@@ -255,8 +256,8 @@ public class MapGenerator : MonoBehaviour
 
         RNG = UnityEngine.Random.Range(0, 100);
         if (RNG <= eliteChance)
-
             return RoomTypes.Elite;
+
         RNG = UnityEngine.Random.Range(0, 100);
         if (RNG <= shopChance)
             return RoomTypes.Shop;
@@ -264,6 +265,10 @@ public class MapGenerator : MonoBehaviour
         RNG = UnityEngine.Random.Range(0, 100);
         if (RNG <= eventChance)
             return RoomTypes.Event;
+
+        RNG = UnityEngine.Random.Range(0, 100);
+        if (RNG <= restChance)
+            return RoomTypes.Rest;
 
         return RoomTypes.Normal;
     }
