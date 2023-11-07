@@ -7,6 +7,7 @@ public class Hazard : MonoBehaviour
     public float baseDamage = 1;
     public int totalDamage;
     public int resetTimer = 30;
+    public bool followParent = false;
     int resetcounter;
     public Alignment alignment;
     public Attack attack;
@@ -17,17 +18,31 @@ public class Hazard : MonoBehaviour
 
     Vector3 knockbackDirection;
     Vector3 aVector;
-
+    Rigidbody rb;
     public List<Status> enemyList;
     protected Transform colPos;
     // Start is called before the first frame update
     void Start()
     {
+        rb = transform.parent.GetComponentInParent<Rigidbody>();
         GameManager.Instance.advanceGameState += ExecuteFrame;
         resetcounter = resetTimer;
     }
+    private void OnDisable()
+    {
+        GameManager.Instance.advanceGameState -= ExecuteFrame;
+    }
+
     void ExecuteFrame()
     {
+        if (followParent)
+        {
+            transform.position = transform.parent.position;
+            attack.groundHitProperty.pushback = new Vector2(rb.velocity.x, rb.velocity.y);
+
+            Debug.Log(rb.velocity);
+        }
+
         if (enemyList.Count > 0)
         {
             resetcounter--;
@@ -77,7 +92,7 @@ public class Hazard : MonoBehaviour
     void ExecuteHit(HitProperty hit, Status other, Attack atk)
     {
         //Calculate direction
-        aVector = transform.forward * hit.pushback.x + Vector3.up * hit.pushback.y;
+        aVector = Vector3.right * hit.pushback.x + Vector3.up * hit.pushback.y;
 
 
         totalDamage = (int)(baseDamage * (atk.damage));

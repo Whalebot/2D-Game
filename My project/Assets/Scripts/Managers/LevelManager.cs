@@ -14,7 +14,9 @@ public class LevelManager : MonoBehaviour
     public List<SceneSO> shopRoomLvl1;
     public List<SceneSO> treasureRoomLvl1;
     public List<SceneSO> eventRoomLvl1;
+    public List<SceneSO> restRoomLvl1;
     public List<SceneSO> bossRoomLvl2;
+    public int area = 1;
     public int currentLevel = 1;
     public int treasureChance = 10;
     public int shopChance = 20;
@@ -25,6 +27,8 @@ public class LevelManager : MonoBehaviour
 
     public event Action spawnLevelGates;
     public MapGenerator mapGenerator;
+    public MapGenerator mapGenerator2;
+    public MapGenerator mapGenerator3;
     public MapNode currentMapNode;
 
     private void Awake()
@@ -39,6 +43,8 @@ public class LevelManager : MonoBehaviour
 
         if (SaveManager.Instance.HasSaveData())
         {
+
+
             currentMapNode = mapGenerator.mapNodes[SaveManager.Instance.CurrentLevel];
             currentRoomType = currentMapNode.roomType;
         }
@@ -121,6 +127,9 @@ public class LevelManager : MonoBehaviour
             case RoomTypes.Event:
                 RNG = UnityEngine.Random.Range(0, eventRoomLvl1.Count);
                 return eventRoomLvl1[RNG].sceneName;
+            case RoomTypes.Rest:
+                RNG = UnityEngine.Random.Range(0, restRoomLvl1.Count);
+                return restRoomLvl1[RNG].sceneName;
 
             case RoomTypes.Disabled:
                 return "";

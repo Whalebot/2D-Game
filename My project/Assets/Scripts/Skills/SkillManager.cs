@@ -111,7 +111,6 @@ public class SkillManager : MonoBehaviour
             //If last skill and haven't found sufficiently high skill
             if (!foundRank && i == skillButtons.Count - 1)
             {
-                Debug.Log("Pity roll");
                 switch (r)
                 {
                     case Rank.D:

@@ -39,7 +39,7 @@ public class CharacterCreator : MonoBehaviour
         //    GameManager.Instance.player.GetComponentInChildren<Animator>().runtimeAnimatorController = characters[SaveManager.Instance.saveData.visualData.characterJob].controller;
         //}
         if (SaveManager.Instance != null)
-            if (!SaveManager.Instance.HasSaveData() && visuals != null)
+            if (!SaveManager.Instance.HasCurrentCharacter() && visuals != null)
                 RandomizeVisuals();
     }
     public int Class

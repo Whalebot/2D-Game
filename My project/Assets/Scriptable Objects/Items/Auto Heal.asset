@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f2923ec284c6840a8cd468af82cb4d, type: 3}
+  m_Name: Auto Heal
+  m_EditorClassIdentifier: 
+  skillRank: 2
+  type: 2
+  title: Auto Heal
+  sprite: {fileID: 0}
+  prerequisiteSkills: []
+  prerequisiteMoves: []
+  newMoves: []
+  skillProperties:
+  - {fileID: 11400000, guid: 9bb87b815f6abd04caadd4607d7bbab7, type: 2}
+  description: Every time to enter a new room, recover 10 health
+  stats:
+    currentHealth: 0
+    maxHealth: 0
+    currentMeter: 0
+    maxMeter: 0
+    level: 0
+    strength: 0
+    intelligence: 0
+    agility: 0
+    luck: 0
+    gold: 0
+    attack: 0
+    magic: 0
+    attackSpeed: 0
+    jumps: 1
+    airActions: 0
+    rerolls: 0
+    movementSpeedModifier: 0
+    meterGainModifier: 0
+    poiseRegen: 0
+    poise: 0
+    defense: -0.5
+    resistance: 0
+    guardBreakModifier: 0
+    sizeModifier: 0
+    damageModifierPercentage: 0
+    backstabModifier: 0
+    damageModifierFlat: 0
+    hitStunMultiplier: 0
+    knockbackModifier: 0
+    critChance: 0.3
+    critMultiplier: 0.5

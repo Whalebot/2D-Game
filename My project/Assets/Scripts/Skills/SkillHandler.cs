@@ -28,6 +28,7 @@ public class SkillHandler : MonoBehaviour
         //UpdateStats();
         LateBehaviour();
         attackScript.hitEvent += OnHitBehaviour;
+        WaveBeahviour();
     }
     void DuplicateMoveset()
     {
@@ -80,7 +81,17 @@ public class SkillHandler : MonoBehaviour
             }
         }
     }
-
+    void WaveBeahviour()
+    {
+        foreach (var item in learnedSkills)
+        {
+            item.WaveBehaviour(this);
+            foreach (var prop in item.skillProperties)
+            {
+                prop.WaveBehaviour(this);
+            }
+        }
+    }
     void ActivateBehaviour()
     {
     }

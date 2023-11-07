@@ -14,6 +14,7 @@ public class TransitionManager : MonoBehaviour
     public static bool isLoading;
 
     public float sceneTransitionDelay;
+    public float fadeDelay = 0;
 
     private void Awake()
     {
@@ -30,6 +31,7 @@ public class TransitionManager : MonoBehaviour
     {
         if(AudioManager.Instance != null)
         AudioManager.Instance.FadeOutVolume();
+        yield return new WaitForSeconds(fadeDelay);
         Fade();
         yield return new WaitForSeconds(sceneTransitionDelay);
         //DataManager.Instance.SaveData();

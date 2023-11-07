@@ -158,7 +158,7 @@ public class Hitbox : MonoBehaviour
         attack.hit = true;
 
         //Calculate direction
-        aVector = knockbackDirection * hit.pushback.x + Vector3.up * hit.pushback.y;
+        aVector = status.currentStats.knockbackModifier * (knockbackDirection * hit.pushback.x + Vector3.up * hit.pushback.y);
 
         //Screen shake on hit
         for (int i = 0; i < move.screenShake.Length; i++)

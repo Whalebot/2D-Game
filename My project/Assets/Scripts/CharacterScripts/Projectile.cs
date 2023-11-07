@@ -181,6 +181,7 @@ public class Projectile : Hitbox
     }
     public virtual void ExecuteFrame()
     {
+
         if (lifetime > 0)
         {
             lifetime--;
@@ -202,6 +203,7 @@ public class Projectile : Hitbox
             projectileDelay--;
             if (projectileDelay <= 0 && willDelayReaim)
             {
+
                 if (target == null)
                     FindTarget();
 
@@ -358,6 +360,7 @@ public class Projectile : Hitbox
 
         if (enemyStatus != null && hitbox == null)
         {
+            if (willDelayReaim && projectileDelay > 0) return;
             if (status == enemyStatus) return;
             if (status.alignment == enemyStatus.alignment) return;
 

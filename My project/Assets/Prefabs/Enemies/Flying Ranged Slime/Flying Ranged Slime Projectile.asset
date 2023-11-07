@@ -17,10 +17,10 @@ MonoBehaviour:
   meterGain: 10
   consumeMeterOnActiveFrame: 0
   icon: {fileID: 0}
-  firstStartupFrame: 25
-  lastActiveFrame: 34
-  totalMoveDuration: 54
-  firstGatlingFrame: 30
+  firstStartupFrame: 40
+  lastActiveFrame: 49
+  totalMoveDuration: 69
+  firstGatlingFrame: 45
   recoveryFrames: 20
   attacks:
   - attackLevel: 0
@@ -31,7 +31,7 @@ MonoBehaviour:
     stun: 20
     hitstop: 5
     poiseBreak: 0
-    startupFrame: 25
+    startupFrame: 40
     activeFrames: 10
     gatlingFrames: 5
     groundHitProperty:
@@ -88,7 +88,7 @@ MonoBehaviour:
   landCancel: 0
   recoverOnlyOnLand: 0
   m:
-  - startFrame: 25
+  - startFrame: 40
     duration: 2
     momentum: {x: -2, y: 0}
     resetVelocityDuringRecovery: 1

@@ -7,6 +7,7 @@ public class Treasure : Interactable
 {
 
     public Rank rank;
+    public bool autoSetup = true;
     public TextMeshProUGUI treasureText;
     public GameObject treasure;
 
@@ -17,6 +18,35 @@ public class Treasure : Interactable
         AIManager.Instance.roomClearEvent += SpawnTreasure;
         if (LevelManager.Instance.currentRoomType != RoomTypes.Treasure && LevelManager.Instance.currentRoomType != RoomTypes.Event)
             treasure.SetActive(false);
+    }
+
+    void AutoSetupTreasure() {
+        if (LevelManager.Instance != null && autoSetup) {
+            switch (LevelManager.Instance.currentMapNode.roomType)
+            {
+                case RoomTypes.Normal:
+                    rank = Rank.C;
+                    break;
+                case RoomTypes.Elite:
+                    rank = Rank.A;
+                    break;
+                case RoomTypes.Boss:
+                    rank = Rank.S;
+                    break;
+                case RoomTypes.Treasure:
+                    break;
+                case RoomTypes.Shop:
+                    break;
+                case RoomTypes.Event:
+                    break;
+                case RoomTypes.Rest:
+                    break;
+                case RoomTypes.Disabled:
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     void SpawnTreasure()

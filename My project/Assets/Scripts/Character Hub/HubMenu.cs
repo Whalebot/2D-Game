@@ -8,6 +8,7 @@ using Sirenix.OdinInspector;
 public class HubMenu : MonoBehaviour
 {
     public Animator animator;
+    public Animator faceAnimator;
     [TabGroup("Components")] public Image classImage;
     [TabGroup("Components")] public TextMeshProUGUI classText;
     [TabGroup("Components")] public TextMeshProUGUI colorNumber;
@@ -32,6 +33,7 @@ public class HubMenu : MonoBehaviour
     [TabGroup("Components")] public Button shoesMinusButton;
     [TabGroup("Components")] public Button classPlusButton;
     [TabGroup("Components")] public Button classMinusButton;
+    [TabGroup("Components")] public GameObject cameraPan;
 
     private void Start()
     {
@@ -71,8 +73,22 @@ public class HubMenu : MonoBehaviour
     {
         SaveManager.Instance.SetupCharacter();
         SaveManager.Instance.Stats.ReplaceStats(CharacterCreator.Instance.characters[CharacterCreator.Instance.Class].stats);
-
+        cameraPan.SetActive(true);
+        animator.SetBool("Cutscene", true);
+        faceAnimator.SetTrigger("Emote");
+        StartCoroutine(FadeOutCanvas());
         TransitionManager.Instance.LoadScene(1);
+    }
+    IEnumerator FadeOutCanvas()
+    {
+        CanvasGroup group = GetComponent<CanvasGroup>();
+        while (group.alpha > 0)
+        {
+            group.alpha -= 0.01F;
+            yield return new WaitForEndOfFrame();
+        }
+        Canvas canvas = GetComponent<Canvas>();
+        canvas.enabled = false;
     }
     public void ChangeClass(bool add)
     {

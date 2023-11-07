@@ -25,6 +25,7 @@ MonoBehaviour:
   attacks:
   - attackLevel: 0
     attackType: 1
+    damageType: 0
     hitbox: {fileID: 5860963072138344223, guid: 047b3b30708f11b43b3987fa05006fb6, type: 3}
     damage: 1
     stun: 20
@@ -39,13 +40,10 @@ MonoBehaviour:
     airHitProperty:
       pushback: {x: 0, y: 0}
       hitState: 0
-    blockProperty:
-      pushback: {x: 0, y: 0}
-      hitState: 0
-    hitID: 0
   - attackLevel: 0
     attackType: 1
-    hitbox: {fileID: 5860963072138344223, guid: af5ab7a4b4346a34c8be4181bd8fbe92, type: 3}
+    damageType: 0
+    hitbox: {fileID: 5860963072138344223, guid: 03252389187bb3f4795088d7b78254f5, type: 3}
     damage: 1
     stun: 20
     hitstop: 5
@@ -59,13 +57,10 @@ MonoBehaviour:
     airHitProperty:
       pushback: {x: 0, y: 0}
       hitState: 0
-    blockProperty:
-      pushback: {x: 0, y: 0}
-      hitState: 0
-    hitID: 0
   - attackLevel: 0
     attackType: 1
-    hitbox: {fileID: 5860963072138344223, guid: 4afc23b3005615e499f28f5f321f7019, type: 3}
+    damageType: 0
+    hitbox: {fileID: 5860963072138344223, guid: 8ecfcceaf140aba4da28201c4d44bb79, type: 3}
     damage: 1
     stun: 20
     hitstop: 5
@@ -79,10 +74,6 @@ MonoBehaviour:
     airHitProperty:
       pushback: {x: 0, y: 0}
       hitState: 0
-    blockProperty:
-      pushback: {x: 0, y: 0}
-      hitState: 0
-    hitID: 0
   type: 0
   uniqueProperties: []
   screenShake:
@@ -91,14 +82,16 @@ MonoBehaviour:
     amplitude: 1
     duration: 1
   vfx:
-  - startup: 1
+  - type: 0
+    startup: 1
     prefab: {fileID: 194346, guid: 18ca0b65eadca7c46b9b94e7d23cab44, type: 3}
     deattachFromPlayer: 0
     destroyOnRecovery: 0
     position: {x: 0, y: 0.01, z: 0}
     rotation: {x: -90, y: 0, z: 0}
     scale: {x: 0.1, y: 0.1, z: 0.1}
-  - startup: 40
+  - type: 0
+    startup: 40
     prefab: {fileID: 194346, guid: 18ca0b65eadca7c46b9b94e7d23cab44, type: 3}
     deattachFromPlayer: 0
     destroyOnRecovery: 0
@@ -107,6 +100,7 @@ MonoBehaviour:
     scale: {x: 0.1, y: 0.1, z: 0.1}
   sfx: []
   hitFX:
+    type: 0
     startup: 1
     prefab: {fileID: 1416824176164296, guid: dc1397204bb5ee84895af2b49dac2d49, type: 3}
     deattachFromPlayer: 1
@@ -151,5 +145,6 @@ MonoBehaviour:
   instantStartupRotation: 1
   overrideVelocity: 1
   runMomentum: 0
+  inheritForwardVelocity: 0
   stopAtEdges: 1
   homing: 0

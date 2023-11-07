@@ -80,6 +80,7 @@ public class MapGenerator : MonoBehaviour
         entryGO.name = "0-1 Entrance";
         startNode = entryGO.GetComponent<MapNode>();
         mapNodes.Add(startNode);
+        startNode.Visited();
 
         GameObject bossGO = Instantiate(mapNodePrefab, mapContainer.transform.position + new Vector3(0, nodeSpacing.y * roomsPerFloor), Quaternion.identity, mapContainer.transform);
         bossGO.transform.localPosition = new Vector3(0, nodeSpacing.y * roomsPerFloor);
@@ -164,13 +165,6 @@ public class MapGenerator : MonoBehaviour
                 {
                     if (item.y == node.y + 1)
                     {
-                        //if ()
-                        //{
-                        //    int multi = Random.Range(0, 4);
-                        //    if (multi == 0 && Mathf.Abs(node.x - item.x) < 2)
-                        //        ConnectNodes(node, item);
-                        //}
-
                         float tempX = j - (float)randomRoomChoices / 2;
                         float oldX = item.x - (float)previousFloorCount / 2;
                         //If the node hasn't found anything and the range is smaller than 2
@@ -180,14 +174,6 @@ public class MapGenerator : MonoBehaviour
                             if (multi == 0)
                                 ConnectNodes(node, item);
                         }
-
-                        // When reaching the last node, will auto connect to everything without an entry
-                        //if (node.x == randomRoomChoices - 1)
-                        //{
-                        //    if (item.entryRooms.Count == 0)
-                        //        ConnectNodes(node, item);
-                        //}
-
                     }
                 }
                 foreach (var item in mapNodes)
@@ -217,9 +203,6 @@ public class MapGenerator : MonoBehaviour
 
                         if (item.entryRooms.Count == 0 && Mathf.Abs(tempX - oldX) < 1f)
                             ConnectNodes(node, item);
-
-                        //if (node.exitRooms.Count == 0)
-                        //    ConnectNodes(node, item);
                     }
                 }
 
