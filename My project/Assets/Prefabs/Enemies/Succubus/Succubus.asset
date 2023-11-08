@@ -9,22 +9,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41f2923ec284c6840a8cd468af82cb4d, type: 3}
-  m_Name: Fire
+  m_Script: {fileID: 11500000, guid: fd0f521e490d135408b5fbd75180cbbf, type: 3}
+  m_Name: Succubus
   m_EditorClassIdentifier: 
-  skillRank: 2
-  type: 0
-  title: Fire
-  sprite: {fileID: 21300000, guid: 03281c94f9924fa47a72404b965890f6, type: 3}
-  prerequisiteSkills: []
-  prerequisiteMoves: []
-  newMoves: []
-  skillProperties:
-  - {fileID: 11400000, guid: a17681f5dbf90714885bddd1ddc7cbf9, type: 2}
-  description: Your attacks apply burning status on enemies.
+  characterName: Slime
+  subTitle: 
+  description: 
+  image: {fileID: 0}
+  prefab: {fileID: 9037631907321898802, guid: 518eee88e2d9a6643952facd713e1871, type: 3}
+  controller: {fileID: 0}
+  moveset: {fileID: 0}
+  actions:
+  - {fileID: 11400000, guid: c1ba586f61776ed4099ffe898b5ff965, type: 2}
+  - {fileID: 11400000, guid: b1e705ee9830a8947bc26972670eec37, type: 2}
+  - {fileID: 11400000, guid: 3447b80f13de079438fb61c93ad6273d, type: 2}
+  - {fileID: 11400000, guid: 8d805430ea8264f4581c133cb310de35, type: 2}
   stats:
-    currentHealth: 0
-    maxHealth: 0
+    currentHealth: 500
+    maxHealth: 500
     currentMeter: 0
     maxMeter: 0
     level: 1
@@ -33,16 +35,16 @@ MonoBehaviour:
     agility: 0
     luck: 0
     gold: 0
-    attack: 0
-    magic: 0
+    attack: 3
+    magic: 3
     attackSpeed: 1
     jumps: 1
     airActions: 1
     rerolls: 0
     movementSpeedModifier: 1
     meterGainModifier: 1
-    poiseRegen: 0
-    poise: 0
+    poiseRegen: 0.1
+    poise: 100
     defense: 0
     resistance: 0
     guardBreakModifier: 1
@@ -53,4 +55,5 @@ MonoBehaviour:
     hitStunMultiplier: 1
     knockbackModifier: 1
     critChance: 0
-    critMultiplier: 1.5
+    critMultiplier: 0
+  skills: []

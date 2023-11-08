@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
-  m_Name: Flying Ranged Slime Projectile
+  m_Name: Flying Slime Tackle 1
   m_EditorClassIdentifier: 
   animationID: 0
   meterCost: 0
@@ -18,21 +18,21 @@ MonoBehaviour:
   consumeMeterOnActiveFrame: 0
   icon: {fileID: 0}
   firstStartupFrame: 40
-  lastActiveFrame: 49
-  totalMoveDuration: 69
+  lastActiveFrame: 54
+  totalMoveDuration: 74
   firstGatlingFrame: 45
   recoveryFrames: 20
   attacks:
   - attackLevel: 0
-    attackType: 1
-    damageType: 1
-    hitbox: {fileID: 5860963072138344223, guid: c6e93879ce401ab45ae720659eae9a26, type: 3}
+    attackType: 0
+    damageType: 0
+    hitbox: {fileID: 5860963072138344223, guid: deecb40114d5721488d20bb89baa4e42, type: 3}
     damage: 1
     stun: 20
     hitstop: 5
     poiseBreak: 0
     startupFrame: 40
-    activeFrames: 10
+    activeFrames: 15
     gatlingFrames: 5
     groundHitProperty:
       pushback: {x: 0, y: 0}
@@ -43,23 +43,7 @@ MonoBehaviour:
   type: 0
   uniqueProperties: []
   screenShake: []
-  vfx:
-  - type: 0
-    startup: 1
-    prefab: {fileID: 194346, guid: 18ca0b65eadca7c46b9b94e7d23cab44, type: 3}
-    deattachFromPlayer: 0
-    destroyOnRecovery: 0
-    position: {x: 0, y: 0.01, z: 0}
-    rotation: {x: -90, y: 0, z: 0}
-    scale: {x: 0.1, y: 0.1, z: 0.1}
-  - type: 0
-    startup: 40
-    prefab: {fileID: 9143454445820708258, guid: 413257cc1651f9f44a0acc09067a1c17, type: 3}
-    deattachFromPlayer: 1
-    destroyOnRecovery: 0
-    position: {x: 0, y: 0.6, z: 0.7}
-    rotation: {x: 0, y: 0, z: 90}
-    scale: {x: 0.5, y: 0.5, z: 0.5}
+  vfx: []
   sfx: []
   hitFX:
     type: 0
@@ -104,9 +88,47 @@ MonoBehaviour:
   landCancel: 0
   recoverOnlyOnLand: 0
   m:
+  - startFrame: 10
+    duration: 2
+    momentum: {x: -1, y: 0}
+    resetVelocityDuringRecovery: 0
+    xMovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    movementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    freeMovement: 0
+    useCurve: 0
+    teleport: 0
   - startFrame: 40
     duration: 2
-    momentum: {x: -2, y: 0}
+    momentum: {x: 20, y: 0}
+    resetVelocityDuringRecovery: 0
+    xMovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    movementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    freeMovement: 0
+    useCurve: 0
+    teleport: 0
+  - startFrame: 53
+    duration: 2
+    momentum: {x: 5, y: 0}
     resetVelocityDuringRecovery: 0
     xMovementCurve:
       serializedVersion: 2
@@ -128,4 +150,4 @@ MonoBehaviour:
   runMomentum: 0
   inheritForwardVelocity: 0
   stopAtEdges: 0
-  homing: 0
+  homing: 1

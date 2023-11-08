@@ -6,6 +6,7 @@ using Sirenix.OdinInspector;
 public class CharacterVisuals : MonoBehaviour
 {
     public bool loadVisuals = false;
+    public ColorPresetSO presetSO;
     public CharacterVisualData visualData;
     public List<GameObject> weapons;
     public List<GameObject> hairVariations;
@@ -45,7 +46,13 @@ public class CharacterVisuals : MonoBehaviour
     [Button]
     public void ApplyMaterial()
     {
-        ColorPresetSO preset = CharacterCreator.Instance.allPresets[visualData.colorPreset];
+        ColorPresetSO preset = null;
+        if (presetSO != null)
+        {
+            preset = presetSO;
+        }
+        else { preset = CharacterCreator.Instance.allPresets[visualData.colorPreset]; }
+
         foreach (var item in preset.colorPresets)
         {
             foreach (var mat in materials)

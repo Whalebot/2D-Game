@@ -15,18 +15,22 @@ public class MapManager : MonoBehaviour
         secondAreaMap.gameObject.SetActive(false);
         thirdAreaMap.gameObject.SetActive(false);
 
-        switch (LevelManager.Instance.area)
+        if (LevelManager.Instance != null)
         {
-            case 1: firstAreaMap.gameObject.SetActive(true); break;
-            case 2: secondAreaMap.gameObject.SetActive(true); break;
-            case 3: thirdAreaMap.gameObject.SetActive(true); break;
-            default:
-                break;
+            switch (LevelManager.Instance.area)
+            {
+                case 1: firstAreaMap.gameObject.SetActive(true); break;
+                case 2: secondAreaMap.gameObject.SetActive(true); break;
+                case 3: thirdAreaMap.gameObject.SetActive(true); break;
+                default:
+                    break;
+            }
         }
+        else firstAreaMap.gameObject.SetActive(true);
     }
 
     private void OnEnable()
     {
-        
+
     }
 }

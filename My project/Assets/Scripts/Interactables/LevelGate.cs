@@ -29,8 +29,15 @@ public class LevelGate : Interactable
                 break;
         }
 
+        if (LevelManager.Instance.currentMapNode.roomType == RoomTypes.Boss)
+        {
+            destinationNode = LevelManager.Instance.mapGenerator2.startNode;
+        }
+
         if (destinationNode != null)
             nextSceneName = LevelManager.Instance.NextLevelName(destinationNode.roomType);
+
+    
 
         SetupGate();
         if (destinationNode == null)
@@ -63,6 +70,10 @@ public class LevelGate : Interactable
 
     public void EnterGate()
     {
+        if (destinationNode.roomType == RoomTypes.Staircase)
+        {
+            LevelManager.Instance.area++;
+        }
         LevelManager.Instance.GoToNextLevel(destinationNode);
         TransitionManager.Instance.LoadScene(nextSceneName);
     }

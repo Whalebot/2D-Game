@@ -15,6 +15,7 @@ public class LevelManager : MonoBehaviour
     public List<SceneSO> treasureRoomLvl1;
     public List<SceneSO> eventRoomLvl1;
     public List<SceneSO> restRoomLvl1;
+    public List<SceneSO> stairwayRoom;
     public List<SceneSO> bossRoomLvl2;
     public int area = 1;
     public int currentLevel = 1;
@@ -26,6 +27,7 @@ public class LevelManager : MonoBehaviour
     public MapNode room3;
 
     public event Action spawnLevelGates;
+    public List<MapNode> allNodes;
     public MapGenerator mapGenerator;
     public MapGenerator mapGenerator2;
     public MapGenerator mapGenerator3;
@@ -38,14 +40,27 @@ public class LevelManager : MonoBehaviour
 
         SaveManager.Instance.saveEvent += SaveData;
         SaveManager.Instance.startLoadEvent += LoadData;
+        area = SaveManager.Instance.saveData.currrentCharacter.currentArea;
 
         mapGenerator.SetupNodes();
+        mapGenerator2.SetupNodes();
+        mapGenerator3.SetupNodes();
 
+        foreach (var item in mapGenerator.mapNodes)
+        {
+            allNodes.Add(item);
+        }
+        foreach (var item in mapGenerator2.mapNodes)
+        {
+            allNodes.Add(item);
+        }
+        foreach (var item in mapGenerator3.mapNodes)
+        {
+            allNodes.Add(item);
+        }
         if (SaveManager.Instance.HasSaveData())
         {
-
-
-            currentMapNode = mapGenerator.mapNodes[SaveManager.Instance.CurrentLevel];
+            currentMapNode = allNodes[SaveManager.Instance.CurrentLevel];
             currentRoomType = currentMapNode.roomType;
         }
         else
@@ -64,27 +79,26 @@ public class LevelManager : MonoBehaviour
     void MarkVisitedRooms()
     {
 
-        for (int i = 0; i < mapGenerator.mapNodes.Count; i++)
+        for (int i = 0; i < allNodes.Count; i++)
         {
             foreach (var item in SaveManager.Instance.saveData.currrentCharacter.visitedRooms)
             {
                 if (i == item)
-                    mapGenerator.mapNodes[i].Visited();
+                    allNodes[i].Visited();
             }
-
         }
-
     }
 
     public void GoToNextLevel(MapNode node)
     {
         int index = -1;
-        for (int i = 0; i < mapGenerator.mapNodes.Count; i++)
+        for (int i = 0; i < allNodes.Count; i++)
         {
-            if (mapGenerator.mapNodes[i] == node)
+            if (allNodes[i] == node)
                 index = i;
         }
         SaveManager.Instance.saveData.currrentCharacter.visitedRooms.Add(index);
+        SaveManager.Instance.saveData.currrentCharacter.currentArea = area;
         SaveManager.Instance.CurrentLevel = index;
     }
 
@@ -116,7 +130,10 @@ public class LevelManager : MonoBehaviour
                 return eliteRoomLvl1[RNG].sceneName;
             case RoomTypes.Boss:
                 RNG = UnityEngine.Random.Range(0, bossRoomLvl1.Count);
-                if (currentMapNode.roomType == RoomTypes.Boss) return bossRoomLvl2[0].sceneName;
+                if (currentMapNode.roomType == RoomTypes.Boss)
+                {
+                    return stairwayRoom[0].sceneName;
+                }
                 return bossRoomLvl1[RNG].sceneName;
             case RoomTypes.Treasure:
                 RNG = UnityEngine.Random.Range(0, treasureRoomLvl1.Count);
@@ -130,7 +147,8 @@ public class LevelManager : MonoBehaviour
             case RoomTypes.Rest:
                 RNG = UnityEngine.Random.Range(0, restRoomLvl1.Count);
                 return restRoomLvl1[RNG].sceneName;
-
+            case RoomTypes.Staircase:
+                return stairwayRoom[0].sceneName;
             case RoomTypes.Disabled:
                 return "";
             default:
@@ -150,5 +168,5 @@ public class LevelManager : MonoBehaviour
 
 public enum RoomTypes
 {
-    Normal, Elite, Boss, Treasure, Shop, Event, Rest, Disabled
+    Normal, Elite, Boss, Treasure, Shop, Event, Rest, Staircase, Disabled
 }

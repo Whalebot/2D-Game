@@ -170,6 +170,7 @@ public class CharacterData
     public int rngSeed;
     public Stats stats;
     public int currentRoomID = 0;
+    public int currentArea = 1;
     public List<int> visitedRooms;
     public CharacterVisualData visualData;
     public List<SkillSO> learnedSkills;

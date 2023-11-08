@@ -80,6 +80,7 @@ public class MapGenerator : MonoBehaviour
         entryGO.name = "0-1 Entrance";
         startNode = entryGO.GetComponent<MapNode>();
         mapNodes.Add(startNode);
+        startNode.roomType = RoomTypes.Staircase;
         startNode.Visited();
 
         GameObject bossGO = Instantiate(mapNodePrefab, mapContainer.transform.position + new Vector3(0, nodeSpacing.y * roomsPerFloor), Quaternion.identity, mapContainer.transform);
