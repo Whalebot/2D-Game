@@ -1611,6 +1611,10 @@ PrefabInstance:
       value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2611016267439307869, guid: 5e43fc135bd09324fa593af850605463, type: 3}
+      propertyPath: detected
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2611016267439307869, guid: 5e43fc135bd09324fa593af850605463, type: 3}
       propertyPath: character
       value: 
       objectReference: {fileID: 11400000, guid: bad62ba807f5c3a4bb299352978f703e, type: 2}
@@ -1742,6 +1746,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d336682567c3a548bad6c220953a2b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadVisuals: 0
+  presetSO: {fileID: 0}
   visualData:
     characterJob: 2
     colorPreset: 0
@@ -1768,6 +1774,8 @@ MonoBehaviour:
   shoes:
   - {fileID: 825193888580740850}
   - {fileID: 2141841290266170821}
+  materials: []
+  anim: {fileID: 0}
 --- !u!4 &3408259246303841022 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7464143608956673379, guid: 5e43fc135bd09324fa593af850605463, type: 3}

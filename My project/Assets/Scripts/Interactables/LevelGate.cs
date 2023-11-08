@@ -37,7 +37,7 @@ public class LevelGate : Interactable
         if (destinationNode != null)
             nextSceneName = LevelManager.Instance.NextLevelName(destinationNode.roomType);
 
-    
+
 
         SetupGate();
         if (destinationNode == null)
@@ -45,7 +45,7 @@ public class LevelGate : Interactable
             levelGates.SetActive(false);
             return;
         }
-        if (LevelManager.Instance.currentRoomType != RoomTypes.Shop && LevelManager.Instance.currentRoomType != RoomTypes.Treasure && LevelManager.Instance.currentRoomType != RoomTypes.Event)
+        if (LevelManager.Instance.currentRoomType == RoomTypes.Normal || LevelManager.Instance.currentRoomType == RoomTypes.Elite || LevelManager.Instance.currentRoomType == RoomTypes.Boss)
             levelGates.SetActive(false);
     }
 

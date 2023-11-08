@@ -49,7 +49,10 @@ public class EnemySummoner : MonoBehaviour
     void SummonEnemy()
     {
         isSummoning = false;
-        Instantiate(enemyPrefab, transform.position, transform.rotation);
+        Vector3 playerPos = GameManager.Instance.player.position;
+        playerPos.y = transform.position.y;
+
+        Instantiate(enemyPrefab, transform.position, Quaternion.LookRotation((playerPos - transform.position).normalized));
         AIManager.Instance.wave1.Remove(this);
 
         GameManager.Instance.advanceGameState -= ExecuteFrame;
