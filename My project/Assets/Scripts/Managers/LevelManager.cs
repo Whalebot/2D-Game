@@ -7,7 +7,7 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance;
     public RoomTypes currentRoomType = RoomTypes.Normal;
-    public List<SceneSO> sceneObjects;
+
     public List<SceneSO> normalRoomLvl1;
     public List<SceneSO> eliteRoomLvl1;
     public List<SceneSO> bossRoomLvl1;
@@ -16,7 +16,13 @@ public class LevelManager : MonoBehaviour
     public List<SceneSO> eventRoomLvl1;
     public List<SceneSO> restRoomLvl1;
     public List<SceneSO> stairwayRoom;
+
+    public List<SceneSO> normalRoomLvl2;
+    public List<SceneSO> eliteRoomLvl2;
     public List<SceneSO> bossRoomLvl2;
+    public List<SceneSO> treasureRoomLvl2;
+    public List<SceneSO> eventRoomLvl2;
+
     public int area = 1;
     public int currentLevel = 1;
     public int treasureChance = 10;
@@ -123,27 +129,78 @@ public class LevelManager : MonoBehaviour
         switch (roomType)
         {
             case RoomTypes.Normal:
-                RNG = UnityEngine.Random.Range(0, normalRoomLvl1.Count);
-                return normalRoomLvl1[RNG].sceneName;
-            case RoomTypes.Elite:
-                RNG = UnityEngine.Random.Range(0, eliteRoomLvl1.Count);
-                return eliteRoomLvl1[RNG].sceneName;
-            case RoomTypes.Boss:
-                RNG = UnityEngine.Random.Range(0, bossRoomLvl1.Count);
-                if (currentMapNode.roomType == RoomTypes.Boss)
+
+                if (area == 2)
                 {
-                    return stairwayRoom[0].sceneName;
+                    RNG = UnityEngine.Random.Range(0, normalRoomLvl2.Count);
+
+                    return normalRoomLvl2[RNG].sceneName;
                 }
-                return bossRoomLvl1[RNG].sceneName;
+                else
+                {
+                    RNG = UnityEngine.Random.Range(0, normalRoomLvl1.Count);
+ 
+
+                    return normalRoomLvl1[RNG].sceneName;
+                }
+            case RoomTypes.Elite:
+                if (area == 2)
+                {
+                    RNG = UnityEngine.Random.Range(0, eliteRoomLvl2.Count);
+                    return eliteRoomLvl2[RNG].sceneName;
+                }
+                else
+                {
+                    RNG = UnityEngine.Random.Range(0, eliteRoomLvl1.Count);
+                    return eliteRoomLvl1[RNG].sceneName;
+                }
+            case RoomTypes.Boss:
+                if (area == 2)
+                {
+                    RNG = UnityEngine.Random.Range(0, bossRoomLvl2.Count);
+                    if (currentMapNode.roomType == RoomTypes.Boss)
+                    {
+                        return stairwayRoom[0].sceneName;
+                    }
+
+                    return bossRoomLvl2[RNG].sceneName;
+                }
+                else
+                {
+                    RNG = UnityEngine.Random.Range(0, bossRoomLvl1.Count);
+                    if (currentMapNode.roomType == RoomTypes.Boss)
+                    {
+                        return stairwayRoom[0].sceneName;
+                    }
+
+                    return bossRoomLvl1[RNG].sceneName;
+                }
+              
             case RoomTypes.Treasure:
-                RNG = UnityEngine.Random.Range(0, treasureRoomLvl1.Count);
-                return treasureRoomLvl1[RNG].sceneName;
+                if (area == 2)
+                {
+                    RNG = UnityEngine.Random.Range(0, treasureRoomLvl2.Count);
+                    return treasureRoomLvl2[RNG].sceneName;
+                }
+                else
+                {
+                    RNG = UnityEngine.Random.Range(0, treasureRoomLvl1.Count);
+                    return treasureRoomLvl1[RNG].sceneName;
+                }
             case RoomTypes.Shop:
                 RNG = UnityEngine.Random.Range(0, shopRoomLvl1.Count);
                 return shopRoomLvl1[RNG].sceneName;
             case RoomTypes.Event:
-                RNG = UnityEngine.Random.Range(0, eventRoomLvl1.Count);
-                return eventRoomLvl1[RNG].sceneName;
+                if (area == 2)
+                {
+                    RNG = UnityEngine.Random.Range(0, eventRoomLvl2.Count);
+                    return eventRoomLvl2[RNG].sceneName;
+                }
+                else
+                {
+                    RNG = UnityEngine.Random.Range(0, eventRoomLvl1.Count);
+                    return eventRoomLvl1[RNG].sceneName;
+                }
             case RoomTypes.Rest:
                 RNG = UnityEngine.Random.Range(0, restRoomLvl1.Count);
                 return restRoomLvl1[RNG].sceneName;
