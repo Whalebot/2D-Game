@@ -15,6 +15,8 @@ public class AudioManager : MonoBehaviour
     public AudioSource battleMusic;
     public float fadeSpeed;
 
+    public AudioSource SFXPrefab;
+
     float ASstart;
     float battleStart;
 
@@ -54,6 +56,21 @@ public class AudioManager : MonoBehaviour
             sfx.Remove(temp[i]);
             Destroy(temp[i].gameObject);
         }
+    }
+
+    public void PlayAudio(AudioClip clip, Vector3 position, float volume = 1f)
+    {
+        AudioSource sfx = Instantiate(SFXPrefab, position, Quaternion.identity);
+
+        sfx.clip = clip;
+
+        sfx.Play();
+
+        sfx.volume = volume;
+
+        float length = sfx.clip.length;
+
+        Destroy(sfx.gameObject, length);
     }
 
     public void AddSFX(AudioSource AS)
@@ -128,6 +145,6 @@ public class AudioManager : MonoBehaviour
 
     public void GoToState(AudioState state)
     {
-     
+
     }
 }

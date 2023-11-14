@@ -343,10 +343,7 @@ public class AttackScript : MonoBehaviour
                 {
                     if (frame == item.startup)
                     {
-                        GameObject fx = Instantiate(item.prefab, transform.position, transform.rotation, hitboxContainer);
-                        fx.transform.localPosition = item.prefab.transform.localPosition;
-                        fx.transform.localRotation = item.prefab.transform.rotation;
-                        fx.transform.SetParent(null);
+                        AudioManager.Instance.PlayAudio(item.audioClip, transform.position, item.volume);
                     }
                 }
         }

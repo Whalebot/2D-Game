@@ -119,7 +119,7 @@ public class Hazard : MonoBehaviour
             if (hitSFX != null)
                 Instantiate(hitSFX, colPos.position, colPos.rotation);
             else
-                Instantiate(VFXManager.Instance.defaultHitSFX, colPos.position, colPos.rotation);
+                Instantiate(VFXManager.Instance.defaultHitSFX.audioClip, colPos.position, colPos.rotation);
 
         }
 

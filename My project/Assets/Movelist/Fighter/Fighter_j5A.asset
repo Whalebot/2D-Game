@@ -20,7 +20,7 @@ MonoBehaviour:
   firstStartupFrame: 10
   lastActiveFrame: 12
   totalMoveDuration: 27
-  firstGatlingFrame: 15
+  firstGatlingFrame: 12
   recoveryFrames: 15
   attacks:
   - attackLevel: 3
@@ -33,7 +33,7 @@ MonoBehaviour:
     poiseBreak: 5
     startupFrame: 10
     activeFrames: 3
-    gatlingFrames: 5
+    gatlingFrames: 2
     groundHitProperty:
       pushback: {x: 2, y: 0}
       hitState: 0
@@ -52,7 +52,9 @@ MonoBehaviour:
     position: {x: 0, y: 0.5, z: 0.5}
     rotation: {x: -5.44, y: 180, z: 0}
     scale: {x: 0.4, y: 0.4, z: 0.4}
-  sfx: []
+  sfx:
+  - startup: 5
+    audioClip: {fileID: 8300000, guid: 4087704416222b244a3ea08215ec4de1, type: 3}
   hitFX:
     type: 0
     startup: 1

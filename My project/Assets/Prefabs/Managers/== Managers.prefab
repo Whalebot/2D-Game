@@ -309,8 +309,8 @@ AudioSource:
   m_GameObject: {fileID: 399436146496126040}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -7018903642717940045, guid: 2e91ef8f6cda55c4e80721b0bf0700a5, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 1a028420d0a5c1142b93d8fc813bfaf9, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -540,19 +540,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultHitVFX: {fileID: 1347330118340980, guid: a270d4b31a4d11a4b8302acf069f853a, type: 3}
   defaultBlockVFX: {fileID: 1812881953744270, guid: ed0c022a338d3384d9ee622d354a94e2, type: 3}
-  counterHitVFX: {fileID: 1812881953744270, guid: 00e015abc60ea4442b4a4315704756f0, type: 3}
-  defaultHitSFX: {fileID: 1812881953744270, guid: 00e015abc60ea4442b4a4315704756f0, type: 3}
-  defaultBlockSFX: {fileID: 1812881953744270, guid: 00e015abc60ea4442b4a4315704756f0, type: 3}
-  counterHitSFX: {fileID: 1812881953744270, guid: 00e015abc60ea4442b4a4315704756f0, type: 3}
-  exMoveVFX: {fileID: 1812881953744270, guid: 00e015abc60ea4442b4a4315704756f0, type: 3}
+  defaultHitSFX:
+    startup: 1
+    audioClip: {fileID: 8300000, guid: 4c4e10ccc0f27b043a29998401d41a51, type: 3}
+    volume: 0.2
+  defaultBlockSFX:
+    startup: 1
+    audioClip: {fileID: 0}
+    volume: 1
   defaultProjectileVFX: {fileID: 1812881953744270, guid: 00e015abc60ea4442b4a4315704756f0, type: 3}
   defaultProjectileSFX: {fileID: 1812881953744270, guid: 00e015abc60ea4442b4a4315704756f0, type: 3}
   recoveryFX: {fileID: 0}
   wakeupFX: {fileID: 0}
-  throwFX: {fileID: 0}
-  throwSFX: {fileID: 0}
-  throwBreakVFX: {fileID: 0}
-  throwBreakSFX: {fileID: 0}
   particles: []
   deletedParticles: []
 --- !u!1 &399436147411117087
@@ -775,6 +774,7 @@ MonoBehaviour:
   defaultBGM: {fileID: 0}
   battleMusic: {fileID: 0}
   fadeSpeed: 0
+  SFXPrefab: {fileID: 8003423194213289120, guid: 0a652b92a12cbc44bb1a5d988583a8f9, type: 3}
   audioState: 0
 --- !u!1001 &399436147044443372
 PrefabInstance:

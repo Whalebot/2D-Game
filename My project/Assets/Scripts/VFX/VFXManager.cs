@@ -10,23 +10,15 @@ public class VFXManager : MonoBehaviour
     }
     public GameObject defaultHitVFX;
     public GameObject defaultBlockVFX;
-    public GameObject counterHitVFX;
-    public GameObject defaultHitSFX;
-    public GameObject defaultBlockSFX;
-    public GameObject counterHitSFX;
-    public GameObject exMoveVFX;
+
+    public SFX defaultHitSFX;
+    public SFX defaultBlockSFX;
 
     public GameObject defaultProjectileVFX;
     public GameObject defaultProjectileSFX;
 
     public GameObject recoveryFX;
     public GameObject wakeupFX;
-
-    public GameObject throwFX;
-    public GameObject throwSFX;
-
-    public GameObject throwBreakVFX;
-    public GameObject throwBreakSFX;
 
     public List<ParticleObject> particles;
     public List<ParticleObject> deletedParticles;

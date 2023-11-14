@@ -77,7 +77,11 @@ MonoBehaviour:
     position: {x: 0, y: 1.5, z: 0.5}
     rotation: {x: 180, y: 0, z: 0}
     scale: {x: 0.5, y: 0.5, z: 1}
-  sfx: []
+  sfx:
+  - startup: 16
+    audioClip: {fileID: 8300000, guid: e6c87645e4bc9b140a91a5c04fa12a95, type: 3}
+  - startup: 32
+    audioClip: {fileID: 8300000, guid: 11c8f1b379174c345a7b2217e042f70c, type: 3}
   hitFX:
     type: 0
     startup: 1

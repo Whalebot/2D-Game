@@ -216,9 +216,13 @@ public class Hitbox : MonoBehaviour
         {
             if (move.blockFX != null)
                 Instantiate(move.blockFX, colPos.position, colPos.rotation);
-            else Instantiate(VFXManager.Instance.defaultBlockVFX, colPos.position, colPos.rotation);
-            if (move.blockSFX != null)
-                Instantiate(move.blockSFX, colPos.position, colPos.rotation);
+            else 
+                Instantiate(VFXManager.Instance.defaultBlockVFX, colPos.position, colPos.rotation);
+
+            if (move.hitSFX != null)
+                AudioManager.Instance.PlayAudio(move.blockSFX, colPos.position);
+            else
+                AudioManager.Instance.PlayAudio(VFXManager.Instance.defaultBlockSFX.audioClip, colPos.position, VFXManager.Instance.defaultHitSFX.volume);
         }
         else
         {
@@ -232,9 +236,9 @@ public class Hitbox : MonoBehaviour
                 Instantiate(VFXManager.Instance.defaultHitVFX, colPos.position, colPos.rotation);
 
             if (move.hitSFX != null)
-                Instantiate(move.hitSFX, colPos.position, colPos.rotation);
+                AudioManager.Instance.PlayAudio(move.hitSFX, colPos.position);
             else
-                Instantiate(VFXManager.Instance.defaultHitSFX, colPos.position, colPos.rotation);
+                AudioManager.Instance.PlayAudio(VFXManager.Instance.defaultHitSFX.audioClip, colPos.position, VFXManager.Instance.defaultHitSFX.volume);
 
         }
 
@@ -273,7 +277,7 @@ public class Hitbox : MonoBehaviour
         if (move.hitSFX != null)
             Instantiate(move.hitSFX, colPos.position, colPos.rotation);
         else
-            Instantiate(VFXManager.Instance.defaultHitSFX, colPos.position, colPos.rotation);
+            Instantiate(VFXManager.Instance.defaultHitSFX.audioClip, colPos.position, colPos.rotation);
 
         attack.newAttack = false;
         attack.Idle();

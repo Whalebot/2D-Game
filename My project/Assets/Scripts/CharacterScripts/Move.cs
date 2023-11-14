@@ -35,9 +35,9 @@ public class Move : ScriptableObject
     [TabGroup("Group 2", "FX")] public VFX hitFX;
     [TabGroup("Group 2", "FX")] public GameObject blockFX;
     [TabGroup("Group 2", "FX")] public GameObject counterhitFX;
-    [TabGroup("Group 2", "FX")] public GameObject hitSFX;
-    [TabGroup("Group 2", "FX")] public GameObject blockSFX;
-    [TabGroup("Group 2", "FX")] public GameObject counterhitSFX;
+    [TabGroup("Group 2", "FX")] public AudioClip hitSFX;
+    [TabGroup("Group 2", "FX")] public AudioClip blockSFX;
+    [TabGroup("Group 2", "FX")] public AudioClip counterhitSFX;
 
     [Header("Move properties")]
     [TabGroup("Move properties")] public bool useAttackSpeed = true;
@@ -118,7 +118,8 @@ public class SFX
 {
 
     public int startup = 1;
-    public GameObject prefab;
+    public AudioClip audioClip;
+    public float volume = 1;
 }
 
 [System.Serializable]
