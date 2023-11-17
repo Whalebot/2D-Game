@@ -10,24 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41f2923ec284c6840a8cd468af82cb4d, type: 3}
-  m_Name: Fire
+  m_Name: Earth Special
   m_EditorClassIdentifier: 
   skillRank: 2
-  type: 0
-  title: Fire
-  sprite: {fileID: 21300000, guid: 03281c94f9924fa47a72404b965890f6, type: 3}
+  type: 1
+  title: Earth Special
+  sprite: {fileID: 21300000, guid: 85f6633326b0ca44ebfc454ec65d2730, type: 3}
   prerequisiteSkills: []
   prerequisiteMoves: []
   newMoves: []
   skillProperties:
-  - {fileID: 11400000, guid: a17681f5dbf90714885bddd1ddc7cbf9, type: 2}
-  description: Your attacks apply burning status on enemies.
+  - {fileID: 11400000, guid: 22c52f966a43e03459dbf89237ebb14b, type: 2}
+  description: Your attacks gets increased knockback and pushed enemies will hurt
+    other enemies upon collision
   stats:
     currentHealth: 0
     maxHealth: 0
     currentMeter: 0
     maxMeter: 0
-    level: 1
+    level: 0
     strength: 0
     intelligence: 0
     agility: 0
@@ -35,22 +36,22 @@ MonoBehaviour:
     gold: 0
     attack: 0
     magic: 0
-    attackSpeed: 1
-    jumps: 1
-    airActions: 1
+    attackSpeed: 0
+    jumps: 0
+    airActions: 0
     rerolls: 0
-    movementSpeedModifier: 1
-    meterGainModifier: 1
+    movementSpeedModifier: 0
+    meterGainModifier: 0
     poiseRegen: 0
     poise: 0
     defense: 0
     resistance: 0
-    guardBreakModifier: 1
-    sizeModifier: 1
-    damageModifierPercentage: 1
+    guardBreakModifier: 0
+    sizeModifier: 0
+    damageModifierPercentage: 0
     backstabModifier: 0
     damageModifierFlat: 0
-    hitStunMultiplier: 1
-    knockbackModifier: 1
+    hitStunMultiplier: 0
+    knockbackModifier: 0
     critChance: 0
-    critMultiplier: 1.5
+    critMultiplier: 0

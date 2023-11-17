@@ -21,6 +21,7 @@ public class SkillHandler : MonoBehaviour
         status = GetComponent<Status>();
 
         SaveManager.Instance.startLoadEvent += LoadData;
+        GameManager.Instance.advanceGameState += ExecuteFrame;
         DuplicateMoveset();
     }
     void Start()
@@ -29,6 +30,24 @@ public class SkillHandler : MonoBehaviour
         LateBehaviour();
         attackScript.hitEvent += OnHitBehaviour;
         WaveBeahviour();
+    }
+    private void OnDisable()
+    {
+        SaveManager.Instance.startLoadEvent -= LoadData;
+        GameManager.Instance.advanceGameState -= ExecuteFrame;
+    }
+    void ExecuteFrame()
+    {
+        if (attackScript.attacking)
+        {
+            foreach (var item in learnedSkills)
+            {
+                foreach (var prop in item.skillProperties)
+                {
+                    prop.AttackingBehaviour(this);
+                }
+            }
+        }
     }
     void DuplicateMoveset()
     {

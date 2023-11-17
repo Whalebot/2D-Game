@@ -10,17 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41f2923ec284c6840a8cd468af82cb4d, type: 3}
-  m_Name: Broken shit
+  m_Name: Ice Attack
   m_EditorClassIdentifier: 
-  skillRank: 3
+  skillRank: 2
   type: 1
-  title: Broken shit
-  sprite: {fileID: 21300000, guid: 645929b266a33e746bd6dc044c6cf850, type: 3}
+  title: Ice Attack
+  sprite: {fileID: 21300000, guid: 89d6fcf1b6e03be45b794182ea1e0de7, type: 3}
   prerequisiteSkills: []
   prerequisiteMoves: []
   newMoves: []
-  skillProperties: []
-  description: Reduce movement speed with 10% and increase damage with 50%
+  skillProperties:
+  - {fileID: 11400000, guid: 6b9538588f48fef408efe1807b1ed290, type: 2}
+  description: Adds 2 dmg to hits and applies ice when landing a hit
   stats:
     currentHealth: 0
     maxHealth: 0
@@ -35,9 +36,10 @@ MonoBehaviour:
     attack: 0
     magic: 0
     attackSpeed: 0
+    jumps: 0
     airActions: 0
     rerolls: 0
-    movementSpeedModifier: -0.2
+    movementSpeedModifier: 0
     meterGainModifier: 0
     poiseRegen: 0
     poise: 0
@@ -45,7 +47,7 @@ MonoBehaviour:
     resistance: 0
     guardBreakModifier: 0
     sizeModifier: 0
-    damageModifierPercentage: 0.5
+    damageModifierPercentage: 0
     backstabModifier: 0
     damageModifierFlat: 0
     hitStunMultiplier: 0

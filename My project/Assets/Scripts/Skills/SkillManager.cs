@@ -245,3 +245,8 @@ public class SkillManager : MonoBehaviour
     #endregion
 
 }
+
+public enum RewardType
+{
+Skill, Item, Potential, Gold
+}

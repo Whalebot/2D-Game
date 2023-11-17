@@ -12,10 +12,10 @@ public class UniqueSkillProperty : ScriptableObject
     public virtual void LateBehaviour(SkillHandler handler)
     {
     }
-    public virtual void RepeatBehaviour(SkillHandler handler)
+    public virtual void AttackingBehaviour(SkillHandler handler)
     {
     }
-    public virtual void AttackActiveBehaviour(SkillHandler handler)
+    public virtual void ActiveFrameBehaviour(SkillHandler handler)
     {
     }
     public virtual void WaveBehaviour(SkillHandler handler)

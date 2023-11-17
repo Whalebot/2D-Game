@@ -54,7 +54,7 @@ public class StatusEffect : ScriptableObject
     }
     public virtual void RefreshBehaviour()
     {
-        tickCounter = 0;
+        //tickCounter = 0;
         if (stacks < maxStacks)
             stacks++;
         durationCounter = duration;

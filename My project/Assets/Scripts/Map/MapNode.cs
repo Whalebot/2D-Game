@@ -7,23 +7,30 @@ public class MapNode : MonoBehaviour
 {
     public int x, y;
     public RoomTypes roomType;
+    public RewardType rewardType;
+
     public Image img;
+    public Image rewardImg;
     public GameObject visitedIcon;
     public TextMeshProUGUI roomName;
     public List<MapNode> entryRooms;
     public List<MapNode> exitRooms;
     public Sprite normalSprite, eliteSprite, bossSprite, treasureSprite, shopSprite, eventSprite, restSprite;
+    public Sprite goldRewardSprite, itemRewardSprite, skillRewardSprite, potentialRewardSprite;
     public void SetupNode(RoomTypes room)
     {
         roomName.text = "" + room;
         roomType = room;
+        rewardImg.gameObject.SetActive(false);
         switch (room)
         {
             case RoomTypes.Normal:
                 img.sprite = normalSprite;
+                rewardImg.gameObject.SetActive(true);
                 break;
             case RoomTypes.Elite:
                 img.sprite = eliteSprite;
+                rewardImg.gameObject.SetActive(true);
                 break;
             case RoomTypes.Boss:
                 img.sprite = bossSprite;
@@ -46,7 +53,31 @@ public class MapNode : MonoBehaviour
                 break;
         }
     }
-    public void Visited() {
+
+    public void SetupReward(RewardType reward)
+    {
+        rewardType = reward;
+
+        switch (rewardType)
+        {
+            case RewardType.Skill:
+                rewardImg.sprite = skillRewardSprite;
+                break;
+            case RewardType.Item:
+                rewardImg.sprite = itemRewardSprite;
+                break;
+            case RewardType.Potential:
+                rewardImg.sprite = potentialRewardSprite;
+                break;
+            case RewardType.Gold:
+                rewardImg.sprite = goldRewardSprite;
+                break;
+            default:
+                break;
+        }
+    }
+    public void Visited()
+    {
         visitedIcon.SetActive(true);
     }
     public MapNode GetExitNode(int i)

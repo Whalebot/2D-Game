@@ -77,19 +77,4 @@ public class CharacterSFX : MonoBehaviour
     {
         Instantiate(footstep, transform.position, Quaternion.identity);
     }
-
-    public void Roll()
-    {
-        Instantiate(roll, transform.position, Quaternion.identity);
-    }
-
-
-    void Roar(AnimationEvent evt)
-    {
-        if (evt.animatorClipInfo.weight > 0.5F)
-        {
-            Instantiate(roarSFX, transform.position, Quaternion.identity);
-
-        }
-    }
 }

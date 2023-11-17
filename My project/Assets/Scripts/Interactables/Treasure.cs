@@ -7,6 +7,7 @@ public class Treasure : Interactable
 {
 
     public Rank rank;
+    public RewardType reward;
     public bool autoSetup = true;
     public TextMeshProUGUI treasureText;
     public GameObject treasure;
@@ -14,14 +15,41 @@ public class Treasure : Interactable
     public override void Start()
     {
         base.Start();
-        treasureText.text = rank + " Rank Treasure";
+
+
+
+        SetupText();
         AIManager.Instance.roomClearEvent += SpawnTreasure;
         if (LevelManager.Instance.currentRoomType != RoomTypes.Treasure && LevelManager.Instance.currentRoomType != RoomTypes.Event)
             treasure.SetActive(false);
     }
 
-    void AutoSetupTreasure() {
-        if (LevelManager.Instance != null && autoSetup) {
+    void SetupText()
+    {
+        switch (reward)
+        {
+            case RewardType.Skill:
+                treasureText.text = rank + " Rank Treasure";
+                break;
+            case RewardType.Item:
+                treasureText.text = rank + " Rank Treasure";
+                break;
+            case RewardType.Potential:
+                treasureText.text = rank + " Rank Treasure";
+                break;
+            case RewardType.Gold:
+                treasureText.text = rank + " Gold";
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    void AutoSetupTreasure()
+    {
+        if (LevelManager.Instance != null && autoSetup)
+        {
             switch (LevelManager.Instance.currentMapNode.roomType)
             {
                 case RoomTypes.Normal:
@@ -55,11 +83,6 @@ public class Treasure : Interactable
             treasure.SetActive(true);
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.CompareTag("Player"))
-    //        GivePowerup();
-    //}
     public override void South()
     {
         base.South();
@@ -67,8 +90,27 @@ public class Treasure : Interactable
     }
     public void GivePowerup()
     {
-        SkillManager.Instance.RollSkills(rank);
-        GameManager.Instance.OpenGetSkillWindow();
+        switch (reward)
+        {
+            case RewardType.Skill:
+                SkillManager.Instance.RollSkills(rank);
+                GameManager.Instance.OpenGetSkillWindow();
+                break;
+            case RewardType.Item:
+                SkillManager.Instance.RollSkills(rank);
+                GameManager.Instance.OpenGetSkillWindow();
+                break;
+            case RewardType.Potential:
+                SkillManager.Instance.RollSkills(rank);
+                GameManager.Instance.OpenGetSkillWindow();
+                break;
+            case RewardType.Gold:
+                GameManager.Instance.Gold += 150;
+                break;
+            default:
+                break;
+        }
+
         Destroy(gameObject);
     }
 }

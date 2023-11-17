@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "StatusEffectSkillProperty", menuName = "ScriptableObjects/SkillProperty/StatusEffectSkillProperty")]
 public class StatusEffectSkillProperty : UniqueSkillProperty
 {
+    public MoveGroup affectedMoves;
     public List<StatusEffect> appliedEffects;
     public override void HitBehaviour(HitInfo hitInfo)
     {
@@ -13,9 +14,12 @@ public class StatusEffectSkillProperty : UniqueSkillProperty
         if (hitInfo.status == null)
             return;
 
+        if (!affectedMoves.moves.Contains(hitInfo.move))
+            return;
+
         foreach (var item in appliedEffects)
         {
-                hitInfo.status.ApplyStatusEffect(item);
+            hitInfo.status.ApplyStatusEffect(item);
         }
     }
 }

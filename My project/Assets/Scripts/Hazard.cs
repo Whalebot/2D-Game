@@ -7,6 +7,8 @@ public class Hazard : MonoBehaviour
     public float baseDamage = 1;
     public int totalDamage;
     public int resetTimer = 30;
+    public int life = 0;
+    public int lifeCounter;
     public bool followParent = false;
     int resetcounter;
     public Alignment alignment;
@@ -15,7 +17,7 @@ public class Hazard : MonoBehaviour
     public VFX hitVFX;
     public GameObject hitSFX;
     public GameObject collider;
-
+    public ParticleSystem ps;
     Vector3 knockbackDirection;
     Vector3 aVector;
     Rigidbody rb;
@@ -24,13 +26,14 @@ public class Hazard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = transform.parent.GetComponentInParent<Rigidbody>();
+        if (followParent)
+            rb = transform.parent.GetComponentInParent<Rigidbody>();
         GameManager.Instance.advanceGameState += ExecuteFrame;
         resetcounter = resetTimer;
     }
     private void OnDisable()
     {
-        GameManager.Instance.advanceGameState -= ExecuteFrame;
+
     }
 
     void ExecuteFrame()
@@ -58,6 +61,30 @@ public class Hazard : MonoBehaviour
         {
             collider.gameObject.SetActive(true);
         }
+
+        if (life > 0)
+        {
+            lifeCounter++;
+            if (lifeCounter >= life)
+                StartCoroutine(DelayDestroy());
+        }
+    }
+
+    IEnumerator DelayDestroy()
+    {
+        collider.gameObject.SetActive(false);
+        if (ps != null)
+        {
+            ParticleSystem[] temp = GetComponentsInChildren<ParticleSystem>();
+            foreach (var item in temp)
+            {
+                item.Stop();
+            }
+
+        }
+        GameManager.Instance.advanceGameState -= ExecuteFrame;
+        yield return new WaitForSeconds(1);
+        Destroy(gameObject);
     }
 
     public void OnTriggerEnter(Collider other)
@@ -101,7 +128,8 @@ public class Hazard : MonoBehaviour
         int damageDealt = Mathf.RoundToInt((totalDamage * (1 - other.currentStats.defense)) - other.currentStats.resistance);
 
 
-        if (damageDealt <= 0)
+        if (baseDamage == 0) { }
+        else if (damageDealt <= 0)
         {
             Instantiate(VFXManager.Instance.defaultBlockVFX, colPos.position, colPos.rotation);
         }

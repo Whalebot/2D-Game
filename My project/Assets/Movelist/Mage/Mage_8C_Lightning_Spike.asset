@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
   m_Name: Mage_8C_Lightning_Spike
   m_EditorClassIdentifier: 
-  animationID: 51
-  meterCost: 0
-  meterGain: 20
+  animationID: 553
+  meterCost: 50
+  meterGain: 0
   consumeMeterOnActiveFrame: 0
   icon: {fileID: 0}
   firstStartupFrame: 40
@@ -41,7 +41,8 @@ MonoBehaviour:
       pushback: {x: 0, y: 0}
       hitState: 0
   type: 0
-  uniqueProperties: []
+  uniqueProperties:
+  - {fileID: 11400000, guid: 36415a179a6f3e448a51a7a75b8e5370, type: 2}
   screenShake:
   - type: 0
     startup: 40

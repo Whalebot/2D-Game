@@ -6,25 +6,29 @@ using Sirenix.OdinInspector;
 public class MapGenerator : MonoBehaviour
 {
     public int inEditorSeed;
-    RectTransform rectTransform;
-    public Vector3 scrollPosition;
-    public Vector3 clampPosition;
-    public Transform mapContainer;
-    Vector2 startPosition;
-    public GameObject mapNodePrefab;
-    public GameObject mapLinePrefab;
-    public Vector2 nodeSpacing;
-    public Vector2 nodeNoise;
-    public int roomsPerFloor = 5;
-    public int roomChoices = 3;
-    public int treasureChance = 10;
-    public int restChance = 10;
-    public int shopChance = 20;
-    public int eliteChance = 20;
-    public int eventChance = 40;
 
-    public MapNode startNode;
-    public List<MapNode> mapNodes;
+    [TabGroup("Map Generation")] public Vector2 nodeSpacing;
+    [TabGroup("Map Generation")] public Vector2 nodeNoise;
+    [TabGroup("Map Generation")] public int roomsPerFloor = 5;
+    [TabGroup("Map Generation")] public int roomChoices = 3;
+    [TabGroup("Map Generation")] public int treasureChance = 10;
+    [TabGroup("Map Generation")] public int restChance = 10;
+    [TabGroup("Map Generation")] public int shopChance = 20;
+    [TabGroup("Map Generation")] public int eliteChance = 20;
+    [TabGroup("Map Generation")] public int eventChance = 40;
+
+    [TabGroup("Reward Generation")] public int potentialChance = 25;
+    [TabGroup("Reward Generation")] public int goldChance = 25;
+
+    RectTransform rectTransform;
+    [TabGroup("Settings & Components")] public Vector3 scrollPosition;
+    [TabGroup("Settings & Components")] public Vector3 clampPosition;
+    [TabGroup("Settings & Components")] public Transform mapContainer;
+    Vector2 startPosition;
+    [TabGroup("Settings & Components")] public GameObject mapNodePrefab;
+    [TabGroup("Settings & Components")] public GameObject mapLinePrefab;
+    [TabGroup("Settings & Components")] public MapNode startNode;
+    [TabGroup("Settings & Components")] public List<MapNode> mapNodes;
 
     private void Start()
     {
@@ -115,7 +119,7 @@ public class MapGenerator : MonoBehaviour
                 tempNode.transform.localPosition = new Vector3(nodeSpacing.x * pos + x, nodeSpacing.y * i + y);
                 tempNode.name = $"{i}-{j}";
                 MapNode node = tempNode.GetComponent<MapNode>();
-                node.SetupNode(RollRoomType());
+
                 node.x = j;
                 node.y = i;
 
@@ -214,9 +218,15 @@ public class MapGenerator : MonoBehaviour
 
                 if (i == roomsPerFloor - 1)
                     ConnectNodes(node, bossNode);
+
+                node.SetupNode(RollRoomType(node));
             }
 
             previousFloorCount = randomRoomChoices;
+        }
+        foreach (var item in mapNodes)
+        {
+            RollRewardType(item);
         }
     }
 
@@ -231,7 +241,96 @@ public class MapGenerator : MonoBehaviour
         tempNode.transform.localScale = new Vector3(1, Vector2.Distance(to.transform.localPosition, from.transform.localPosition) * 0.008f, 1);
         tempNode.transform.localRotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, (to.transform.localPosition - from.transform.localPosition).normalized));
     }
+    void RollRewardType(MapNode node)
+    {
+        bool foundGold = false;
+        foreach (var item in node.exitRooms)
+        {
+            if (item.rewardType == RewardType.Gold)
+                foundGold = true;
 
+            int RNG = UnityEngine.Random.Range(0, 100);
+
+            if (item.roomType == RoomTypes.Elite)
+            {
+                if (RNG <= 50)
+                {
+                    item.SetupReward(RewardType.Potential);
+                    continue;
+                }
+
+                item.SetupReward(RewardType.Item);
+                continue;
+            }
+
+
+            if (RNG <= potentialChance)
+            {
+                item.SetupReward(RewardType.Potential);
+                continue;
+            }
+
+            RNG = UnityEngine.Random.Range(0, 100);
+            if (RNG <= goldChance && !foundGold)
+            {
+                item.SetupReward(RewardType.Gold);
+                continue;
+            }
+
+            item.SetupReward(RewardType.Skill);
+
+        }
+    }
+
+    RoomTypes RollRoomType(MapNode node)
+    {
+        bool foundShop = false;
+        bool foundElite = false;
+        bool foundRest = false;
+        foreach (var item in node.exitRooms)
+        {
+            if (item.roomType == RoomTypes.Shop)
+                foundShop = true;
+            if (item.roomType == RoomTypes.Elite)
+                foundElite = true;
+            if (item.roomType == RoomTypes.Rest)
+                foundRest = true;
+        }
+
+        if (node.y == 9)
+            return RoomTypes.Treasure;
+
+        int RNG = UnityEngine.Random.Range(0, 100);
+        if (RNG <= treasureChance)
+            return RoomTypes.Treasure;
+
+        if (node.y != 1 && !foundElite)
+        {
+            RNG = UnityEngine.Random.Range(0, 100);
+            if (RNG <= eliteChance)
+                return RoomTypes.Elite;
+        }
+
+        if (!foundShop)
+        {
+            RNG = UnityEngine.Random.Range(0, 100);
+            if (RNG <= shopChance)
+                return RoomTypes.Shop;
+        }
+
+        RNG = UnityEngine.Random.Range(0, 100);
+        if (RNG <= eventChance)
+            return RoomTypes.Event;
+
+        if (node.y != 1 && !foundRest)
+        {
+            RNG = UnityEngine.Random.Range(0, 100);
+            if (RNG <= restChance)
+                return RoomTypes.Rest;
+        }
+
+        return RoomTypes.Normal;
+    }
     RoomTypes RollRoomType()
     {
         int RNG = UnityEngine.Random.Range(0, 100);

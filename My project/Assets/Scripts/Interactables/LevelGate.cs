@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+
 public class LevelGate : Interactable
 {
     public int gateID;
@@ -9,9 +11,12 @@ public class LevelGate : Interactable
     public string nextSceneName;
     public GameObject levelGates;
     public TextMeshProUGUI levelName;
+    public Image rewardPreviewImage;
+    public Sprite skillSprite, itemSprite, potentialSprite, goldSprite;
 
     public override void Start()
     {
+        rewardPreviewImage.gameObject.SetActive(false);
         LevelManager.Instance.spawnLevelGates += SpawnLevelGates;
         switch (gateID)
         {
@@ -38,8 +43,6 @@ public class LevelGate : Interactable
             nextSceneName = LevelManager.Instance.NextLevelName(destinationNode.roomType);
 
 
-
-        SetupGate();
         if (destinationNode == null)
         {
             levelGates.SetActive(false);
@@ -47,12 +50,36 @@ public class LevelGate : Interactable
         }
         if (LevelManager.Instance.currentRoomType == RoomTypes.Normal || LevelManager.Instance.currentRoomType == RoomTypes.Elite || LevelManager.Instance.currentRoomType == RoomTypes.Boss)
             levelGates.SetActive(false);
+
+        SetupGate();
     }
 
     void SetupGate()
     {
         if (destinationNode != null)
             levelName.text = "" + destinationNode.roomType;
+
+        if (destinationNode.roomType == RoomTypes.Normal || destinationNode.roomType == RoomTypes.Elite)
+        {
+            rewardPreviewImage.gameObject.SetActive(true);
+            switch (destinationNode.rewardType)
+            {
+                case RewardType.Skill:
+                    rewardPreviewImage.sprite = skillSprite;
+                    break;
+                case RewardType.Item:
+                    rewardPreviewImage.sprite = itemSprite;
+                    break;
+                case RewardType.Potential:
+                    rewardPreviewImage.sprite = potentialSprite;
+                    break;
+                case RewardType.Gold:
+                    rewardPreviewImage.sprite = goldSprite;
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     void SpawnLevelGates()
