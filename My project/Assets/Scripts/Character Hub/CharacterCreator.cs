@@ -16,6 +16,7 @@ public class CharacterCreator : MonoBehaviour
     [TabGroup("Components")] public CharacterVisuals visuals;
 
     [TabGroup("Components")] public List<ColorPresetSO> allPresets;
+    [TabGroup("Components")] public Animator cameraPanAnimator;
     public event Action visualsUpdateEvent;
 
     private void Awake()
@@ -30,6 +31,11 @@ public class CharacterCreator : MonoBehaviour
             LoadVisuals();
             GameManager.Instance.playerStatus.character = characters[SaveManager.Instance.VisualData.characterJob];
             GameManager.Instance.player.GetComponent<AttackScript>().moveset = characters[SaveManager.Instance.VisualData.characterJob].moveset;
+        }
+
+        if (cameraPanAnimator != null)
+        {
+            cameraPanAnimator.SetInteger("TransitionID", UnityEngine.Random.Range(0, 3));
         }
     }
     private void Start()
@@ -166,14 +172,16 @@ public class CharacterCreator : MonoBehaviour
     {
 #if UNITY_EDITOR
         if (liveUpdate)
+        {
             ApplyVisuals();
 
 
-        // Ensure continuous Update calls.
-        if (!Application.isPlaying)
-        {
-            UnityEditor.EditorApplication.QueuePlayerLoopUpdate();
-            UnityEditor.SceneView.RepaintAll();
+            // Ensure continuous Update calls.
+            if (!Application.isPlaying)
+            {
+                UnityEditor.EditorApplication.QueuePlayerLoopUpdate();
+                UnityEditor.SceneView.RepaintAll();
+            }
         }
 #endif
     }
@@ -249,7 +257,7 @@ public class CharacterCreator : MonoBehaviour
 
         visuals.UpdateVisuals();
         visuals.RandomizeMaterials();
-       
+
     }
 
     [Button]
@@ -274,44 +282,48 @@ public class CharacterCreator : MonoBehaviour
 
         foreach (var item in allPresets[currentPreset].colorPresets)
         {
-            item.material.SetColor("_MainColor", item.color * item.color);
+            foreach (var mat in item.materialGroup.materials)
+            {
+                mat.SetColor("_MainColor", item.color * item.color);
+            }
+           
         }
     }
 
-    [Button]
-    public void SaveMaterial()
-    {
-        foreach (var item in preset.colorPresets)
-        {
-            item.color = item.material.GetColor("_MainColor");
-        }
-    }
+    //[Button]
+    //public void SaveMaterial()
+    //{
+    //    foreach (var item in preset.colorPresets)
+    //    {
+    //        item.color = item.material.GetColor("_MainColor");
+    //    }
+    //}
     [Button]
     public void GetMaterials()
     {
-        SkinnedMeshRenderer[] mr = target.GetComponentsInChildren<SkinnedMeshRenderer>();
-        foreach (var thing in allPresets)
-        {
-            foreach (var item in mr)
-            {
-                foreach (var mat in item.sharedMaterials)
-                {
-                    bool isDuplicate = false;
-                    foreach (var pres in thing.colorPresets)
-                    {
-                        if (pres.material == mat)
-                            isDuplicate = true;
-                    }
-                    if (!isDuplicate)
-                    {
-                        ColorPreset temp = new ColorPreset();
-                        temp.material = mat;
-                        temp.color = Color.white;
-                        thing.colorPresets.Add(temp);
-                    }
-                }
-            }
-        }
+        //SkinnedMeshRenderer[] mr = target.GetComponentsInChildren<SkinnedMeshRenderer>();
+        //foreach (var thing in allPresets)
+        //{
+        //    foreach (var item in mr)
+        //    {
+        //        foreach (var mat in item.sharedMaterials)
+        //        {
+        //            bool isDuplicate = false;
+        //            foreach (var pres in thing.colorPresets)
+        //            {
+        //                if (pres.material == mat)
+        //                    isDuplicate = true;
+        //            }
+        //            if (!isDuplicate)
+        //            {
+        //                ColorPreset temp = new ColorPreset();
+        //                temp.material = mat;
+        //                temp.color = Color.white;
+        //                thing.colorPresets.Add(temp);
+        //            }
+        //        }
+        //    }
+        //}
     }
 
 }

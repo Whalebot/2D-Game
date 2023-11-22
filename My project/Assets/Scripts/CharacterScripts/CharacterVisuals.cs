@@ -57,8 +57,12 @@ public class CharacterVisuals : MonoBehaviour
         {
             foreach (var mat in materials)
             {
-                if (mat.name.Contains(item.material.name))
-                    mat.SetColor("_MainColor", item.color * item.color);
+                foreach (var tempMat in item.materialGroup.materials)
+                {
+                    if (mat.name.Contains(tempMat.name))
+                        mat.SetColor("_MainColor", item.color * item.color);
+                }
+
             }
         }
     }
@@ -72,8 +76,11 @@ public class CharacterVisuals : MonoBehaviour
             ColorPresetSO preset = CharacterCreator.Instance.allPresets[RNG];
             foreach (var item in preset.colorPresets)
             {
-                if (mat.name.Contains(item.material.name))
-                    mat.SetColor("_MainColor", item.color * item.color);
+                foreach (var tempMat in item.materialGroup.materials)
+                {
+                    if (mat.name.Contains(tempMat.name))
+                        mat.SetColor("_MainColor", item.color * item.color);
+                }
             }
         }
 

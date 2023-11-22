@@ -27,7 +27,7 @@ MonoBehaviour:
     attackType: 0
     damageType: 0
     hitbox: {fileID: 5860963072138344223, guid: 6a749b7ddecd8444ea2db4afaa8c34b6, type: 3}
-    damage: 1
+    damage: 1.5
     stun: 20
     hitstop: 5
     poiseBreak: 0
@@ -45,7 +45,7 @@ MonoBehaviour:
   screenShake: []
   vfx:
   - type: 0
-    startup: 10
+    startup: 12
     prefab: {fileID: 1320683006971348, guid: 83ea291b15cd5ed46be1077c6b047713, type: 3}
     deattachFromPlayer: 1
     destroyOnRecovery: 0
@@ -55,6 +55,7 @@ MonoBehaviour:
   sfx:
   - startup: 8
     audioClip: {fileID: 8300000, guid: 175791b63a6769046b72e5949353f81f, type: 3}
+    volume: 1
   hitFX:
     type: 0
     startup: 1

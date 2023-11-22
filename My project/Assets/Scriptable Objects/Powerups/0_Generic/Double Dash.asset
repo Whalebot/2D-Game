@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Double Dash
   m_EditorClassIdentifier: 
   skillRank: 0
-  type: 0
+  type: 1
   title: Double Dash
   sprite: {fileID: 0}
   prerequisiteSkills: []
@@ -44,7 +44,7 @@ MonoBehaviour:
     maxHealth: 0
     currentMeter: 0
     maxMeter: 0
-    level: 1
+    level: 0
     strength: 0
     intelligence: 0
     agility: 0
@@ -52,21 +52,22 @@ MonoBehaviour:
     gold: 0
     attack: 0
     magic: 0
-    attackSpeed: 1
+    attackSpeed: 0
+    jumps: 0
     airActions: 1
     rerolls: 0
-    movementSpeedModifier: 1
-    meterGainModifier: 1
+    movementSpeedModifier: 0
+    meterGainModifier: 0
     poiseRegen: 0
     poise: 0
     defense: 0
     resistance: 0
-    guardBreakModifier: 1
-    sizeModifier: 1
-    damageModifierPercentage: 1
+    guardBreakModifier: 0
+    sizeModifier: 0
+    damageModifierPercentage: 0
     backstabModifier: 0
     damageModifierFlat: 0
-    hitStunMultiplier: 1
-    knockbackModifier: 1
+    hitStunMultiplier: 0
+    knockbackModifier: 0
     critChance: 0
-    critMultiplier: 1.5
+    critMultiplier: 0

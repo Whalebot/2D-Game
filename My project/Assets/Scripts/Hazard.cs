@@ -33,7 +33,7 @@ public class Hazard : MonoBehaviour
     }
     private void OnDisable()
     {
-
+        GameManager.Instance.advanceGameState -= ExecuteFrame;
     }
 
     void ExecuteFrame()

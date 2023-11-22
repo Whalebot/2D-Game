@@ -11,12 +11,13 @@ public class Treasure : Interactable
     public bool autoSetup = true;
     public TextMeshProUGUI treasureText;
     public GameObject treasure;
+    public GameObject woodChest, silverChest, goldChest;
 
     public override void Start()
     {
         base.Start();
 
-
+        AutoSetupTreasure();
 
         SetupText();
         AIManager.Instance.roomClearEvent += SpawnTreasure;
@@ -53,12 +54,15 @@ public class Treasure : Interactable
             switch (LevelManager.Instance.currentMapNode.roomType)
             {
                 case RoomTypes.Normal:
+                    reward = LevelManager.Instance.currentMapNode.rewardType;
                     rank = Rank.C;
                     break;
                 case RoomTypes.Elite:
+                    reward = LevelManager.Instance.currentMapNode.rewardType;
                     rank = Rank.A;
                     break;
                 case RoomTypes.Boss:
+                    reward = LevelManager.Instance.currentMapNode.rewardType;
                     rank = Rank.S;
                     break;
                 case RoomTypes.Treasure:
@@ -70,6 +74,31 @@ public class Treasure : Interactable
                 case RoomTypes.Rest:
                     break;
                 case RoomTypes.Disabled:
+                    break;
+                default:
+                    break;
+            }
+
+            woodChest.SetActive(false);
+            silverChest.SetActive(false);
+            goldChest.SetActive(false);
+
+            switch (rank)
+            {
+                case Rank.D:
+                    woodChest.SetActive(true);
+                    break;
+                case Rank.C:
+                    woodChest.SetActive(true);
+                    break;
+                case Rank.B:
+                    silverChest.SetActive(true);
+                    break;
+                case Rank.A:
+                    silverChest.SetActive(true);
+                    break;
+                case Rank.S:
+                    goldChest.SetActive(true);
                     break;
                 default:
                     break;
@@ -106,6 +135,7 @@ public class Treasure : Interactable
                 break;
             case RewardType.Gold:
                 GameManager.Instance.Gold += 150;
+                LevelManager.Instance.SpawnLevelGates();
                 break;
             default:
                 break;

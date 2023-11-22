@@ -11,8 +11,9 @@ public class SkillManager : MonoBehaviour
     public static SkillManager Instance;
     [TabGroup("Debug")] public List<SkillSO> allSkills;
     [TabGroup("Debug")] public List<SkillSO> foundSkills;
+    [TabGroup("Debug")] public List<SkillSO> items, activeSkills, passiveSkills;
     [TabGroup("Debug")] public List<SkillSO> DSkills, CSkills, BSkills, ASkills, SSkills;
-    [TabGroup("Debug")] public List<SkillSO> activeSkills;
+    [TabGroup("Debug")] public SkillSO emptyPoolSkill;
     [TabGroup("Components")] public List<Moveset> allMovesets;
     [TabGroup("Components")] public List<SkillSelectionButton> skillButtons;
     [TabGroup("Components")] public List<ShopButton> shopButtons;
@@ -98,6 +99,40 @@ public class SkillManager : MonoBehaviour
             shopButtons[i].skillSO = skill;
             if (skill != null)
                 shopButtons[i].SetupSkill();
+        }
+    }
+    [Button]
+    public void RollSkillType(SkillType r)
+    {
+        activeSkills.Clear();
+        for (int i = 0; i < skillButtons.Count; i++)
+        {
+            SkillSO skill = null;
+            //If last skill and haven't found sufficiently high skill
+            if (i == skillButtons.Count - 1)
+            {
+                switch (r)
+                {
+                    case SkillType.Active:
+                        skill = RollSkill(activeSkills);
+                        break;
+                    case SkillType.Passive:
+                        skill = RollSkill(passiveSkills);
+                        break;
+                    case SkillType.Item:
+                        skill = RollSkill(items);
+                        break;
+                    default:
+                        break;
+                }
+
+                skillButtons[i].skillSO = skill;
+                if (skill != null)
+                    skillButtons[i].SetupSkill();
+            }
+            skillButtons[i].skillSO = skill;
+            if (skill != null)
+                skillButtons[i].SetupSkill();
         }
     }
     [Button]
@@ -199,7 +234,7 @@ public class SkillManager : MonoBehaviour
         else
         {
             Debug.Log("Found all skills");
-            return null;
+            return emptyPoolSkill;
         }
     }
 
@@ -213,12 +248,33 @@ public class SkillManager : MonoBehaviour
         BSkills.Clear();
         ASkills.Clear();
         SSkills.Clear();
+
+        items.Clear();
+        passiveSkills.Clear();
+        activeSkills.Clear();
+
         string[] skillNames = AssetDatabase.FindAssets("t:SkillSO", new[] { "Assets/Scriptable Objects" });
         foreach (var SOName in skillNames)
         {
             var SOpath = AssetDatabase.GUIDToAssetPath(SOName);
             var item = AssetDatabase.LoadAssetAtPath<SkillSO>(SOpath);
             allSkills.Add(item);
+
+            switch (item.type)
+            {
+                case SkillType.Active:
+                    activeSkills.Add(item);
+                    break;
+                case SkillType.Passive:
+                    passiveSkills.Add(item);
+                    break;
+                case SkillType.Item:
+                    items.Add(item);
+                    break;
+                default:
+                    break;
+            }
+
             switch (item.skillRank)
             {
                 case Rank.D:
@@ -248,5 +304,5 @@ public class SkillManager : MonoBehaviour
 
 public enum RewardType
 {
-Skill, Item, Potential, Gold
+    Skill, Item, Potential, Gold
 }

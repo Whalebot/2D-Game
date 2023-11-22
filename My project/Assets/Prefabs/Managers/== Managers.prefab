@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 399436146496126047}
   - component: {fileID: 399436146496126046}
   m_Layer: 0
-  m_Name: Audio Source
+  m_Name: BGM Audio Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -314,7 +314,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -773,7 +773,7 @@ MonoBehaviour:
   sfx: []
   defaultBGM: {fileID: 0}
   battleMusic: {fileID: 0}
-  fadeSpeed: 0
+  fadeSpeed: 0.01
   SFXPrefab: {fileID: 8003423194213289120, guid: 0a652b92a12cbc44bb1a5d988583a8f9, type: 3}
   audioState: 0
 --- !u!1001 &399436147044443372

@@ -16,15 +16,15 @@ public class ColorPresetSO : ScriptableObject
     }
     static int SortByName(ColorPreset p1, ColorPreset p2)
     {
-        if (p1.material == null && p2.material == null) { return 0; }
-        if (p2.material == null) { return -1; }
-        if (p1.material == null) { return 1; }
-        return p1.material.name.CompareTo(p2.material.name);
+        if (p1.materialGroup == null && p2.materialGroup == null) { return 0; }
+        if (p2.materialGroup == null) { return -1; }
+        if (p1.materialGroup == null) { return 1; }
+        return p1.materialGroup.name.CompareTo(p2.materialGroup.name);
     }
 }
 [System.Serializable]
 public class ColorPreset
 {
-    public Material material;
+    public MaterialGroupSO materialGroup;
     public Color color;
 }

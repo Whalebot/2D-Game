@@ -1026,6 +1026,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character Creator Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 8527237191093226347, guid: fa51d6cfaefcea5468ba135388bbc2dd, type: 3}
+      propertyPath: cameraPanAnimator
+      value: 
+      objectReference: {fileID: 1249551821}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1103,6 +1107,11 @@ Transform:
   - {fileID: 618586404}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!95 &1249551821 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3841509071709988667, guid: 42e0bfdb624c94f4c9626c7d4b0f0759, type: 3}
+  m_PrefabInstance: {fileID: 6733307238899008684}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1266745877
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1481,6 +1490,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4263647646799305370, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4344973749192075009, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1500,6 +1513,14 @@ PrefabInstance:
     - target: {fileID: 5207211516290660524, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7533591080901685413, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7902160589133206868, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8195908180380428752, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
       propertyPath: m_IsActive
@@ -1617,6 +1638,10 @@ PrefabInstance:
     - target: {fileID: 341838130661770984, guid: 42e0bfdb624c94f4c9626c7d4b0f0759, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841509071709988667, guid: 42e0bfdb624c94f4c9626c7d4b0f0759, type: 3}
+      propertyPath: m_UpdateMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7387584017467740566, guid: 42e0bfdb624c94f4c9626c7d4b0f0759, type: 3}
       propertyPath: m_Name

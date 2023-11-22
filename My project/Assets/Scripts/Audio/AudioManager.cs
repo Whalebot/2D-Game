@@ -81,12 +81,12 @@ public class AudioManager : MonoBehaviour
 
     public void FadeOutVolume(AudioSource source)
     {
-        StartCoroutine("ReduceVolume", source);
+        StartCoroutine(ReduceVolume(source));
     }
 
     public void FadeOutVolume()
     {
-        StartCoroutine("ReduceVolume", AS);
+        StartCoroutine(ReduceVolume(AS));
     }
 
     IEnumerator ReduceVolume(AudioSource source)
@@ -100,12 +100,12 @@ public class AudioManager : MonoBehaviour
 
     public void FadeInVolume(AudioSource source)
     {
-        StartCoroutine("IncreaseVolume", source);
+        StartCoroutine(IncreaseVolume(source));
     }
 
     public void FadeInVolume()
     {
-        StartCoroutine("IncreaseVolume");
+        StartCoroutine(IncreaseVolume());
     }
 
     IEnumerator BattleMusic()
