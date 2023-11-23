@@ -349,18 +349,19 @@ public class AI : MonoBehaviour
         {
             currentTarget = target.position;
 
-            if (Vector3.Distance(transform.position, target.transform.position) > stoppingDistance)
+            if (Vector3.Distance(transform.position, target.transform.position) > stoppingDistance && !movement.CheckEdge())
             {
                 movement.direction = MovementDirection();
             }
             else
             {
-                if (WithinAngle())
-                    Idle();
-                else
-                {
-                    movement.direction = MovementDirection();
-                }
+                Idle();
+                //if (WithinAngle())
+                //    Idle();
+                //else
+                //{
+                //    movement.direction = MovementDirection();
+                //}
             }
         }
         else

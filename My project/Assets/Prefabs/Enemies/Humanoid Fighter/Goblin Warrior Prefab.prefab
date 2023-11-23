@@ -1697,8 +1697,96 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 763658823407521956, guid: 5e43fc135bd09324fa593af850605463, type: 3}
+      propertyPath: check
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 763658823407521956, guid: 5e43fc135bd09324fa593af850605463, type: 3}
+      propertyPath: airMat
+      value: 
+      objectReference: {fileID: 13400000, guid: e4cc499f5e5bff84f93d937565404f38, type: 2}
+    - target: {fileID: 763658823407521956, guid: 5e43fc135bd09324fa593af850605463, type: 3}
+      propertyPath: check2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 763658823407521956, guid: 5e43fc135bd09324fa593af850605463, type: 3}
+      propertyPath: ground
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 763658823407521956, guid: 5e43fc135bd09324fa593af850605463, type: 3}
       propertyPath: runSpeed
-      value: 5
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 763658823407521956, guid: 5e43fc135bd09324fa593af850605463, type: 3}
+      propertyPath: stepAngle
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 763658823407521956, guid: 5e43fc135bd09324fa593af850605463, type: 3}
+      propertyPath: jumpHeight
+      value: 8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 763658823407521956, guid: 5e43fc135bd09324fa593af850605463, type: 3}
+      propertyPath: stepHeight
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 763658823407521956, guid: 5e43fc135bd09324fa593af850605463, type: 3}
+      propertyPath: direction.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 763658823407521956, guid: 5e43fc135bd09324fa593af850605463, type: 3}
+      propertyPath: stepRayLength
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 763658823407521956, guid: 5e43fc135bd09324fa593af850605463, type: 3}
+      propertyPath: fallMultiplier
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 763658823407521956, guid: 5e43fc135bd09324fa593af850605463, type: 3}
+      propertyPath: groundRayLength
+      value: 0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 763658823407521956, guid: 5e43fc135bd09324fa593af850605463, type: 3}
+      propertyPath: wallMask.m_Bits
+      value: 2048
+      objectReference: {fileID: 0}
+    - target: {fileID: 763658823407521956, guid: 5e43fc135bd09324fa593af850605463, type: 3}
+      propertyPath: enemyMask.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 763658823407521956, guid: 5e43fc135bd09324fa593af850605463, type: 3}
+      propertyPath: groundBackOffset
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 763658823407521956, guid: 5e43fc135bd09324fa593af850605463, type: 3}
+      propertyPath: preLandRayLength
+      value: 0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 763658823407521956, guid: 5e43fc135bd09324fa593af850605463, type: 3}
+      propertyPath: groundFrontOffset
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 763658823407521956, guid: 5e43fc135bd09324fa593af850605463, type: 3}
+      propertyPath: groundMask.m_Bits
+      value: 2103
+      objectReference: {fileID: 0}
+    - target: {fileID: 763658823407521956, guid: 5e43fc135bd09324fa593af850605463, type: 3}
+      propertyPath: smoothAcceleration
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 763658823407521956, guid: 5e43fc135bd09324fa593af850605463, type: 3}
+      propertyPath: passthroughDuration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 763658823407521956, guid: 5e43fc135bd09324fa593af850605463, type: 3}
+      propertyPath: frontGroundRayLength
+      value: 0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 763658823407521956, guid: 5e43fc135bd09324fa593af850605463, type: 3}
+      propertyPath: smoothDeacceleration
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 763658823407521956, guid: 5e43fc135bd09324fa593af850605463, type: 3}
+      propertyPath: groundCheckHeightOffset
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 2611016267439307869, guid: 5e43fc135bd09324fa593af850605463, type: 3}
       propertyPath: range
