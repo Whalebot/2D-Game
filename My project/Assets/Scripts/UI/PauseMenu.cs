@@ -1,16 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PauseMenu : MonoBehaviour
 {
     public MapGenerator mapGenerator;
     public StatDisplay statWindow;
+    public Button continueButton;
+    public Button restartButton;
+    public Button quitButton;
+
+    private void Awake()
+    {
+
+        continueButton.onClick.AddListener(() => Continue());
+        restartButton.onClick.AddListener(() => Restart());
+        quitButton.onClick.AddListener(() => Quit());
+    }
+
     private void OnEnable()
     {
         mapGenerator.SetupNodes();
         MarkVisitedRooms();
     }
+
+    void Continue() {
+        GameManager.Instance.CloseMenu();
+    }
+    void Restart() {
+        GameManager.Instance.LoseGame();
+    }
+    void Quit()
+    {
+
+    }
+
     void MarkVisitedRooms()
     {
 

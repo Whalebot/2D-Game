@@ -64,13 +64,13 @@ public class LevelGate : Interactable
             rewardPreviewImage.gameObject.SetActive(true);
             switch (destinationNode.rewardType)
             {
-                case RewardType.Skill:
+                case RewardType.Blessing:
                     rewardPreviewImage.sprite = skillSprite;
                     break;
                 case RewardType.Item:
                     rewardPreviewImage.sprite = itemSprite;
                     break;
-                case RewardType.Potential:
+                case RewardType.Skill:
                     rewardPreviewImage.sprite = potentialSprite;
                     break;
                 case RewardType.Gold:

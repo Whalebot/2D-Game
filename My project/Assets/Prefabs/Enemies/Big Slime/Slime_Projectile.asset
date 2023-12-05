@@ -15,6 +15,7 @@ MonoBehaviour:
   animationID: 0
   meterCost: 0
   meterGain: 10
+  consumeMeterOnActiveFrame: 0
   icon: {fileID: 0}
   firstStartupFrame: 40
   lastActiveFrame: 44
@@ -24,6 +25,7 @@ MonoBehaviour:
   attacks:
   - attackLevel: 0
     attackType: 1
+    damageType: 0
     hitbox: {fileID: 5860963072138344223, guid: 7cf3d64ca1e71d24bad3e3adfe843a4a, type: 3}
     damage: 1
     stun: 20
@@ -38,19 +40,12 @@ MonoBehaviour:
     airHitProperty:
       pushback: {x: 0, y: 0}
       hitState: 0
-    blockProperty:
-      pushback: {x: 0, y: 0}
-      hitState: 0
-    hitID: 0
   type: 0
   uniqueProperties: []
-  screenShake:
-  - type: 0
-    startup: 40
-    amplitude: 2
-    duration: 10
+  screenShake: []
   vfx:
-  - startup: 1
+  - type: 0
+    startup: 1
     prefab: {fileID: 105970, guid: 6f7145cb657b7364a84e284e02fe90e7, type: 3}
     deattachFromPlayer: 0
     destroyOnRecovery: 0
@@ -59,6 +54,7 @@ MonoBehaviour:
     scale: {x: 0.1, y: 0.1, z: 0.1}
   sfx: []
   hitFX:
+    type: 0
     startup: 1
     prefab: {fileID: 1416824176164296, guid: dc1397204bb5ee84895af2b49dac2d49, type: 3}
     deattachFromPlayer: 1
@@ -75,6 +71,7 @@ MonoBehaviour:
   keepVelocity: 0
   particleID: 0
   holdAttack: 0
+  releaseAttackMove: {fileID: 0}
   autoAim: 0
   armor: 0
   resetGatling: 0
@@ -103,11 +100,43 @@ MonoBehaviour:
     duration: 2
     momentum: {x: 8, y: 0}
     resetVelocityDuringRecovery: 0
+    xMovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    movementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    freeMovement: 0
+    useCurve: 0
+    teleport: 0
   - startFrame: 50
     duration: 2
     momentum: {x: 4, y: 0}
     resetVelocityDuringRecovery: 1
+    xMovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    movementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    freeMovement: 0
+    useCurve: 0
+    teleport: 0
   instantStartupRotation: 1
   overrideVelocity: 1
   runMomentum: 0
+  inheritForwardVelocity: 0
   stopAtEdges: 1
+  homing: 0

@@ -68,25 +68,6 @@ public class DescriptionWindow : MonoBehaviour
     }
 
 
-
-
-
-    public void DisplayUI(Skill item)
-    {
-        if (icon != null)
-            icon.sprite = item.skillSO.sprite;
-        if (titleText != null)
-            titleText.text = item.skillSO.title;
-        if (descriptionText != null)
-            descriptionText.text = CheckStringTags(item.skillSO);
-
-        expSlider.maxValue = Mathf.Pow(1.5F, item.level) * 100;
-        expSlider.value = item.experience;
-
-        levelText.text = "Lv. " + item.level;
-    }
-
-
     string CheckStringTags(string s)
     {
         List<string> words = new List<string>();

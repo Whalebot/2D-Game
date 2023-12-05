@@ -154,7 +154,7 @@ public class SkillHandler : MonoBehaviour
         modifiedStats.ResetValues();
         foreach (SkillSO skill in learnedSkills)
         {
-            if (skill.type != SkillType.Active)
+            if (skill.type != SkillType.Skill)
                 CalculateSkillStats(skill);
         }
         ApplySkillEffects(loading);

@@ -11,6 +11,8 @@ public class SkillSelectionButton : MonoBehaviour
     public SkillSO skillSO;
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI descriptionText;
+    public GameObject replacementContainer;
+    public TextMeshProUGUI replacementText;
     public Image buttonBackground;
     Button button;
     void Start()
@@ -29,6 +31,15 @@ public class SkillSelectionButton : MonoBehaviour
     {
         titleText.text = skillSO.title;
         descriptionText.text = skillSO.description;
+
+        SkillSO replacement = skillManager.CheckReplacementBlessing(skillSO);
+
+        if (replacement != null)
+        {
+            replacementContainer.SetActive(true);
+            replacementText.text = "- Replaces " + replacement.name;
+        }
+
         switch (skillSO.skillRank)
         {
             case Rank.D:

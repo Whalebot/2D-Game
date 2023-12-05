@@ -60,13 +60,13 @@ public class MapNode : MonoBehaviour
 
         switch (rewardType)
         {
-            case RewardType.Skill:
+            case RewardType.Blessing:
                 rewardImg.sprite = skillRewardSprite;
                 break;
             case RewardType.Item:
                 rewardImg.sprite = itemRewardSprite;
                 break;
-            case RewardType.Potential:
+            case RewardType.Skill:
                 rewardImg.sprite = potentialRewardSprite;
                 break;
             case RewardType.Gold:

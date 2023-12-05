@@ -277,10 +277,16 @@ public class GameManager : MonoBehaviour
     public void ToggleMenu()
     {
         menuOpen = !menuOpen;
+        if (menuOpen)
+        {
+            runNormally = false;
+        }
+        else CloseMenu();
     }
     public void CloseMenu()
     {
         menuOpen = false;
+        runNormally = true;
     }
     void FixedUpdate()
     {

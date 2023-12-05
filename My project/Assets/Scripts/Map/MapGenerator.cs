@@ -255,7 +255,7 @@ public class MapGenerator : MonoBehaviour
             {
                 if (RNG <= 50)
                 {
-                    item.SetupReward(RewardType.Potential);
+                    item.SetupReward(RewardType.Skill);
                     continue;
                 }
 
@@ -266,7 +266,7 @@ public class MapGenerator : MonoBehaviour
 
             if (RNG <= potentialChance)
             {
-                item.SetupReward(RewardType.Potential);
+                item.SetupReward(RewardType.Skill);
                 continue;
             }
 
@@ -277,7 +277,7 @@ public class MapGenerator : MonoBehaviour
                 continue;
             }
 
-            item.SetupReward(RewardType.Skill);
+            item.SetupReward(RewardType.Blessing);
 
         }
     }
@@ -297,8 +297,8 @@ public class MapGenerator : MonoBehaviour
                 foundRest = true;
         }
 
-        if (node.y == 9)
-            return RoomTypes.Treasure;
+        //if (node.y == 9)
+        //    return RoomTypes.Treasure;
 
         int RNG = UnityEngine.Random.Range(0, 100);
         if (RNG <= treasureChance)

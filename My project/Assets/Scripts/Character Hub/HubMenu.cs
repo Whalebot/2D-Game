@@ -9,6 +9,7 @@ public class HubMenu : MonoBehaviour
 {
     public Animator animator;
     public Animator faceAnimator;
+    public Animator cameraPan;
     [TabGroup("Components")] public Image classImage;
     [TabGroup("Components")] public TextMeshProUGUI classText;
     [TabGroup("Components")] public TextMeshProUGUI colorNumber;
@@ -33,14 +34,15 @@ public class HubMenu : MonoBehaviour
     [TabGroup("Components")] public Button shoesMinusButton;
     [TabGroup("Components")] public Button classPlusButton;
     [TabGroup("Components")] public Button classMinusButton;
-    [TabGroup("Components")] public GameObject cameraPan;
 
     private void Start()
     {
         colorPlusButton.onClick.AddListener(() => ChangeColor(true));
         colorMinusButton.onClick.AddListener(() => ChangeColor(false));
+
         hairPlusButton.onClick.AddListener(() => ChangeHair(true));
         hairMinusButton.onClick.AddListener(() => ChangeHair(false));
+
         topPlusButton.onClick.AddListener(() => ChangeTop(true));
         topMinusButton.onClick.AddListener(() => ChangeTop(false));
         bottomPlusButton.onClick.AddListener(() => ChangeBottom(true));
@@ -73,7 +75,9 @@ public class HubMenu : MonoBehaviour
     {
         SaveManager.Instance.SetupCharacter();
         SaveManager.Instance.Stats.ReplaceStats(CharacterCreator.Instance.characters[CharacterCreator.Instance.Class].stats);
-        cameraPan.SetActive(true);
+        cameraPan.SetInteger("TransitionID", CharacterCreator.Instance.Class);
+        animator.SetInteger("ID", CharacterCreator.Instance.Class);
+        cameraPan.gameObject.SetActive(true);
         animator.SetBool("Cutscene", true);
         faceAnimator.SetTrigger("Emote");
         StartCoroutine(FadeOutCanvas());

@@ -29,17 +29,17 @@ public class Treasure : Interactable
     {
         switch (reward)
         {
-            case RewardType.Skill:
-                treasureText.text = rank + " Rank Treasure";
+            case RewardType.Blessing:
+                treasureText.text = rank + " Rank " + reward + " Treasure";
                 break;
             case RewardType.Item:
-                treasureText.text = rank + " Rank Treasure";
+                treasureText.text = rank + " Rank " + reward + " Treasure";
                 break;
-            case RewardType.Potential:
-                treasureText.text = rank + " Rank Treasure";
+            case RewardType.Skill:
+                treasureText.text = rank + " Rank " + reward + " Treasure";
                 break;
             case RewardType.Gold:
-                treasureText.text = rank + " Gold";
+                treasureText.text = rank + " Rank Gold";
                 break;
             default:
                 break;
@@ -79,6 +79,14 @@ public class Treasure : Interactable
                     break;
             }
 
+            SetupChest();
+        }
+    }
+
+    void SetupChest()
+    {
+        if (autoSetup)
+        {
             woodChest.SetActive(false);
             silverChest.SetActive(false);
             goldChest.SetActive(false);
@@ -106,6 +114,11 @@ public class Treasure : Interactable
         }
     }
 
+    private void OnValidate()
+    {
+        SetupChest();
+    }
+
     void SpawnTreasure()
     {
         if (treasure != null)
@@ -121,16 +134,16 @@ public class Treasure : Interactable
     {
         switch (reward)
         {
-            case RewardType.Skill:
-                SkillManager.Instance.RollSkills(rank);
+            case RewardType.Blessing:
+                SkillManager.Instance.RollBlessing(rank);
                 GameManager.Instance.OpenGetSkillWindow();
                 break;
             case RewardType.Item:
-                SkillManager.Instance.RollSkills(rank);
+                SkillManager.Instance.RollItem(rank);
                 GameManager.Instance.OpenGetSkillWindow();
                 break;
-            case RewardType.Potential:
-                SkillManager.Instance.RollSkills(rank);
+            case RewardType.Skill:
+                SkillManager.Instance.RollActiveSkill(rank);
                 GameManager.Instance.OpenGetSkillWindow();
                 break;
             case RewardType.Gold:

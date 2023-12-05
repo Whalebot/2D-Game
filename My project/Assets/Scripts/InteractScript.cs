@@ -33,7 +33,7 @@ public class InteractScript : MonoBehaviour
 
     void ExecuteFrame()
     {
-        if (status.currentState == Status.State.Neutral)
+        //if (status.currentState == Status.State.Neutral)
         {
             DetectCollisions();
         }
@@ -62,7 +62,7 @@ public class InteractScript : MonoBehaviour
         }
 
         UIManager.Instance.DisableButtonPrompts();
-        Collider[] col = Physics.OverlapBox(transform.position + offset, boxSize * 0.5F, transform.rotation, interactMask);
+        Collider[] col = Physics.OverlapBox(transform.position, boxSize * 0.5F, transform.rotation, interactMask);
         foreach (Collider item in col)
         {
             if (item.transform.IsChildOf(status.transform))

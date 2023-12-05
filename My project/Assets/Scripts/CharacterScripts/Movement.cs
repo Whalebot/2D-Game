@@ -428,9 +428,12 @@ public class Movement : MonoBehaviour
 
     public void CollisionPassthrough()
     {
-        status.col.gameObject.layer = LayerMask.NameToLayer("CollisionPassthrough");
-        status.airCol.gameObject.layer = LayerMask.NameToLayer("CollisionPassthrough");
-        passthroughPlatforms = true;
+        if (status.col.gameObject.layer != LayerMask.NameToLayer("Noclip"))
+        {
+            status.col.gameObject.layer = LayerMask.NameToLayer("CollisionPassthrough");
+            status.airCol.gameObject.layer = LayerMask.NameToLayer("CollisionPassthrough");
+            passthroughPlatforms = true;
+        }
     }
     public void FallThroughPlatforms()
     {

@@ -101,7 +101,7 @@ MonoBehaviour:
   saveData:
     currrentCharacter:
       characterName: 
-      rngSeed: 379983
+      rngSeed: 0
       stats:
         currentHealth: 0
         maxHealth: 0
@@ -682,6 +682,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c3bee202c2f012548a8441482b3a4bfa, type: 2}
   - {fileID: 11400000, guid: 0b803382d3012104da799fe7c7d0c531, type: 2}
   - {fileID: 11400000, guid: c81a3fd2ab10a584bafac4a4d24586bb, type: 2}
+  - {fileID: 11400000, guid: d7b268f1d8fb6a84f8112dfab6fdfc98, type: 2}
   eliteRoomLvl1:
   - {fileID: 11400000, guid: d55bc49fff8351d4192a07b5f0831f91, type: 2}
   - {fileID: 11400000, guid: cd65eb591a13ba8468376ab75c7f5f9b, type: 2}
@@ -695,19 +696,24 @@ MonoBehaviour:
   treasureRoomLvl1:
   - {fileID: 11400000, guid: 7ec88067dc8679d4d9560e9bf519ddf0, type: 2}
   eventRoomLvl1:
-  - {fileID: 11400000, guid: 24a4bcd54472639428088d33d56b8c94, type: 2}
   - {fileID: 11400000, guid: a1218c6cdbf05c2439c0628231f1f783, type: 2}
+  - {fileID: 11400000, guid: 138a4c545816e0644907ebc50eef18a8, type: 2}
   - {fileID: 11400000, guid: cd65eb591a13ba8468376ab75c7f5f9b, type: 2}
   restRoomLvl1:
   - {fileID: 11400000, guid: 24a4bcd54472639428088d33d56b8c94, type: 2}
   stairwayRoom:
   - {fileID: 11400000, guid: 71936718a6cc3c543864c4fc1606883f, type: 2}
-  normalRoomLvl2: []
-  eliteRoomLvl2: []
+  normalRoomLvl2:
+  - {fileID: 11400000, guid: 7c5483fdae599644b952a56372f84434, type: 2}
+  eliteRoomLvl2:
+  - {fileID: 11400000, guid: efa57103355a0b6428a25ad0bd8dbab9, type: 2}
   bossRoomLvl2:
   - {fileID: 11400000, guid: c7d330b570339f549bd47b09c477d120, type: 2}
-  treasureRoomLvl2: []
-  eventRoomLvl2: []
+  treasureRoomLvl2:
+  - {fileID: 11400000, guid: 7ec88067dc8679d4d9560e9bf519ddf0, type: 2}
+  eventRoomLvl2:
+  - {fileID: 11400000, guid: 138a4c545816e0644907ebc50eef18a8, type: 2}
+  - {fileID: 11400000, guid: a1218c6cdbf05c2439c0628231f1f783, type: 2}
   area: 1
   currentLevel: 1
   treasureChance: 10
@@ -1744,6 +1750,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 399436146491855173}
     m_Modifications:
+    - target: {fileID: 3041523238274643963, guid: ab6dfc09eeb331c4bb7dc79a8b5c1247, type: 3}
+      propertyPath: skillGroup
+      value: 
+      objectReference: {fileID: 11400000, guid: e4aa5e2fbc6e92b4db98f3cae7864119, type: 2}
+    - target: {fileID: 3041523238274643963, guid: ab6dfc09eeb331c4bb7dc79a8b5c1247, type: 3}
+      propertyPath: attackGroup
+      value: 
+      objectReference: {fileID: 11400000, guid: 24321e4beb0acb04ba9e2aa62774278f, type: 2}
+    - target: {fileID: 3041523238274643963, guid: ab6dfc09eeb331c4bb7dc79a8b5c1247, type: 3}
+      propertyPath: specialGroup
+      value: 
+      objectReference: {fileID: 11400000, guid: 52dd362a8bef30e4e9ab91811d389788, type: 2}
     - target: {fileID: 3041523238274643963, guid: ab6dfc09eeb331c4bb7dc79a8b5c1247, type: 3}
       propertyPath: shopButtons.Array.data[0]
       value: 

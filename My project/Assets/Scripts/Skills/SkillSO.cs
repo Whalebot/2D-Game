@@ -18,7 +18,7 @@ public class SkillSO : ScriptableObject
 
     [TextArea(15, 20)]
     public string description;
-    [ShowIf("@type == SkillType.Passive || type == SkillType.Item")]
+    [ShowIf("@type == SkillType.Blessing || type == SkillType.Item")]
     public Stats stats;
 
     public virtual void ActivateBehaviour(SkillHandler handler)
@@ -74,4 +74,4 @@ public class NewMove
 
 public enum Rank { D, C, B, A, S }
 
-public enum SkillType { Active, Passive, Item }
+public enum SkillType { Skill, Blessing, Item }

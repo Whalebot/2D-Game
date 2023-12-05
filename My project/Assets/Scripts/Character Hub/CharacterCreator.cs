@@ -16,7 +16,6 @@ public class CharacterCreator : MonoBehaviour
     [TabGroup("Components")] public CharacterVisuals visuals;
 
     [TabGroup("Components")] public List<ColorPresetSO> allPresets;
-    [TabGroup("Components")] public Animator cameraPanAnimator;
     public event Action visualsUpdateEvent;
 
     private void Awake()
@@ -31,11 +30,6 @@ public class CharacterCreator : MonoBehaviour
             LoadVisuals();
             GameManager.Instance.playerStatus.character = characters[SaveManager.Instance.VisualData.characterJob];
             GameManager.Instance.player.GetComponent<AttackScript>().moveset = characters[SaveManager.Instance.VisualData.characterJob].moveset;
-        }
-
-        if (cameraPanAnimator != null)
-        {
-            cameraPanAnimator.SetInteger("TransitionID", UnityEngine.Random.Range(0, 3));
         }
     }
     private void Start()

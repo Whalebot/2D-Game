@@ -11,10 +11,12 @@ public class SkillManager : MonoBehaviour
     public static SkillManager Instance;
     [TabGroup("Debug")] public List<SkillSO> allSkills;
     [TabGroup("Debug")] public List<SkillSO> foundSkills;
-    [TabGroup("Debug")] public List<SkillSO> items, activeSkills, passiveSkills;
+    [TabGroup("Debug")] public List<SkillSO> selectedSkills;
+    [TabGroup("Debug")] public List<SkillSO> items, activeSkills, blessings;
     [TabGroup("Debug")] public List<SkillSO> DSkills, CSkills, BSkills, ASkills, SSkills;
     [TabGroup("Debug")] public SkillSO emptyPoolSkill;
     [TabGroup("Components")] public List<Moveset> allMovesets;
+    [TabGroup("Components")] public SkillGroupSO attackGroup, specialGroup, skillGroup;
     [TabGroup("Components")] public List<SkillSelectionButton> skillButtons;
     [TabGroup("Components")] public List<ShopButton> shopButtons;
     [TabGroup("Components")] public Sprite NBackground, RBackground, SRBackground, SSRBackground, URBackground;
@@ -38,14 +40,67 @@ public class SkillManager : MonoBehaviour
     void ExecuteFrame()
     {
     }
+    public SkillSO CheckReplacementBlessing(SkillSO skill)
+    {
+        if (attackGroup.skills.Contains(skill))
+        {
+            for (int i = 0; i < foundSkills.Count; i++)
+            {
 
+                if (attackGroup.skills.Contains(foundSkills[i]))
+                {
+                    return foundSkills[i];
+                    //foundSkills[i] = skill;
+                }
+            }
+        }
+        if (specialGroup.skills.Contains(skill))
+        {
+            for (int i = 0; i < foundSkills.Count; i++)
+            {
+
+                if (specialGroup.skills.Contains(foundSkills[i]))
+                {
+                    return foundSkills[i];
+                    //foundSkills[i] = skill;
+                }
+            }
+        }
+        if (skillGroup.skills.Contains(skill))
+        {
+            for (int i = 0; i < foundSkills.Count; i++)
+            {
+
+                if (skillGroup.skills.Contains(foundSkills[i]))
+                {
+                    return foundSkills[i];
+                    //foundSkills[i] = skill;
+                }
+            }
+        }
+
+        return null;
+    }
     #region Roll Skills
+    public void ReplaceSkill()
+    {
+
+    }
     public void GetSkill(SkillSO skillSO)
     {
-        pickedSkillEvent?.Invoke(skillSO);
-        skillHandler.LearnSkill(skillSO);
-        foundSkills.Add(skillSO);
-        activeSkills.Clear();
+        SkillSO replacement = CheckReplacementBlessing(skillSO);
+        if (replacement != null)
+        {
+            foundSkills.Remove(replacement);
+        }
+
+        //else
+        {
+            pickedSkillEvent?.Invoke(skillSO);
+            skillHandler.LearnSkill(skillSO);
+            foundSkills.Add(skillSO);
+            selectedSkills.Clear();
+        }
     }
     void SaveSkills()
     {
@@ -55,42 +110,11 @@ public class SkillManager : MonoBehaviour
     public void RollShop(Rank r)
     {
         bool foundRank = false;
-        activeSkills.Clear();
+        selectedSkills.Clear();
         for (int i = 0; i < shopButtons.Count; i++)
         {
             SkillSO skill = null;
-            //If last skill and haven't found sufficiently high skill
-            if (!foundRank && i == shopButtons.Count - 1)
-            {
-                switch (r)
-                {
-                    case Rank.D:
-                        skill = RollSkill(DSkills);
-                        break;
-                    case Rank.C:
-                        skill = RollSkill(CSkills);
-                        break;
-                    case Rank.B:
-                        skill = RollSkill(BSkills);
-                        break;
-                    case Rank.A:
-                        skill = RollSkill(ASkills);
-                        break;
-                    case Rank.S:
-                        skill = RollSkill(SSkills);
-                        break;
-                    default:
-                        break;
-                }
 
-                if (skill.skillRank >= r)
-                    foundRank = true;
-
-                shopButtons[i].skillSO = skill;
-                if (skill != null)
-                    shopButtons[i].SetupSkill();
-            }
-            else
             {
                 skill = RollSkill();
                 if (skill.skillRank >= r)
@@ -101,45 +125,84 @@ public class SkillManager : MonoBehaviour
                 shopButtons[i].SetupSkill();
         }
     }
-    [Button]
-    public void RollSkillType(SkillType r)
+    public void RollBlessing(Rank rank)
     {
-        activeSkills.Clear();
+        selectedSkills.Clear();
+        List<SkillSO> eligibleSkills = new List<SkillSO>();
+        foreach (var item in allSkills)
+        {
+            if (item.type == SkillType.Blessing)
+            {
+                eligibleSkills.Add(item);
+            }
+        }
+
         for (int i = 0; i < skillButtons.Count; i++)
         {
             SkillSO skill = null;
-            //If last skill and haven't found sufficiently high skill
-            if (i == skillButtons.Count - 1)
-            {
-                switch (r)
-                {
-                    case SkillType.Active:
-                        skill = RollSkill(activeSkills);
-                        break;
-                    case SkillType.Passive:
-                        skill = RollSkill(passiveSkills);
-                        break;
-                    case SkillType.Item:
-                        skill = RollSkill(items);
-                        break;
-                    default:
-                        break;
-                }
 
-                skillButtons[i].skillSO = skill;
-                if (skill != null)
-                    skillButtons[i].SetupSkill();
-            }
+            skill = RollSkill(eligibleSkills);
             skillButtons[i].skillSO = skill;
             if (skill != null)
                 skillButtons[i].SetupSkill();
+
         }
     }
+    public void RollItem(Rank rank)
+    {
+        selectedSkills.Clear();
+        List<SkillSO> eligibleSkills = new List<SkillSO>();
+        foreach (var item in allSkills)
+        {
+            if (item.type == SkillType.Item)
+            {
+                eligibleSkills.Add(item);
+            }
+        }
+
+        for (int i = 0; i < skillButtons.Count; i++)
+        {
+            SkillSO skill = null;
+
+            skill = RollSkill(eligibleSkills);
+            skillButtons[i].skillSO = skill;
+            if (skill != null)
+                skillButtons[i].SetupSkill();
+
+        }
+    }
+
+    public void RollActiveSkill(Rank rank)
+    {
+        selectedSkills.Clear();
+        List<SkillSO> eligibleSkills = new List<SkillSO>();
+        foreach (var item in allSkills)
+        {
+            if (item.type == SkillType.Skill)
+            {
+                eligibleSkills.Add(item);
+            }
+        }
+
+        for (int i = 0; i < skillButtons.Count; i++)
+        {
+            SkillSO skill = null;
+
+
+            skill = RollSkill(eligibleSkills);
+
+            skillButtons[i].skillSO = skill;
+            if (skill != null)
+                skillButtons[i].SetupSkill();
+
+        }
+    }
+
     [Button]
     public void RollSkills(Rank r)
     {
         bool foundRank = false;
-        activeSkills.Clear();
+        selectedSkills.Clear();
         for (int i = 0; i < skillButtons.Count; i++)
         {
             SkillSO skill = null;
@@ -189,7 +252,7 @@ public class SkillManager : MonoBehaviour
     public void ResetSkills()
     {
         foundSkills.Clear();
-        activeSkills.Clear();
+        selectedSkills.Clear();
     }
 
     public SkillSO RollSkill(List<SkillSO> skillList)
@@ -197,16 +260,16 @@ public class SkillManager : MonoBehaviour
         List<SkillSO> availableSkills = new List<SkillSO>();
         foreach (var item in skillList)
         {
-            if (!foundSkills.Contains(item) && !activeSkills.Contains(item) && skillHandler.CanGetSkill(item))
+            if (!foundSkills.Contains(item) && !selectedSkills.Contains(item) && skillHandler.CanGetSkill(item))
                 availableSkills.Add(item);
         }
 
         int RNG = UnityEngine.Random.Range(0, availableSkills.Count);
-
+        Debug.Log(skillList.Count + " " + availableSkills.Count);
 
         if (availableSkills.Count > 0)
         {
-            activeSkills.Add(availableSkills[RNG]);
+            selectedSkills.Add(availableSkills[RNG]);
             return availableSkills[RNG];
         }
         else
@@ -221,14 +284,14 @@ public class SkillManager : MonoBehaviour
         List<SkillSO> availableSkills = new List<SkillSO>();
         foreach (var item in allSkills)
         {
-            if (!foundSkills.Contains(item) && !activeSkills.Contains(item) && skillHandler.CanGetSkill(item))
+            if (!foundSkills.Contains(item) && !selectedSkills.Contains(item) && skillHandler.CanGetSkill(item))
                 availableSkills.Add(item);
         }
 
         int RNG = UnityEngine.Random.Range(0, availableSkills.Count);
         if (availableSkills.Count > 0)
         {
-            activeSkills.Add(availableSkills[RNG]);
+            selectedSkills.Add(availableSkills[RNG]);
             return availableSkills[RNG];
         }
         else
@@ -250,8 +313,8 @@ public class SkillManager : MonoBehaviour
         SSkills.Clear();
 
         items.Clear();
-        passiveSkills.Clear();
-        activeSkills.Clear();
+        blessings.Clear();
+        selectedSkills.Clear();
 
         string[] skillNames = AssetDatabase.FindAssets("t:SkillSO", new[] { "Assets/Scriptable Objects" });
         foreach (var SOName in skillNames)
@@ -262,11 +325,11 @@ public class SkillManager : MonoBehaviour
 
             switch (item.type)
             {
-                case SkillType.Active:
-                    activeSkills.Add(item);
+                case SkillType.Skill:
+                    selectedSkills.Add(item);
                     break;
-                case SkillType.Passive:
-                    passiveSkills.Add(item);
+                case SkillType.Blessing:
+                    blessings.Add(item);
                     break;
                 case SkillType.Item:
                     items.Add(item);
@@ -304,5 +367,5 @@ public class SkillManager : MonoBehaviour
 
 public enum RewardType
 {
-    Skill, Item, Potential, Gold
+    Blessing, Item, Skill, Gold
 }

@@ -199,6 +199,7 @@ public class LevelManager : MonoBehaviour
                 else
                 {
                     RNG = UnityEngine.Random.Range(0, eventRoomLvl1.Count);
+                    Debug.Log(eventRoomLvl1[RNG].sceneName);
                     return eventRoomLvl1[RNG].sceneName;
                 }
             case RoomTypes.Rest:

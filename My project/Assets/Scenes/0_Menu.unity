@@ -343,13 +343,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3738011405208974595, guid: 42e0bfdb624c94f4c9626c7d4b0f0759, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7387584017467740566, guid: 42e0bfdb624c94f4c9626c7d4b0f0759, type: 3}
       propertyPath: m_Name
       value: Cam Pans
       objectReference: {fileID: 0}
     - target: {fileID: 7387584017467740566, guid: 42e0bfdb624c94f4c9626c7d4b0f0759, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3320,11 +3324,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4815059389588673366, guid: ddf89d6ef45a9604694920621dcbf310, type: 3}
   m_PrefabInstance: {fileID: 749041945}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &653399674 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7387584017467740566, guid: 42e0bfdb624c94f4c9626c7d4b0f0759, type: 3}
-  m_PrefabInstance: {fileID: 30315681}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &653399675 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 341838130661770984, guid: 42e0bfdb624c94f4c9626c7d4b0f0759, type: 3}
@@ -4056,6 +4055,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1982028044}
   faceAnimator: {fileID: 1982028046}
+  cameraPan: {fileID: 653399676}
   classImage: {fileID: 1202830441}
   classText: {fileID: 1514225536}
   colorNumber: {fileID: 1878669055}
@@ -4073,14 +4073,13 @@ MonoBehaviour:
   hairPlusButton: {fileID: 339985384}
   hairMinusButton: {fileID: 1064789842}
   topPlusButton: {fileID: 1882636026}
-  topMinusButton: {fileID: 1064789842}
+  topMinusButton: {fileID: 645843772}
   bottomPlusButton: {fileID: 1710088269}
   bottomMinusButton: {fileID: 1280804060}
   shoesPlusButton: {fileID: 1245067286}
   shoesMinusButton: {fileID: 376646173}
   classPlusButton: {fileID: 1175901711}
   classMinusButton: {fileID: 1600491508}
-  cameraPan: {fileID: 653399674}
 --- !u!225 &762220373
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -8602,7 +8601,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3436149183182166577, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4263647646799305370, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
       propertyPath: m_IsActive
@@ -8610,7 +8609,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4344973749192075009, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4473196853156505094, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
       propertyPath: m_IsActive
@@ -8618,6 +8617,54 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5207211516290660524, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156850051993860637, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156850051993860637, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156850051993860637, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156850051993860637, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0009
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156850051993860637, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0023
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156850051993860637, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0208
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156850051993860637, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9016238
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156850051993860637, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.06457975
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156850051993860637, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.17488696
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156850051993860637, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.39028004
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156850051993860637, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -44.755
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156850051993860637, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
+      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7533591080901685413, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
@@ -8630,15 +8677,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8195908180380428752, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8657941101522971073, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8690334448329959856, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8945170544527260188, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
       propertyPath: m_IsActive
@@ -8646,7 +8693,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8955483033868350561, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9151002904983823383, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
       propertyPath: m_Name
@@ -9208,10 +9255,6 @@ PrefabInstance:
       value: Character Creator Manager
       objectReference: {fileID: 0}
     - target: {fileID: 8527237191093226347, guid: fa51d6cfaefcea5468ba135388bbc2dd, type: 3}
-      propertyPath: preset
-      value: 
-      objectReference: {fileID: 11400000, guid: 42ebfd779b007bb4ca01483f90dc343a, type: 2}
-    - target: {fileID: 8527237191093226347, guid: fa51d6cfaefcea5468ba135388bbc2dd, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1982028045}
@@ -9220,29 +9263,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1982028043}
     - target: {fileID: 8527237191093226347, guid: fa51d6cfaefcea5468ba135388bbc2dd, type: 3}
-      propertyPath: liveUpdate
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8527237191093226347, guid: fa51d6cfaefcea5468ba135388bbc2dd, type: 3}
-      propertyPath: visualData.topID
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8527237191093226347, guid: fa51d6cfaefcea5468ba135388bbc2dd, type: 3}
       propertyPath: cameraPanAnimator
       value: 
       objectReference: {fileID: 653399676}
-    - target: {fileID: 8527237191093226347, guid: fa51d6cfaefcea5468ba135388bbc2dd, type: 3}
-      propertyPath: visualData.hairID
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8527237191093226347, guid: fa51d6cfaefcea5468ba135388bbc2dd, type: 3}
-      propertyPath: visualData.bottomID
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8527237191093226347, guid: fa51d6cfaefcea5468ba135388bbc2dd, type: 3}
-      propertyPath: visualData.colorPreset
-      value: 4
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
