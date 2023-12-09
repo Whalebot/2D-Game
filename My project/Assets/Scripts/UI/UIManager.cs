@@ -24,7 +24,11 @@ public class UIManager : MonoBehaviour
     [TabGroup("Components")] public TextMeshProUGUI goldText;
     [TabGroup("Components")] public TextMeshProUGUI floorText;
     [TabGroup("Components")] public TextMeshProUGUI timeText;
+    [TabGroup("Components")] public RectTransform tooltip;
+    [TabGroup("Components")] public Vector3 tooltipOffset;
+    [TabGroup("Components")] public bool tooltipEnabled;
 
+    
 
     private void Awake()
     {
@@ -60,7 +64,19 @@ public class UIManager : MonoBehaviour
         rerollText.text = "x" + GameManager.Instance.playerStatus.currentStats.rerolls;
         floorText.text = "Floor " + LevelManager.Instance.currentMapNode.y;
         timeText.text = "" + TimeFormatter(GameManager.time, true);
+        //Vector3 mousePosition = Input.mousePosition; 
+        //RectTransformUtility.ScreenPointToLocalPointInRectangle(rect.parent as RectTransform, mousePosition, null, out Vector2 anchoredPosition); anchoredPosition += offset; rect.anchoredPosition = anchoredPosition;
+        tooltip.position = Input.mousePosition + tooltipOffset;
+        tooltip.gameObject.SetActive(tooltipEnabled);
     }
+    private void LateUpdate()
+    {
+
+    }
+
+    public void EnableTooltip() { tooltipEnabled = true;  }
+    public void DisableTooltip() { tooltipEnabled = false; }
+
     public static string TimeFormatter(float seconds, bool forceHHMMSS = false)
     {
         float secondsRemainder = Mathf.Floor((seconds % 60) * 100) / 100.0f;

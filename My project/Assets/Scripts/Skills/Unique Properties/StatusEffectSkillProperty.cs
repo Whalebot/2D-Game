@@ -11,7 +11,7 @@ public class StatusEffectSkillProperty : UniqueSkillProperty
     {
         base.HitBehaviour(hitInfo);
 
-        if (hitInfo.status == null)
+        if (hitInfo.enemyStatus == null)
             return;
 
         if (!affectedMoves.moves.Contains(hitInfo.move))
@@ -19,7 +19,7 @@ public class StatusEffectSkillProperty : UniqueSkillProperty
 
         foreach (var item in appliedEffects)
         {
-            hitInfo.status.ApplyStatusEffect(item);
+            hitInfo.enemyStatus.ApplyStatusEffect(item, hitInfo);
         }
     }
 }

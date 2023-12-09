@@ -18,6 +18,6 @@ public class StatusEffectProperty : MoveUniqueProperty
     {
         base.HitBehaviour(hitInfo);
         if (propertyType == UniquePropertyType.OnHit)
-            hitInfo.status.ApplyStatusEffect(statusEffect);
+            hitInfo.enemyStatus.ApplyStatusEffect(statusEffect);
     }
 }

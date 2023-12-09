@@ -16,8 +16,10 @@ MonoBehaviour:
   type: 2
   title: Four Clover
   sprite: {fileID: 0}
-  move: {fileID: 0}
-  combo: {fileID: 0}
+  prerequisiteSkills: []
+  prerequisiteMoves: []
+  newMoves: []
+  skillProperties: []
   description: 'Add 2 Luck
 
     Add 1 Reroll'
@@ -27,12 +29,25 @@ MonoBehaviour:
     currentMeter: 0
     maxMeter: 0
     level: 0
+    strength: 0
+    intelligence: 0
+    agility: 0
+    faith: 0
+    luck: 2
+    gold: 0
     attack: 0
     magic: 0
+    faithModifier: 0
     attackSpeed: 0
+    jumps: 0
     airActions: 0
-    luck: 2
     rerolls: 1
+    fireModifier: 0
+    iceModifier: 0
+    lightningModifier: 0
+    earthModifier: 0
+    windModifier: 0
+    poisonModifier: 0
     movementSpeedModifier: 0
     meterGainModifier: 0
     poiseRegen: 0
@@ -42,6 +57,7 @@ MonoBehaviour:
     guardBreakModifier: 0
     sizeModifier: 0
     damageModifierPercentage: 0
+    backstabModifier: 0
     damageModifierFlat: 0
     hitStunMultiplier: 0
     knockbackModifier: 0

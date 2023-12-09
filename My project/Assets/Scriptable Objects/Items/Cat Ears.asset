@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillRank: 2
   type: 2
-  title: Shuriken
+  title: Cat Ears
   sprite: {fileID: 0}
-  move: {fileID: 0}
-  combo: {fileID: 0}
+  prerequisiteSkills: []
+  prerequisiteMoves: []
+  newMoves: []
+  skillProperties: []
   description: 'Gain 30% crit chance and 50% crit damage
 
     Lose 20% damage modifier'
@@ -27,12 +29,25 @@ MonoBehaviour:
     currentMeter: 0
     maxMeter: 0
     level: 0
+    strength: 0
+    intelligence: 0
+    agility: 0
+    faith: 0
+    luck: 0
+    gold: 0
     attack: 0
     magic: 0
+    faithModifier: 0
     attackSpeed: 0
+    jumps: 0
     airActions: 0
-    luck: 0
     rerolls: 0
+    fireModifier: 0
+    iceModifier: 0
+    lightningModifier: 0
+    earthModifier: 0
+    windModifier: 0
+    poisonModifier: 0
     movementSpeedModifier: 0
     meterGainModifier: 0
     poiseRegen: 0
@@ -42,6 +57,7 @@ MonoBehaviour:
     guardBreakModifier: 0
     sizeModifier: 0
     damageModifierPercentage: -0.2
+    backstabModifier: 0
     damageModifierFlat: 0
     hitStunMultiplier: 0
     knockbackModifier: 0

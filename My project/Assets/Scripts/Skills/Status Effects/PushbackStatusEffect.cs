@@ -5,10 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PushbackStatusEffect", menuName = "ScriptableObjects/StatusEffects/PushbackStatusEffect")]
 public class PushbackStatusEffect : StatusEffect
 {
+    public int baseDamage = 5;
     public GameObject hazardPrefab;
     public GameObject tempGO;
     public Hazard hazard;
-    public override void ActivateBehaviour(Status s)
+    public override void ActivateBehaviour(Status s, HitInfo hitInfo = null)
     {
         base.ActivateBehaviour(s);
         SpawnHitbox();
@@ -27,7 +28,7 @@ public class PushbackStatusEffect : StatusEffect
         tempGO = Instantiate(hazardPrefab, status.transform.position, status.transform.rotation, status.transform);
         hazard = tempGO.GetComponent<Hazard>();
         hazard.enemyList.Add(status);
-
+        hazard.baseDamage = baseDamage * damageModifier;
         //hazard.
 
         tempGO.transform.localPosition = hazardPrefab.transform.position;

@@ -10,62 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
-  m_Name: Humanoid_Projectile
+  m_Name: Shaman_Projectile_Single
   m_EditorClassIdentifier: 
-  animationID: 51
+  animationID: 553
   meterCost: 0
   meterGain: 10
   consumeMeterOnActiveFrame: 0
   icon: {fileID: 0}
   firstStartupFrame: 44
-  lastActiveFrame: 52
-  totalMoveDuration: 72
+  lastActiveFrame: 48
+  totalMoveDuration: 68
   firstGatlingFrame: 46
   recoveryFrames: 20
   attacks:
   - attackLevel: 0
     attackType: 1
     damageType: 0
-    hitbox: {fileID: 5860963072138344223, guid: 047b3b30708f11b43b3987fa05006fb6, type: 3}
+    hitbox: {fileID: 5860963072138344223, guid: 6997a1672c5c31a43840ce8d66aa0118, type: 3}
     damage: 1
     stun: 20
     hitstop: 5
     poiseBreak: 0
     startupFrame: 44
-    activeFrames: 5
-    gatlingFrames: 2
-    groundHitProperty:
-      pushback: {x: 2, y: 0}
-      hitState: 0
-    airHitProperty:
-      pushback: {x: 0, y: 0}
-      hitState: 0
-  - attackLevel: 0
-    attackType: 1
-    damageType: 0
-    hitbox: {fileID: 5860963072138344223, guid: 03252389187bb3f4795088d7b78254f5, type: 3}
-    damage: 1
-    stun: 20
-    hitstop: 5
-    poiseBreak: 0
-    startupFrame: 46
-    activeFrames: 5
-    gatlingFrames: 2
-    groundHitProperty:
-      pushback: {x: 2, y: 0}
-      hitState: 0
-    airHitProperty:
-      pushback: {x: 0, y: 0}
-      hitState: 0
-  - attackLevel: 0
-    attackType: 1
-    damageType: 0
-    hitbox: {fileID: 5860963072138344223, guid: 8ecfcceaf140aba4da28201c4d44bb79, type: 3}
-    damage: 1
-    stun: 20
-    hitstop: 5
-    poiseBreak: 0
-    startupFrame: 48
     activeFrames: 5
     gatlingFrames: 2
     groundHitProperty:
@@ -87,7 +53,7 @@ MonoBehaviour:
     prefab: {fileID: 194346, guid: 18ca0b65eadca7c46b9b94e7d23cab44, type: 3}
     deattachFromPlayer: 0
     destroyOnRecovery: 0
-    position: {x: 0, y: 0.01, z: 0}
+    position: {x: 0, y: 0.01, z: 0.5}
     rotation: {x: -90, y: 0, z: 0}
     scale: {x: 0.1, y: 0.1, z: 0.1}
   - type: 0
@@ -95,8 +61,8 @@ MonoBehaviour:
     prefab: {fileID: 194346, guid: 18ca0b65eadca7c46b9b94e7d23cab44, type: 3}
     deattachFromPlayer: 0
     destroyOnRecovery: 0
-    position: {x: 0, y: 0.7, z: 0.5}
-    rotation: {x: -30, y: 0, z: 0}
+    position: {x: 0, y: 1, z: 2}
+    rotation: {x: 0, y: 0, z: 0}
     scale: {x: 0.1, y: 0.1, z: 0.1}
   sfx: []
   hitFX:

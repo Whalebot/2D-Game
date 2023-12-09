@@ -9,12 +9,12 @@ public class PickpocketSkillProperty : UniqueSkillProperty
     {
         base.HitBehaviour(hitInfo);
 
-        if (hitInfo.status.character == null)
+        if (hitInfo.enemyStatus.character == null)
             return;
 
         if (hitInfo.crit && hitInfo.backstab)
         {
-            GameManager.Instance.Gold += hitInfo.status.character.stats.gold;
+            GameManager.Instance.Gold += hitInfo.enemyStatus.character.stats.gold;
         }
     }
 }

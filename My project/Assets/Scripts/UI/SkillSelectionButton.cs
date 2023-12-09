@@ -15,10 +15,28 @@ public class SkillSelectionButton : MonoBehaviour
     public TextMeshProUGUI replacementText;
     public Image buttonBackground;
     Button button;
+    bool tooltip = false;
     void Start()
     {
         button = GetComponent<Button>();
         button.onClick.AddListener(() => GetSkill());
+    }
+
+    private void FixedUpdate()
+    {
+
+        int linkIndex = TMP_TextUtilities.FindIntersectingLink(descriptionText, Input.mousePosition, null);  // If you are not in a Canvas using Screen Overlay, put your camera instead of null
+        if (linkIndex != -1)
+        {
+            tooltip = true;
+            TMP_LinkInfo linkInfo = descriptionText.textInfo.linkInfo[linkIndex];
+            UIManager.Instance.EnableTooltip();
+        }
+        else if (tooltip)
+        {
+            tooltip = false;
+            UIManager.Instance.DisableTooltip();
+        }
     }
 
     private void OnEnable()
@@ -30,7 +48,7 @@ public class SkillSelectionButton : MonoBehaviour
     public void SetupSkill()
     {
         titleText.text = skillSO.title;
-        descriptionText.text = skillSO.description;
+        descriptionText.text = SkillManager.Instance.SkillDescription(skillSO);
 
         SkillSO replacement = skillManager.CheckReplacementBlessing(skillSO);
 
@@ -38,6 +56,10 @@ public class SkillSelectionButton : MonoBehaviour
         {
             replacementContainer.SetActive(true);
             replacementText.text = "- Replaces " + replacement.name;
+        }
+        else
+        {
+            replacementContainer.SetActive(false);
         }
 
         switch (skillSO.skillRank)

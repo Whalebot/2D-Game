@@ -884,15 +884,17 @@ public class AttackScript : MonoBehaviour
 
 public class HitInfo
 {
-    public HitInfo(bool c = false, bool b = false, Status s = null, Move m = null)
+    public HitInfo(bool c = false, bool b = false, Status atkStatus = null, Status s = null, Move m = null)
     {
         crit = c;
         backstab = b;
-        status = s;
+        attackerStatus = atkStatus;
+        enemyStatus = s;
         move = m;
     }
     public bool crit = false;
     public bool backstab = false;
-    public Status status = null;
+    public Status attackerStatus = null;
+    public Status enemyStatus = null;
     public Move move = null;
 }
