@@ -111,14 +111,22 @@ MonoBehaviour:
         strength: 0
         intelligence: 0
         agility: 0
+        faith: 0
         luck: 0
         gold: 0
         attack: 0
         magic: 0
+        faithModifier: 0
         attackSpeed: 1
         jumps: 1
         airActions: 1
         rerolls: 0
+        fireModifier: 0
+        iceModifier: 0
+        lightningModifier: 0
+        earthModifier: 0
+        windModifier: 0
+        poisonModifier: 0
         movementSpeedModifier: 1
         meterGainModifier: 1
         poiseRegen: 0
@@ -546,8 +554,8 @@ MonoBehaviour:
     volume: 0.2
   defaultBlockSFX:
     startup: 1
-    audioClip: {fileID: 0}
-    volume: 1
+    audioClip: {fileID: 8300000, guid: 323a93666a4377e41b7ed38c9f53e104, type: 3}
+    volume: 0.2
   defaultProjectileVFX: {fileID: 1812881953744270, guid: 00e015abc60ea4442b4a4315704756f0, type: 3}
   defaultProjectileSFX: {fileID: 1812881953744270, guid: 00e015abc60ea4442b4a4315704756f0, type: 3}
   recoveryFX: {fileID: 0}
@@ -1750,18 +1758,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 399436146491855173}
     m_Modifications:
-    - target: {fileID: 3041523238274643963, guid: ab6dfc09eeb331c4bb7dc79a8b5c1247, type: 3}
-      propertyPath: skillGroup
-      value: 
-      objectReference: {fileID: 11400000, guid: e4aa5e2fbc6e92b4db98f3cae7864119, type: 2}
-    - target: {fileID: 3041523238274643963, guid: ab6dfc09eeb331c4bb7dc79a8b5c1247, type: 3}
-      propertyPath: attackGroup
-      value: 
-      objectReference: {fileID: 11400000, guid: 24321e4beb0acb04ba9e2aa62774278f, type: 2}
-    - target: {fileID: 3041523238274643963, guid: ab6dfc09eeb331c4bb7dc79a8b5c1247, type: 3}
-      propertyPath: specialGroup
-      value: 
-      objectReference: {fileID: 11400000, guid: 52dd362a8bef30e4e9ab91811d389788, type: 2}
     - target: {fileID: 3041523238274643963, guid: ab6dfc09eeb331c4bb7dc79a8b5c1247, type: 3}
       propertyPath: shopButtons.Array.data[0]
       value: 

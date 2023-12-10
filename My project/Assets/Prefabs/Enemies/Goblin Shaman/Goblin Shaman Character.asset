@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd0f521e490d135408b5fbd75180cbbf, type: 3}
-  m_Name: Humanoid Mage
+  m_Name: Goblin Shaman Character
   m_EditorClassIdentifier: 
   characterName: Slime
   subTitle: 
@@ -20,7 +20,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   moveset: {fileID: 0}
   actions:
-  - {fileID: 11400000, guid: 1579857f270d23b4d83f8c57cc5b99c5, type: 2}
+  - {fileID: 11400000, guid: 5edd89e08c1a2bb45976b01ac6843cca, type: 2}
   - {fileID: 11400000, guid: 1be3e23b1120e1d45bae936f9a34d7a6, type: 2}
   stats:
     currentHealth: 50
@@ -31,13 +31,22 @@ MonoBehaviour:
     strength: 0
     intelligence: 0
     agility: 0
+    faith: 0
     luck: 0
     gold: 0
     attack: 3
     magic: 0
+    faithModifier: 0
     attackSpeed: 1
+    jumps: 1
     airActions: 1
     rerolls: 0
+    fireModifier: 0
+    iceModifier: 0
+    lightningModifier: 0
+    earthModifier: 0
+    windModifier: 0
+    poisonModifier: 0
     movementSpeedModifier: 1
     meterGainModifier: 1
     poiseRegen: 0

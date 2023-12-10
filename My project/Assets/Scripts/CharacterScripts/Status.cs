@@ -42,7 +42,9 @@ public class Status : MonoBehaviour
 
 
     [TabGroup("Settings")] public bool debug;
+    [TabGroup("Settings")] public int hitInvulDuration;
     [TabGroup("Settings")] public int wakeupInvul;
+    int invulCounter;
     int counter;
     [Header("Auto destroy on death")]
     [TabGroup("Settings")] public bool autoDeath;
@@ -188,10 +190,22 @@ public class Status : MonoBehaviour
     void ExecuteFrame()
     {
         PoiseRegen();
+        ResolveInvul();
         ResolveStatusEffects();
         StateMachine();
     }
-    public void ApplyStatusEffect(StatusEffect effect)
+    void ResolveInvul()
+    {
+        if (invulCounter > 0)
+        {
+            invulCounter--;
+            if (invulCounter <= 0)
+            {
+                invincible = false;
+            }
+        }
+    }
+    public void ApplyStatusEffect(StatusEffect effect,HitInfo hitInfo = null)
     {
         StatusEffect clone = null;
         foreach (var item in statusEffects)
@@ -467,8 +481,11 @@ public class Status : MonoBehaviour
         {
             GoToState(State.Knockdown);
         }
-
-
+        if (hitInvulDuration > 0)
+        {
+            invincible = true;
+            invulCounter = hitInvulDuration;
+        }
     }
     public void PoiseBreak()
     {

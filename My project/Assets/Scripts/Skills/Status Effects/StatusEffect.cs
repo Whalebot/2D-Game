@@ -5,6 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "StatusEffects", menuName = "ScriptableObjects/StatusEffects")]
 public class StatusEffect : ScriptableObject
 {
+    public Elemental elemental;
+    public float damageModifier = 1;
+    float elementalModifier = 1;
+
     public int duration;
     public int stacks = 0;
     public int maxStacks = 1;
@@ -15,12 +19,41 @@ public class StatusEffect : ScriptableObject
     public VFX statusVFX;
     public GameObject currentVFX;
 
-    public virtual void ActivateBehaviour(Status s)
+    public virtual void ActivateBehaviour(Status s, HitInfo hitInfo = null)
     {
         status = s;
         stacks = 1;
         durationCounter = duration;
         tickCounter = 0;
+
+        if (hitInfo != null) {
+            Stats stats = hitInfo.attackerStatus.currentStats;
+            switch (elemental)
+            {
+                case Elemental.None:
+                    break;
+                case Elemental.Earth:
+                    damageModifier = stats.faithModifier * stats.earthModifier;
+                    break;
+                case Elemental.Fire:
+                    damageModifier = stats.faithModifier * stats.fireModifier;
+                    break;
+                case Elemental.Ice:
+                    damageModifier = stats.faithModifier * stats.iceModifier;
+                    break;
+                case Elemental.Lightning:
+                    damageModifier = stats.faithModifier * stats.lightningModifier;
+                    break;
+                case Elemental.Wind:
+                    damageModifier = stats.faithModifier * stats.windModifier;
+                    break;
+                case Elemental.Poison:
+                    damageModifier = stats.faithModifier * stats.poisonModifier;
+                    break;
+                default:
+                    break;
+            }
+        }
         SpawnVFX();
     }
     void SpawnVFX()

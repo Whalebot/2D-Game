@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using TMPro;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -10,12 +11,14 @@ public class SkillManager : MonoBehaviour
 {
     public static SkillManager Instance;
     [TabGroup("Debug")] public List<SkillSO> allSkills;
+    [TabGroup("Debug")] public List<SkillSO> learnedSkills;
     [TabGroup("Debug")] public List<SkillSO> foundSkills;
     [TabGroup("Debug")] public List<SkillSO> selectedSkills;
     [TabGroup("Debug")] public List<SkillSO> items, activeSkills, blessings;
     [TabGroup("Debug")] public List<SkillSO> DSkills, CSkills, BSkills, ASkills, SSkills;
     [TabGroup("Debug")] public SkillSO emptyPoolSkill;
     [TabGroup("Components")] public List<Moveset> allMovesets;
+    [TabGroup("Components")] public List<TextTags> colorTags;
     [TabGroup("Components")] public SkillGroupSO attackGroup, specialGroup, skillGroup;
     [TabGroup("Components")] public List<SkillSelectionButton> skillButtons;
     [TabGroup("Components")] public List<ShopButton> shopButtons;
@@ -91,14 +94,17 @@ public class SkillManager : MonoBehaviour
         SkillSO replacement = CheckReplacementBlessing(skillSO);
         if (replacement != null)
         {
-            foundSkills.Remove(replacement);
+            learnedSkills.Remove(replacement);
         }
 
         //else
         {
             pickedSkillEvent?.Invoke(skillSO);
             skillHandler.LearnSkill(skillSO);
+
             foundSkills.Add(skillSO);
+            learnedSkills.Add(skillSO);
+
             selectedSkills.Clear();
         }
     }
@@ -142,6 +148,7 @@ public class SkillManager : MonoBehaviour
             SkillSO skill = null;
 
             skill = RollSkill(eligibleSkills);
+            skill.skillRank = (Rank)UnityEngine.Random.Range(0, 5);
             skillButtons[i].skillSO = skill;
             if (skill != null)
                 skillButtons[i].SetupSkill();
@@ -265,7 +272,6 @@ public class SkillManager : MonoBehaviour
         }
 
         int RNG = UnityEngine.Random.Range(0, availableSkills.Count);
-        Debug.Log(skillList.Count + " " + availableSkills.Count);
 
         if (availableSkills.Count > 0)
         {
@@ -299,6 +305,67 @@ public class SkillManager : MonoBehaviour
             Debug.Log("Found all skills");
             return emptyPoolSkill;
         }
+    }
+
+    string CheckStringTags(string s)
+    {
+        List<string> words = new List<string>();
+        string test = "";
+
+        //Divide words
+        foreach (char letter in s.ToCharArray())
+        {
+            test += letter;
+
+            if (letter == ' ')
+            {
+                words.Add(test);
+                test = "";
+            }
+        }
+
+        //Add final word
+        words.Add(test);
+
+        //Paint text
+        for (int i = 0; i < words.Count; i++)
+        {
+            foreach (var item in colorTags)
+            {
+                foreach (string tag in item.tags)
+                {
+                    if (words[i].ToLower().Contains(tag))
+                    {
+                        //words[i] = $"<color=#{ColorUtility.ToHtmlStringRGB(item.tagColor)}>" + words[i] + "</color>";
+                        //words[i] = $"<color=#{ColorUtility.ToHtmlStringRGB(item.tagColor)}>" + words[i] + "</color>";
+                        words[i] = ($"<link=\"0\"><color=#{ColorUtility.ToHtmlStringRGB(item.tagColor)}>" + words[i] + "</color>" + "</link>");
+                        //words[i] = ($"<link=0><color=#{ColorUtility.ToHtmlStringRGB(item.tagColor)}>" + words[i] + "</color>" + "</link>");
+
+                        // words[i] = ($"<link='0'><color=#{ColorUtility.ToHtmlStringRGB(item.tagColor)}>" + words[i] + "</color>" + "</link>").Replace("'", "\"");
+
+                    }
+                }
+            }
+        }
+
+        string final = "";
+
+        foreach (string word in words)
+        {
+            final += word;
+        }
+        return final;
+    }
+
+    public string SkillDescription(SkillSO skill)
+    {
+        string s = CheckStringTags(skill.description);
+        return s;
+    }
+
+    public string SkillToolTip()
+    {
+        return "";
     }
 
 #if UNITY_EDITOR
@@ -368,4 +435,9 @@ public class SkillManager : MonoBehaviour
 public enum RewardType
 {
     Blessing, Item, Skill, Gold
+}
+
+public enum Elemental
+{
+    None, Earth, Fire, Ice, Lightning, Wind, Poison
 }

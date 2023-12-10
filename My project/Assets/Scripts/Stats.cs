@@ -14,11 +14,13 @@ public class Stats
     [TabGroup("Stats")] public int strength = 0;
     [TabGroup("Stats")] public int intelligence = 0;
     [TabGroup("Stats")] public int agility = 0;
+    [TabGroup("Stats")] public int faith = 0;
     [TabGroup("Stats")] public int luck = 0;
     [TabGroup("Stats")] public int gold = 0;
 
     [TabGroup("Stats")] public int attack;
     [TabGroup("Stats")] public int magic;
+    [TabGroup("Stats")] public float faithModifier = 0;
     [TabGroup("Stats")] public float attackSpeed = 1;
     [TabGroup("Stats")] public int jumps = 1;
     [TabGroup("Stats")] public int airActions = 1;
@@ -26,6 +28,13 @@ public class Stats
     [TabGroup("Stats")] public int rerolls = 0;
 
     [Header("Modifiers")]
+    [TabGroup("Modifiers")] public float fireModifier = 0;
+    [TabGroup("Modifiers")] public float iceModifier = 0;
+    [TabGroup("Modifiers")] public float lightningModifier = 0;
+    [TabGroup("Modifiers")] public float earthModifier = 0;
+    [TabGroup("Modifiers")] public float windModifier = 0;
+    [TabGroup("Modifiers")] public float poisonModifier = 0;
+
     [TabGroup("Modifiers")] public float movementSpeedModifier = 1;
     [TabGroup("Modifiers")] public float meterGainModifier = 1;
     [TabGroup("Modifiers")] public float poiseRegen = 0;
@@ -60,7 +69,13 @@ public class Stats
             defInfo1[i].SetValue(obj, defInfo2[i].GetValue(obj2));
         }
     }
-
+    [Button]
+    public void CalculateValues()
+    {
+        attack = strength;
+        magic = intelligence;
+        faithModifier = faith * 0.2F;
+    }
     [Button]
     public void ResetValues()
     {

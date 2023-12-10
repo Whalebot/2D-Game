@@ -203,7 +203,7 @@ public class Hitbox : MonoBehaviour
         int damageDealt = Mathf.RoundToInt((totalDamage * (1 - other.currentStats.defense)) - other.currentStats.resistance);
 
 
-        HitInfo hitInfo = new HitInfo(crit, backstab, other, move);
+        HitInfo hitInfo = new HitInfo(crit, backstab, status, other, move);
         attack.HitEvent(hitInfo);
 
         foreach (var item in move.uniqueProperties)
@@ -216,7 +216,7 @@ public class Hitbox : MonoBehaviour
         {
             if (move.blockFX != null)
                 Instantiate(move.blockFX, colPos.position, colPos.rotation);
-            else 
+            else
                 Instantiate(VFXManager.Instance.defaultBlockVFX, colPos.position, colPos.rotation);
 
             if (move.hitSFX != null)
