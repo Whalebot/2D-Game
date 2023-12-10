@@ -35,7 +35,10 @@ MonoBehaviour:
     position: {x: 0, y: 0.2, z: 0}
     rotation: {x: 0, y: 180, z: 0}
     scale: {x: 0.5, y: 0.5, z: 0.5}
-  sfx: []
+  sfx:
+  - startup: 1
+    audioClip: {fileID: 8300000, guid: 97e07579943202d48a64e5abd04d241c, type: 3}
+    volume: 1
   hitFX:
     type: 0
     startup: 1
@@ -59,6 +62,7 @@ MonoBehaviour:
   armor: 0
   resetGatling: 0
   hitsGroundOnly: 0
+  isDashing: 1
   noClip: 1
   noClipStart: 1
   noClipDuration: 12

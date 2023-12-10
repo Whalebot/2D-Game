@@ -48,6 +48,7 @@ public class AttackScript : MonoBehaviour
     [TabGroup("Debug")] public int airActionCounter;
     [TabGroup("Debug")] public int extendedBuffer;
 
+    [TabGroup("Debug")] public bool isDashing;
     [TabGroup("Debug")] public bool holdAttack;
     [TabGroup("Debug")] public bool attackString;
     [TabGroup("Debug")] public bool canTargetCombo;
@@ -514,6 +515,7 @@ public class AttackScript : MonoBehaviour
 
         recoverOnlyOnLand = move.recoverOnlyOnLand;
         activeMove = move;
+        isDashing = move.isDashing;
         attackID = move.animationID;
         status.animationArmor = move.armor;
         attackString = false;
@@ -845,6 +847,7 @@ public class AttackScript : MonoBehaviour
         recoverOnlyOnLand = false;
         jumpFrameCounter = 0;
         attacking = false;
+        isDashing = false;
         canTargetCombo = false;
         landCancel = false;
         hit = false;
