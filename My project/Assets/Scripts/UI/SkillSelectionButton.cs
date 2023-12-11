@@ -13,6 +13,7 @@ public class SkillSelectionButton : MonoBehaviour
     public TextMeshProUGUI descriptionText;
     public GameObject replacementContainer;
     public TextMeshProUGUI replacementText;
+    public Image iconImage;
     public Image buttonBackground;
     Button button;
     bool tooltip = false;
@@ -49,7 +50,8 @@ public class SkillSelectionButton : MonoBehaviour
     {
         titleText.text = skillSO.title;
         descriptionText.text = SkillManager.Instance.SkillDescription(skillSO);
-
+        if (skillSO.sprite != null)
+            iconImage.sprite = skillSO.sprite;
         SkillSO replacement = skillManager.CheckReplacementBlessing(skillSO);
 
         if (replacement != null)

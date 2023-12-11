@@ -10,30 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
-  m_Name: Shaman_Projectile_Single
+  m_Name: Rogue_Shuriken_j5AA
   m_EditorClassIdentifier: 
-  animationID: 553
+  animationID: 151
   meterCost: 0
   meterGain: 10
   consumeMeterOnActiveFrame: 0
   icon: {fileID: 0}
-  firstStartupFrame: 44
-  lastActiveFrame: 48
-  totalMoveDuration: 68
-  firstGatlingFrame: 46
-  recoveryFrames: 20
+  firstStartupFrame: 12
+  lastActiveFrame: 12
+  totalMoveDuration: 37
+  firstGatlingFrame: 19
+  recoveryFrames: 25
   attacks:
   - attackLevel: 0
     attackType: 1
     damageType: 0
-    hitbox: {fileID: 5860963072138344223, guid: 6997a1672c5c31a43840ce8d66aa0118, type: 3}
+    hitbox: {fileID: 5860963072138344223, guid: 3a901f24c013e374f8e52f0cf074ddd3, type: 3}
     damage: 1
     stun: 20
     hitstop: 5
     poiseBreak: 0
-    startupFrame: 44
-    activeFrames: 5
-    gatlingFrames: 2
+    startupFrame: 12
+    activeFrames: 1
+    gatlingFrames: 7
     groundHitProperty:
       pushback: {x: 2, y: 0}
       hitState: 0
@@ -42,29 +42,20 @@ MonoBehaviour:
       hitState: 0
   type: 0
   uniqueProperties: []
-  screenShake:
-  - type: 0
-    startup: 40
-    amplitude: 1
-    duration: 1
+  screenShake: []
   vfx:
   - type: 0
-    startup: 1
-    prefab: {fileID: 194346, guid: 18ca0b65eadca7c46b9b94e7d23cab44, type: 3}
-    deattachFromPlayer: 0
+    startup: 12
+    prefab: {fileID: 3495573824567096830, guid: 3fd8f98a6e1a44f4ab278e40d273923a, type: 3}
+    deattachFromPlayer: 1
     destroyOnRecovery: 0
-    position: {x: 0, y: 0.01, z: 0.5}
-    rotation: {x: -90, y: 0, z: 0}
-    scale: {x: 0.1, y: 0.1, z: 0.1}
-  - type: 0
-    startup: 40
-    prefab: {fileID: 194346, guid: 18ca0b65eadca7c46b9b94e7d23cab44, type: 3}
-    deattachFromPlayer: 0
-    destroyOnRecovery: 0
-    position: {x: 0, y: 1, z: 1.5}
-    rotation: {x: 0, y: 0, z: 0}
-    scale: {x: 0.1, y: 0.1, z: 0.1}
-  sfx: []
+    position: {x: 0, y: 0.6, z: 1}
+    rotation: {x: 0, y: 0, z: 90}
+    scale: {x: 0.2, y: 0.2, z: 0.2}
+  sfx:
+  - startup: 6
+    audioClip: {fileID: 8300000, guid: 8f0ea1839eb463c44aef01dbabfbff03, type: 3}
+    volume: 1
   hitFX:
     type: 0
     startup: 1
@@ -73,7 +64,7 @@ MonoBehaviour:
     destroyOnRecovery: 0
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0}
-    scale: {x: 0.5, y: 0.5, z: 0.5}
+    scale: {x: 0.7, y: 0.7, z: 0.7}
   blockFX: {fileID: 0}
   counterhitFX: {fileID: 0}
   hitSFX: {fileID: 0}
@@ -106,12 +97,31 @@ MonoBehaviour:
   gatlingCancel: 1
   uncancelable: 0
   useAirAction: 0
-  landCancel: 0
+  landCancel: 1
   recoverOnlyOnLand: 0
-  m: []
+  m:
+  - startFrame: 14
+    duration: 23
+    momentum: {x: 0, y: 0}
+    resetVelocityDuringRecovery: 0
+    xMovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    movementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    freeMovement: 1
+    useCurve: 0
+    teleport: 0
   instantStartupRotation: 1
-  overrideVelocity: 1
+  overrideVelocity: 0
   runMomentum: 0
-  inheritForwardVelocity: 0
-  stopAtEdges: 1
+  inheritForwardVelocity: 1
+  stopAtEdges: 0
   homing: 0

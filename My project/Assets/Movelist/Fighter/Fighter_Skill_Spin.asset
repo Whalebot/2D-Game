@@ -16,7 +16,7 @@ MonoBehaviour:
   meterCost: 50
   meterGain: 0
   consumeMeterOnActiveFrame: 0
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: df52e2f627b62614d8fcafd7d24322e6, type: 3}
   firstStartupFrame: 16
   lastActiveFrame: 53
   totalMoveDuration: 83
@@ -142,12 +142,16 @@ MonoBehaviour:
   sfx:
   - startup: 15
     audioClip: {fileID: 8300000, guid: c42832f2b6b42664594a8b54961d9e8f, type: 3}
+    volume: 1
   - startup: 21
     audioClip: {fileID: 8300000, guid: c42832f2b6b42664594a8b54961d9e8f, type: 3}
+    volume: 1
   - startup: 30
     audioClip: {fileID: 8300000, guid: c42832f2b6b42664594a8b54961d9e8f, type: 3}
+    volume: 1
   - startup: 41
     audioClip: {fileID: 8300000, guid: c42832f2b6b42664594a8b54961d9e8f, type: 3}
+    volume: 1
   hitFX:
     type: 0
     startup: 1
@@ -171,6 +175,7 @@ MonoBehaviour:
   armor: 1
   resetGatling: 0
   hitsGroundOnly: 0
+  isDashing: 0
   noClip: 0
   noClipStart: 1
   noClipDuration: 0

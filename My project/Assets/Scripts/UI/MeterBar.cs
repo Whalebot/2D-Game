@@ -22,10 +22,10 @@ public class MeterBar : MonoBehaviour
     }
     void UpdateValues()
     {
-        meterText.text = "" + (int)(status.Meter / 100);
+        meterText.text = "" + (status.Meter) + "/" + status.currentStats.maxMeter;
 
         if (status.currentStats.maxMeter > 0)
-            meterBar.fillAmount = ((float)(status.currentStats.currentMeter % (100 + 1f)) / 100);
+            meterBar.fillAmount = ((float)status.currentStats.currentMeter / (float)status.currentStats.maxMeter);
 
     }
 

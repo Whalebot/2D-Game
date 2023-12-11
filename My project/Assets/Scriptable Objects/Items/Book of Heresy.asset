@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41f2923ec284c6840a8cd468af82cb4d, type: 3}
-  m_Name: Holy Book
+  m_Name: Book of Heresy
   m_EditorClassIdentifier: 
   skillRank: 2
   type: 2
-  title: Holy Book
+  title: Book of Heresy
   sprite: {fileID: 21300000, guid: 96763b23ec88c1b418316b02715b1a6e, type: 3}
   damageValue: 0
   prerequisiteSkills: []
@@ -22,7 +22,8 @@ MonoBehaviour:
   bannedMoves: []
   newMoves: []
   skillProperties: []
-  description: Increases the power of blessings with 50%
+  description: Increases damage with 25% and decreases the power of blessings with
+    50%
   stats:
     currentHealth: 0
     maxHealth: 0
@@ -37,7 +38,7 @@ MonoBehaviour:
     gold: 0
     attack: 0
     magic: 0
-    faithModifier: 0.5
+    faithModifier: -0.5
     attackSpeed: 0
     jumps: 0
     airActions: 0
@@ -56,7 +57,7 @@ MonoBehaviour:
     resistance: 0
     guardBreakModifier: 0
     sizeModifier: 0
-    damageModifierPercentage: 0
+    damageModifierPercentage: 0.25
     backstabModifier: 0
     damageModifierFlat: 0
     hitStunMultiplier: 0

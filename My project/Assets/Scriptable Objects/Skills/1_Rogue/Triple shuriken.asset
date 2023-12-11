@@ -15,9 +15,11 @@ MonoBehaviour:
   skillRank: 3
   type: 0
   title: Triple shuriken
-  sprite: {fileID: 21300000, guid: 95976ef1466e12546af6c716633910d6, type: 3}
+  sprite: {fileID: 21300000, guid: 8dae7d3945db11a438c5a02650f0e7ef, type: 3}
+  damageValue: 0
   prerequisiteSkills: []
   prerequisiteMoves: []
+  bannedMoves: []
   newMoves:
   - move: {fileID: 11400000, guid: 80de144a8cc80a340b22c0dc9820b010, type: 2}
     combo: {fileID: 0}
@@ -33,14 +35,22 @@ MonoBehaviour:
     strength: 0
     intelligence: 0
     agility: 0
+    faith: 0
     luck: 0
     gold: 0
     attack: 0
     magic: 0
+    faithModifier: 0
     attackSpeed: 0
     jumps: 0
     airActions: 0
     rerolls: 0
+    fireModifier: 0
+    iceModifier: 0
+    lightningModifier: 0
+    earthModifier: 0
+    windModifier: 0
+    poisonModifier: 0
     movementSpeedModifier: 0
     meterGainModifier: 0
     poiseRegen: 0

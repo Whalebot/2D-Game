@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     public OrganizeChildren skillPanelOrganizer;
     [TabGroup("Components")] public GameObject pauseMenu;
     [TabGroup("Components")] public GameObject skillUIPrefab;
+    [TabGroup("Components")] public Image neutralSkillIcon, upSkillIcon, downSkillIcon, sideSkillIcon;
     [TabGroup("Components")] public HPBar playerHPBar;
     [TabGroup("Components")] public ButtonPrompt southPrompt;
     [TabGroup("Components")] public ButtonPrompt westPrompt;
@@ -64,14 +65,59 @@ public class UIManager : MonoBehaviour
         rerollText.text = "x" + GameManager.Instance.playerStatus.currentStats.rerolls;
         floorText.text = "Floor " + LevelManager.Instance.currentMapNode.y;
         timeText.text = "" + TimeFormatter(GameManager.time, true);
+
+        UpdateSkillIcon();
+
         //Vector3 mousePosition = Input.mousePosition; 
         //RectTransformUtility.ScreenPointToLocalPointInRectangle(rect.parent as RectTransform, mousePosition, null, out Vector2 anchoredPosition); anchoredPosition += offset; rect.anchoredPosition = anchoredPosition;
         tooltip.position = Input.mousePosition + tooltipOffset;
         tooltip.gameObject.SetActive(tooltipEnabled);
     }
-    private void LateUpdate()
-    {
+    void UpdateSkillIcon() {
+        AttackScript attack = GameManager.Instance.playerStatus.GetComponent<AttackScript>();
+        if (attack.moveset.skillCombo.moves.Count > 0)
+        {
+            neutralSkillIcon.gameObject.SetActive(true);
+            neutralSkillIcon.sprite = attack.moveset.skillCombo.moves[0].icon;
 
+            if(GameManager.Instance.playerStatus.Meter < 50)
+            neutralSkillIcon.color = Color.gray;
+            else neutralSkillIcon.color = Color.white;
+        }
+        else neutralSkillIcon.gameObject.SetActive(false);
+
+        if (attack.moveset.upSkillCombo.moves.Count > 0)
+        {
+            upSkillIcon.gameObject.SetActive(true);
+            upSkillIcon.sprite = attack.moveset.upSkillCombo.moves[0].icon;
+
+            if (GameManager.Instance.playerStatus.Meter < 50)
+                upSkillIcon.color = Color.gray;
+            else upSkillIcon.color = Color.white;
+        }
+        else upSkillIcon.gameObject.SetActive(false);
+
+        if (attack.moveset.downSkillCombo.moves.Count > 0)
+        {
+            downSkillIcon.gameObject.SetActive(true);
+            downSkillIcon.sprite = attack.moveset.downSkillCombo.moves[0].icon;
+
+            if (GameManager.Instance.playerStatus.Meter < 50)
+                downSkillIcon.color = Color.gray;
+            else downSkillIcon.color = Color.white;
+        }
+        else downSkillIcon.gameObject.SetActive(false);
+
+        if (attack.moveset.sideSkillCombo.moves.Count > 0)
+        {
+            sideSkillIcon.gameObject.SetActive(true);
+            sideSkillIcon.sprite = attack.moveset.sideSkillCombo.moves[0].icon;
+
+            if (GameManager.Instance.playerStatus.Meter < 50)
+                sideSkillIcon.color = Color.gray;
+            else sideSkillIcon.color = Color.white;
+        }
+        else sideSkillIcon.gameObject.SetActive(false);
     }
 
     public void EnableTooltip() { tooltipEnabled = true;  }

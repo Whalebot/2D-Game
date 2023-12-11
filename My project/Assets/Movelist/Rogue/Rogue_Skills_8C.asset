@@ -10,30 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
-  m_Name: Fighter_Skill_Fireball_Free_Move
+  m_Name: Rogue_Skills_8C
   m_EditorClassIdentifier: 
-  animationID: 53
-  meterCost: 0
+  animationID: 52
+  meterCost: 50
   meterGain: 10
   consumeMeterOnActiveFrame: 0
-  icon: {fileID: 21300000, guid: 03281c94f9924fa47a72404b965890f6, type: 3}
-  firstStartupFrame: 25
-  lastActiveFrame: 25
-  totalMoveDuration: 50
-  firstGatlingFrame: 30
-  recoveryFrames: 25
+  icon: {fileID: 21300000, guid: 8dae7d3945db11a438c5a02650f0e7ef, type: 3}
+  firstStartupFrame: 2
+  lastActiveFrame: 21
+  totalMoveDuration: 39
+  firstGatlingFrame: 12
+  recoveryFrames: 18
   attacks:
   - attackLevel: 2
-    attackType: 1
+    attackType: 0
     damageType: 0
-    hitbox: {fileID: 5860963072138344223, guid: fdaed30a4102f4b4aa435277a0e4a9de, type: 3}
-    damage: 4
+    hitbox: {fileID: 5860963072138344223, guid: 2882afa60e18a8547bd9f6cabf9ee25d, type: 3}
+    damage: 2.5
     stun: 20
     hitstop: 5
     poiseBreak: 0
-    startupFrame: 25
-    activeFrames: 1
-    gatlingFrames: 5
+    startupFrame: 2
+    activeFrames: 20
+    gatlingFrames: 10
     groundHitProperty:
       pushback: {x: 2, y: 8}
       hitState: 0
@@ -41,23 +41,25 @@ MonoBehaviour:
       pushback: {x: 0, y: 0}
       hitState: 0
   type: 0
-  uniqueProperties:
-  - {fileID: 11400000, guid: a58dd1a964224964a94a170f73b5bca2, type: 2}
+  uniqueProperties: []
   screenShake:
   - type: 0
-    startup: 20
-    amplitude: 2
-    duration: 1
+    startup: 2
+    amplitude: 5
+    duration: 2
   vfx:
   - type: 0
-    startup: 15
-    prefab: {fileID: 3595050330844811134, guid: 2c70ba2d625df0541965d239fd82e7e6, type: 3}
-    deattachFromPlayer: 0
+    startup: 4
+    prefab: {fileID: 1800976239324842, guid: c3a419073912434429f93f4f6d5369ff, type: 3}
+    deattachFromPlayer: 1
     destroyOnRecovery: 0
-    position: {x: 0, y: 0.6, z: 0.7}
-    rotation: {x: 0, y: 0, z: 90}
-    scale: {x: 0.3, y: 0.3, z: 0.3}
-  sfx: []
+    position: {x: 0, y: 0.5, z: 0}
+    rotation: {x: -5, y: 90, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+  sfx:
+  - startup: 1
+    audioClip: {fileID: 8300000, guid: e6c87645e4bc9b140a91a5c04fa12a95, type: 3}
+    volume: 1
   hitFX:
     type: 0
     startup: 1
@@ -82,12 +84,12 @@ MonoBehaviour:
   resetGatling: 0
   hitsGroundOnly: 0
   isDashing: 0
-  noClip: 0
+  noClip: 1
   noClipStart: 1
-  noClipDuration: 0
-  invincible: 0
+  noClipDuration: 20
+  invincible: 1
   invincibleStart: 1
-  invincibleDuration: 0
+  invincibleDuration: 10
   projectileInvul: 0
   projectileInvulStart: 1
   projectileInvulDuration: 0
@@ -95,15 +97,34 @@ MonoBehaviour:
   airInvulStart: 1
   airInvulDuration: 0
   targetComboMoves: []
-  fullCancel: 0
+  fullCancel: 1
   gatlingCancel: 1
   uncancelable: 0
   useAirAction: 0
   landCancel: 0
   recoverOnlyOnLand: 0
   m:
-  - startFrame: 10
-    duration: 5
+  - startFrame: 2
+    duration: 2
+    momentum: {x: 25, y: 20}
+    resetVelocityDuringRecovery: 0
+    xMovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    movementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    freeMovement: 0
+    useCurve: 0
+    teleport: 0
+  - startFrame: 12
+    duration: 2
     momentum: {x: 0, y: 0}
     resetVelocityDuringRecovery: 0
     xMovementCurve:
@@ -121,28 +142,9 @@ MonoBehaviour:
     freeMovement: 0
     useCurve: 0
     teleport: 0
-  - startFrame: 20
-    duration: 2
-    momentum: {x: -5, y: 0}
-    resetVelocityDuringRecovery: 0
-    xMovementCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    movementCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    freeMovement: 0
-    useCurve: 0
-    teleport: 0
   instantStartupRotation: 1
-  overrideVelocity: 0
+  overrideVelocity: 1
   runMomentum: 0
   inheritForwardVelocity: 0
-  stopAtEdges: 1
+  stopAtEdges: 0
   homing: 0
