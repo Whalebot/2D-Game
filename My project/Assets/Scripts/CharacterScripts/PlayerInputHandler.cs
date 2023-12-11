@@ -6,7 +6,6 @@ public class PlayerInputHandler : MonoBehaviour
 {
     public static PlayerInputHandler Instance { get; private set; }
     public bool flipPlayer;
-    public bool isDashing;
     public bool holdWest;
     public bool holdNorth;
     [HideInInspector] public InputManager input;
@@ -42,8 +41,6 @@ public class PlayerInputHandler : MonoBehaviour
         input.northRelease += ReleaseNorthButton;
         input.westRelease += ReleaseWestButton;
 
-        attack.recoveryEvent += ResetDash;
-        attack.startupEvent += ResetDash;
 
         status = GetComponent<Status>();
         mov = GetComponent<Movement>();
@@ -60,13 +57,6 @@ public class PlayerInputHandler : MonoBehaviour
         input.northRelease -= ReleaseNorthButton;
         input.westRelease -= ReleaseWestButton;
 
-        attack.recoveryEvent -= ResetDash;
-        attack.startupEvent -= ResetDash;
-    }
-
-    void ResetDash()
-    {
-        isDashing = false;
     }
 
     void ExecuteFrame()
@@ -133,20 +123,18 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (mov.ground)
         {
-            if (isDashing)
+            if (attack.isDashing)
                 if (attack.ComboAttack(attack.moveset.dashAttackCombo))
                 {
-                    isDashing = true;
                     return true;
                 }
             return attack.ComboAttack(attack.moveset.lightCombo);
         }
         else
         {
-            if (isDashing)
+            if (attack.isDashing)
                 if (attack.ComboAttack(attack.moveset.airDashAttackCombo))
                 {
-                    isDashing = true;
                     return true;
                 }
             return attack.ComboAttack(attack.moveset.airLightCombo);
@@ -283,7 +271,6 @@ public class PlayerInputHandler : MonoBehaviour
         {
             if (attack.ComboAttack(attack.moveset.dodgeCombo))
             {
-                isDashing = true;
                 return true;
             }
             else return false;
@@ -292,12 +279,33 @@ public class PlayerInputHandler : MonoBehaviour
         {
             if (attack.ComboAttack(attack.moveset.airDodgeCombo))
             {
-                isDashing = true;
                 return true;
             }
             else return false;
         }
 
+    }
+
+    bool DashAttack()
+    {
+        if (mov.ground)
+        {
+            if (attack.isDashing)
+                if (attack.ComboAttack(attack.moveset.dashAttackCombo))
+                {
+                    return true;
+                }
+            return false;
+        }
+        else
+        {
+            if (attack.isDashing)
+                if (attack.ComboAttack(attack.moveset.airDashAttackCombo))
+                {
+                    return true;
+                }
+            return false;
+        }
     }
 
     void NeutralInput()
@@ -447,6 +455,22 @@ public class PlayerInputHandler : MonoBehaviour
         if (InputAvailable())
         {
             if (attack.attackString) { NeutralInput(); }
+            else
+            {
+                for (int i = 0; i < input.bufferedInputs.Count; i++)
+                {
+                    switch (input.bufferedInputs[i].id)
+                    {
+                        //Interact button
+                        case 1:
+                            if (DashAttack())
+                            {
+                                DeleteInputs(i);
+                            }
+                            break;
+                    }
+                }
+            }
         }
     }
 

@@ -52,7 +52,10 @@ MonoBehaviour:
     position: {x: 0, y: 0.5, z: 0.2}
     rotation: {x: -5.44, y: 180, z: 90}
     scale: {x: 0.5, y: 0.5, z: 0.5}
-  sfx: []
+  sfx:
+  - startup: 1
+    audioClip: {fileID: 8300000, guid: 8f0ea1839eb463c44aef01dbabfbff03, type: 3}
+    volume: 1
   hitFX:
     type: 0
     startup: 1
@@ -76,6 +79,7 @@ MonoBehaviour:
   armor: 0
   resetGatling: 1
   hitsGroundOnly: 0
+  isDashing: 0
   noClip: 0
   noClipStart: 1
   noClipDuration: 0
@@ -91,7 +95,7 @@ MonoBehaviour:
   targetComboMoves:
   - {fileID: 11400000, guid: 87ce976be1e36da4597e87f94ae4b279, type: 2}
   fullCancel: 0
-  gatlingCancel: 0
+  gatlingCancel: 1
   uncancelable: 0
   useAirAction: 0
   landCancel: 1

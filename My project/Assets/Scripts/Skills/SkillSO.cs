@@ -13,6 +13,7 @@ public class SkillSO : ScriptableObject
     [PreviewField(50)] public Sprite sprite;
     public List<SkillSO> prerequisiteSkills;
     public List<Move> prerequisiteMoves;
+    public List<Move> bannedMoves;
     public List<NewMove> newMoves;
     public List<UniqueSkillProperty> skillProperties;
 

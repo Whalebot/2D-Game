@@ -165,6 +165,7 @@ public class SkillHandler : MonoBehaviour
     public bool CanGetSkill(SkillSO skillSO)
     {
         bool hasRequiredSkill = false;
+        bool hasBannedMove = false;
         bool hasRequiredMove = false;
 
         if (skillSO.prerequisiteSkills.Count > 0)
@@ -179,6 +180,7 @@ public class SkillHandler : MonoBehaviour
         }
         else hasRequiredSkill = true;
 
+
         Moveset def1 = attackScript.moveset;
         FieldInfo[] defInfo1 = def1.GetType().GetFields();
         if (skillSO.newMoves.Count > 0)
@@ -190,6 +192,15 @@ public class SkillHandler : MonoBehaviour
                 if (var1 is Combo)
                 {
                     Combo temp = (Combo)var1;
+                    foreach (var item in skillSO.bannedMoves)
+                    {
+                        foreach (var oldMove in temp.moves)
+                        {
+                            if (item.name == oldMove.name)
+                                hasBannedMove = true;
+                        }
+                    }
+
                     foreach (var newMove in skillSO.newMoves)
                     {
                         if (newMove.oldMove != null)
@@ -210,7 +221,7 @@ public class SkillHandler : MonoBehaviour
 
         //Debug.Log($"{skillSO} Has required move {hasRequiredMove} & has required skill{hasRequiredSkill}");
 
-        return hasRequiredMove && hasRequiredSkill;
+        return hasRequiredMove && hasRequiredSkill && !hasBannedMove;
     }
     public void LearnSkill(SkillSO skill, bool loading = false)
     {

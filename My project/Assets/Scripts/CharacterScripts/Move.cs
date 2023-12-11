@@ -50,6 +50,7 @@ public class Move : ScriptableObject
     [TabGroup("Move properties")] public bool armor;
     [TabGroup("Move properties")] public bool resetGatling;
     [TabGroup("Move properties")] public bool hitsGroundOnly;
+    [TabGroup("Move properties")] public bool isDashing;
 
     [TabGroup("Move properties")] public bool noClip;
     [ShowIf("noClip")]
