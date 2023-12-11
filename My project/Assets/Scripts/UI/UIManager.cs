@@ -111,7 +111,7 @@ public class UIManager : MonoBehaviour
     public void RerollButton()
     {
         GameManager.Instance.playerStatus.currentStats.rerolls--;
-        SkillManager.Instance.RollSkills(Rank.B);
+        SkillManager.Instance.Reroll();
     }
     void OpenPowerupPanel()
     {

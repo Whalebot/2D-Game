@@ -10,25 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41f2923ec284c6840a8cd468af82cb4d, type: 3}
-  m_Name: Fireball
+  m_Name: Holy Book
   m_EditorClassIdentifier: 
-  skillRank: 4
-  type: 0
-  title: Fireball
-  sprite: {fileID: 21300000, guid: 95976ef1466e12546af6c716633910d6, type: 3}
+  skillRank: 2
+  type: 2
+  title: Glasses
+  sprite: {fileID: 0}
   prerequisiteSkills: []
   prerequisiteMoves: []
-  bannedMoves:
-  - {fileID: 11400000, guid: 879a708098a85214b95f22ba1c2e8b59, type: 2}
-  newMoves:
-  - move: {fileID: 11400000, guid: 879a708098a85214b95f22ba1c2e8b59, type: 2}
-    combo: {fileID: 11400000, guid: fc9164ff3509902439a2cc443c017bd8, type: 2}
-    oldMove: {fileID: 0}
+  newMoves: []
   skillProperties: []
-  description: '[Forward + (Skill)] to shoot a fireball.
+  description: 'Gain 30% crit chance and 50% crit damage
 
-
-    DMGVAL fire damage.'
+    Take 50% more damage'
   stats:
     currentHealth: 0
     maxHealth: 0
@@ -45,7 +39,7 @@ MonoBehaviour:
     magic: 0
     faithModifier: 0
     attackSpeed: 0
-    jumps: 1
+    jumps: 0
     airActions: 0
     rerolls: 0
     fireModifier: 0
@@ -58,7 +52,7 @@ MonoBehaviour:
     meterGainModifier: 0
     poiseRegen: 0
     poise: 0
-    defense: 0
+    defense: -0.5
     resistance: 0
     guardBreakModifier: 0
     sizeModifier: 0
@@ -67,5 +61,5 @@ MonoBehaviour:
     damageModifierFlat: 0
     hitStunMultiplier: 0
     knockbackModifier: 0
-    critChance: 0
-    critMultiplier: 0
+    critChance: 0.3
+    critMultiplier: 0.5

@@ -10,8 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6fd9f65ed0e7cb47bdb4f7c141c204d, type: 3}
-  m_Name: FrozenStatusEffect
+  m_Name: Frozen Status Effect
   m_EditorClassIdentifier: 
+  elemental: 3
+  baseDamage: 2
+  damageModifier: 1
   duration: 300
   stacks: 0
   maxStacks: 4
@@ -26,7 +29,6 @@ MonoBehaviour:
     rotation: {x: -90, y: 0, z: 0}
     scale: {x: 0.5, y: 0.5, z: 0.5}
   currentVFX: {fileID: 0}
-  damageOnApply: 3
   iceVFX:
     type: 0
     startup: 1

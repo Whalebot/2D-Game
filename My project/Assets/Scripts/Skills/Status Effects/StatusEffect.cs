@@ -6,6 +6,7 @@ using UnityEngine;
 public class StatusEffect : ScriptableObject
 {
     public Elemental elemental;
+    public int baseDamage;
     public float damageModifier = 1;
     float elementalModifier = 1;
 
@@ -26,7 +27,8 @@ public class StatusEffect : ScriptableObject
         durationCounter = duration;
         tickCounter = 0;
 
-        if (hitInfo != null) {
+        if (hitInfo != null)
+        {
             Stats stats = hitInfo.attackerStatus.currentStats;
             switch (elemental)
             {

@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee4a6ab6f25b534419716c5c239a90cb, type: 3}
   m_Name: Poison Status Effect
   m_EditorClassIdentifier: 
+  elemental: 6
+  baseDamage: 1
+  damageModifier: 1
   duration: 300
   stacks: 0
   maxStacks: 10
@@ -26,7 +29,6 @@ MonoBehaviour:
     rotation: {x: -90, y: 0, z: 0}
     scale: {x: 0.3, y: 0.3, z: 0.3}
   currentVFX: {fileID: 0}
-  damagePerTick: 1
   poisonVFX:
     type: 0
     startup: 1

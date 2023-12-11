@@ -10,13 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6be187000d3178242b45b44948f6bf0d, type: 3}
-  m_Name: BurningStatusEffect
+  m_Name: Burning Status Effect
   m_EditorClassIdentifier: 
+  elemental: 2
+  baseDamage: 2
+  damageModifier: 1
   duration: 150
   stacks: 0
   maxStacks: 1
   tickInterval: 50
   statusVFX:
+    type: 0
     startup: 1
     prefab: {fileID: 0}
     deattachFromPlayer: 1
@@ -25,8 +29,8 @@ MonoBehaviour:
     rotation: {x: 0, y: 0, z: 0}
     scale: {x: 1, y: 1, z: 1}
   currentVFX: {fileID: 0}
-  damagePerTick: 2
   fireVFX:
+    type: 0
     startup: 1
     prefab: {fileID: 187646, guid: 01f42707f167b8b4ca766683fa96d652, type: 3}
     deattachFromPlayer: 1

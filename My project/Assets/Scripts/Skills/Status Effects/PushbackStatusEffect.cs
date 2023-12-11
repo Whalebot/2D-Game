@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PushbackStatusEffect", menuName = "ScriptableObjects/StatusEffects/PushbackStatusEffect")]
 public class PushbackStatusEffect : StatusEffect
 {
-    public int baseDamage = 5;
     public GameObject hazardPrefab;
     public GameObject tempGO;
     public Hazard hazard;

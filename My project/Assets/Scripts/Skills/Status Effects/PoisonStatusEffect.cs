@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PoisonStatusEffect", menuName = "ScriptableObjects/StatusEffects/PoisonStatusEffect")]
 public class PoisonStatusEffect : StatusEffect
 {
-    public int damagePerTick;
     public VFX poisonVFX;
     public override void TickBehaviour()
     {
@@ -17,7 +16,7 @@ public class PoisonStatusEffect : StatusEffect
     {
         GameObject fx = Instantiate(poisonVFX.prefab, status.transform.position, status.transform.rotation, status.transform);
 
-        int dmgDone = (int)(damagePerTick * stacks * damageModifier);
+        int dmgDone = (int)(baseDamage * stacks * damageModifier);
 
         status.Health -= dmgDone;
         GameManager.Instance.DamageNumbers(status.transform, dmgDone, false);

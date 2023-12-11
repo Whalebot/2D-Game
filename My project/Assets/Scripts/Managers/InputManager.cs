@@ -520,6 +520,8 @@ public class InputManager : MonoBehaviour
     {
         if (inputDirection.y > 0.7) return 8;
         if (inputDirection.y < -0.7) return 2;
+        if (inputDirection.x > 0.7) return 6;
+        if (inputDirection.x < -0.7) return 4;
         return 5;
 
         //if (netDirectionals[0])

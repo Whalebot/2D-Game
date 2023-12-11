@@ -248,6 +248,18 @@ public class PlayerInputHandler : MonoBehaviour
             return attack.ComboAttack(attack.moveset.airSkillCombo);
         }
     }
+    bool SideEastButton()
+    {
+        if (mov.ground)
+        {
+
+            return attack.ComboAttack(attack.moveset.sideSkillCombo);
+        }
+        else
+        {
+            return attack.ComboAttack(attack.moveset.sideSkillCombo);
+        }
+    }
     bool UpEastButton()
     {
         return attack.ComboAttack(attack.moveset.upSkillCombo);
@@ -394,7 +406,14 @@ public class PlayerInputHandler : MonoBehaviour
                             break;
                         }
                     }
-
+                    if (input.bufferedInputs[i].dir == 4 || input.bufferedInputs[i].dir == 6)
+                    {
+                        if (SideEastButton())
+                        {
+                            DeleteInputs(i);
+                            break;
+                        }
+                    }
                     if (EastButton())
                     {
                         DeleteInputs(i);

@@ -205,7 +205,7 @@ public class Status : MonoBehaviour
             }
         }
     }
-    public void ApplyStatusEffect(StatusEffect effect,HitInfo hitInfo = null)
+    public void ApplyStatusEffect(StatusEffect effect, HitInfo hitInfo = null)
     {
         StatusEffect clone = null;
         foreach (var item in statusEffects)
@@ -225,7 +225,7 @@ public class Status : MonoBehaviour
             clone = Instantiate(effect);
             clone.name = effect.name;
             statusEffects.Add(clone);
-            clone.ActivateBehaviour(this);
+            clone.ActivateBehaviour(this, hitInfo);
         }
     }
     public bool HasStatusEffect(StatusEffect effect)

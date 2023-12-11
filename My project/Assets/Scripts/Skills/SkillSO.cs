@@ -11,15 +11,18 @@ public class SkillSO : ScriptableObject
     public SkillType type;
     public string title;
     [PreviewField(50)] public Sprite sprite;
+
+    public int damageValue = 0;
+
     public List<SkillSO> prerequisiteSkills;
-    public List<Move> prerequisiteMoves;
-    public List<Move> bannedMoves;
-    public List<NewMove> newMoves;
+    [ShowIf("@type == SkillType.Skill")] public List<Move> prerequisiteMoves;
+    [ShowIf("@type == SkillType.Skill")] public List<Move> bannedMoves;
+    [ShowIf("@type == SkillType.Skill")] public List<NewMove> newMoves;
     public List<UniqueSkillProperty> skillProperties;
 
     [TextArea(15, 20)]
     public string description;
-    [ShowIf("@type == SkillType.Blessing || type == SkillType.Item")]
+    [ShowIf("@type == SkillType.Item")]
     public Stats stats;
 
     public virtual void ActivateBehaviour(SkillHandler handler)
@@ -57,6 +60,59 @@ public class SkillSO : ScriptableObject
     public virtual void HitBehaviour(SkillHandler handler)
     {
         //Debug.Log("Base behaviour");
+    }
+
+    public void CalculateDamageValue(Status status)
+    {
+        switch (type)
+        {
+            case SkillType.Skill:
+                //Find new move hitbox damage
+                if (newMoves.Count > 0)
+                {
+                    damageValue = (int)(status.Attack * newMoves[0].move.attacks[0].damage);
+                }
+                break;
+            case SkillType.Blessing:
+                if (skillProperties.Count > 0)
+                {
+                    StatusEffectSkillProperty prop = (StatusEffectSkillProperty)skillProperties[0];
+                    float damageMod = 1f;
+                    switch (prop.appliedEffects[0].elemental)
+                    {
+                        case Elemental.None:
+                            break;
+                        case Elemental.Earth:
+                            damageMod = status.currentStats.faithModifier * status.currentStats.earthModifier;
+                            break;
+                        case Elemental.Fire:
+                            damageMod = status.currentStats.faithModifier * status.currentStats.fireModifier;
+                                break;
+                        case Elemental.Ice:
+                            damageMod = status.currentStats.faithModifier * status.currentStats.iceModifier;
+                            break;
+                        case Elemental.Lightning:
+                            damageMod = status.currentStats.faithModifier * status.currentStats.lightningModifier;
+                            break;
+                        case Elemental.Wind:
+                            damageMod = status.currentStats.faithModifier * status.currentStats.windModifier;
+                            break;
+                        case Elemental.Poison:
+                            damageMod = status.currentStats.faithModifier * status.currentStats.poisonModifier;
+                            break;
+                        default:
+                            break;
+                    }
+                    damageValue = (int)(prop.appliedEffects[0].baseDamage * damageMod);
+           
+                }
+                break;
+            case SkillType.Item:
+                break;
+            default:
+                break;
+        }
+
     }
 
     private void OnValidate()

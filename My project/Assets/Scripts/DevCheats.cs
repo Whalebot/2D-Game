@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class DevCheats : MonoBehaviour
 {
     public SkillSO skill;
+    public Stats stats;
     private void Start()
     {
         InputManager.Instance.selectInput += Restart;
@@ -26,10 +27,13 @@ public class DevCheats : MonoBehaviour
         if (Keyboard.current.f3Key.wasPressedThisFrame) SaveManager.Instance.DeleteData();
         if (Keyboard.current.f5Key.wasPressedThisFrame)
         {
+               
+
             GameManager.Instance.playerStatus.currentStats.maxHealth = 1000000;
             GameManager.Instance.playerStatus.currentStats.currentHealth = 1000000;
             GameManager.Instance.playerStatus.currentStats.maxMeter = 1000000;
             GameManager.Instance.playerStatus.currentStats.currentMeter = 1000000;
+            GameManager.Instance.playerStatus.currentStats.rerolls = 1000000;
         }
     }
 }

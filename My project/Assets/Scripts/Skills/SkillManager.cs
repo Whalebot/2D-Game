@@ -15,7 +15,6 @@ public class SkillManager : MonoBehaviour
     [TabGroup("Debug")] public List<SkillSO> foundSkills;
     [TabGroup("Debug")] public List<SkillSO> selectedSkills;
     [TabGroup("Debug")] public List<SkillSO> items, activeSkills, blessings;
-    [TabGroup("Debug")] public List<SkillSO> DSkills, CSkills, BSkills, ASkills, SSkills;
     [TabGroup("Debug")] public SkillSO emptyPoolSkill;
     [TabGroup("Components")] public List<Moveset> allMovesets;
     [TabGroup("Components")] public List<TextTags> colorTags;
@@ -23,7 +22,8 @@ public class SkillManager : MonoBehaviour
     [TabGroup("Components")] public List<SkillSelectionButton> skillButtons;
     [TabGroup("Components")] public List<ShopButton> shopButtons;
     [TabGroup("Components")] public Sprite NBackground, RBackground, SRBackground, SSRBackground, URBackground;
-
+    RewardType rewardType;
+    Rank rank;
     public event Action<SkillSO> pickedSkillEvent;
 
     SkillHandler skillHandler;
@@ -112,6 +112,28 @@ public class SkillManager : MonoBehaviour
     {
         SaveManager.Instance.LearnedSkills = new List<SkillSO>(foundSkills);
     }
+
+    [Button]
+    public void Reroll()
+    {
+        switch (rewardType)
+        {
+            case RewardType.Blessing:
+                RollBlessing(rank);
+                break;
+            case RewardType.Item:
+                RollItem(rank);
+                break;
+            case RewardType.Skill:
+                RollActiveSkill(rank);
+                break;
+            case RewardType.Gold:
+                break;
+            default:
+                break;
+        }
+    }
+
     [Button]
     public void RollShop(Rank r)
     {
@@ -133,6 +155,7 @@ public class SkillManager : MonoBehaviour
     }
     public void RollBlessing(Rank rank)
     {
+        rewardType = RewardType.Blessing;
         selectedSkills.Clear();
         List<SkillSO> eligibleSkills = new List<SkillSO>();
         foreach (var item in allSkills)
@@ -157,6 +180,7 @@ public class SkillManager : MonoBehaviour
     }
     public void RollItem(Rank rank)
     {
+        rewardType = RewardType.Item;
         selectedSkills.Clear();
         List<SkillSO> eligibleSkills = new List<SkillSO>();
         foreach (var item in allSkills)
@@ -181,6 +205,7 @@ public class SkillManager : MonoBehaviour
 
     public void RollActiveSkill(Rank rank)
     {
+        rewardType = RewardType.Skill;
         selectedSkills.Clear();
         List<SkillSO> eligibleSkills = new List<SkillSO>();
         foreach (var item in allSkills)
@@ -205,56 +230,6 @@ public class SkillManager : MonoBehaviour
         }
     }
 
-    [Button]
-    public void RollSkills(Rank r)
-    {
-        bool foundRank = false;
-        selectedSkills.Clear();
-        for (int i = 0; i < skillButtons.Count; i++)
-        {
-            SkillSO skill = null;
-            //If last skill and haven't found sufficiently high skill
-            if (!foundRank && i == skillButtons.Count - 1)
-            {
-                switch (r)
-                {
-                    case Rank.D:
-                        skill = RollSkill(DSkills);
-                        break;
-                    case Rank.C:
-                        skill = RollSkill(CSkills);
-                        break;
-                    case Rank.B:
-                        skill = RollSkill(BSkills);
-                        break;
-                    case Rank.A:
-                        skill = RollSkill(ASkills);
-                        break;
-                    case Rank.S:
-                        skill = RollSkill(SSkills);
-                        break;
-                    default:
-                        break;
-                }
-
-                if (skill.skillRank >= r)
-                    foundRank = true;
-
-                skillButtons[i].skillSO = skill;
-                if (skill != null)
-                    skillButtons[i].SetupSkill();
-            }
-            else
-            {
-                skill = RollSkill();
-                if (skill.skillRank >= r)
-                    foundRank = true;
-            }
-            skillButtons[i].skillSO = skill;
-            if (skill != null)
-                skillButtons[i].SetupSkill();
-        }
-    }
     [Button]
     public void ResetSkills()
     {
@@ -307,7 +282,7 @@ public class SkillManager : MonoBehaviour
         }
     }
 
-    string CheckStringTags(string s)
+    string CheckStringTags(string s, SkillSO skill = null)
     {
         List<string> words = new List<string>();
         string test = "";
@@ -317,7 +292,7 @@ public class SkillManager : MonoBehaviour
         {
             test += letter;
 
-            if (letter == ' ')
+            if (letter == ' ' || letter == '\n')
             {
                 words.Add(test);
                 test = "";
@@ -330,18 +305,24 @@ public class SkillManager : MonoBehaviour
         //Paint text
         for (int i = 0; i < words.Count; i++)
         {
+            if (skill != null)
+                if (words[i].Contains("DMGVAL"))
+                {
+                    skill.CalculateDamageValue(GameManager.Instance.playerStatus);
+                    words[i] = skill.damageValue + " ";
+                    words[i] = ($"<link=\"0\"><color=#{ColorUtility.ToHtmlStringRGB(Color.yellow)}>" + words[i] + "</color>" + "</link>");
+                }
+
+
             foreach (var item in colorTags)
             {
                 foreach (string tag in item.tags)
                 {
                     if (words[i].ToLower().Contains(tag))
                     {
-                        //words[i] = $"<color=#{ColorUtility.ToHtmlStringRGB(item.tagColor)}>" + words[i] + "</color>";
-                        //words[i] = $"<color=#{ColorUtility.ToHtmlStringRGB(item.tagColor)}>" + words[i] + "</color>";
+                        words[i] = words[i].Replace("(", "");
+                        words[i] = words[i].Replace(")", "");
                         words[i] = ($"<link=\"0\"><color=#{ColorUtility.ToHtmlStringRGB(item.tagColor)}>" + words[i] + "</color>" + "</link>");
-                        //words[i] = ($"<link=0><color=#{ColorUtility.ToHtmlStringRGB(item.tagColor)}>" + words[i] + "</color>" + "</link>");
-
-                        // words[i] = ($"<link='0'><color=#{ColorUtility.ToHtmlStringRGB(item.tagColor)}>" + words[i] + "</color>" + "</link>").Replace("'", "\"");
 
                     }
                 }
@@ -359,7 +340,7 @@ public class SkillManager : MonoBehaviour
 
     public string SkillDescription(SkillSO skill)
     {
-        string s = CheckStringTags(skill.description);
+        string s = CheckStringTags(skill.description, skill);
         return s;
     }
 
@@ -373,11 +354,6 @@ public class SkillManager : MonoBehaviour
     void LoadItemSO()
     {
         allSkills.Clear();
-        DSkills.Clear();
-        CSkills.Clear();
-        BSkills.Clear();
-        ASkills.Clear();
-        SSkills.Clear();
 
         items.Clear();
         blessings.Clear();
@@ -400,27 +376,6 @@ public class SkillManager : MonoBehaviour
                     break;
                 case SkillType.Item:
                     items.Add(item);
-                    break;
-                default:
-                    break;
-            }
-
-            switch (item.skillRank)
-            {
-                case Rank.D:
-                    DSkills.Add(item);
-                    break;
-                case Rank.C:
-                    CSkills.Add(item);
-                    break;
-                case Rank.B:
-                    BSkills.Add(item);
-                    break;
-                case Rank.A:
-                    ASkills.Add(item);
-                    break;
-                case Rank.S:
-                    SSkills.Add(item);
                     break;
                 default:
                     break;

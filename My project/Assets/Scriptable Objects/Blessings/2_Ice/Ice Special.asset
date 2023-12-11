@@ -12,16 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41f2923ec284c6840a8cd468af82cb4d, type: 3}
   m_Name: Ice Special
   m_EditorClassIdentifier: 
-  skillRank: 2
+  skillRank: 4
   type: 1
   title: Ice Special
   sprite: {fileID: 21300000, guid: 89d6fcf1b6e03be45b794182ea1e0de7, type: 3}
+  damageValue: 2
   prerequisiteSkills: []
   prerequisiteMoves: []
+  bannedMoves: []
   newMoves: []
   skillProperties:
   - {fileID: 11400000, guid: 6b9538588f48fef408efe1807b1ed290, type: 2}
-  description: Adds 2 dmg to hits and applies ice when landing a hit
+  description: "Your [special] apply burning status on enemies. \nDMGVAL ice damage
+    to hits and applies stacking frozen effect for 5 seconds when landing a hit."
   stats:
     currentHealth: 0
     maxHealth: 0
@@ -31,14 +34,22 @@ MonoBehaviour:
     strength: 0
     intelligence: 0
     agility: 0
+    faith: 0
     luck: 0
     gold: 0
     attack: 0
     magic: 0
+    faithModifier: 0
     attackSpeed: 0
     jumps: 0
     airActions: 0
     rerolls: 0
+    fireModifier: 0
+    iceModifier: 0
+    lightningModifier: 0
+    earthModifier: 0
+    windModifier: 0
+    poisonModifier: 0
     movementSpeedModifier: 0
     meterGainModifier: 0
     poiseRegen: 0

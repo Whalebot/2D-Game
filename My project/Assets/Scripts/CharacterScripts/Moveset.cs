@@ -27,6 +27,7 @@ public class Moveset : ScriptableObject
     public Combo skillCombo;
     public Combo upSkillCombo;
     public Combo downSkillCombo;
+    public Combo sideSkillCombo;
     public Combo airSkillCombo;
     public Combo downAirSkillCombo;
 }
