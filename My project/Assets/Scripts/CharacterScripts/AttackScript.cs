@@ -534,7 +534,7 @@ public class AttackScript : MonoBehaviour
         //Air properties
         if (move.useAirAction) airActionCounter++;
 
-        if (!movement.passthroughPlatforms)
+        if (movement.passthroughPlatforms)
             status.EnableCollider();
 
         if (move.homing)
