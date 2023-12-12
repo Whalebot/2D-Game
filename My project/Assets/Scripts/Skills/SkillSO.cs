@@ -76,35 +76,7 @@ public class SkillSO : ScriptableObject
             case SkillType.Blessing:
                 if (skillProperties.Count > 0)
                 {
-                    StatusEffectSkillProperty prop = (StatusEffectSkillProperty)skillProperties[0];
-                    float damageMod = 1f;
-                    switch (prop.appliedEffects[0].elemental)
-                    {
-                        case Elemental.None:
-                            break;
-                        case Elemental.Earth:
-                            damageMod = status.currentStats.faithModifier * status.currentStats.earthModifier;
-                            break;
-                        case Elemental.Fire:
-                            damageMod = status.currentStats.faithModifier * status.currentStats.fireModifier;
-                                break;
-                        case Elemental.Ice:
-                            damageMod = status.currentStats.faithModifier * status.currentStats.iceModifier;
-                            break;
-                        case Elemental.Lightning:
-                            damageMod = status.currentStats.faithModifier * status.currentStats.lightningModifier;
-                            break;
-                        case Elemental.Wind:
-                            damageMod = status.currentStats.faithModifier * status.currentStats.windModifier;
-                            break;
-                        case Elemental.Poison:
-                            damageMod = status.currentStats.faithModifier * status.currentStats.poisonModifier;
-                            break;
-                        default:
-                            break;
-                    }
-                    damageValue = (int)(prop.appliedEffects[0].baseDamage * damageMod);
-           
+                    damageValue = skillProperties[0].GetDamage(status, skillRank);
                 }
                 break;
             case SkillType.Item:

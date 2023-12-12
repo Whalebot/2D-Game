@@ -9,9 +9,10 @@ using Sirenix.OdinInspector;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
-    public GameObject powerupPanel;
-    public GameObject shopPanel;
-    public OrganizeChildren skillPanelOrganizer;
+    [TabGroup("Components")] public GameObject treasurePanel;
+    [TabGroup("Components")] public GameObject blessingPanel, itemPanel, skillPanel;
+    [TabGroup("Components")] public GameObject shopPanel;
+    [TabGroup("Components")] public OrganizeChildren skillPanelOrganizer;
     [TabGroup("Components")] public GameObject pauseMenu;
     [TabGroup("Components")] public GameObject skillUIPrefab;
     [TabGroup("Components")] public Image neutralSkillIcon, upSkillIcon, downSkillIcon, sideSkillIcon;
@@ -25,11 +26,16 @@ public class UIManager : MonoBehaviour
     [TabGroup("Components")] public TextMeshProUGUI goldText;
     [TabGroup("Components")] public TextMeshProUGUI floorText;
     [TabGroup("Components")] public TextMeshProUGUI timeText;
-    [TabGroup("Components")] public RectTransform tooltip;
-    [TabGroup("Components")] public Vector3 tooltipOffset;
-    [TabGroup("Components")] public bool tooltipEnabled;
+    [TabGroup("Tooltip")] public RectTransform tooltip;
+    [TabGroup("Tooltip")] public Vector3 tooltipOffset;
+    [TabGroup("Tooltip")] public bool tooltipEnabled;
+    [TabGroup("Tooltip")] public TextMeshProUGUI tooltipText;
+    [TabGroup("Tooltip")] public GameObject skillDescriptionWindow;
+    [TabGroup("Tooltip")] public Vector3 skillDescriptionOffset;
+    [TabGroup("Tooltip")] public TextMeshProUGUI skillDescriptionText;
+    [TabGroup("Tooltip")] public TextMeshProUGUI skillDescriptionTitle;
 
-    
+
 
     private void Awake()
     {
@@ -41,14 +47,16 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         //GameManager.Instance.advanceGameState += ExecuteFrame;
-        GameManager.Instance.getSkillEvent += OpenPowerupPanel;
+        GameManager.Instance.openRewardWindowEvent += OpenPowerupPanel;
 
         GameManager.Instance.pauseEvent += OpenPauseMenu;
         GameManager.Instance.resumeEvent += ClosePauseMenu;
 
         GameManager.Instance.openShopEvent += OpenShopPanel;
+        SkillManager.Instance.pickedSkillEvent += SetupSkillPanel;
+
         rerollButton.onClick.AddListener(() => RerollButton());
-        SetupSkillPanel();
+        SetupSkillPanel(null);
     }
     void OpenPauseMenu()
     {
@@ -73,15 +81,16 @@ public class UIManager : MonoBehaviour
         tooltip.position = Input.mousePosition + tooltipOffset;
         tooltip.gameObject.SetActive(tooltipEnabled);
     }
-    void UpdateSkillIcon() {
+    void UpdateSkillIcon()
+    {
         AttackScript attack = GameManager.Instance.playerStatus.GetComponent<AttackScript>();
         if (attack.moveset.skillCombo.moves.Count > 0)
         {
             neutralSkillIcon.gameObject.SetActive(true);
             neutralSkillIcon.sprite = attack.moveset.skillCombo.moves[0].icon;
 
-            if(GameManager.Instance.playerStatus.Meter < 50)
-            neutralSkillIcon.color = Color.gray;
+            if (GameManager.Instance.playerStatus.Meter < 50)
+                neutralSkillIcon.color = Color.gray;
             else neutralSkillIcon.color = Color.white;
         }
         else neutralSkillIcon.gameObject.SetActive(false);
@@ -120,7 +129,23 @@ public class UIManager : MonoBehaviour
         else sideSkillIcon.gameObject.SetActive(false);
     }
 
-    public void EnableTooltip() { tooltipEnabled = true;  }
+    public void DisplaySkillDescription(SkillIcon icon)
+    {
+        skillDescriptionWindow.SetActive(true);
+        skillDescriptionTitle.text = icon.skillSO.title;
+        skillDescriptionText.text = SkillManager.Instance.SkillDescription(icon.skillSO);
+        skillDescriptionWindow.transform.position = icon.transform.position + skillDescriptionOffset;
+    }
+    public void HideSkillDescription()
+    {
+        skillDescriptionWindow.SetActive(false);
+    }
+
+    public void EnableTooltip(string key)
+    {
+        tooltipEnabled = true;
+        tooltipText.text = key;
+    }
     public void DisableTooltip() { tooltipEnabled = false; }
 
     public static string TimeFormatter(float seconds, bool forceHHMMSS = false)
@@ -139,7 +164,7 @@ public class UIManager : MonoBehaviour
         return System.String.Format("{0}:{1:00}:{2:00}", hours, minutes, secondsRemainder);
     }
     [Button]
-    public void SetupSkillPanel()
+    public void SetupSkillPanel(SkillSO so)
     {
         foreach (Transform child in skillPanelOrganizer.transform)
         {
@@ -149,8 +174,8 @@ public class UIManager : MonoBehaviour
         foreach (var item in SaveManager.Instance.LearnedSkills)
         {
             GameObject temp = Instantiate(skillUIPrefab, skillPanelOrganizer.transform, false);
-            Image img = temp.transform.GetChild(0).gameObject.GetComponent<Image>();
-            if (img != null) img.sprite = item.sprite;
+            SkillIcon icon = temp.GetComponent<SkillIcon>();
+            icon.SetupIcon(item);
         }
         skillPanelOrganizer.SetupPosition();
     }
@@ -159,9 +184,28 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.playerStatus.currentStats.rerolls--;
         SkillManager.Instance.Reroll();
     }
-    void OpenPowerupPanel()
+    void OpenPowerupPanel(RewardType rewardType)
     {
-        powerupPanel.SetActive(true);
+        blessingPanel.SetActive(false);
+        itemPanel.SetActive(false);
+        skillPanel.SetActive(false);
+        switch (rewardType)
+        {
+            case RewardType.Blessing:
+                blessingPanel.SetActive(true);
+                break;
+            case RewardType.Item:
+                itemPanel.SetActive(true);
+                break;
+            case RewardType.Skill:
+                skillPanel.SetActive(true);
+                break;
+            case RewardType.Gold:
+                break;
+            default:
+                break;
+        }
+        treasurePanel.SetActive(true);
     }
     void OpenShopPanel()
     {
@@ -169,7 +213,7 @@ public class UIManager : MonoBehaviour
     }
     public void CloseRewardPanels()
     {
-        powerupPanel.SetActive(false);
+        treasurePanel.SetActive(false);
         shopPanel.SetActive(false);
         GameManager.Instance.CloseMenu();
         LevelManager.Instance.SpawnLevelGates();

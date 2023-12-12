@@ -71,7 +71,7 @@ public class ShopButton : MonoBehaviour
         }
 
         priceText.text = "" + price;
-        if (price >= GameManager.Instance.Gold)
+        if (price > GameManager.Instance.Gold)
             priceText.color = Color.red;
 
         titleText.text = skillSO.title;

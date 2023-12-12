@@ -136,15 +136,15 @@ public class Treasure : Interactable
         {
             case RewardType.Blessing:
                 SkillManager.Instance.RollBlessing(rank);
-                GameManager.Instance.OpenGetSkillWindow();
+                GameManager.Instance.OpenGetSkillWindow(RewardType.Blessing);
                 break;
             case RewardType.Item:
                 SkillManager.Instance.RollItem(rank);
-                GameManager.Instance.OpenGetSkillWindow();
+                GameManager.Instance.OpenGetSkillWindow(RewardType.Item);
                 break;
             case RewardType.Skill:
                 SkillManager.Instance.RollActiveSkill(rank);
-                GameManager.Instance.OpenGetSkillWindow();
+                GameManager.Instance.OpenGetSkillWindow(RewardType.Skill);
                 break;
             case RewardType.Gold:
                 GameManager.Instance.Gold += 150;

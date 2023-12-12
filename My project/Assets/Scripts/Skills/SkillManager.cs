@@ -23,7 +23,7 @@ public class SkillManager : MonoBehaviour
     [TabGroup("Components")] public List<ShopButton> shopButtons;
     [TabGroup("Components")] public Sprite NBackground, RBackground, SRBackground, SSRBackground, URBackground;
     RewardType rewardType;
-    Rank rank;
+    Rank rewardRank;
     public event Action<SkillSO> pickedSkillEvent;
 
     SkillHandler skillHandler;
@@ -99,13 +99,13 @@ public class SkillManager : MonoBehaviour
 
         //else
         {
-            pickedSkillEvent?.Invoke(skillSO);
             skillHandler.LearnSkill(skillSO);
 
             foundSkills.Add(skillSO);
             learnedSkills.Add(skillSO);
 
             selectedSkills.Clear();
+            pickedSkillEvent?.Invoke(skillSO);
         }
     }
     void SaveSkills()
@@ -119,13 +119,13 @@ public class SkillManager : MonoBehaviour
         switch (rewardType)
         {
             case RewardType.Blessing:
-                RollBlessing(rank);
+                RollBlessing(rewardRank);
                 break;
             case RewardType.Item:
-                RollItem(rank);
+                RollItem(rewardRank);
                 break;
             case RewardType.Skill:
-                RollActiveSkill(rank);
+                RollActiveSkill(rewardRank);
                 break;
             case RewardType.Gold:
                 break;
@@ -155,6 +155,7 @@ public class SkillManager : MonoBehaviour
     }
     public void RollBlessing(Rank rank)
     {
+        rewardRank = rank;
         rewardType = RewardType.Blessing;
         selectedSkills.Clear();
         List<SkillSO> eligibleSkills = new List<SkillSO>();
@@ -171,7 +172,8 @@ public class SkillManager : MonoBehaviour
             SkillSO skill = null;
 
             skill = RollSkill(eligibleSkills);
-            skill.skillRank = (Rank)UnityEngine.Random.Range(0, 5);
+            skill.skillRank = rank;
+            //skill.skillRank = (Rank)UnityEngine.Random.Range(0, 5);
             skillButtons[i].skillSO = skill;
             if (skill != null)
                 skillButtons[i].SetupSkill();
@@ -182,6 +184,7 @@ public class SkillManager : MonoBehaviour
     {
         rewardType = RewardType.Item;
         selectedSkills.Clear();
+        rewardRank = rank;
         List<SkillSO> eligibleSkills = new List<SkillSO>();
         foreach (var item in allSkills)
         {
@@ -207,6 +210,7 @@ public class SkillManager : MonoBehaviour
     {
         rewardType = RewardType.Skill;
         selectedSkills.Clear();
+        rewardRank = rank;
         List<SkillSO> eligibleSkills = new List<SkillSO>();
         foreach (var item in allSkills)
         {
@@ -322,7 +326,7 @@ public class SkillManager : MonoBehaviour
                     {
                         words[i] = words[i].Replace("(", "");
                         words[i] = words[i].Replace(")", "");
-                        words[i] = ($"<link=\"0\"><color=#{ColorUtility.ToHtmlStringRGB(item.tagColor)}>" + words[i] + "</color>" + "</link>");
+                        words[i] = ($"<link=\"1\"><color=#{ColorUtility.ToHtmlStringRGB(item.tagColor)}>" + words[i] + "</color>" + "</link>");
 
                     }
                 }

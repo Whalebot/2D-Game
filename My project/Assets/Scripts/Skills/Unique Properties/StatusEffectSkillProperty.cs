@@ -7,9 +7,48 @@ public class StatusEffectSkillProperty : UniqueSkillProperty
 {
     public MoveGroup affectedMoves;
     public List<StatusEffect> appliedEffects;
-    public override void HitBehaviour(HitInfo hitInfo)
+
+    public override int GetDamage(Status status = null, Rank rank = Rank.D)
     {
-        base.HitBehaviour(hitInfo);
+
+        if (appliedEffects.Count > 0)
+        {
+            float damageMod = 1;
+
+            switch (appliedEffects[0].elemental)
+            {
+                case Elemental.None:
+                    break;
+                case Elemental.Earth:
+                    damageMod = status.currentStats.faithModifier * status.currentStats.earthModifier;
+                    break;
+                case Elemental.Fire:
+                    damageMod = status.currentStats.faithModifier * status.currentStats.fireModifier;
+                    break;
+                case Elemental.Ice:
+                    damageMod = status.currentStats.faithModifier * status.currentStats.iceModifier;
+                    break;
+                case Elemental.Lightning:
+                    damageMod = status.currentStats.faithModifier * status.currentStats.lightningModifier;
+                    break;
+                case Elemental.Wind:
+                    damageMod = status.currentStats.faithModifier * status.currentStats.windModifier;
+                    break;
+                case Elemental.Poison:
+                    damageMod = status.currentStats.faithModifier * status.currentStats.poisonModifier;
+                    break;
+                default:
+                    break;
+            }
+
+            return (int)(appliedEffects[0].baseDamage * damageMod * RarityModifier(rank));
+        }
+        else return base.GetDamage();
+    }
+
+    public override void HitBehaviour(HitInfo hitInfo, SkillSO skill)
+    {
+        base.HitBehaviour(hitInfo, skill);
 
         if (hitInfo.enemyStatus == null)
             return;
@@ -19,7 +58,8 @@ public class StatusEffectSkillProperty : UniqueSkillProperty
 
         foreach (var item in appliedEffects)
         {
-            hitInfo.enemyStatus.ApplyStatusEffect(item, hitInfo);
+            Debug.Log("skill effect Property" + skill.skillRank);
+            hitInfo.enemyStatus.ApplyStatusEffect(item, hitInfo, skill.skillRank);
         }
     }
 }

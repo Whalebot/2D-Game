@@ -9,9 +9,9 @@ public class FrozenStatusEffect : StatusEffect
     public float attackSpeedReduction = 0.1f;
     public float movementSpeedReduction = 0.2f;
 
-    public override void ActivateBehaviour(Status s, HitInfo hitInfo = null)
+    public override void ActivateBehaviour(Status s, HitInfo hitInfo = null, Rank rank = Rank.D)
     {
-        base.ActivateBehaviour(s);
+        base.ActivateBehaviour(s, hitInfo, rank);
         IceDamage();
     }
 
@@ -31,7 +31,7 @@ public class FrozenStatusEffect : StatusEffect
     {
         GameObject fx = Instantiate(iceVFX.prefab, status.transform.position, status.transform.rotation);
 
-        int damage = (int) (baseDamage * damageModifier);
+        int damage = (int)(baseDamage * damageModifier);
         status.Health -= damage;
         GameManager.Instance.DamageNumbers(status.transform, damage, false);
 

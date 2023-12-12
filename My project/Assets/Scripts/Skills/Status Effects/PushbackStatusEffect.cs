@@ -8,9 +8,9 @@ public class PushbackStatusEffect : StatusEffect
     public GameObject hazardPrefab;
     public GameObject tempGO;
     public Hazard hazard;
-    public override void ActivateBehaviour(Status s, HitInfo hitInfo = null)
+    public override void ActivateBehaviour(Status s, HitInfo hitInfo = null,Rank rank = Rank.D)
     {
-        base.ActivateBehaviour(s);
+        base.ActivateBehaviour(s, hitInfo, rank);
         SpawnHitbox();
     }
 

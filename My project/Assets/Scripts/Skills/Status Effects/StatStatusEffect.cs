@@ -7,7 +7,7 @@ public class StatStatusEffect : StatusEffect
 {
     public Stats stats;
 
-    public override void ActivateBehaviour(Status s, HitInfo hitInfo = null)
+    public override void ActivateBehaviour(Status s, HitInfo hitInfo = null, Rank rank = Rank.D)
     {
         base.ActivateBehaviour(s);
         AddStats();

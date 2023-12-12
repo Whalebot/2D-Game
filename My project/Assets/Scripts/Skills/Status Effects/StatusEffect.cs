@@ -6,6 +6,7 @@ using UnityEngine;
 public class StatusEffect : ScriptableObject
 {
     public Elemental elemental;
+    public Rank skillRank;
     public int baseDamage;
     public float damageModifier = 1;
     float elementalModifier = 1;
@@ -20,13 +21,15 @@ public class StatusEffect : ScriptableObject
     public VFX statusVFX;
     public GameObject currentVFX;
 
-    public virtual void ActivateBehaviour(Status s, HitInfo hitInfo = null)
+
+
+    public virtual void ActivateBehaviour(Status s, HitInfo hitInfo = null, Rank rank = Rank.D)
     {
         status = s;
         stacks = 1;
         durationCounter = duration;
         tickCounter = 0;
-
+        skillRank = rank;
         if (hitInfo != null)
         {
             Stats stats = hitInfo.attackerStatus.currentStats;
@@ -55,6 +58,10 @@ public class StatusEffect : ScriptableObject
                 default:
                     break;
             }
+
+            float rarityModifier = (1 + (int)rank * 0.25f);
+
+            damageModifier = damageModifier * rarityModifier;
         }
         SpawnVFX();
     }

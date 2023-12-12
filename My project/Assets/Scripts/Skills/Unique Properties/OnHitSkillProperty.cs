@@ -11,9 +11,41 @@ public class OnHitSkillProperty : UniqueSkillProperty
     public float damageModifier;
     public MoveGroup affectedMoves;
     public ChainLightning chainLightning;
-    public override void HitBehaviour(HitInfo hitInfo)
+
+    public override int GetDamage(Status status = null, Rank rank = Rank.D)
     {
-        base.HitBehaviour(hitInfo);
+        Stats stats = status.currentStats;
+        switch (elemental)
+        {
+            case Elemental.None:
+                break;
+            case Elemental.Earth:
+                damageModifier = stats.faithModifier * stats.earthModifier;
+                break;
+            case Elemental.Fire:
+                damageModifier = stats.faithModifier * stats.fireModifier;
+                break;
+            case Elemental.Ice:
+                damageModifier = stats.faithModifier * stats.iceModifier;
+                break;
+            case Elemental.Lightning:
+                damageModifier = stats.faithModifier * stats.lightningModifier;
+                break;
+            case Elemental.Wind:
+                damageModifier = stats.faithModifier * stats.windModifier;
+                break;
+            case Elemental.Poison:
+                damageModifier = stats.faithModifier * stats.poisonModifier;
+                break;
+            default:
+                break;
+        }
+        return (int)(baseDamage * damageModifier * RarityModifier(rank));
+    }
+
+    public override void HitBehaviour(HitInfo hitInfo, SkillSO skill)
+    {
+        base.HitBehaviour(hitInfo, skill);
 
         if (hitInfo.enemyStatus == null)
             return;
@@ -53,7 +85,7 @@ public class OnHitSkillProperty : UniqueSkillProperty
             }
         }
 
-        lightning.damage = (int)(baseDamage * damageModifier);
+        lightning.damage = (int)(baseDamage * damageModifier * RarityModifier(skill.skillRank));
         lightning.StartChainLightning(hitInfo.enemyStatus);
     }
 }

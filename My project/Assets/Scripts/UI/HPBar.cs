@@ -11,6 +11,7 @@ public class HPBar : MonoBehaviour
     public bool alwaysShowHPBar;
     public bool isBoss = false;
     public bool disabled;
+    public bool player;
     [SerializeField] public Status status;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI subTitleText;
@@ -28,10 +29,15 @@ public class HPBar : MonoBehaviour
     public Color poiseColor;
     public Color poiseBreakColor;
 
+    RectTransform rect;
+    float startWidth;
 
     private void Start()
     {
         GameManager.Instance.advanceGameState += ExecuteFrame;
+
+        rect = GetComponent<RectTransform>();
+        startWidth = rect.rect.width;
 
         if (status == null)
         {
@@ -52,13 +58,17 @@ public class HPBar : MonoBehaviour
 
         status.healthEvent += UpdateBar;
         status.deathEvent += DisableHPBar;
-        UpdateBar();
+        UpdateValues();
+        //UpdateBar();
         SetName();
     }
 
     private void ExecuteFrame()
     {
         if (disabled) return;
+
+        if (player)
+            rect.sizeDelta = new Vector2(startWidth * status.currentStats.maxHealth / 50f, rect.sizeDelta.y);
 
         if (!alwaysShowHPBar && GameManager.Instance.showHPBar)
         {

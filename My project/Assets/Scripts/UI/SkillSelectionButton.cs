@@ -31,7 +31,8 @@ public class SkillSelectionButton : MonoBehaviour
         {
             tooltip = true;
             TMP_LinkInfo linkInfo = descriptionText.textInfo.linkInfo[linkIndex];
-            UIManager.Instance.EnableTooltip();
+            //Debug.Log(linkInfo.GetLinkText());
+            UIManager.Instance.EnableTooltip(linkInfo.GetLinkText());
         }
         else if (tooltip)
         {

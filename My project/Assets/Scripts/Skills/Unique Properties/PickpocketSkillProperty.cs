@@ -5,9 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PickpocketProperty", menuName = "ScriptableObjects/SkillProperty/Pickpocket")]
 public class PickpocketSkillProperty : UniqueSkillProperty
 {
-    public override void HitBehaviour(HitInfo hitInfo)
+    public override void HitBehaviour(HitInfo hitInfo, SkillSO skill)
     {
-        base.HitBehaviour(hitInfo);
+        base.HitBehaviour(hitInfo, skill);
 
         if (hitInfo.enemyStatus.character == null)
             return;

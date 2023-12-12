@@ -5,7 +5,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SkillProperty", menuName = "ScriptableObjects/SkillProperty", order = 1)]
 public class UniqueSkillProperty : ScriptableObject
 {
-
+    public virtual int GetDamage(Status status = null, Rank rank = Rank.D)
+    {
+        return -1;
+    }
+    public virtual float RarityModifier(Rank r) {
+        float rarityModifier = (1 + (int)r * 0.25f);
+        return rarityModifier;
+    }
     public virtual void ActivateBehaviour(SkillHandler handler)
     {
     }
@@ -21,7 +28,7 @@ public class UniqueSkillProperty : ScriptableObject
     public virtual void WaveBehaviour(SkillHandler handler)
     {
     }
-    public virtual void HitBehaviour(HitInfo hitInfo)
+    public virtual void HitBehaviour(HitInfo hitInfo, SkillSO skill)
     {
     }
 

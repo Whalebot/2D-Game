@@ -127,7 +127,8 @@ public class SkillHandler : MonoBehaviour
         {
             foreach (var prop in item.skillProperties)
             {
-                prop.HitBehaviour(hitInfo);
+
+                prop.HitBehaviour(hitInfo, item);
             }
         }
     }

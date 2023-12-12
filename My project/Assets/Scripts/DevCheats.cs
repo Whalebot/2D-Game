@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class DevCheats : MonoBehaviour
 {
+    public Rank rank;
     public SkillSO skill;
     public Stats stats;
     private void Start()
@@ -15,7 +16,10 @@ public class DevCheats : MonoBehaviour
         TransitionManager.Instance.LoadScene(0);
     }
     [Button]
-    public void GiveSkillSkill() { SkillManager.Instance.GetSkill(skill); }
+    public void GiveSkillSkill() {
+        skill.skillRank = rank;
+        SkillManager.Instance.GetSkill(skill); 
+    }
 
     void Update()
     {
@@ -29,11 +33,11 @@ public class DevCheats : MonoBehaviour
         {
                
 
-            GameManager.Instance.playerStatus.currentStats.maxHealth = 1000000;
-            GameManager.Instance.playerStatus.currentStats.currentHealth = 1000000;
-            GameManager.Instance.playerStatus.currentStats.maxMeter = 1000000;
-            GameManager.Instance.playerStatus.currentStats.currentMeter = 1000000;
-            GameManager.Instance.playerStatus.currentStats.rerolls = 1000000;
+            GameManager.Instance.playerStatus.currentStats.maxHealth = 2000;
+            GameManager.Instance.playerStatus.currentStats.currentHealth = 2000;
+            GameManager.Instance.playerStatus.currentStats.maxMeter = 2000;
+            GameManager.Instance.playerStatus.currentStats.currentMeter = 2000;
+            GameManager.Instance.playerStatus.currentStats.rerolls = 2000;
         }
     }
 }

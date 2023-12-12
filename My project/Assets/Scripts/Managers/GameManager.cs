@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     public event Action advanceGameState;
     public event Action resetEvent;
     public event Action playerDeath;
-    public event Action getSkillEvent;
+    public event Action<RewardType> openRewardWindowEvent;
     public event Action openShopEvent;
     public event Action goldChangeEvent;
 
@@ -137,9 +137,9 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void OpenGetSkillWindow()
+    public void OpenGetSkillWindow(RewardType rewardType)
     {
-        getSkillEvent?.Invoke();
+        openRewardWindowEvent?.Invoke(rewardType);
         ToggleMenu();
     }
 

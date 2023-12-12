@@ -7,10 +7,14 @@ using UnityEngine.UI;
 public class MeterBar : MonoBehaviour
 {
     Status status;
+    RectTransform rect;
     public TextMeshProUGUI meterText;
     public Image meterBar;
+    float startWidth;
     private void Start()
     {
+        rect = GetComponent<RectTransform>();
+        startWidth = rect.rect.width;
         GameManager.Instance.advanceGameState += ExecuteFrame;
 
         if (status == null)
@@ -22,6 +26,7 @@ public class MeterBar : MonoBehaviour
     }
     void UpdateValues()
     {
+        rect.sizeDelta = new Vector2(startWidth * status.currentStats.maxMeter / 100f, rect.sizeDelta.y);
         meterText.text = "" + (status.Meter) + "/" + status.currentStats.maxMeter;
 
         if (status.currentStats.maxMeter > 0)
