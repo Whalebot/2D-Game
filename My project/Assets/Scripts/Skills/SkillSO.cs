@@ -9,6 +9,8 @@ public class SkillSO : ScriptableObject
 {
     public Rank skillRank;
     public SkillType type;
+    [ShowIf("@type == SkillType.Blessing")] public Elemental elemental;
+
     public string title;
     [PreviewField(50)] public Sprite sprite;
 

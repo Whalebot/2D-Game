@@ -14,10 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillRank: 2
   type: 1
+  elemental: 1
   title: Earth Attack
   sprite: {fileID: 21300000, guid: 85f6633326b0ca44ebfc454ec65d2730, type: 3}
+  damageValue: 0
   prerequisiteSkills: []
   prerequisiteMoves: []
+  bannedMoves: []
   newMoves: []
   skillProperties:
   - {fileID: 11400000, guid: 22c52f966a43e03459dbf89237ebb14b, type: 2}
@@ -32,14 +35,22 @@ MonoBehaviour:
     strength: 0
     intelligence: 0
     agility: 0
+    faith: 0
     luck: 0
     gold: 0
     attack: 0
     magic: 0
+    faithModifier: 0
     attackSpeed: 0
     jumps: 0
     airActions: 0
     rerolls: 0
+    fireModifier: 0
+    iceModifier: 0
+    lightningModifier: 0
+    earthModifier: 0
+    windModifier: 0
+    poisonModifier: 0
     movementSpeedModifier: 0
     meterGainModifier: 0
     poiseRegen: 0

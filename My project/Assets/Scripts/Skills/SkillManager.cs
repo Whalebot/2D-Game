@@ -85,10 +85,6 @@ public class SkillManager : MonoBehaviour
         return null;
     }
     #region Roll Skills
-    public void ReplaceSkill()
-    {
-
-    }
     public void GetSkill(SkillSO skillSO)
     {
         SkillSO replacement = CheckReplacementBlessing(skillSO);
@@ -260,7 +256,7 @@ public class SkillManager : MonoBehaviour
         else
         {
             Debug.Log("Found from this rank, rolling generic");
-            return RollSkill();
+            return emptyPoolSkill;
         }
     }
 

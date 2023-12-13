@@ -26,6 +26,7 @@ public class Move : ScriptableObject
     [TabGroup("Attacks")] public MoveType type;
 
     public MoveUniqueProperty[] uniqueProperties;
+    public List<UniqueSkillProperty> skillProperties;
 
     [Header("Screen shake")]
     [TabGroup("Group 2", "FX")]

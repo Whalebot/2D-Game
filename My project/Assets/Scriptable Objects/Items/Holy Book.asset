@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillRank: 2
   type: 2
+  elemental: 0
   title: Holy Book
   sprite: {fileID: 21300000, guid: 96763b23ec88c1b418316b02715b1a6e, type: 3}
   damageValue: 0
@@ -22,7 +23,10 @@ MonoBehaviour:
   bannedMoves: []
   newMoves: []
   skillProperties: []
-  description: Increases the power of blessings with 50%
+  description: 'Increases the power of blessings with 50%
+
+    Reduce magic with
+    2'
   stats:
     currentHealth: 0
     maxHealth: 0
@@ -36,7 +40,7 @@ MonoBehaviour:
     luck: 0
     gold: 0
     attack: 0
-    magic: 0
+    magic: -2
     faithModifier: 0.5
     attackSpeed: 0
     jumps: 0

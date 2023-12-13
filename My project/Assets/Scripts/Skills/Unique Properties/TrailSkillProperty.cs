@@ -26,7 +26,6 @@ public class TrailSkillProperty : UniqueSkillProperty
             Hazard foundHazard = null;
             foreach (Collider item in col)
             {
-                Debug.Log(item.gameObject);
                 foundHazard = item.GetComponentInParent<Hazard>();
 
             }
