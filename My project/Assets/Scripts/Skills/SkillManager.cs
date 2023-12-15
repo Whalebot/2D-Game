@@ -31,7 +31,8 @@ public class SkillManager : MonoBehaviour
     {
         Instance = this;
         SaveManager.Instance.saveEvent += SaveSkills;
-        foundSkills = SaveManager.Instance.LearnedSkills;
+        learnedSkills = SaveManager.Instance.LearnedSkills;
+        foundSkills = SaveManager.Instance.FoundSkills;
         GameManager.Instance.advanceGameState += ExecuteFrame;
     }
 
@@ -43,40 +44,49 @@ public class SkillManager : MonoBehaviour
     void ExecuteFrame()
     {
     }
+    public SkillSO CheckUpgrade(SkillSO skill)
+    {
+        if (learnedSkills.Contains(skill))
+        {
+            return skill;
+        }
+        return null;
+    }
+
     public SkillSO CheckReplacementBlessing(SkillSO skill)
     {
         if (attackGroup.skills.Contains(skill))
         {
-            for (int i = 0; i < foundSkills.Count; i++)
+            for (int i = 0; i < learnedSkills.Count; i++)
             {
 
-                if (attackGroup.skills.Contains(foundSkills[i]))
+                if (attackGroup.skills.Contains(learnedSkills[i]))
                 {
-                    return foundSkills[i];
+                    return learnedSkills[i];
                     //foundSkills[i] = skill;
                 }
             }
         }
         if (specialGroup.skills.Contains(skill))
         {
-            for (int i = 0; i < foundSkills.Count; i++)
+            for (int i = 0; i < learnedSkills.Count; i++)
             {
 
-                if (specialGroup.skills.Contains(foundSkills[i]))
+                if (specialGroup.skills.Contains(learnedSkills[i]))
                 {
-                    return foundSkills[i];
+                    return learnedSkills[i];
                     //foundSkills[i] = skill;
                 }
             }
         }
         if (skillGroup.skills.Contains(skill))
         {
-            for (int i = 0; i < foundSkills.Count; i++)
+            for (int i = 0; i < learnedSkills.Count; i++)
             {
 
-                if (skillGroup.skills.Contains(foundSkills[i]))
+                if (skillGroup.skills.Contains(learnedSkills[i]))
                 {
-                    return foundSkills[i];
+                    return learnedSkills[i];
                     //foundSkills[i] = skill;
                 }
             }
@@ -90,14 +100,23 @@ public class SkillManager : MonoBehaviour
         SkillSO replacement = CheckReplacementBlessing(skillSO);
         if (replacement != null)
         {
+            foundSkills.Add(replacement);
             learnedSkills.Remove(replacement);
         }
 
+        SkillSO upgrade = CheckUpgrade(skillSO);
+        if (upgrade != null)
+        {
+            skillSO.skillRank = skillSO.skillRank + 1;
+        }
         //else
         {
             skillHandler.LearnSkill(skillSO);
 
-            foundSkills.Add(skillSO);
+            //If blessing, don't add to found list
+            if (skillSO.type != SkillType.Blessing || skillSO.skillRank == Rank.S)
+                foundSkills.Add(skillSO);
+
             learnedSkills.Add(skillSO);
 
             selectedSkills.Clear();
@@ -106,7 +125,7 @@ public class SkillManager : MonoBehaviour
     }
     void SaveSkills()
     {
-        SaveManager.Instance.LearnedSkills = new List<SkillSO>(foundSkills);
+        SaveManager.Instance.LearnedSkills = new List<SkillSO>(learnedSkills);
     }
 
     [Button]
@@ -233,6 +252,7 @@ public class SkillManager : MonoBehaviour
     [Button]
     public void ResetSkills()
     {
+        learnedSkills.Clear();
         foundSkills.Clear();
         selectedSkills.Clear();
     }
@@ -265,7 +285,7 @@ public class SkillManager : MonoBehaviour
         List<SkillSO> availableSkills = new List<SkillSO>();
         foreach (var item in allSkills)
         {
-            if (!foundSkills.Contains(item) && !selectedSkills.Contains(item) && skillHandler.CanGetSkill(item))
+            if (!learnedSkills.Contains(item) && !selectedSkills.Contains(item) && skillHandler.CanGetSkill(item))
                 availableSkills.Add(item);
         }
 

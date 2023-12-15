@@ -49,7 +49,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2778032040300063875}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -154,6 +154,8 @@ MonoBehaviour:
   baseDamage: 5
   totalDamage: 0
   resetTimer: 90
+  life: 0
+  lifeCounter: 0
   followParent: 1
   alignment: 0
   attack:
@@ -186,6 +188,7 @@ MonoBehaviour:
     scale: {x: 1, y: 1, z: 1}
   hitSFX: {fileID: 0}
   collider: {fileID: 2778032040300063875}
+  ps: {fileID: 0}
   enemyList: []
 --- !u!54 &1143763593384805890
 Rigidbody:

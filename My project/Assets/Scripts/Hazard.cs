@@ -42,8 +42,6 @@ public class Hazard : MonoBehaviour
         {
             transform.position = transform.parent.position;
             attack.groundHitProperty.pushback = new Vector2(rb.velocity.x, rb.velocity.y);
-
-            Debug.Log(rb.velocity);
         }
 
         if (enemyList.Count > 0)

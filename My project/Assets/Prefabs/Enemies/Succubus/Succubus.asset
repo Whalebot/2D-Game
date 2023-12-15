@@ -20,7 +20,8 @@ MonoBehaviour:
   controller: {fileID: 0}
   moveset: {fileID: 0}
   actions:
-  - {fileID: 11400000, guid: c1ba586f61776ed4099ffe898b5ff965, type: 2}
+  - {fileID: 11400000, guid: 1579857f270d23b4d83f8c57cc5b99c5, type: 2}
+  - {fileID: 11400000, guid: 9b5a5d799447ce4489e3a3500b8dc9d8, type: 2}
   - {fileID: 11400000, guid: b1e705ee9830a8947bc26972670eec37, type: 2}
   - {fileID: 11400000, guid: 3447b80f13de079438fb61c93ad6273d, type: 2}
   - {fileID: 11400000, guid: 8d805430ea8264f4581c133cb310de35, type: 2}
@@ -33,14 +34,22 @@ MonoBehaviour:
     strength: 0
     intelligence: 0
     agility: 0
+    faith: 0
     luck: 0
     gold: 0
     attack: 3
     magic: 3
+    faithModifier: 0
     attackSpeed: 1
     jumps: 1
     airActions: 1
     rerolls: 0
+    fireModifier: 0
+    iceModifier: 0
+    lightningModifier: 0
+    earthModifier: 0
+    windModifier: 0
+    poisonModifier: 0
     movementSpeedModifier: 1
     meterGainModifier: 1
     poiseRegen: 0.1

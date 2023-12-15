@@ -177,7 +177,10 @@ public class UIManager : MonoBehaviour
             SkillIcon icon = temp.GetComponent<SkillIcon>();
             icon.SetupIcon(item);
         }
-        skillPanelOrganizer.SetupPosition();
+        StartCoroutine(DelaySetupPosition());
+    }
+    IEnumerator DelaySetupPosition() {
+        yield return new WaitForEndOfFrame(); skillPanelOrganizer.SetupPosition();
     }
     public void RerollButton()
     {

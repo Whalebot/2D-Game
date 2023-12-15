@@ -59,6 +59,7 @@ public class HPBar : MonoBehaviour
         status.healthEvent += UpdateBar;
         status.deathEvent += DisableHPBar;
         UpdateValues();
+        delayHealthBar.transform.localScale = new Vector3((float)status.currentStats.currentHealth / status.currentStats.maxHealth, 1, 1);
         //UpdateBar();
         SetName();
     }

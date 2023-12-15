@@ -14,10 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillRank: 0
   type: 1
+  elemental: 5
   title: Double Dash
   sprite: {fileID: 0}
+  damageValue: 0
   prerequisiteSkills: []
   prerequisiteMoves: []
+  bannedMoves: []
   newMoves:
   - move: {fileID: 11400000, guid: c2d36937ce172be4ea15b3ba4783bfff, type: 2}
     combo: {fileID: 11400000, guid: 1078570f6a852dc4792404235170cb84, type: 2}
@@ -48,14 +51,22 @@ MonoBehaviour:
     strength: 0
     intelligence: 0
     agility: 0
+    faith: 0
     luck: 0
     gold: 0
     attack: 0
     magic: 0
+    faithModifier: 0
     attackSpeed: 0
     jumps: 0
     airActions: 0
     rerolls: 0
+    fireModifier: 0
+    iceModifier: 0
+    lightningModifier: 0
+    earthModifier: 0
+    windModifier: 0
+    poisonModifier: 0
     movementSpeedModifier: 0
     meterGainModifier: 0
     poiseRegen: 0

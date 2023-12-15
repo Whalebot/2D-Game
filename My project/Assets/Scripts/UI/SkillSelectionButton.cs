@@ -53,7 +53,9 @@ public class SkillSelectionButton : MonoBehaviour
         descriptionText.text = SkillManager.Instance.SkillDescription(skillSO);
         if (skillSO.sprite != null)
             iconImage.sprite = skillSO.sprite;
+
         SkillSO replacement = skillManager.CheckReplacementBlessing(skillSO);
+        SkillSO upgrade = skillManager.CheckUpgrade(skillSO);
 
         if (replacement != null)
         {

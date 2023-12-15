@@ -47,8 +47,10 @@ public class HubMenu : MonoBehaviour
         topMinusButton.onClick.AddListener(() => ChangeTop(false));
         bottomPlusButton.onClick.AddListener(() => ChangeBottom(true));
         bottomMinusButton.onClick.AddListener(() => ChangeBottom(false));
-        bottomPlusButton.onClick.AddListener(() => ChangeBottom(true));
-        bottomMinusButton.onClick.AddListener(() => ChangeBottom(false));
+
+        shoesPlusButton.onClick.AddListener(() => ChangeShoes(true));
+        shoesMinusButton.onClick.AddListener(() => ChangeShoes(false));
+
         classPlusButton.onClick.AddListener(() => ChangeClass(true));
         classMinusButton.onClick.AddListener(() => ChangeClass(false));
 
@@ -134,8 +136,8 @@ public class HubMenu : MonoBehaviour
     public void ChangeShoes(bool add)
     {
         if (add)
-            CharacterCreator.Instance.BottomID++;
+            CharacterCreator.Instance.ShoesID++;
         else
-            CharacterCreator.Instance.BottomID--;
+            CharacterCreator.Instance.ShoesID--;
     }
 }

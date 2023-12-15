@@ -67,6 +67,17 @@ public class SaveManager : MonoBehaviour
             saveData.currrentCharacter.learnedSkills = value;
         }
     }
+    public List<SkillSO> FoundSkills
+    {
+        get
+        {
+            return saveData.currrentCharacter.foundSkills;
+        }
+        set
+        {
+            saveData.currrentCharacter.foundSkills = value;
+        }
+    }
     public Stats Stats
     {
         get
@@ -174,6 +185,7 @@ public class CharacterData
     public List<int> visitedRooms;
     public CharacterVisualData visualData;
     public List<SkillSO> learnedSkills;
+    public List<SkillSO> foundSkills;
 }
 
 [System.Serializable]
