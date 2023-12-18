@@ -1049,6 +1049,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""e5ac82cb-9eb1-4324-a837-1c359aecc3c4"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""cbe31ffa-4b7b-449c-a885-99bcceb5e13d"",
                     ""path"": ""<Gamepad>/dpad"",
                     ""interactions"": """",

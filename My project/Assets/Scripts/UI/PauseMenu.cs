@@ -24,12 +24,15 @@ public class PauseMenu : MonoBehaviour
     {
         mapGenerator.SetupNodes();
         MarkVisitedRooms();
+        UIManager.Instance.SetActiveEventSystem(continueButton.gameObject);
     }
 
-    void Continue() {
+    void Continue()
+    {
         GameManager.Instance.CloseMenu();
     }
-    void Restart() {
+    void Restart()
+    {
         GameManager.Instance.LoseGame();
     }
     void Quit()

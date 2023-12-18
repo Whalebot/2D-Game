@@ -196,7 +196,6 @@ Transform:
   - {fileID: 7880865995103853394}
   - {fileID: 5141301046498260922}
   - {fileID: 399436147799149812}
-  - {fileID: 399436147411117086}
   - {fileID: 399436147017013761}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -319,7 +318,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -7018903642717940045, guid: 2e91ef8f6cda55c4e80721b0bf0700a5, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 1a028420d0a5c1142b93d8fc813bfaf9, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8d674944c424d274bae9b22cdc6023aa, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -589,12 +588,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 399436147411117087}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 399436146491855173}
+  m_Father: {fileID: 399436147017013761}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &399436147411117084
 MonoBehaviour:
@@ -627,17 +626,17 @@ MonoBehaviour:
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: 5ce287a07a002e54687faa19cbd7f76c, type: 3}
+  m_PointAction: {fileID: 607720697978773115, guid: 5ce287a07a002e54687faa19cbd7f76c, type: 3}
+  m_MoveAction: {fileID: 2296051479983844241, guid: 5ce287a07a002e54687faa19cbd7f76c, type: 3}
+  m_SubmitAction: {fileID: -2332311170438364798, guid: 5ce287a07a002e54687faa19cbd7f76c, type: 3}
+  m_CancelAction: {fileID: 0}
+  m_LeftClickAction: {fileID: -7634772166601858172, guid: 5ce287a07a002e54687faa19cbd7f76c, type: 3}
+  m_MiddleClickAction: {fileID: 0}
+  m_RightClickAction: {fileID: 0}
+  m_ScrollWheelAction: {fileID: 6117078493062208827, guid: 5ce287a07a002e54687faa19cbd7f76c, type: 3}
+  m_TrackedDevicePositionAction: {fileID: 0}
+  m_TrackedDeviceOrientationAction: {fileID: 0}
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
@@ -1022,6 +1021,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 597837012259505224, guid: 1f6846fbf3d1a2a42935257776871191, type: 3}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 399436147411117084}
     - target: {fileID: 597837012259505225, guid: 1f6846fbf3d1a2a42935257776871191, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -1644,7 +1647,10 @@ PrefabInstance:
       objectReference: {fileID: 399436148029251711}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 597837012259505225, guid: 1f6846fbf3d1a2a42935257776871191, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 399436147411117086}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f6846fbf3d1a2a42935257776871191, type: 3}
 --- !u!114 &210526449037343385 stripped

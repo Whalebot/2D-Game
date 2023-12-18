@@ -287,6 +287,7 @@ public class GameManager : MonoBehaviour
     {
         menuOpen = false;
         runNormally = true;
+        resumeEvent?.Invoke();
     }
     void FixedUpdate()
     {

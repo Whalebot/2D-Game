@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 using Sirenix.OdinInspector;
@@ -9,6 +10,7 @@ using Sirenix.OdinInspector;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
+    [TabGroup("Components")] public EventSystem eventSystem;
     [TabGroup("Components")] public GameObject treasurePanel;
     [TabGroup("Components")] public GameObject blessingPanel, itemPanel, skillPanel;
     [TabGroup("Components")] public GameObject shopPanel;
@@ -58,6 +60,12 @@ public class UIManager : MonoBehaviour
         rerollButton.onClick.AddListener(() => RerollButton());
         SetupSkillPanel(null);
     }
+
+    public void SetActiveEventSystem(GameObject go) {
+        eventSystem.SetSelectedGameObject(null);
+        eventSystem.SetSelectedGameObject(go);
+    }
+
     void OpenPauseMenu()
     {
         pauseMenu.SetActive(true);

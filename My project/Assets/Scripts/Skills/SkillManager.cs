@@ -192,9 +192,14 @@ public class SkillManager : MonoBehaviour
             skillButtons[i].skillSO = skill;
             if (skill != null)
                 skillButtons[i].SetupSkill();
-
         }
+        SetActiveEventSystem();
     }
+
+    void SetActiveEventSystem() {
+        UIManager.Instance.SetActiveEventSystem(skillButtons[1].gameObject);
+    }
+
     public void RollItem(Rank rank)
     {
         rewardType = RewardType.Item;
@@ -219,6 +224,7 @@ public class SkillManager : MonoBehaviour
                 skillButtons[i].SetupSkill();
 
         }
+        SetActiveEventSystem();
     }
 
     public void RollActiveSkill(Rank rank)
@@ -247,6 +253,7 @@ public class SkillManager : MonoBehaviour
                 skillButtons[i].SetupSkill();
 
         }
+        SetActiveEventSystem();
     }
 
     [Button]
