@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
     [TabGroup("Components")] public EventSystem eventSystem;
+    [TabGroup("Components")] public ResultScreen resultScreen;
     [TabGroup("Components")] public GameObject treasurePanel;
     [TabGroup("Components")] public GameObject blessingPanel, itemPanel, skillPanel;
     [TabGroup("Components")] public GameObject shopPanel;
@@ -53,15 +54,13 @@ public class UIManager : MonoBehaviour
 
         GameManager.Instance.pauseEvent += OpenPauseMenu;
         GameManager.Instance.resumeEvent += ClosePauseMenu;
-
         GameManager.Instance.openShopEvent += OpenShopPanel;
-        SkillManager.Instance.pickedSkillEvent += SetupSkillPanel;
-
         rerollButton.onClick.AddListener(() => RerollButton());
-        SetupSkillPanel(null);
+
     }
 
-    public void SetActiveEventSystem(GameObject go) {
+    public void SetActiveEventSystem(GameObject go)
+    {
         eventSystem.SetSelectedGameObject(null);
         eventSystem.SetSelectedGameObject(go);
     }
@@ -171,25 +170,7 @@ public class UIManager : MonoBehaviour
         }
         return System.String.Format("{0}:{1:00}:{2:00}", hours, minutes, secondsRemainder);
     }
-    [Button]
-    public void SetupSkillPanel(SkillSO so)
-    {
-        foreach (Transform child in skillPanelOrganizer.transform)
-        {
-            Destroy(child.gameObject);
-        }
 
-        foreach (var item in SaveManager.Instance.LearnedSkills)
-        {
-            GameObject temp = Instantiate(skillUIPrefab, skillPanelOrganizer.transform, false);
-            SkillIcon icon = temp.GetComponent<SkillIcon>();
-            icon.SetupIcon(item);
-        }
-        StartCoroutine(DelaySetupPosition());
-    }
-    IEnumerator DelaySetupPosition() {
-        yield return new WaitForEndOfFrame(); skillPanelOrganizer.SetupPosition();
-    }
     public void RerollButton()
     {
         GameManager.Instance.playerStatus.currentStats.rerolls--;

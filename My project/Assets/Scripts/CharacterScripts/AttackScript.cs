@@ -344,7 +344,7 @@ public class AttackScript : MonoBehaviour
                 {
                     if (frame == item.startup)
                     {
-                        AudioManager.Instance.PlayAudio(item.audioClip, transform.position, item.volume);
+                        AudioManager.Instance.PlaySFX(item, transform.position);
                     }
                 }
         }

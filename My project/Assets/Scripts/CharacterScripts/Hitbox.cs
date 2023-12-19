@@ -219,10 +219,10 @@ public class Hitbox : MonoBehaviour
             else
                 Instantiate(VFXManager.Instance.defaultBlockVFX, colPos.position, colPos.rotation);
 
-            if (move.hitSFX != null)
-                AudioManager.Instance.PlayAudio(move.blockSFX, colPos.position);
+            if (move.hitSFX.audioClips.Count > 0)
+                AudioManager.Instance.PlaySFX(move.blockSFX, colPos.position);
             else
-                AudioManager.Instance.PlayAudio(VFXManager.Instance.defaultBlockSFX.audioClip, colPos.position, VFXManager.Instance.defaultHitSFX.volume);
+                AudioManager.Instance.PlaySFX(VFXManager.Instance.defaultBlockSFX, colPos.position);
         }
         else
         {
@@ -235,10 +235,10 @@ public class Hitbox : MonoBehaviour
             else
                 Instantiate(VFXManager.Instance.defaultHitVFX, colPos.position, colPos.rotation);
 
-            if (move.hitSFX != null)
-                AudioManager.Instance.PlayAudio(move.hitSFX, colPos.position);
+            if (move.hitSFX.audioClips.Count > 0)
+                AudioManager.Instance.PlaySFX(move.hitSFX, colPos.position);
             else
-                AudioManager.Instance.PlayAudio(VFXManager.Instance.defaultHitSFX.audioClip, colPos.position, VFXManager.Instance.defaultHitSFX.volume);
+                AudioManager.Instance.PlaySFX(VFXManager.Instance.defaultHitSFX, colPos.position);
 
         }
 
@@ -257,29 +257,5 @@ public class Hitbox : MonoBehaviour
                 other.TakeHit(damageDealt, aVector, atk.stun, atk.poiseBreak, aVector, atk.hitstop, hit.hitState, crit);
                 break;
         }
-    }
-
-    void Clash(Status enemyStatus)
-    {
-        canClash = false;
-        Collider col = GetComponent<Collider>();
-        col.enabled = false;
-
-        //Hit FX
-        if (move.hitFX != null)
-        {
-            GameObject VFX = Instantiate(move.hitFX.prefab, colPos.position, colPos.rotation);
-            VFX.transform.localScale = move.hitFX.scale;
-        }
-        else
-            Instantiate(VFXManager.Instance.defaultHitVFX, colPos.position, colPos.rotation);
-
-        if (move.hitSFX != null)
-            Instantiate(move.hitSFX, colPos.position, colPos.rotation);
-        else
-            Instantiate(VFXManager.Instance.defaultHitSFX.audioClip, colPos.position, colPos.rotation);
-
-        attack.newAttack = false;
-        attack.Idle();
     }
 }

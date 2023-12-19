@@ -58,7 +58,6 @@ MonoBehaviour:
       pushback: {x: 3, y: -2}
       hitState: 0
   type: 0
-  uniqueProperties: []
   screenShake: []
   vfx:
   - type: 0
@@ -80,8 +79,16 @@ MonoBehaviour:
   sfx:
   - startup: 16
     audioClip: {fileID: 8300000, guid: e6c87645e4bc9b140a91a5c04fa12a95, type: 3}
+    audioClips:
+    - {fileID: 8300000, guid: e6c87645e4bc9b140a91a5c04fa12a95, type: 3}
+    volume: 1
+    pitchRange: 0
   - startup: 32
     audioClip: {fileID: 8300000, guid: 11c8f1b379174c345a7b2217e042f70c, type: 3}
+    audioClips:
+    - {fileID: 8300000, guid: 11c8f1b379174c345a7b2217e042f70c, type: 3}
+    volume: 1
+    pitchRange: 0
   hitFX:
     type: 0
     startup: 1
@@ -92,10 +99,20 @@ MonoBehaviour:
     rotation: {x: 0, y: 0, z: 0}
     scale: {x: 0.7, y: 0.7, z: 0.7}
   blockFX: {fileID: 0}
-  counterhitFX: {fileID: 0}
-  hitSFX: {fileID: 0}
-  blockSFX: {fileID: 0}
-  counterhitSFX: {fileID: 0}
+  hitSFX:
+    startup: 1
+    audioClip: {fileID: 0}
+    audioClips: []
+    volume: 1
+    pitchRange: 0
+  blockSFX:
+    startup: 1
+    audioClip: {fileID: 0}
+    audioClips: []
+    volume: 1
+    pitchRange: 0
+  uniqueProperties: []
+  skillProperties: []
   useAttackSpeed: 1
   keepVelocity: 0
   particleID: 0
@@ -105,6 +122,7 @@ MonoBehaviour:
   armor: 1
   resetGatling: 0
   hitsGroundOnly: 0
+  isDashing: 0
   noClip: 0
   noClipStart: 1
   noClipDuration: 20

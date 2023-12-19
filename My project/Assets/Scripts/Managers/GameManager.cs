@@ -325,6 +325,10 @@ public class GameManager : MonoBehaviour
     {
         playerDeath?.Invoke();
         reloading = true;
+    }
+
+    public void ReloadGame()
+    {
         StartCoroutine(DeathScreenDelay());
         StartCoroutine(RestartDelay());
     }

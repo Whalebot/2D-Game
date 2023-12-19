@@ -41,8 +41,6 @@ MonoBehaviour:
       pushback: {x: 8, y: 5}
       hitState: 0
   type: 0
-  uniqueProperties:
-  - {fileID: 11400000, guid: 2669df5c119bdaa46af219731701ae27, type: 2}
   screenShake:
   - type: 0
     startup: 40
@@ -84,10 +82,21 @@ MonoBehaviour:
     rotation: {x: 0, y: 0, z: 0}
     scale: {x: 0.5, y: 0.5, z: 0.5}
   blockFX: {fileID: 0}
-  counterhitFX: {fileID: 0}
-  hitSFX: {fileID: 0}
-  blockSFX: {fileID: 0}
-  counterhitSFX: {fileID: 0}
+  hitSFX:
+    startup: 1
+    audioClip: {fileID: 0}
+    audioClips: []
+    volume: 1
+    pitchRange: 0
+  blockSFX:
+    startup: 1
+    audioClip: {fileID: 0}
+    audioClips: []
+    volume: 1
+    pitchRange: 0
+  uniqueProperties:
+  - {fileID: 11400000, guid: 2669df5c119bdaa46af219731701ae27, type: 2}
+  skillProperties: []
   useAttackSpeed: 1
   keepVelocity: 0
   particleID: 0

@@ -15,7 +15,7 @@ public class Hazard : MonoBehaviour
     public Attack attack;
     public StatusEffect effect;
     public VFX hitVFX;
-    public GameObject hitSFX;
+    public SFX hitSFX;
     public GameObject collider;
     public ParticleSystem ps;
     Vector3 knockbackDirection;
@@ -142,11 +142,11 @@ public class Hazard : MonoBehaviour
             else
                 Instantiate(VFXManager.Instance.defaultHitVFX, colPos.position, colPos.rotation);
 
-            if (hitSFX != null)
-                Instantiate(hitSFX, colPos.position, colPos.rotation);
-            else
-                Instantiate(VFXManager.Instance.defaultHitSFX.audioClip, colPos.position, colPos.rotation);
 
+            if (hitSFX.audioClips.Count > 0)
+                AudioManager.Instance.PlaySFX(hitSFX, colPos.position);
+            else
+                AudioManager.Instance.PlaySFX(VFXManager.Instance.defaultHitSFX, colPos.position);
         }
 
         switch (atk.attackLevel)

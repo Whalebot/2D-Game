@@ -58,19 +58,33 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayAudio(AudioClip clip, Vector3 position, float volume = 1f)
+    public void PlaySFX(SFX temp, Vector3 position)
     {
         AudioSource sfx = Instantiate(SFXPrefab, position, Quaternion.identity);
 
-        sfx.clip = clip;
+        sfx.pitch = 1 + Random.Range(-temp.pitchRange, temp.pitchRange);
 
-        sfx.Play();
+        if (temp.audioClips.Count > 0)
+        {
+            sfx.clip = temp.audioClips[Random.Range(0, temp.audioClips.Count)];
+        }
 
-        sfx.volume = volume;
+        else
+        {
+            Debug.Log(sfx.gameObject + " Missing Audio Clip");
+            sfx.clip = null;
+        }
 
-        float length = sfx.clip.length;
+        if (sfx.clip != null)
+        {
+            sfx.Play();
 
-        Destroy(sfx.gameObject, length);
+            sfx.volume = temp.volume;
+
+            float length = sfx.clip.length;
+
+            Destroy(sfx.gameObject, length);
+        }
     }
 
     public void AddSFX(AudioSource AS)

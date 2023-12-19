@@ -25,22 +25,23 @@ public class Move : ScriptableObject
     [Header("Hit properties")]
     [TabGroup("Attacks")] public MoveType type;
 
-    public MoveUniqueProperty[] uniqueProperties;
-    public List<UniqueSkillProperty> skillProperties;
+
 
     [Header("Screen shake")]
     [TabGroup("Group 2", "FX")]
     public ScreenShake[] screenShake;
     [TabGroup("Group 2", "FX")] public VFX[] vfx;
-    [TabGroup("Group 2", "FX")] public SFX[] sfx;
+    [TabGroup("Group 2", "SFX")] public SFX[] sfx;
     [TabGroup("Group 2", "FX")] public VFX hitFX;
-    [TabGroup("Group 2", "FX")] public GameObject blockFX;
-    [TabGroup("Group 2", "FX")] public GameObject counterhitFX;
-    [TabGroup("Group 2", "FX")] public AudioClip hitSFX;
-    [TabGroup("Group 2", "FX")] public AudioClip blockSFX;
-    [TabGroup("Group 2", "FX")] public AudioClip counterhitSFX;
+    //[TabGroup("Group 2", "FX")]
+    [HideInInspector] public GameObject blockFX;
+    [TabGroup("Group 2", "SFX")] [InlineProperty(LabelWidth = 150)] public SFX hitSFX;
+    //[TabGroup("Group 2", "SFX")] 
+    [HideInInspector] public SFX blockSFX;
 
     [Header("Move properties")]
+    [TabGroup("Move properties")] public MoveUniqueProperty[] uniqueProperties;
+    [TabGroup("Move properties")] public List<UniqueSkillProperty> skillProperties;
     [TabGroup("Move properties")] public bool useAttackSpeed = true;
     [TabGroup("Move properties")] public bool keepVelocity = false;
     [TabGroup("Move properties")] public int particleID;
@@ -120,8 +121,9 @@ public class SFX
 {
 
     public int startup = 1;
-    public AudioClip audioClip;
+    public List<AudioClip> audioClips;
     public float volume = 1;
+    public float pitchRange = 0;
 }
 
 [System.Serializable]

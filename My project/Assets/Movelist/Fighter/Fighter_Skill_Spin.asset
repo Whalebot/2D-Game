@@ -92,7 +92,6 @@ MonoBehaviour:
       pushback: {x: 5, y: -5}
       hitState: 0
   type: 0
-  uniqueProperties: []
   screenShake:
   - type: 2
     startup: 1
@@ -142,16 +141,28 @@ MonoBehaviour:
   sfx:
   - startup: 15
     audioClip: {fileID: 8300000, guid: c42832f2b6b42664594a8b54961d9e8f, type: 3}
+    audioClips:
+    - {fileID: 8300000, guid: c42832f2b6b42664594a8b54961d9e8f, type: 3}
     volume: 1
+    pitchRange: 0
   - startup: 21
     audioClip: {fileID: 8300000, guid: c42832f2b6b42664594a8b54961d9e8f, type: 3}
+    audioClips:
+    - {fileID: 8300000, guid: c42832f2b6b42664594a8b54961d9e8f, type: 3}
     volume: 1
+    pitchRange: 0
   - startup: 30
     audioClip: {fileID: 8300000, guid: c42832f2b6b42664594a8b54961d9e8f, type: 3}
+    audioClips:
+    - {fileID: 8300000, guid: c42832f2b6b42664594a8b54961d9e8f, type: 3}
     volume: 1
+    pitchRange: 0
   - startup: 41
     audioClip: {fileID: 8300000, guid: c42832f2b6b42664594a8b54961d9e8f, type: 3}
+    audioClips:
+    - {fileID: 8300000, guid: c42832f2b6b42664594a8b54961d9e8f, type: 3}
     volume: 1
+    pitchRange: 0
   hitFX:
     type: 0
     startup: 1
@@ -162,10 +173,20 @@ MonoBehaviour:
     rotation: {x: 0, y: 0, z: 0}
     scale: {x: 0.7, y: 0.7, z: 0.7}
   blockFX: {fileID: 0}
-  counterhitFX: {fileID: 0}
-  hitSFX: {fileID: 0}
-  blockSFX: {fileID: 0}
-  counterhitSFX: {fileID: 0}
+  hitSFX:
+    startup: 1
+    audioClip: {fileID: 0}
+    audioClips: []
+    volume: 1
+    pitchRange: 0
+  blockSFX:
+    startup: 1
+    audioClip: {fileID: 0}
+    audioClips: []
+    volume: 1
+    pitchRange: 0
+  uniqueProperties: []
+  skillProperties: []
   useAttackSpeed: 1
   keepVelocity: 0
   particleID: 0
