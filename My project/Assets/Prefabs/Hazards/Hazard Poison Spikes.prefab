@@ -181,10 +181,15 @@ MonoBehaviour:
   baseDamage: 5
   totalDamage: 0
   resetTimer: 90
+  life: 0
+  lifeCounter: 0
+  followParent: 0
+  resetcounter: 0
   alignment: 2
   attack:
     attackLevel: 0
     attackType: 0
+    damageType: 0
     hitbox: {fileID: 0}
     damage: 1
     stun: 20
@@ -199,12 +204,9 @@ MonoBehaviour:
     airHitProperty:
       pushback: {x: 0, y: 0}
       hitState: 0
-    blockProperty:
-      pushback: {x: 0, y: 0}
-      hitState: 0
-    hitID: 0
   effect: {fileID: 11400000, guid: 156ffd24f319d644cb75d002495ef8cb, type: 2}
   hitVFX:
+    type: 0
     startup: 1
     prefab: {fileID: 0}
     deattachFromPlayer: 1
@@ -212,6 +214,11 @@ MonoBehaviour:
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0}
     scale: {x: 1, y: 1, z: 1}
-  hitSFX: {fileID: 0}
-  collider: {fileID: 2778032040300063875}
+  hitSFX:
+    startup: 1
+    audioClips: []
+    volume: 1
+    pitchRange: 0
+  col: {fileID: 2778032040300063875}
+  ps: {fileID: 0}
   enemyList: []

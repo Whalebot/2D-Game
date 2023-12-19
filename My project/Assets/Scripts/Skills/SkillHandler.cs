@@ -283,6 +283,29 @@ public class SkillHandler : MonoBehaviour
         FieldInfo[] defInfo1 = def1.GetType().GetFields();
         FieldInfo[] defInfo2 = def2.GetType().GetFields();
 
+        float blessingModifier = 1;
+        if (temp.type == SkillType.Blessing)
+            switch (temp.skillRank)
+            {
+                case Rank.D:
+                    blessingModifier = 1;
+                    break;
+                case Rank.C:
+                    blessingModifier = 1.5f;
+                    break;
+                case Rank.B:
+                    blessingModifier = 1.75f;
+                    break;
+                case Rank.A:
+                    blessingModifier = 2;
+                    break;
+                case Rank.S:
+                    blessingModifier = 2.5f;
+                    break;
+                default:
+                    break;
+            }
+
         for (int i = 0; i < defInfo1.Length; i++)
         {
             object obj = def1;
@@ -296,14 +319,14 @@ public class SkillHandler : MonoBehaviour
                 if ((int)var2 != 0)
                 {
                     if (defInfo1[i].Name != "currentHealth" && defInfo1[i].Name != "currentMeter")
-                        defInfo1[i].SetValue(obj, (int)var1 + (int)var2);
+                        defInfo1[i].SetValue(obj, (int)var1 + (((int)var2) * blessingModifier));
                 }
 
             }
             else if (var1 is float)
             {
                 if ((float)var2 != 0)
-                    defInfo1[i].SetValue(obj, (float)var1 + (float)var2);
+                    defInfo1[i].SetValue(obj, (float)var1 + ((float)var2) * blessingModifier);
             }
         }
     }

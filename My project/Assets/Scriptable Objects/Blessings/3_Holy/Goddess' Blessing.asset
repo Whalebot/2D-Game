@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41f2923ec284c6840a8cd468af82cb4d, type: 3}
-  m_Name: Crossbow
+  m_Name: Goddess' Blessing
   m_EditorClassIdentifier: 
-  skillRank: 1
-  type: 2
-  elemental: 0
-  title: Crossbow
-  sprite: {fileID: 21300000, guid: 2868072709418b14281e6dd756fac2b1, type: 3}
+  skillRank: 2
+  type: 1
+  elemental: 2
+  title: Goddess' Blessing
+  sprite: {fileID: 21300000, guid: 716ad85d81c4bd7419016547e42f354a, type: 3}
   damageValue: 0
   prerequisiteSkills: []
   prerequisiteMoves: []
@@ -38,17 +38,17 @@ MonoBehaviour:
     gold: 0
     attack: 0
     magic: 0
-    faithModifier: 0
+    faithModifier: 0.5
     attackSpeed: 0
     jumps: 0
     airActions: 0
     rerolls: 0
-    fireModifier: 0
-    iceModifier: 0
-    lightningModifier: 0
-    earthModifier: 0
-    windModifier: 0
-    poisonModifier: 0
+    fireModifier: 0.1
+    iceModifier: 0.1
+    lightningModifier: 0.1
+    earthModifier: 0.1
+    windModifier: 0.1
+    poisonModifier: 0.1
     movementSpeedModifier: 0
     meterGainModifier: 0
     poiseRegen: 0
@@ -63,4 +63,4 @@ MonoBehaviour:
     hitStunMultiplier: 0
     knockbackModifier: 0
     critChance: 0
-    critMultiplier: 0.5
+    critMultiplier: 0

@@ -10,7 +10,7 @@ public class ResultScreen : MonoBehaviour
 
     public TextMeshProUGUI floorText;
     public TextMeshProUGUI enemiesKilledText;
-    public TextMeshProUGUI boosesKilledText;
+    public TextMeshProUGUI bossesKilledText;
 
     public OrganizeChildren skillPanel;
 
@@ -18,11 +18,14 @@ public class ResultScreen : MonoBehaviour
     void Start()
     {
         continueButton.onClick.AddListener(() => ContinueButton());
+        SetupResultScreen();
     }
 
     public void SetupResultScreen()
     {
         floorText.text = "" + SaveManager.Instance.CurrentLevel;
+        enemiesKilledText.text = "" + SaveManager.Instance.CurrentData.enemiesKilled;
+        bossesKilledText.text = "" + SaveManager.Instance.CurrentData.bossesKilled;
     }
 
     public void ContinueButton()

@@ -44,7 +44,18 @@ public class SaveManager : MonoBehaviour
         if (autoLoad && HasSaveData())
             startLoadEvent?.Invoke();
     }
+    public CharacterData CurrentData
+    {
+        get
+        {
+            return saveData.currrentCharacter;
+        }
+        set
+        {
+            saveData.currrentCharacter = value;
+        }
 
+    }
     public CharacterVisualData VisualData
     {
         get
@@ -182,6 +193,8 @@ public class CharacterData
     public Stats stats;
     public int currentRoomID = 0;
     public int currentArea = 1;
+    public int enemiesKilled = 0;
+    public int bossesKilled = 0;
     public List<int> visitedRooms;
     public CharacterVisualData visualData;
     public List<SkillSO> learnedSkills;

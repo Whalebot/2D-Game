@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41f2923ec284c6840a8cd468af82cb4d, type: 3}
-  m_Name: Crossbow
+  m_Name: Earth Mastery
   m_EditorClassIdentifier: 
-  skillRank: 1
-  type: 2
-  elemental: 0
-  title: Crossbow
-  sprite: {fileID: 21300000, guid: 2868072709418b14281e6dd756fac2b1, type: 3}
+  skillRank: 2
+  type: 1
+  elemental: 1
+  title: Earth Mastery
+  sprite: {fileID: 21300000, guid: 85f6633326b0ca44ebfc454ec65d2730, type: 3}
   damageValue: 0
   prerequisiteSkills: []
   prerequisiteMoves: []
@@ -46,7 +46,7 @@ MonoBehaviour:
     fireModifier: 0
     iceModifier: 0
     lightningModifier: 0
-    earthModifier: 0
+    earthModifier: 0.25
     windModifier: 0
     poisonModifier: 0
     movementSpeedModifier: 0
@@ -63,4 +63,4 @@ MonoBehaviour:
     hitStunMultiplier: 0
     knockbackModifier: 0
     critChance: 0
-    critMultiplier: 0.5
+    critMultiplier: 0

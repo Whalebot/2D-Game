@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -196,7 +197,8 @@ public class SkillManager : MonoBehaviour
         SetActiveEventSystem();
     }
 
-    void SetActiveEventSystem() {
+    void SetActiveEventSystem()
+    {
         UIManager.Instance.SetActiveEventSystem(skillButtons[1].gameObject);
     }
 
@@ -333,12 +335,19 @@ public class SkillManager : MonoBehaviour
         for (int i = 0; i < words.Count; i++)
         {
             if (skill != null)
+            {
                 if (words[i].Contains("DMGVAL"))
                 {
                     skill.CalculateDamageValue(GameManager.Instance.playerStatus);
                     words[i] = skill.damageValue + " ";
                     words[i] = ($"<link=\"0\"><color=#{ColorUtility.ToHtmlStringRGB(Color.yellow)}>" + words[i] + "</color>" + "</link>");
                 }
+                if (words[i].Contains("STATS"))
+                {
+                    words[i] = SkillStatDescription(skill) + " ";
+                    words[i] = ($"<link=\"0\"><color=#{ColorUtility.ToHtmlStringRGB(Color.yellow)}>" + words[i] + "</color>" + "</link>");
+                }
+            }
 
 
             foreach (var item in colorTags)
@@ -363,6 +372,72 @@ public class SkillManager : MonoBehaviour
             final += word;
         }
         return final;
+    }
+
+    public string SkillStatDescription(SkillSO skill)
+    {
+        string d = "";
+        Stats def1 = skill.stats;
+        FieldInfo[] defInfo1 = def1.GetType().GetFields();
+
+        float blessingModifier = 1;
+        if (skill.type == SkillType.Blessing)
+            switch (skill.skillRank)
+            {
+                case Rank.D:
+                    blessingModifier = 1;
+                    break;
+                case Rank.C:
+                    blessingModifier = 1.5f;
+                    break;
+                case Rank.B:
+                    blessingModifier = 1.75f;
+                    break;
+                case Rank.A:
+                    blessingModifier = 2;
+                    break;
+                case Rank.S:
+                    blessingModifier = 2.5f;
+                    break;
+                default:
+                    break;
+            }
+
+        for (int i = 0; i < defInfo1.Length; i++)
+        {
+            object obj = def1;
+
+            object var1 = defInfo1[i].GetValue(obj);
+
+            if (var1 is int)
+            {
+                if ((int)var1 != 0)
+                {
+                    if ((int)var1 > 0)
+                        d += $"Increase {defInfo1[i].Name} with {(int)var1 * blessingModifier} \n";
+                    else
+                    {
+                        d += $"Decrease {defInfo1[i].Name} with {(int)var1 * blessingModifier} \n";
+                    }
+
+                }
+
+            }
+            else if (var1 is float)
+            {
+                if ((float)var1 != 0)
+                {
+                    if ((float)var1 > 0)
+                        d += $"Increase {defInfo1[i].Name} with {(float)var1 * blessingModifier} \n";
+                    else
+                    {
+                        d += $"Decrease {defInfo1[i].Name} with {(float)var1 * blessingModifier} \n";
+                    }
+                }
+            }
+
+        }
+        return d;
     }
 
     public string SkillDescription(SkillSO skill)

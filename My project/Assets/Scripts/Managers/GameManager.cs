@@ -242,8 +242,6 @@ public class GameManager : MonoBehaviour
 
     public void ResumeGame()
     {
-        // print("Resume");
-
         //  Time.timeScale = 1;
         StartCoroutine(DelayResume());
     }
