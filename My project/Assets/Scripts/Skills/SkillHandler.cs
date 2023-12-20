@@ -107,12 +107,28 @@ public class SkillHandler : MonoBehaviour
             item.WaveBehaviour(this);
             foreach (var prop in item.skillProperties)
             {
-                prop.WaveBehaviour(this);
+                prop.WaveBehaviour(this, item);
             }
         }
     }
     void ActivateBehaviour()
     {
+    }
+    public StatusEffect ModifyStatusEffect(StatusEffect statusEffect)
+    {
+        foreach (var item in learnedSkills)
+        {
+            foreach (var prop in item.skillProperties)
+            {
+                if (prop.GetType() == typeof(ModifyEffectSkillProperty))
+                {
+                    ModifyEffectSkillProperty mod = (ModifyEffectSkillProperty)prop;
+                    mod.ModifyEffect(statusEffect);
+                }
+            }
+        }
+
+        return statusEffect;
     }
     void LateBehaviour()
     {

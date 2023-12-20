@@ -25,7 +25,7 @@ public class UniqueSkillProperty : ScriptableObject
     public virtual void ActiveFrameBehaviour(SkillHandler handler)
     {
     }
-    public virtual void WaveBehaviour(SkillHandler handler)
+    public virtual void WaveBehaviour(SkillHandler handler, SkillSO skill)
     {
     }
     public virtual void HitBehaviour(HitInfo hitInfo, SkillSO skill)

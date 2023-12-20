@@ -6,6 +6,7 @@ using UnityEngine;
 public class PoisonStatusEffect : StatusEffect
 {
     public VFX poisonVFX;
+    public bool spread;
     public override void TickBehaviour()
     {
         base.TickBehaviour();
@@ -23,8 +24,22 @@ public class PoisonStatusEffect : StatusEffect
         fx.transform.localPosition = poisonVFX.position;
         fx.transform.localRotation = Quaternion.Euler(poisonVFX.rotation);
         fx.transform.localScale = poisonVFX.scale;
-        //if (item.destroyOnRecovery)
-        //    fx.GetComponent<VFXScript>().SetupVFX(status);
+
+        if (spread)
+        {
+            Collider[] col = Physics.OverlapSphere(status.transform.position, 1 * 0.5F);
+
+            foreach (Collider item in col)
+            {
+                Status tempStatus = item.GetComponentInParent<Status>();
+                if (tempStatus == null || tempStatus == status) continue;
+                if (tempStatus.alignment != status.alignment) continue;
+
+                tempStatus.ApplyStatusEffect(this);
+            }
+        }
+
+
         if (poisonVFX.deattachFromPlayer)
             fx.transform.SetParent(null);
     }
