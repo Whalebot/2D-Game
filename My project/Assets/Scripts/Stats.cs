@@ -51,6 +51,7 @@ public class Stats
     [TabGroup("Modifiers")] public float knockbackModifier = 1;
     [TabGroup("Modifiers")] public float critChance = 0;
     [TabGroup("Modifiers")] public float critMultiplier = 1.5f;
+    [TabGroup("Modifiers")] public float lifesteal = 0;
 
     public void ReplaceStats(Stats newStats)
     {

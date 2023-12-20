@@ -201,7 +201,10 @@ public class Hitbox : MonoBehaviour
             totalDamage = (int)(totalDamage * (1 + status.currentStats.backstabModifier));
         }
         int damageDealt = Mathf.RoundToInt((totalDamage * (1 - other.currentStats.defense)) - other.currentStats.resistance);
-
+        if (status.currentStats.lifesteal > 0 && !magicDamage)
+        {
+            status.Health += (int)(damageDealt * status.currentStats.lifesteal);
+        }
 
         HitInfo hitInfo = new HitInfo(crit, backstab, status, other, move);
         attack.HitEvent(hitInfo);
