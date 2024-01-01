@@ -28,6 +28,6 @@ public class DamageText : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.Translate(dir);
+        //transform.Translate(dir);
     }
 }
