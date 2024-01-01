@@ -55,6 +55,10 @@ public class GameManager : MonoBehaviour
     [TabGroup("Feedback")] [SerializeField] int offsetTime;
     [TabGroup("Feedback")] public GameObject damageText;
     [TabGroup("Feedback")] public GameObject critDamageText;
+
+    [TabGroup("Feedback")] public GameObject enemyDamageText;
+    [TabGroup("Feedback")] public GameObject enemyCritDamageText;
+
     [TabGroup("Feedback")] public GameObject healingText;
     [TabGroup("Feedback")] public float slowMotionValue;
     [TabGroup("Feedback")] public float slowMotionDuration;
@@ -190,15 +194,35 @@ public class GameManager : MonoBehaviour
         playerDeath?.Invoke();
     }
 
-    public void DamageNumbers(Transform other, int damageValue, bool crit)
+    public void DamageNumbers(Transform other, int damageValue, bool crit, Alignment alignment)
     {
         if (showDamageText)
         {
             GameObject text = null;
-            if (crit)
-                text = Instantiate(critDamageText, other.position + Vector3.up * offsetCounter * numberOffset, Quaternion.identity);
-            else
-                text = Instantiate(damageText, other.position + Vector3.up * offsetCounter * numberOffset, Quaternion.identity);
+            switch (alignment)
+            {
+                case Alignment.Player:
+                    if (crit)
+                        text = Instantiate(critDamageText, other.position + Vector3.up * offsetCounter * numberOffset, Quaternion.identity);
+                    else
+                        text = Instantiate(damageText, other.position + Vector3.up * offsetCounter * numberOffset, Quaternion.identity);
+                    break;
+                case Alignment.Enemy:
+                    if (crit)
+                        text = Instantiate(enemyCritDamageText, other.position + Vector3.up * offsetCounter * numberOffset, Quaternion.identity);
+                    else
+                        text = Instantiate(enemyDamageText, other.position + Vector3.up * offsetCounter * numberOffset, Quaternion.identity);
+                    break;
+                case Alignment.Neutral:
+                    if (crit)
+                        text = Instantiate(enemyCritDamageText, other.position + Vector3.up * offsetCounter * numberOffset, Quaternion.identity);
+                    else
+                        text = Instantiate(enemyDamageText, other.position + Vector3.up * offsetCounter * numberOffset, Quaternion.identity);
+                    break;
+                default:
+                    break;
+            }
+         
 
             text.GetComponentInChildren<DamageText>().SetupNumber(damageValue);
             offsetCounter++;

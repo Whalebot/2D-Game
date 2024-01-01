@@ -432,7 +432,7 @@ public class Status : MonoBehaviour
             }
         }
 
-        GameManager.Instance.DamageNumbers(transform, damage, crit);
+        GameManager.Instance.DamageNumbers(transform, damage, crit, alignment);
         Health -= damage;
 
         if (hasArmor || animationArmor)

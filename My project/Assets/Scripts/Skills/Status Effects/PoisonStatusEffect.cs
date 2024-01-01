@@ -20,7 +20,7 @@ public class PoisonStatusEffect : StatusEffect
         int dmgDone = (int)(baseDamage * stacks * damageModifier);
 
         status.Health -= dmgDone;
-        GameManager.Instance.DamageNumbers(status.transform, dmgDone, false);
+        GameManager.Instance.DamageNumbers(status.transform, dmgDone, false,status.alignment);
         fx.transform.localPosition = poisonVFX.position;
         fx.transform.localRotation = Quaternion.Euler(poisonVFX.rotation);
         fx.transform.localScale = poisonVFX.scale;

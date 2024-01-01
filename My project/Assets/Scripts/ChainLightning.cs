@@ -107,7 +107,7 @@ public class ChainLightning : MonoBehaviour
 
         Vector3 dir = (tempStatus.transform.position - fromPosition).normalized;
         tempStatus.Health -= damage;
-        GameManager.Instance.DamageNumbers(tempStatus.transform, damage, false);
+        GameManager.Instance.DamageNumbers(tempStatus.transform, damage, false, tempStatus.alignment);
         //No hitstun
         //tempStatus.TakeHit(damage, Vector3.zero, CombatManager.Instance.lvl1.stun, CombatManager.Instance.lvl1.poiseBreak, Vector3.zero, CombatManager.Instance.lvl1.hitstop, HitState.None, false);
     }

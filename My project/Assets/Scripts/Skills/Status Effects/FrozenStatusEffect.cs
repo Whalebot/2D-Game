@@ -33,7 +33,7 @@ public class FrozenStatusEffect : StatusEffect
 
         int damage = (int)(baseDamage * damageModifier);
         status.Health -= damage;
-        GameManager.Instance.DamageNumbers(status.transform, damage, false);
+        GameManager.Instance.DamageNumbers(status.transform, damage, false,status.alignment);
 
         //fx.transform.localPosition = item.position;
         //fx.transform.localRotation = Quaternion.Euler(item.rotation);
