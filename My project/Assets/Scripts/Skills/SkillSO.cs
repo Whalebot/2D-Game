@@ -24,8 +24,7 @@ public class SkillSO : ScriptableObject
 
     [TextArea(15, 20)]
     public string description;
-    [ShowIf("@type == SkillType.Item")]
-    public Stats stats;
+    [HideLabel] public Stats  stats;
 
     public virtual void ActivateBehaviour(SkillHandler handler)
     {

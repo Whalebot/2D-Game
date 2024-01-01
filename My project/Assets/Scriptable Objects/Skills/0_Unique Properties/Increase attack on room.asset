@@ -9,23 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41f2923ec284c6840a8cd468af82cb4d, type: 3}
-  m_Name: Auto Heal
+  m_Script: {fileID: 11500000, guid: c64f3eae1c0ce554a9210618c236a65c, type: 3}
+  m_Name: Increase attack on room
   m_EditorClassIdentifier: 
-  skillRank: 2
-  type: 2
-  title: Auto Heal
-  sprite: {fileID: 0}
-  damageValue: 0
-  prerequisiteSkills: []
-  prerequisiteMoves: []
-  bannedMoves: []
-  newMoves: []
-  skillProperties:
-  - {fileID: 11400000, guid: 9bb87b815f6abd04caadd4607d7bbab7, type: 2}
-  description: Every time to enter a new room, recover 10 health
-  stats:
-    currentHealth: 0
+  recoveredStats:
+    currentHealth: 10
     maxHealth: 0
     currentMeter: 0
     maxMeter: 0
@@ -53,7 +41,7 @@ MonoBehaviour:
     meterGainModifier: 0
     poiseRegen: 0
     poise: 0
-    defense: -0.5
+    defense: 0
     resistance: 0
     guardBreakModifier: 0
     sizeModifier: 0
@@ -62,5 +50,5 @@ MonoBehaviour:
     damageModifierFlat: 0
     hitStunMultiplier: 0
     knockbackModifier: 0
-    critChance: 0.3
-    critMultiplier: 0.5
+    critChance: 0
+    critMultiplier: 0

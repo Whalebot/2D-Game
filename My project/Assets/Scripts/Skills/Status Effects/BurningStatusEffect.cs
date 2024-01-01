@@ -6,6 +6,7 @@ using UnityEngine;
 public class BurningStatusEffect : StatusEffect
 {
     public VFX fireVFX;
+    public bool spread;
     public override void TickBehaviour()
     {
         base.TickBehaviour();
@@ -24,6 +25,20 @@ public class BurningStatusEffect : StatusEffect
         fx.transform.localPosition = fireVFX.position;
         fx.transform.localRotation = Quaternion.Euler(fireVFX.rotation);
         fx.transform.localScale = fireVFX.scale;
+
+        if (spread)
+        {
+            Collider[] col = Physics.OverlapSphere(status.transform.position, 1 * 0.5F);
+
+            foreach (Collider item in col)
+            {
+                Status tempStatus = item.GetComponentInParent<Status>();
+                if (tempStatus == null || tempStatus == status) continue;
+                if (tempStatus.alignment != status.alignment) continue;
+
+                tempStatus.ApplyStatusEffect(this);
+            }
+        }
 
         if (fireVFX.deattachFromPlayer)
             fx.transform.SetParent(null);

@@ -77,10 +77,15 @@ MonoBehaviour:
   baseDamage: 1
   totalDamage: 0
   resetTimer: 30
+  life: 0
+  lifeCounter: 0
+  followParent: 0
+  resetcounter: 0
   alignment: 2
   attack:
     attackLevel: 3
     attackType: 0
+    damageType: 0
     hitbox: {fileID: 0}
     damage: 1
     stun: 0
@@ -95,12 +100,9 @@ MonoBehaviour:
     airHitProperty:
       pushback: {x: 0, y: 0}
       hitState: 0
-    blockProperty:
-      pushback: {x: 0, y: 0}
-      hitState: 0
-    hitID: 0
   effect: {fileID: 11400000, guid: 0079a705b55ba6442b788efc29957914, type: 2}
   hitVFX:
+    type: 0
     startup: 1
     prefab: {fileID: 123764, guid: 5077e2ec8ec48d247af6fecd8d5bb756, type: 3}
     deattachFromPlayer: 1
@@ -108,8 +110,13 @@ MonoBehaviour:
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0}
     scale: {x: 0.2, y: 0.2, z: 0.2}
-  hitSFX: {fileID: 6221875919659914540, guid: 2e93bb8f6b9308046876c71285120417, type: 3}
-  collider: {fileID: 8706467883841827797}
+  hitSFX:
+    startup: 1
+    audioClips: []
+    volume: 1
+    pitchRange: 0
+  col: {fileID: 8706467883841827797}
+  ps: {fileID: 4944938660021262122}
   enemyList: []
 --- !u!1 &8706467883841827797
 GameObject:
@@ -309,6 +316,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 996caa051abc4be4d8b39b565b8694b5, type: 3}
+--- !u!198 &4944938660021262122 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19864882, guid: 996caa051abc4be4d8b39b565b8694b5, type: 3}
+  m_PrefabInstance: {fileID: 4944938660035742232}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4944938660035397572 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 478684, guid: 996caa051abc4be4d8b39b565b8694b5, type: 3}

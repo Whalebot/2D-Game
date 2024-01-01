@@ -55,6 +55,7 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.pauseEvent += OpenPauseMenu;
         GameManager.Instance.resumeEvent += ClosePauseMenu;
         GameManager.Instance.openShopEvent += OpenShopPanel;
+        GameManager.Instance.playerDeath  += OpenResultScreen;
         rerollButton.onClick.AddListener(() => RerollButton());
 
     }
@@ -64,7 +65,10 @@ public class UIManager : MonoBehaviour
         eventSystem.SetSelectedGameObject(null);
         eventSystem.SetSelectedGameObject(go);
     }
-
+    void OpenResultScreen()
+    {
+        resultScreen.gameObject.SetActive(true);
+    }
     void OpenPauseMenu()
     {
         pauseMenu.SetActive(true);

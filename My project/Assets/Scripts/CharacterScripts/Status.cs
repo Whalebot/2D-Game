@@ -612,7 +612,7 @@ public class Status : MonoBehaviour
             defInfo1[i].SetValue(obj, defInfo2[i].GetValue(obj2));
         }
     }
-    public void AddStats(Stats oldStats, Stats newStats)
+    public void AddStats(Stats oldStats, Stats newStats, float modifier = 1f)
     {
         //Get stat definition and add 1 to 2
         Stats def1 = oldStats;
@@ -632,12 +632,12 @@ public class Status : MonoBehaviour
             if (var1 is int)
             {
                 if ((int)var2 != 0)
-                    defInfo1[i].SetValue(obj, (int)var1 + (int)var2);
+                    defInfo1[i].SetValue(obj, (int)var1 + ((int)var2) * modifier);
             }
             else if (var1 is float)
             {
                 if ((float)var2 != 0)
-                    defInfo1[i].SetValue(obj, (float)var1 + (float)var2);
+                    defInfo1[i].SetValue(obj, (float)var1 + ((float)var2) * modifier);
             }
         }
     }

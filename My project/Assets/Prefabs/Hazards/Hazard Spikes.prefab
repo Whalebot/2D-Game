@@ -191,6 +191,7 @@ MonoBehaviour:
   life: 0
   lifeCounter: 0
   followParent: 0
+  resetcounter: 0
   alignment: 2
   attack:
     attackLevel: 0
@@ -220,8 +221,12 @@ MonoBehaviour:
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0}
     scale: {x: 1, y: 1, z: 1}
-  hitSFX: {fileID: 0}
-  collider: {fileID: 2778032040300063875}
+  hitSFX:
+    startup: 1
+    audioClips: []
+    volume: 1
+    pitchRange: 0
+  col: {fileID: 2778032040300063875}
   ps: {fileID: 0}
   enemyList: []
 --- !u!1001 &1436760877002505347

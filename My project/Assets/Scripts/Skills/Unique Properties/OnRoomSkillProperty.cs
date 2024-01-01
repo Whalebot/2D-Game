@@ -6,10 +6,14 @@ using UnityEngine;
 public class OnRoomSkillProperty : UniqueSkillProperty
 {
     public Stats recoveredStats;
-    public override void WaveBehaviour(SkillHandler handler)
+    public override void WaveBehaviour(SkillHandler handler, SkillSO skill)
     {
-        base.WaveBehaviour(handler);
+        base.WaveBehaviour(handler, skill);
         Status status = handler.GetComponent<Status>();
-        status.AddStats(status.currentStats, recoveredStats);
+        float mod = 1f;
+        if (skill.type == SkillType.Blessing)
+            mod = RarityModifier(skill.skillRank);
+
+        status.AddStats(status.currentStats, recoveredStats, mod);
     }
 }

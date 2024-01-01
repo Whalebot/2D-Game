@@ -843,7 +843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventSystem: {fileID: 1226063110771076}
-  resultScreen: {fileID: 0}
+  resultScreen: {fileID: 2865416679658711534}
   treasurePanel: {fileID: 597837011972036709}
   blessingPanel: {fileID: 309692134137239894}
   itemPanel: {fileID: 7871113208886226768}
@@ -3467,7 +3467,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -350, y: 350}
+  m_AnchoredPosition: {x: -350, y: 200}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1050356425100700409
@@ -4501,7 +4501,7 @@ MonoBehaviour:
   continueButton: {fileID: 7426837385734097152}
   floorText: {fileID: 2335158671026339640}
   enemiesKilledText: {fileID: 6554319661145737279}
-  boosesKilledText: {fileID: 5746779115425885633}
+  bossesKilledText: {fileID: 5746779115425885633}
   skillPanel: {fileID: 1050356425100700409}
 --- !u!1 &7099776660783107639
 GameObject:
@@ -7969,6 +7969,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6751784812164443129, guid: 7a9da60ca77f7694db0bef6ecb70552e, type: 3}
       propertyPath: alwaysShowHPBar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7493821809767001230, guid: 7a9da60ca77f7694db0bef6ecb70552e, type: 3}
+      propertyPath: m_FillAmount
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7640429225173346522, guid: 7a9da60ca77f7694db0bef6ecb70552e, type: 3}

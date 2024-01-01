@@ -7,6 +7,7 @@ using Pathfinding;
 public class AI : MonoBehaviour
 {
     [HideInInspector] public Character character;
+    public EnemyType enemyType;
 
     public AIAction currentAction;
 
@@ -118,6 +119,20 @@ public class AI : MonoBehaviour
     void DeathEvent()
     {
         GameManager.Instance.Gold += status.currentStats.gold;
+        switch (enemyType)
+        {
+            case EnemyType.Normal:
+                SaveManager.Instance.CurrentData.enemiesKilled++;
+                break;
+            case EnemyType.Elite:
+                SaveManager.Instance.CurrentData.enemiesKilled++;
+                break;
+            case EnemyType.Boss:
+                SaveManager.Instance.CurrentData.bossesKilled++;
+                break;
+            default:
+                break;
+        }
         RemoveFromAIManager();
     }
 
@@ -632,3 +647,7 @@ public class AI : MonoBehaviour
     #endregion
 }
 
+public enum EnemyType
+{
+    Normal, Elite, Boss
+}

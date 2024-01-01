@@ -10,13 +10,13 @@ public class Hazard : MonoBehaviour
     public int life = 0;
     public int lifeCounter;
     public bool followParent = false;
-    int resetcounter;
+   public int resetcounter;
     public Alignment alignment;
     public Attack attack;
     public StatusEffect effect;
     public VFX hitVFX;
     public SFX hitSFX;
-    public GameObject collider;
+    public GameObject col;
     public ParticleSystem ps;
     Vector3 knockbackDirection;
     Vector3 aVector;
@@ -49,7 +49,7 @@ public class Hazard : MonoBehaviour
             resetcounter--;
             if (resetcounter <= 0)
             {
-                collider.gameObject.SetActive(false);
+                col.gameObject.SetActive(false);
                 enemyList.Clear();
                 resetcounter = resetTimer;
             }
@@ -57,7 +57,7 @@ public class Hazard : MonoBehaviour
         }
         else
         {
-            collider.gameObject.SetActive(true);
+            col.gameObject.SetActive(true);
         }
 
         if (life > 0)
@@ -70,7 +70,7 @@ public class Hazard : MonoBehaviour
 
     IEnumerator DelayDestroy()
     {
-        collider.gameObject.SetActive(false);
+        col.gameObject.SetActive(false);
         if (ps != null)
         {
             ParticleSystem[] temp = GetComponentsInChildren<ParticleSystem>();
@@ -85,7 +85,7 @@ public class Hazard : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerStay(Collider other)
     {
         Status enemyStatus = other.GetComponentInParent<Status>();
         Hitbox hitbox = other.GetComponent<Hitbox>();
