@@ -20,7 +20,7 @@ public class BurningStatusEffect : StatusEffect
         int damage = (int) (baseDamage * damageModifier);
 
         status.Health -= damage;
-        GameManager.Instance.DamageNumbers(status.transform, damage, false);
+        GameManager.Instance.DamageNumbers(status.transform, damage, false, status.alignment);
 
         fx.transform.localPosition = fireVFX.position;
         fx.transform.localRotation = Quaternion.Euler(fireVFX.rotation);
