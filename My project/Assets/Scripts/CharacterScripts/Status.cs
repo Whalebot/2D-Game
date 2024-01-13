@@ -66,6 +66,7 @@ public class Status : MonoBehaviour
     public event Action healthEvent;
     public event Action statEvent;
     public event Action hurtEvent;
+    public event Action<int> damageEvent;
     public event Action deathEvent;
     public event Action pushbackEvent;
 
@@ -434,6 +435,7 @@ public class Status : MonoBehaviour
 
         GameManager.Instance.DamageNumbers(transform, damage, crit, alignment);
         Health -= damage;
+        damageEvent?.Invoke(damage);
 
         if (hasArmor || animationArmor)
         {
