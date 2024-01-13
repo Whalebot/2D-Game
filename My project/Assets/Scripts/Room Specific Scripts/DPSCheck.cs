@@ -39,7 +39,7 @@ public class DPSCheck : MonoBehaviour
         if (started && !finished)
         {
             duration--;
-            text.text = "" + (duration / 60) + 1;
+            text.text = "" + ((duration / 60) + 1);
             if (duration <= 0)
             {
                 text.text = dmgCounted + " DAMAGE!";
