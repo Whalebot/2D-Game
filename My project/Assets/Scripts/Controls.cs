@@ -422,6 +422,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""da6c1a56-6b22-48c4-92ad-7b80e706a8e1"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse"",
+                    ""action"": ""East"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""3b68eddd-39e3-49d2-aa36-1191a563cff1"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
