@@ -12,9 +12,13 @@ public class Treasure : Interactable
     public TextMeshProUGUI treasureText;
     public GameObject treasure;
     public GameObject woodChest, silverChest, goldChest;
+    Status status;
 
     public override void Start()
     {
+        status = GetComponent<Status>();
+
+        status.deathEvent += GivePowerup;
         base.Start();
 
         AutoSetupTreasure();
@@ -124,7 +128,10 @@ public class Treasure : Interactable
         if (treasure != null)
             treasure.SetActive(true);
     }
-
+    public override bool CanInteract()
+    {
+        return false;
+    }
     public override void South()
     {
         base.South();

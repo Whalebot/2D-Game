@@ -60,16 +60,14 @@ public class HPBar : MonoBehaviour
         status.deathEvent += DisableHPBar;
         UpdateValues();
         delayHealthBar.transform.localScale = new Vector3((float)status.currentStats.currentHealth / status.currentStats.maxHealth, 1, 1);
-        //UpdateBar();
+        SetSize();
         SetName();
     }
 
     private void ExecuteFrame()
     {
         if (disabled) return;
-
-        if (player)
-            rect.sizeDelta = new Vector2(startWidth * status.currentStats.maxHealth / 50f, rect.sizeDelta.y);
+        SetSize();
 
         if (!alwaysShowHPBar && GameManager.Instance.showHPBar)
         {
@@ -91,7 +89,10 @@ public class HPBar : MonoBehaviour
             if (frameCounter <= 0) UpdateDelayBar();
         }
     }
-
+    void SetSize() {
+        if (player)
+            rect.sizeDelta = new Vector2(startWidth * status.currentStats.maxHealth / 50f, rect.sizeDelta.y);
+    }
     void DisplayInfo()
     {
         if (!activated || !isBoss) return;
