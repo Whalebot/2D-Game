@@ -6,12 +6,12 @@ using Sirenix.OdinInspector;
 using UnityEditor;
 using Sirenix.OdinInspector.Editor;
 
-[CustomEditor(typeof(AI))]
+[CustomEditor(typeof(AIEnemy))]
 public class AIFieldOfView : OdinEditor
 {
     private void OnSceneGUI()
     {
-        AI thisAI = (AI)target;
+        AIEnemy thisAI = (AIEnemy)target;
         Handles.color = Color.white;
         if (thisAI != null)
         {

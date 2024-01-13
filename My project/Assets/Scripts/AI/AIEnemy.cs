@@ -4,7 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using Pathfinding;
 
-public class AI : MonoBehaviour
+public class AIEnemy : MonoBehaviour
 {
     [HideInInspector] public Character character;
     public EnemyType enemyType;
@@ -331,7 +331,7 @@ public class AI : MonoBehaviour
             foreach (var item in hitColliders)
             {
 
-                AI ai = item.GetComponent<AI>();
+                AIEnemy ai = item.GetComponent<AIEnemy>();
                 if (ai != null)
                     ai.Detect();
 
@@ -629,7 +629,7 @@ public class AI : MonoBehaviour
     {
         float minDistance = float.PositiveInfinity;
         GameObject closestEnemy = null;
-        foreach (AI enemy in AIManager.Instance.allEnemies)
+        foreach (AIEnemy enemy in AIManager.Instance.allEnemies)
         {
             float distance = Vector3.Distance(enemy.transform.position, transform.position);
             if (distance < minDistance)

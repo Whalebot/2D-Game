@@ -21,9 +21,9 @@ public class AIManager : MonoBehaviour
     public event Action roomClearEvent;
 
     public List<EnemySummoner> wave1;
-    public List<AI> respawningEnemies;
-    public List<AI> allEnemies;
-    public List<AI> activeEnemies;
+    public List<AIEnemy> respawningEnemies;
+    public List<AIEnemy> allEnemies;
+    public List<AIEnemy> activeEnemies;
 
 
     public bool combatEncounter;
@@ -31,7 +31,7 @@ public class AIManager : MonoBehaviour
     {
 
         Instance = this;
-        allEnemies = new List<AI>();
+        allEnemies = new List<AIEnemy>();
 
 
     }
@@ -59,7 +59,7 @@ public class AIManager : MonoBehaviour
 
     }
 
-    public void EnemyKilled(AI temp)
+    public void EnemyKilled(AIEnemy temp)
     {
         if (allEnemies.Contains(temp))
             allEnemies.Remove(temp);
