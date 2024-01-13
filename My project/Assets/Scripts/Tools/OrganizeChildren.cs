@@ -48,8 +48,6 @@ public class OrganizeChildren : MonoBehaviour
     [Button]
     public void SetupPosition()
     {
-        Debug.Log("pos");
-
         RectTransform[] children = transform.GetComponentsInChildren<RectTransform>();
         List<RectTransform> layer1 = new List<RectTransform>();
         layer1.Clear();

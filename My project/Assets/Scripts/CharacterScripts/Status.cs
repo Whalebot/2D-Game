@@ -514,8 +514,10 @@ public class Status : MonoBehaviour
 
         deathEvent?.Invoke();
         invincible = true;
-        hurtbox.enabled = false;
-        col.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+        if (hurtbox != null)
+            hurtbox.enabled = false;
+        if (col != null)
+            col.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
         if (autoDeath) StartCoroutine(DelayDeath());
     }
     IEnumerator DelayDeath()

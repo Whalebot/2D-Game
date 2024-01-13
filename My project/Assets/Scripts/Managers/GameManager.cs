@@ -313,7 +313,7 @@ public class GameManager : MonoBehaviour
     }
     void FixedUpdate()
     {
-        isPaused = menuOpen;
+        isPaused = menuOpen || cutscene;
         if (isPaused)
         {
 
