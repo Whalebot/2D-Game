@@ -59,6 +59,11 @@ public class AIManager : MonoBehaviour
 
     }
 
+    public bool HasEnemies()
+    {
+        return allEnemies.Count > 0;
+    }
+
     public void EnemyKilled(AIEnemy temp)
     {
         if (allEnemies.Contains(temp))

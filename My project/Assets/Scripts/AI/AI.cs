@@ -39,16 +39,11 @@ public class AI : MonoBehaviour
     private int currentWaypoint = 0;
 
     [TabGroup("Pathfinding")] public LayerMask enemyMask;
-    [TabGroup("Pathfinding")] public float crowdRange = 5F;
-    [TabGroup("Pathfinding")] public bool isWalking;
     [TabGroup("Pathfinding")] public float stoppingDistance = 4;
-    [TabGroup("Pathfinding")] public float enemyDetectionRadius = 8;
     [TabGroup("Pathfinding")] public bool detected;
 
+
     public bool flying;
-
-
-
 
     protected Movement movement;
     protected Status status;

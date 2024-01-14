@@ -48,7 +48,7 @@ public class LevelGate : Interactable
             levelGates.SetActive(false);
             return;
         }
-        if (LevelManager.Instance.currentRoomType == RoomTypes.Normal || LevelManager.Instance.currentRoomType == RoomTypes.Elite || LevelManager.Instance.currentRoomType == RoomTypes.Boss)
+        if (LevelManager.Instance.currentRoomType == RoomTypes.Normal || LevelManager.Instance.currentRoomType == RoomTypes.Elite || LevelManager.Instance.currentRoomType == RoomTypes.Boss || AIManager.Instance.HasEnemies())
             levelGates.SetActive(false);
 
         SetupGate();

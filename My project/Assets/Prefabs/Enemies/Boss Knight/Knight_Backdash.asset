@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
   m_Name: Knight_Backdash
   m_EditorClassIdentifier: 
-  animationID: 3
+  animationID: 21
   meterCost: 0
   meterGain: 10
   consumeMeterOnActiveFrame: 0
@@ -24,7 +24,6 @@ MonoBehaviour:
   recoveryFrames: 30
   attacks: []
   type: 0
-  uniqueProperties: []
   screenShake:
   - type: 2
     startup: 19
@@ -33,6 +32,7 @@ MonoBehaviour:
   vfx: []
   sfx: []
   hitFX:
+    type: 0
     startup: 1
     prefab: {fileID: 1416824176164296, guid: dc1397204bb5ee84895af2b49dac2d49, type: 3}
     deattachFromPlayer: 1
@@ -41,10 +41,18 @@ MonoBehaviour:
     rotation: {x: 0, y: 0, z: 0}
     scale: {x: 0.7, y: 0.7, z: 0.7}
   blockFX: {fileID: 0}
-  counterhitFX: {fileID: 0}
-  hitSFX: {fileID: 0}
-  blockSFX: {fileID: 0}
-  counterhitSFX: {fileID: 0}
+  hitSFX:
+    startup: 1
+    audioClips: []
+    volume: 1
+    pitchRange: 0
+  blockSFX:
+    startup: 1
+    audioClips: []
+    volume: 1
+    pitchRange: 0
+  uniqueProperties: []
+  skillProperties: []
   useAttackSpeed: 1
   keepVelocity: 0
   particleID: 0
@@ -54,6 +62,7 @@ MonoBehaviour:
   armor: 0
   resetGatling: 0
   hitsGroundOnly: 0
+  isDashing: 0
   noClip: 1
   noClipStart: 1
   noClipDuration: 20
@@ -78,8 +87,24 @@ MonoBehaviour:
     duration: 2
     momentum: {x: -6, y: 6}
     resetVelocityDuringRecovery: 0
+    xMovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    movementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    freeMovement: 0
+    useCurve: 0
     teleport: 0
   instantStartupRotation: 1
   overrideVelocity: 0
   runMomentum: 0
+  inheritForwardVelocity: 0
   stopAtEdges: 0
+  homing: 0

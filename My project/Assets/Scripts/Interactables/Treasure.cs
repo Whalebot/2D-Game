@@ -26,7 +26,7 @@ public class Treasure : Interactable
 
         SetupText();
         AIManager.Instance.roomClearEvent += SpawnTreasure;
-        if (LevelManager.Instance.currentRoomType != RoomTypes.Treasure && LevelManager.Instance.currentRoomType != RoomTypes.Event)
+        if (LevelManager.Instance.currentRoomType != RoomTypes.Treasure && LevelManager.Instance.currentRoomType != RoomTypes.Event || AIManager.Instance.HasEnemies())
             treasure.SetActive(false);
     }
 
