@@ -21,7 +21,7 @@ public class Status : MonoBehaviour
     [TabGroup("Current Stats")]
     public List<StatusEffect> statusEffects;
     [HideInInspector] public List<StatusEffect> removedEffects;
-    [HideLabel] public Stats currentStats;
+    [TabGroup("Current Stats")] [HideLabel] public Stats currentStats;
     [TabGroup("Current Stats")] public int hitstunValue;
     [TabGroup("Current Stats")] public int blockstunValue;
 
@@ -97,7 +97,7 @@ public class Status : MonoBehaviour
         GameManager.Instance.advanceGameState += ExecuteFrame;
     }
 
-    void OnDisable()
+    void OnDestroy()
     {
         GameManager.Instance.advanceGameState -= ExecuteFrame;
     }

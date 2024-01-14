@@ -4,7 +4,7 @@ public class BillboardCanvas : MonoBehaviour
 {
     GameObject camcam;
     public Camera m_Camera;
-    public bool ignoreY;
+    public bool flip = true;
     Status status;
     private void Start()
     {
@@ -19,7 +19,9 @@ public class BillboardCanvas : MonoBehaviour
     //Orient the camera after all movement is completed this frame to avoid jittering
     void FixedUpdate()
     {
-        transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * -Mathf.Sign(status.transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        if (flip)
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * -Mathf.Sign(status.transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        //transform.rotation = Quaternion.identity;
         //if (m_Camera == null)
         //{
         //    camcam = Camera.main.gameObject;

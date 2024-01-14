@@ -184,15 +184,23 @@ public class Movement : MonoBehaviour
     public virtual void Rotation()
     {
         if (isMoving)
+        {
             if (direction != Vector3.zero)
             {
                 if (GameManager.Instance.flipGraphics)
                     transform.localScale = new Vector3(Mathf.Sign(direction.x), 1, 1);
-                //Desired rotation, updated every (fixed) frame
+
                 Quaternion desiredRotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, new Vector3(direction.x, 0, direction.z), Vector3.up), 0);
                 transform.rotation = desiredRotation;
-
             }
+        }
+        else
+        {
+            if (GameManager.Instance.flipGraphics)
+            {
+                transform.localScale = new Vector3(Mathf.Sign(transform.rotation.y), 1, 1);
+            }
+        }
     }
 
     public virtual void MovementProperties()

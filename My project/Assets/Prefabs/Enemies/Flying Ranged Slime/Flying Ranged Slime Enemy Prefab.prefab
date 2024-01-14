@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 226784766958790313, guid: 518eee88e2d9a6643952facd713e1871, type: 3}
       propertyPath: range
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 226784766958790313, guid: 518eee88e2d9a6643952facd713e1871, type: 3}
       propertyPath: flying
@@ -18,7 +18,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 226784766958790313, guid: 518eee88e2d9a6643952facd713e1871, type: 3}
       propertyPath: detected
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 226784766958790313, guid: 518eee88e2d9a6643952facd713e1871, type: 3}
+      propertyPath: viewAngle
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 226784766958790313, guid: 518eee88e2d9a6643952facd713e1871, type: 3}
       propertyPath: movementOffset.y
@@ -54,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9037631907321898802, guid: 518eee88e2d9a6643952facd713e1871, type: 3}
       propertyPath: m_Name
-      value: Flying Slime Enemy Prefab
+      value: Flying Ranged Slime Enemy Prefab
       objectReference: {fileID: 0}
     - target: {fileID: 9037631907321898804, guid: 518eee88e2d9a6643952facd713e1871, type: 3}
       propertyPath: m_UseGravity

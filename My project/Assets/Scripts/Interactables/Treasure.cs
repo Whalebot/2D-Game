@@ -9,6 +9,7 @@ public class Treasure : Interactable
     public Rank rank;
     public RewardType reward;
     public bool autoSetup = true;
+    public bool canInteract = true;
     public TextMeshProUGUI treasureText;
     public GameObject treasure;
     public GameObject woodChest, silverChest, goldChest;
@@ -130,7 +131,7 @@ public class Treasure : Interactable
     }
     public override bool CanInteract()
     {
-        return false;
+        return canInteract;
     }
     public override void South()
     {

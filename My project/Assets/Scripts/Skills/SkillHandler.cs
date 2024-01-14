@@ -335,7 +335,7 @@ public class SkillHandler : MonoBehaviour
                 if ((int)var2 != 0)
                 {
                     if (defInfo1[i].Name != "currentHealth" && defInfo1[i].Name != "currentMeter")
-                        defInfo1[i].SetValue(obj, (int)var1 + (((int)var2) * blessingModifier));
+                        defInfo1[i].SetValue(obj, (int)var1 + (int)(((int)var2) * blessingModifier));
                 }
 
             }

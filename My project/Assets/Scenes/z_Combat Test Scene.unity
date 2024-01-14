@@ -404,7 +404,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8706467882756264699, guid: cc256bb52e6bf754e838f181d17f624d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -846,7 +846,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rank: 2
-  skill: {fileID: 11400000, guid: 000efc70b267c8d4bac9095524ec49ad, type: 2}
+  skill: {fileID: 11400000, guid: 788832a539e8047439c358ae4ed5d89a, type: 2}
   stats:
     currentHealth: 0
     maxHealth: 0
@@ -3680,6 +3680,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Practice Slime Enemy Prefab Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 9037631907321898802, guid: 625deed1e0a22d248ba3122a751eeec6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9037631907321898807, guid: 625deed1e0a22d248ba3122a751eeec6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.5
@@ -3733,6 +3737,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3657715195520306060, guid: 625deed1e0a22d248ba3122a751eeec6, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8921407514382556022, guid: 625deed1e0a22d248ba3122a751eeec6, type: 3}
       propertyPath: m_FillAmount
       value: 1
@@ -3740,6 +3748,10 @@ PrefabInstance:
     - target: {fileID: 9037631907321898802, guid: 625deed1e0a22d248ba3122a751eeec6, type: 3}
       propertyPath: m_Name
       value: Practice Slime Enemy Prefab Variant (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9037631907321898802, guid: 625deed1e0a22d248ba3122a751eeec6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9037631907321898807, guid: 625deed1e0a22d248ba3122a751eeec6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3759,7 +3771,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9037631907321898807, guid: 625deed1e0a22d248ba3122a751eeec6, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9037631907321898807, guid: 625deed1e0a22d248ba3122a751eeec6, type: 3}
       propertyPath: m_LocalRotation.y
@@ -3767,7 +3779,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9037631907321898807, guid: 625deed1e0a22d248ba3122a751eeec6, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9037631907321898807, guid: 625deed1e0a22d248ba3122a751eeec6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4454,7 +4466,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 399436146292193353, guid: 25fad5f91a2f0c544b3cc04b4460b587, type: 3}
       propertyPath: seed
-      value: 1114548042
+      value: -970443901
       objectReference: {fileID: 0}
     - target: {fileID: 399436146292193353, guid: 25fad5f91a2f0c544b3cc04b4460b587, type: 3}
       propertyPath: autoLoad
@@ -5281,7 +5293,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2366076005060820964, guid: 0a9dd561ca5976a45a1f393f8dd28446, type: 3}
       propertyPath: rank
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2366076005060820964, guid: 0a9dd561ca5976a45a1f393f8dd28446, type: 3}
       propertyPath: reward
