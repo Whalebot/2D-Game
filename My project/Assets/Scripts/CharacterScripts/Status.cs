@@ -636,7 +636,7 @@ public class Status : MonoBehaviour
             if (var1 is int)
             {
                 if ((int)var2 != 0)
-                    defInfo1[i].SetValue(obj, (int)var1 + ((int)var2) * modifier);
+                    defInfo1[i].SetValue(obj, (int)var1 + (int)((int)var2) * modifier);
             }
             else if (var1 is float)
             {
