@@ -6,6 +6,7 @@ public class Hazard : MonoBehaviour
 {
     public float baseDamage = 1;
     public int totalDamage;
+    public bool instantKillEnemies = false;
     public int resetTimer = 30;
     public int life = 0;
     public int lifeCounter;
@@ -122,7 +123,6 @@ public class Hazard : MonoBehaviour
 
         totalDamage = (int)(baseDamage * (atk.damage));
 
-
         int damageDealt = Mathf.RoundToInt((totalDamage * (1 - other.currentStats.defense)) - other.currentStats.resistance);
 
 
@@ -164,5 +164,8 @@ public class Hazard : MonoBehaviour
                 other.TakeHit(damageDealt, aVector, atk.stun, atk.poiseBreak, aVector, atk.hitstop, hit.hitState, false);
                 break;
         }
+
+        if (instantKillEnemies && other.alignment == Alignment.Enemy)
+            other.Death();
     }
 }
