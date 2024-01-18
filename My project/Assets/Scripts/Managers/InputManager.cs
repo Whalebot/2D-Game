@@ -20,6 +20,7 @@ public class InputManager : MonoBehaviour
     #region Events
     public InputEvent controlSchemeChange;
     public InputEvent keyboardEvent;
+    public InputEvent mouseEvent;
     public InputEvent gamepadEvent;
 
     public InputEvent interactInput;
@@ -126,8 +127,8 @@ public class InputManager : MonoBehaviour
     }
     private void Start()
     {
-
-        GameManager.Instance.advanceGameState += ExecuteFrame;
+        if (GameManager.Instance != null)
+            GameManager.Instance.advanceGameState += ExecuteFrame;
 
         bufferedInputs = new List<BufferedInput>();
         deleteInputs = new List<BufferedInput>();
@@ -188,13 +189,13 @@ public class InputManager : MonoBehaviour
     private void OnLeft()
     {
         if (debug) print("Left");
-        ChangeControlScheme(ControlScheme.MouseAndKeyboard);
+        ChangeControlScheme(ControlScheme.Keyboard);
         leftInput?.Invoke();
     }
     private void OnRight()
     {
         if (debug) print("Right");
-        ChangeControlScheme(ControlScheme.MouseAndKeyboard);
+        ChangeControlScheme(ControlScheme.Keyboard);
         rightInput?.Invoke();
     }
     private void OnUp(InputAction.CallbackContext context)
@@ -250,8 +251,8 @@ public class InputManager : MonoBehaviour
                 controlScheme = ControlScheme.PS4;
                 controlSchemeChange?.Invoke();
                 break;
-            case ControlScheme.MouseAndKeyboard:
-                controlScheme = ControlScheme.MouseAndKeyboard;
+            case ControlScheme.Keyboard:
+                controlScheme = ControlScheme.Keyboard;
                 controlSchemeChange?.Invoke();
                 keyboardEvent?.Invoke();
                 //Cursor.lockState = CursorLockMode.Confined;
@@ -268,7 +269,7 @@ public class InputManager : MonoBehaviour
 
         if (context.control.device == Gamepad.current)
         {
-            if (controlScheme == ControlScheme.MouseAndKeyboard) gamepadEvent?.Invoke();
+            if (controlScheme == ControlScheme.Keyboard) gamepadEvent?.Invoke();
             if (Gamepad.current.name.Contains("Dual"))
             {
                 controlScheme = ControlScheme.PS4;
@@ -286,16 +287,27 @@ public class InputManager : MonoBehaviour
             //Cursor.lockState = CursorLockMode.Locked;
             //Cursor.visible = false;
         }
+        else if (context.control.device == Mouse.current)
+        {
+            controlScheme = ControlScheme.Mouse;
+            controlSchemeChange?.Invoke();
+            mouseEvent?.Invoke();
+
+            //Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
         else
         {
-            //if (controlScheme != ControlScheme.MouseAndKeyboard)
 
-            controlScheme = ControlScheme.MouseAndKeyboard;
+            if (controlScheme != ControlScheme.Keyboard)
+
+                controlScheme = ControlScheme.Keyboard;
             controlSchemeChange?.Invoke();
             keyboardEvent?.Invoke();
             //Cursor.lockState = CursorLockMode.Confined;
             // Cursor.visible = true;
         }
+        //Debug.Log(controlScheme);
     }
 
     void OnTouchPad()
@@ -573,4 +585,4 @@ public class BufferedInput
     public int frame;
 }
 
-public enum ControlScheme { PS4, XBOX, MouseAndKeyboard, Switch }
+public enum ControlScheme { PS4, XBOX, Keyboard, Switch, Mouse }

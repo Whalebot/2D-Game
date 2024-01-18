@@ -450,7 +450,61 @@ public class SkillManager : MonoBehaviour
     {
         return "";
     }
+    #region RNG calculation
 
+
+    [Button]
+    public void CalculateRNG() {
+        CalculateAllRNG();
+        CalculateTypeRNG(items);
+        CalculateTypeRNG(activeSkills);
+        CalculateTypeRNG(blessings);
+    }
+    public void CalculateAllRNG()
+    {
+        List<SkillSO> dropTable = new List<SkillSO>();
+
+        int totalWeight = 0;
+        foreach (var item in allSkills)
+        {
+            totalWeight += item.rngWeight;
+            for (int i = 0; i < item.rngWeight; i++)
+            {
+                dropTable.Add(item);
+            }
+        }
+
+        foreach (var item in allSkills)
+        {
+            item.allChance = 100 * (float)item.rngWeight / (float)totalWeight;
+        }
+
+        Debug.Log(dropTable[UnityEngine.Random.Range(0, dropTable.Count)]);
+    }
+    public void CalculateTypeRNG(List<SkillSO> skillPool)
+    {
+        List<SkillSO> dropTable = new List<SkillSO>();
+
+        int totalWeight = 0;
+        foreach (var item in skillPool)
+        {
+            totalWeight += item.rngWeight;
+            for (int i = 0; i < item.rngWeight; i++)
+            {
+                dropTable.Add(item);
+            }
+        }
+
+        foreach (var item in skillPool)
+        {
+            item.typeChance = 100 * (float)item.rngWeight / (float)totalWeight;
+        }
+
+        Debug.Log(dropTable[UnityEngine.Random.Range(0, dropTable.Count)]);
+    }
+  
+
+    #endregion
 #if UNITY_EDITOR
     [Button]
     void LoadItemSO()
@@ -459,7 +513,7 @@ public class SkillManager : MonoBehaviour
 
         items.Clear();
         blessings.Clear();
-        selectedSkills.Clear();
+        activeSkills.Clear();
 
         string[] skillNames = AssetDatabase.FindAssets("t:SkillSO", new[] { "Assets/Scriptable Objects" });
         foreach (var SOName in skillNames)
@@ -471,7 +525,7 @@ public class SkillManager : MonoBehaviour
             switch (item.type)
             {
                 case SkillType.Skill:
-                    selectedSkills.Add(item);
+                    activeSkills.Add(item);
                     break;
                 case SkillType.Blessing:
                     blessings.Add(item);

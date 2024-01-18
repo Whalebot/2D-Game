@@ -49,7 +49,7 @@ public class ControlUI : MonoBehaviour
         {
             case ControlScheme.PS4: PS4.SetActive(true); break;
             case ControlScheme.XBOX: XBOX.SetActive(true); break;
-            case ControlScheme.MouseAndKeyboard: keyboard.SetActive(true); break;
+            case ControlScheme.Keyboard: keyboard.SetActive(true); break;
             default: PS4.SetActive(true); break;
         }
     }

@@ -89,7 +89,7 @@ public class ButtonPrompt : MonoBehaviour
                 keyboard.SetActive(false);
                 if (!XBOX.activeSelf)
                     XBOX.SetActive(true); break;
-            case ControlScheme.MouseAndKeyboard:
+            case ControlScheme.Keyboard:
                 PS4.SetActive(false);
                 XBOX.SetActive(false);
                 if (!keyboard.activeSelf) keyboard.SetActive(true);

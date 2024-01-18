@@ -13,7 +13,7 @@ public class SkillSO : ScriptableObject
 
     public string title;
     [PreviewField(50)] public Sprite sprite;
-
+    public int rngWeight = 1;
     public int damageValue = 0;
 
     public List<SkillSO> prerequisiteSkills;
@@ -26,6 +26,8 @@ public class SkillSO : ScriptableObject
     public string description;
     [HideLabel] public Stats  stats;
 
+    [ReadOnly] public float allChance;
+    [ReadOnly] public float typeChance;
     public virtual void ActivateBehaviour(SkillHandler handler)
     {
         //Debug.Log("Set behaviour");

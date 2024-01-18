@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
-  m_Name: Fighter_Skill_Fireball Move
+  m_Name: Fighter_Skill_6C_Fireball_Free_Move
   m_EditorClassIdentifier: 
   animationID: 53
-  meterCost: 50
+  meterCost: 0
   meterGain: 10
   consumeMeterOnActiveFrame: 0
   icon: {fileID: 21300000, guid: 03281c94f9924fa47a72404b965890f6, type: 3}
@@ -25,7 +25,7 @@ MonoBehaviour:
   attacks:
   - attackLevel: 2
     attackType: 1
-    damageType: 0
+    damageType: 1
     hitbox: {fileID: 5860963072138344223, guid: fdaed30a4102f4b4aa435277a0e4a9de, type: 3}
     damage: 4
     stun: 20
@@ -68,13 +68,11 @@ MonoBehaviour:
   blockFX: {fileID: 0}
   hitSFX:
     startup: 1
-    audioClip: {fileID: 0}
     audioClips: []
     volume: 1
     pitchRange: 0
   blockSFX:
     startup: 1
-    audioClip: {fileID: 0}
     audioClips: []
     volume: 1
     pitchRange: 0
@@ -104,7 +102,7 @@ MonoBehaviour:
   airInvulStart: 1
   airInvulDuration: 0
   targetComboMoves: []
-  fullCancel: 0
+  fullCancel: 1
   gatlingCancel: 1
   uncancelable: 0
   useAirAction: 0

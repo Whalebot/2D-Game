@@ -14,17 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillRank: 2
   type: 0
+  elemental: 0
   title: Wind Orb
   sprite: {fileID: 21300000, guid: 07ba602ad4450ea48b3f49f924110fba, type: 3}
+  rngWeight: 1
+  damageValue: 0
   prerequisiteSkills: []
   prerequisiteMoves: []
+  bannedMoves: []
   newMoves:
   - move: {fileID: 11400000, guid: 70764c176b2a4134798fb438a1ca70ec, type: 2}
-    combo: {fileID: 11400000, guid: 4c0031c054177ea48891740762f2f9bf, type: 2}
-    oldMove: {fileID: 0}
+    combo: {fileID: 0}
+    oldMove: {fileID: 11400000, guid: 4df648d02ddacaf44b628163942bdc53, type: 2}
+  - move: {fileID: 11400000, guid: 70764c176b2a4134798fb438a1ca70ec, type: 2}
+    combo: {fileID: 0}
+    oldMove: {fileID: 11400000, guid: 4df648d02ddacaf44b628163942bdc53, type: 2}
   skillProperties: []
-  description: Press skill button in the air to summon a wind orb which sucks enemies
-    in and turns into a tornado.
+  description: Press skill button to summon a wind orb which sucks enemies in and
+    turns into a tornado.
   stats:
     currentHealth: 0
     maxHealth: 0
@@ -34,13 +41,22 @@ MonoBehaviour:
     strength: 0
     intelligence: 0
     agility: 0
+    faith: 0
     luck: 0
     gold: 0
     attack: 0
     magic: 0
+    faithModifier: 0
     attackSpeed: 0
+    jumps: 1
     airActions: 0
     rerolls: 0
+    fireModifier: 0
+    iceModifier: 0
+    lightningModifier: 0
+    earthModifier: 0
+    windModifier: 0
+    poisonModifier: 0
     movementSpeedModifier: 0
     meterGainModifier: 0
     poiseRegen: 0
@@ -56,3 +72,6 @@ MonoBehaviour:
     knockbackModifier: 0
     critChance: 0
     critMultiplier: 0
+    lifesteal: 0
+  allChance: 1.3513514
+  typeChance: 5.263158

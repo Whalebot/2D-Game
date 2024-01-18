@@ -338,8 +338,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.5, z: 0.75}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 0.6666667, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7781932958552145057}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -412,8 +412,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 1.9999999
+  m_Radius: 0.3
+  m_Height: 1.5
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7781932958312057089
@@ -506,7 +506,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flipPlayer: 1
-  isDashing: 0
   holdWest: 0
   holdNorth: 0
   input: {fileID: 0}
@@ -550,14 +549,22 @@ MonoBehaviour:
     strength: 0
     intelligence: 0
     agility: 0
+    faith: 0
     luck: 0
     gold: 0
     attack: 0
     magic: 0
+    faithModifier: 0
     attackSpeed: 1
     jumps: 1
     airActions: 1
     rerolls: 0
+    fireModifier: 0
+    iceModifier: 0
+    lightningModifier: 0
+    earthModifier: 0
+    windModifier: 0
+    poisonModifier: 0
     movementSpeedModifier: 1
     meterGainModifier: 1
     poiseRegen: 0
@@ -573,6 +580,7 @@ MonoBehaviour:
     knockbackModifier: 1
     critChance: 0
     critMultiplier: 0
+    lifesteal: 0
   hitstunValue: 0
   blockstunValue: 0
   modifiedStats:
@@ -584,14 +592,22 @@ MonoBehaviour:
     strength: 0
     intelligence: 0
     agility: 0
+    faith: 0
     luck: 0
     gold: 0
     attack: 0
     magic: 0
+    faithModifier: 0
     attackSpeed: 1
     jumps: 1
     airActions: 1
     rerolls: 0
+    fireModifier: 0
+    iceModifier: 0
+    lightningModifier: 0
+    earthModifier: 0
+    windModifier: 0
+    poisonModifier: 0
     movementSpeedModifier: 1
     meterGainModifier: 1
     poiseRegen: 0
@@ -607,6 +623,7 @@ MonoBehaviour:
     knockbackModifier: 1
     critChance: 0
     critMultiplier: 0
+    lifesteal: 0
   baseStats:
     currentHealth: 0
     maxHealth: 0
@@ -616,14 +633,22 @@ MonoBehaviour:
     strength: 0
     intelligence: 0
     agility: 0
+    faith: 0
     luck: 0
     gold: 0
     attack: 0
     magic: 0
+    faithModifier: 0
     attackSpeed: 1
     jumps: 1
     airActions: 1
     rerolls: 0
+    fireModifier: 0
+    iceModifier: 0
+    lightningModifier: 0
+    earthModifier: 0
+    windModifier: 0
+    poisonModifier: 0
     movementSpeedModifier: 1
     meterGainModifier: 1
     poiseRegen: 0
@@ -639,6 +664,7 @@ MonoBehaviour:
     knockbackModifier: 1
     critChance: 0
     critMultiplier: 0
+    lifesteal: 0
   isFlying: 0
   hasArmor: 0
   animationArmor: 0
@@ -787,6 +813,7 @@ MonoBehaviour:
   lastFrame: 0
   airActionCounter: 0
   extendedBuffer: 0
+  isDashing: 0
   holdAttack: 0
   attackString: 0
   canTargetCombo: 0
@@ -823,14 +850,22 @@ MonoBehaviour:
     strength: 0
     intelligence: 0
     agility: 0
+    faith: 0
     luck: 0
     gold: 0
     attack: 0
     magic: 0
+    faithModifier: 0
     attackSpeed: 1
     jumps: 1
     airActions: 1
     rerolls: 0
+    fireModifier: 0
+    iceModifier: 0
+    lightningModifier: 0
+    earthModifier: 0
+    windModifier: 0
+    poisonModifier: 0
     movementSpeedModifier: 1
     meterGainModifier: 1
     poiseRegen: 0
@@ -846,6 +881,7 @@ MonoBehaviour:
     knockbackModifier: 1
     critChance: 0
     critMultiplier: 1.5
+    lifesteal: 0
   learnedSkills: []
   attackScript: {fileID: 7781932958552145060}
   window: {fileID: 0}

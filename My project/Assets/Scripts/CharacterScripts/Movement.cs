@@ -102,7 +102,7 @@ public class Movement : MonoBehaviour
             status.col.material = groundMat;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         GameManager.Instance.advanceGameState -= ExecuteFrame;
         status.neutralEvent -= Neutral;

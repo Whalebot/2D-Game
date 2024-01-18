@@ -48,7 +48,7 @@ public class PlayerInputHandler : MonoBehaviour
         cam = Camera.main;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         GameManager.Instance.advanceGameState -= ExecuteFrame;
         input.interactInput -= InteractButton;

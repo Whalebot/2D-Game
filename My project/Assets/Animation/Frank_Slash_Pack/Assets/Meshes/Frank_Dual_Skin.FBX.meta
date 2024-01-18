@@ -1,266 +1,720 @@
 fileFormatVersion: 2
 guid: 7e18ab53ad9b71d4fb74a586a304061d
-timeCreated: 1551612624
-licenseType: Store
 ModelImporter:
-  serializedVersion: 22
-  fileIDToRecycleName:
-    100000: ball_l
-    100002: ball_r
-    100004: Bone001
-    100006: Bone002
-    100008: Bone003
-    100010: Bone004
-    100012: Bone005
-    100014: Bone006
-    100016: Bone007
-    100018: Bone008
-    100020: Bone009
-    100022: Bone010
-    100024: Bone011
-    100026: Bone012
-    100028: calf_l
-    100030: calf_r
-    100032: calf_twist_01_l
-    100034: calf_twist_01_r
-    100036: clavicle_l
-    100038: clavicle_r
-    100040: Cloak
-    100042: Convertable_Sword01
-    100044: Convertable_Sword02
-    100046: Convertable_Sword03
-    100048: Convertable_Sword04
-    100050: Convertable_Sword05
-    100052: Convertable_Sword06
-    100054: Convertable_Sword07
-    100056: Convertable_Sword08
-    100058: foot_l
-    100060: foot_r
-    100062: //RootNode
-    100064: Frank_Mesh_Unity
-    100066: FX_Slash_L
-    100068: FX_Slash_R
-    100070: hand_l
-    100072: hand_r
-    100074: head
-    100076: ik_foot_l
-    100078: ik_foot_r
-    100080: ik_foot_root
-    100082: ik_hand_gun
-    100084: ik_hand_l
-    100086: ik_hand_r
-    100088: ik_hand_root
-    100090: index_01_l
-    100092: index_01_r
-    100094: index_02_l
-    100096: index_02_r
-    100098: index_03_l
-    100100: index_03_r
-    100102: L_Shash_FX
-    100104: L_Slash_FX_Bone
-    100106: lowerarm_l
-    100108: lowerarm_r
-    100110: lowerarm_twist_01_l
-    100112: lowerarm_twist_01_r
-    100114: middle_01_l
-    100116: middle_01_r
-    100118: middle_02_l
-    100120: middle_02_r
-    100122: middle_03_l
-    100124: middle_03_r
-    100126: neck_01
-    100128: pelvis
-    100130: pinky_01_l
-    100132: pinky_01_r
-    100134: pinky_02_l
-    100136: pinky_02_r
-    100138: pinky_03_l
-    100140: pinky_03_r
-    100142: R_Hand_Weapon
-    100144: R_Hand_Weapon001
-    100146: R_Shash_FX
-    100148: R_Slash_FX_Bone
-    100150: ring_01_l
-    100152: ring_01_r
-    100154: ring_02_l
-    100156: ring_02_r
-    100158: ring_03_l
-    100160: ring_03_r
-    100162: root
-    100164: spine_01
-    100166: spine_02
-    100168: spine_03
-    100170: Sword_L
-    100172: Sword_L_Bone
-    100174: Sword_R
-    100176: Sword_R_Bone
-    100178: thigh_l
-    100180: thigh_r
-    100182: thigh_twist_01_l
-    100184: thigh_twist_01_r
-    100186: thumb_01_l
-    100188: thumb_01_r
-    100190: thumb_02_l
-    100192: thumb_02_r
-    100194: thumb_03_l
-    100196: thumb_03_r
-    100198: upperarm_l
-    100200: upperarm_r
-    100202: upperarm_twist_01_l
-    100204: upperarm_twist_01_r
-    400000: ball_l
-    400002: ball_r
-    400004: Bone001
-    400006: Bone002
-    400008: Bone003
-    400010: Bone004
-    400012: Bone005
-    400014: Bone006
-    400016: Bone007
-    400018: Bone008
-    400020: Bone009
-    400022: Bone010
-    400024: Bone011
-    400026: Bone012
-    400028: calf_l
-    400030: calf_r
-    400032: calf_twist_01_l
-    400034: calf_twist_01_r
-    400036: clavicle_l
-    400038: clavicle_r
-    400040: Cloak
-    400042: Convertable_Sword01
-    400044: Convertable_Sword02
-    400046: Convertable_Sword03
-    400048: Convertable_Sword04
-    400050: Convertable_Sword05
-    400052: Convertable_Sword06
-    400054: Convertable_Sword07
-    400056: Convertable_Sword08
-    400058: foot_l
-    400060: foot_r
-    400062: //RootNode
-    400064: Frank_Mesh_Unity
-    400066: FX_Slash_L
-    400068: FX_Slash_R
-    400070: hand_l
-    400072: hand_r
-    400074: head
-    400076: ik_foot_l
-    400078: ik_foot_r
-    400080: ik_foot_root
-    400082: ik_hand_gun
-    400084: ik_hand_l
-    400086: ik_hand_r
-    400088: ik_hand_root
-    400090: index_01_l
-    400092: index_01_r
-    400094: index_02_l
-    400096: index_02_r
-    400098: index_03_l
-    400100: index_03_r
-    400102: L_Shash_FX
-    400104: L_Slash_FX_Bone
-    400106: lowerarm_l
-    400108: lowerarm_r
-    400110: lowerarm_twist_01_l
-    400112: lowerarm_twist_01_r
-    400114: middle_01_l
-    400116: middle_01_r
-    400118: middle_02_l
-    400120: middle_02_r
-    400122: middle_03_l
-    400124: middle_03_r
-    400126: neck_01
-    400128: pelvis
-    400130: pinky_01_l
-    400132: pinky_01_r
-    400134: pinky_02_l
-    400136: pinky_02_r
-    400138: pinky_03_l
-    400140: pinky_03_r
-    400142: R_Hand_Weapon
-    400144: R_Hand_Weapon001
-    400146: R_Shash_FX
-    400148: R_Slash_FX_Bone
-    400150: ring_01_l
-    400152: ring_01_r
-    400154: ring_02_l
-    400156: ring_02_r
-    400158: ring_03_l
-    400160: ring_03_r
-    400162: root
-    400164: spine_01
-    400166: spine_02
-    400168: spine_03
-    400170: Sword_L
-    400172: Sword_L_Bone
-    400174: Sword_R
-    400176: Sword_R_Bone
-    400178: thigh_l
-    400180: thigh_r
-    400182: thigh_twist_01_l
-    400184: thigh_twist_01_r
-    400186: thumb_01_l
-    400188: thumb_01_r
-    400190: thumb_02_l
-    400192: thumb_02_r
-    400194: thumb_03_l
-    400196: thumb_03_r
-    400198: upperarm_l
-    400200: upperarm_r
-    400202: upperarm_twist_01_l
-    400204: upperarm_twist_01_r
-    2100000: Body_Parts
-    2100002: Frank_Unity
-    2100004: Sowrd
-    2100006: Glow
-    2100008: FX_Slash
-    4300000: Cloak
-    4300002: Frank_Mesh_Unity
-    4300004: Sword_R
-    4300006: Sword_L
-    4300008: L_Shash_FX
-    4300010: R_Shash_FX
-    4300012: FX_Slash_L
-    4300014: FX_Slash_R
-    9500000: //RootNode
-    13700000: Cloak
-    13700002: Frank_Mesh_Unity
-    13700004: FX_Slash_L
-    13700006: FX_Slash_R
-    13700008: L_Shash_FX
-    13700010: R_Shash_FX
-    13700012: Sword_L
-    13700014: Sword_R
+  serializedVersion: 22200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: ball_l
+  - first:
+      1: 100002
+    second: ball_r
+  - first:
+      1: 100004
+    second: Bone001
+  - first:
+      1: 100006
+    second: Bone002
+  - first:
+      1: 100008
+    second: Bone003
+  - first:
+      1: 100010
+    second: Bone004
+  - first:
+      1: 100012
+    second: Bone005
+  - first:
+      1: 100014
+    second: Bone006
+  - first:
+      1: 100016
+    second: Bone007
+  - first:
+      1: 100018
+    second: Bone008
+  - first:
+      1: 100020
+    second: Bone009
+  - first:
+      1: 100022
+    second: Bone010
+  - first:
+      1: 100024
+    second: Bone011
+  - first:
+      1: 100026
+    second: Bone012
+  - first:
+      1: 100028
+    second: calf_l
+  - first:
+      1: 100030
+    second: calf_r
+  - first:
+      1: 100032
+    second: calf_twist_01_l
+  - first:
+      1: 100034
+    second: calf_twist_01_r
+  - first:
+      1: 100036
+    second: clavicle_l
+  - first:
+      1: 100038
+    second: clavicle_r
+  - first:
+      1: 100040
+    second: Cloak
+  - first:
+      1: 100042
+    second: Convertable_Sword01
+  - first:
+      1: 100044
+    second: Convertable_Sword02
+  - first:
+      1: 100046
+    second: Convertable_Sword03
+  - first:
+      1: 100048
+    second: Convertable_Sword04
+  - first:
+      1: 100050
+    second: Convertable_Sword05
+  - first:
+      1: 100052
+    second: Convertable_Sword06
+  - first:
+      1: 100054
+    second: Convertable_Sword07
+  - first:
+      1: 100056
+    second: Convertable_Sword08
+  - first:
+      1: 100058
+    second: foot_l
+  - first:
+      1: 100060
+    second: foot_r
+  - first:
+      1: 100062
+    second: //RootNode
+  - first:
+      1: 100064
+    second: Frank_Mesh_Unity
+  - first:
+      1: 100066
+    second: FX_Slash_L
+  - first:
+      1: 100068
+    second: FX_Slash_R
+  - first:
+      1: 100070
+    second: hand_l
+  - first:
+      1: 100072
+    second: hand_r
+  - first:
+      1: 100074
+    second: head
+  - first:
+      1: 100076
+    second: ik_foot_l
+  - first:
+      1: 100078
+    second: ik_foot_r
+  - first:
+      1: 100080
+    second: ik_foot_root
+  - first:
+      1: 100082
+    second: ik_hand_gun
+  - first:
+      1: 100084
+    second: ik_hand_l
+  - first:
+      1: 100086
+    second: ik_hand_r
+  - first:
+      1: 100088
+    second: ik_hand_root
+  - first:
+      1: 100090
+    second: index_01_l
+  - first:
+      1: 100092
+    second: index_01_r
+  - first:
+      1: 100094
+    second: index_02_l
+  - first:
+      1: 100096
+    second: index_02_r
+  - first:
+      1: 100098
+    second: index_03_l
+  - first:
+      1: 100100
+    second: index_03_r
+  - first:
+      1: 100102
+    second: L_Shash_FX
+  - first:
+      1: 100104
+    second: L_Slash_FX_Bone
+  - first:
+      1: 100106
+    second: lowerarm_l
+  - first:
+      1: 100108
+    second: lowerarm_r
+  - first:
+      1: 100110
+    second: lowerarm_twist_01_l
+  - first:
+      1: 100112
+    second: lowerarm_twist_01_r
+  - first:
+      1: 100114
+    second: middle_01_l
+  - first:
+      1: 100116
+    second: middle_01_r
+  - first:
+      1: 100118
+    second: middle_02_l
+  - first:
+      1: 100120
+    second: middle_02_r
+  - first:
+      1: 100122
+    second: middle_03_l
+  - first:
+      1: 100124
+    second: middle_03_r
+  - first:
+      1: 100126
+    second: neck_01
+  - first:
+      1: 100128
+    second: pelvis
+  - first:
+      1: 100130
+    second: pinky_01_l
+  - first:
+      1: 100132
+    second: pinky_01_r
+  - first:
+      1: 100134
+    second: pinky_02_l
+  - first:
+      1: 100136
+    second: pinky_02_r
+  - first:
+      1: 100138
+    second: pinky_03_l
+  - first:
+      1: 100140
+    second: pinky_03_r
+  - first:
+      1: 100142
+    second: R_Hand_Weapon
+  - first:
+      1: 100144
+    second: R_Hand_Weapon001
+  - first:
+      1: 100146
+    second: R_Shash_FX
+  - first:
+      1: 100148
+    second: R_Slash_FX_Bone
+  - first:
+      1: 100150
+    second: ring_01_l
+  - first:
+      1: 100152
+    second: ring_01_r
+  - first:
+      1: 100154
+    second: ring_02_l
+  - first:
+      1: 100156
+    second: ring_02_r
+  - first:
+      1: 100158
+    second: ring_03_l
+  - first:
+      1: 100160
+    second: ring_03_r
+  - first:
+      1: 100162
+    second: root
+  - first:
+      1: 100164
+    second: spine_01
+  - first:
+      1: 100166
+    second: spine_02
+  - first:
+      1: 100168
+    second: spine_03
+  - first:
+      1: 100170
+    second: Sword_L
+  - first:
+      1: 100172
+    second: Sword_L_Bone
+  - first:
+      1: 100174
+    second: Sword_R
+  - first:
+      1: 100176
+    second: Sword_R_Bone
+  - first:
+      1: 100178
+    second: thigh_l
+  - first:
+      1: 100180
+    second: thigh_r
+  - first:
+      1: 100182
+    second: thigh_twist_01_l
+  - first:
+      1: 100184
+    second: thigh_twist_01_r
+  - first:
+      1: 100186
+    second: thumb_01_l
+  - first:
+      1: 100188
+    second: thumb_01_r
+  - first:
+      1: 100190
+    second: thumb_02_l
+  - first:
+      1: 100192
+    second: thumb_02_r
+  - first:
+      1: 100194
+    second: thumb_03_l
+  - first:
+      1: 100196
+    second: thumb_03_r
+  - first:
+      1: 100198
+    second: upperarm_l
+  - first:
+      1: 100200
+    second: upperarm_r
+  - first:
+      1: 100202
+    second: upperarm_twist_01_l
+  - first:
+      1: 100204
+    second: upperarm_twist_01_r
+  - first:
+      4: 400000
+    second: ball_l
+  - first:
+      4: 400002
+    second: ball_r
+  - first:
+      4: 400004
+    second: Bone001
+  - first:
+      4: 400006
+    second: Bone002
+  - first:
+      4: 400008
+    second: Bone003
+  - first:
+      4: 400010
+    second: Bone004
+  - first:
+      4: 400012
+    second: Bone005
+  - first:
+      4: 400014
+    second: Bone006
+  - first:
+      4: 400016
+    second: Bone007
+  - first:
+      4: 400018
+    second: Bone008
+  - first:
+      4: 400020
+    second: Bone009
+  - first:
+      4: 400022
+    second: Bone010
+  - first:
+      4: 400024
+    second: Bone011
+  - first:
+      4: 400026
+    second: Bone012
+  - first:
+      4: 400028
+    second: calf_l
+  - first:
+      4: 400030
+    second: calf_r
+  - first:
+      4: 400032
+    second: calf_twist_01_l
+  - first:
+      4: 400034
+    second: calf_twist_01_r
+  - first:
+      4: 400036
+    second: clavicle_l
+  - first:
+      4: 400038
+    second: clavicle_r
+  - first:
+      4: 400040
+    second: Cloak
+  - first:
+      4: 400042
+    second: Convertable_Sword01
+  - first:
+      4: 400044
+    second: Convertable_Sword02
+  - first:
+      4: 400046
+    second: Convertable_Sword03
+  - first:
+      4: 400048
+    second: Convertable_Sword04
+  - first:
+      4: 400050
+    second: Convertable_Sword05
+  - first:
+      4: 400052
+    second: Convertable_Sword06
+  - first:
+      4: 400054
+    second: Convertable_Sword07
+  - first:
+      4: 400056
+    second: Convertable_Sword08
+  - first:
+      4: 400058
+    second: foot_l
+  - first:
+      4: 400060
+    second: foot_r
+  - first:
+      4: 400062
+    second: //RootNode
+  - first:
+      4: 400064
+    second: Frank_Mesh_Unity
+  - first:
+      4: 400066
+    second: FX_Slash_L
+  - first:
+      4: 400068
+    second: FX_Slash_R
+  - first:
+      4: 400070
+    second: hand_l
+  - first:
+      4: 400072
+    second: hand_r
+  - first:
+      4: 400074
+    second: head
+  - first:
+      4: 400076
+    second: ik_foot_l
+  - first:
+      4: 400078
+    second: ik_foot_r
+  - first:
+      4: 400080
+    second: ik_foot_root
+  - first:
+      4: 400082
+    second: ik_hand_gun
+  - first:
+      4: 400084
+    second: ik_hand_l
+  - first:
+      4: 400086
+    second: ik_hand_r
+  - first:
+      4: 400088
+    second: ik_hand_root
+  - first:
+      4: 400090
+    second: index_01_l
+  - first:
+      4: 400092
+    second: index_01_r
+  - first:
+      4: 400094
+    second: index_02_l
+  - first:
+      4: 400096
+    second: index_02_r
+  - first:
+      4: 400098
+    second: index_03_l
+  - first:
+      4: 400100
+    second: index_03_r
+  - first:
+      4: 400102
+    second: L_Shash_FX
+  - first:
+      4: 400104
+    second: L_Slash_FX_Bone
+  - first:
+      4: 400106
+    second: lowerarm_l
+  - first:
+      4: 400108
+    second: lowerarm_r
+  - first:
+      4: 400110
+    second: lowerarm_twist_01_l
+  - first:
+      4: 400112
+    second: lowerarm_twist_01_r
+  - first:
+      4: 400114
+    second: middle_01_l
+  - first:
+      4: 400116
+    second: middle_01_r
+  - first:
+      4: 400118
+    second: middle_02_l
+  - first:
+      4: 400120
+    second: middle_02_r
+  - first:
+      4: 400122
+    second: middle_03_l
+  - first:
+      4: 400124
+    second: middle_03_r
+  - first:
+      4: 400126
+    second: neck_01
+  - first:
+      4: 400128
+    second: pelvis
+  - first:
+      4: 400130
+    second: pinky_01_l
+  - first:
+      4: 400132
+    second: pinky_01_r
+  - first:
+      4: 400134
+    second: pinky_02_l
+  - first:
+      4: 400136
+    second: pinky_02_r
+  - first:
+      4: 400138
+    second: pinky_03_l
+  - first:
+      4: 400140
+    second: pinky_03_r
+  - first:
+      4: 400142
+    second: R_Hand_Weapon
+  - first:
+      4: 400144
+    second: R_Hand_Weapon001
+  - first:
+      4: 400146
+    second: R_Shash_FX
+  - first:
+      4: 400148
+    second: R_Slash_FX_Bone
+  - first:
+      4: 400150
+    second: ring_01_l
+  - first:
+      4: 400152
+    second: ring_01_r
+  - first:
+      4: 400154
+    second: ring_02_l
+  - first:
+      4: 400156
+    second: ring_02_r
+  - first:
+      4: 400158
+    second: ring_03_l
+  - first:
+      4: 400160
+    second: ring_03_r
+  - first:
+      4: 400162
+    second: root
+  - first:
+      4: 400164
+    second: spine_01
+  - first:
+      4: 400166
+    second: spine_02
+  - first:
+      4: 400168
+    second: spine_03
+  - first:
+      4: 400170
+    second: Sword_L
+  - first:
+      4: 400172
+    second: Sword_L_Bone
+  - first:
+      4: 400174
+    second: Sword_R
+  - first:
+      4: 400176
+    second: Sword_R_Bone
+  - first:
+      4: 400178
+    second: thigh_l
+  - first:
+      4: 400180
+    second: thigh_r
+  - first:
+      4: 400182
+    second: thigh_twist_01_l
+  - first:
+      4: 400184
+    second: thigh_twist_01_r
+  - first:
+      4: 400186
+    second: thumb_01_l
+  - first:
+      4: 400188
+    second: thumb_01_r
+  - first:
+      4: 400190
+    second: thumb_02_l
+  - first:
+      4: 400192
+    second: thumb_02_r
+  - first:
+      4: 400194
+    second: thumb_03_l
+  - first:
+      4: 400196
+    second: thumb_03_r
+  - first:
+      4: 400198
+    second: upperarm_l
+  - first:
+      4: 400200
+    second: upperarm_r
+  - first:
+      4: 400202
+    second: upperarm_twist_01_l
+  - first:
+      4: 400204
+    second: upperarm_twist_01_r
+  - first:
+      21: 2100000
+    second: Body_Parts
+  - first:
+      21: 2100002
+    second: Frank_Unity
+  - first:
+      21: 2100004
+    second: Sowrd
+  - first:
+      21: 2100006
+    second: Glow
+  - first:
+      21: 2100008
+    second: FX_Slash
+  - first:
+      43: 4300000
+    second: Cloak
+  - first:
+      43: 4300002
+    second: Frank_Mesh_Unity
+  - first:
+      43: 4300004
+    second: Sword_R
+  - first:
+      43: 4300006
+    second: Sword_L
+  - first:
+      43: 4300008
+    second: L_Shash_FX
+  - first:
+      43: 4300010
+    second: R_Shash_FX
+  - first:
+      43: 4300012
+    second: FX_Slash_L
+  - first:
+      43: 4300014
+    second: FX_Slash_R
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: Cloak
+  - first:
+      137: 13700002
+    second: Frank_Mesh_Unity
+  - first:
+      137: 13700004
+    second: FX_Slash_L
+  - first:
+      137: 13700006
+    second: FX_Slash_R
+  - first:
+      137: 13700008
+    second: L_Shash_FX
+  - first:
+      137: 13700010
+    second: R_Shash_FX
+  - first:
+      137: 13700012
+    second: Sword_L
+  - first:
+      137: 13700014
+    second: Sword_R
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Body_Parts
-    second: {fileID: 2100000, guid: 46607ced5e7460644aa58d80ab060878, type: 2}
+    second: {fileID: 2100000, guid: f3cfa8d9c632f424ba4c89dde57dca28, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: FX_Slash
-    second: {fileID: 2100000, guid: 989974ba2d594754cb94ee7306399e0b, type: 2}
+    second: {fileID: 2100000, guid: 545e25aa650cf204caae2730a68e999e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Frank_Unity
-    second: {fileID: 2100000, guid: 31796c9068a700347828356b4ec81044, type: 2}
+    second: {fileID: 2100000, guid: 20cf1d55a72f5344888858921f1211a6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Glow
-    second: {fileID: 2100000, guid: 6a58150ea249eee4eb2600737603c5b7, type: 2}
+    second: {fileID: 2100000, guid: c4a01f5a88d401f4fad26fe32cec3ae2, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Sowrd
-    second: {fileID: 2100000, guid: c8279143f28984c49b284dff1c421f29, type: 2}
+    second: {fileID: 2100000, guid: c604a48ae81411749b4945454e570bd7, type: 2}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -269,6 +723,7 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -277,6 +732,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -291,32 +747,49 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 0
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    nodeNameCollisionStrategy: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human:
     - boneName: pelvis
       humanName: Hips
@@ -808,8 +1281,7 @@ ModelImporter:
     - name: ik_hand_r
       parentName: ik_hand_gun
       position: {x: -0, y: 0, z: -0.000000019073486}
-      rotation: {x: 0.000000029802315, y: -0.000000044703487, z: 0.000000014901163,
-        w: 1}
+      rotation: {x: 0.000000029802315, y: -0.000000044703487, z: 0.000000014901163, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: pelvis
       parentName: root
@@ -854,8 +1326,7 @@ ModelImporter:
     - name: lowerarm_twist_01_l
       parentName: lowerarm_l
       position: {x: -0.14000022, y: 0.000000076293944, z: 0.00000022888183}
-      rotation: {x: 0.00000001490116, y: -0.000000014901157, z: 0.000000037252896,
-        w: 1}
+      rotation: {x: 0.00000001490116, y: -0.000000014901157, z: 0.000000037252896, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: hand_l
       parentName: lowerarm_l
@@ -990,8 +1461,7 @@ ModelImporter:
     - name: Sword_R_Bone
       parentName: R_Hand_Weapon
       position: {x: -0.00000022888183, y: 0, z: -0.00000015258789}
-      rotation: {x: -0.000000007450588, y: 0.000000007450581, z: -0.000000014901161,
-        w: 1}
+      rotation: {x: -0.000000007450588, y: 0.000000007450581, z: -0.000000014901161, w: 1}
       scale: {x: 1, y: 0.999999, z: 1.000001}
     - name: Convertable_Sword01
       parentName: Sword_R_Bone
@@ -1246,8 +1716,7 @@ ModelImporter:
     - name: Sword_L
       parentName: Frank_Dual_Skin(Clone)
       position: {x: -0.6470133, y: 0.000000117001306, z: -0.00000026586778}
-      rotation: {x: 0.00000012583162, y: -0.000000035951892, z: -0.000000031457898,
-        w: 1}
+      rotation: {x: 0.00000012583162, y: -0.000000035951892, z: -0.000000031457898, w: 1}
       scale: {x: 1.6579, y: 1.6579, z: 1.6579}
     - name: Sword_R
       parentName: Frank_Dual_Skin(Clone)
@@ -1261,14 +1730,19 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

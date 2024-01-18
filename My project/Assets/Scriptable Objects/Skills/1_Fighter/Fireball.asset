@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillRank: 4
   type: 0
+  elemental: 0
   title: Fireball
   sprite: {fileID: 21300000, guid: 5f1dc3107b2d72646a75fe561260aaea, type: 3}
-  damageValue: 20
+  rngWeight: 1
+  damageValue: 8
   prerequisiteSkills: []
   prerequisiteMoves: []
   bannedMoves:
@@ -24,6 +26,9 @@ MonoBehaviour:
   newMoves:
   - move: {fileID: 11400000, guid: 879a708098a85214b95f22ba1c2e8b59, type: 2}
     combo: {fileID: 11400000, guid: fc9164ff3509902439a2cc443c017bd8, type: 2}
+    oldMove: {fileID: 0}
+  - move: {fileID: 11400000, guid: 879a708098a85214b95f22ba1c2e8b59, type: 2}
+    combo: {fileID: 11400000, guid: e3e35357b7b491f48955b434384f9449, type: 2}
     oldMove: {fileID: 0}
   skillProperties: []
   description: '[Forward + (Skill)] to shoot a fireball.
@@ -70,3 +75,6 @@ MonoBehaviour:
     knockbackModifier: 0
     critChance: 0
     critMultiplier: 0
+    lifesteal: 0
+  allChance: 1.3513514
+  typeChance: 5.263158
