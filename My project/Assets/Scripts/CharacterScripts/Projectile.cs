@@ -27,6 +27,7 @@ public class Projectile : Hitbox
 
     [Header("Homing")]
     [TabGroup("Settings")] public float rotateSpeed;
+    [TabGroup("Settings")] public bool waitForTarget;
 
     [Header("Re-Aim")]
     [TabGroup("Unique")] public bool willDelayReaim;
@@ -80,8 +81,13 @@ public class Projectile : Hitbox
         GameManager.Instance.advanceGameState += ExecuteFrame;
         resetCounter = resetTimer;
 
-        if (status.alignment == Alignment.Enemy && projectileMovement != ProjectileMovement.Homing)
-            target = GameManager.Instance.player;
+        if (status != null)
+        {
+            if (status.alignment == Alignment.Enemy && projectileMovement != ProjectileMovement.Homing)
+                target = GameManager.Instance.player;
+            else  //Look for enemy
+                FindTarget();
+        }
         else
         {
             //Look for enemy
@@ -318,7 +324,7 @@ public class Projectile : Hitbox
                     //rb.velocity += transform.forward * updateVelocity;
                     rb.velocity += (targetPosition - transform.position).normalized * updateVelocity;
                 }
-                else
+                else if (!waitForTarget)
                     rb.velocity += transform.forward * updateVelocity;
                 break;
             default:
@@ -387,8 +393,12 @@ public class Projectile : Hitbox
     public override void DoDamage(Status other, float dmgMod)
     {
         if (!hit && !onlyExplosionDamage)
+        {
             base.DoDamage(other, dmgMod);
-        //      hit = true;
+            //CheckAttack(other,)
+            //      hit = true;
+        }
+
         if (destroyOnHit)
             DestroyProjectile();
     }

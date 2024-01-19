@@ -45,6 +45,7 @@ public class Move : ScriptableObject
     [TabGroup("Move properties")] public bool useAttackSpeed = true;
     [TabGroup("Move properties")] public bool keepVelocity = false;
     [TabGroup("Move properties")] public int particleID;
+    //[TabGroup("Move properties")] public bool relativePushback;
     [TabGroup("Move properties")] public bool holdAttack;
     [TabGroup("Move properties")] public Move releaseAttackMove;
 

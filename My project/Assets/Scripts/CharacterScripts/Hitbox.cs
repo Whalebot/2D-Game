@@ -8,7 +8,7 @@ public class Hitbox : MonoBehaviour
     [HideInInspector] public int hitboxID;
     [HideInInspector] public AttackScript attack;
     [HideInInspector] public Move move;
-    [HideInInspector] public Status status;
+    [TabGroup("Debug")] public Status status;
     [TabGroup("Settings")] public bool canClash = true;
     [TabGroup("Settings")] public bool relativePushback = false;
 
@@ -17,7 +17,7 @@ public class Hitbox : MonoBehaviour
     protected int resetCounter;
     [TabGroup("Debug")] public GameObject col;
     Vector3 knockbackDirection;
-    Vector3 aVector;
+    Vector3 pushbackDirection;
     [HideInInspector] protected Transform body;
     [HideInInspector] public List<Status> enemyList;
     MeshRenderer mr;
@@ -157,8 +157,8 @@ public class Hitbox : MonoBehaviour
     {
         attack.hit = true;
 
-        //Calculate direction
-        aVector = status.currentStats.knockbackModifier * (knockbackDirection * hit.pushback.x + Vector3.up * hit.pushback.y);
+
+        pushbackDirection = status.currentStats.knockbackModifier * (knockbackDirection * hit.pushback.x + Vector3.up * hit.pushback.y);
 
         //Screen shake on hit
         for (int i = 0; i < move.screenShake.Length; i++)
@@ -248,16 +248,16 @@ public class Hitbox : MonoBehaviour
         switch (atk.attackLevel)
         {
             case AttackLevel.Level1:
-                other.TakeHit(damageDealt, aVector, CombatManager.Instance.lvl1.stun, CombatManager.Instance.lvl1.poiseBreak, aVector, CombatManager.Instance.lvl1.hitstop, hit.hitState, crit);
+                other.TakeHit(damageDealt, pushbackDirection, CombatManager.Instance.lvl1.stun, CombatManager.Instance.lvl1.poiseBreak, pushbackDirection, CombatManager.Instance.lvl1.hitstop, hit.hitState, crit);
                 break;
             case AttackLevel.Level2:
-                other.TakeHit(damageDealt, aVector, CombatManager.Instance.lvl2.stun, CombatManager.Instance.lvl2.poiseBreak, aVector, CombatManager.Instance.lvl2.hitstop, hit.hitState, crit);
+                other.TakeHit(damageDealt, pushbackDirection, CombatManager.Instance.lvl2.stun, CombatManager.Instance.lvl2.poiseBreak, pushbackDirection, CombatManager.Instance.lvl2.hitstop, hit.hitState, crit);
                 break;
             case AttackLevel.Level3:
-                other.TakeHit(damageDealt, aVector, CombatManager.Instance.lvl3.stun, CombatManager.Instance.lvl3.poiseBreak, aVector, CombatManager.Instance.lvl3.hitstop, hit.hitState, crit);
+                other.TakeHit(damageDealt, pushbackDirection, CombatManager.Instance.lvl3.stun, CombatManager.Instance.lvl3.poiseBreak, pushbackDirection, CombatManager.Instance.lvl3.hitstop, hit.hitState, crit);
                 break;
             case AttackLevel.Custom:
-                other.TakeHit(damageDealt, aVector, atk.stun, atk.poiseBreak, aVector, atk.hitstop, hit.hitState, crit);
+                other.TakeHit(damageDealt, pushbackDirection, atk.stun, atk.poiseBreak, pushbackDirection, atk.hitstop, hit.hitState, crit);
                 break;
         }
     }
