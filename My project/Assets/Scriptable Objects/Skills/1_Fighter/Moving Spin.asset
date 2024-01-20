@@ -10,31 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41f2923ec284c6840a8cd468af82cb4d, type: 3}
-  m_Name: Fireball
+  m_Name: Moving Spin
   m_EditorClassIdentifier: 
   skillRank: 2
   type: 0
   elemental: 0
-  title: Fireball
-  sprite: {fileID: 21300000, guid: 5f1dc3107b2d72646a75fe561260aaea, type: 3}
+  title: Moving Spin
+  sprite: {fileID: 21300000, guid: 7146218a73b541a4391fb14360e1a40b, type: 3}
   rngWeight: 1
-  damageValue: 20
+  damageValue: 8
   prerequisiteSkills: []
   prerequisiteMoves: []
-  bannedMoves:
-  - {fileID: 11400000, guid: 879a708098a85214b95f22ba1c2e8b59, type: 2}
+  bannedMoves: []
   newMoves:
-  - move: {fileID: 11400000, guid: 879a708098a85214b95f22ba1c2e8b59, type: 2}
-    combo: {fileID: 11400000, guid: fc9164ff3509902439a2cc443c017bd8, type: 2}
-    oldMove: {fileID: 0}
-  - move: {fileID: 11400000, guid: 879a708098a85214b95f22ba1c2e8b59, type: 2}
-    combo: {fileID: 11400000, guid: e3e35357b7b491f48955b434384f9449, type: 2}
-    oldMove: {fileID: 0}
+  - move: {fileID: 11400000, guid: 3305ea7c716d0f74fa738a6e00b34729, type: 2}
+    combo: {fileID: 0}
+    oldMove: {fileID: 11400000, guid: c9ff265dac604b74a854038dd511f19c, type: 2}
+  - move: {fileID: 11400000, guid: eb69c1427125b9642bf88861f47d0a99, type: 2}
+    combo: {fileID: 0}
+    oldMove: {fileID: 11400000, guid: b56083dc54f93784c9baa2dc09ba7d25, type: 2}
   skillProperties: []
-  description: '[Forward + (Skill)] to shoot a fireball.
+  description: 'Can now move during [(Skill)] spin.
 
 
-    DMGVAL fire damage.'
+    DMGVAL physical damage.'
   stats:
     currentHealth: 0
     maxHealth: 0

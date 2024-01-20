@@ -10,136 +10,152 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
-  m_Name: Fighter_Skill_8C_Air_Spin
+  m_Name: Fighter_Skill_5C_Spin_Followup
   m_EditorClassIdentifier: 
-  animationID: 123
-  meterCost: 50
+  animationID: 533
+  meterCost: 10
   meterGain: 0
   consumeMeterOnActiveFrame: 0
   icon: {fileID: 21300000, guid: df52e2f627b62614d8fcafd7d24322e6, type: 3}
-  firstStartupFrame: 16
-  lastActiveFrame: 53
-  totalMoveDuration: 83
-  firstGatlingFrame: 56
+  firstStartupFrame: 2
+  lastActiveFrame: 41
+  totalMoveDuration: 71
+  firstGatlingFrame: 16
   recoveryFrames: 30
   attacks:
   - attackLevel: 0
     attackType: 0
     damageType: 0
-    hitbox: {fileID: 5860963072138344223, guid: d291246c7a8042b4f973efd10f686d66, type: 3}
+    hitbox: {fileID: 5860963072138344223, guid: d394692ccc0935741915a7720e8ae5ad, type: 3}
     damage: 1
     stun: 20
     hitstop: 5
     poiseBreak: 0
-    startupFrame: 16
+    startupFrame: 2
     activeFrames: 4
-    gatlingFrames: 40
+    gatlingFrames: 14
     groundHitProperty:
-      pushback: {x: 5, y: 5}
+      pushback: {x: -1, y: 0}
       hitState: 0
     airHitProperty:
-      pushback: {x: 5, y: 5}
+      pushback: {x: -1, y: 0}
       hitState: 0
   - attackLevel: 0
     attackType: 0
     damageType: 0
-    hitbox: {fileID: 5860963072138344223, guid: d291246c7a8042b4f973efd10f686d66, type: 3}
+    hitbox: {fileID: 5860963072138344223, guid: d394692ccc0935741915a7720e8ae5ad, type: 3}
     damage: 1
     stun: 20
     hitstop: 5
     poiseBreak: 0
-    startupFrame: 24
+    startupFrame: 10
     activeFrames: 4
     gatlingFrames: 40
     groundHitProperty:
-      pushback: {x: 7, y: 0}
+      pushback: {x: -1, y: 0}
       hitState: 0
     airHitProperty:
-      pushback: {x: 7, y: 0}
+      pushback: {x: -1, y: 0}
       hitState: 0
   - attackLevel: 0
     attackType: 0
     damageType: 0
-    hitbox: {fileID: 5860963072138344223, guid: d291246c7a8042b4f973efd10f686d66, type: 3}
+    hitbox: {fileID: 5860963072138344223, guid: d394692ccc0935741915a7720e8ae5ad, type: 3}
     damage: 1
     stun: 20
     hitstop: 5
     poiseBreak: 0
-    startupFrame: 33
+    startupFrame: 19
     activeFrames: 4
     gatlingFrames: 40
     groundHitProperty:
-      pushback: {x: 7, y: -5}
+      pushback: {x: -1, y: 0}
       hitState: 0
     airHitProperty:
-      pushback: {x: 7, y: -5}
+      pushback: {x: -1, y: 0}
       hitState: 0
   - attackLevel: 2
     attackType: 0
     damageType: 0
-    hitbox: {fileID: 5860963072138344223, guid: d291246c7a8042b4f973efd10f686d66, type: 3}
+    hitbox: {fileID: 5860963072138344223, guid: 99c2b7527c18a4b488da4a5c164c8f9b, type: 3}
     damage: 2
     stun: 20
     hitstop: 5
     poiseBreak: 0
-    startupFrame: 44
+    startupFrame: 32
     activeFrames: 10
     gatlingFrames: 40
     groundHitProperty:
-      pushback: {x: 5, y: -5}
+      pushback: {x: 10, y: 5}
       hitState: 0
     airHitProperty:
-      pushback: {x: 5, y: -5}
+      pushback: {x: 5, y: 5}
       hitState: 0
   type: 0
   screenShake:
   - type: 0
-    startup: 44
-    amplitude: 3
+    startup: 32
+    amplitude: 2
     duration: 1
   vfx:
   - type: 0
-    startup: 15
+    startup: 1
     prefab: {fileID: 1320683006971348, guid: 83ea291b15cd5ed46be1077c6b047713, type: 3}
     deattachFromPlayer: 0
     destroyOnRecovery: 0
     position: {x: 0, y: 0.5, z: 0}
-    rotation: {x: 0, y: 180, z: 90}
+    rotation: {x: 0, y: 180, z: 0}
     scale: {x: 0.5, y: 0.5, z: 0.6}
   - type: 0
-    startup: 24
+    startup: 2
     prefab: {fileID: 1320683006971348, guid: 83ea291b15cd5ed46be1077c6b047713, type: 3}
     deattachFromPlayer: 0
     destroyOnRecovery: 0
     position: {x: 0, y: 0.5, z: 0}
-    rotation: {x: 0, y: 180, z: 90}
+    rotation: {x: 180, y: 180, z: 0}
     scale: {x: 0.5, y: 0.5, z: 0.6}
   - type: 0
-    startup: 33
+    startup: 10
     prefab: {fileID: 1320683006971348, guid: 83ea291b15cd5ed46be1077c6b047713, type: 3}
     deattachFromPlayer: 0
     destroyOnRecovery: 0
     position: {x: 0, y: 0.5, z: 0}
-    rotation: {x: 0, y: 180, z: 90}
+    rotation: {x: 0, y: 180, z: 0}
     scale: {x: 0.5, y: 0.5, z: 0.6}
   - type: 0
-    startup: 44
+    startup: 11
+    prefab: {fileID: 1320683006971348, guid: 83ea291b15cd5ed46be1077c6b047713, type: 3}
+    deattachFromPlayer: 0
+    destroyOnRecovery: 0
+    position: {x: 0, y: 0.5, z: 0}
+    rotation: {x: 180, y: 180, z: 0}
+    scale: {x: 0.5, y: 0.5, z: 0.6}
+  - type: 0
+    startup: 19
+    prefab: {fileID: 1320683006971348, guid: 83ea291b15cd5ed46be1077c6b047713, type: 3}
+    deattachFromPlayer: 0
+    destroyOnRecovery: 0
+    position: {x: 0, y: 0.5, z: 0}
+    rotation: {x: 0, y: 180, z: 0}
+    scale: {x: 0.5, y: 0.5, z: 0.6}
+  - type: 0
+    startup: 30
     prefab: {fileID: 1320683006971348, guid: 83ea291b15cd5ed46be1077c6b047713, type: 3}
     deattachFromPlayer: 0
     destroyOnRecovery: 0
     position: {x: 0, y: 0.7, z: 0}
-    rotation: {x: 0, y: 180, z: 90}
+    rotation: {x: 0, y: 180, z: 0}
     scale: {x: 0.75, y: 0.75, z: 0.91}
-  - type: 2
-    startup: 44
-    prefab: {fileID: 160150, guid: 135baa54467718346b4ec3b679824e50, type: 3}
+  - type: 0
+    startup: 31
+    prefab: {fileID: 1320683006971348, guid: 83ea291b15cd5ed46be1077c6b047713, type: 3}
     deattachFromPlayer: 0
     destroyOnRecovery: 0
-    position: {x: 0, y: 0.8, z: 1}
-    rotation: {x: 0, y: 0, z: 0}
-    scale: {x: 1, y: 1, z: 1}
+    position: {x: 0, y: 0.7, z: 0}
+    rotation: {x: 180, y: 180, z: 0}
+    scale: {x: 0.75, y: 0.75, z: 0.91}
   sfx:
-  - startup: 15
+  - startup: 1
     audioClips:
     - {fileID: 8300000, guid: c42832f2b6b42664594a8b54961d9e8f, type: 3}
     volume: 1
@@ -149,12 +165,12 @@ MonoBehaviour:
     - {fileID: 8300000, guid: c42832f2b6b42664594a8b54961d9e8f, type: 3}
     volume: 1
     pitchRange: 0
-  - startup: 30
+  - startup: 16
     audioClips:
     - {fileID: 8300000, guid: c42832f2b6b42664594a8b54961d9e8f, type: 3}
     volume: 1
     pitchRange: 0
-  - startup: 41
+  - startup: 28
     audioClips:
     - {fileID: 8300000, guid: c42832f2b6b42664594a8b54961d9e8f, type: 3}
     volume: 1
@@ -187,6 +203,7 @@ MonoBehaviour:
   holdAttack: 0
   releaseAttackMove: {fileID: 0}
   autoAim: 0
+  keepComboCount: 0
   armor: 1
   resetGatling: 0
   hitsGroundOnly: 0
@@ -203,115 +220,15 @@ MonoBehaviour:
   airInvul: 0
   airInvulStart: 1
   airInvulDuration: 0
-  targetComboMoves: []
+  targetComboMoves:
+  - {fileID: 11400000}
   fullCancel: 0
   gatlingCancel: 1
   uncancelable: 0
   useAirAction: 0
   landCancel: 0
   recoverOnlyOnLand: 0
-  m:
-  - startFrame: 1
-    duration: 9
-    momentum: {x: 0, y: 0}
-    resetVelocityDuringRecovery: 0
-    xMovementCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    movementCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    freeMovement: 0
-    useCurve: 0
-    teleport: 0
-  - startFrame: 10
-    duration: 35
-    momentum: {x: 0, y: 0}
-    resetVelocityDuringRecovery: 0
-    xMovementCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: -0.012298584
-        value: 0.0753479
-        inSlope: 100.159966
-        outSlope: 100.159966
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.037277203
-      - serializedVersion: 3
-        time: 0.19971967
-        value: 7.97217
-        inSlope: 9.140765
-        outSlope: 9.140765
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.15268996
-      - serializedVersion: 3
-        time: 0.6143652
-        value: 5.881705
-        inSlope: -18.700884
-        outSlope: -18.700884
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.14566602
-      - serializedVersion: 3
-        time: 0.7996216
-        value: -0.1331482
-        inSlope: -32.631676
-        outSlope: -32.631676
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.098656714
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    movementCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 8.606121
-        inSlope: 10.163333
-        outSlope: 10.163333
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.13797638
-      - serializedVersion: 3
-        time: 0.4937455
-        value: -7.2232447
-        inSlope: -89.766846
-        outSlope: -89.766846
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.057290886
-        outWeight: 0.053758472
-      - serializedVersion: 3
-        time: 1.0029764
-        value: -20.133368
-        inSlope: -12.555887
-        outSlope: -12.555887
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.09244506
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    freeMovement: 0
-    useCurve: 1
-    teleport: 0
+  m: []
   instantStartupRotation: 1
   overrideVelocity: 0
   runMomentum: 0

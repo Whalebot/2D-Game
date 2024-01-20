@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3316587179486486419}
   - component: {fileID: 2213129043607953297}
   m_Layer: 6
-  m_Name: Fighter_Skill_5C_Spin_Hitbox
+  m_Name: Fighter_Katana_8B_Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,13 +28,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5860963072138344223}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 3}
+  m_LocalRotation: {x: -0.30070576, y: 0, z: 0, w: 0.953717}
+  m_LocalPosition: {x: 0, y: 1.5, z: 1.3}
+  m_LocalScale: {x: 1, y: 1.5, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -35, y: 0, z: 0}
 --- !u!33 &7135228236847557431
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -125,7 +125,7 @@ MonoBehaviour:
   move: {fileID: 0}
   status: {fileID: 0}
   canClash: 1
-  relativePushback: 1
+  relativePushback: 0
   resetTimer: 0
   col: {fileID: 0}
   enemyList: []

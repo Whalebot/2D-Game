@@ -10,55 +10,55 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
-  m_Name: Fighter_j2A
+  m_Name: Fighter_2B_Riposte
   m_EditorClassIdentifier: 
-  animationID: 121
+  animationID: 13
   meterCost: 0
-  meterGain: 10
+  meterGain: 0
   consumeMeterOnActiveFrame: 0
-  icon: {fileID: 0}
-  firstStartupFrame: 20
-  lastActiveFrame: 119
-  totalMoveDuration: 129
-  firstGatlingFrame: 120
-  recoveryFrames: 10
+  icon: {fileID: 21300000, guid: 8dae7d3945db11a438c5a02650f0e7ef, type: 3}
+  firstStartupFrame: 5
+  lastActiveFrame: 24
+  totalMoveDuration: 42
+  firstGatlingFrame: 15
+  recoveryFrames: 18
   attacks:
   - attackLevel: 2
     attackType: 0
     damageType: 0
-    hitbox: {fileID: 5860963072138344223, guid: d06842a275e4e674fab9e8a08d958294, type: 3}
-    damage: 1.5
+    hitbox: {fileID: 5860963072138344223, guid: 2882afa60e18a8547bd9f6cabf9ee25d, type: 3}
+    damage: 3
     stun: 20
     hitstop: 5
     poiseBreak: 0
-    startupFrame: 20
-    activeFrames: 100
-    gatlingFrames: 100
+    startupFrame: 5
+    activeFrames: 20
+    gatlingFrames: 10
     groundHitProperty:
-      pushback: {x: 5, y: -2}
+      pushback: {x: 2, y: 8}
       hitState: 0
     airHitProperty:
-      pushback: {x: 5, y: -10}
+      pushback: {x: 0, y: 0}
       hitState: 0
   type: 0
   screenShake:
-  - type: 2
+  - type: 0
     startup: 2
     amplitude: 5
     duration: 2
   vfx:
   - type: 0
-    startup: 20
-    prefab: {fileID: 1439497813189136, guid: fce9ea9114d643c468165a2b10c919f9, type: 3}
+    startup: 4
+    prefab: {fileID: 1800976239324842, guid: c3a419073912434429f93f4f6d5369ff, type: 3}
     deattachFromPlayer: 1
     destroyOnRecovery: 0
-    position: {x: 0, y: 1.5, z: 0.5}
-    rotation: {x: -180, y: 0, z: 0}
-    scale: {x: 0.7, y: 1, z: 0.7}
+    position: {x: 0, y: 0.5, z: 0}
+    rotation: {x: 0, y: 90, z: 5}
+    scale: {x: 2, y: 2, z: 2}
   sfx:
-  - startup: 18
+  - startup: 1
     audioClips:
-    - {fileID: 8300000, guid: 7989a52949b972f4d899ad58edbcb3e0, type: 3}
+    - {fileID: 8300000, guid: e6c87645e4bc9b140a91a5c04fa12a95, type: 3}
     volume: 1
     pitchRange: 0
   hitFX:
@@ -96,9 +96,9 @@ MonoBehaviour:
   isDashing: 0
   noClip: 1
   noClipStart: 1
-  noClipDuration: 100
+  noClipDuration: 20
   invincible: 1
-  invincibleStart: 9
+  invincibleStart: 1
   invincibleDuration: 10
   projectileInvul: 0
   projectileInvulStart: 1
@@ -107,16 +107,16 @@ MonoBehaviour:
   airInvulStart: 1
   airInvulDuration: 0
   targetComboMoves: []
-  fullCancel: 0
+  fullCancel: 1
   gatlingCancel: 1
   uncancelable: 0
   useAirAction: 0
   landCancel: 0
-  recoverOnlyOnLand: 1
+  recoverOnlyOnLand: 0
   m:
-  - startFrame: 1
-    duration: 9
-    momentum: {x: 0, y: 2}
+  - startFrame: 2
+    duration: 5
+    momentum: {x: 10, y: 0}
     resetVelocityDuringRecovery: 0
     xMovementCurve:
       serializedVersion: 2
@@ -133,9 +133,9 @@ MonoBehaviour:
     freeMovement: 0
     useCurve: 0
     teleport: 0
-  - startFrame: 20
-    duration: 100
-    momentum: {x: 0, y: -20}
+  - startFrame: 16
+    duration: 2
+    momentum: {x: 0, y: 0}
     resetVelocityDuringRecovery: 0
     xMovementCurve:
       serializedVersion: 2

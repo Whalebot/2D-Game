@@ -355,67 +355,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4579287836408229524, guid: 454a5842c201f954cb919797fd3bb79f, type: 3}
   m_PrefabInstance: {fileID: 398691287}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &171361303
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 8706467882756264694, guid: cc256bb52e6bf754e838f181d17f624d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8706467882756264694, guid: cc256bb52e6bf754e838f181d17f624d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8706467882756264694, guid: cc256bb52e6bf754e838f181d17f624d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8706467882756264694, guid: cc256bb52e6bf754e838f181d17f624d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8706467882756264694, guid: cc256bb52e6bf754e838f181d17f624d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8706467882756264694, guid: cc256bb52e6bf754e838f181d17f624d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8706467882756264694, guid: cc256bb52e6bf754e838f181d17f624d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8706467882756264694, guid: cc256bb52e6bf754e838f181d17f624d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8706467882756264694, guid: cc256bb52e6bf754e838f181d17f624d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8706467882756264694, guid: cc256bb52e6bf754e838f181d17f624d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8706467882756264699, guid: cc256bb52e6bf754e838f181d17f624d, type: 3}
-      propertyPath: m_Name
-      value: Hazard Fire
-      objectReference: {fileID: 0}
-    - target: {fileID: 8706467882756264699, guid: cc256bb52e6bf754e838f181d17f624d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: cc256bb52e6bf754e838f181d17f624d, type: 3}
 --- !u!1001 &216470004
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -430,7 +369,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8203981254483095162, guid: e7fae4b0770ba8346ae365cfa5797167, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8203981254483095163, guid: e7fae4b0770ba8346ae365cfa5797167, type: 3}
       propertyPath: m_RootOrder
@@ -673,6 +612,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hazard Spikes Wide Variant (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4579287836408229522, guid: 454a5842c201f954cb919797fd3bb79f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4579287836408229524, guid: 454a5842c201f954cb919797fd3bb79f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14
@@ -910,7 +853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rank: 2
-  skill: {fileID: 11400000, guid: 788832a539e8047439c358ae4ed5d89a, type: 2}
+  skill: {fileID: 11400000, guid: 0992966b04377bb46b32e98f6c60b241, type: 2}
   stats:
     currentHealth: 0
     maxHealth: 0
@@ -978,6 +921,10 @@ PrefabInstance:
     - target: {fileID: 4579287836408229522, guid: 454a5842c201f954cb919797fd3bb79f, type: 3}
       propertyPath: m_Name
       value: Hazard Spikes Wide Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4579287836408229522, guid: 454a5842c201f954cb919797fd3bb79f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4579287836408229524, guid: 454a5842c201f954cb919797fd3bb79f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2172,11 +2119,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1345725273913731678, guid: a695c65e797bdc843a52934b1df1f1bf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10
+      value: 12.25
       objectReference: {fileID: 0}
     - target: {fileID: 1345725273913731678, guid: a695c65e797bdc843a52934b1df1f1bf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1345725273913731678, guid: a695c65e797bdc843a52934b1df1f1bf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4604,7 +4551,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 399436146292193353, guid: 25fad5f91a2f0c544b3cc04b4460b587, type: 3}
       propertyPath: saveData.currrentCharacter.visualData.characterJob
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 399436146491855168, guid: 25fad5f91a2f0c544b3cc04b4460b587, type: 3}
       propertyPath: m_Name
@@ -4649,6 +4596,10 @@ PrefabInstance:
     - target: {fileID: 399436146491855173, guid: 25fad5f91a2f0c544b3cc04b4460b587, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 399436146491855175, guid: 25fad5f91a2f0c544b3cc04b4460b587, type: 3}
+      propertyPath: showHitboxes
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1584742296736151705, guid: 25fad5f91a2f0c544b3cc04b4460b587, type: 3}
       propertyPath: m_AnchorMax.y
@@ -5469,7 +5420,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7922439481741705641, guid: 0a9dd561ca5976a45a1f393f8dd28446, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5552,7 +5503,6 @@ SceneRoots:
   - {fileID: 6431882701165814854}
   - {fileID: 1646290997}
   - {fileID: 1681105412}
-  - {fileID: 171361303}
   - {fileID: 827342158}
   - {fileID: 1265388024}
   - {fileID: 5958976312345152733}

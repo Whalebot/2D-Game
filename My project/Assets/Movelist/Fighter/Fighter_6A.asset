@@ -17,21 +17,21 @@ MonoBehaviour:
   meterGain: 10
   consumeMeterOnActiveFrame: 0
   icon: {fileID: 0}
-  firstStartupFrame: 10
-  lastActiveFrame: 19
-  totalMoveDuration: 39
-  firstGatlingFrame: 25
+  firstStartupFrame: 12
+  lastActiveFrame: 21
+  totalMoveDuration: 41
+  firstGatlingFrame: 27
   recoveryFrames: 20
   attacks:
   - attackLevel: 0
     attackType: 0
     damageType: 0
-    hitbox: {fileID: 5860963072138344223, guid: 90e29b448ab86814eb94f028ac521cff, type: 3}
+    hitbox: {fileID: 5860963072138344223, guid: 3989b15e2a64f0742813cc94cc791559, type: 3}
     damage: 1.5
     stun: 20
     hitstop: 5
     poiseBreak: 0
-    startupFrame: 10
+    startupFrame: 12
     activeFrames: 10
     gatlingFrames: 15
     groundHitProperty:
@@ -44,16 +44,15 @@ MonoBehaviour:
   screenShake: []
   vfx:
   - type: 0
-    startup: 13
+    startup: 7
     prefab: {fileID: 1800976239324842, guid: c3a419073912434429f93f4f6d5369ff, type: 3}
     deattachFromPlayer: 1
     destroyOnRecovery: 0
-    position: {x: 0, y: 0.5, z: 0}
+    position: {x: 0, y: 0.5, z: 1.5}
     rotation: {x: -5, y: 90, z: 0}
-    scale: {x: 1, y: 1, z: 1}
+    scale: {x: 0.69, y: 0.69, z: 0.69}
   sfx:
   - startup: 3
-    audioClip: {fileID: 8300000, guid: 9703811f01f93494b96dd7bcda5086ff, type: 3}
     audioClips:
     - {fileID: 8300000, guid: 9703811f01f93494b96dd7bcda5086ff, type: 3}
     volume: 1
@@ -70,13 +69,11 @@ MonoBehaviour:
   blockFX: {fileID: 0}
   hitSFX:
     startup: 1
-    audioClip: {fileID: 0}
     audioClips: []
     volume: 1
     pitchRange: 0
   blockSFX:
     startup: 1
-    audioClip: {fileID: 0}
     audioClips: []
     volume: 1
     pitchRange: 0
@@ -88,11 +85,12 @@ MonoBehaviour:
   holdAttack: 0
   releaseAttackMove: {fileID: 0}
   autoAim: 0
+  keepComboCount: 0
   armor: 0
   resetGatling: 0
   hitsGroundOnly: 0
   isDashing: 0
-  noClip: 1
+  noClip: 0
   noClipStart: 5
   noClipDuration: 20
   invincible: 0
@@ -114,7 +112,7 @@ MonoBehaviour:
   m:
   - startFrame: 5
     duration: 10
-    momentum: {x: 25, y: 0}
+    momentum: {x: 12, y: 0}
     resetVelocityDuringRecovery: 0
     xMovementCurve:
       serializedVersion: 2

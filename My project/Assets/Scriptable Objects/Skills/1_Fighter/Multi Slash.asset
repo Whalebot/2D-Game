@@ -10,31 +10,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41f2923ec284c6840a8cd468af82cb4d, type: 3}
-  m_Name: Fireball
+  m_Name: Multi Slash
   m_EditorClassIdentifier: 
-  skillRank: 2
+  skillRank: 3
   type: 0
   elemental: 0
-  title: Fireball
-  sprite: {fileID: 21300000, guid: 5f1dc3107b2d72646a75fe561260aaea, type: 3}
+  title: Multi Slash
+  sprite: {fileID: 21300000, guid: 123f6cf9343da864a8a0b6e1b909b757, type: 3}
   rngWeight: 1
-  damageValue: 20
-  prerequisiteSkills: []
+  damageValue: 3
+  prerequisiteSkills:
+  - {fileID: 11400000, guid: 8b6a63ac8f515f34aa387a2f030e5893, type: 2}
   prerequisiteMoves: []
-  bannedMoves:
-  - {fileID: 11400000, guid: 879a708098a85214b95f22ba1c2e8b59, type: 2}
+  bannedMoves: []
   newMoves:
-  - move: {fileID: 11400000, guid: 879a708098a85214b95f22ba1c2e8b59, type: 2}
-    combo: {fileID: 11400000, guid: fc9164ff3509902439a2cc443c017bd8, type: 2}
+  - move: {fileID: 11400000, guid: b685f78566ec6c446ae753d4b458ff6e, type: 2}
+    combo: {fileID: 11400000, guid: ac80d04707f026a4294e328887a0c277, type: 2}
     oldMove: {fileID: 0}
-  - move: {fileID: 11400000, guid: 879a708098a85214b95f22ba1c2e8b59, type: 2}
-    combo: {fileID: 11400000, guid: e3e35357b7b491f48955b434384f9449, type: 2}
+  - move: {fileID: 11400000, guid: b685f78566ec6c446ae753d4b458ff6e, type: 2}
+    combo: {fileID: 11400000, guid: ac80d04707f026a4294e328887a0c277, type: 2}
+    oldMove: {fileID: 0}
+  - move: {fileID: 11400000, guid: e74485db97b10ba43a62c44ddefd9c1b, type: 2}
+    combo: {fileID: 11400000, guid: 3e0e8011edd34d64786e53c0cca857f8, type: 2}
+    oldMove: {fileID: 0}
+  - move: {fileID: 11400000, guid: e74485db97b10ba43a62c44ddefd9c1b, type: 2}
+    combo: {fileID: 11400000, guid: 3e0e8011edd34d64786e53c0cca857f8, type: 2}
     oldMove: {fileID: 0}
   skillProperties: []
-  description: '[Forward + (Skill)] to shoot a fireball.
-
-
-    DMGVAL fire damage.'
+  description: Allows you to use [Special] iaido slash 3 times in quick succession.
   stats:
     currentHealth: 0
     maxHealth: 0
@@ -51,7 +54,7 @@ MonoBehaviour:
     magic: 0
     faithModifier: 0
     attackSpeed: 0
-    jumps: 1
+    jumps: 0
     airActions: 0
     rerolls: 0
     fireModifier: 0
@@ -76,5 +79,5 @@ MonoBehaviour:
     critChance: 0
     critMultiplier: 0
     lifesteal: 0
-  allChance: 1.3513514
-  typeChance: 5.263158
+  allChance: 0
+  typeChance: 0

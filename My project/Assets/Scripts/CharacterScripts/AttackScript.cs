@@ -269,7 +269,7 @@ public class AttackScript : MonoBehaviour
 
                     if (activeMove.m[i].freeMovement)
                     {
-                        movement.ExecuteMovement();
+                        movement.AttackMovement();
                         return;
                     }
 
@@ -405,7 +405,9 @@ public class AttackScript : MonoBehaviour
                             hitboxes[i].transform.localRotation = activeMove.attacks[i].hitbox.transform.rotation;
                         }
                         Hitbox hitbox = hitboxes[i].GetComponentInChildren<Hitbox>();
-                        hitbox.SetupHitbox(i, this, status, activeMove);
+
+                        if (hitbox != null) hitbox.SetupHitbox(i, this, status, activeMove);
+
                         if (activeMove.attacks[i].attackType == AttackType.Projectile)
                         {
                             projectiles.Add(hitboxes[i]);
@@ -715,7 +717,18 @@ public class AttackScript : MonoBehaviour
                 //Debug.Log("Can't use move");
                 return false;
             }
-            combo = 0;
+            if (activeCombo != null)
+            {
+                if (!activeCombo.moves[0].keepComboCount)
+                    combo = 0;
+                else
+                {
+                    if (c.moves.Count <= combo)
+                        return false;
+                }
+
+            }
+
         }
 
         activeCombo = c;

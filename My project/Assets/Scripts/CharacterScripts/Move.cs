@@ -50,6 +50,7 @@ public class Move : ScriptableObject
     [TabGroup("Move properties")] public Move releaseAttackMove;
 
     [TabGroup("Move properties")] public bool autoAim;
+    [TabGroup("Move properties")] public bool keepComboCount;
     [TabGroup("Move properties")] public bool armor;
     [TabGroup("Move properties")] public bool resetGatling;
     [TabGroup("Move properties")] public bool hitsGroundOnly;

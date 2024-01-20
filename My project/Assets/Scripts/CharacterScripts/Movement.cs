@@ -170,6 +170,23 @@ public class Movement : MonoBehaviour
         PlayerMovement();
     }
 
+    public void AttackMovement()
+    {
+        if (!isMoving)
+        {
+            currentVel = 0;
+        }
+        else
+        {
+            if (ground)
+                currentVel = runSpeed * status.currentStats.movementSpeedModifier/2;
+            else
+                currentVel = airSpeed * status.currentStats.movementSpeedModifier/2;
+        }
+        CalculateVelocity();
+        Rotation();
+        PlayerMovement();
+    }
     #region Assistance functions
 
     void DisableMovement()
