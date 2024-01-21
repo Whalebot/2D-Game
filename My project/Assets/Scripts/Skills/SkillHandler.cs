@@ -184,12 +184,13 @@ public class SkillHandler : MonoBehaviour
         bool hasRequiredSkill = false;
         bool hasBannedMove = false;
         bool hasRequiredMove = false;
+        bool hasReplacedMove = false;
 
         if (skillSO.prerequisiteSkills.Count > 0)
         {
             foreach (var item in learnedSkills)
             {
-                if (item == skillSO)
+                if (item.name == skillSO.name)
                 {
                     hasRequiredSkill = true;
                 }
@@ -218,27 +219,38 @@ public class SkillHandler : MonoBehaviour
                         }
                     }
 
+                    foreach (var item in skillSO.prerequisiteMoves)
+                    {
+                        foreach (var oldMove in temp.moves)
+                        {
+                            if (item.name == oldMove.name)
+                                hasRequiredMove = true;
+                        }
+                    }
+
                     foreach (var newMove in skillSO.newMoves)
                     {
                         if (newMove.oldMove != null)
                             foreach (var item in temp.moves)
                             {
                                 if (item.name == newMove.oldMove.name)
-                                    hasRequiredMove = true;
+                                    hasReplacedMove = true;
                             }
 
                         if (newMove.combo != null)
                             if (temp.name == newMove.combo.name)
-                                hasRequiredMove = true;
+                                hasReplacedMove = true;
                     }
                 }
             }
         }
-        else hasRequiredMove = true;
+        else hasReplacedMove = true;
 
+        if (skillSO.prerequisiteMoves.Count <= 0)
+            hasRequiredMove = true;
         //Debug.Log($"{skillSO} Has required move {hasRequiredMove} & has required skill{hasRequiredSkill}");
 
-        return hasRequiredMove && hasRequiredSkill && !hasBannedMove;
+        return hasRequiredMove && hasReplacedMove && hasRequiredSkill && !hasBannedMove;
     }
     public void LearnSkill(SkillSO skill, bool loading = false)
     {

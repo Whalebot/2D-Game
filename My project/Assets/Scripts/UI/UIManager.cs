@@ -204,6 +204,7 @@ public class UIManager : MonoBehaviour
             default:
                 break;
         }
+        Debug.Log("PP panel");
         treasurePanel.SetActive(true);
     }
     void OpenShopPanel()
