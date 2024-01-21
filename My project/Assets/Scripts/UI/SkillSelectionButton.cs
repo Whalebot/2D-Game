@@ -7,7 +7,6 @@ using Sirenix.OdinInspector;
 
 public class SkillSelectionButton : MonoBehaviour
 {
-    public SkillManager skillManager;
     public SkillSO skillSO;
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI descriptionText;
@@ -54,8 +53,8 @@ public class SkillSelectionButton : MonoBehaviour
         if (skillSO.sprite != null)
             iconImage.sprite = skillSO.sprite;
 
-        SkillSO replacement = skillManager.CheckReplacementBlessing(skillSO);
-        SkillSO upgrade = skillManager.CheckUpgrade(skillSO);
+        SkillSO replacement = SkillManager.Instance.CheckReplacementBlessing(skillSO);
+        SkillSO upgrade = SkillManager.Instance.CheckUpgrade(skillSO);
 
         if (replacement != null)
         {
@@ -70,19 +69,19 @@ public class SkillSelectionButton : MonoBehaviour
         switch (skillSO.skillRank)
         {
             case Rank.D:
-                buttonBackground.sprite = skillManager.NBackground;
+                buttonBackground.sprite = SkillManager.Instance.NBackground;
                 break;
             case Rank.C:
-                buttonBackground.sprite = skillManager.RBackground;
+                buttonBackground.sprite = SkillManager.Instance.RBackground;
                 break;
             case Rank.B:
-                buttonBackground.sprite = skillManager.SRBackground;
+                buttonBackground.sprite = SkillManager.Instance.SRBackground;
                 break;
             case Rank.A:
-                buttonBackground.sprite = skillManager.SSRBackground;
+                buttonBackground.sprite = SkillManager.Instance.SSRBackground;
                 break;
             case Rank.S:
-                buttonBackground.sprite = skillManager.URBackground;
+                buttonBackground.sprite = SkillManager.Instance.URBackground;
                 break;
             default:
                 break;
@@ -91,7 +90,7 @@ public class SkillSelectionButton : MonoBehaviour
 
     public void GetSkill()
     {
-        skillManager.GetSkill(skillSO);
+        SkillManager.Instance.GetSkill(skillSO);
 
         UIManager.Instance.CloseRewardPanels();
     }

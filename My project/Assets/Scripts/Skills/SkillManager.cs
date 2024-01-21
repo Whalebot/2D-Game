@@ -21,7 +21,9 @@ public class SkillManager : MonoBehaviour
     [TabGroup("Components")] public List<TextTags> colorTags;
     [TabGroup("Components")] public SkillGroupSO attackGroup, specialGroup, skillGroup;
     [TabGroup("Components")] public List<SkillSelectionButton> skillButtons;
-    [TabGroup("Components")] public List<ShopButton> shopButtons;
+    [TabGroup("Components")] public List<ShopButton> shopItems;
+    [TabGroup("Components")] public List<ShopButton> shopBlessings;
+    [TabGroup("Components")] public List<ShopButton> shopSkills;
     [TabGroup("Components")] public Sprite NBackground, RBackground, SRBackground, SSRBackground, URBackground;
     RewardType rewardType;
     Rank rewardRank;
@@ -153,20 +155,31 @@ public class SkillManager : MonoBehaviour
     [Button]
     public void RollShop(Rank r)
     {
-        bool foundRank = false;
-        selectedSkills.Clear();
-        for (int i = 0; i < shopButtons.Count; i++)
+        for (int i = 0; i < shopItems.Count; i++)
         {
             SkillSO skill = null;
-
-            {
-                skill = RollSkill();
-                if (skill.skillRank >= r)
-                    foundRank = true;
-            }
-            shopButtons[i].skillSO = skill;
+            skill = RollSkill(items);
+            shopItems[i].skillSO = skill;
             if (skill != null)
-                shopButtons[i].SetupSkill();
+                shopItems[i].SetupSkill();
+        }
+
+        for (int i = 0; i < shopBlessings.Count; i++)
+        {
+            SkillSO skill = null;
+            skill = RollSkill(blessings);
+            shopBlessings[i].skillSO = skill;
+            if (skill != null)
+                shopBlessings[i].SetupSkill();
+        }
+
+        for (int i = 0; i < shopSkills.Count; i++)
+        {
+            SkillSO skill = null;
+            skill = RollSkill(activeSkills);
+            shopSkills[i].skillSO = skill;
+            if (skill != null)
+                shopSkills[i].SetupSkill();
         }
     }
     public void RollBlessing(Rank rank)
@@ -454,7 +467,8 @@ public class SkillManager : MonoBehaviour
 
 
     [Button]
-    public void CalculateRNG() {
+    public void CalculateRNG()
+    {
         CalculateAllRNG();
         CalculateTypeRNG(items);
         CalculateTypeRNG(activeSkills);
@@ -502,7 +516,7 @@ public class SkillManager : MonoBehaviour
 
         Debug.Log(dropTable[UnityEngine.Random.Range(0, dropTable.Count)]);
     }
-  
+
 
     #endregion
 #if UNITY_EDITOR

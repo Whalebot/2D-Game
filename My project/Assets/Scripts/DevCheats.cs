@@ -38,6 +38,7 @@ public class DevCheats : MonoBehaviour
             GameManager.Instance.playerStatus.currentStats.maxMeter = 2000;
             GameManager.Instance.playerStatus.currentStats.currentMeter = 2000;
             GameManager.Instance.playerStatus.currentStats.rerolls = 2000;
+            GameManager.Instance.playerStatus.currentStats.gold= 5000;
         }
     }
 }

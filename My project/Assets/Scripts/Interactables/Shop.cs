@@ -20,8 +20,9 @@ public class Shop : Interactable
     }
     public void OpenShop()
     {
-        SkillManager.Instance.RollShop(rank);
+  
         GameManager.Instance.OpenShopWindow();
+        SkillManager.Instance.RollShop(rank);
         Destroy(gameObject);
     }
 }

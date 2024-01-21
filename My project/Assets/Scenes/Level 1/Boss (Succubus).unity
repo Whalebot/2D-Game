@@ -14659,7 +14659,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 32.6
+    FieldOfView: 60
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -14685,14 +14685,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1574642237}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.043614376, y: 0.015169353, z: -0.0006623085, w: 0.99893314}
-  m_LocalPosition: {x: 2, y: 5, z: -20}
+  m_LocalRotation: {x: -0.000087250075, y: 0.015183804, z: 0.0000013249407, w: 0.9998847}
+  m_LocalPosition: {x: 2, y: 3.53, z: -10.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2128773464}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 5, y: 1.74, z: 0}
+  m_LocalEulerAnglesHint: {x: -0.01, y: 1.74, z: 0}
 --- !u!1 &1588201519
 GameObject:
   m_ObjectHideFlags: 0
@@ -22170,15 +22170,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5797937292774076658, guid: 149c35565e503f444bc57a247d7dab4d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5
+      value: 3.53
       objectReference: {fileID: 0}
     - target: {fileID: 5797937292774076658, guid: 149c35565e503f444bc57a247d7dab4d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -20
+      value: -10.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5797937292774076658, guid: 149c35565e503f444bc57a247d7dab4d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9998847
+      objectReference: {fileID: 0}
+    - target: {fileID: 5797937292774076658, guid: 149c35565e503f444bc57a247d7dab4d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.000087250075
+      objectReference: {fileID: 0}
+    - target: {fileID: 5797937292774076658, guid: 149c35565e503f444bc57a247d7dab4d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.015183804
+      objectReference: {fileID: 0}
+    - target: {fileID: 5797937292774076658, guid: 149c35565e503f444bc57a247d7dab4d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0000013249407
       objectReference: {fileID: 0}
     - target: {fileID: 5797937292774076661, guid: 149c35565e503f444bc57a247d7dab4d, type: 3}
       propertyPath: field of view
-      value: 32.6
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 5797937293740945270, guid: 149c35565e503f444bc57a247d7dab4d, type: 3}
       propertyPath: m_RenderPostProcessing

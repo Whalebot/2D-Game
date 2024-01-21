@@ -15,10 +15,11 @@ public class InteractScript : MonoBehaviour
     [TabGroup("Components")] public Status status;
     [TabGroup("Components")] public LayerMask interactMask;
     [TabGroup("Components")] public Transform player;
-
+    Movement movement;
     private void Awake()
     {
         Instance = this;
+        movement = player.GetComponent<Movement>();
     }
     void Start()
     {
@@ -103,7 +104,7 @@ public class InteractScript : MonoBehaviour
     }
     public bool CanSouth()
     {
-        return lastInteractable && lastInteractable.CanSouth();
+        return lastInteractable && lastInteractable.CanSouth() && movement.ground;
     }
     public void South()
     {

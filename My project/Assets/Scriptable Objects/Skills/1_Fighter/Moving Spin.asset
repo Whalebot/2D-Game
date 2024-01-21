@@ -18,9 +18,10 @@ MonoBehaviour:
   title: Moving Spin
   sprite: {fileID: 21300000, guid: 7146218a73b541a4391fb14360e1a40b, type: 3}
   rngWeight: 1
-  damageValue: 8
+  damageValue: 5
   prerequisiteSkills: []
-  prerequisiteMoves: []
+  prerequisiteMoves:
+  - {fileID: 11400000, guid: c9ff265dac604b74a854038dd511f19c, type: 2}
   bannedMoves: []
   newMoves:
   - move: {fileID: 11400000, guid: 3305ea7c716d0f74fa738a6e00b34729, type: 2}
@@ -75,5 +76,5 @@ MonoBehaviour:
     critChance: 0
     critMultiplier: 0
     lifesteal: 0
-  allChance: 1.3513514
-  typeChance: 5.263158
+  allChance: 1.2345679
+  typeChance: 3.8461537

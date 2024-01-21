@@ -13,10 +13,15 @@ public class ShopButton : MonoBehaviour
     public TextMeshProUGUI priceText;
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI descriptionText;
+    public GameObject replacementContainer;
+    public TextMeshProUGUI replacementText;
     public Image buttonBackground;
     public Image iconBackground;
     public Image icon;
     Button button;
+    bool tooltip = false;
+
+ 
     void Start()
     {
         button = GetComponent<Button>();
@@ -31,7 +36,25 @@ public class ShopButton : MonoBehaviour
 
     private void OnEnable()
     {
+        skillManager = SkillManager.Instance;
         SetupSkill();
+    }
+    private void FixedUpdate()
+    {
+
+        int linkIndex = TMP_TextUtilities.FindIntersectingLink(descriptionText, Input.mousePosition, null);  // If you are not in a Canvas using Screen Overlay, put your camera instead of null
+        if (linkIndex != -1)
+        {
+            tooltip = true;
+            TMP_LinkInfo linkInfo = descriptionText.textInfo.linkInfo[linkIndex];
+            //Debug.Log(linkInfo.GetLinkText());
+            UIManager.Instance.EnableTooltip(linkInfo.GetLinkText());
+        }
+        else if (tooltip)
+        {
+            tooltip = false;
+            UIManager.Instance.DisableTooltip();
+        }
     }
 
     [Button]
@@ -75,11 +98,24 @@ public class ShopButton : MonoBehaviour
             priceText.color = Color.red;
 
         titleText.text = skillSO.title;
-        descriptionText.text = skillSO.description;
+        descriptionText.text = SkillManager.Instance.SkillDescription(skillSO);
+        if (skillSO.sprite != null)
+            icon.sprite = skillSO.sprite;
 
-        icon.sprite = skillSO.sprite;
+        SkillSO replacement = skillManager.CheckReplacementBlessing(skillSO);
+        SkillSO upgrade = skillManager.CheckUpgrade(skillSO);
 
-    }
+        if (replacement != null)
+        {
+            replacementContainer.SetActive(true);
+            replacementText.text = "- Replaces " + replacement.name;
+        }
+        else
+        {
+            replacementContainer.SetActive(false);
+        }
+
+     }
 
     public void BuySkill()
     {

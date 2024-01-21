@@ -12,15 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41f2923ec284c6840a8cd468af82cb4d, type: 3}
   m_Name: Multi Spin
   m_EditorClassIdentifier: 
-  skillRank: 2
+  skillRank: 3
   type: 0
   elemental: 0
   title: Multi Spin
   sprite: {fileID: 21300000, guid: 7146218a73b541a4391fb14360e1a40b, type: 3}
   rngWeight: 1
-  damageValue: 8
+  damageValue: 5
   prerequisiteSkills: []
-  prerequisiteMoves: []
+  prerequisiteMoves:
+  - {fileID: 11400000, guid: c9ff265dac604b74a854038dd511f19c, type: 2}
+  - {fileID: 11400000, guid: 3305ea7c716d0f74fa738a6e00b34729, type: 2}
   bannedMoves: []
   newMoves:
   - move: {fileID: 11400000, guid: b56083dc54f93784c9baa2dc09ba7d25, type: 2}
@@ -82,5 +84,5 @@ MonoBehaviour:
     critChance: 0
     critMultiplier: 0
     lifesteal: 0
-  allChance: 1.3513514
-  typeChance: 5.263158
+  allChance: 1.2345679
+  typeChance: 3.8461537

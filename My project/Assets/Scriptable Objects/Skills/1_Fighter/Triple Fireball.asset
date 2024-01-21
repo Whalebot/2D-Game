@@ -14,12 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillRank: 3
   type: 0
+  elemental: 0
   title: Triple Fireball
   sprite: {fileID: 21300000, guid: 5f1dc3107b2d72646a75fe561260aaea, type: 3}
+  rngWeight: 1
   damageValue: 20
-  prerequisiteSkills:
-  - {fileID: 11400000, guid: e724dd6207ffa5146b183afa3092b0b9, type: 2}
-  prerequisiteMoves: []
+  prerequisiteSkills: []
+  prerequisiteMoves:
+  - {fileID: 11400000, guid: 879a708098a85214b95f22ba1c2e8b59, type: 2}
+  - {fileID: 11400000, guid: 499c6f9a0e46ba345b30e7392da7619f, type: 2}
   bannedMoves: []
   newMoves:
   - move: {fileID: 11400000, guid: 727fbc22a1766c3449d6b9a97e55e7a7, type: 2}
@@ -74,3 +77,6 @@ MonoBehaviour:
     knockbackModifier: 0
     critChance: 0
     critMultiplier: 0
+    lifesteal: 0
+  allChance: 1.2345679
+  typeChance: 3.8461537

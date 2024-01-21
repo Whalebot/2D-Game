@@ -52,10 +52,10 @@ public class DPSCheck : MonoBehaviour
 
     void GiveReward()
     {
-        if (dmgCounted < 50) { chestD.SetActive(true); }
-        else if (dmgCounted < 100) { chestC.SetActive(true); }
-        else if (dmgCounted < 200) { chestB.SetActive(true); }
-        else if (dmgCounted < 500) { chestA.SetActive(true); }
-        else if (dmgCounted < 1000) { chestS.SetActive(true); }
+        if (dmgCounted < 100) { chestD.SetActive(true); }
+        else if (dmgCounted < 200) { chestC.SetActive(true); }
+        else if (dmgCounted < 400) { chestB.SetActive(true); }
+        else if (dmgCounted < 1000) { chestA.SetActive(true); }
+        else if (dmgCounted < 2500) { chestS.SetActive(true); }
     }
 }
