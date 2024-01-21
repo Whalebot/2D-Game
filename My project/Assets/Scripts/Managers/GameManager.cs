@@ -222,7 +222,7 @@ public class GameManager : MonoBehaviour
                 default:
                     break;
             }
-         
+
 
             text.GetComponentInChildren<DamageText>().SetupNumber(damageValue);
             offsetCounter++;
@@ -298,6 +298,7 @@ public class GameManager : MonoBehaviour
 
     public void ToggleMenu()
     {
+        UIManager.Instance.ButtonPressed();
         menuOpen = !menuOpen;
         if (menuOpen)
         {

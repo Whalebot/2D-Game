@@ -351,8 +351,7 @@ public class SkillManager : MonoBehaviour
             {
                 if (words[i].Contains("DMGVAL"))
                 {
-                    skill.CalculateDamageValue(GameManager.Instance.playerStatus);
-                    words[i] = skill.damageValue + " ";
+                    words[i] = skill.CalculateDamageValue(GameManager.Instance.playerStatus) + " ";
                     words[i] = ($"<link=\"0\"><color=#{ColorUtility.ToHtmlStringRGB(Color.yellow)}>" + words[i] + "</color>" + "</link>");
                 }
                 if (words[i].Contains("STATS"))

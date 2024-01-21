@@ -89,9 +89,15 @@ public class HPBar : MonoBehaviour
             if (frameCounter <= 0) UpdateDelayBar();
         }
     }
-    void SetSize() {
+    void SetSize()
+    {
         if (player)
-            rect.sizeDelta = new Vector2(startWidth * status.currentStats.maxHealth / 50f, rect.sizeDelta.y);
+        {
+            float size = Mathf.Clamp(
+                (startWidth * 0.75f) + (startWidth * 0.25f * (status.currentStats.maxHealth / 50f))
+                , 250f, 900f);
+            rect.sizeDelta = new Vector2(size, rect.sizeDelta.y);
+        }
     }
     void DisplayInfo()
     {

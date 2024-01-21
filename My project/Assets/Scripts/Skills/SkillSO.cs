@@ -24,7 +24,7 @@ public class SkillSO : ScriptableObject
 
     [TextArea(15, 20)]
     public string description;
-    [HideLabel] public Stats  stats;
+    [HideLabel] public Stats stats;
 
     [ReadOnly] public float allChance;
     [ReadOnly] public float typeChance;
@@ -65,21 +65,43 @@ public class SkillSO : ScriptableObject
         //Debug.Log("Base behaviour");
     }
 
-    public void CalculateDamageValue(Status status)
+    public string CalculateDamageValue(Status status)
     {
+        string dmgText = "";
         switch (type)
         {
             case SkillType.Skill:
                 //Find new move hitbox damage
                 if (newMoves.Count > 0)
                 {
+
                     damageValue = (int)(status.Attack * newMoves[0].move.attacks[0].damage);
+                    for (int i = 0; i < newMoves[0].move.attacks.Length; i++)
+                    {
+                        Attack attack = newMoves[0].move.attacks[i];
+                        switch (attack.damageType)
+                        {
+                            case DamageType.Physical:
+                                dmgText += ((int)(status.Attack * attack.damage));
+                                break;
+                            case DamageType.Magic:
+                                dmgText += ((int)(status.Magic * attack.damage));
+                                break;
+                            default:
+                                break;
+                        }
+                        if (newMoves[0].move.attacks.Length > i + 1)
+                        {
+                            dmgText += "+";
+                        }
+                    }
+
                 }
                 break;
             case SkillType.Blessing:
                 if (skillProperties.Count > 0)
                 {
-                    damageValue = skillProperties[0].GetDamage(status, skillRank);
+                    dmgText = "" + skillProperties[0].GetDamage(status, skillRank);
                 }
                 break;
             case SkillType.Item:
@@ -88,6 +110,7 @@ public class SkillSO : ScriptableObject
                 break;
         }
 
+        return dmgText;
     }
 
     private void OnValidate()

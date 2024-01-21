@@ -26,7 +26,11 @@ public class MeterBar : MonoBehaviour
     }
     void UpdateValues()
     {
-        rect.sizeDelta = new Vector2(startWidth * status.currentStats.maxMeter / 100f, rect.sizeDelta.y);
+        float size = Mathf.Clamp(
+          (startWidth * 0.75f) + (startWidth * 0.25f * (status.currentStats.maxMeter / 100f))
+          , 250f, 900f);
+        rect.sizeDelta = new Vector2(size, rect.sizeDelta.y);
+
         meterText.text = "" + (status.Meter) + "/" + status.currentStats.maxMeter;
 
         if (status.currentStats.maxMeter > 0)

@@ -21,7 +21,7 @@ public class ShopButton : MonoBehaviour
     Button button;
     bool tooltip = false;
 
- 
+
     void Start()
     {
         button = GetComponent<Button>();
@@ -32,6 +32,7 @@ public class ShopButton : MonoBehaviour
     private void OnDisable()
     {
         GameManager.Instance.goldChangeEvent -= SetupSkill;
+        UIManager.Instance.DisableTooltip();
     }
 
     private void OnEnable()
@@ -55,13 +56,15 @@ public class ShopButton : MonoBehaviour
             tooltip = false;
             UIManager.Instance.DisableTooltip();
         }
+
+        SetupSkill();
     }
 
     [Button]
     public void SetupSkill()
     {
 
-  
+
         switch (skillSO.skillRank)
         {
             case Rank.D:
@@ -96,6 +99,7 @@ public class ShopButton : MonoBehaviour
         priceText.text = "" + price;
         if (price > GameManager.Instance.Gold)
             priceText.color = Color.red;
+        else priceText.color = Color.green;
 
         titleText.text = skillSO.title;
         descriptionText.text = SkillManager.Instance.SkillDescription(skillSO);
@@ -115,10 +119,11 @@ public class ShopButton : MonoBehaviour
             replacementContainer.SetActive(false);
         }
 
-     }
+    }
 
     public void BuySkill()
     {
+        if (UIManager.buttonDelay) return;
         if (GameManager.Instance.Gold >= price)
         {
             GameManager.Instance.Gold -= price;

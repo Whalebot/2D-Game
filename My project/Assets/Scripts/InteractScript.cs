@@ -80,7 +80,7 @@ public class InteractScript : MonoBehaviour
 
             if (CanInteract())
             {
-               UIManager.Instance.SetupButtonPrompt(temp);
+                UIManager.Instance.SetupButtonPrompt(temp);
             }
             else
             {

@@ -38,7 +38,8 @@ public class UIManager : MonoBehaviour
     [TabGroup("Tooltip")] public TextMeshProUGUI skillDescriptionText;
     [TabGroup("Tooltip")] public TextMeshProUGUI skillDescriptionTitle;
 
-
+    public static float buttonDelayCounter;
+    public static bool buttonDelay;
 
     private void Awake()
     {
@@ -94,7 +95,22 @@ public class UIManager : MonoBehaviour
         //RectTransformUtility.ScreenPointToLocalPointInRectangle(rect.parent as RectTransform, mousePosition, null, out Vector2 anchoredPosition); anchoredPosition += offset; rect.anchoredPosition = anchoredPosition;
         tooltip.position = Input.mousePosition + tooltipOffset;
         tooltip.gameObject.SetActive(tooltipEnabled);
+
+
+        if (buttonDelayCounter > 0)
+        {
+            buttonDelayCounter--;
+            if (buttonDelayCounter <= 0)
+                buttonDelay = false;
+        }
     }
+
+    public void ButtonPressed()
+    {
+        buttonDelayCounter = 10;
+        buttonDelay = true;
+    }
+
     void UpdateSkillIcon()
     {
         AttackScript attack = GameManager.Instance.playerStatus.GetComponent<AttackScript>();

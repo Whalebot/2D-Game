@@ -36,7 +36,6 @@ MonoBehaviour:
     scale: {x: 0.5, y: 0.5, z: 0.5}
   sfx:
   - startup: 1
-    audioClip: {fileID: 8300000, guid: 97e07579943202d48a64e5abd04d241c, type: 3}
     audioClips:
     - {fileID: 8300000, guid: 97e07579943202d48a64e5abd04d241c, type: 3}
     volume: 1
@@ -53,13 +52,11 @@ MonoBehaviour:
   blockFX: {fileID: 0}
   hitSFX:
     startup: 1
-    audioClip: {fileID: 0}
     audioClips: []
     volume: 1
     pitchRange: 0
   blockSFX:
     startup: 1
-    audioClip: {fileID: 0}
     audioClips: []
     volume: 1
     pitchRange: 0
@@ -71,6 +68,7 @@ MonoBehaviour:
   holdAttack: 0
   releaseAttackMove: {fileID: 0}
   autoAim: 0
+  keepComboCount: 0
   armor: 0
   resetGatling: 0
   hitsGroundOnly: 0

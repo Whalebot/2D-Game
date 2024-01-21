@@ -37,8 +37,8 @@ public class OrganizeChildren : MonoBehaviour
             SkillIcon icon = temp.GetComponent<SkillIcon>();
             icon.SetupIcon(item);
         }
-        SetupPosition();
-        //StartCoroutine(DelaySetupPosition());
+        //SetupPosition();
+        StartCoroutine(DelaySetupPosition());
     }
     IEnumerator DelaySetupPosition()
     {
