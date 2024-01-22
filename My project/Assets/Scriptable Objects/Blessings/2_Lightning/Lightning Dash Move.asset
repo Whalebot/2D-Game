@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
-  m_Name: Mage_Skill_2C_Frost_Nova
+  m_Name: Lightning Dash Move
   m_EditorClassIdentifier: 
-  animationID: 53
-  meterCost: 0
-  meterGain: 20
+  animationID: 553
+  meterCost: 50
+  meterGain: 0
   consumeMeterOnActiveFrame: 0
-  icon: {fileID: 21300000, guid: 102c8ecd2edd9cd499af21b9b269013c, type: 3}
+  icon: {fileID: 21300000, guid: 5f1dc3107b2d72646a75fe561260aaea, type: 3}
   firstStartupFrame: 40
   lastActiveFrame: 40
   totalMoveDuration: 60
   firstGatlingFrame: 45
   recoveryFrames: 20
   attacks:
-  - attackLevel: 0
+  - attackLevel: 2
     attackType: 1
     damageType: 1
-    hitbox: {fileID: 5860963072138344223, guid: e56508cf7eef0ce4a99ce18f081a363b, type: 3}
-    damage: 2
+    hitbox: {fileID: 5860963072138344223, guid: b64e26034a517f74a962a826bf7bbb5b, type: 3}
+    damage: 1
     stun: 20
     hitstop: 5
     poiseBreak: 0
@@ -35,10 +35,10 @@ MonoBehaviour:
     activeFrames: 1
     gatlingFrames: 5
     groundHitProperty:
-      pushback: {x: 8, y: 5}
+      pushback: {x: 2, y: 0}
       hitState: 0
     airHitProperty:
-      pushback: {x: 8, y: 5}
+      pushback: {x: 0, y: 0}
       hitState: 0
   type: 0
   screenShake:
@@ -49,27 +49,19 @@ MonoBehaviour:
   vfx:
   - type: 0
     startup: 1
-    prefab: {fileID: 9143454445820708258, guid: 413257cc1651f9f44a0acc09067a1c17, type: 3}
-    deattachFromPlayer: 1
+    prefab: {fileID: 696211589295866031, guid: 0b2f1ef8d24b93947bb610a7f39f05e8, type: 3}
+    deattachFromPlayer: 0
     destroyOnRecovery: 0
     position: {x: 0, y: 0.01, z: 0}
     rotation: {x: -90, y: 0, z: 0}
     scale: {x: 0.3, y: 0.3, z: 0.3}
   - type: 0
     startup: 40
-    prefab: {fileID: 9143454445820708258, guid: 413257cc1651f9f44a0acc09067a1c17, type: 3}
-    deattachFromPlayer: 1
-    destroyOnRecovery: 0
+    prefab: {fileID: 696211589295866031, guid: 0b2f1ef8d24b93947bb610a7f39f05e8, type: 3}
+    deattachFromPlayer: 0
+    destroyOnRecovery: 1
     position: {x: 0, y: 0.6, z: 0.7}
     rotation: {x: 0, y: 0, z: 90}
-    scale: {x: 0.5, y: 0.5, z: 0.5}
-  - type: 0
-    startup: 40
-    prefab: {fileID: 117360, guid: 93dde01820cd8a44bbb998ba21c24e43, type: 3}
-    deattachFromPlayer: 1
-    destroyOnRecovery: 0
-    position: {x: 0, y: 0, z: 0}
-    rotation: {x: -90, y: 0, z: 0}
     scale: {x: 0.5, y: 0.5, z: 0.5}
   sfx: []
   hitFX:
@@ -93,7 +85,7 @@ MonoBehaviour:
     volume: 1
     pitchRange: 0
   skillProperties:
-  - {fileID: 11400000, guid: b42ab6ef4f5c6254fb7e888db3eb83ad, type: 2}
+  - {fileID: 11400000, guid: 719d67fa955e1494ab475ffd39699e5e, type: 2}
   useAttackSpeed: 1
   keepVelocity: 0
   particleID: 0
@@ -124,7 +116,26 @@ MonoBehaviour:
   useAirAction: 0
   landCancel: 0
   recoverOnlyOnLand: 0
-  m: []
+  m:
+  - startFrame: 40
+    duration: 2
+    momentum: {x: -3, y: 0}
+    resetVelocityDuringRecovery: 0
+    xMovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    movementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    freeMovement: 0
+    useCurve: 0
+    teleport: 0
   instantStartupRotation: 0
   overrideVelocity: 1
   runMomentum: 0

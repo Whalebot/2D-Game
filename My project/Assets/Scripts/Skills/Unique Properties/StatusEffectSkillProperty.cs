@@ -53,16 +53,19 @@ public class StatusEffectSkillProperty : UniqueSkillProperty
         if (hitInfo.enemyStatus == null)
             return;
 
-        if (!affectedMoves.moves.Contains(hitInfo.move))
-            return;
+        if (affectedMoves != null)
+            if (!affectedMoves.moves.Contains(hitInfo.move))
+                return;
 
         foreach (var item in appliedEffects)
         {
             SkillHandler skillHandler = hitInfo.attackerStatus.GetComponent<SkillHandler>();
             StatusEffect clone = Instantiate(item);
             clone = skillHandler.ModifyStatusEffect(clone);
-            Debug.Log("skill effect Property" + skill.skillRank);
-            hitInfo.enemyStatus.ApplyStatusEffect(clone, hitInfo, skill.skillRank);
+            if (skill == null)
+                hitInfo.enemyStatus.ApplyStatusEffect(clone, hitInfo, Rank.D);
+            else
+                hitInfo.enemyStatus.ApplyStatusEffect(clone, hitInfo, skill.skillRank);
         }
     }
 }

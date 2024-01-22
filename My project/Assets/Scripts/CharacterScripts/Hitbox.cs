@@ -169,27 +169,47 @@ public class Hitbox : MonoBehaviour
 
         int rng = Random.Range(1, 101);
         bool crit = false;
-        bool magicDamage = atk.damageType != DamageType.Physical;
+        bool physicalDamage = atk.damageType == DamageType.Physical;
 
 
+  
         if (rng <= status.currentStats.critChance * 100)
         {
             crit = true;
             status.Meter += (int)(move.meterGain * status.currentStats.meterGainModifier * status.currentStats.critMultiplier);
-            if (magicDamage)
-                totalDamage = (int)(baseDamage * (atk.damage * status.currentStats.damageModifierPercentage * status.Magic * status.currentStats.critMultiplier) + status.currentStats.damageModifierFlat);
-            else
-                totalDamage = (int)(baseDamage * (atk.damage * status.currentStats.damageModifierPercentage * status.Attack * status.currentStats.critMultiplier) + status.currentStats.damageModifierFlat);
-
+            switch (atk.damageType)
+            {
+                case DamageType.Physical:
+                    totalDamage = (int)(baseDamage * (atk.damage * status.currentStats.damageModifierPercentage * status.Attack * status.currentStats.critMultiplier) + status.currentStats.damageModifierFlat);
+                    break;
+                case DamageType.Magic:
+                    totalDamage = (int)(baseDamage * (atk.damage * status.currentStats.damageModifierPercentage * status.Magic * status.currentStats.critMultiplier) + status.currentStats.damageModifierFlat);
+                    break;
+                case DamageType.Blessing:
+                    totalDamage = (int)(baseDamage * (atk.damage * status.currentStats.damageModifierPercentage * status.Magic * status.currentStats.critMultiplier) + status.currentStats.damageModifierFlat);
+                    break;
+                default:
+                    break;
+            }
         }
         else
         {
             status.Meter += (int)(move.meterGain * status.currentStats.meterGainModifier);
 
-            if (magicDamage)
-                totalDamage = (int)(baseDamage * (atk.damage * status.currentStats.damageModifierPercentage * status.Magic) + status.currentStats.damageModifierFlat);
-            else
-                totalDamage = (int)(baseDamage * (atk.damage * status.currentStats.damageModifierPercentage * status.Attack) + status.currentStats.damageModifierFlat);
+            switch (atk.damageType)
+            {
+                case DamageType.Physical:
+                    totalDamage = (int)(baseDamage * (atk.damage * status.currentStats.damageModifierPercentage * status.Attack) + status.currentStats.damageModifierFlat);
+                    break;
+                case DamageType.Magic:
+                    totalDamage = (int)(baseDamage * (atk.damage * status.currentStats.damageModifierPercentage * status.Magic) + status.currentStats.damageModifierFlat);
+                    break;
+                case DamageType.Blessing:
+                    totalDamage = (int)(baseDamage * (atk.damage * status.currentStats.damageModifierPercentage * status.currentStats.faith) + status.currentStats.damageModifierFlat);
+                    break;
+                default:
+                    break;
+            }
         }
 
         //Send info to skill manager
@@ -201,7 +221,7 @@ public class Hitbox : MonoBehaviour
             totalDamage = (int)(totalDamage * (1 + status.currentStats.backstabModifier));
         }
         int damageDealt = Mathf.RoundToInt((totalDamage * (1 - other.currentStats.defense)) - other.currentStats.resistance);
-        if (status.currentStats.lifesteal > 0 && !magicDamage)
+        if (status.currentStats.lifesteal > 0 && physicalDamage)
         {
             status.Health += (int)(damageDealt * status.currentStats.lifesteal);
         }
@@ -209,7 +229,7 @@ public class Hitbox : MonoBehaviour
         HitInfo hitInfo = new HitInfo(crit, backstab, status, other, move);
         attack.HitEvent(hitInfo);
 
-        foreach (var item in move.uniqueProperties)
+        foreach (var item in move.skillProperties)
         {
             item.HitBehaviour(hitInfo);
         }

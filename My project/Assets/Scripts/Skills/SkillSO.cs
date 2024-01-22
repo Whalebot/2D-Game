@@ -19,7 +19,7 @@ public class SkillSO : ScriptableObject
     public List<SkillSO> prerequisiteSkills;
     [ShowIf("@type == SkillType.Skill")] public List<Move> prerequisiteMoves;
     [ShowIf("@type == SkillType.Skill")] public List<Move> bannedMoves;
-    [ShowIf("@type == SkillType.Skill")] public List<NewMove> newMoves;
+    public List<NewMove> newMoves;
     public List<UniqueSkillProperty> skillProperties;
 
     [TextArea(15, 20)]

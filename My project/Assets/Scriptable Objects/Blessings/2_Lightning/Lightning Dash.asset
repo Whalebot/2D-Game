@@ -17,13 +17,14 @@ MonoBehaviour:
   elemental: 2
   title: Lightning Dash
   sprite: {fileID: 21300000, guid: a51f67d16d73832409dcc367bc618728, type: 3}
+  rngWeight: 1
   damageValue: 0
   prerequisiteSkills: []
   prerequisiteMoves: []
   bannedMoves: []
   newMoves: []
   skillProperties:
-  - {fileID: 11400000, guid: 9ceeca83ad178f642bf438607cd373c9, type: 2}
+  - {fileID: 11400000, guid: 29fc0ba04cd4976408530ad0c2386c81, type: 2}
   description: "Your [Dash] leaves a trail of fire which apply burning status on
     enemies. \nDMGVAL fire damage every second for 3 seconds.\nTBD"
   stats:
@@ -66,3 +67,6 @@ MonoBehaviour:
     knockbackModifier: 0
     critChance: 0
     critMultiplier: 0
+    lifesteal: 0
+  allChance: 0
+  typeChance: 0

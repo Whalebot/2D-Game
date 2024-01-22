@@ -10,18 +10,18 @@ public class TrailSkillProperty : UniqueSkillProperty
     public int trailSpawnInterval;
     public Vector3 boxSize;
     public LayerMask interactMask;
-    int counter;
+    int trailCounter;
     public override void AttackingBehaviour(SkillHandler handler)
     {
         base.AttackingBehaviour(handler);
 
         if (!affectedMoves.moves.Contains(handler.attackScript.activeMove))
             return;
-        counter++;
+        trailCounter++;
 
-        if (counter >= trailSpawnInterval)
+        if (trailCounter >= trailSpawnInterval)
         {
-            counter = 0;
+            trailCounter = 0;
             Collider[] col = Physics.OverlapBox(handler.transform.position, boxSize * 0.5F, handler.transform.rotation, interactMask);
             Hazard foundHazard = null;
             foreach (Collider item in col)

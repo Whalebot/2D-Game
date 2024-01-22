@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 076b19b4b40dae243a30a531c828d273, type: 3}
-  m_Name: Summon Right Slime
+  m_Script: {fileID: 11500000, guid: 36abc0ce95bd2c241a5c4178692cbb92, type: 3}
+  m_Name: Rage Buff Property
   m_EditorClassIdentifier: 
   propertyType: 0
-  frame: 0
-  summon: {fileID: 0}
-  offset: {x: 2, y: 0, z: 0}
+  frame: 40
+  delay: 0
+  counter: 0
+  appliedEffects:
+  - {fileID: 11400000, guid: 9db64b830d2e17a4991ccedccd2bebc5, type: 2}

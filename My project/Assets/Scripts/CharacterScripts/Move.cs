@@ -40,7 +40,6 @@ public class Move : ScriptableObject
     [HideInInspector] public SFX blockSFX;
 
     [Header("Move properties")]
-    [TabGroup("Move properties")] public MoveUniqueProperty[] uniqueProperties;
     [TabGroup("Move properties")] public List<UniqueSkillProperty> skillProperties;
     [TabGroup("Move properties")] public bool useAttackSpeed = true;
     [TabGroup("Move properties")] public bool keepVelocity = false;
@@ -113,7 +112,7 @@ public class Move : ScriptableObject
     }
 }
 
-public enum DamageType { Physical, Magic
+public enum DamageType { Physical, Magic, Blessing
       //  , Fire, Water, Earth, Wind, Lightning 
 }
 

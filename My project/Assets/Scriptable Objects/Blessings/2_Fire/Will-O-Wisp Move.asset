@@ -10,67 +10,55 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
-  m_Name: Mage_Skill_2C_Frost_Nova
+  m_Name: Will-O-Wisp Move
   m_EditorClassIdentifier: 
   animationID: 53
-  meterCost: 0
-  meterGain: 20
-  consumeMeterOnActiveFrame: 0
-  icon: {fileID: 21300000, guid: 102c8ecd2edd9cd499af21b9b269013c, type: 3}
-  firstStartupFrame: 40
-  lastActiveFrame: 40
-  totalMoveDuration: 60
-  firstGatlingFrame: 45
-  recoveryFrames: 20
+  meterCost: 10
+  meterGain: 0
+  consumeMeterOnActiveFrame: 1
+  icon: {fileID: 0}
+  firstStartupFrame: 20
+  lastActiveFrame: 20
+  totalMoveDuration: 45
+  firstGatlingFrame: 25
+  recoveryFrames: 25
   attacks:
   - attackLevel: 0
     attackType: 1
-    damageType: 1
-    hitbox: {fileID: 5860963072138344223, guid: e56508cf7eef0ce4a99ce18f081a363b, type: 3}
-    damage: 2
+    damageType: 2
+    hitbox: {fileID: 5860963072138344223, guid: b8a56a6122df81147bff3ae24a8e40af, type: 3}
+    damage: 1
     stun: 20
     hitstop: 5
     poiseBreak: 0
-    startupFrame: 40
+    startupFrame: 20
     activeFrames: 1
     gatlingFrames: 5
     groundHitProperty:
-      pushback: {x: 8, y: 5}
+      pushback: {x: 2, y: 0}
       hitState: 0
     airHitProperty:
-      pushback: {x: 8, y: 5}
+      pushback: {x: 0, y: 0}
       hitState: 0
   type: 0
-  screenShake:
-  - type: 0
-    startup: 40
-    amplitude: 2
-    duration: 2
+  screenShake: []
   vfx:
   - type: 0
-    startup: 1
-    prefab: {fileID: 9143454445820708258, guid: 413257cc1651f9f44a0acc09067a1c17, type: 3}
-    deattachFromPlayer: 1
+    startup: 15
+    prefab: {fileID: 3495573824567096830, guid: 3fd8f98a6e1a44f4ab278e40d273923a, type: 3}
+    deattachFromPlayer: 0
     destroyOnRecovery: 0
-    position: {x: 0, y: 0.01, z: 0}
-    rotation: {x: -90, y: 0, z: 0}
-    scale: {x: 0.3, y: 0.3, z: 0.3}
-  - type: 0
-    startup: 40
-    prefab: {fileID: 9143454445820708258, guid: 413257cc1651f9f44a0acc09067a1c17, type: 3}
-    deattachFromPlayer: 1
-    destroyOnRecovery: 0
-    position: {x: 0, y: 0.6, z: 0.7}
+    position: {x: 0, y: 0.6, z: 0.5}
     rotation: {x: 0, y: 0, z: 90}
-    scale: {x: 0.5, y: 0.5, z: 0.5}
+    scale: {x: 0.2, y: 0.2, z: 0.2}
   - type: 0
-    startup: 40
-    prefab: {fileID: 117360, guid: 93dde01820cd8a44bbb998ba21c24e43, type: 3}
+    startup: 20
+    prefab: {fileID: 696211589295866031, guid: 0b2f1ef8d24b93947bb610a7f39f05e8, type: 3}
     deattachFromPlayer: 1
-    destroyOnRecovery: 0
-    position: {x: 0, y: 0, z: 0}
-    rotation: {x: -90, y: 0, z: 0}
-    scale: {x: 0.5, y: 0.5, z: 0.5}
+    destroyOnRecovery: 1
+    position: {x: 0, y: 0.6, z: 0.5}
+    rotation: {x: 0, y: 0, z: 90}
+    scale: {x: 0.15, y: 0.15, z: 0.15}
   sfx: []
   hitFX:
     type: 0
@@ -80,7 +68,7 @@ MonoBehaviour:
     destroyOnRecovery: 0
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0}
-    scale: {x: 0.5, y: 0.5, z: 0.5}
+    scale: {x: 0.7, y: 0.7, z: 0.7}
   blockFX: {fileID: 0}
   hitSFX:
     startup: 1
@@ -93,7 +81,7 @@ MonoBehaviour:
     volume: 1
     pitchRange: 0
   skillProperties:
-  - {fileID: 11400000, guid: b42ab6ef4f5c6254fb7e888db3eb83ad, type: 2}
+  - {fileID: 11400000, guid: 45f4ac3c7c0f5e149ba0d33f11dfa636, type: 2}
   useAttackSpeed: 1
   keepVelocity: 0
   particleID: 0
@@ -124,9 +112,28 @@ MonoBehaviour:
   useAirAction: 0
   landCancel: 0
   recoverOnlyOnLand: 0
-  m: []
-  instantStartupRotation: 0
-  overrideVelocity: 1
+  m:
+  - startFrame: 19
+    duration: 5
+    momentum: {x: -1, y: 0}
+    resetVelocityDuringRecovery: 0
+    xMovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    movementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    freeMovement: 0
+    useCurve: 0
+    teleport: 0
+  instantStartupRotation: 1
+  overrideVelocity: 0
   runMomentum: 0
   inheritForwardVelocity: 0
   stopAtEdges: 1

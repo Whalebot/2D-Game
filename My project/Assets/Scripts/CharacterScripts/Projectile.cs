@@ -20,6 +20,7 @@ public class Projectile : Hitbox
     [Header("Movement")]
     [TabGroup("Settings")] public ProjectileMovement projectileMovement;
     [TabGroup("Settings")] public float velocity;
+    [TabGroup("Settings")] public float maxVelocity = 50f;
     [TabGroup("Settings")] public Vector3 rotationVector;
     [TabGroup("Settings")] public bool onStartVelocity;
     [TabGroup("Settings")] public bool updateVelocty;
@@ -45,8 +46,13 @@ public class Projectile : Hitbox
     [TabGroup("Settings")] public float searchSize;
 
     [TabGroup("Unique")]
+    [TabGroup("Unique")] public Vector3 startOffset;
+    [TabGroup("Unique")] public bool followCaster;
+    [TabGroup("Unique")] public bool keepParent;
+    [TabGroup("Unique")] public float minimumFollowDistance;
     [Header("Explosion")] public GameObject explosion;
     [TabGroup("Unique")] public bool onlyExplosionDamage;
+
     [TabGroup("Unique")] public GameObject explosionVFX;
     [TabGroup("Unique")] public GameObject explosionSFX;
 
@@ -93,6 +99,8 @@ public class Projectile : Hitbox
             //Look for enemy
             FindTarget();
         }
+
+        startOffset = transform.position - status.transform.position;
 
         if (onStartVelocity)
             rb.velocity = transform.forward * velocity;
@@ -179,6 +187,9 @@ public class Projectile : Hitbox
 
         if (target != null)
         {
+            if (keepParent)
+                transform.SetParent(null);
+
             if (projectileMovement == ProjectileMovement.SpawnOnTarget)
                 transform.position = target.position;
 
@@ -324,25 +335,41 @@ public class Projectile : Hitbox
                     //rb.velocity += transform.forward * updateVelocity;
                     rb.velocity += (targetPosition - transform.position).normalized * updateVelocity;
                 }
+                else if (followCaster)
+                {
+                    if (Vector3.Distance(status.transform.position + startOffset, transform.position) > minimumFollowDistance)
+                        rb.velocity += ((status.transform.position + startOffset) - transform.position).normalized * velocity;
+
+                }
                 else if (!waitForTarget)
                     rb.velocity += transform.forward * updateVelocity;
                 break;
             default:
                 break;
         }
+
+        rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxVelocity);
     }
 
     new void OnTriggerEnter(Collider other)
     {
         if (delayDestroy) return;
         bool foundTarget = false;
+        bool ignoreCollision = false;
         colPos = other.gameObject.transform;
         Projectile proj = other.GetComponentInParent<Projectile>();
         Hitbox hitbox = other.GetComponent<Hitbox>();
+        Hazard hazard = other.GetComponentInParent<Hazard>();
 
         if (proj != null || hitbox != null)
         {
             foundTarget = true;
+        }
+
+        if (hazard != null)
+        {
+            ignoreCollision = true;
+
         }
 
         if (proj != null && destroyOnProjectileClash && proj.status != status)
@@ -383,8 +410,9 @@ public class Projectile : Hitbox
         if (!foundTarget)
         {
             // Found Collission
-            if (destroyOnCollission)
+            if (destroyOnCollission && !ignoreCollision)
             {
+                Debug.Log(ignoreCollision);
                 DestroyProjectile();
             }
         }

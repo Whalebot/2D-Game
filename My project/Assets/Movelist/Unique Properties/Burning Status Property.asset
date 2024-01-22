@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 076b19b4b40dae243a30a531c828d273, type: 3}
-  m_Name: Summon Right Slime
+  m_Script: {fileID: 11500000, guid: ce2eef0d2be95ce4cbe1285e01cd4351, type: 3}
+  m_Name: Burning Status Property
   m_EditorClassIdentifier: 
   propertyType: 0
   frame: 0
-  summon: {fileID: 0}
-  offset: {x: 2, y: 0, z: 0}
+  affectedMoves: {fileID: 0}
+  appliedEffects:
+  - {fileID: 11400000, guid: 0079a705b55ba6442b788efc29957914, type: 2}

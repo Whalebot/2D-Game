@@ -24,9 +24,6 @@ MonoBehaviour:
   recoveryFrames: 40
   attacks: []
   type: 0
-  uniqueProperties:
-  - {fileID: 11400000, guid: 551ceb1462568a24b9cc8ee3f62d1abb, type: 2}
-  - {fileID: 11400000, guid: ff6bee0e793003f4cb5ee709c32c8d02, type: 2}
   screenShake: []
   vfx: []
   sfx: []
@@ -40,19 +37,30 @@ MonoBehaviour:
     rotation: {x: 0, y: 0, z: 0}
     scale: {x: 1, y: 1, z: 1}
   blockFX: {fileID: 0}
-  counterhitFX: {fileID: 0}
-  hitSFX: {fileID: 0}
-  blockSFX: {fileID: 0}
-  counterhitSFX: {fileID: 0}
+  hitSFX:
+    startup: 1
+    audioClips: []
+    volume: 1
+    pitchRange: 0
+  blockSFX:
+    startup: 1
+    audioClips: []
+    volume: 1
+    pitchRange: 0
+  skillProperties:
+  - {fileID: 11400000, guid: 551ceb1462568a24b9cc8ee3f62d1abb, type: 2}
+  - {fileID: 11400000, guid: ff6bee0e793003f4cb5ee709c32c8d02, type: 2}
   useAttackSpeed: 1
   keepVelocity: 0
   particleID: 0
   holdAttack: 0
   releaseAttackMove: {fileID: 0}
   autoAim: 0
+  keepComboCount: 0
   armor: 0
   resetGatling: 0
   hitsGroundOnly: 0
+  isDashing: 0
   noClip: 0
   noClipStart: 1
   noClipDuration: 0

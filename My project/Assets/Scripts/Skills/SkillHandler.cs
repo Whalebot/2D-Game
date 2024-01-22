@@ -22,6 +22,8 @@ public class SkillHandler : MonoBehaviour
 
         SaveManager.Instance.startLoadEvent += LoadData;
         GameManager.Instance.advanceGameState += ExecuteFrame;
+        attackScript.frameEvent += OnStartupFrame;
+        attackScript.deactivateHitboxEvent += OnRecovery;
         DuplicateMoveset();
     }
     void Start()
@@ -35,9 +37,42 @@ public class SkillHandler : MonoBehaviour
     {
         SaveManager.Instance.startLoadEvent -= LoadData;
         GameManager.Instance.advanceGameState -= ExecuteFrame;
+        attackScript.frameEvent -= OnStartupFrame;
+        attackScript.deactivateHitboxEvent -= OnRecovery;
+    }
+    void OnStartupFrame(int frame)
+    {
+        foreach (var item in learnedSkills)
+        {
+            foreach (var prop in item.skillProperties)
+            {
+                if (prop.frame == frame)
+                    prop.OnStartupFrame(attackScript, frame, item);
+            }
+        }
+    }
+    void OnRecovery(Move move)
+    {
+        foreach (var item in learnedSkills)
+        {
+            foreach (var prop in item.skillProperties)
+            {
+        
+                    prop.OnRecoveryBehaviour();
+            }
+        }
     }
     void ExecuteFrame()
     {
+        //Every frame
+        foreach (var item in learnedSkills)
+        {
+            foreach (var prop in item.skillProperties)
+            {
+                prop.OnFrameBehaviour(this);
+            }
+        }
+
         if (attackScript.attacking)
         {
             foreach (var item in learnedSkills)

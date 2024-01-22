@@ -50,8 +50,9 @@ public class OnHitSkillProperty : UniqueSkillProperty
         if (hitInfo.enemyStatus == null)
             return;
 
-        if (!affectedMoves.moves.Contains(hitInfo.move))
-            return;
+        if (affectedMoves != null)
+            if (!affectedMoves.moves.Contains(hitInfo.move))
+                return;
 
         ChainLightning lightning = Instantiate(chainLightning, hitInfo.enemyStatus.transform.position, Quaternion.identity);
 
@@ -84,8 +85,11 @@ public class OnHitSkillProperty : UniqueSkillProperty
                     break;
             }
         }
+        if (skill == null)
+            lightning.damage = (int)(baseDamage * damageModifier * RarityModifier(Rank.D));
+        else
+            lightning.damage = (int)(baseDamage * damageModifier * RarityModifier(skill.skillRank));
 
-        lightning.damage = (int)(baseDamage * damageModifier * RarityModifier(skill.skillRank));
         lightning.StartChainLightning(hitInfo.enemyStatus);
     }
 }

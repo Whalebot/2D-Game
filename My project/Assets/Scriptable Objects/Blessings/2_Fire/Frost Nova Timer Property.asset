@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 076b19b4b40dae243a30a531c828d273, type: 3}
-  m_Name: Summon Right Slime
+  m_Script: {fileID: 11500000, guid: c7ab98729f5737145aa2c69dcdd02e9c, type: 3}
+  m_Name: Frost Nova Timer Property
   m_EditorClassIdentifier: 
-  propertyType: 0
+  propertyType: 4
   frame: 0
-  summon: {fileID: 0}
-  offset: {x: 2, y: 0, z: 0}
+  delay: 300
+  counter: 261
+  move: {fileID: 11400000, guid: 796398cbec012b24799773d449e9080f, type: 2}
+  offset: {x: 0, y: 0, z: 0}

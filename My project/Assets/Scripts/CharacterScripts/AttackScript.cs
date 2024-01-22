@@ -14,10 +14,12 @@ public class AttackScript : MonoBehaviour
     Movement movement;
 
     public event Action emptyAttackEvent;
+    public event Action<int> frameEvent;
     public event Action startupEvent;
     public event Action blendAttackEvent;
     public event Action topAnimationEvent;
     public event Action activeEvent;
+    public event Action lastActiveFrameEvent;
     public event Action recoveryEvent;
     public event Action parryEvent;
     public event Action blockEvent;
@@ -193,15 +195,17 @@ public class AttackScript : MonoBehaviour
     }
     void ExecuteUniqueProperties(int frame)
     {
+        frameEvent?.Invoke(frame);
+
         //if (lastFrame == frame) { Debug.Log($"{lastFrame} {frame}"); }
-        foreach (var item in activeMove.uniqueProperties)
+        foreach (var item in activeMove.skillProperties)
         {
             if (frame == item.frame)
             {
                 item.OnStartupFrame(this, frame);
             }
         }
-        foreach (var item in activeMove.uniqueProperties)
+        foreach (var item in activeMove.skillProperties)
         {
             if (frame <= activeMove.lastActiveFrame && (int)frame >= activeMove.firstStartupFrame)
             {
