@@ -41,32 +41,31 @@ public class HitboxMoveProperty : UniqueSkillProperty
 
     void SpawnProjectile(Vector3 position, Quaternion rotation, AttackScript attack, Status status, Transform container)
     {
-       
-
         for (int i = 0; i < move.attacks.Length; i++)
         {
-
             if (move.attacks[i].hitbox != null)
             {
-
-            
-                hitboxes.Add(Instantiate(move.attacks[i].hitbox, position, rotation, container));
-                hitboxes[i].transform.localPosition = move.attacks[i].hitbox.transform.localPosition;
-                hitboxes[i].transform.localRotation = move.attacks[i].hitbox.transform.rotation;
-
-                Hitbox hitbox = hitboxes[i].GetComponentInParent<Hitbox>();
-
-                if (move.attacks[i].attackType == AttackType.Projectile)
+                if (move.attacks[i].attackType == AttackType.Normal)
                 {
-                    Projectile projectile = hitboxes[i].GetComponentInParent<Projectile>();
+                    hitboxes.Add(Instantiate(move.attacks[i].hitbox, position, rotation, container));
+                    hitboxes[i].transform.localPosition = move.attacks[i].hitbox.transform.localPosition;
+                    hitboxes[i].transform.localRotation = move.attacks[i].hitbox.transform.rotation;
+
+                    Hitbox hitbox = hitboxes[i].GetComponentInParent<Hitbox>();
+                    if (hitbox != null) hitbox.SetupHitbox(i, attack, status, move);
+                }
+                else if (move.attacks[i].attackType == AttackType.Projectile)
+                {
+                    GameObject proj = Instantiate(move.attacks[i].hitbox, position, rotation, container);
+                    proj.transform.localPosition = move.attacks[i].hitbox.transform.localPosition;
+                    proj.transform.localRotation = move.attacks[i].hitbox.transform.rotation;
+                    Projectile projectile = proj.GetComponentInParent<Projectile>();
 
                     if (!projectile.keepParent)
-                        hitboxes[i].transform.SetParent(null);
+                        proj.transform.SetParent(null);
 
                     if (projectile != null) projectile.SetupHitbox(i, attack, status, move);
                 }
-                else
-                if (hitbox != null) hitbox.SetupHitbox(i, attack, status, move);
             }
         }
 

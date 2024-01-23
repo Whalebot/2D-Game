@@ -29,8 +29,4 @@ public class MapManager : MonoBehaviour
         else firstAreaMap.gameObject.SetActive(true);
     }
 
-    private void OnEnable()
-    {
-
-    }
 }

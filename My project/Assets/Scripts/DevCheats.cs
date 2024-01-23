@@ -1,11 +1,12 @@
 ﻿using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class DevCheats : MonoBehaviour
 {
     public Rank rank;
-    public SkillSO skill;
+    public List<SkillSO> skills;
     public Stats stats;
     private void Start()
     {
@@ -17,8 +18,12 @@ public class DevCheats : MonoBehaviour
     }
     [Button]
     public void GiveSkillSkill() {
-        skill.skillRank = rank;
-        SkillManager.Instance.GetSkill(skill); 
+        foreach (var item in skills)
+        {
+            item.skillRank = rank;
+            SkillManager.Instance.GetSkill(item);
+        }
+  
     }
 
     void Update()

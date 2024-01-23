@@ -11,9 +11,9 @@ public class TrailSkillProperty : UniqueSkillProperty
     public Vector3 boxSize;
     public LayerMask interactMask;
     int trailCounter;
-    public override void AttackingBehaviour(SkillHandler handler)
+    public override void AttackingBehaviour(SkillHandler handler, Rank rank)
     {
-        base.AttackingBehaviour(handler);
+        base.AttackingBehaviour(handler, rank);
 
         if (!affectedMoves.moves.Contains(handler.attackScript.activeMove))
             return;
@@ -30,7 +30,13 @@ public class TrailSkillProperty : UniqueSkillProperty
 
             }
             if (foundHazard == null)
-                Instantiate(trailPrefab, handler.transform.position, handler.transform.rotation);
+            {
+                Status status = handler.GetComponent<Status>();
+                GameObject go = Instantiate(trailPrefab, handler.transform.position, handler.transform.rotation);
+                Hazard haz = go.GetComponent<Hazard>();
+                haz.damageModifier = status.currentStats.faithModifier * status.currentStats.fireModifier;
+                haz.rank = rank;
+            }
             else
             {
                 foundHazard.lifeCounter = 0;

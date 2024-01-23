@@ -5,7 +5,9 @@ using UnityEngine;
 public class Hazard : MonoBehaviour
 {
     public float baseDamage = 1;
+    public Rank rank = Rank.D;
     public int totalDamage;
+    public float damageModifier = 1;
     public bool instantKillEnemies = false;
     public int resetTimer = 30;
     public int life = 0;
@@ -101,7 +103,7 @@ public class Hazard : MonoBehaviour
                 if (!CheckInvul(enemyStatus)) return;
                 enemyList.Add(enemyStatus);
                 if (effect != null)
-                    enemyStatus.ApplyStatusEffect(effect);
+                    enemyStatus.ApplyStatusEffect(effect, null, rank);
                 ExecuteHit(attack.groundHitProperty, enemyStatus, attack);
                 return;
             }
@@ -121,7 +123,7 @@ public class Hazard : MonoBehaviour
         aVector = Vector3.right * hit.pushback.x + Vector3.up * hit.pushback.y;
 
 
-        totalDamage = (int)(baseDamage * (atk.damage));
+        totalDamage = (int)(baseDamage * (atk.damage) * damageModifier);
 
         int damageDealt = Mathf.RoundToInt((totalDamage * (1 - other.currentStats.defense)) - other.currentStats.resistance);
 

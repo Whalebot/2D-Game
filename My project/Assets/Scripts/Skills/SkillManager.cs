@@ -284,7 +284,7 @@ public class SkillManager : MonoBehaviour
         List<SkillSO> availableSkills = new List<SkillSO>();
         foreach (var item in skillList)
         {
-            if (!foundSkills.Contains(item) && !selectedSkills.Contains(item) && skillHandler.CanGetSkill(item))
+            if (!learnedSkills.Contains(item) && !foundSkills.Contains(item) && !selectedSkills.Contains(item) && skillHandler.CanGetSkill(item))
                 availableSkills.Add(item);
         }
 

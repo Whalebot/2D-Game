@@ -644,6 +644,9 @@ public class Status : MonoBehaviour
                     defInfo1[i].SetValue(obj, (float)var1 + ((float)var2) * modifier);
             }
         }
+
+        if (def1.currentHealth > def1.maxHealth)
+            def1.currentHealth = def1.maxHealth;
     }
     public void RemoveStats(Stats oldStats, Stats newStats)
     {

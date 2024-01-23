@@ -52,7 +52,7 @@ public class UniqueSkillProperty : ScriptableObject
         if (propertyType != UniquePropertyType.ActiveFrames) return;
     }
 
-    public virtual void AttackingBehaviour(SkillHandler handler)
+    public virtual void AttackingBehaviour(SkillHandler handler, Rank rank)
     {
     }
     public virtual void ActiveFrameBehaviour(SkillHandler handler)

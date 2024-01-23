@@ -58,11 +58,10 @@ public class StatusEffect : ScriptableObject
                 default:
                     break;
             }
-
-            float rarityModifier = (1 + (int)rank * 0.25f);
-
-            damageModifier = damageModifier * rarityModifier;
         }
+        float rarityModifier = (1 + (int)rank * 0.25f);
+
+        damageModifier = damageModifier * rarityModifier;
         SpawnVFX();
     }
     void SpawnVFX()

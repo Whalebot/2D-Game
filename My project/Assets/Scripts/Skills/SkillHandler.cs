@@ -79,7 +79,7 @@ public class SkillHandler : MonoBehaviour
             {
                 foreach (var prop in item.skillProperties)
                 {
-                    prop.AttackingBehaviour(this);
+                    prop.AttackingBehaviour(this, item.skillRank);
                 }
             }
         }

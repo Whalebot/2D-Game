@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41f2923ec284c6840a8cd468af82cb4d, type: 3}
-  m_Name: Wind Dash
+  m_Name: Frost Ring
   m_EditorClassIdentifier: 
-  skillRank: 2
+  skillRank: 4
   type: 1
-  elemental: 2
-  title: Wind Dash
-  sprite: {fileID: 21300000, guid: a51f67d16d73832409dcc367bc618728, type: 3}
+  elemental: 3
+  title: Frost Ring
+  sprite: {fileID: 21300000, guid: 89d6fcf1b6e03be45b794182ea1e0de7, type: 3}
   rngWeight: 1
-  damageValue: -1
+  damageValue: 2
   prerequisiteSkills: []
   prerequisiteMoves: []
   bannedMoves: []
   newMoves: []
   skillProperties:
-  - {fileID: 11400000, guid: ab77175fa8daa684c892e901ed51d40c, type: 2}
-  description: TBD
+  - {fileID: 11400000, guid: 4e69ce564323f8a4db7eaa335cd9f9b7, type: 2}
+  description: You spawn a frost ring every 5 seconds
   stats:
     currentHealth: 0
     maxHealth: 0

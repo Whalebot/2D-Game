@@ -10,12 +10,13 @@ public class OrganizeChildren : MonoBehaviour
     private void Start()
     {
         SkillManager.Instance.pickedSkillEvent += SetupSkillPanel;
+        SetupSkillPanel(null);
     }
 
     private void OnEnable()
     {
      
-        SetupSkillPanel(null);
+
     }
 
     private void OnDisable()

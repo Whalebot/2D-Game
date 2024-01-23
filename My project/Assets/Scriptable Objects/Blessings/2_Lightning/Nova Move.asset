@@ -1,0 +1,191 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
+  m_Name: Nova Move
+  m_EditorClassIdentifier: 
+  animationID: 53
+  meterCost: 10
+  meterGain: 0
+  consumeMeterOnActiveFrame: 1
+  icon: {fileID: 0}
+  firstStartupFrame: 20
+  lastActiveFrame: 20
+  totalMoveDuration: 45
+  firstGatlingFrame: 25
+  recoveryFrames: 25
+  attacks:
+  - attackLevel: 0
+    attackType: 1
+    damageType: 2
+    hitbox: {fileID: 5860963072138344223, guid: 7982c3377a43d7746810e27a772154ed, type: 3}
+    damage: 1
+    stun: 20
+    hitstop: 5
+    poiseBreak: 0
+    startupFrame: 20
+    activeFrames: 1
+    gatlingFrames: 5
+    groundHitProperty:
+      pushback: {x: 2, y: 0}
+      hitState: 0
+    airHitProperty:
+      pushback: {x: 0, y: 0}
+      hitState: 0
+  - attackLevel: 0
+    attackType: 1
+    damageType: 2
+    hitbox: {fileID: 5860963072138344223, guid: ea766bce281ea204097348ba94b29b2b, type: 3}
+    damage: 1
+    stun: 20
+    hitstop: 5
+    poiseBreak: 0
+    startupFrame: 20
+    activeFrames: 1
+    gatlingFrames: 5
+    groundHitProperty:
+      pushback: {x: 2, y: 0}
+      hitState: 0
+    airHitProperty:
+      pushback: {x: 0, y: 0}
+      hitState: 0
+  - attackLevel: 0
+    attackType: 1
+    damageType: 2
+    hitbox: {fileID: 5860963072138344223, guid: ea766bce281ea204097348ba94b29b2b, type: 3}
+    damage: 1
+    stun: 20
+    hitstop: 5
+    poiseBreak: 0
+    startupFrame: 20
+    activeFrames: 1
+    gatlingFrames: 5
+    groundHitProperty:
+      pushback: {x: 2, y: 0}
+      hitState: 0
+    airHitProperty:
+      pushback: {x: 0, y: 0}
+      hitState: 0
+  - attackLevel: 0
+    attackType: 1
+    damageType: 2
+    hitbox: {fileID: 5860963072138344223, guid: 8415eeef89b247d44a776465290fa700, type: 3}
+    damage: 1
+    stun: 20
+    hitstop: 5
+    poiseBreak: 0
+    startupFrame: 20
+    activeFrames: 1
+    gatlingFrames: 5
+    groundHitProperty:
+      pushback: {x: 2, y: 0}
+      hitState: 0
+    airHitProperty:
+      pushback: {x: 0, y: 0}
+      hitState: 0
+  type: 0
+  screenShake: []
+  vfx:
+  - type: 0
+    startup: 15
+    prefab: {fileID: 3495573824567096830, guid: 3fd8f98a6e1a44f4ab278e40d273923a, type: 3}
+    deattachFromPlayer: 0
+    destroyOnRecovery: 0
+    position: {x: 0, y: 0.6, z: 0.5}
+    rotation: {x: 0, y: 0, z: 90}
+    scale: {x: 0.2, y: 0.2, z: 0.2}
+  - type: 0
+    startup: 20
+    prefab: {fileID: 696211589295866031, guid: 0b2f1ef8d24b93947bb610a7f39f05e8, type: 3}
+    deattachFromPlayer: 1
+    destroyOnRecovery: 1
+    position: {x: 0, y: 0.6, z: 0.5}
+    rotation: {x: 0, y: 0, z: 90}
+    scale: {x: 0.15, y: 0.15, z: 0.15}
+  sfx: []
+  hitFX:
+    type: 0
+    startup: 1
+    prefab: {fileID: 1416824176164296, guid: dc1397204bb5ee84895af2b49dac2d49, type: 3}
+    deattachFromPlayer: 1
+    destroyOnRecovery: 0
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+    scale: {x: 0.7, y: 0.7, z: 0.7}
+  blockFX: {fileID: 0}
+  hitSFX:
+    startup: 1
+    audioClips: []
+    volume: 1
+    pitchRange: 0
+  blockSFX:
+    startup: 1
+    audioClips: []
+    volume: 1
+    pitchRange: 0
+  skillProperties:
+  - {fileID: 11400000, guid: 45f4ac3c7c0f5e149ba0d33f11dfa636, type: 2}
+  useAttackSpeed: 1
+  keepVelocity: 0
+  particleID: 0
+  holdAttack: 0
+  releaseAttackMove: {fileID: 0}
+  autoAim: 0
+  keepComboCount: 0
+  armor: 0
+  resetGatling: 0
+  hitsGroundOnly: 0
+  isDashing: 0
+  noClip: 0
+  noClipStart: 1
+  noClipDuration: 0
+  invincible: 0
+  invincibleStart: 1
+  invincibleDuration: 0
+  projectileInvul: 0
+  projectileInvulStart: 1
+  projectileInvulDuration: 0
+  airInvul: 0
+  airInvulStart: 1
+  airInvulDuration: 0
+  targetComboMoves: []
+  fullCancel: 0
+  gatlingCancel: 1
+  uncancelable: 0
+  useAirAction: 0
+  landCancel: 0
+  recoverOnlyOnLand: 0
+  m:
+  - startFrame: 19
+    duration: 5
+    momentum: {x: -1, y: 0}
+    resetVelocityDuringRecovery: 0
+    xMovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    movementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    freeMovement: 0
+    useCurve: 0
+    teleport: 0
+  instantStartupRotation: 1
+  overrideVelocity: 0
+  runMomentum: 0
+  inheritForwardVelocity: 0
+  stopAtEdges: 1
+  homing: 0

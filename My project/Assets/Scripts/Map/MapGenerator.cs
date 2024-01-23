@@ -19,6 +19,7 @@ public class MapGenerator : MonoBehaviour
 
     [TabGroup("Reward Generation")] public int potentialChance = 25;
     [TabGroup("Reward Generation")] public int goldChance = 25;
+    [TabGroup("Reward Generation")] public int itemChance = 25;
 
     RectTransform rectTransform;
     [TabGroup("Settings & Components")] public Vector3 scrollPosition;
@@ -263,9 +264,15 @@ public class MapGenerator : MonoBehaviour
                 continue;
             }
 
+            if (RNG <= itemChance)
+            {
+                item.SetupReward(RewardType.Item);
+                continue;
+            }
 
             if (RNG <= potentialChance)
             {
+                RNG = UnityEngine.Random.Range(0, 100);
                 item.SetupReward(RewardType.Skill);
                 continue;
             }
