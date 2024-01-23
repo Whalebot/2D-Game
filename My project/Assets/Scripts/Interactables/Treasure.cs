@@ -13,6 +13,7 @@ public class Treasure : Interactable
     public TextMeshProUGUI treasureText;
     public GameObject treasure;
     public GameObject woodChest, silverChest, goldChest;
+    public SFX treasureSFX;
     Status status;
 
     public override void Start()
@@ -140,6 +141,7 @@ public class Treasure : Interactable
     }
     public void GivePowerup()
     {
+        AudioManager.Instance.PlaySFX(treasureSFX, transform.position);
         switch (reward)
         {
             case RewardType.Blessing:

@@ -513,6 +513,12 @@ MonoBehaviour:
   woodChest: {fileID: 6000675393747569210}
   silverChest: {fileID: 7037575803052019965}
   goldChest: {fileID: 1917902994822026441}
+  treasureSFX:
+    startup: 1
+    audioClips:
+    - {fileID: 8300000, guid: de2177a17132d5e4d9d017301fd118e3, type: 3}
+    volume: 1
+    pitchRange: 0
 --- !u!54 &4178783465516117884
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -601,6 +607,7 @@ MonoBehaviour:
     critChance: 0
     critMultiplier: 0
     lifesteal: 0
+    spellSpeed: 0
   hitstunValue: 0
   blockstunValue: 0
   modifiedStats:
@@ -644,6 +651,7 @@ MonoBehaviour:
     critChance: 0
     critMultiplier: 0
     lifesteal: 0
+    spellSpeed: 0
   baseStats:
     currentHealth: 20
     maxHealth: 20
@@ -685,6 +693,7 @@ MonoBehaviour:
     critChance: 0
     critMultiplier: 0
     lifesteal: 0
+    spellSpeed: 0
   isFlying: 0
   hasArmor: 0
   animationArmor: 0

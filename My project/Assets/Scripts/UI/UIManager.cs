@@ -29,6 +29,7 @@ public class UIManager : MonoBehaviour
     [TabGroup("Components")] public TextMeshProUGUI goldText;
     [TabGroup("Components")] public TextMeshProUGUI floorText;
     [TabGroup("Components")] public TextMeshProUGUI timeText;
+    [TabGroup("Components")] public Animator goldUIAnimator;
     [TabGroup("Tooltip")] public RectTransform tooltip;
     [TabGroup("Tooltip")] public Vector3 tooltipOffset;
     [TabGroup("Tooltip")] public bool tooltipEnabled;
@@ -57,8 +58,14 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.resumeEvent += ClosePauseMenu;
         GameManager.Instance.openShopEvent += OpenShopPanel;
         GameManager.Instance.playerDeath += OpenResultScreen;
+        GameManager.Instance.goldChangeEvent += GoldUIUpdate;
         rerollButton.onClick.AddListener(() => RerollButton());
 
+    }
+
+    public void GoldUIUpdate()
+    {
+        goldUIAnimator.SetTrigger("GainMoney");
     }
 
     public void SetActiveEventSystem(GameObject go)

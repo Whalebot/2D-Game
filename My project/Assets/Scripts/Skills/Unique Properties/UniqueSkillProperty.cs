@@ -9,7 +9,7 @@ public class UniqueSkillProperty : ScriptableObject
     public UniquePropertyType propertyType;
     [HideIf("@propertyType != UniquePropertyType.StartupFrame")] public int frame;
     [HideIf("@propertyType != UniquePropertyType.Timer")] public int delay;
-    [HideIf("@propertyType != UniquePropertyType.Timer")] public int counter;
+    [HideIf("@propertyType != UniquePropertyType.Timer")] int counter;
     public virtual int GetDamage(Status status = null, Rank rank = Rank.D)
     {
         return -1;
@@ -26,7 +26,7 @@ public class UniqueSkillProperty : ScriptableObject
         {
             counter = delay;
             OnTimer(handler);
-            Debug.Log(counter + " " + delay);
+           // Debug.Log(counter + " " + delay);
         }
         
     }

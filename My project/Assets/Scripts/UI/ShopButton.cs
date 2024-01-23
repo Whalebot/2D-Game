@@ -18,6 +18,7 @@ public class ShopButton : MonoBehaviour
     public Image buttonBackground;
     public Image iconBackground;
     public Image icon;
+    public SFX buySFX;
     Button button;
     bool tooltip = false;
 
@@ -127,6 +128,7 @@ public class ShopButton : MonoBehaviour
         if (GameManager.Instance.Gold >= price)
         {
             GameManager.Instance.Gold -= price;
+            AudioManager.Instance.PlaySFX(buySFX);
             skillManager.GetSkill(skillSO);
             gameObject.SetActive(false);
         }

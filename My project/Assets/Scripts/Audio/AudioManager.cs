@@ -58,7 +58,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlaySFX(SFX temp, Vector3 position)
+    public void PlaySFX(SFX temp, Vector3 position = default(Vector3))
     {
         AudioSource sfx = Instantiate(SFXPrefab, position, Quaternion.identity);
 

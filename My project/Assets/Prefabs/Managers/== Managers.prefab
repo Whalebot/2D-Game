@@ -143,6 +143,7 @@ MonoBehaviour:
         critChance: 0
         critMultiplier: 1.5
         lifesteal: 0
+        spellSpeed: 0
       currentRoomID: 0
       currentArea: 1
       enemiesKilled: 0
@@ -241,6 +242,12 @@ MonoBehaviour:
   slowMotionValue: 0.1
   slowMotionDuration: 0.1
   slowMotionSmoothing: 0.1
+  goldAudioClip:
+    startup: 1
+    audioClips:
+    - {fileID: 8300000, guid: 214f019bb7af5b442bc31c83d490bf5a, type: 3}
+    volume: 1
+    pitchRange: 0
 --- !u!114 &399436146491855174
 MonoBehaviour:
   m_ObjectHideFlags: 0

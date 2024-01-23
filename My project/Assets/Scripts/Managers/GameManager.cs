@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour
     [TabGroup("Feedback")] public float slowMotionValue;
     [TabGroup("Feedback")] public float slowMotionDuration;
     [TabGroup("Feedback")] public float slowMotionSmoothing;
+    [TabGroup("Feedback")] public SFX goldAudioClip;
 
     bool reloading;
     float startTimeStep;
@@ -73,6 +74,7 @@ public class GameManager : MonoBehaviour
         set
         {
             playerStatus.currentStats.gold = value;
+            AudioManager.Instance.PlaySFX(goldAudioClip, player.position);
             goldChangeEvent?.Invoke();
         }
     }

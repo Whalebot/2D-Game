@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Sirenix.OdinInspector;
@@ -24,6 +25,8 @@ public class CharacterAnimator : MonoBehaviour
     float tempDirection = 0F;
     [TabGroup("Settings")] public float fallThreshold;
 
+    public List<Transform> renderers;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +45,7 @@ public class CharacterAnimator : MonoBehaviour
             movement.jumpEvent += Jump;
             movement.preLandEvent += PreLand;
             movement.doubleJumpEvent += DoubleJump;
+
         }
 
 
@@ -83,9 +87,37 @@ public class CharacterAnimator : MonoBehaviour
         normalizedTime = anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
         frame = Mathf.RoundToInt(anim.GetCurrentAnimatorStateInfo(0).normalizedTime * anim.GetCurrentAnimatorStateInfo(0).length / (1f / 60f) / anim.GetCurrentAnimatorStateInfo(0).speed);
 
+        if (movement.isMoving)
+        {
+            if (movement.direction != Vector3.zero)
+            {
+                if (GameManager.Instance.flipGraphics)
+                {
+                    if (GameManager.Instance.flipGraphics)
+                    {
+                        foreach (var item in renderers)
+                        {
+                            item.localScale = new Vector3(Mathf.Sign(movement.direction.x) * Mathf.Abs(item.localScale.x), item.localScale.y, item.localScale.z);
+                        }
+                    }
+                }
+
+            }
+        }
+        else
+        {
+            if (GameManager.Instance.flipGraphics)
+            {
+                foreach (var item in renderers)
+                {
+                    item.localScale = new Vector3(Mathf.Sign(transform.rotation.y) * Mathf.Abs(item.localScale.x), item.localScale.y, item.localScale.z);
+                }
+            }
+        }
+
         if (blend)
         {
-            if (anim.GetNextAnimatorStateInfo(0).speed > 0 )
+            if (anim.GetNextAnimatorStateInfo(0).speed > 0)
             {
                 //Debug.Log($"{attack.attackFrames} {attack.attackFrames/60} {anim.GetNextAnimatorStateInfo(0).length} {((attack.attackFrames / 60))/ anim.GetNextAnimatorStateInfo(0).length}");
                 anim.Play(anim.GetNextAnimatorStateInfo(0).fullPathHash, 0,

@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 76eab27b0612b544a832f08c25231b9b
 ModelImporter:
-  serializedVersion: 21202
+  serializedVersion: 22200
   internalIDToNameTable:
   - first:
       1: 100000
@@ -563,7 +563,7 @@ ModelImporter:
     second: upperarm_twist_01_r
   - first:
       74: 7400000
-    second: Take 001
+    second: GreatSword_8Way_Run_F
   - first:
       95: 9500000
     second: //RootNode
@@ -617,7 +617,36 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: GreatSword_8Way_Run_F
+      takeName: Take 001
+      internalID: 7400000
+      firstFrame: 4930
+      lastFrame: 4980
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -626,6 +655,7 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -653,6 +683,7 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -1146,8 +1177,7 @@ ModelImporter:
     - name: ik_hand_r
       parentName: ik_hand_gun
       position: {x: -0, y: 0, z: -0.000000019073486}
-      rotation: {x: 0.0000000149011585, y: -0.000000022351745, z: 0.00000002980233,
-        w: 1}
+      rotation: {x: 0.0000000149011585, y: -0.000000022351745, z: 0.00000002980233, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: pelvis
       parentName: root
@@ -1317,8 +1347,7 @@ ModelImporter:
     - name: GreatSword_Root
       parentName: R_Hand_Weapon
       position: {x: -0.00000022888183, y: -0.000000038146972, z: -0.000000114440915}
-      rotation: {x: -0.000000074505834, y: -0.00000011920935, z: 0.00000020861633,
-        w: 1}
+      rotation: {x: -0.000000074505834, y: -0.00000011920935, z: 0.00000020861633, w: 1}
       scale: {x: 1, y: 0.999999, z: 1}
     - name: R_Slash_FX_Bone
       parentName: GreatSword_Root
@@ -1423,8 +1452,7 @@ ModelImporter:
     - name: lowerarm_twist_01_l
       parentName: lowerarm_l
       position: {x: -0.14000027, y: 0.000000019073486, z: 0.00000022888183}
-      rotation: {x: 0.000000029802322, y: 0.000000029802315, z: 0.000000022351736,
-        w: 1}
+      rotation: {x: 0.000000029802322, y: 0.000000029802315, z: 0.000000022351736, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: hand_l
       parentName: lowerarm_l
@@ -1583,13 +1611,14 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: c5126f94ac3e9934ebe714cfb53f07be,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: c5126f94ac3e9934ebe714cfb53f07be, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
   avatarSetup: 2
   addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
