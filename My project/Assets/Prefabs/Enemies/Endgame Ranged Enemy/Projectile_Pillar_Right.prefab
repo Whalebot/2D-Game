@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -6229484424086246374}
   - component: {fileID: 3491742535472836370}
   m_Layer: 6
-  m_Name: Projectile_Pillar
+  m_Name: Projectile_Pillar_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,11 +116,13 @@ MonoBehaviour:
   lifetime: 65
   projectileMovement: 0
   velocity: 10
+  maxVelocity: 50
   rotationVector: {x: 0, y: 0, z: 0}
   onStartVelocity: 1
   updateVelocty: 0
   updateVelocity: 0.2
   rotateSpeed: 200
+  waitForTarget: 0
   willDelayReaim: 0
   projectileDelay: 35
   delayVelocity: 4
@@ -131,6 +133,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   searchSize: 10
+  startOffset: {x: 0, y: 0, z: 0}
+  followCaster: 0
+  keepParent: 0
+  minimumFollowDistance: 0
   explosion: {fileID: 0}
   onlyExplosionDamage: 0
   explosionVFX: {fileID: 199898, guid: 7bbe36e923d120540a9d42d5002a84f5, type: 3}
@@ -195,8 +201,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 10, z: 1}
-  m_Center: {x: 0, y: 5, z: 0}
+  m_Size: {x: 1, y: 21.339418, z: 1}
+  m_Center: {x: 0, y: -0.6697092, z: 0}
 --- !u!1001 &6451013003286763444
 PrefabInstance:
   m_ObjectHideFlags: 0

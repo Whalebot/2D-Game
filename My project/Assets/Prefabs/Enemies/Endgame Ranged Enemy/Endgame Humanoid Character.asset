@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd0f521e490d135408b5fbd75180cbbf, type: 3}
-  m_Name: Goblin Chief
+  m_Name: Endgame Humanoid Character
   m_EditorClassIdentifier: 
-  characterName: Slime
+  characterName: Endgame Humanoid
   subTitle: 
   description: 
   image: {fileID: 0}
@@ -20,11 +20,10 @@ MonoBehaviour:
   controller: {fileID: 0}
   moveset: {fileID: 0}
   actions:
-  - {fileID: 11400000, guid: d4dea00e8c91c9240983c28ff41cc62d, type: 2}
-  - {fileID: 11400000, guid: 48a1e06c97a0bda4e86af8109aa1872d, type: 2}
-  - {fileID: 11400000, guid: 82b3db4eec88fa446831c4d95b91fa04, type: 2}
-  - {fileID: 11400000, guid: 994f6b00c6721034d871e2d7001344d9, type: 2}
+  - {fileID: 11400000, guid: 1be3e23b1120e1d45bae936f9a34d7a6, type: 2}
+  - {fileID: 11400000, guid: 9b5a5d799447ce4489e3a3500b8dc9d8, type: 2}
   - {fileID: 11400000, guid: 81d7f9d233c450449802762a090012c8, type: 2}
+  - {fileID: 11400000, guid: 1579857f270d23b4d83f8c57cc5b99c5, type: 2}
   stats:
     currentHealth: 150
     maxHealth: 150
@@ -36,7 +35,7 @@ MonoBehaviour:
     agility: 0
     faith: 0
     luck: 0
-    gold: 50
+    gold: 0
     attack: 5
     magic: 0
     faithModifier: 0
@@ -52,9 +51,9 @@ MonoBehaviour:
     poisonModifier: 0
     movementSpeedModifier: 1
     meterGainModifier: 1
-    poiseRegen: 0.1
+    poiseRegen: 0.01
     poise: 50
-    defense: 0.15
+    defense: 0
     resistance: 0
     guardBreakModifier: 1
     sizeModifier: 1

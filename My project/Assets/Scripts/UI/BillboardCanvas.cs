@@ -20,7 +20,10 @@ public class BillboardCanvas : MonoBehaviour
     void FixedUpdate()
     {
         if (flip)
-            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * -Mathf.Sign(status.transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            transform.rotation = Quaternion.identity;
+           
+        //transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * -Mathf.Sign(status.transform.localScale.x), transform.localScale.y, transform.localScale.z);
+
         //transform.rotation = Quaternion.identity;
         //if (m_Camera == null)
         //{

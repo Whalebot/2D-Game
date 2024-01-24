@@ -49,15 +49,14 @@ MonoBehaviour:
   vfx:
   - type: 0
     startup: 20
-    prefab: {fileID: 1800976239324842, guid: c3a419073912434429f93f4f6d5369ff, type: 3}
+    prefab: {fileID: 1320683006971348, guid: 83ea291b15cd5ed46be1077c6b047713, type: 3}
     deattachFromPlayer: 0
     destroyOnRecovery: 1
-    position: {x: 0, y: 0.2, z: 1}
-    rotation: {x: -15, y: 90, z: 0}
+    position: {x: 0, y: 0.4, z: 0.5}
+    rotation: {x: 0, y: 180, z: 0}
     scale: {x: 0.5, y: 0.5, z: 0.5}
   sfx:
   - startup: 15
-    audioClip: {fileID: 8300000, guid: 9703811f01f93494b96dd7bcda5086ff, type: 3}
     audioClips:
     - {fileID: 8300000, guid: 9703811f01f93494b96dd7bcda5086ff, type: 3}
     volume: 1
@@ -74,17 +73,14 @@ MonoBehaviour:
   blockFX: {fileID: 0}
   hitSFX:
     startup: 1
-    audioClip: {fileID: 0}
     audioClips: []
     volume: 1
     pitchRange: 0
   blockSFX:
     startup: 1
-    audioClip: {fileID: 0}
     audioClips: []
     volume: 1
     pitchRange: 0
-  uniqueProperties: []
   skillProperties: []
   useAttackSpeed: 1
   keepVelocity: 0
@@ -92,6 +88,7 @@ MonoBehaviour:
   holdAttack: 0
   releaseAttackMove: {fileID: 0}
   autoAim: 0
+  keepComboCount: 0
   armor: 0
   resetGatling: 0
   hitsGroundOnly: 0

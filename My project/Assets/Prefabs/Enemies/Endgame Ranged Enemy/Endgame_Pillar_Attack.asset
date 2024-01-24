@@ -10,53 +10,77 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
-  m_Name: Fighter_5A
+  m_Name: Endgame_Pillar_Attack
   m_EditorClassIdentifier: 
-  animationID: 51
+  animationID: 14
   meterCost: 0
   meterGain: 10
   consumeMeterOnActiveFrame: 0
   icon: {fileID: 0}
-  firstStartupFrame: 10
-  lastActiveFrame: 14
-  totalMoveDuration: 34
-  firstGatlingFrame: 18
+  firstStartupFrame: 44
+  lastActiveFrame: 44
+  totalMoveDuration: 64
+  firstGatlingFrame: 46
   recoveryFrames: 20
   attacks:
-  - attackLevel: 0
-    attackType: 0
+  - attackLevel: 2
+    attackType: 1
     damageType: 0
-    hitbox: {fileID: 5860963072138344223, guid: 6a749b7ddecd8444ea2db4afaa8c34b6, type: 3}
+    hitbox: {fileID: 5860963072138344223, guid: 664d76c3c36eba544a18bfc08011b683, type: 3}
     damage: 1
     stun: 20
     hitstop: 5
     poiseBreak: 0
-    startupFrame: 10
-    activeFrames: 5
-    gatlingFrames: 8
+    startupFrame: 44
+    activeFrames: 1
+    gatlingFrames: 2
     groundHitProperty:
-      pushback: {x: 2, y: 0}
+      pushback: {x: 10, y: 5}
       hitState: 0
     airHitProperty:
-      pushback: {x: 0, y: 0}
+      pushback: {x: 10, y: 5}
+      hitState: 0
+  - attackLevel: 2
+    attackType: 1
+    damageType: 0
+    hitbox: {fileID: 5860963072138344223, guid: c3bff459a3ba0934ea6611c06399358f, type: 3}
+    damage: 1
+    stun: 20
+    hitstop: 5
+    poiseBreak: 0
+    startupFrame: 44
+    activeFrames: 1
+    gatlingFrames: 2
+    groundHitProperty:
+      pushback: {x: 10, y: 5}
+      hitState: 0
+    airHitProperty:
+      pushback: {x: 10, y: 5}
       hitState: 0
   type: 0
-  screenShake: []
+  screenShake:
+  - type: 0
+    startup: 40
+    amplitude: 1
+    duration: 1
   vfx:
   - type: 0
-    startup: 6
-    prefab: {fileID: 1320683006971348, guid: 83ea291b15cd5ed46be1077c6b047713, type: 3}
-    deattachFromPlayer: 1
+    startup: 1
+    prefab: {fileID: 194346, guid: 18ca0b65eadca7c46b9b94e7d23cab44, type: 3}
+    deattachFromPlayer: 0
     destroyOnRecovery: 0
-    position: {x: 0, y: 0.4, z: 0.6}
-    rotation: {x: -5.44, y: 180, z: -189.5}
-    scale: {x: 0.5, y: 0.5, z: 0.5}
-  sfx:
-  - startup: 6
-    audioClips:
-    - {fileID: 8300000, guid: 7ebc3edc309281c4f94808a3d37fac9b, type: 3}
-    volume: 1
-    pitchRange: 0
+    position: {x: 0, y: 0.01, z: 0}
+    rotation: {x: -90, y: 0, z: 0}
+    scale: {x: 0.1, y: 0.1, z: 0.1}
+  - type: 0
+    startup: 40
+    prefab: {fileID: 194346, guid: 18ca0b65eadca7c46b9b94e7d23cab44, type: 3}
+    deattachFromPlayer: 0
+    destroyOnRecovery: 0
+    position: {x: 0, y: 0.7, z: 0.5}
+    rotation: {x: -30, y: 0, z: 0}
+    scale: {x: 0.1, y: 0.1, z: 0.1}
+  sfx: []
   hitFX:
     type: 0
     startup: 1
@@ -101,54 +125,14 @@ MonoBehaviour:
   airInvul: 0
   airInvulStart: 1
   airInvulDuration: 0
-  targetComboMoves:
-  - {fileID: 11400000, guid: 37391d90e34a3c04d9b26278e1cbb6d9, type: 2}
-  - {fileID: 11400000, guid: ed34fc79e59100e4581063694b9a3d79, type: 2}
+  targetComboMoves: []
   fullCancel: 0
-  gatlingCancel: 0
+  gatlingCancel: 1
   uncancelable: 0
   useAirAction: 0
   landCancel: 0
   recoverOnlyOnLand: 0
-  m:
-  - startFrame: 3
-    duration: 2
-    momentum: {x: 4, y: 0}
-    resetVelocityDuringRecovery: 0
-    xMovementCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    movementCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    freeMovement: 0
-    useCurve: 0
-    teleport: 0
-  - startFrame: 15
-    duration: 1
-    momentum: {x: 2, y: 0}
-    resetVelocityDuringRecovery: 0
-    xMovementCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    movementCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    freeMovement: 0
-    useCurve: 0
-    teleport: 0
+  m: []
   instantStartupRotation: 1
   overrideVelocity: 1
   runMomentum: 0

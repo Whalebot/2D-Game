@@ -9,9 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac60b8abaf1a662499c25f51b144327a, type: 3}
-  m_Name: Humanoid Touhou Combo
+  m_Script: {fileID: 11500000, guid: 9c9a298cc95668e4482d66c637d04358, type: 3}
+  m_Name: Endgame Pillar Action
   m_EditorClassIdentifier: 
-  comboName: 
-  moves:
-  - {fileID: 11400000, guid: a8380eb7f474bf84394c5df09b6c10dd, type: 2}
+  actionType: 0
+  minDistance: 0
+  maxHeight: 10
+  distance: 50
+  targetDistance: 0
+  cooldown: 60
+  combo: {fileID: 11400000, guid: 7bd983096a929df41a33347f62d70177, type: 2}
