@@ -400,12 +400,16 @@ public class Status : MonoBehaviour
     [Button]
     public void ApplyCharacter()
     {
+        //Set base stats the prefab is reading to the stats from the character SO
         if (character != null)
         {
             ReplaceStats(baseStats, character.stats);
         }
+        //Set current stats to the active stats.
         if (alignment != Alignment.Player || !SaveManager.Instance.HasSaveData())
+        {
             ReplaceStats(currentStats, baseStats);
+        }
     }
     public void TakeHit(int damage, Vector3 kb, int stunVal, int poiseBreak, Vector3 dir, float slowDur, HitState hitState, bool crit = false)
     {
@@ -589,16 +593,7 @@ public class Status : MonoBehaviour
                 defInfo1[i].SetValue(obj, defInfo2[i].GetValue(obj2));
         }
     }
-    public void CalculateStats()
-    {
-        Stats tempStats = new Stats();
-        tempStats.ResetValues();
-        AddStats(tempStats, baseStats);
-        AddStats(tempStats, modifiedStats);
 
-        tempStats.currentHealth = Health;
-        ReplaceStats(currentStats, tempStats);
-    }
     public void ReplaceStats(Stats oldStats, Stats newStats)
     {
 
@@ -645,8 +640,33 @@ public class Status : MonoBehaviour
             }
         }
 
+        //Clamp hp and meter
         if (def1.currentHealth > def1.maxHealth)
             def1.currentHealth = def1.maxHealth;
+        if (def1.currentMeter > def1.maxMeter)
+            def1.currentMeter = def1.maxMeter;
+
+        //Add stats from base stats
+        if (newStats.strength != 0)
+        {
+            oldStats.maxHealth += newStats.strength * 10;
+            oldStats.currentHealth += newStats.strength * 10;
+            oldStats.attack += newStats.strength;
+        }
+        if (newStats.intelligence != 0)
+        {
+            oldStats.maxMeter += newStats.intelligence * 20;
+            oldStats.currentMeter += newStats.intelligence * 20;
+            oldStats.magic += newStats.intelligence;
+        }
+        if (newStats.agility != 0)
+        {
+            oldStats.movementSpeedModifier += newStats.agility * 0.1F;
+        }
+        if (newStats.faith != 0)
+        {
+            oldStats.faithModifier += newStats.faith * 0.2F;
+        }
     }
     public void RemoveStats(Stats oldStats, Stats newStats)
     {

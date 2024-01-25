@@ -392,6 +392,29 @@ public class SkillHandler : MonoBehaviour
                     defInfo1[i].SetValue(obj, (float)var1 + ((float)var2) * blessingModifier);
             }
         }
+
+
+        //Add stats from base stats
+        if (def2.strength != 0)
+        {
+            modifiedStats.maxHealth += def2.strength * 10;
+            modifiedStats.currentHealth += def2.strength * 10;
+            modifiedStats.attack += def2.strength;
+        }
+        if (def2.intelligence != 0)
+        {
+            modifiedStats.maxMeter += def2.intelligence * 20;
+            modifiedStats.currentMeter += def2.intelligence * 20;
+            modifiedStats.magic += def2.intelligence;
+        }
+        if (def2.agility != 0)
+        {
+            modifiedStats.movementSpeedModifier += def2.agility * 0.1F;
+        }
+        if (def2.faith != 0)
+        {
+            modifiedStats.faithModifier += def2.faith * 0.2F;
+        }
     }
     public void ApplySkillEffects(bool loading = false)
     {
@@ -437,5 +460,12 @@ public class SkillHandler : MonoBehaviour
                     defInfo1[i].SetValue(obj, defInfo2[i].GetValue(obj2));
             }
         }
+
+        //Clamp hp and meter
+        if (def1.currentHealth > def1.maxHealth)
+            def1.currentHealth = def1.maxHealth;
+        if (def1.currentMeter > def1.maxMeter)
+            def1.currentMeter = def1.maxMeter;
+
     }
 }

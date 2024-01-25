@@ -79,8 +79,17 @@ public class CharacterAnimator : MonoBehaviour
             movement.preLandEvent -= PreLand;
             movement.doubleJumpEvent -= DoubleJump;
         }
+
+        ExecuteFrame();
     }
 
+    private void FixedUpdate()
+    {
+        if (GameManager.isPaused)
+        {
+            anim.enabled = false;
+        }
+    }
     void ExecuteFrame()
     {
         anim.enabled = true;

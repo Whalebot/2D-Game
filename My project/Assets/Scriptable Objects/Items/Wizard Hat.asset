@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41f2923ec284c6840a8cd468af82cb4d, type: 3}
   m_Name: Wizard Hat
   m_EditorClassIdentifier: 
-  skillRank: 1
+  skillRank: 2
   type: 2
+  elemental: 0
   title: Wizard Hat
   sprite: {fileID: 21300000, guid: 91d940b46198b1f4791d81465c363a5b, type: 3}
+  rngWeight: 1
   damageValue: 0
   prerequisiteSkills: []
   prerequisiteMoves: []
@@ -63,3 +65,7 @@ MonoBehaviour:
     knockbackModifier: 0
     critChance: 0
     critMultiplier: 0
+    lifesteal: 0
+    spellSpeed: 0
+  allChance: 0
+  typeChance: 0
