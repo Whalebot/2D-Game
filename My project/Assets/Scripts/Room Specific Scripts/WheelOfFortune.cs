@@ -14,12 +14,13 @@ public class WheelOfFortune : MonoBehaviour
     public enum WheelRewards { item, bad, gold, veryBad, potential, superBad, skill, ultraBad }
     public WheelRewards reward;
     public Status dummy;
-
+    public GameObject blockade;
     public AudioSource clickSound;
     // Start is called before the first frame update
     void Start()
     {
         GameManager.Instance.advanceGameState += ExecuteFrame;
+        LevelManager.Instance.spawnLevelGates += RemoveBlockade;
         dummy.damageEvent += SpinWheel;
     }
 
@@ -57,9 +58,60 @@ public class WheelOfFortune : MonoBehaviour
         }
     }
 
+    void RemoveBlockade()
+    {
+        blockade.SetActive(false);
+    }
+
     [Button]
     void GiveReward()
     {
-
+        Status status = GameManager.Instance.playerStatus;
+        int damage = 10;
+        switch (reward)
+        {
+            case WheelRewards.item:
+                SkillManager.Instance.RollItem(Rank.B);
+                GameManager.Instance.OpenGetSkillWindow(RewardType.Item);
+                break;
+            case WheelRewards.bad:
+                damage = 5;
+                status.Health -= damage;
+                GameManager.Instance.DamageNumbers(status.transform, damage, false, status.alignment);
+                LevelManager.Instance.SpawnLevelGates();
+                break;
+            case WheelRewards.gold:
+                GameManager.Instance.Gold += 150;
+                LevelManager.Instance.SpawnLevelGates();
+                break;
+            case WheelRewards.veryBad:
+                damage = 10;
+                status.Health -= damage;
+                GameManager.Instance.DamageNumbers(status.transform, damage, false, status.alignment);
+                LevelManager.Instance.SpawnLevelGates();
+                break;
+            case WheelRewards.potential:
+                SkillManager.Instance.RollActiveSkill(Rank.B);
+                GameManager.Instance.OpenGetSkillWindow(RewardType.Skill);
+                break;
+            case WheelRewards.superBad:
+                damage = (int)(status.Health * 0.25F);
+                status.Health -= damage;
+                GameManager.Instance.DamageNumbers(status.transform, damage, false, status.alignment);
+                LevelManager.Instance.SpawnLevelGates();
+                break;
+            case WheelRewards.skill:
+                SkillManager.Instance.RollBlessing(Rank.B);
+                GameManager.Instance.OpenGetSkillWindow(RewardType.Blessing);
+                break;
+            case WheelRewards.ultraBad:
+                damage = (int)(status.Health * 0.5F);
+                status.Health -= damage;
+                GameManager.Instance.DamageNumbers(status.transform, damage, false, status.alignment);
+                LevelManager.Instance.SpawnLevelGates();
+                break;
+            default:
+                break;
+        }
     }
 }

@@ -159,7 +159,7 @@ public class Treasure : Interactable
                 GameManager.Instance.OpenGetSkillWindow(RewardType.Skill);
                 break;
             case RewardType.Gold:
-                GameManager.Instance.Gold += 150;
+                GameManager.Instance.Gold += 50 * (int)rank;
                 LevelManager.Instance.SpawnLevelGates();
                 break;
             default:
