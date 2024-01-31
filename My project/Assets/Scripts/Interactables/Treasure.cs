@@ -72,6 +72,8 @@ public class Treasure : Interactable
                     rank = Rank.S;
                     break;
                 case RoomTypes.Treasure:
+                    reward = RewardType.Item;
+                    rank = Rank.A;
                     break;
                 case RoomTypes.Shop:
                     break;
