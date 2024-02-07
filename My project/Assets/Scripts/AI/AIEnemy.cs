@@ -71,7 +71,8 @@ public class AIEnemy : AI
 
     void DeathEvent()
     {
-        GameManager.Instance.Gold += status.currentStats.gold;
+        GameManager.Instance.SpawnGold(status.currentStats.gold, transform.position);
+        //GameManager.Instance.Gold += status.currentStats.gold;
         switch (enemyType)
         {
             case EnemyType.Normal:

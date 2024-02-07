@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
         get { return playerStatus.currentStats.gold; }
         set
         {
+            Debug.Log(value);
             playerStatus.currentStats.gold = value;
             AudioManager.Instance.PlaySFX(goldAudioClip, player.position);
             goldChangeEvent?.Invoke();
@@ -142,7 +143,33 @@ public class GameManager : MonoBehaviour
         }
 
     }
-
+    public void SpawnGold(int goldValue, Vector3 spawnLocation)
+    {
+        int remainingGold = goldValue;
+        while (remainingGold > 0)
+        {
+            //Break gold into biggest possible combinations
+            if (remainingGold > 100)
+            {
+                Gold += 100;
+                //Instantiate big gold coin
+                remainingGold -= 100;
+            }
+            else if (remainingGold < 10)
+            {
+                Gold += remainingGold;
+                //Set the gold coin value to the remaining gold
+                remainingGold = 0;
+            }
+            else
+            {
+                Gold += 10;
+                //Instantiate small gold coin
+                remainingGold -= 10;
+            }
+            Debug.Log(remainingGold);
+        }
+    }
     public void OpenGetSkillWindow(RewardType rewardType)
     {
         openRewardWindowEvent?.Invoke(rewardType);
