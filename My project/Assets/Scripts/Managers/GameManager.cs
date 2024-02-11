@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     public event Action playerDeath;
     public event Action<RewardType> openRewardWindowEvent;
     public event Action openShopEvent;
-    public event Action goldChangeEvent;
+    public event Action<int> goldChangeEvent;
 
     [TabGroup("Components")] public GameObject playerUI;
     [TabGroup("Components")] public Transform player;
@@ -73,10 +73,10 @@ public class GameManager : MonoBehaviour
         get { return playerStatus.currentStats.gold; }
         set
         {
-            Debug.Log(value);
+            int change = value - playerStatus.currentStats.gold;
             playerStatus.currentStats.gold = value;
             AudioManager.Instance.PlaySFX(goldAudioClip, player.position);
-            goldChangeEvent?.Invoke();
+            goldChangeEvent?.Invoke(change);
         }
     }
 

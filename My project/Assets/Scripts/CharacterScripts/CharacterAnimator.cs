@@ -58,6 +58,7 @@ public class CharacterAnimator : MonoBehaviour
             attack.emptyAttackEvent += EmptyAttack;
             attack.recoveryEvent += AttackRecovery;
         }
+        ExecuteFrame();
     }
 
     private void OnDisable()

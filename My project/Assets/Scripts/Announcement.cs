@@ -13,6 +13,7 @@ public class Announcement : MonoBehaviour
 
     IEnumerator PauseGame()
     {
+        yield return new WaitForFixedUpdate();
         GameManager.cutscene = true;
         yield return new WaitForSecondsRealtime(pauseDuration);
         GameManager.cutscene = false;

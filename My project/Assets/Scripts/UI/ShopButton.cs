@@ -27,12 +27,12 @@ public class ShopButton : MonoBehaviour
     {
         button = GetComponent<Button>();
         button.onClick.AddListener(() => BuySkill());
-        GameManager.Instance.goldChangeEvent += SetupSkill;
+        GameManager.Instance.goldChangeEvent += GoldChanged;
     }
 
     private void OnDisable()
     {
-        GameManager.Instance.goldChangeEvent -= SetupSkill;
+        GameManager.Instance.goldChangeEvent -= GoldChanged;
         UIManager.Instance.DisableTooltip();
     }
 
@@ -60,7 +60,9 @@ public class ShopButton : MonoBehaviour
 
         SetupSkill();
     }
-
+    void GoldChanged(int changedMoney) {
+        SetupSkill();
+    }
     [Button]
     public void SetupSkill()
     {

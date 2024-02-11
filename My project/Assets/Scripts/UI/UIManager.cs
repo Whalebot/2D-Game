@@ -29,6 +29,7 @@ public class UIManager : MonoBehaviour
     [TabGroup("Components")] public TextMeshProUGUI goldText;
     [TabGroup("Components")] public TextMeshProUGUI floorText;
     [TabGroup("Components")] public TextMeshProUGUI timeText;
+    [TabGroup("Components")] public TextMeshProUGUI goldChangeText;
     [TabGroup("Components")] public Animator goldUIAnimator;
     [TabGroup("Tooltip")] public RectTransform tooltip;
     [TabGroup("Tooltip")] public Vector3 tooltipOffset;
@@ -38,7 +39,9 @@ public class UIManager : MonoBehaviour
     [TabGroup("Tooltip")] public Vector3 skillDescriptionOffset;
     [TabGroup("Tooltip")] public TextMeshProUGUI skillDescriptionText;
     [TabGroup("Tooltip")] public TextMeshProUGUI skillDescriptionTitle;
-
+    [TabGroup("Settings")] public int goldTimer;
+    int savedGoldCounter;
+    int goldCounter;
     public static float buttonDelayCounter;
     public static bool buttonDelay;
 
@@ -63,9 +66,29 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void GoldUIUpdate()
+    public void GoldUIUpdate(int value)
     {
+        savedGoldCounter += value;
+        goldCounter = goldTimer;
+        if (savedGoldCounter > 0)
+        {
+            goldChangeText.color = Color.green;
+            goldChangeText.text = "+" + savedGoldCounter;
+        }
+        else
+        {
+            goldChangeText.color = Color.red;
+            goldChangeText.text = "" + savedGoldCounter;
+        }
+        //goldChangeText.gameObject.SetActive(true);
         goldUIAnimator.SetTrigger("GainMoney");
+    }
+
+    void ResetGoldCounter()
+    {
+        savedGoldCounter = 0;
+   
+        //goldChangeText.gameObject.SetActive(false);
     }
 
     public void SetActiveEventSystem(GameObject go)
@@ -95,6 +118,16 @@ public class UIManager : MonoBehaviour
         rerollText.text = "x" + GameManager.Instance.playerStatus.currentStats.rerolls;
         floorText.text = "Floor " + LevelManager.Instance.currentMapNode.y;
         timeText.text = "" + TimeFormatter(GameManager.time, true);
+
+        if (savedGoldCounter > 0)
+        {
+            goldCounter--;
+            if (goldCounter <= 0)
+            {
+                ResetGoldCounter();
+
+            }
+        }
 
         UpdateSkillIcon();
 

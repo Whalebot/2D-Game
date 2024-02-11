@@ -10,6 +10,8 @@ public class HubMenu : MonoBehaviour
     public Animator animator;
     public Animator faceAnimator;
     public Animator cameraPan;
+    public Animator tabAnimator;
+    [TabGroup("Components")] public Button tabToggleButton;
     [TabGroup("Components")] public Image classImage;
     [TabGroup("Components")] public TextMeshProUGUI classText;
     [TabGroup("Components")] public TextMeshProUGUI colorNumber;
@@ -37,6 +39,8 @@ public class HubMenu : MonoBehaviour
 
     private void Start()
     {
+        tabToggleButton.onClick.AddListener(() => ToggleTab());
+
         colorPlusButton.onClick.AddListener(() => ChangeColor(true));
         colorMinusButton.onClick.AddListener(() => ChangeColor(false));
 
@@ -73,6 +77,9 @@ public class HubMenu : MonoBehaviour
         bottomNumber.text = "" + CharacterCreator.Instance.visualData.bottomID;
         shoesNumber.text = "" + CharacterCreator.Instance.visualData.shoesID;
     }
+    void ToggleTab() {
+        tabAnimator.SetBool("Open", !tabAnimator.GetBool("Open"));    }
+
     public void StartGame()
     {
         SaveManager.Instance.SetupCharacter();
