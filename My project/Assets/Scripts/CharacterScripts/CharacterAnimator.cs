@@ -226,9 +226,10 @@ public class CharacterAnimator : MonoBehaviour
         anim.SetFloat("Horizontal", x);
         anim.SetFloat("Vertical", y);
 
-        if (movement._rb.velocity.y < fallThreshold)
-            anim.SetInteger("Falling", -1);
-        else anim.SetInteger("Falling", 1);
+        if (movement._rb != null)
+            if (movement._rb.velocity.y < fallThreshold)
+                anim.SetInteger("Falling", -1);
+            else anim.SetInteger("Falling", 1);
     }
 
     private void RunSpeed()

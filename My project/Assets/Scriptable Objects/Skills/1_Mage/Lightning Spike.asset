@@ -14,14 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillRank: 2
   type: 0
+  elemental: 0
   title: Lightning Spike
   sprite: {fileID: 21300000, guid: e6763eb614379dc4fa6fe93cf5bc263d, type: 3}
+  rngWeight: 1
+  damageValue: 0
   prerequisiteSkills: []
   prerequisiteMoves: []
+  bannedMoves: []
   newMoves:
   - move: {fileID: 11400000, guid: 5753be9dc0c0fe9439e054dd1cc5fd00, type: 2}
     combo: {fileID: 11400000, guid: 0f26d1fba08008745a60401b10be257c, type: 2}
     oldMove: {fileID: 0}
+  skillProperties: []
   description: Adds Lighting Spike to up + skill button to an lightning spike which
     homes unto the enemy.
   stats:
@@ -33,13 +38,22 @@ MonoBehaviour:
     strength: 0
     intelligence: 0
     agility: 0
+    faith: 0
     luck: 0
     gold: 0
     attack: 0
     magic: 0
+    faithModifier: 0
     attackSpeed: 0
+    jumps: 0
     airActions: 0
     rerolls: 0
+    fireModifier: 0
+    iceModifier: 0
+    lightningModifier: 0
+    earthModifier: 0
+    windModifier: 0
+    poisonModifier: 0
     movementSpeedModifier: 0
     meterGainModifier: 0
     poiseRegen: 0
@@ -48,10 +62,14 @@ MonoBehaviour:
     resistance: 0
     guardBreakModifier: 0
     sizeModifier: 0
-    damageModifierPercentage: 0.2
+    damageModifierPercentage: 0
     backstabModifier: 0
     damageModifierFlat: 0
     hitStunMultiplier: 0
     knockbackModifier: 0
     critChance: 0
     critMultiplier: 0
+    lifesteal: 0
+    spellSpeed: 0
+  allChance: 0
+  typeChance: 0

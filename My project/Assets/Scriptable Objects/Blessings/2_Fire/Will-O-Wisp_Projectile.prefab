@@ -131,7 +131,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5860963072138344223}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
@@ -139,7 +139,7 @@ Transform:
   - {fileID: 3342019050465728706}
   - {fileID: 4253428494558703204}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &2660963686386907694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,8 +168,8 @@ MonoBehaviour:
   life: 1
   lifetime: 295
   projectileMovement: 1
-  velocity: 0.1
-  maxVelocity: 5
+  velocity: 10
+  maxVelocity: 10
   rotationVector: {x: 0, y: 0, z: 0}
   onStartVelocity: 0
   updateVelocty: 0
@@ -247,6 +247,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Will-o-Wisp Flame
       objectReference: {fileID: 0}
+    - target: {fileID: 169198, guid: eb17b29c96aac1144ae6fc06337c46c6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 480864, guid: eb17b29c96aac1144ae6fc06337c46c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -288,14 +292,100 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19869882, guid: eb17b29c96aac1144ae6fc06337c46c6, type: 3}
+      propertyPath: ColorModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19869882, guid: eb17b29c96aac1144ae6fc06337c46c6, type: 3}
       propertyPath: InitialModule.gravityModifier.scalar
       value: -0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 713321524542341597, guid: eb17b29c96aac1144ae6fc06337c46c6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3197247324683544180, guid: eb17b29c96aac1144ae6fc06337c46c6, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5974469401104790495, guid: eb17b29c96aac1144ae6fc06337c46c6, type: 3}
+      propertyPath: prewarm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5974469401104790495, guid: eb17b29c96aac1144ae6fc06337c46c6, type: 3}
+      propertyPath: useUnscaledTime
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5974469401104790495, guid: eb17b29c96aac1144ae6fc06337c46c6, type: 3}
+      propertyPath: SizeModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5974469401104790495, guid: eb17b29c96aac1144ae6fc06337c46c6, type: 3}
+      propertyPath: ColorModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5974469401104790495, guid: eb17b29c96aac1144ae6fc06337c46c6, type: 3}
+      propertyPath: NoiseModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5974469401104790495, guid: eb17b29c96aac1144ae6fc06337c46c6, type: 3}
+      propertyPath: NoiseModule.frequency
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5974469401104790495, guid: eb17b29c96aac1144ae6fc06337c46c6, type: 3}
+      propertyPath: NoiseModule.strength.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5974469401104790495, guid: eb17b29c96aac1144ae6fc06337c46c6, type: 3}
+      propertyPath: NoiseModule.sizeAmount.scalar
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5974469401104790495, guid: eb17b29c96aac1144ae6fc06337c46c6, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5974469401104790495, guid: eb17b29c96aac1144ae6fc06337c46c6, type: 3}
+      propertyPath: NoiseModule.scrollSpeed.scalar
+      value: 1.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 5974469401104790495, guid: eb17b29c96aac1144ae6fc06337c46c6, type: 3}
+      propertyPath: NoiseModule.positionAmount.scalar
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5974469401104790495, guid: eb17b29c96aac1144ae6fc06337c46c6, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5974469401104790495, guid: eb17b29c96aac1144ae6fc06337c46c6, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5974469401104790495, guid: eb17b29c96aac1144ae6fc06337c46c6, type: 3}
+      propertyPath: EmissionModule.rateOverDistance.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5974469401104790495, guid: eb17b29c96aac1144ae6fc06337c46c6, type: 3}
+      propertyPath: startDelay.maxCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5974469401104790495, guid: eb17b29c96aac1144ae6fc06337c46c6, type: 3}
+      propertyPath: startDelay.maxCurve.m_Curve.Array.data[1].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5974469401123335683, guid: eb17b29c96aac1144ae6fc06337c46c6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5974469401123344371, guid: eb17b29c96aac1144ae6fc06337c46c6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5974469401123403897, guid: eb17b29c96aac1144ae6fc06337c46c6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 713321524542341597, guid: eb17b29c96aac1144ae6fc06337c46c6, type: 3}
+    - {fileID: 3197247324683544180, guid: eb17b29c96aac1144ae6fc06337c46c6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

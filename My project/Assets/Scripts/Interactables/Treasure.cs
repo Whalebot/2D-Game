@@ -68,7 +68,7 @@ public class Treasure : Interactable
                     rank = Rank.A;
                     break;
                 case RoomTypes.Boss:
-                    reward = LevelManager.Instance.currentMapNode.rewardType;
+                    reward = RewardType.Item;
                     rank = Rank.S;
                     break;
                 case RoomTypes.Treasure:

@@ -68,10 +68,10 @@ public class Projectile : Hitbox
     [TabGroup("Unique")] public Vector2 attractPower;
 
 
-    [TabGroup("Teleport")] public LayerMask teleportMask;
-    [TabGroup("Teleport")] public bool airTeleport;
-    [TabGroup("Teleport")] public float teleportYRange = 5f;
-    [TabGroup("Teleport")] public float teleportYOffset = 1f;
+    [HideIf("@projectileMovement != ProjectileMovement.Teleport")] public LayerMask teleportMask;
+    [HideIf("@projectileMovement != ProjectileMovement.Teleport")] public bool airTeleport;
+    [HideIf("@projectileMovement != ProjectileMovement.Teleport")] public float teleportYRange = 5f;
+    [HideIf("@projectileMovement != ProjectileMovement.Teleport")] public float teleportYOffset = 1f;
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public bool hit;
     RaycastHit teleportHit;
@@ -194,6 +194,9 @@ public class Projectile : Hitbox
                 transform.position = target.position;
 
             targetPosition = target.position + Vector3.up * 0.5F;
+
+            if (followCaster)
+                rb.velocity = Vector3.zero;
         }
     }
     public virtual void ExecuteFrame()
@@ -337,8 +340,9 @@ public class Projectile : Hitbox
                 }
                 else if (followCaster)
                 {
-                    if (Vector3.Distance(status.transform.position + startOffset, transform.position) > minimumFollowDistance)
-                        rb.velocity += ((status.transform.position + startOffset) - transform.position).normalized * velocity;
+                    float dist = Vector3.Distance(status.transform.position + startOffset, transform.position);
+                    //if (dist > minimumFollowDistance)
+                    rb.velocity = ((status.transform.position + startOffset) - transform.position).normalized * velocity * dist;
 
                 }
                 else if (!waitForTarget)
@@ -430,9 +434,4 @@ public class Projectile : Hitbox
         if (destroyOnHit)
             DestroyProjectile();
     }
-}
-public class ProjectileItem
-{
-    public GameObject prefab;
-
 }

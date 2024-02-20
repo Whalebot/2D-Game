@@ -14,11 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillRank: 0
   type: 1
+  elemental: 0
   title: Mana Blade
   sprite: {fileID: 0}
+  rngWeight: 1
+  damageValue: 0
   prerequisiteSkills: []
   prerequisiteMoves:
   - {fileID: 11400000, guid: 846265f9525a33948b942cb5e5fc0ae3, type: 2}
+  bannedMoves: []
   newMoves:
   - move: {fileID: 11400000, guid: 734dc6cfe1e2a2a4f84f62bc322b4444, type: 2}
     combo: {fileID: 0}
@@ -40,13 +44,22 @@ MonoBehaviour:
     strength: 0
     intelligence: 0
     agility: 0
+    faith: 0
     luck: 0
     gold: 0
     attack: 0
     magic: 0
+    faithModifier: 0
     attackSpeed: 0
+    jumps: 0
     airActions: 0
     rerolls: 0
+    fireModifier: 0
+    iceModifier: 0
+    lightningModifier: 0
+    earthModifier: 0
+    windModifier: 0
+    poisonModifier: 0
     movementSpeedModifier: 0
     meterGainModifier: 0
     poiseRegen: 0
@@ -62,3 +75,7 @@ MonoBehaviour:
     knockbackModifier: 0
     critChance: 0
     critMultiplier: 0
+    lifesteal: 0
+    spellSpeed: 0
+  allChance: 0
+  typeChance: 0
