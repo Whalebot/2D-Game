@@ -2952,7 +2952,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -3117,6 +3117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1184423575082932196}
   - component: {fileID: 4928001389613365552}
+  - component: {fileID: 4928001389613365553}
   m_Layer: 10
   m_Name: Treasure (2)
   m_TagString: Untagged
@@ -3151,6 +3152,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4928001389613365553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184423575082932197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f2bc200e0e7f8642888aebfcdce6b1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _southType: 0
+  westType: 2
+  northType: 2
+  eastType: 2
 --- !u!1 &5549424527015324961
 GameObject:
   m_ObjectHideFlags: 0
