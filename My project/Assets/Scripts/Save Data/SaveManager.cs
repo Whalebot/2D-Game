@@ -189,6 +189,7 @@ public class SaveData
 public class CharacterData
 {
     public string characterName;
+    public int vouchers;
     public int rngSeed;
     public Stats stats;
     public int currentRoomID = 0;
