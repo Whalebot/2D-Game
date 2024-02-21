@@ -11,10 +11,17 @@ public class HubMenu : MonoBehaviour
     public Animator faceAnimator;
     public Animator cameraPan;
     public Animator tabAnimator;
+
+    [TabGroup("Components")] public TextMeshProUGUI vouncherText;
+    [TabGroup("Components")] public Button startGameButton;
+    [TabGroup("Components")] public Button buyClassButton;
+
+
     [TabGroup("Components")] public Button tabToggleButton;
     [TabGroup("Components")] public Image classImage;
     [TabGroup("Components")] public TextMeshProUGUI classText;
     [TabGroup("Components")] public TextMeshProUGUI colorNumber;
+    [TabGroup("Components")] public TextMeshProUGUI classDescription;
     [TabGroup("Components")] public TextMeshProUGUI hairNumber;
     [TabGroup("Components")] public TextMeshProUGUI topNumber;
     [TabGroup("Components")] public TextMeshProUGUI bottomNumber;
@@ -22,6 +29,7 @@ public class HubMenu : MonoBehaviour
     [TabGroup("Components")] public TextMeshProUGUI strengthStat;
     [TabGroup("Components")] public TextMeshProUGUI agilityStat;
     [TabGroup("Components")] public TextMeshProUGUI intStat;
+    [TabGroup("Components")] public TextMeshProUGUI faithStat;
     [TabGroup("Components")] public TextMeshProUGUI luckStat;
     [TabGroup("Components")] public TextMeshProUGUI gold;
     [TabGroup("Components")] public Button colorPlusButton;
@@ -63,10 +71,14 @@ public class HubMenu : MonoBehaviour
 
     private void FixedUpdate()
     {
+        vouncherText.text = "" + SaveManager.Instance.CurrentData.vouchers;
+
+        classDescription.text = CharacterCreator.Instance.characters[CharacterCreator.Instance.visualData.characterJob].description;
         classImage.sprite = CharacterCreator.Instance.characters[CharacterCreator.Instance.visualData.characterJob].image;
         strengthStat.text = "" + CharacterCreator.Instance.characters[CharacterCreator.Instance.visualData.characterJob].stats.strength;
         agilityStat.text = "" + CharacterCreator.Instance.characters[CharacterCreator.Instance.visualData.characterJob].stats.agility;
         intStat.text = "" + CharacterCreator.Instance.characters[CharacterCreator.Instance.visualData.characterJob].stats.intelligence;
+        intStat.text = "" + CharacterCreator.Instance.characters[CharacterCreator.Instance.visualData.characterJob].stats.faith;
         luckStat.text = "" + CharacterCreator.Instance.characters[CharacterCreator.Instance.visualData.characterJob].stats.luck;
         gold.text = "" + CharacterCreator.Instance.characters[CharacterCreator.Instance.visualData.characterJob].stats.gold;
 
@@ -77,8 +89,10 @@ public class HubMenu : MonoBehaviour
         bottomNumber.text = "" + CharacterCreator.Instance.visualData.bottomID;
         shoesNumber.text = "" + CharacterCreator.Instance.visualData.shoesID;
     }
-    void ToggleTab() {
-        tabAnimator.SetBool("Open", !tabAnimator.GetBool("Open"));    }
+    void ToggleTab()
+    {
+        tabAnimator.SetBool("Open", !tabAnimator.GetBool("Open"));
+    }
 
     public void StartGame()
     {
