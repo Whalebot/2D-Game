@@ -15,7 +15,7 @@ public class Character : ScriptableObject
 
     [BoxGroup("Basic Info")]
     [LabelWidth(100)]
-    public string description;
+    [TextArea(5,5)]public string description;
 
     [HorizontalGroup("Game Data", 75)]
     [PreviewField(75)] public Sprite image;

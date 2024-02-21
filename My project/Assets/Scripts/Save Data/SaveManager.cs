@@ -190,6 +190,7 @@ public class CharacterData
 {
     public string characterName;
     public int vouchers;
+    public bool[] unlockedCharacters = new bool[2];
     public int rngSeed;
     public Stats stats;
     public int currentRoomID = 0;

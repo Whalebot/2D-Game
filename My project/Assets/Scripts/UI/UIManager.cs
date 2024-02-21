@@ -49,19 +49,25 @@ public class UIManager : MonoBehaviour
     {
         Instance = this;
 
-        playerHPBar.status = GameManager.Instance.playerStatus;
+        if (GameManager.Instance != null)
+            playerHPBar.status = GameManager.Instance.playerStatus;
     }
 
     private void Start()
     {
-        //GameManager.Instance.advanceGameState += ExecuteFrame;
-        GameManager.Instance.openRewardWindowEvent += OpenPowerupPanel;
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.advanceGameState += ExecuteFrame;
+            GameManager.Instance.openRewardWindowEvent += OpenPowerupPanel;
 
-        GameManager.Instance.pauseEvent += OpenPauseMenu;
-        GameManager.Instance.resumeEvent += ClosePauseMenu;
-        GameManager.Instance.openShopEvent += OpenShopPanel;
-        GameManager.Instance.playerDeath += OpenResultScreen;
-        GameManager.Instance.goldChangeEvent += GoldUIUpdate;
+            GameManager.Instance.pauseEvent += OpenPauseMenu;
+            GameManager.Instance.resumeEvent += ClosePauseMenu;
+            GameManager.Instance.openShopEvent += OpenShopPanel;
+            GameManager.Instance.playerDeath += OpenResultScreen;
+            GameManager.Instance.goldChangeEvent += GoldUIUpdate;
+
+            ExecuteFrame();
+        }
         rerollButton.onClick.AddListener(() => RerollButton());
 
     }
@@ -87,7 +93,7 @@ public class UIManager : MonoBehaviour
     void ResetGoldCounter()
     {
         savedGoldCounter = 0;
-   
+
         //goldChangeText.gameObject.SetActive(false);
     }
 
@@ -111,7 +117,7 @@ public class UIManager : MonoBehaviour
     {
         pauseMenu.SetActive(false);
     }
-    void FixedUpdate()
+    void ExecuteFrame()
     {
         goldText.text = "" + GameManager.Instance.Gold;
         rerollButton.interactable = GameManager.Instance.playerStatus.currentStats.rerolls > 0;

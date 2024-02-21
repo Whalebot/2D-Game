@@ -36,12 +36,16 @@ public class SkillManager : MonoBehaviour
         SaveManager.Instance.saveEvent += SaveSkills;
         learnedSkills = SaveManager.Instance.LearnedSkills;
         foundSkills = SaveManager.Instance.FoundSkills;
-        GameManager.Instance.advanceGameState += ExecuteFrame;
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.advanceGameState += ExecuteFrame;
+            skillHandler = GameManager.Instance.player.GetComponent<SkillHandler>();
+        }
     }
 
     private void Start()
     {
-        skillHandler = GameManager.Instance.player.GetComponent<SkillHandler>();
+
     }
 
     void ExecuteFrame()
@@ -351,7 +355,10 @@ public class SkillManager : MonoBehaviour
             {
                 if (words[i].Contains("DMGVAL"))
                 {
-                    words[i] = skill.CalculateDamageValue(GameManager.Instance.playerStatus) + " ";
+                    if (GameManager.Instance == null)
+                        words[i] = skill.CalculateDamageValue(null) + " ";
+                    else
+                        words[i] = skill.CalculateDamageValue(GameManager.Instance.playerStatus) + " ";
                     words[i] = ($"<link=\"0\"><color=#{ColorUtility.ToHtmlStringRGB(Color.yellow)}>" + words[i] + "</color>" + "</link>");
                 }
                 if (words[i].Contains("STATS"))

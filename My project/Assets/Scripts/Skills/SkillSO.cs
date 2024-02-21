@@ -65,9 +65,11 @@ public class SkillSO : ScriptableObject
         //Debug.Log("Base behaviour");
     }
 
-    public string CalculateDamageValue(Status status)
+    public string CalculateDamageValue(Status status = null)
     {
         string dmgText = "";
+        if (status == null)
+            return "x";
         switch (type)
         {
             case SkillType.Skill:

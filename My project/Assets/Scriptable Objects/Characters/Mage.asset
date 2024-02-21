@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Mage
   subTitle: 
-  description: 
+  description: Mage who excels at long range combat but is weak and slow up close.
+    All [Unique] buttons cost mana and attacks can be held to power them up using
+    mana.
   image: {fileID: 21300000, guid: 46f8a4fb7c5cc0c47893660af6f2ee59, type: 3}
   prefab: {fileID: 0}
   controller: {fileID: 22100000, guid: fd46e1b2b3b1bac4da8eff8bcb0af392, type: 2}
@@ -60,4 +62,6 @@ MonoBehaviour:
     knockbackModifier: 1
     critChance: 0.1
     critMultiplier: 1.5
+    lifesteal: 0
+    spellSpeed: 0
   skills: []

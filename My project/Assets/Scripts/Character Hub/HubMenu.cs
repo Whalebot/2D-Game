@@ -12,6 +12,8 @@ public class HubMenu : MonoBehaviour
     public Animator cameraPan;
     public Animator tabAnimator;
 
+    [TabGroup("Components")] public Transform skillPanel;
+    [TabGroup("Components")] public GameObject skillGUIPrefab;
     [TabGroup("Components")] public TextMeshProUGUI vouncherText;
     [TabGroup("Components")] public Button startGameButton;
     [TabGroup("Components")] public Button buyClassButton;
@@ -48,6 +50,7 @@ public class HubMenu : MonoBehaviour
     private void Start()
     {
         tabToggleButton.onClick.AddListener(() => ToggleTab());
+        buyClassButton.onClick.AddListener(() => BuyClass());
 
         colorPlusButton.onClick.AddListener(() => ChangeColor(true));
         colorMinusButton.onClick.AddListener(() => ChangeColor(false));
@@ -67,6 +70,8 @@ public class HubMenu : MonoBehaviour
         classMinusButton.onClick.AddListener(() => ChangeClass(false));
 
         animator.runtimeAnimatorController = CharacterCreator.Instance.characters[CharacterCreator.Instance.Class].controller;
+
+        SetupSkills();
     }
 
     private void FixedUpdate()
@@ -88,7 +93,47 @@ public class HubMenu : MonoBehaviour
         topNumber.text = "" + CharacterCreator.Instance.visualData.topID;
         bottomNumber.text = "" + CharacterCreator.Instance.visualData.bottomID;
         shoesNumber.text = "" + CharacterCreator.Instance.visualData.shoesID;
+
+        //If fighter class, shop button unavailable
+        if (CharacterCreator.Instance.visualData.characterJob == 0)
+        {
+            startGameButton.interactable = true;
+            buyClassButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            bool needToBuyClass = !SaveManager.Instance.CurrentData.unlockedCharacters[CharacterCreator.Instance.visualData.characterJob - 1];
+            startGameButton.interactable = !needToBuyClass;
+            buyClassButton.gameObject.SetActive(needToBuyClass);
+            if (needToBuyClass)
+            {
+                buyClassButton.interactable = SaveManager.Instance.CurrentData.vouchers > 0;
+            }
+        }
     }
+
+    void BuyClass()
+    {
+        SaveManager.Instance.CurrentData.vouchers--;
+        SaveManager.Instance.CurrentData.unlockedCharacters[CharacterCreator.Instance.visualData.characterJob - 1] = true;
+    }
+
+    void SetupSkills()
+    {
+        foreach (Transform child in skillPanel)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (var item in CharacterCreator.Instance.characters[CharacterCreator.Instance.visualData.characterJob].skills)
+        {
+            GameObject GO = Instantiate(skillGUIPrefab, skillPanel);
+            SkillIcon icon = GO.GetComponent<SkillIcon>();
+            icon.SetupIcon(item);
+
+        }
+
+    }
+
     void ToggleTab()
     {
         tabAnimator.SetBool("Open", !tabAnimator.GetBool("Open"));
@@ -125,6 +170,7 @@ public class HubMenu : MonoBehaviour
             CharacterCreator.Instance.Class--;
 
         animator.runtimeAnimatorController = CharacterCreator.Instance.characters[CharacterCreator.Instance.Class].controller;
+        SetupSkills();
     }
     public void ChangeColor(bool add)
     {

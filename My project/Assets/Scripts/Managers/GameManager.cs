@@ -379,6 +379,15 @@ public class GameManager : MonoBehaviour
         reloading = true;
     }
 
+
+    public void WinGame()
+    {
+        SaveManager.Instance.CurrentData.vouchers++;
+        playerDeath?.Invoke();
+        reloading = true;
+    }
+
+
     public void ReloadGame()
     {
         StartCoroutine(DeathScreenDelay());
