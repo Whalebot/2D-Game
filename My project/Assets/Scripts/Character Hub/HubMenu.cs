@@ -94,22 +94,22 @@ public class HubMenu : MonoBehaviour
         bottomNumber.text = "" + CharacterCreator.Instance.visualData.bottomID;
         shoesNumber.text = "" + CharacterCreator.Instance.visualData.shoesID;
 
-        //If fighter class, shop button unavailable
-        if (CharacterCreator.Instance.visualData.characterJob == 0)
-        {
-            startGameButton.interactable = true;
-            buyClassButton.gameObject.SetActive(false);
-        }
-        else
-        {
-            bool needToBuyClass = !SaveManager.Instance.CurrentData.unlockedCharacters[CharacterCreator.Instance.visualData.characterJob - 1];
-            startGameButton.interactable = !needToBuyClass;
-            buyClassButton.gameObject.SetActive(needToBuyClass);
-            if (needToBuyClass)
-            {
-                buyClassButton.interactable = SaveManager.Instance.CurrentData.vouchers > 0;
-            }
-        }
+        ////If fighter class, shop button unavailable
+        //if (CharacterCreator.Instance.visualData.characterJob == 0)
+        //{
+        //    startGameButton.interactable = true;
+        //    buyClassButton.gameObject.SetActive(false);
+        //}
+        //else
+        //{
+        //    bool needToBuyClass = !SaveManager.Instance.CurrentData.unlockedCharacters[CharacterCreator.Instance.visualData.characterJob - 1];
+        //    startGameButton.interactable = !needToBuyClass;
+        //    buyClassButton.gameObject.SetActive(needToBuyClass);
+        //    if (needToBuyClass)
+        //    {
+        //        buyClassButton.interactable = SaveManager.Instance.CurrentData.vouchers > 0;
+        //    }
+        //}
     }
 
     void BuyClass()
