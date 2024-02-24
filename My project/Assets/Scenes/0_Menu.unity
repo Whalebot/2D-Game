@@ -866,9 +866,10 @@ MonoBehaviour:
   seed: 0
   autoLoad: 1
   saveData:
+    vouchers: 0
+    unlockedCharacters: 0000
     currrentCharacter:
       characterName: 
-      vouchers: 0
       rngSeed: 0
       stats:
         currentHealth: 0
@@ -1112,6 +1113,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skill Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 3041523238274643965, guid: ab6dfc09eeb331c4bb7dc79a8b5c1247, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1306,6 +1311,10 @@ PrefabInstance:
     - target: {fileID: 3880068166685521523, guid: 1f6846fbf3d1a2a42935257776871191, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699449586001472406, guid: 1f6846fbf3d1a2a42935257776871191, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -57.785645
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

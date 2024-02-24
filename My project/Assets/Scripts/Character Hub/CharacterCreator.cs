@@ -29,7 +29,7 @@ public class CharacterCreator : MonoBehaviour
         {
             LoadVisuals();
             GameManager.Instance.playerStatus.character = characters[SaveManager.Instance.VisualData.characterJob];
-            GameManager.Instance.player.GetComponent<AttackScript>().moveset = characters[SaveManager.Instance.VisualData.characterJob].moveset;
+            GameManager.Instance.player.GetComponent<SkillHandler>().OverrideMoveset(characters[SaveManager.Instance.VisualData.characterJob].moveset);
         }
     }
     private void Start()
@@ -280,7 +280,7 @@ public class CharacterCreator : MonoBehaviour
             {
                 mat.SetColor("_MainColor", item.color * item.color);
             }
-           
+
         }
     }
 

@@ -76,7 +76,7 @@ public class HubMenu : MonoBehaviour
 
     private void FixedUpdate()
     {
-        vouncherText.text = "" + SaveManager.Instance.CurrentData.vouchers;
+        vouncherText.text = "" + SaveManager.Instance.saveData.vouchers;
 
         classDescription.text = CharacterCreator.Instance.characters[CharacterCreator.Instance.visualData.characterJob].description;
         classImage.sprite = CharacterCreator.Instance.characters[CharacterCreator.Instance.visualData.characterJob].image;
@@ -114,8 +114,8 @@ public class HubMenu : MonoBehaviour
 
     void BuyClass()
     {
-        SaveManager.Instance.CurrentData.vouchers--;
-        SaveManager.Instance.CurrentData.unlockedCharacters[CharacterCreator.Instance.visualData.characterJob - 1] = true;
+        SaveManager.Instance.saveData.vouchers--;
+        SaveManager.Instance.saveData.unlockedCharacters[CharacterCreator.Instance.visualData.characterJob - 1] = true;
     }
 
     void SetupSkills()

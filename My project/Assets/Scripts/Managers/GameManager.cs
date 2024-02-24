@@ -382,7 +382,7 @@ public class GameManager : MonoBehaviour
 
     public void WinGame()
     {
-        SaveManager.Instance.CurrentData.vouchers++;
+        SaveManager.Instance.saveData.vouchers++;
         playerDeath?.Invoke();
         reloading = true;
     }

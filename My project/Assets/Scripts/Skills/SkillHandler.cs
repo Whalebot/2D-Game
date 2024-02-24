@@ -57,8 +57,8 @@ public class SkillHandler : MonoBehaviour
         {
             foreach (var prop in item.skillProperties)
             {
-        
-                    prop.OnRecoveryBehaviour();
+
+                prop.OnRecoveryBehaviour();
             }
         }
     }
@@ -91,6 +91,49 @@ public class SkillHandler : MonoBehaviour
         DuplicateCombos(moveset);
         attackScript.moveset = moveset;
     }
+    public void OverrideMoveset(Moveset newMoveset)
+    {
+        Moveset clonedMoveset = Instantiate(attackScript.moveset);
+        Moveset def1 = clonedMoveset;
+        Moveset def2 = newMoveset;
+
+        FieldInfo[] defInfo1 = def1.GetType().GetFields();
+        FieldInfo[] defInfo2 = def2.GetType().GetFields();
+
+        for (int i = 0; i < defInfo1.Length; i++)
+        {
+            object obj = def1;
+            object var1 = defInfo1[i].GetValue(obj);
+
+            object obj2 = def1;
+            object var2 = defInfo2[i].GetValue(obj2);
+
+            if (var1 is Combo)
+            {
+                Combo clonedCombo = Instantiate((Combo)var2);
+                //Combo newCombo = Instantiate((Combo)var2);
+
+                //FieldInfo[] clonedComboInfo = clonedCombo.GetType().GetFields();
+                //FieldInfo[] comboInfo2 = newCombo.GetType().GetFields();
+
+                ////For each combo, copy the move from the previous move unto
+                //for (int j = 0; j < clonedComboInfo.Length; j++)
+                //{
+                //    object comboObj = clonedComboInfo;
+                //    object comboObj2 = comboInfo2;
+
+                //    object newMove = comboInfo2[j].GetValue(comboObj2);
+                //    //Setting the duplicated combos move to be new moveset's combo move
+                //    clonedComboInfo[j].SetValue(comboObj, newMove);
+                //}
+
+                clonedCombo.name = ((Combo)var2).name;
+                defInfo1[i].SetValue(obj, clonedCombo);
+            }
+        }
+        attackScript.moveset = clonedMoveset;
+    }
+
     void DuplicateCombos(Moveset moveset)
     {
         Moveset def1 = moveset;

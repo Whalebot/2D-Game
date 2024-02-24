@@ -1,10 +1,15 @@
 ﻿using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 [CreateAssetMenu(fileName = "New Move", menuName = "Move")]
 public class Move : ScriptableObject
 {
+    public List<Move> moves = new List<Move>();
+
     public int animationID;
     public int meterCost;
     public int meterGain = 10;
@@ -110,10 +115,27 @@ public class Move : ScriptableObject
 
         totalMoveDuration = lastActiveFrame + recoveryFrames;
     }
+
+//#if UNITY_EDITOR
+//    [ContextMenu("Make new")]
+//    private void MakeNewMove()
+//    {
+//        Move move = CreateInstance<Move>();
+//        move.name = "New Move";
+//        moves.Add(move);
+//        AssetDatabase.AddObjectToAsset(move, this);
+//        AssetDatabase.SaveAssets();
+//        EditorUtility.SetDirty(this);
+//        EditorUtility.SetDirty(move);
+
+//    }
+//#endif
 }
 
-public enum DamageType { Physical, Magic, Blessing
-      //  , Fire, Water, Earth, Wind, Lightning 
+public enum DamageType
+{
+    Physical, Magic, Blessing
+    //  , Fire, Water, Earth, Wind, Lightning 
 }
 
 

@@ -10,28 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41f2923ec284c6840a8cd468af82cb4d, type: 3}
-  m_Name: Fireball
+  m_Name: Spin
   m_EditorClassIdentifier: 
-  skillRank: 2
+  skillRank: 3
   type: 0
   elemental: 0
-  title: Fireball
-  sprite: {fileID: 21300000, guid: 5f1dc3107b2d72646a75fe561260aaea, type: 3}
+  title: Spin
+  sprite: {fileID: 21300000, guid: 7146218a73b541a4391fb14360e1a40b, type: 3}
   rngWeight: 1
-  damageValue: 20
+  damageValue: 5
   prerequisiteSkills: []
   prerequisiteMoves: []
-  bannedMoves:
-  - {fileID: 11400000, guid: 879a708098a85214b95f22ba1c2e8b59, type: 2}
+  bannedMoves: []
   newMoves:
-  - move: {fileID: 11400000, guid: 879a708098a85214b95f22ba1c2e8b59, type: 2}
-    combo: {fileID: 11400000, guid: 2e3d8ae1ee142ee44ae495c7978a3db9, type: 2}
+  - move: {fileID: 11400000, guid: c9ff265dac604b74a854038dd511f19c, type: 2}
+    combo: {fileID: 11400000, guid: 6cc355a251509c9449aac1c023456ab6, type: 2}
     oldMove: {fileID: 0}
   skillProperties: []
-  description: '[Forward + (Skill)] to shoot a fireball.
+  description: 'Can now chain [(Skill)] spin into itself 5 times.
 
 
-    DMGVAL fire damage.'
+    DMGVAL physical
+    damage.'
   stats:
     currentHealth: 0
     maxHealth: 0
@@ -74,5 +74,5 @@ MonoBehaviour:
     critMultiplier: 0
     lifesteal: 0
     spellSpeed: 0
-  allChance: 1.3513514
-  typeChance: 5.263158
+  allChance: 1.2345679
+  typeChance: 3.8461537

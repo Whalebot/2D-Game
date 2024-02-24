@@ -181,16 +181,16 @@ public class SaveManager : MonoBehaviour
 [System.Serializable]
 public class SaveData
 {
+    public int vouchers;
+    public bool[] unlockedCharacters = new bool[2];
     public CharacterData currrentCharacter;
-
     public List<CharacterData> oldCharacters;
 }
 [System.Serializable]
 public class CharacterData
 {
     public string characterName;
-    public int vouchers;
-    public bool[] unlockedCharacters = new bool[2];
+
     public int rngSeed;
     public Stats stats;
     public int currentRoomID = 0;

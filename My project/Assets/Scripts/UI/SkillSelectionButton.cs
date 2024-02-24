@@ -90,8 +90,9 @@ public class SkillSelectionButton : MonoBehaviour
 
     public void GetSkill()
     {
+        Debug.Log(UIManager.buttonDelay);
         if (UIManager.buttonDelay) return;
-
+        Debug.Log("Test 2");
         SkillManager.Instance.GetSkill(skillSO);
         UIManager.Instance.CloseRewardPanels();
     }

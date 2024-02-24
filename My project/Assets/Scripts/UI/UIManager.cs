@@ -117,6 +117,16 @@ public class UIManager : MonoBehaviour
     {
         pauseMenu.SetActive(false);
     }
+    private void FixedUpdate()
+    {
+        if (buttonDelayCounter > 0)
+        {
+            buttonDelayCounter--;
+            if (buttonDelayCounter <= 0)
+                buttonDelay = false;
+        }
+    }
+
     void ExecuteFrame()
     {
         goldText.text = "" + GameManager.Instance.Gold;
@@ -143,12 +153,7 @@ public class UIManager : MonoBehaviour
         tooltip.gameObject.SetActive(tooltipEnabled);
 
 
-        if (buttonDelayCounter > 0)
-        {
-            buttonDelayCounter--;
-            if (buttonDelayCounter <= 0)
-                buttonDelay = false;
-        }
+       
     }
 
     public void ButtonPressed()
