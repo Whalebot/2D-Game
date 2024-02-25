@@ -19,6 +19,8 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 59f654c034abb334a8ba4591c79f4464, type: 3}
   rngWeight: 1
   damageValue: 0
+  allowedCharacters:
+  - {fileID: 11400000, guid: 95e74b597952b484da1a7230e848739c, type: 2}
   prerequisiteSkills: []
   prerequisiteMoves: []
   bannedMoves: []
@@ -30,7 +32,7 @@ MonoBehaviour:
     combo: {fileID: 11400000, guid: f4a0cbc848d78c54a8334f21a85cffbb, type: 2}
     oldMove: {fileID: 0}
   skillProperties: []
-  description: '[ Up + (Skill)] to summon a 3 homing magic orb which follow you.'
+  description: '[ Down + (Skill)] to summon a 3 homing magic orb which follow you.'
   stats:
     currentHealth: 0
     maxHealth: 0

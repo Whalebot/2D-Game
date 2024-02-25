@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillRank: 3
   type: 0
+  elemental: 0
   title: Multi Alpha Blade
   sprite: {fileID: 21300000, guid: 8dae7d3945db11a438c5a02650f0e7ef, type: 3}
+  rngWeight: 1
   damageValue: 0
+  allowedCharacters:
+  - {fileID: 11400000, guid: f45992e7410287944aa65082242a4e6b, type: 2}
   prerequisiteSkills: []
   prerequisiteMoves:
   - {fileID: 11400000, guid: 563dbcef377e05e4dbb20357ac1e4d38, type: 2}
@@ -70,3 +74,7 @@ MonoBehaviour:
     knockbackModifier: 0
     critChance: 0
     critMultiplier: 0
+    lifesteal: 0
+    spellSpeed: 0
+  allChance: 0
+  typeChance: 0

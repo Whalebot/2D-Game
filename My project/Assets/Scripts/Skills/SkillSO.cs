@@ -16,6 +16,7 @@ public class SkillSO : ScriptableObject
     public int rngWeight = 1;
     public int damageValue = 0;
 
+    public List<Character> allowedCharacters;
     public List<SkillSO> prerequisiteSkills;
     [ShowIf("@type == SkillType.Skill")] public List<Move> prerequisiteMoves;
     [ShowIf("@type == SkillType.Skill")] public List<Move> bannedMoves;

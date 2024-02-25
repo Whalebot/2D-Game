@@ -416,7 +416,6 @@ public class Projectile : Hitbox
             // Found Collission
             if (destroyOnCollission && !ignoreCollision)
             {
-                Debug.Log(ignoreCollision);
                 DestroyProjectile();
             }
         }

@@ -95,6 +95,7 @@ public class SkillHandler : MonoBehaviour
     {
         Moveset clonedMoveset = Instantiate(attackScript.moveset);
         Moveset def1 = clonedMoveset;
+
         Moveset def2 = newMoveset;
 
         FieldInfo[] defInfo1 = def1.GetType().GetFields();
@@ -105,7 +106,7 @@ public class SkillHandler : MonoBehaviour
             object obj = def1;
             object var1 = defInfo1[i].GetValue(obj);
 
-            object obj2 = def1;
+            object obj2 = def2;
             object var2 = defInfo2[i].GetValue(obj2);
 
             if (var1 is Combo)
@@ -127,7 +128,7 @@ public class SkillHandler : MonoBehaviour
                 //    clonedComboInfo[j].SetValue(comboObj, newMove);
                 //}
 
-                clonedCombo.name = ((Combo)var2).name;
+                clonedCombo.name = ((Combo)var1).name;
                 defInfo1[i].SetValue(obj, clonedCombo);
             }
         }
@@ -259,10 +260,25 @@ public class SkillHandler : MonoBehaviour
 
     public bool CanGetSkill(SkillSO skillSO)
     {
+        bool allowedCharacter = false;
         bool hasRequiredSkill = false;
         bool hasBannedMove = false;
         bool hasRequiredMove = false;
         bool hasReplacedMove = false;
+
+        if (skillSO.allowedCharacters.Count > 0)
+        {
+            foreach (var item in skillSO.allowedCharacters)
+            {
+                if (status.character == item)
+                    allowedCharacter = true;
+            }
+
+            if (!allowedCharacter)
+            {
+                return false;
+            }
+        }
 
         if (skillSO.prerequisiteSkills.Count > 0)
         {

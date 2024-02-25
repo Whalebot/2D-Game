@@ -1,18 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using Sirenix.OdinInspector;
 
-public class EventInteractable : MonoBehaviour
+public class EventInteractable : Interactable
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject canvas;
+    public List<EventButton> buttons;
+    public override void Start()
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public override void South()
     {
-        
+        base.South();
+        canvas.SetActive(true);
+        GameManager.Instance.ToggleMenu();
+        Reroll();
+    }
+
+    public void Reroll()
+    {
+        foreach (var item in buttons)
+        {
+            item.GetSkills();
+        }
+    }
+
+    public void CloseMenu()
+    {
+        canvas.SetActive(false);
+        GameManager.Instance.CloseMenu();
     }
 }

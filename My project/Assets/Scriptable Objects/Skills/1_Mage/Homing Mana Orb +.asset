@@ -10,36 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41f2923ec284c6840a8cd468af82cb4d, type: 3}
-  m_Name: Double Shuriken
+  m_Name: Homing Mana Orb +
   m_EditorClassIdentifier: 
-  skillRank: 4
+  skillRank: 2
   type: 0
   elemental: 0
-  title: Double Shuriken
-  sprite: {fileID: 21300000, guid: 7ee09dc42093ecc41b03b4b947a37c04, type: 3}
+  title: Homing Mana Orb +
+  sprite: {fileID: 21300000, guid: 59f654c034abb334a8ba4591c79f4464, type: 3}
   rngWeight: 1
   damageValue: 0
   allowedCharacters:
-  - {fileID: 11400000, guid: f45992e7410287944aa65082242a4e6b, type: 2}
+  - {fileID: 11400000, guid: 95e74b597952b484da1a7230e848739c, type: 2}
   prerequisiteSkills: []
-  prerequisiteMoves:
-  - {fileID: 11400000, guid: c70d98c07584e96479ad0792598bfcc6, type: 2}
+  prerequisiteMoves: []
   bannedMoves: []
   newMoves:
-  - move: {fileID: 11400000, guid: 0e87c50c3a8ab2b4483f124911932dd4, type: 2}
+  - move: {fileID: 11400000, guid: 4ad12daf31c475d45a20401914382849, type: 2}
     combo: {fileID: 0}
-    oldMove: {fileID: 11400000, guid: c70d98c07584e96479ad0792598bfcc6, type: 2}
-  - move: {fileID: 11400000, guid: d25b9f0422c915e49a270651ba5c9a2e, type: 2}
+    oldMove: {fileID: 11400000, guid: f4c98efc85fd0f349b608839a010816c, type: 2}
+  - move: {fileID: 11400000, guid: 4ad12daf31c475d45a20401914382849, type: 2}
     combo: {fileID: 0}
-    oldMove: {fileID: 11400000, guid: b3508d87a2961b94bb45847a9af25870, type: 2}
-  - move: {fileID: 11400000, guid: fb52158fd713a4045ac9e577acb76e59, type: 2}
-    combo: {fileID: 0}
-    oldMove: {fileID: 11400000, guid: dff8cf3ec0b393c49867a08df1558f2e, type: 2}
+    oldMove: {fileID: 11400000, guid: f4c98efc85fd0f349b608839a010816c, type: 2}
   skillProperties: []
-  description: 'Doubles the straight shurikens you throw.
-
-    Each shuriken does
-    DMGVAL dmg.'
+  description: '[ Down + (Skill)] to summon a 3 homing magic orb which follow you.'
   stats:
     currentHealth: 0
     maxHealth: 0

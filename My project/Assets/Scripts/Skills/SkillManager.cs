@@ -102,6 +102,14 @@ public class SkillManager : MonoBehaviour
         return null;
     }
     #region Roll Skills
+    public void RemoveSkill(SkillSO skillToRemove)
+    {
+
+        learnedSkills.Remove(skillToRemove);
+
+        pickedSkillEvent?.Invoke(null);
+    }
+
     public void GetSkill(SkillSO skillSO)
     {
         SkillSO replacement = CheckReplacementBlessing(skillSO);
