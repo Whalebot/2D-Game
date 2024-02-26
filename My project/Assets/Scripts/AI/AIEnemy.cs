@@ -172,7 +172,7 @@ public class AIEnemy : AI
         currentState = State.Combat;
     }
 
-    void RollAction()
+    protected virtual void RollAction()
     {
         startDistance = 0;
         endDistance = 0;
@@ -198,7 +198,7 @@ public class AIEnemy : AI
         }
     }
 
-    private void ExecuteAction(AIAction aiAction)
+    protected virtual void ExecuteAction(AIAction aiAction)
     {
         startDistance = Distance();
         cooldown = aiAction.cooldown;
@@ -227,7 +227,7 @@ public class AIEnemy : AI
         }
     }
 
-    void Attacking()
+   protected void Attacking()
     {
         currentTarget = target.position;
 
@@ -301,7 +301,7 @@ public class AIEnemy : AI
     }
 
 
-    protected void Approach()
+    protected virtual void Approach()
     {
         if (target != null)
         {
@@ -327,7 +327,7 @@ public class AIEnemy : AI
             Idle();
         }
     }
-    protected void Flee()
+    protected virtual void Flee()
     {
         if (target != null)
         {

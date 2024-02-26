@@ -9,6 +9,7 @@ public class AttackScript : MonoBehaviour
     [HideInInspector] public Status status;
     [FoldoutGroup("Components")] public Transform hitboxContainer;
     [FoldoutGroup("Components")] public List<GameObject> hitboxes;
+    [FoldoutGroup("Components")] public List<GameObject> graphics;
     [FoldoutGroup("Components")] public Transform vfxContainer;
 
     Movement movement;
@@ -447,6 +448,25 @@ public class AttackScript : MonoBehaviour
     void ProcessInvul(int frame = 0)
     {
         //Execute properties
+        //Hide Graphics
+        if (activeMove.hideGraphics)
+        {
+            if (frame == activeMove.hideGraphicsStart)
+            {
+                foreach (var item in graphics)
+                {
+                    Debug.Log("Hide");
+                    item.gameObject.SetActive(false);
+                }
+            }
+            else if (frame >= activeMove.hideGraphicsStart + activeMove.hideGraphicsDuration)
+            {
+                foreach (var item in graphics)
+                {
+                    item.gameObject.SetActive(true);
+                }
+            }
+        }
         //Invul
         if (activeMove.invincible)
         {
@@ -858,7 +878,11 @@ public class AttackScript : MonoBehaviour
     public void ResetAllValues()
     {
         ClearHitboxes();
-        ClearVFX();
+        ClearVFX(); 
+        foreach (var item in graphics)
+        {
+            item.gameObject.SetActive(true);
+        }
         newAttack = false;
         attackString = false;
 

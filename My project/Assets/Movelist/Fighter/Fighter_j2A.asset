@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
   m_Name: Fighter_j2A
   m_EditorClassIdentifier: 
+  moves: []
   animationID: 121
   meterCost: 0
   meterGain: 10
@@ -48,9 +49,9 @@ MonoBehaviour:
     duration: 2
   vfx:
   - type: 0
-    startup: 20
+    startup: 19
     prefab: {fileID: 1439497813189136, guid: fce9ea9114d643c468165a2b10c919f9, type: 3}
-    deattachFromPlayer: 1
+    deattachFromPlayer: 0
     destroyOnRecovery: 0
     position: {x: 0, y: 1.5, z: 0.5}
     rotation: {x: -180, y: 0, z: 0}
@@ -81,7 +82,6 @@ MonoBehaviour:
     audioClips: []
     volume: 1
     pitchRange: 0
-  uniqueProperties: []
   skillProperties: []
   useAttackSpeed: 1
   keepVelocity: 0

@@ -16,14 +16,12 @@ public class SkillManager : MonoBehaviour
     [TabGroup("Debug")] public List<SkillSO> foundSkills;
     [TabGroup("Debug")] public List<SkillSO> selectedSkills;
     [TabGroup("Debug")] public List<SkillSO> items, activeSkills, blessings;
+    [TabGroup("Debug")] public List<SkillSO> fighterSkills, mageSkills, rogueSkills;
     [TabGroup("Debug")] public SkillSO emptyPoolSkill;
-    [TabGroup("Components")] public List<Moveset> allMovesets;
     [TabGroup("Components")] public List<TextTags> colorTags;
     [TabGroup("Components")] public SkillGroupSO attackGroup, specialGroup, skillGroup;
     [TabGroup("Components")] public List<SkillSelectionButton> skillButtons;
-    [TabGroup("Components")] public List<ShopButton> shopItems;
-    [TabGroup("Components")] public List<ShopButton> shopBlessings;
-    [TabGroup("Components")] public List<ShopButton> shopSkills;
+
     [TabGroup("Components")] public Sprite NBackground, RBackground, SRBackground, SSRBackground, URBackground;
     RewardType rewardType;
     Rank rewardRank;
@@ -164,36 +162,7 @@ public class SkillManager : MonoBehaviour
         }
     }
 
-    [Button]
-    public void RollShop(Rank r)
-    {
-        for (int i = 0; i < shopItems.Count; i++)
-        {
-            SkillSO skill = null;
-            skill = RollSkill(items);
-            shopItems[i].skillSO = skill;
-            if (skill != null)
-                shopItems[i].SetupSkill();
-        }
-
-        for (int i = 0; i < shopBlessings.Count; i++)
-        {
-            SkillSO skill = null;
-            skill = RollSkill(blessings);
-            shopBlessings[i].skillSO = skill;
-            if (skill != null)
-                shopBlessings[i].SetupSkill();
-        }
-
-        for (int i = 0; i < shopSkills.Count; i++)
-        {
-            SkillSO skill = null;
-            skill = RollSkill(activeSkills);
-            shopSkills[i].skillSO = skill;
-            if (skill != null)
-                shopSkills[i].SetupSkill();
-        }
-    }
+  
     public void RollBlessing(Rank rank)
     {
         rewardRank = rank;
@@ -539,6 +508,10 @@ public class SkillManager : MonoBehaviour
     {
         allSkills.Clear();
 
+        fighterSkills.Clear();
+        mageSkills.Clear();
+        rogueSkills.Clear();
+
         items.Clear();
         blessings.Clear();
         activeSkills.Clear();
@@ -549,6 +522,19 @@ public class SkillManager : MonoBehaviour
             var SOpath = AssetDatabase.GUIDToAssetPath(SOName);
             var item = AssetDatabase.LoadAssetAtPath<SkillSO>(SOpath);
             allSkills.Add(item);
+
+            if (item.allowedCharacters.Contains(CharacterCreator.Instance.characters[0]))
+            {
+                fighterSkills.Add(item);
+            }
+            if (item.allowedCharacters.Contains(CharacterCreator.Instance.characters[1]))
+            {
+                rogueSkills.Add(item);
+            }
+            if (item.allowedCharacters.Contains(CharacterCreator.Instance.characters[2]))
+            {
+                mageSkills.Add(item);
+            }
 
             switch (item.type)
             {

@@ -1480,6 +1480,94 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3041523238274643964, guid: ab6dfc09eeb331c4bb7dc79a8b5c1247, type: 3}
   m_PrefabInstance: {fileID: 461171556}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1072311942
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1072311944}
+  - component: {fileID: 1072311943}
+  m_Layer: 0
+  m_Name: Dev Cheats
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1072311943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072311942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56e624af795e56a41aa7fb5d844f3f72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rank: 0
+  skills: []
+  stats:
+    currentHealth: 0
+    maxHealth: 0
+    currentMeter: 0
+    maxMeter: 0
+    level: 0
+    strength: 0
+    intelligence: 0
+    agility: 0
+    faith: 0
+    luck: 0
+    gold: 0
+    attack: 0
+    magic: 0
+    faithModifier: 0
+    attackSpeed: 0
+    jumps: 0
+    airActions: 0
+    rerolls: 0
+    fireModifier: 0
+    iceModifier: 0
+    lightningModifier: 0
+    earthModifier: 0
+    windModifier: 0
+    poisonModifier: 0
+    movementSpeedModifier: 0
+    meterGainModifier: 0
+    poiseRegen: 0
+    poise: 0
+    defense: 0
+    resistance: 0
+    guardBreakModifier: 0
+    sizeModifier: 0
+    damageModifierPercentage: 0
+    backstabModifier: 0
+    damageModifierFlat: 0
+    hitStunMultiplier: 0
+    knockbackModifier: 0
+    critChance: 0
+    critMultiplier: 0
+    lifesteal: 0
+    spellSpeed: 0
+--- !u!4 &1072311944
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072311942}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.22911896, y: 0.5578593, z: 0.08496769}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1163208915
 GameObject:
   m_ObjectHideFlags: 0
@@ -3064,3 +3152,4 @@ SceneRoots:
   - {fileID: 319150351}
   - {fileID: 1568844086}
   - {fileID: 393012708}
+  - {fileID: 1072311944}

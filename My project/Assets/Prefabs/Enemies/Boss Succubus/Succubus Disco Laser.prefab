@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2660963686386907694}
   - component: {fileID: -7005878722383217374}
   m_Layer: 6
-  m_Name: Knight Straight Projectile
+  m_Name: Succubus Disco Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,11 +65,13 @@ MonoBehaviour:
   lifetime: 300
   projectileMovement: 0
   velocity: 4
+  maxVelocity: 10
   rotationVector: {x: 0, y: 0, z: 0}
   onStartVelocity: 1
-  updateVelocty: 1
+  updateVelocty: 0
   updateVelocity: 2
   rotateSpeed: 200
+  waitForTarget: 0
   willDelayReaim: 0
   projectileDelay: 0
   delayVelocity: 0
@@ -80,6 +82,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   searchSize: 20
+  startOffset: {x: 0, y: 0, z: 0}
+  followCaster: 0
+  keepParent: 0
+  minimumFollowDistance: 0
   explosion: {fileID: 0}
   onlyExplosionDamage: 0
   explosionVFX: {fileID: 126790, guid: 3c882a5553977f644823c4468aae67c3, type: 3}
@@ -154,7 +160,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6395638579328327229}
@@ -573,6 +579,10 @@ PrefabInstance:
     - target: {fileID: 401126, guid: f2c7cd139e83ae14e9911fec989558e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 401126, guid: f2c7cd139e83ae14e9911fec989558e4, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 19824758, guid: f2c7cd139e83ae14e9911fec989558e4, type: 3}
       propertyPath: moveWithTransform

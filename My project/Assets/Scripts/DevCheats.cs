@@ -17,13 +17,14 @@ public class DevCheats : MonoBehaviour
         TransitionManager.Instance.LoadScene(0);
     }
     [Button]
-    public void GiveSkillSkill() {
+    public void GiveSkillSkill()
+    {
         foreach (var item in skills)
         {
             item.skillRank = rank;
             SkillManager.Instance.GetSkill(item);
         }
-  
+
     }
 
     void Update()
@@ -36,14 +37,17 @@ public class DevCheats : MonoBehaviour
         if (Keyboard.current.f3Key.wasPressedThisFrame) SaveManager.Instance.DeleteData();
         if (Keyboard.current.f5Key.wasPressedThisFrame)
         {
-               
+            for (int i = 0; i < SaveManager.Instance.saveData.unlockedCharacters.Length; i++)
+            {
+                SaveManager.Instance.saveData.unlockedCharacters[i] = true;
+            }
 
             GameManager.Instance.playerStatus.currentStats.maxHealth = 2000;
             GameManager.Instance.playerStatus.currentStats.currentHealth = 2000;
             GameManager.Instance.playerStatus.currentStats.maxMeter = 2000;
             GameManager.Instance.playerStatus.currentStats.currentMeter = 2000;
             GameManager.Instance.playerStatus.currentStats.rerolls = 2000;
-            GameManager.Instance.playerStatus.currentStats.gold= 5000;
+            GameManager.Instance.playerStatus.currentStats.gold = 5000;
         }
     }
 }

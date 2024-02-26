@@ -39,7 +39,11 @@ public class ProjectileSpawner : Projectile
             }
 
             //  GameObject go = Instantiate(projectileToSpawn, transform.position + Quaternion.Euler(startRotation) * transform.forward * projectileSpacing, Quaternion.Euler(startRotation));
-            GameObject go = Instantiate(projectileToSpawn, transform.position + projectileRotation * transform.forward * projectileSpacing, Quaternion.Euler(startRotation));
+            Vector3 spawnPosition = transform.position + projectileRotation * transform.forward * projectileSpacing;
+            GameObject go = Instantiate(projectileToSpawn, spawnPosition, Quaternion.identity);
+            go.transform.forward = (spawnPosition - transform.position).normalized;
+            //go.transform.parent = null;
+
             Projectile proj = go.GetComponent<Projectile>();
             proj.SetupHitbox(hitboxID, attack, status, move);
             //go.transform.localScale = Vector3.one ;

@@ -179,7 +179,9 @@ public class GameManager : MonoBehaviour
     public void OpenShopWindow()
     {
         openShopEvent?.Invoke();
-        ToggleMenu();
+        UIManager.Instance.ButtonPressed();
+        menuOpen = true;
+        runNormally = false;
     }
 
 

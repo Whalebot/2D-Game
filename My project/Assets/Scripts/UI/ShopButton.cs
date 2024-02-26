@@ -38,7 +38,6 @@ public class ShopButton : MonoBehaviour
 
     private void OnEnable()
     {
-        skillManager = SkillManager.Instance;
         SetupSkill();
     }
     private void FixedUpdate()
@@ -66,7 +65,7 @@ public class ShopButton : MonoBehaviour
     [Button]
     public void SetupSkill()
     {
-
+        skillManager = SkillManager.Instance;
 
         switch (skillSO.skillRank)
         {

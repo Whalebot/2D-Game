@@ -14,7 +14,6 @@ public class UIManager : MonoBehaviour
     [TabGroup("Components")] public ResultScreen resultScreen;
     [TabGroup("Components")] public GameObject treasurePanel;
     [TabGroup("Components")] public GameObject blessingPanel, itemPanel, skillPanel;
-    [TabGroup("Components")] public GameObject shopPanel;
     [TabGroup("Components")] public OrganizeChildren skillPanelOrganizer;
     [TabGroup("Components")] public GameObject pauseMenu;
     [TabGroup("Components")] public GameObject skillUIPrefab;
@@ -62,7 +61,6 @@ public class UIManager : MonoBehaviour
 
             GameManager.Instance.pauseEvent += OpenPauseMenu;
             GameManager.Instance.resumeEvent += ClosePauseMenu;
-            GameManager.Instance.openShopEvent += OpenShopPanel;
             GameManager.Instance.playerDeath += OpenResultScreen;
             GameManager.Instance.goldChangeEvent += GoldUIUpdate;
 
@@ -274,14 +272,10 @@ public class UIManager : MonoBehaviour
         Debug.Log("PP panel");
         treasurePanel.SetActive(true);
     }
-    void OpenShopPanel()
-    {
-        shopPanel.SetActive(true);
-    }
+
     public void CloseRewardPanels()
     {
         treasurePanel.SetActive(false);
-        shopPanel.SetActive(false);
         GameManager.Instance.CloseMenu();
         LevelManager.Instance.SpawnLevelGates();
     }

@@ -42,7 +42,7 @@ public class InteractScript : MonoBehaviour
 
     public bool CanInteract()
     {
-        if (lastInteractable != null)
+        if (lastInteractable != null && !GameManager.isPaused)
         {
             return lastInteractable.CanInteract();
         }
@@ -96,7 +96,7 @@ public class InteractScript : MonoBehaviour
 
     public bool CanNorth()
     {
-        return lastInteractable && lastInteractable.CanNorth();
+        return lastInteractable && lastInteractable.CanNorth() && CanInteract();
     }
     public void North()
     {
@@ -104,7 +104,7 @@ public class InteractScript : MonoBehaviour
     }
     public bool CanSouth()
     {
-        return lastInteractable && lastInteractable.CanSouth() && movement.ground;
+        return lastInteractable && lastInteractable.CanSouth() && movement.ground && CanInteract();
     }
     public void South()
     {

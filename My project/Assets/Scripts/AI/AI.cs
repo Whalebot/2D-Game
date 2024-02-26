@@ -22,13 +22,12 @@ public class AI : MonoBehaviour
     [TabGroup("Pathfinding")] public int movementChangeTime = 30;
     protected int movementChangeCounter;
     protected RaycastHit hit;
-    [TabGroup("Pathfinding")] public Vector3 movementDirection;
-    [TabGroup("Pathfinding")] public Vector3 directionVector;
-    [TabGroup("Pathfinding")] public Vector3 movementOffset;
-    [TabGroup("Pathfinding")] public bool reachedEndOfPath;
+    [TabGroup("Debug")] public Vector3 movementDirection;
+    [TabGroup("Debug")] public Vector3 directionVector;
+    [TabGroup("Debug")] public Vector3 movementOffset;
+    [TabGroup("Debug")] public bool reachedEndOfPath;
     [TabGroup("Pathfinding")] public Path path;
-
-    [TabGroup("Pathfinding")] public int elapsed = 0;
+    [HideInInspector] public int elapsed = 0;
     [TabGroup("Pathfinding")] public int pathUpdateTime;
 
     [TabGroup("Pathfinding")] public Action detectEvent;
@@ -71,7 +70,8 @@ public class AI : MonoBehaviour
         Initialize();
     }
 
-    protected virtual void Initialize() {
+    protected virtual void Initialize()
+    {
         seeker = GetComponent<Seeker>();
     }
 

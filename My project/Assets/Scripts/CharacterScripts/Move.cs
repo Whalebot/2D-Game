@@ -81,7 +81,11 @@ public class Move : ScriptableObject
     [TabGroup("Move properties")] public int airInvulStart = 1;
     [ShowIf("airInvul")]
     [TabGroup("Move properties")] public int airInvulDuration;
-
+    [TabGroup("Move properties")] public bool hideGraphics;
+    [ShowIf("hideGraphics")]
+    [TabGroup("Move properties")] public int hideGraphicsStart = 1;
+    [ShowIf("hideGraphics")]
+    [TabGroup("Move properties")] public int hideGraphicsDuration;
     [TabGroup("Cancel properties")] public List<Move> targetComboMoves;
     [TabGroup("Cancel properties")] public bool fullCancel = false;
     [TabGroup("Cancel properties")] public bool gatlingCancel = false;
