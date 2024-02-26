@@ -64,6 +64,7 @@ MonoBehaviour:
   lifetime: 300
   projectileMovement: 1
   velocity: 3
+  maxVelocity: 50
   rotationVector: {x: 0, y: 0, z: 0}
   onStartVelocity: 1
   updateVelocty: 0
@@ -80,6 +81,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   searchSize: 100
+  startOffset: {x: 0, y: 0, z: 0}
+  followCaster: 0
+  keepParent: 0
+  minimumFollowDistance: 0
   explosion: {fileID: 0}
   onlyExplosionDamage: 0
   explosionVFX: {fileID: 199898, guid: 7bbe36e923d120540a9d42d5002a84f5, type: 3}
@@ -174,7 +179,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7617765567682750977}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

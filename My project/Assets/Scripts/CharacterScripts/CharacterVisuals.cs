@@ -57,11 +57,12 @@ public class CharacterVisuals : MonoBehaviour
         {
             foreach (var mat in materials)
             {
-                foreach (var tempMat in item.materialGroup.materials)
-                {
-                    if (mat.name.Contains(tempMat.name))
-                        mat.SetColor("_MainColor", item.color * item.color);
-                }
+                if (item.materialGroup != null)
+                    foreach (var tempMat in item.materialGroup.materials)
+                    {
+                        if (mat.name.Contains(tempMat.name))
+                            mat.SetColor("_MainColor", item.color * item.color);
+                    }
 
             }
         }

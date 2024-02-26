@@ -5582,6 +5582,11 @@ Transform:
   - {fileID: 75388886}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &513341709 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6163353296552497253, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
+  m_PrefabInstance: {fileID: 7084506706958713828}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &513532088 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1813698288677873929, guid: 8e188d59ad361f14baa57ebb0008ec4d, type: 3}
@@ -22729,6 +22734,8 @@ MonoBehaviour:
   status: {fileID: 0}
   hitboxContainer: {fileID: 6401006740043288779}
   hitboxes: []
+  graphics:
+  - {fileID: 513341709}
   vfxContainer: {fileID: 1123979893988040239}
   moveset: {fileID: 0}
   attacking: 0
@@ -23020,7 +23027,7 @@ PrefabInstance:
     - target: {fileID: 5064048602166505248, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
       propertyPath: presetSO
       value: 
-      objectReference: {fileID: 11400000, guid: ccc48024e9dc2d046a6fc7b7e900c456, type: 2}
+      objectReference: {fileID: 11400000, guid: b0e98546677937e41ad1cce6019a1d39, type: 2}
     - target: {fileID: 5064048602166505248, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -23089,6 +23096,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9151002904983823385, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: dd3b47a688bf2f34d8fe89368fa6245f, type: 2}
     - target: {fileID: 9151002904983823386, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
       propertyPath: m_Enabled
       value: 1

@@ -455,7 +455,6 @@ public class AttackScript : MonoBehaviour
             {
                 foreach (var item in graphics)
                 {
-                    Debug.Log("Hide");
                     item.gameObject.SetActive(false);
                 }
             }

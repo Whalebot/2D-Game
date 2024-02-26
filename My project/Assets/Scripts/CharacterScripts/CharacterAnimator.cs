@@ -95,7 +95,7 @@ public class CharacterAnimator : MonoBehaviour
         normalizedTime = anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
         frame = Mathf.RoundToInt(anim.GetCurrentAnimatorStateInfo(0).normalizedTime * anim.GetCurrentAnimatorStateInfo(0).length / (1f / 60f) / anim.GetCurrentAnimatorStateInfo(0).speed);
 
-        if (movement.isMoving)
+        if (movement.isMoving && !attack.attacking)
         {
             if (movement.direction != Vector3.zero)
             {
