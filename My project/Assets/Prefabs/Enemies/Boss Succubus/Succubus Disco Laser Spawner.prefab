@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4573642075086242987}
   - component: {fileID: -7005878722383217374}
   m_Layer: 6
-  m_Name: Succubus Disco Spawner
+  m_Name: Succubus Disco Laser Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 5860963072138344223}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -103,9 +103,9 @@ MonoBehaviour:
   rb: {fileID: 0}
   hit: 0
   projectileToSpawn: {fileID: 5860963072138344223, guid: ba5cc21fadb9ea7408a931483fc74893, type: 3}
-  projectilesSpawned: 12
-  projectileSpreadAngle: 45
-  projectileSpacing: 1
+  projectilesSpawned: 16
+  projectileSpreadAngle: 30
+  projectileSpacing: 0.25
 --- !u!54 &-7005878722383217374
 Rigidbody:
   m_ObjectHideFlags: 0
