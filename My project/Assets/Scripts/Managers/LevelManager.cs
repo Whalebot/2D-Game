@@ -8,20 +8,26 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance;
     public RoomTypes currentRoomType = RoomTypes.Normal;
 
-    public List<SceneSO> normalRoomLvl1;
-    public List<SceneSO> eliteRoomLvl1;
-    public List<SceneSO> bossRoomLvl1;
-    public List<SceneSO> shopRoomLvl1;
-    public List<SceneSO> treasureRoomLvl1;
-    public List<SceneSO> eventRoomLvl1;
-    public List<SceneSO> restRoomLvl1;
+    [TabGroup("Event Generation")] public int eventNormalChance = 10;
+    [TabGroup("Event Generation")] public int eventShopChance = 10;
+    [TabGroup("Event Generation")] public int eventTreasureChance = 5;
+
+    [TabGroup("Area 1")] public List<SceneSO> easyRoomLvl1;
+    [TabGroup("Area 1")] public List<SceneSO> normalRoomLvl1;
+    [TabGroup("Area 1")] public List<SceneSO> eliteRoomLvl1;
+    [TabGroup("Area 1")] public List<SceneSO> bossRoomLvl1;
+    [TabGroup("Area 1")] public List<SceneSO> shopRoomLvl1;
+    [TabGroup("Area 1")] public List<SceneSO> treasureRoomLvl1;
+    [TabGroup("Area 1")] public List<SceneSO> eventRoomLvl1;
+    [TabGroup("Area 1")] public List<SceneSO> restRoomLvl1;
+
     public List<SceneSO> stairwayRoom;
 
-    public List<SceneSO> normalRoomLvl2;
-    public List<SceneSO> eliteRoomLvl2;
-    public List<SceneSO> bossRoomLvl2;
-    public List<SceneSO> treasureRoomLvl2;
-    public List<SceneSO> eventRoomLvl2;
+    [TabGroup("Area 2")] public List<SceneSO> normalRoomLvl2;
+    [TabGroup("Area 2")] public List<SceneSO> eliteRoomLvl2;
+    [TabGroup("Area 2")] public List<SceneSO> bossRoomLvl2;
+    [TabGroup("Area 2")] public List<SceneSO> treasureRoomLvl2;
+    [TabGroup("Area 2")] public List<SceneSO> eventRoomLvl2;
 
     public int area = 1;
     public int currentLevel = 1;
@@ -123,7 +129,7 @@ public class LevelManager : MonoBehaviour
         spawnLevelGates?.Invoke();
     }
 
-    public string NextLevelName(RoomTypes roomType)
+    public string NextLevelName(RoomTypes roomType, int levelDepth)
     {
         int RNG = 0;
         switch (roomType)
@@ -138,10 +144,15 @@ public class LevelManager : MonoBehaviour
                 }
                 else
                 {
-                    RNG = UnityEngine.Random.Range(0, normalRoomLvl1.Count);
- 
-
-                    return normalRoomLvl1[RNG].sceneName;
+                    if (levelDepth <= 3) {
+                        RNG = UnityEngine.Random.Range(0, easyRoomLvl1.Count);
+                        return easyRoomLvl1[RNG].sceneName;
+                    }
+                    else
+                    {
+                        RNG = UnityEngine.Random.Range(0, normalRoomLvl1.Count);
+                        return normalRoomLvl1[RNG].sceneName;
+                    }
                 }
             case RoomTypes.Elite:
                 if (area == 2)
@@ -175,7 +186,7 @@ public class LevelManager : MonoBehaviour
 
                     return bossRoomLvl1[RNG].sceneName;
                 }
-              
+
             case RoomTypes.Treasure:
                 if (area == 2)
                 {

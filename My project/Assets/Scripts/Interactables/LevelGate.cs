@@ -40,7 +40,7 @@ public class LevelGate : Interactable
         }
 
         if (destinationNode != null)
-            nextSceneName = LevelManager.Instance.NextLevelName(destinationNode.roomType);
+            nextSceneName = LevelManager.Instance.NextLevelName(destinationNode.roomType, destinationNode.y);
 
 
         if (destinationNode == null)
