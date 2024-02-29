@@ -88,6 +88,7 @@ public class MapGenerator : MonoBehaviour
         startNode.roomType = RoomTypes.Staircase;
         startNode.Visited();
 
+        //Boss Node
         GameObject bossGO = Instantiate(mapNodePrefab, mapContainer.transform.position + new Vector3(0, nodeSpacing.y * roomsPerFloor), Quaternion.identity, mapContainer.transform);
         bossGO.transform.localPosition = new Vector3(0, nodeSpacing.y * roomsPerFloor);
         bossGO.name = $"{roomsPerFloor}-{1} Boss";
@@ -302,16 +303,29 @@ public class MapGenerator : MonoBehaviour
                 foundElite = true;
             if (item.roomType == RoomTypes.Rest)
                 foundRest = true;
+
+            //foreach (var childItem in item.exitRooms)
+            //{
+            //    if (item.roomType == RoomTypes.Shop)
+            //        foundShop = true;
+            //    if (item.roomType == RoomTypes.Elite)
+            //        foundElite = true;
+            //    if (item.roomType == RoomTypes.Rest)
+            //        foundRest = true;
+            //}
         }
 
-        //if (node.y == 9)
+        if (node.y == 1)
+        {
+            return RoomTypes.Normal;
+        }
         //    return RoomTypes.Treasure;
 
         int RNG = UnityEngine.Random.Range(0, 100);
         if (RNG <= treasureChance)
             return RoomTypes.Treasure;
 
-        if (node.y != 1 && !foundElite)
+        if (node.y > 3 && !foundElite)
         {
             RNG = UnityEngine.Random.Range(0, 100);
             if (RNG <= eliteChance)
@@ -329,7 +343,7 @@ public class MapGenerator : MonoBehaviour
         if (RNG <= eventChance)
             return RoomTypes.Event;
 
-        if (node.y != 1 && !foundRest)
+        if (node.y >= 5 && !foundRest)
         {
             RNG = UnityEngine.Random.Range(0, 100);
             if (RNG <= restChance)

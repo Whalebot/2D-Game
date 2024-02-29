@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41f2923ec284c6840a8cd468af82cb4d, type: 3}
   m_Name: Spin
   m_EditorClassIdentifier: 
-  skillRank: 3
+  skillRank: 2
   type: 0
   elemental: 0
   title: Spin
@@ -22,18 +22,23 @@ MonoBehaviour:
   allowedCharacters:
   - {fileID: 11400000, guid: 12809cbeb7fa7514595cf45844648d6a, type: 2}
   prerequisiteSkills: []
+  replaceMoves: 1
   prerequisiteMoves: []
-  bannedMoves: []
+  bannedMoves:
+  - {fileID: 11400000, guid: c9ff265dac604b74a854038dd511f19c, type: 2}
   newMoves:
   - move: {fileID: 11400000, guid: c9ff265dac604b74a854038dd511f19c, type: 2}
     combo: {fileID: 11400000, guid: 6cc355a251509c9449aac1c023456ab6, type: 2}
     oldMove: {fileID: 0}
+  - move: {fileID: 11400000, guid: c9ff265dac604b74a854038dd511f19c, type: 2}
+    combo: {fileID: 11400000, guid: 31f617f7643913640b0961571c83f6ab, type: 2}
+    oldMove: {fileID: 0}
   skillProperties: []
-  description: 'Can now chain [(Skill)] spin into itself 5 times.
+  description: '[(Skill)] to do a spinning attack which hits around you.
 
 
-    DMGVAL physical
-    damage.'
+    DMGVAL
+    physical damage.'
   stats:
     currentHealth: 0
     maxHealth: 0

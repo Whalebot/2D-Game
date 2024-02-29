@@ -9,15 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78406b75ed8be194caa285e2ae26719c, type: 3}
+  m_Script: {fileID: 11500000, guid: 46ec16e6fccabdf47a64617756758efe, type: 3}
   m_Name: Blue tags
   m_EditorClassIdentifier: 
-  tagColor: {r: 1, g: 0.1692376, b: 0, a: 1}
+  tagColor: {r: 0.07132578, g: 0, b: 1, a: 1}
   tags:
-  - '[fire]'
-  - '[ice]'
-  - '[lightning]'
-  - '[earth]'
-  - '[wind]'
-  - '[poison]'
-  - burning
+  - tag: (BURN)
+    title: Burn
+    description: 'Status Debuff: Inflict 2 damage every second'
+  - tag: (CHILL)
+    title: Chill
+    description: 'Status Debuff: Reduce movement speed by 10% per stack'
+  - tag: (FROZEN)
+    title: 
+    description: 
+  - tag: (POISON)
+    title: Poison
+    description: 'Status Debuff: Inflict stacking poison damage every second for
+      5 seconds up to 10 stacks.'

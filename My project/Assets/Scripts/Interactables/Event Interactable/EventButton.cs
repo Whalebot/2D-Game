@@ -32,7 +32,7 @@ public class EventButton : MonoBehaviour
             oldSkill = SkillManager.Instance.learnedSkills[0];
 
         if (oldSkill != null)
-            oldSkillName.text = oldSkill.name;
+            oldSkillName.text = "- Remove " + oldSkill.name;
         else
         {
             oldSkillName.text = "No skill to replace";

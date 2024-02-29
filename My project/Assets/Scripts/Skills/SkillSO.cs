@@ -18,6 +18,8 @@ public class SkillSO : ScriptableObject
 
     public List<Character> allowedCharacters;
     public List<SkillSO> prerequisiteSkills;
+
+    [ShowIf("@type == SkillType.Skill")] public bool replaceMoves;
     [ShowIf("@type == SkillType.Skill")] public List<Move> prerequisiteMoves;
     [ShowIf("@type == SkillType.Skill")] public List<Move> bannedMoves;
     public List<NewMove> newMoves;

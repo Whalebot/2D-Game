@@ -97,9 +97,9 @@ public class UIManager : MonoBehaviour
 
     public void SetActiveEventSystem(GameObject go)
     {
+        eventSystem.SetSelectedGameObject(null);
         if (InputManager.controlScheme != ControlScheme.Mouse)
         {
-            eventSystem.SetSelectedGameObject(null);
             eventSystem.SetSelectedGameObject(go);
         }
     }
@@ -125,7 +125,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    void ExecuteFrame()
+    private void Update()
     {
         goldText.text = "" + GameManager.Instance.Gold;
         rerollButton.interactable = GameManager.Instance.playerStatus.currentStats.rerolls > 0;
@@ -133,6 +133,10 @@ public class UIManager : MonoBehaviour
         floorText.text = "Floor " + LevelManager.Instance.currentMapNode.y;
         timeText.text = "" + TimeFormatter(GameManager.time, true);
 
+    }
+
+    void ExecuteFrame()
+    {
         if (savedGoldCounter > 0)
         {
             goldCounter--;
@@ -145,13 +149,8 @@ public class UIManager : MonoBehaviour
 
         UpdateSkillIcon();
 
-        //Vector3 mousePosition = Input.mousePosition; 
-        //RectTransformUtility.ScreenPointToLocalPointInRectangle(rect.parent as RectTransform, mousePosition, null, out Vector2 anchoredPosition); anchoredPosition += offset; rect.anchoredPosition = anchoredPosition;
         tooltip.position = Input.mousePosition + tooltipOffset;
         tooltip.gameObject.SetActive(tooltipEnabled);
-
-
-       
     }
 
     public void ButtonPressed()
@@ -225,7 +224,9 @@ public class UIManager : MonoBehaviour
         tooltipEnabled = true;
         tooltipText.text = key;
     }
-    public void DisableTooltip() { tooltipEnabled = false; }
+    public void DisableTooltip() { 
+        tooltipEnabled = false;
+    }
 
     public static string TimeFormatter(float seconds, bool forceHHMMSS = false)
     {
@@ -276,6 +277,7 @@ public class UIManager : MonoBehaviour
     public void CloseRewardPanels()
     {
         treasurePanel.SetActive(false);
+        SetActiveEventSystem(null);
         GameManager.Instance.CloseMenu();
         LevelManager.Instance.SpawnLevelGates();
     }

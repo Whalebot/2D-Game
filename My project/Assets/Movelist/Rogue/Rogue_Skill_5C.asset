@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
   m_Name: Rogue_Skill_5C
   m_EditorClassIdentifier: 
+  moves: []
   animationID: 13
   meterCost: 50
   meterGain: 0
@@ -49,15 +50,14 @@ MonoBehaviour:
   vfx:
   - type: 0
     startup: 4
-    prefab: {fileID: 1800976239324842, guid: c3a419073912434429f93f4f6d5369ff, type: 3}
+    prefab: {fileID: 1800976239324842, guid: 1c54a0fc2a2551f4e827867734dacf7c, type: 3}
     deattachFromPlayer: 1
     destroyOnRecovery: 0
     position: {x: 0, y: 0.5, z: 0}
-    rotation: {x: 0, y: 90, z: 5}
-    scale: {x: 2, y: 2, z: 2}
+    rotation: {x: 0, y: 0, z: 5}
+    scale: {x: 2, y: 1, z: 2}
   sfx:
   - startup: 1
-    audioClip: {fileID: 8300000, guid: e6c87645e4bc9b140a91a5c04fa12a95, type: 3}
     audioClips:
     - {fileID: 8300000, guid: e6c87645e4bc9b140a91a5c04fa12a95, type: 3}
     volume: 1
@@ -74,17 +74,14 @@ MonoBehaviour:
   blockFX: {fileID: 0}
   hitSFX:
     startup: 1
-    audioClip: {fileID: 0}
     audioClips: []
     volume: 1
     pitchRange: 0
   blockSFX:
     startup: 1
-    audioClip: {fileID: 0}
     audioClips: []
     volume: 1
     pitchRange: 0
-  uniqueProperties: []
   skillProperties: []
   useAttackSpeed: 1
   keepVelocity: 0
@@ -92,6 +89,7 @@ MonoBehaviour:
   holdAttack: 0
   releaseAttackMove: {fileID: 0}
   autoAim: 0
+  keepComboCount: 0
   armor: 0
   resetGatling: 0
   hitsGroundOnly: 0
@@ -108,6 +106,9 @@ MonoBehaviour:
   airInvul: 0
   airInvulStart: 1
   airInvulDuration: 0
+  hideGraphics: 0
+  hideGraphicsStart: 1
+  hideGraphicsDuration: 0
   targetComboMoves: []
   fullCancel: 1
   gatlingCancel: 1

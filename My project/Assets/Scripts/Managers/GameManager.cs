@@ -67,7 +67,14 @@ public class GameManager : MonoBehaviour
 
     bool reloading;
     float startTimeStep;
-
+    public Stats PlayerStats
+    {
+        get { return playerStatus.currentStats; }
+        set
+        {
+            playerStatus.currentStats = value;
+        }
+    }
     public int Gold
     {
         get { return playerStatus.currentStats.gold; }

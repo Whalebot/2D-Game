@@ -5,5 +5,12 @@ using UnityEngine;
 public class TextTags : ScriptableObject
 {
     public Color tagColor;
-    public List<string> tags;
+    public List<Tag> tags;
+}
+
+[System.Serializable]
+public class Tag {
+    public string tag;
+    public string title;
+    public string description;
 }

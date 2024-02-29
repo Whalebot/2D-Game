@@ -129,7 +129,8 @@ public class ShopButton : MonoBehaviour
         if (GameManager.Instance.Gold >= price)
         {
             GameManager.Instance.Gold -= price;
-            AudioManager.Instance.PlaySFX(buySFX);
+            AudioManager.Instance.PlaySFX(buySFX); 
+            UIManager.Instance.DisableTooltip();
             skillManager.GetSkill(skillSO);
             gameObject.SetActive(false);
         }

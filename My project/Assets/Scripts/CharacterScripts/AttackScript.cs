@@ -665,7 +665,7 @@ public class AttackScript : MonoBehaviour
             if (status.currentStats.currentMeter < move.releaseAttackMove.meterCost) return false;
         }
         else
-        if (status.currentStats.currentMeter < move.meterCost) return false;
+        if (status.currentStats.currentMeter < move.meterCost && move.meterCost > 0) return false;
         //if (jumpFrameCounter > 0) return false;
         if (move.useAirAction)
         {

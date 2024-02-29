@@ -162,7 +162,7 @@ public class SkillManager : MonoBehaviour
         }
     }
 
-  
+
     public void RollBlessing(Rank rank)
     {
         rewardRank = rank;
@@ -348,14 +348,14 @@ public class SkillManager : MonoBehaviour
 
             foreach (var item in colorTags)
             {
-                foreach (string tag in item.tags)
+                foreach (Tag tagTemplate in item.tags)
                 {
-                    if (words[i].ToLower().Contains(tag))
-                    {
-                        words[i] = words[i].Replace("(", "");
-                        words[i] = words[i].Replace(")", "");
-                        words[i] = ($"<link=\"1\"><color=#{ColorUtility.ToHtmlStringRGB(item.tagColor)}>" + words[i] + "</color>" + "</link>");
 
+                    if (words[i].ToLower().Contains(tagTemplate.tag.ToLower()))
+                    {
+                        string tempString = words[i].ToLower();
+                        tempString = tempString.Replace(tagTemplate.tag.ToLower(), $"<link=\"1\"><color=#{ColorUtility.ToHtmlStringRGB(item.tagColor)}>" + tagTemplate.title + "</color>" + "</link>");
+                        words[i] = tempString;
                     }
                 }
             }
@@ -368,6 +368,45 @@ public class SkillManager : MonoBehaviour
             final += word;
         }
         return final;
+    }
+
+    public List<Tag> GetTags(string description)
+    {
+        List<Tag> foundTextTags = new List<Tag>();
+
+        List<string> words = new List<string>();
+        string test = "";
+
+        //Divide words
+        foreach (char letter in description.ToCharArray())
+        {
+            test += letter;
+
+            if (letter == ' ' || letter == '\n')
+            {
+                words.Add(test);
+                test = "";
+            }
+        }
+
+        //Add final word
+        words.Add(test);
+        for (int i = 0; i < words.Count; i++)
+        {
+            foreach (var item in colorTags)
+            {
+                foreach (Tag tagTemplate in item.tags)
+                {
+
+                    if (words[i].ToLower().Contains(tagTemplate.tag.ToLower()))
+                    {
+                        foundTextTags.Add(tagTemplate);
+                    }
+                }
+            }
+        }
+
+        return foundTextTags;
     }
 
     public string SkillStatDescription(SkillSO skill)

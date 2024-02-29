@@ -17,11 +17,16 @@ public class WheelOfFortune : MonoBehaviour
     public GameObject blockade;
     public AudioSource clickSound;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        dummy.damageEvent += SpinWheel;
+    }
+
     void Start()
     {
         GameManager.Instance.advanceGameState += ExecuteFrame;
         LevelManager.Instance.spawnLevelGates += RemoveBlockade;
-        dummy.damageEvent += SpinWheel;
+
     }
 
     void ExecuteFrame()
@@ -61,6 +66,7 @@ public class WheelOfFortune : MonoBehaviour
     void RemoveBlockade()
     {
         blockade.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     [Button]
@@ -111,6 +117,10 @@ public class WheelOfFortune : MonoBehaviour
                 LevelManager.Instance.SpawnLevelGates();
                 break;
             default:
+                damage = 5;
+                status.Health -= damage;
+                GameManager.Instance.DamageNumbers(status.transform, damage, false, status.alignment);
+                LevelManager.Instance.SpawnLevelGates();
                 break;
         }
     }

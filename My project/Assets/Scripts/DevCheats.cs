@@ -42,12 +42,12 @@ public class DevCheats : MonoBehaviour
                 SaveManager.Instance.saveData.unlockedCharacters[i] = true;
             }
 
-            GameManager.Instance.playerStatus.currentStats.maxHealth = 2000;
-            GameManager.Instance.playerStatus.currentStats.currentHealth = 2000;
-            GameManager.Instance.playerStatus.currentStats.maxMeter = 2000;
-            GameManager.Instance.playerStatus.currentStats.currentMeter = 2000;
-            GameManager.Instance.playerStatus.currentStats.rerolls = 2000;
-            GameManager.Instance.playerStatus.currentStats.gold = 5000;
+            GameManager.Instance.PlayerStats.maxHealth = 2000;
+            GameManager.Instance.PlayerStats.currentHealth = 2000;
+            GameManager.Instance.PlayerStats.maxMeter = 2000;
+            GameManager.Instance.PlayerStats.currentMeter = 2000;
+            GameManager.Instance.PlayerStats.rerolls = 2000;
+            GameManager.Instance.PlayerStats.gold = 5000;
         }
     }
 }

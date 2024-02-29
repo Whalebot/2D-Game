@@ -9,12 +9,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78406b75ed8be194caa285e2ae26719c, type: 3}
+  m_Script: {fileID: 11500000, guid: 46ec16e6fccabdf47a64617756758efe, type: 3}
   m_Name: Red tags
   m_EditorClassIdentifier: 
   tagColor: {r: 1, g: 0.1692376, b: 0, a: 1}
   tags:
-  - '[attack]'
-  - '[special]'
-  - '[skill]'
-  - '[dash]'
+  - tag: (ATTACK)
+    title: Attack
+    description: Press SQUARE for your class' primary attack.
+  - tag: (SPECIAL)
+    title: Special
+    description: Press TRIANGLE for your class' unique attack.
+  - tag: (UNIQUE)
+    title: Special
+    description: Press TRIANGLE for your class' unique attack.
+  - tag: (SKILL)
+    title: Skill
+    description: Press CIRCLE for a powerful skill which requires mana.
+  - tag: (DASH)
+    title: Dash
+    description: Press R1 for to perform an evasive dash.
+  - tag: (JUMP)
+    title: Jump
+    description: Press CROSS to jump

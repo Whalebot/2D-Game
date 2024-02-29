@@ -364,9 +364,16 @@ public class SkillHandler : MonoBehaviour
             {
                 if (item.combo != null)
                 {
+
                     Combo c = GetCombo(item.combo);
                     if (c != null)
+                    {
+                        if (skill.replaceMoves)
+                        {
+                            c.moves.Clear();
+                        }
                         c.moves.Add(item.move);
+                    }
                 }
             }
         }

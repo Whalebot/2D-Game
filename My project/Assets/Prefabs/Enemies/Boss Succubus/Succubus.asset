@@ -12,16 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd0f521e490d135408b5fbd75180cbbf, type: 3}
   m_Name: Succubus
   m_EditorClassIdentifier: 
-  characterName: Slime
+  characterName: Succubus
   subTitle: 
   description: 
   image: {fileID: 0}
-  prefab: {fileID: 9037631907321898802, guid: 518eee88e2d9a6643952facd713e1871, type: 3}
+  prefab: {fileID: 8603998171735369550, guid: ad88e7f33424f804d8c433914909b98b, type: 3}
   controller: {fileID: 0}
   moveset: {fileID: 0}
   actions:
-  - {fileID: 11400000, guid: 796d712d1b10a06418864b72f5a01588, type: 2}
+  - {fileID: 11400000, guid: f234706f5d268514c98c5d7b8c01cefb, type: 2}
+  - {fileID: 11400000, guid: 8d805430ea8264f4581c133cb310de35, type: 2}
   - {fileID: 11400000, guid: 4d0544026551f954aa66c5f55bc56825, type: 2}
+  - {fileID: 11400000, guid: 796d712d1b10a06418864b72f5a01588, type: 2}
+  - {fileID: 11400000, guid: 992c4aaa5051b7c48bb4689c2277247a, type: 2}
   stats:
     currentHealth: 500
     maxHealth: 500
@@ -49,7 +52,7 @@ MonoBehaviour:
     poisonModifier: 0
     movementSpeedModifier: 1
     meterGainModifier: 1
-    poiseRegen: 0.1
+    poiseRegen: 0.01
     poise: 100
     defense: 0
     resistance: 0

@@ -16,6 +16,7 @@ public class SkillSelectionButton : MonoBehaviour
     public Image buttonBackground;
     Button button;
     bool tooltip = false;
+    public List<ToolTipDescription> toolTips;
     void Start()
     {
         button = GetComponent<Button>();
@@ -50,6 +51,23 @@ public class SkillSelectionButton : MonoBehaviour
     {
         titleText.text = skillSO.title;
         descriptionText.text = SkillManager.Instance.SkillDescription(skillSO);
+
+        List<Tag> foundTags = SkillManager.Instance.GetTags(skillSO.description);
+
+        foreach (var item in toolTips)
+        {
+            item.gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < foundTags.Count; i++)
+        {
+            if (toolTips.Count > i)
+            {
+                toolTips[i].gameObject.SetActive(true);
+                toolTips[i].SetupToolTip(foundTags[i].title, foundTags[i].description);
+            }
+        }
+
         if (skillSO.sprite != null)
             iconImage.sprite = skillSO.sprite;
 
@@ -94,6 +112,7 @@ public class SkillSelectionButton : MonoBehaviour
         if (UIManager.buttonDelay) return;
         Debug.Log("Test 2");
         SkillManager.Instance.GetSkill(skillSO);
+        UIManager.Instance.DisableTooltip();
         UIManager.Instance.CloseRewardPanels();
     }
 }

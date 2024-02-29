@@ -44,6 +44,7 @@ public class Status : MonoBehaviour
     [TabGroup("Settings")] public bool debug;
     [TabGroup("Settings")] public int hitInvulDuration;
     [TabGroup("Settings")] public int wakeupInvul;
+    [TabGroup("Settings")] public float poisonRegenMultiplier = 4;
     int invulCounter;
     int counter;
     [Header("Auto destroy on death")]
@@ -332,7 +333,7 @@ public class Status : MonoBehaviour
                 Poise = Mathf.Clamp(Poise + currentStats.poiseRegen, 0, baseStats.poise);
             else
             {
-                Poise = Mathf.Clamp(Poise + currentStats.poiseRegen * 4, 0, baseStats.poise);
+                Poise = Mathf.Clamp(Poise + currentStats.poiseRegen * poisonRegenMultiplier, 0, baseStats.poise);
                 if (Poise >= baseStats.poise)
                     poiseBroken = false;
             }
@@ -438,8 +439,9 @@ public class Status : MonoBehaviour
         }
 
         GameManager.Instance.DamageNumbers(transform, damage, crit, alignment);
-        Health -= damage;
         damageEvent?.Invoke(damage);
+        Health -= damage;
+
 
         if (hasArmor || animationArmor)
         {

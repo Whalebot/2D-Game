@@ -81,6 +81,7 @@ public class InputManager : MonoBehaviour
 
         controls = new Controls();
         // controls.MouseScheme.
+        controls.Default.LAnalog.performed += context => InputDirection(context);
 
         controls.Default.West.performed += context => OnWest(context);
         controls.Default.West.canceled += context => OnWest(context);
@@ -134,7 +135,11 @@ public class InputManager : MonoBehaviour
         deleteInputs = new List<BufferedInput>();
     }
 
-
+    void InputDirection(InputAction.CallbackContext context)
+    {
+        ChangeControlScheme(context);
+        //    Vector2 v = context.ReadValue<Vector2>();
+    }
 
     void ExecuteFrame()
     {
@@ -186,15 +191,15 @@ public class InputManager : MonoBehaviour
         rightInput?.Invoke();
     }
 
-    private void OnLeft()
+    private void OnMouseScrollDown()
     {
-        if (debug) print("Left");
+        if (debug) print("Scroll Down");
         ChangeControlScheme(ControlScheme.Keyboard);
         leftInput?.Invoke();
     }
-    private void OnRight()
+    private void OnMouseScrollUp()
     {
-        if (debug) print("Right");
+        if (debug) print("Scroll Up");
         ChangeControlScheme(ControlScheme.Keyboard);
         rightInput?.Invoke();
     }
@@ -221,13 +226,12 @@ public class InputManager : MonoBehaviour
             lookDirection = Vector2.zero;
             return;
         }
-
         inputDirection = controls.Default.LAnalog.ReadValue<Vector2>();
         lookDirection = controls.Default.RAnalog.ReadValue<Vector2>();
         mouseScroll = controls.Default.ScrollWheel.ReadValue<Vector2>();
 
-        if (mouseScroll.y > 0) { OnLeft(); }
-        if (mouseScroll.y < 0) { OnRight(); }
+        if (mouseScroll.y > 0) { OnMouseScrollDown(); }
+        if (mouseScroll.y < 0) { OnMouseScrollUp(); }
 
         if (canTap && lastTapTime + 0.1F < Time.time)
         {
@@ -266,7 +270,7 @@ public class InputManager : MonoBehaviour
     }
     void ChangeControlScheme(InputAction.CallbackContext context)
     {
-
+        ControlScheme oldScheme = controlScheme;
         if (context.control.device == Gamepad.current)
         {
             if (controlScheme == ControlScheme.Keyboard) gamepadEvent?.Invoke();
@@ -299,15 +303,16 @@ public class InputManager : MonoBehaviour
         else
         {
 
-            if (controlScheme != ControlScheme.Keyboard)
-
+            if (controlScheme != ControlScheme.Keyboard && controlScheme != ControlScheme.Mouse)
                 controlScheme = ControlScheme.Keyboard;
+
             controlSchemeChange?.Invoke();
             keyboardEvent?.Invoke();
             //Cursor.lockState = CursorLockMode.Confined;
             // Cursor.visible = true;
         }
-        //Debug.Log(controlScheme);
+        if (oldScheme != controlScheme)
+            Debug.Log(controlScheme);
     }
 
     void OnTouchPad()

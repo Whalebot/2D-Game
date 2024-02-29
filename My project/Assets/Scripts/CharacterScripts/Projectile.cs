@@ -269,10 +269,19 @@ public class Projectile : Hitbox
                 Status tempStatus = item.GetComponentInParent<Status>();
                 if (tempStatus == null || tempStatus == status) continue;
                 Vector3 dir = (transform.position - item.transform.position).normalized * attractPower;
-                if (tempStatus.GetComponent<Movement>().ground)
+
+                Movement mov = tempStatus.GetComponent<Movement>();
+
+                if (mov != null)
+                {
                     dir.y = 0;
+                }
+
                 Rigidbody rb = tempStatus.GetComponent<Rigidbody>();
-                rb.velocity += dir / rb.mass;
+                if (rb != null)
+                {
+                    rb.velocity += dir / rb.mass;
+                }
             }
         }
     }

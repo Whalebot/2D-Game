@@ -33,11 +33,13 @@ public class PauseMenu : MonoBehaviour
     }
     void Restart()
     {
+        GameManager.Instance.CloseMenu();
         GameManager.Instance.LoseGame();
     }
     void Quit()
     {
-
+        if (!Application.isEditor)
+            Application.Quit();
     }
 
     void MarkVisitedRooms()
