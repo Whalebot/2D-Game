@@ -144,7 +144,8 @@ public class LevelManager : MonoBehaviour
                 }
                 else
                 {
-                    if (levelDepth <= 3) {
+                    if (levelDepth <= 3)
+                    {
                         RNG = UnityEngine.Random.Range(0, easyRoomLvl1.Count);
                         return easyRoomLvl1[RNG].sceneName;
                     }
@@ -202,6 +203,20 @@ public class LevelManager : MonoBehaviour
                 RNG = UnityEngine.Random.Range(0, shopRoomLvl1.Count);
                 return shopRoomLvl1[RNG].sceneName;
             case RoomTypes.Event:
+                int eventRNG = UnityEngine.Random.Range(0, 100);
+                if (eventRNG < eventTreasureChance)
+                {
+                    return NextLevelName(RoomTypes.Treasure, levelDepth);
+                }
+                else if (eventRNG < eventTreasureChance + eventShopChance)
+                {
+                    return NextLevelName(RoomTypes.Shop, levelDepth);
+                }
+                else if (eventRNG < eventTreasureChance + eventShopChance + eventNormalChance)
+                {
+                    return NextLevelName(RoomTypes.Normal, levelDepth);
+                }
+
                 if (area == 2)
                 {
                     RNG = UnityEngine.Random.Range(0, eventRoomLvl2.Count);

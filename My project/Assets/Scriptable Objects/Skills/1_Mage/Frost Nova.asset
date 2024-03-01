@@ -22,6 +22,7 @@ MonoBehaviour:
   allowedCharacters:
   - {fileID: 11400000, guid: 95e74b597952b484da1a7230e848739c, type: 2}
   prerequisiteSkills: []
+  replaceMoves: 0
   prerequisiteMoves: []
   bannedMoves: []
   newMoves:
@@ -29,8 +30,11 @@ MonoBehaviour:
     combo: {fileID: 11400000, guid: cbd889e5a194974488fdace717b9e559, type: 2}
     oldMove: {fileID: 0}
   skillProperties: []
-  description: Adds Frost Nova to down + skill button to an frost AoE around the
-    character.
+  description: '[Down + (Skill)] to spawn a frost AoE around the character.
+
+
+    DMGVAL
+    ice damage and inflict (chill).'
   stats:
     currentHealth: 0
     maxHealth: 0
