@@ -64,7 +64,7 @@ public class SkillSelectionButton : MonoBehaviour
             if (toolTips.Count > i)
             {
                 toolTips[i].gameObject.SetActive(true);
-                toolTips[i].SetupToolTip(foundTags[i].title, foundTags[i].description);
+                toolTips[i].SetupToolTip(foundTags[i].title, SkillManager.Instance.CheckStringTags(foundTags[i].description));
             }
         }
 

@@ -19,6 +19,7 @@ public class SkillManager : MonoBehaviour
     [TabGroup("Debug")] public List<SkillSO> fighterSkills, mageSkills, rogueSkills;
     [TabGroup("Debug")] public SkillSO emptyPoolSkill;
     [TabGroup("Components")] public List<TextTags> colorTags;
+    [TabGroup("Components")] public TextTags xbInputTag, psInputTags, kbInputTags, mouseInputTags;
     [TabGroup("Components")] public SkillGroupSO attackGroup, specialGroup, skillGroup;
     [TabGroup("Components")] public List<SkillSelectionButton> skillButtons;
 
@@ -305,7 +306,7 @@ public class SkillManager : MonoBehaviour
         }
     }
 
-    string CheckStringTags(string s, SkillSO skill = null)
+   public string CheckStringTags(string s, SkillSO skill = null)
     {
         List<string> words = new List<string>();
         string test = "";
@@ -359,6 +360,41 @@ public class SkillManager : MonoBehaviour
                     }
                 }
             }
+
+            TextTags inputTag = null;
+
+            switch (InputManager.controlScheme)
+            {
+                case ControlScheme.PS4:
+                    inputTag = psInputTags;
+                    break;
+                case ControlScheme.XBOX:
+                    inputTag = xbInputTag;
+                    break;
+                case ControlScheme.Keyboard:
+                    inputTag = kbInputTags;
+                    break;
+                case ControlScheme.Switch:
+                    break;
+                case ControlScheme.Mouse:
+                    inputTag = mouseInputTags;
+                    break;
+                default:
+                    inputTag = kbInputTags;
+                    break;
+            }
+
+            foreach (Tag tagTemplate in inputTag.tags)
+            {
+
+                if (words[i].ToLower().Contains(tagTemplate.tag.ToLower()))
+                {
+                    string tempString = words[i].ToLower();
+                    tempString = tempString.Replace(tagTemplate.tag.ToLower(), tagTemplate.title);
+                    words[i] = tempString;
+                }
+            }
+
         }
 
         string final = "";
