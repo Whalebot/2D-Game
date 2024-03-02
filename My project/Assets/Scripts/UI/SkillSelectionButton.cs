@@ -14,6 +14,7 @@ public class SkillSelectionButton : MonoBehaviour
     public TextMeshProUGUI replacementText;
     public Image iconImage;
     public Image buttonBackground;
+    public List<GameObject> stars;
     Button button;
     bool tooltip = false;
     public List<ToolTipDescription> toolTips;
@@ -84,6 +85,12 @@ public class SkillSelectionButton : MonoBehaviour
             replacementContainer.SetActive(false);
         }
 
+
+        for (int i = 0; i < stars.Count; i++)
+        {
+            stars[i].SetActive(i <= (int)skillSO.skillRank);
+        }
+
         switch (skillSO.skillRank)
         {
             case Rank.D:
@@ -110,7 +117,6 @@ public class SkillSelectionButton : MonoBehaviour
     {
         Debug.Log(UIManager.buttonDelay);
         if (UIManager.buttonDelay) return;
-        Debug.Log("Test 2");
         SkillManager.Instance.GetSkill(skillSO);
         UIManager.Instance.DisableTooltip();
         UIManager.Instance.CloseRewardPanels();

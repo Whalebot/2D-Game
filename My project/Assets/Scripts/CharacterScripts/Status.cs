@@ -220,7 +220,7 @@ public class Status : MonoBehaviour
 
         if (clone != null)
         {
-            RefreshStatusEffect(clone);
+            RefreshStatusEffect(clone, hitInfo, rank);
         }
         else
         {
@@ -236,10 +236,10 @@ public class Status : MonoBehaviour
 
         return false;
     }
-    public void RefreshStatusEffect(StatusEffect effect)
+    public void RefreshStatusEffect(StatusEffect effect, HitInfo hitInfo = null, Rank rank = Rank.D)
     {
         if (statusEffects.Contains(effect))
-            effect.RefreshBehaviour();
+            effect.RefreshBehaviour(this, hitInfo, rank);
     }
     void ResolveStatusEffects()
     {

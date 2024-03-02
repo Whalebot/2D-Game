@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46ec16e6fccabdf47a64617756758efe, type: 3}
-  m_Name: Blue tags
+  m_Name: Status Effect tags
   m_EditorClassIdentifier: 
   tagColor: {r: 0.07132578, g: 0, b: 1, a: 1}
   tags:
@@ -27,3 +27,7 @@ MonoBehaviour:
     title: Poison
     description: 'Status Debuff: Inflict stacking poison damage every second for
       5 seconds up to 10 stacks.'
+  - tag: (DEATH MARK)
+    title: Death Mark
+    description: 'Status Debuff: Inflict a mark on either the front or back of target.
+      Once applied to both, the mark will trigger and do big damage.'

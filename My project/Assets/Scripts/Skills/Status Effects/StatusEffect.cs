@@ -64,7 +64,7 @@ public class StatusEffect : ScriptableObject
         damageModifier = damageModifier * rarityModifier;
         SpawnVFX();
     }
-    void SpawnVFX()
+    public virtual void SpawnVFX()
     {
         if (statusVFX.prefab != null)
         {
@@ -93,7 +93,7 @@ public class StatusEffect : ScriptableObject
             EndBehaviour();
         }
     }
-    public virtual void RefreshBehaviour()
+    public virtual void RefreshBehaviour(Status s, HitInfo hitInfo = null, Rank rank = Rank.D)
     {
         //tickCounter = 0;
         if (stacks < maxStacks)

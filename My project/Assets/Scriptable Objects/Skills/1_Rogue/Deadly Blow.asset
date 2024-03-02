@@ -10,29 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41f2923ec284c6840a8cd468af82cb4d, type: 3}
-  m_Name: Alpha Blade
+  m_Name: Deadly Blow
   m_EditorClassIdentifier: 
   skillRank: 3
   type: 0
   elemental: 0
-  title: Alpha Blade
+  title: Assasinate
   sprite: {fileID: 21300000, guid: 8dae7d3945db11a438c5a02650f0e7ef, type: 3}
   rngWeight: 1
   damageValue: 0
   allowedCharacters:
   - {fileID: 11400000, guid: f45992e7410287944aa65082242a4e6b, type: 2}
   prerequisiteSkills: []
-  replaceMoves: 1
-  prerequisiteMoves: []
-  bannedMoves:
-  - {fileID: 11400000, guid: 563dbcef377e05e4dbb20357ac1e4d38, type: 2}
+  replaceMoves: 0
+  prerequisiteMoves:
+  - {fileID: 11400000, guid: cbd405441b568ef4ca39db4ab700870f, type: 2}
+  bannedMoves: []
   newMoves:
-  - move: {fileID: 11400000, guid: 563dbcef377e05e4dbb20357ac1e4d38, type: 2}
-    combo: {fileID: 11400000, guid: 2e3d8ae1ee142ee44ae495c7978a3db9, type: 2}
-    oldMove: {fileID: 0}
+  - move: {fileID: 11400000, guid: 2d41d2ef21a90d8488d3997c9b6771b7, type: 2}
+    combo: {fileID: 0}
+    oldMove: {fileID: 11400000, guid: cbd405441b568ef4ca39db4ab700870f, type: 2}
   skillProperties: []
-  description: '[(Skill)] To perform a long range dash attack which passes through
-    enemies'
+  description: Improves your [(Special)] on the ground
   stats:
     currentHealth: 0
     maxHealth: 0

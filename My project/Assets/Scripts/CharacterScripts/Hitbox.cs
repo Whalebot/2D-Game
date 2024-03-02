@@ -20,12 +20,13 @@ public class Hitbox : MonoBehaviour
     Vector3 pushbackDirection;
     [HideInInspector] protected Transform body;
     [HideInInspector] public List<Status> enemyList;
-    MeshRenderer mr;
+    [TabGroup("Debug")] [SerializeField] MeshRenderer mr;
     protected Transform colPos;
 
     private void Awake()
     {
-        mr = GetComponent<MeshRenderer>();
+        if (mr == null)
+            mr = GetComponent<MeshRenderer>();
 
         status = GetComponentInParent<Status>();
         if (body == null) body = GetComponentInParent<Status>().transform;
@@ -172,7 +173,7 @@ public class Hitbox : MonoBehaviour
         bool physicalDamage = atk.damageType == DamageType.Physical;
 
 
-  
+
         if (rng <= status.currentStats.critChance * 100)
         {
             crit = true;
@@ -215,7 +216,7 @@ public class Hitbox : MonoBehaviour
         //Send info to skill manager
         bool backstab = false;
         //BACKSTAB
-        if (Mathf.Sign(status.transform.localScale.x) == Mathf.Sign(other.transform.localScale.x))
+        if (Mathf.Sign(status.transform.localRotation.y) == Mathf.Sign(other.transform.localRotation.y))
         {
             backstab = true;
             totalDamage = (int)(totalDamage * (1 + status.currentStats.backstabModifier));

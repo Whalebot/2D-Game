@@ -678,6 +678,7 @@ MonoBehaviour:
   debug: 0
   hitInvulDuration: 60
   wakeupInvul: 60
+  poisonRegenMultiplier: 4
   autoDeath: 0
   destroyParent: 0
   autoDeathTime: 1.5
@@ -730,7 +731,7 @@ MonoBehaviour:
   groundBackOffset: 0.16
   groundMask:
     serializedVersion: 2
-    m_Bits: 2103
+    m_Bits: 2049
   enemyMask:
     serializedVersion: 2
     m_Bits: 256
@@ -801,6 +802,8 @@ MonoBehaviour:
   status: {fileID: 0}
   hitboxContainer: {fileID: 7781932959363250360}
   hitboxes: []
+  graphics:
+  - {fileID: 5613790237681612825}
   vfxContainer: {fileID: 7490248456676919469}
   moveset: {fileID: 11400000, guid: 0884d8b402a255c469024685902eaf05, type: 2}
   attacking: 0
@@ -1374,6 +1377,11 @@ Transform:
 --- !u!4 &5183553431944268603 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6885791832876540743, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
+  m_PrefabInstance: {fileID: 1756563633811220604}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5613790237681612825 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6163353296552497253, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
   m_PrefabInstance: {fileID: 1756563633811220604}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &6080493326513386797 stripped

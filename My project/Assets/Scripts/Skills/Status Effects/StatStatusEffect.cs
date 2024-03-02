@@ -9,13 +9,13 @@ public class StatStatusEffect : StatusEffect
 
     public override void ActivateBehaviour(Status s, HitInfo hitInfo = null, Rank rank = Rank.D)
     {
-        base.ActivateBehaviour(s);
+        base.ActivateBehaviour(s, hitInfo, rank);
         AddStats();
     }
 
-    public override void RefreshBehaviour()
+    public override void RefreshBehaviour(Status s, HitInfo hitInfo = null, Rank rank = Rank.D)
     {
-        base.RefreshBehaviour();
+        base.RefreshBehaviour(s, hitInfo, rank);
     }
 
     void AddStats()

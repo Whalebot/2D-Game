@@ -155,7 +155,7 @@ public class UIManager : MonoBehaviour
 
     public void ButtonPressed()
     {
-        buttonDelayCounter = 10;
+        buttonDelayCounter = 30;
         buttonDelay = true;
     }
 

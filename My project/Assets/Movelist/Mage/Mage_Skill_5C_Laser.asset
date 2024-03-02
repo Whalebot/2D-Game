@@ -10,32 +10,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
-  m_Name: Rogue_5B
+  m_Name: Mage_Skill_5C_Laser
   m_EditorClassIdentifier: 
-  animationID: 52
-  meterCost: 0
+  moves: []
+  animationID: 553
+  meterCost: 50
   meterGain: 10
   consumeMeterOnActiveFrame: 0
-  icon: {fileID: 0}
-  firstStartupFrame: 25
-  lastActiveFrame: 26
-  totalMoveDuration: 44
-  firstGatlingFrame: 35
-  recoveryFrames: 18
+  icon: {fileID: 21300000, guid: 5f1dc3107b2d72646a75fe561260aaea, type: 3}
+  firstStartupFrame: 40
+  lastActiveFrame: 49
+  totalMoveDuration: 74
+  firstGatlingFrame: 45
+  recoveryFrames: 25
   attacks:
   - attackLevel: 2
     attackType: 0
-    damageType: 0
-    hitbox: {fileID: 5860963072138344223, guid: 59b44e3a39a40b24d95bc7a4e5a6612f, type: 3}
-    damage: 3
+    damageType: 1
+    hitbox: {fileID: 5860963072138344223, guid: 5a9b44690732c8a4fb415a3d87a949bb, type: 3}
+    damage: 4
     stun: 20
     hitstop: 5
     poiseBreak: 0
-    startupFrame: 25
-    activeFrames: 2
-    gatlingFrames: 10
+    startupFrame: 40
+    activeFrames: 10
+    gatlingFrames: 5
     groundHitProperty:
-      pushback: {x: 5, y: 2}
+      pushback: {x: 2, y: 8}
       hitState: 0
     airHitProperty:
       pushback: {x: 0, y: 0}
@@ -43,25 +44,35 @@ MonoBehaviour:
   type: 0
   screenShake:
   - type: 0
-    startup: 25
+    startup: 40
     amplitude: 2
-    duration: 2
+    duration: 1
   vfx:
   - type: 0
-    startup: 25
-    prefab: {fileID: 1800976239324842, guid: c3a419073912434429f93f4f6d5369ff, type: 3}
+    startup: 1
+    prefab: {fileID: 3595050330844811134, guid: 2c70ba2d625df0541965d239fd82e7e6, type: 3}
+    deattachFromPlayer: 0
+    destroyOnRecovery: 0
+    position: {x: 0, y: 0.01, z: 0}
+    rotation: {x: -90, y: 0, z: 0}
+    scale: {x: 0.3, y: 0.3, z: 0.3}
+  - type: 0
+    startup: 40
+    prefab: {fileID: 3595050330844811134, guid: 2c70ba2d625df0541965d239fd82e7e6, type: 3}
+    deattachFromPlayer: 0
+    destroyOnRecovery: 0
+    position: {x: 0, y: 0.6, z: 0.7}
+    rotation: {x: 0, y: 0, z: 90}
+    scale: {x: 0.3, y: 0.3, z: 0.3}
+  - type: 0
+    startup: 40
+    prefab: {fileID: 7598982604646388857, guid: 3292970d1192525418dbf4e75532cb6b, type: 3}
     deattachFromPlayer: 1
     destroyOnRecovery: 0
-    position: {x: 0, y: 0.2, z: -0.2}
-    rotation: {x: -5, y: 90, z: 0}
-    scale: {x: 0.5, y: 0.5, z: 0.5}
-  sfx:
-  - startup: 20
-    audioClip: {fileID: 8300000, guid: 23603e9c2e8fb0543ab8224e8f1251b2, type: 3}
-    audioClips:
-    - {fileID: 8300000, guid: 23603e9c2e8fb0543ab8224e8f1251b2, type: 3}
-    volume: 1
-    pitchRange: 0
+    position: {x: 0, y: 0.6, z: 0.7}
+    rotation: {x: 0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+  sfx: []
   hitFX:
     type: 0
     startup: 1
@@ -74,17 +85,14 @@ MonoBehaviour:
   blockFX: {fileID: 0}
   hitSFX:
     startup: 1
-    audioClip: {fileID: 0}
     audioClips: []
     volume: 1
     pitchRange: 0
   blockSFX:
     startup: 1
-    audioClip: {fileID: 0}
     audioClips: []
     volume: 1
     pitchRange: 0
-  uniqueProperties: []
   skillProperties: []
   useAttackSpeed: 1
   keepVelocity: 0
@@ -92,51 +100,36 @@ MonoBehaviour:
   holdAttack: 0
   releaseAttackMove: {fileID: 0}
   autoAim: 0
+  keepComboCount: 0
   armor: 0
   resetGatling: 0
   hitsGroundOnly: 0
   isDashing: 0
   noClip: 0
   noClipStart: 1
-  noClipDuration: 20
+  noClipDuration: 0
   invincible: 0
   invincibleStart: 1
-  invincibleDuration: 10
+  invincibleDuration: 0
   projectileInvul: 0
   projectileInvulStart: 1
   projectileInvulDuration: 0
   airInvul: 0
   airInvulStart: 1
   airInvulDuration: 0
+  hideGraphics: 0
+  hideGraphicsStart: 1
+  hideGraphicsDuration: 0
   targetComboMoves: []
-  fullCancel: 1
+  fullCancel: 0
   gatlingCancel: 1
   uncancelable: 0
   useAirAction: 0
   landCancel: 0
   recoverOnlyOnLand: 0
-  m:
-  - startFrame: 22
-    duration: 2
-    momentum: {x: 3, y: 0}
-    resetVelocityDuringRecovery: 0
-    xMovementCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    movementCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    freeMovement: 0
-    useCurve: 0
-    teleport: 0
+  m: []
   instantStartupRotation: 1
-  overrideVelocity: 1
+  overrideVelocity: 0
   runMomentum: 0
   inheritForwardVelocity: 0
   stopAtEdges: 1

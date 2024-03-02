@@ -10,52 +10,52 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
-  m_Name: Rogue_j2A
+  m_Name: Rogue_Skill_5BB
   m_EditorClassIdentifier: 
   moves: []
-  animationID: 121
+  animationID: 13
   meterCost: 0
   meterGain: 10
   consumeMeterOnActiveFrame: 0
   icon: {fileID: 0}
-  firstStartupFrame: 8
-  lastActiveFrame: 10
-  totalMoveDuration: 25
-  firstGatlingFrame: 15
-  recoveryFrames: 15
+  firstStartupFrame: 12
+  lastActiveFrame: 21
+  totalMoveDuration: 41
+  firstGatlingFrame: 17
+  recoveryFrames: 20
   attacks:
   - attackLevel: 0
     attackType: 0
     damageType: 0
-    hitbox: {fileID: 5860963072138344223, guid: 1f50c13d05020ca429bcffdd25d6da8a, type: 3}
+    hitbox: {fileID: 5860963072138344223, guid: 1695d89cede66fe4fb21c472f444bba7, type: 3}
     damage: 1
     stun: 20
     hitstop: 5
     poiseBreak: 0
-    startupFrame: 8
-    activeFrames: 3
-    gatlingFrames: 7
+    startupFrame: 12
+    activeFrames: 10
+    gatlingFrames: 5
     groundHitProperty:
-      pushback: {x: 2, y: 0}
+      pushback: {x: 3, y: 2}
       hitState: 0
     airHitProperty:
-      pushback: {x: 0, y: 0}
+      pushback: {x: 3, y: 2}
       hitState: 0
   type: 0
   screenShake: []
   vfx:
   - type: 0
-    startup: 5
-    prefab: {fileID: 1320683006971348, guid: 83ea291b15cd5ed46be1077c6b047713, type: 3}
-    deattachFromPlayer: 0
-    destroyOnRecovery: 1
-    position: {x: 0, y: 0.5, z: 0.2}
-    rotation: {x: -90, y: -90, z: 0}
-    scale: {x: 0.5, y: 0.5, z: 0.5}
+    startup: 7
+    prefab: {fileID: 1800976239324842, guid: 1c54a0fc2a2551f4e827867734dacf7c, type: 3}
+    deattachFromPlayer: 1
+    destroyOnRecovery: 0
+    position: {x: 0, y: 0.5, z: 0.4}
+    rotation: {x: 2, y: 0, z: 110}
+    scale: {x: 0.69, y: 0.69, z: 0.69}
   sfx:
-  - startup: 5
+  - startup: 3
     audioClips:
-    - {fileID: 8300000, guid: 652db114d3169ce459965dbaaf99df74, type: 3}
+    - {fileID: 8300000, guid: 9703811f01f93494b96dd7bcda5086ff, type: 3}
     volume: 1
     pitchRange: 0
   hitFX:
@@ -78,8 +78,7 @@ MonoBehaviour:
     audioClips: []
     volume: 1
     pitchRange: 0
-  skillProperties:
-  - {fileID: 11400000, guid: 6196beae3ddddaf43af6b77de4aa76e9, type: 2}
+  skillProperties: []
   useAttackSpeed: 1
   keepVelocity: 0
   particleID: 0
@@ -88,15 +87,15 @@ MonoBehaviour:
   autoAim: 0
   keepComboCount: 0
   armor: 0
-  resetGatling: 1
+  resetGatling: 0
   hitsGroundOnly: 0
   isDashing: 0
   noClip: 0
-  noClipStart: 1
-  noClipDuration: 0
+  noClipStart: 5
+  noClipDuration: 20
   invincible: 0
   invincibleStart: 1
-  invincibleDuration: 0
+  invincibleDuration: 10
   projectileInvul: 0
   projectileInvulStart: 1
   projectileInvulDuration: 0
@@ -106,18 +105,17 @@ MonoBehaviour:
   hideGraphics: 0
   hideGraphicsStart: 1
   hideGraphicsDuration: 0
-  targetComboMoves:
-  - {fileID: 11400000, guid: 87ce976be1e36da4597e87f94ae4b279, type: 2}
-  fullCancel: 0
+  targetComboMoves: []
+  fullCancel: 1
   gatlingCancel: 0
   uncancelable: 0
   useAirAction: 0
-  landCancel: 1
+  landCancel: 0
   recoverOnlyOnLand: 0
   m:
-  - startFrame: 1
-    duration: 3
-    momentum: {x: 0, y: 0}
+  - startFrame: 5
+    duration: 10
+    momentum: {x: 12, y: 0}
     resetVelocityDuringRecovery: 0
     xMovementCurve:
       serializedVersion: 2
@@ -131,12 +129,12 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    freeMovement: 1
+    freeMovement: 0
     useCurve: 0
     teleport: 0
-  - startFrame: 11
-    duration: 24
-    momentum: {x: 0, y: 0}
+  - startFrame: 16
+    duration: 2
+    momentum: {x: 2, y: 0.1}
     resetVelocityDuringRecovery: 0
     xMovementCurve:
       serializedVersion: 2
@@ -150,11 +148,11 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    freeMovement: 1
+    freeMovement: 0
     useCurve: 0
     teleport: 0
   instantStartupRotation: 1
-  overrideVelocity: 0
+  overrideVelocity: 1
   runMomentum: 0
   inheritForwardVelocity: 0
   stopAtEdges: 1

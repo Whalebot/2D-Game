@@ -14,9 +14,9 @@ public class PushbackStatusEffect : StatusEffect
         SpawnHitbox();
     }
 
-    public override void RefreshBehaviour()
+    public override void RefreshBehaviour(Status s, HitInfo hitInfo = null, Rank rank = Rank.D)
     {
-        base.RefreshBehaviour();
+        base.RefreshBehaviour(s, hitInfo, rank);
         DestroyHitbox();
         SpawnHitbox();
 
