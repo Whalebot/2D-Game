@@ -10,6 +10,7 @@ public class CharacterAnimator : MonoBehaviour
     private Animator anim;
     private Movement movement;
     private AttackScript attack;
+    private AI ai;
     [TabGroup("Debug")] public int frame;
     [TabGroup("Debug")] public float normalizedTime;
     [TabGroup("Debug")] public bool hitstop;
@@ -34,6 +35,8 @@ public class CharacterAnimator : MonoBehaviour
         anim = GetComponent<Animator>();
         movement = GetComponentInParent<Movement>();
         attack = GetComponentInParent<AttackScript>();
+        ai = GetComponentInParent<AI>();
+
         if (status != null)
         {
             //character = status.character;
@@ -144,11 +147,19 @@ public class CharacterAnimator : MonoBehaviour
             anim.enabled = false;
         if (status != null)
             StatusAnimation();
-
+        if (ai != null)
+        {
+            AIAnimation();
+        }
         //if(!attack.attacking)
         //    anim.SetFloat("AnimationStartTime", 0);
 
         if (!GameManager.Instance.runNormally) StartCoroutine(PauseAnimation());
+    }
+
+    void AIAnimation()
+    {
+        anim.SetBool("Detected", ai.detected);
     }
 
     public void HitStop()

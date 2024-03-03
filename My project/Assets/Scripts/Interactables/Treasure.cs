@@ -14,7 +14,7 @@ public class Treasure : Interactable
     public GameObject treasure;
     public GameObject woodChest, silverChest, goldChest;
     public SFX treasureSFX;
-    Status status;
+   protected Status status;
 
     public override void Start()
     {

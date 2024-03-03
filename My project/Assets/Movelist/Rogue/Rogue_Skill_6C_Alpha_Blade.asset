@@ -18,22 +18,22 @@ MonoBehaviour:
   meterGain: 0
   consumeMeterOnActiveFrame: 0
   icon: {fileID: 21300000, guid: 8dae7d3945db11a438c5a02650f0e7ef, type: 3}
-  firstStartupFrame: 2
-  lastActiveFrame: 21
-  totalMoveDuration: 39
-  firstGatlingFrame: 12
+  firstStartupFrame: 10
+  lastActiveFrame: 11
+  totalMoveDuration: 29
+  firstGatlingFrame: 20
   recoveryFrames: 18
   attacks:
   - attackLevel: 2
     attackType: 0
     damageType: 0
-    hitbox: {fileID: 5860963072138344223, guid: 2882afa60e18a8547bd9f6cabf9ee25d, type: 3}
+    hitbox: {fileID: 5860963072138344223, guid: 931f47ef2530909458cffeea79cce08a, type: 3}
     damage: 4
     stun: 20
     hitstop: 5
     poiseBreak: 0
-    startupFrame: 2
-    activeFrames: 20
+    startupFrame: 10
+    activeFrames: 2
     gatlingFrames: 10
     groundHitProperty:
       pushback: {x: 2, y: 8}
@@ -54,7 +54,7 @@ MonoBehaviour:
     deattachFromPlayer: 1
     destroyOnRecovery: 0
     position: {x: 0, y: 0.5, z: 0}
-    rotation: {x: 0, y: 0, z: 5}
+    rotation: {x: 0, y: 0, z: 110}
     scale: {x: 2, y: 1, z: 2}
   sfx:
   - startup: 1
@@ -106,9 +106,9 @@ MonoBehaviour:
   airInvul: 0
   airInvulStart: 1
   airInvulDuration: 0
-  hideGraphics: 0
-  hideGraphicsStart: 1
-  hideGraphicsDuration: 0
+  hideGraphics: 1
+  hideGraphicsStart: 5
+  hideGraphicsDuration: 12
   targetComboMoves: []
   fullCancel: 1
   gatlingCancel: 1
@@ -119,7 +119,7 @@ MonoBehaviour:
   m:
   - startFrame: 2
     duration: 10
-    momentum: {x: 35, y: 0}
+    momentum: {x: 30, y: 0}
     resetVelocityDuringRecovery: 0
     xMovementCurve:
       serializedVersion: 2

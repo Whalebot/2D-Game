@@ -216,7 +216,7 @@ public class Hitbox : MonoBehaviour
         //Send info to skill manager
         bool backstab = false;
         //BACKSTAB
-        if (Mathf.Sign(status.transform.localRotation.y) == Mathf.Sign(other.transform.localRotation.y))
+        if (Mathf.Sign((other.transform.position - status.transform.position).x) == Mathf.Sign(other.transform.localRotation.y))
         {
             backstab = true;
             totalDamage = (int)(totalDamage * (1 + status.currentStats.backstabModifier));
@@ -226,6 +226,7 @@ public class Hitbox : MonoBehaviour
         {
             status.Health += (int)(damageDealt * status.currentStats.lifesteal);
         }
+
 
         HitInfo hitInfo = new HitInfo(crit, backstab, status, other, move);
         attack.HitEvent(hitInfo);

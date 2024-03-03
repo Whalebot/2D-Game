@@ -260,6 +260,7 @@ GameObject:
   - component: {fileID: 2611016267439307869}
   - component: {fileID: 608792622818785729}
   - component: {fileID: 6189947623487383407}
+  - component: {fileID: 6143930780511012196}
   m_Layer: 0
   m_Name: Base Enemy Prefab
   m_TagString: Enemy
@@ -347,6 +348,7 @@ MonoBehaviour:
     critChance: 0
     critMultiplier: 0
     lifesteal: 0
+    spellSpeed: 0
   hitstunValue: 0
   blockstunValue: 0
   modifiedStats:
@@ -390,6 +392,7 @@ MonoBehaviour:
     critChance: 0
     critMultiplier: 0
     lifesteal: 0
+    spellSpeed: 0
   baseStats:
     currentHealth: 0
     maxHealth: 0
@@ -431,6 +434,7 @@ MonoBehaviour:
     critChance: 0
     critMultiplier: 0
     lifesteal: 0
+    spellSpeed: 0
   isFlying: 0
   hasArmor: 0
   animationArmor: 0
@@ -441,6 +445,7 @@ MonoBehaviour:
   debug: 0
   hitInvulDuration: 0
   wakeupInvul: 0
+  poisonRegenMultiplier: 4
   autoDeath: 1
   destroyParent: 0
   autoDeathTime: 0.5
@@ -616,6 +621,7 @@ MonoBehaviour:
   status: {fileID: 0}
   hitboxContainer: {fileID: 8559984112062095360}
   hitboxes: []
+  graphics: []
   vfxContainer: {fileID: 2415882437873446628}
   moveset: {fileID: 0}
   attacking: 0
@@ -675,6 +681,36 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
+--- !u!114 &6143930780511012196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6518288295935901126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 849bf05cdac03cc4d8f3c290e1979c8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _southType: 0
+  westType: 2
+  northType: 2
+  eastType: 2
+  rank: 0
+  reward: 0
+  autoSetup: 1
+  canInteract: 1
+  treasureText: {fileID: 0}
+  treasure: {fileID: 0}
+  woodChest: {fileID: 0}
+  silverChest: {fileID: 0}
+  goldChest: {fileID: 0}
+  treasureSFX:
+    startup: 1
+    audioClips: []
+    volume: 1
+    pitchRange: 0
 --- !u!1 &7464143608956673388
 GameObject:
   m_ObjectHideFlags: 0
@@ -750,6 +786,7 @@ MonoBehaviour:
   maxSpeed: 0
   deaccelerateSpeed: 0
   fallThreshold: 0
+  renderers: []
 --- !u!1 &8115606975259577352
 GameObject:
   m_ObjectHideFlags: 0

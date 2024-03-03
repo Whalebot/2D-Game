@@ -272,7 +272,7 @@ public class AIEnemy : AI
         }
     }
 
-    void Detect()
+   public void Detect()
     {
         if (detectOnce) return;
         currentTarget = target.position;
