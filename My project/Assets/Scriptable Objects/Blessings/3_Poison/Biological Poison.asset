@@ -17,8 +17,14 @@ MonoBehaviour:
   elemental: 6
   title: Biological Poison
   sprite: {fileID: 21300000, guid: 87f26fcffce4df5449fb2d5e68ceeab7, type: 3}
+  rngWeight: 1
   damageValue: 2
-  prerequisiteSkills: []
+  allowedCharacters: []
+  prerequisiteSkills:
+  - {fileID: 11400000, guid: 6d4eaf5c62f02f2448a06bf9e8843a47, type: 2}
+  - {fileID: 11400000, guid: dc2c641eecf234e4ea80d233936ed42d, type: 2}
+  - {fileID: 11400000, guid: aa298337c06e3474c90503f19d1ce278, type: 2}
+  replaceMoves: 0
   prerequisiteMoves: []
   bannedMoves: []
   newMoves: []
@@ -65,3 +71,7 @@ MonoBehaviour:
     knockbackModifier: 0
     critChance: 0
     critMultiplier: 0
+    lifesteal: 0
+    spellSpeed: 0
+  allChance: 0
+  typeChance: 0

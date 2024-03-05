@@ -10,27 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41f2923ec284c6840a8cd468af82cb4d, type: 3}
-  m_Name: Slow Building Poison
+  m_Name: Lightning Mastery
   m_EditorClassIdentifier: 
   skillRank: 1
   type: 1
-  elemental: 6
-  title: Slow Building Poison
-  sprite: {fileID: 21300000, guid: 87f26fcffce4df5449fb2d5e68ceeab7, type: 3}
+  elemental: 4
+  title: Lightning Mastery
+  sprite: {fileID: 21300000, guid: a51f67d16d73832409dcc367bc618728, type: 3}
   rngWeight: 1
-  damageValue: 2
+  damageValue: 0
   allowedCharacters: []
   prerequisiteSkills:
-  - {fileID: 11400000, guid: 6d4eaf5c62f02f2448a06bf9e8843a47, type: 2}
-  - {fileID: 11400000, guid: dc2c641eecf234e4ea80d233936ed42d, type: 2}
-  - {fileID: 11400000, guid: aa298337c06e3474c90503f19d1ce278, type: 2}
+  - {fileID: 11400000, guid: abddcfa7dfce90b418f74441b756d42c, type: 2}
+  - {fileID: 11400000, guid: db1e9fedf3807144daf7746d9ad529a8, type: 2}
+  - {fileID: 11400000, guid: 33c46a4f106fa564d922cbf97888f892, type: 2}
+  - {fileID: 11400000, guid: 4de23479348d7394f95e20a2c71cc967, type: 2}
+  - {fileID: 11400000, guid: 106306e2197016c46b1957b8431e0e7a, type: 2}
+  - {fileID: 11400000, guid: d23ec00d9d7a9464f9d388d43e38188b, type: 2}
   replaceMoves: 0
   prerequisiteMoves: []
   bannedMoves: []
   newMoves: []
-  skillProperties:
-  - {fileID: 11400000, guid: e3e2beb3ab8263741b573a7ea5da1b33, type: 2}
-  description: Increases your poison's max stacks to 30
+  skillProperties: []
+  description: STATS
   stats:
     currentHealth: 0
     maxHealth: 0
@@ -50,7 +52,7 @@ MonoBehaviour:
     jumps: 0
     airActions: 0
     rerolls: 0
-    fireModifier: 0
+    fireModifier: 0.25
     iceModifier: 0
     lightningModifier: 0
     earthModifier: 0

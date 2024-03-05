@@ -262,6 +262,8 @@ public class SkillHandler : MonoBehaviour
     {
         bool allowedCharacter = false;
         bool hasRequiredSkill = false;
+        bool hasMissingSkill = false;
+
         bool hasBannedMove = false;
         bool hasRequiredMove = false;
         bool hasReplacedMove = false;
@@ -282,11 +284,20 @@ public class SkillHandler : MonoBehaviour
 
         if (skillSO.prerequisiteSkills.Count > 0)
         {
-            foreach (var item in learnedSkills)
+            foreach (var prerequisite in skillSO.prerequisiteSkills)
             {
-                if (item.name == skillSO.name)
+                bool missingThisSkill = true;
+                foreach (var item in learnedSkills)
                 {
-                    hasRequiredSkill = true;
+                    if (item.name == prerequisite.name)
+                    {
+                        hasRequiredSkill = true;
+                        missingThisSkill = false;
+                    }
+                }
+                if (missingThisSkill)
+                {
+                    hasMissingSkill = true;
                 }
             }
         }
