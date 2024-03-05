@@ -17,20 +17,16 @@ MonoBehaviour:
   elemental: 0
   title: Holy Hammer
   sprite: {fileID: 21300000, guid: 3299939ebb3d1e94b914a28e9ef280dd, type: 3}
+  rngWeight: 1
   damageValue: 0
+  allowedCharacters: []
   prerequisiteSkills: []
+  replaceMoves: 0
   prerequisiteMoves: []
   bannedMoves: []
   newMoves: []
   skillProperties: []
-  description: 'Increases attack with 1
-
-    Reduce magic with 1
-
-    Increases the
-    power of blessings with 25%
-
-'
+  description: STATS
   stats:
     currentHealth: 0
     maxHealth: 0
@@ -71,3 +67,7 @@ MonoBehaviour:
     knockbackModifier: 0
     critChance: 0
     critMultiplier: 0
+    lifesteal: 0
+    spellSpeed: 0
+  allChance: 0
+  typeChance: 0

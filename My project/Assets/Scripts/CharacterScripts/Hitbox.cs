@@ -9,6 +9,7 @@ public class Hitbox : MonoBehaviour
     [HideInInspector] public AttackScript attack;
     [HideInInspector] public Move move;
     [TabGroup("Debug")] public Status status;
+    [TabGroup("Debug")] public Alignment alignment = Alignment.Enemy;
     [TabGroup("Settings")] public bool canClash = true;
     [TabGroup("Settings")] public bool relativePushback = false;
 
@@ -23,17 +24,21 @@ public class Hitbox : MonoBehaviour
     [TabGroup("Debug")] [SerializeField] MeshRenderer mr;
     protected Transform colPos;
 
-    private void Awake()
+    protected void Awake()
     {
         if (mr == null)
             mr = GetComponent<MeshRenderer>();
 
         status = GetComponentInParent<Status>();
         if (body == null) body = GetComponentInParent<Status>().transform;
-
         enemyList = new List<Status>();
-
     }
+
+    private void Start()
+    {
+        alignment = status.alignment;
+    }
+
     private void OnEnable()
     {
         if (GameManager.Instance.showHitboxes)
@@ -56,13 +61,21 @@ public class Hitbox : MonoBehaviour
 
         if (attack.landCancelFrame) return;
 
+        if (other.TryGetComponent(out Projectile proj))
+        {
+            if (proj.deflectable && alignment != proj.alignment)
+            {
+                proj.DeflectProjectile();
+                return;
+            }
+        }
+
         if (enemyStatus != null)
         {
-            if (status == enemyStatus || status.alignment == enemyStatus.alignment) return;
+            if (status == enemyStatus || alignment == enemyStatus.alignment) return;
 
             if (!enemyList.Contains(enemyStatus))
             {
-                canClash = false;
                 if (!CheckInvul(enemyStatus)) return;
                 enemyList.Add(enemyStatus);
                 DoDamage(enemyStatus, 1);
@@ -222,9 +235,12 @@ public class Hitbox : MonoBehaviour
             totalDamage = (int)(totalDamage * (1 + status.currentStats.backstabModifier));
         }
         int damageDealt = Mathf.RoundToInt((totalDamage * (1 - other.currentStats.defense)) - other.currentStats.resistance);
+        if (damageDealt < 0) damageDealt = 0;
+
         if (status.currentStats.lifesteal > 0 && physicalDamage)
         {
-            status.Health += (int)(damageDealt * status.currentStats.lifesteal);
+            int clampedDamage = Mathf.Clamp(damageDealt, 0, other.currentStats.currentHealth);
+            status.Health += (int)(clampedDamage * status.currentStats.lifesteal);
         }
 
 
@@ -239,15 +255,18 @@ public class Hitbox : MonoBehaviour
 
         if (damageDealt <= 0)
         {
-            if (move.blockFX != null)
-                Instantiate(move.blockFX, colPos.position, colPos.rotation);
-            else
-                Instantiate(VFXManager.Instance.defaultBlockVFX, colPos.position, colPos.rotation);
+            if (atk.damage != 0)
+            {
+                if (move.blockFX != null)
+                    Instantiate(move.blockFX, colPos.position, colPos.rotation);
+                else
+                    Instantiate(VFXManager.Instance.defaultBlockVFX, colPos.position, colPos.rotation);
 
-            if (move.hitSFX.audioClips.Count > 0)
-                AudioManager.Instance.PlaySFX(move.blockSFX, colPos.position);
-            else
-                AudioManager.Instance.PlaySFX(VFXManager.Instance.defaultBlockSFX, colPos.position);
+                if (move.hitSFX.audioClips.Count > 0)
+                    AudioManager.Instance.PlaySFX(move.blockSFX, colPos.position);
+                else
+                    AudioManager.Instance.PlaySFX(VFXManager.Instance.defaultBlockSFX, colPos.position);
+            }
         }
         else
         {

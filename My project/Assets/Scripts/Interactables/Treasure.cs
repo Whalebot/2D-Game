@@ -10,17 +10,20 @@ public class Treasure : Interactable
     public RewardType reward;
     public bool autoSetup = true;
     public bool canInteract = true;
+    public bool open = false;
     public TextMeshProUGUI treasureText;
     public GameObject treasure;
+    public Transform visualContainer;
     public GameObject woodChest, silverChest, goldChest;
     public SFX treasureSFX;
-   protected Status status;
+    public float treasureDelayOpen = 1f;
+    protected Status status;
 
     public override void Start()
     {
         status = GetComponent<Status>();
 
-        status.deathEvent += GivePowerup;
+        status.deathEvent += OpenChest;
         base.Start();
 
         AutoSetupTreasure();
@@ -95,6 +98,12 @@ public class Treasure : Interactable
     {
         if (autoSetup)
         {
+
+            visualContainer.localScale = new Vector3(Mathf.Sign(transform.eulerAngles.y) * Mathf.Abs(visualContainer.localScale.x), visualContainer.localScale.y, visualContainer.localScale.z);
+            float angle = visualContainer.localEulerAngles.y;
+            angle = (angle > 180) ? angle - 360 : angle;
+            visualContainer.localRotation = Quaternion.Euler(0, Mathf.Sign(transform.rotation.y) * Mathf.Abs(visualContainer.localEulerAngles.y), 0);
+
             woodChest.SetActive(false);
             silverChest.SetActive(false);
             goldChest.SetActive(false);
@@ -134,13 +143,26 @@ public class Treasure : Interactable
     }
     public override bool CanInteract()
     {
-        return canInteract;
+        return canInteract && !open;
     }
     public override void South()
     {
         base.South();
+        OpenChest();
+    }
+
+    void OpenChest()
+    {
+        StartCoroutine(DelayOpenChest());
+    }
+
+    IEnumerator DelayOpenChest()
+    {
+        open = true;
+        yield return new WaitForSeconds(treasureDelayOpen);
         GivePowerup();
     }
+
     public void GivePowerup()
     {
         AudioManager.Instance.PlaySFX(treasureSFX, transform.position);

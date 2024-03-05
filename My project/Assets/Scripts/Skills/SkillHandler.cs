@@ -464,13 +464,17 @@ public class SkillHandler : MonoBehaviour
         if (def2.strength != 0)
         {
             modifiedStats.maxHealth += def2.strength * 10;
-            modifiedStats.currentHealth += def2.strength * 10;
+            int value = def2.strength * 10;
+            if (def2.strength <= 0) value = 0;
+            modifiedStats.currentHealth = Mathf.Clamp(modifiedStats.currentHealth + value, 0, modifiedStats.maxHealth);
             modifiedStats.attack += def2.strength;
         }
         if (def2.intelligence != 0)
         {
             modifiedStats.maxMeter += def2.intelligence * 20;
-            modifiedStats.currentMeter += def2.intelligence * 20;
+            int value = def2.intelligence * 10;
+            if (def2.intelligence <= 0) value = 0;
+            modifiedStats.currentMeter = Mathf.Clamp(modifiedStats.currentMeter + value, 0, modifiedStats.maxMeter);
             modifiedStats.magic += def2.intelligence;
         }
         if (def2.agility != 0)

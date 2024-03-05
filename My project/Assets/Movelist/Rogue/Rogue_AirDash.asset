@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
   m_Name: Rogue_AirDash
   m_EditorClassIdentifier: 
+  moves: []
   animationID: 100
   meterCost: 0
   meterGain: 10
@@ -36,7 +37,6 @@ MonoBehaviour:
     scale: {x: 0.5, y: 0.5, z: 0.5}
   sfx:
   - startup: 1
-    audioClip: {fileID: 8300000, guid: 97e07579943202d48a64e5abd04d241c, type: 3}
     audioClips:
     - {fileID: 8300000, guid: 97e07579943202d48a64e5abd04d241c, type: 3}
     volume: 1
@@ -53,17 +53,14 @@ MonoBehaviour:
   blockFX: {fileID: 0}
   hitSFX:
     startup: 1
-    audioClip: {fileID: 0}
     audioClips: []
     volume: 1
     pitchRange: 0
   blockSFX:
     startup: 1
-    audioClip: {fileID: 0}
     audioClips: []
     volume: 1
     pitchRange: 0
-  uniqueProperties: []
   skillProperties: []
   useAttackSpeed: 1
   keepVelocity: 0
@@ -71,6 +68,7 @@ MonoBehaviour:
   holdAttack: 0
   releaseAttackMove: {fileID: 0}
   autoAim: 0
+  keepComboCount: 0
   armor: 0
   resetGatling: 0
   hitsGroundOnly: 0
@@ -87,6 +85,9 @@ MonoBehaviour:
   airInvul: 0
   airInvulStart: 1
   airInvulDuration: 0
+  hideGraphics: 0
+  hideGraphicsStart: 1
+  hideGraphicsDuration: 0
   targetComboMoves:
   - {fileID: 11400000, guid: 37391d90e34a3c04d9b26278e1cbb6d9, type: 2}
   fullCancel: 0

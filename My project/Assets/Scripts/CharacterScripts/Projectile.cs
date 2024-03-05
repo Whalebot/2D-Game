@@ -6,9 +6,6 @@ public class Projectile : Hitbox
     {
         Linear, Homing, SpawnOnTarget, Teleport
     }
-
-
-
     [TabGroup("Debug")] public Transform target;
 
     [TabGroup("Debug")] public Vector3 targetPosition;
@@ -16,6 +13,7 @@ public class Projectile : Hitbox
     bool delayDestroy;
     [TabGroup("Settings")] public int life;
     [TabGroup("Settings")] public int lifetime;
+    int startLifetime;
 
     [Header("Movement")]
     [TabGroup("Settings")] public ProjectileMovement projectileMovement;
@@ -25,6 +23,7 @@ public class Projectile : Hitbox
     [TabGroup("Settings")] public bool onStartVelocity;
     [TabGroup("Settings")] public bool updateVelocty;
     [TabGroup("Settings")] public float updateVelocity;
+    [TabGroup("Settings")] public bool deflectable = true;
 
     [Header("Homing")]
     [TabGroup("Settings")] public float rotateSpeed;
@@ -77,14 +76,17 @@ public class Projectile : Hitbox
     RaycastHit teleportHit;
 
 
-    private void Awake()
+    protected new void Awake()
     {
+        base.Awake();
         rb = GetComponent<Rigidbody>();
         body = transform;
     }
     private void Start()
     {
         GameManager.Instance.advanceGameState += ExecuteFrame;
+        alignment = status.alignment;
+        startLifetime = lifetime;
         resetCounter = resetTimer;
 
         if (status != null)
@@ -114,6 +116,20 @@ public class Projectile : Hitbox
     {
         GameManager.Instance.advanceGameState -= FramePassed;
         GameManager.Instance.advanceGameState -= ExecuteFrame;
+    }
+    public void DeflectProjectile()
+    {
+        lifetime = startLifetime;
+        Vector3 dir = (status.transform.position - transform.position).normalized;
+        //Deflect velocity
+        transform.forward = dir;
+        rb.velocity = rb.velocity.magnitude * dir;
+        if (alignment == Alignment.Player)
+            alignment = Alignment.Enemy;
+        else
+            alignment = Alignment.Player;
+
+        target = status.transform;
     }
     void Teleport()
     {
@@ -387,6 +403,7 @@ public class Projectile : Hitbox
 
         if (proj != null && destroyOnProjectileClash && proj.status != status)
         {
+            if (proj.canClash && deflectable) return;
             life--;
 
             DestroyProjectile();
@@ -396,6 +413,7 @@ public class Projectile : Hitbox
 
         if (hitbox != null && destroyOnHitboxClash && hitbox.status != status)
         {
+            if (hitbox.canClash && deflectable) return;
             life--;
             DestroyProjectile();
             return;
@@ -407,8 +425,8 @@ public class Projectile : Hitbox
         if (enemyStatus != null && hitbox == null)
         {
             if (willDelayReaim && projectileDelay > 0) return;
-            if (status == enemyStatus) return;
-            if (status.alignment == enemyStatus.alignment) return;
+            if (status == enemyStatus && !deflectable) return;
+            if (alignment == enemyStatus.alignment) return;
 
             if (!enemyList.Contains(enemyStatus))
             {

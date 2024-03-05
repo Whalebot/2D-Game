@@ -14,17 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillRank: 2
   type: 2
+  elemental: 0
   title: Necronomicon
   sprite: {fileID: 21300000, guid: 201d9bc37da37894984bff49889c83b8, type: 3}
+  rngWeight: 1
   damageValue: 0
+  allowedCharacters: []
   prerequisiteSkills: []
+  replaceMoves: 0
   prerequisiteMoves: []
   bannedMoves: []
   newMoves: []
   skillProperties: []
-  description: 'Increases damage modifier with 40%
-
-    Reduce defense with 100%'
+  description: STATS
   stats:
     currentHealth: 0
     maxHealth: 0
@@ -54,14 +56,18 @@ MonoBehaviour:
     meterGainModifier: 0
     poiseRegen: 0
     poise: 0
-    defense: -1
+    defense: -0.25
     resistance: 0
     guardBreakModifier: 0
     sizeModifier: 0
-    damageModifierPercentage: 0.4
+    damageModifierPercentage: 0.25
     backstabModifier: 0
     damageModifierFlat: 0
     hitStunMultiplier: 0
     knockbackModifier: 0
     critChance: 0
     critMultiplier: 0
+    lifesteal: 0
+    spellSpeed: 0
+  allChance: 0
+  typeChance: 0

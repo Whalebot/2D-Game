@@ -105,22 +105,27 @@ MonoBehaviour:
   attack: {fileID: 0}
   move: {fileID: 0}
   status: {fileID: 0}
+  alignment: 1
   canClash: 1
   relativePushback: 0
   resetTimer: 0
   col: {fileID: 0}
   enemyList: []
+  mr: {fileID: 0}
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
   life: 1
   lifetime: 300
   projectileMovement: 1
   velocity: 2
+  maxVelocity: 50
   rotationVector: {x: 0, y: 0, z: 0}
   onStartVelocity: 1
   updateVelocty: 0
   updateVelocity: 0.3
+  deflectable: 1
   rotateSpeed: 200
+  waitForTarget: 0
   willDelayReaim: 0
   projectileDelay: 0
   delayVelocity: 0
@@ -131,6 +136,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   searchSize: 20
+  startOffset: {x: 0, y: 0, z: 0}
+  followCaster: 0
+  keepParent: 0
+  minimumFollowDistance: 0
   explosion: {fileID: 0}
   onlyExplosionDamage: 0
   explosionVFX: {fileID: 126790, guid: 3c882a5553977f644823c4468aae67c3, type: 3}

@@ -17,15 +17,16 @@ MonoBehaviour:
   elemental: 0
   title: Cat Ears
   sprite: {fileID: 0}
+  rngWeight: 1
   damageValue: 0
+  allowedCharacters: []
   prerequisiteSkills: []
+  replaceMoves: 0
   prerequisiteMoves: []
   bannedMoves: []
   newMoves: []
   skillProperties: []
-  description: 'Gain 30% crit chance and 50% crit damage
-
-    Lose 20% damage modifier'
+  description: STATS
   stats:
     currentHealth: 0
     maxHealth: 0
@@ -66,3 +67,7 @@ MonoBehaviour:
     knockbackModifier: 0
     critChance: 0.3
     critMultiplier: 0.5
+    lifesteal: 0
+    spellSpeed: 0
+  allChance: 0
+  typeChance: 0

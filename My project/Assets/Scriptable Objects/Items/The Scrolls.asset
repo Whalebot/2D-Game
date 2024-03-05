@@ -14,15 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillRank: 2
   type: 2
+  elemental: 0
   title: The Scrolls
   sprite: {fileID: 21300000, guid: f5828f9fe23e7f244be4ba4f34cfc0e3, type: 3}
+  rngWeight: 1
   damageValue: 0
+  allowedCharacters: []
   prerequisiteSkills: []
+  replaceMoves: 0
   prerequisiteMoves: []
   bannedMoves: []
   newMoves: []
   skillProperties: []
-  description: Increases Max Meter with 100 and meter gain modifier with 50%
+  description: STATS
   stats:
     currentHealth: 0
     maxHealth: 0
@@ -63,3 +67,7 @@ MonoBehaviour:
     knockbackModifier: 0
     critChance: 0
     critMultiplier: 0
+    lifesteal: 0
+    spellSpeed: 0
+  allChance: 0
+  typeChance: 0

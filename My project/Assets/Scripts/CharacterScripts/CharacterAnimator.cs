@@ -109,6 +109,14 @@ public class CharacterAnimator : MonoBehaviour
                         foreach (var item in renderers)
                         {
                             item.localScale = new Vector3(Mathf.Sign(movement.direction.x) * Mathf.Abs(item.localScale.x), item.localScale.y, item.localScale.z);
+                            //float angle = 15f;
+                            float angle = item.localEulerAngles.y;
+
+                            if (angle > 180)
+                                angle = angle - 360;
+                            angle = (angle > 180) ? angle - 360 : angle;
+                            //Debug.Log(angle);
+                            item.localRotation = Quaternion.Euler(0, Mathf.Sign(transform.rotation.y) * Mathf.Abs(angle), 0);
                         }
                     }
                 }
@@ -121,7 +129,10 @@ public class CharacterAnimator : MonoBehaviour
             {
                 foreach (var item in renderers)
                 {
-                    item.localScale = new Vector3(Mathf.Sign(transform.rotation.y) * Mathf.Abs(item.localScale.x), item.localScale.y, item.localScale.z);
+                    item.localScale = new Vector3(Mathf.Sign(status.transform.rotation.y) * Mathf.Abs(item.localScale.x), item.localScale.y, item.localScale.z);
+                    float angle = item.localEulerAngles.y;
+                    angle = (angle > 180) ? angle - 360 : angle;
+                    item.localRotation = Quaternion.Euler(0, Mathf.Sign(transform.rotation.y) * Mathf.Abs(angle), 0);
                 }
             }
         }

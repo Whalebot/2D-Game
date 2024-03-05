@@ -17,13 +17,16 @@ MonoBehaviour:
   elemental: 0
   title: Goddess' Fruit
   sprite: {fileID: 21300000, guid: 13b21a10a5a395a4383e5399e9c17d70, type: 3}
+  rngWeight: 1
   damageValue: 0
+  allowedCharacters: []
   prerequisiteSkills: []
+  replaceMoves: 0
   prerequisiteMoves: []
   bannedMoves: []
   newMoves: []
   skillProperties: []
-  description: Increases max health with 100
+  description: STATS
   stats:
     currentHealth: 100
     maxHealth: 100
@@ -64,3 +67,7 @@ MonoBehaviour:
     knockbackModifier: 0
     critChance: 0
     critMultiplier: 0
+    lifesteal: 0
+    spellSpeed: 0
+  allChance: 0
+  typeChance: 0

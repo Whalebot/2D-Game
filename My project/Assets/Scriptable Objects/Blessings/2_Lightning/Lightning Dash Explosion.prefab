@@ -28,8 +28,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.3, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.25, z: 1.5}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3904846998252023798}
   - {fileID: 50126755842484398}
@@ -58,12 +58,14 @@ MonoBehaviour:
   resetTimer: 0
   col: {fileID: 0}
   enemyList: []
+  mr: {fileID: 0}
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
   life: 39
   lifetime: 15
   projectileMovement: 0
   velocity: 0
+  maxVelocity: 50
   rotationVector: {x: 0, y: 0, z: 0}
   onStartVelocity: 0
   updateVelocty: 0
@@ -80,6 +82,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   searchSize: 0
+  startOffset: {x: 0, y: 0, z: 0}
+  followCaster: 0
+  keepParent: 0
+  minimumFollowDistance: 0
   explosion: {fileID: 0}
   onlyExplosionDamage: 0
   explosionVFX: {fileID: 6221875919659914540, guid: 2e93bb8f6b9308046876c71285120417, type: 3}
@@ -256,15 +262,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7189935991850856429, guid: 4ac24a678ca3ebc49b1016987269f278, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.21
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7189935991850856429, guid: 4ac24a678ca3ebc49b1016987269f278, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.21
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7189935991850856429, guid: 4ac24a678ca3ebc49b1016987269f278, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.52500004
+      value: 2.5000002
       objectReference: {fileID: 0}
     - target: {fileID: 7189935991850856429, guid: 4ac24a678ca3ebc49b1016987269f278, type: 3}
       propertyPath: m_LocalPosition.x
@@ -320,15 +326,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7189935991870202211, guid: 4ac24a678ca3ebc49b1016987269f278, type: 3}
       propertyPath: scalingMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7189935991870212139, guid: 4ac24a678ca3ebc49b1016987269f278, type: 3}
       propertyPath: scalingMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7189935991870228081, guid: 4ac24a678ca3ebc49b1016987269f278, type: 3}
       propertyPath: scalingMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7189935991870228081, guid: 4ac24a678ca3ebc49b1016987269f278, type: 3}
       propertyPath: InitialModule.startSizeY.minMaxState
@@ -348,7 +354,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7189935991870238335, guid: 4ac24a678ca3ebc49b1016987269f278, type: 3}
       propertyPath: scalingMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7189935991870238335, guid: 4ac24a678ca3ebc49b1016987269f278, type: 3}
       propertyPath: InitialModule.startSizeY.minMaxState
@@ -360,7 +366,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7189935991870303909, guid: 4ac24a678ca3ebc49b1016987269f278, type: 3}
       propertyPath: scalingMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7189935991870303909, guid: 4ac24a678ca3ebc49b1016987269f278, type: 3}
       propertyPath: InitialModule.startSizeY.minMaxState

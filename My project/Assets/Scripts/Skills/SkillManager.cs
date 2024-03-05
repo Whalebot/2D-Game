@@ -342,7 +342,7 @@ public class SkillManager : MonoBehaviour
                 if (words[i].Contains("STATS"))
                 {
                     words[i] = SkillStatDescription(skill) + " ";
-                    words[i] = ($"<link=\"0\"><color=#{ColorUtility.ToHtmlStringRGB(Color.yellow)}>" + words[i] + "</color>" + "</link>");
+                    //words[i] = ($"<link=\"0\"><color=#{ColorUtility.ToHtmlStringRGB(Color.yellow)}>" + words[i] + "</color>" + "</link>");
                 }
             }
 
@@ -406,15 +406,18 @@ public class SkillManager : MonoBehaviour
         return final;
     }
 
-    public List<Tag> GetTags(string description)
+    public List<Tag> GetTags(SkillSO skill)
     {
         List<Tag> foundTextTags = new List<Tag>();
+        string newString = skill.description;
 
         List<string> words = new List<string>();
         string test = "";
 
+
+
         //Divide words
-        foreach (char letter in description.ToCharArray())
+        foreach (char letter in newString.ToCharArray())
         {
             test += letter;
 
@@ -429,6 +432,12 @@ public class SkillManager : MonoBehaviour
         words.Add(test);
         for (int i = 0; i < words.Count; i++)
         {
+            if (words[i].Contains("STATS"))
+            {
+                words[i] = SkillStatDescription(skill) + " ";
+                //words[i] = ($"<link=\"0\"><color=#{ColorUtility.ToHtmlStringRGB(Color.yellow)}>" + words[i] + "</color>" + "</link>");
+            }
+
             foreach (var item in colorTags)
             {
                 foreach (Tag tagTemplate in item.tags)
@@ -485,10 +494,10 @@ public class SkillManager : MonoBehaviour
                 if ((int)var1 != 0)
                 {
                     if ((int)var1 > 0)
-                        d += $"Increase {defInfo1[i].Name} with {(int)var1 * blessingModifier} \n";
+                        d += $"Increase [{defInfo1[i].Name}] with {(int)var1 * blessingModifier} \n";
                     else
                     {
-                        d += $"Decrease {defInfo1[i].Name} with {(int)var1 * blessingModifier} \n";
+                        d += $"Decrease [{defInfo1[i].Name}] with {(int)var1 * blessingModifier} \n";
                     }
 
                 }
@@ -499,10 +508,10 @@ public class SkillManager : MonoBehaviour
                 if ((float)var1 != 0)
                 {
                     if ((float)var1 > 0)
-                        d += $"Increase {defInfo1[i].Name} with {(float)var1 * blessingModifier} \n";
+                        d += $"Increase [{defInfo1[i].Name}] with {(float)var1 * blessingModifier} \n";
                     else
                     {
-                        d += $"Decrease {defInfo1[i].Name} with {(float)var1 * blessingModifier} \n";
+                        d += $"Decrease [{defInfo1[i].Name}] with {(float)var1 * blessingModifier} \n";
                     }
                 }
             }

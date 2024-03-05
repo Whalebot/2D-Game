@@ -127,12 +127,14 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        goldText.text = "" + GameManager.Instance.Gold;
-        rerollButton.interactable = GameManager.Instance.playerStatus.currentStats.rerolls > 0;
-        rerollText.text = "x" + GameManager.Instance.playerStatus.currentStats.rerolls;
-        floorText.text = "Floor " + LevelManager.Instance.currentMapNode.y;
-        timeText.text = "" + TimeFormatter(GameManager.time, true);
-
+        if (GameManager.Instance != null)
+        {
+            goldText.text = "" + GameManager.Instance.Gold;
+            rerollButton.interactable = GameManager.Instance.playerStatus.currentStats.rerolls > 0;
+            rerollText.text = "x" + GameManager.Instance.playerStatus.currentStats.rerolls;
+            floorText.text = "Floor " + LevelManager.Instance.currentMapNode.y;
+            timeText.text = "" + TimeFormatter(GameManager.time, true);
+        }
     }
 
     void ExecuteFrame()
@@ -224,7 +226,8 @@ public class UIManager : MonoBehaviour
         tooltipEnabled = true;
         tooltipText.text = key;
     }
-    public void DisableTooltip() { 
+    public void DisableTooltip()
+    {
         tooltipEnabled = false;
     }
 

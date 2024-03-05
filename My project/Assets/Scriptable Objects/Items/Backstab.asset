@@ -14,15 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillRank: 1
   type: 2
+  elemental: 0
   title: Backstab
   sprite: {fileID: 21300000, guid: 2e1708f732a2e1e489dca21b3bb6194b, type: 3}
+  rngWeight: 1
   damageValue: 0
+  allowedCharacters: []
   prerequisiteSkills: []
+  replaceMoves: 0
   prerequisiteMoves: []
   bannedMoves: []
   newMoves: []
   skillProperties: []
-  description: Increases damage done to the back of enemies with 50%
+  description: STATS
   stats:
     currentHealth: 0
     maxHealth: 0
@@ -63,3 +67,7 @@ MonoBehaviour:
     knockbackModifier: 0
     critChance: 0
     critMultiplier: 0
+    lifesteal: 0
+    spellSpeed: 0
+  allChance: 0
+  typeChance: 0

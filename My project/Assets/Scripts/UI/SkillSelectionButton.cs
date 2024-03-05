@@ -53,7 +53,7 @@ public class SkillSelectionButton : MonoBehaviour
         titleText.text = skillSO.title;
         descriptionText.text = SkillManager.Instance.SkillDescription(skillSO);
 
-        List<Tag> foundTags = SkillManager.Instance.GetTags(skillSO.description);
+        List<Tag> foundTags = SkillManager.Instance.GetTags(skillSO);
 
         foreach (var item in toolTips)
         {

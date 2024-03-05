@@ -2433,6 +2433,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6828426286815169247, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6828426286815169247, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6828426286815169247, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7046009351964735270, guid: 411facb0c27caeb4aa816684a4426b3e, type: 3}
       propertyPath: m_BlendShapeWeights.Array.data[0]
       value: 0
@@ -3118,6 +3130,10 @@ PrefabInstance:
       value: Character Creator Manager
       objectReference: {fileID: 0}
     - target: {fileID: 8527237191093226347, guid: fa51d6cfaefcea5468ba135388bbc2dd, type: 3}
+      propertyPath: preset
+      value: 
+      objectReference: {fileID: 11400000, guid: f39a820e734df1540b669c8548b7e3f5, type: 2}
+    - target: {fileID: 8527237191093226347, guid: fa51d6cfaefcea5468ba135388bbc2dd, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1982028045}
@@ -3126,9 +3142,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1982028043}
     - target: {fileID: 8527237191093226347, guid: fa51d6cfaefcea5468ba135388bbc2dd, type: 3}
+      propertyPath: liveUpdate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8527237191093226347, guid: fa51d6cfaefcea5468ba135388bbc2dd, type: 3}
       propertyPath: cameraPanAnimator
       value: 
       objectReference: {fileID: 653399676}
+    - target: {fileID: 8527237191093226347, guid: fa51d6cfaefcea5468ba135388bbc2dd, type: 3}
+      propertyPath: visualData.colorPreset
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

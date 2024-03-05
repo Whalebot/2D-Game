@@ -106,7 +106,7 @@ MonoBehaviour:
   hideGraphicsStart: 1
   hideGraphicsDuration: 0
   targetComboMoves: []
-  fullCancel: 1
+  fullCancel: 0
   gatlingCancel: 0
   uncancelable: 0
   useAirAction: 0
@@ -134,7 +134,7 @@ MonoBehaviour:
     teleport: 0
   - startFrame: 16
     duration: 2
-    momentum: {x: 2, y: 0.1}
+    momentum: {x: 2, y: 0}
     resetVelocityDuringRecovery: 0
     xMovementCurve:
       serializedVersion: 2

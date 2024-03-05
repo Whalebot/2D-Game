@@ -12,19 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41f2923ec284c6840a8cd468af82cb4d, type: 3}
   m_Name: Goddess' Healing
   m_EditorClassIdentifier: 
-  skillRank: 2
+  skillRank: 1
   type: 1
   elemental: 0
-  title: Auto Heal
+  title: Goddess' Healing
   sprite: {fileID: 0}
+  rngWeight: 1
   damageValue: 0
+  allowedCharacters: []
   prerequisiteSkills: []
+  replaceMoves: 0
   prerequisiteMoves: []
   bannedMoves: []
   newMoves: []
   skillProperties:
   - {fileID: 11400000, guid: 9bb87b815f6abd04caadd4607d7bbab7, type: 2}
-  description: Every time to enter a new room, recover 10 health
+  description: Every time to enter a new room, recover 5 health
   stats:
     currentHealth: 0
     maxHealth: 0
@@ -54,7 +57,7 @@ MonoBehaviour:
     meterGainModifier: 0
     poiseRegen: 0
     poise: 0
-    defense: -0.5
+    defense: 0
     resistance: 0
     guardBreakModifier: 0
     sizeModifier: 0
@@ -63,5 +66,9 @@ MonoBehaviour:
     damageModifierFlat: 0
     hitStunMultiplier: 0
     knockbackModifier: 0
-    critChance: 0.3
-    critMultiplier: 0.5
+    critChance: 0
+    critMultiplier: 0
+    lifesteal: 0
+    spellSpeed: 0
+  allChance: 0
+  typeChance: 0
