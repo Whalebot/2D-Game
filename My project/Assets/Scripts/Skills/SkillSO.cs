@@ -67,7 +67,28 @@ public class SkillSO : ScriptableObject
     {
         //Debug.Log("Base behaviour");
     }
-
+    public string GetModifier(Status status = null)
+    {
+        string dmgText = "";
+        if (status == null)
+            return "x";
+        switch (type)
+        {
+            case SkillType.Skill:
+                break;
+            case SkillType.Blessing:
+                if (skillProperties.Count > 0)
+                {
+                    dmgText = "" + (skillProperties[0].GetModifier(status, skillRank)) * 100 + "%";
+                }
+                break;
+            case SkillType.Item:
+                break;
+            default:
+                break;
+        }
+        return dmgText;
+    }
     public string CalculateDamageValue(Status status = null)
     {
         string dmgText = "";
@@ -114,7 +135,6 @@ public class SkillSO : ScriptableObject
             default:
                 break;
         }
-
         return dmgText;
     }
 

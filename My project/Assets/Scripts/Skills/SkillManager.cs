@@ -58,7 +58,6 @@ public class SkillManager : MonoBehaviour
         }
         return null;
     }
-
     public SkillSO CheckReplacementBlessing(SkillSO skill)
     {
         if (attackGroup.skills.Contains(skill))
@@ -305,8 +304,9 @@ public class SkillManager : MonoBehaviour
             return emptyPoolSkill;
         }
     }
-
-   public string CheckStringTags(string s, SkillSO skill = null)
+    #endregion
+    #region String checking
+    public string CheckStringTags(string s, SkillSO skill = null)
     {
         List<string> words = new List<string>();
         string test = "";
@@ -337,6 +337,14 @@ public class SkillManager : MonoBehaviour
                         words[i] = skill.CalculateDamageValue(null) + " ";
                     else
                         words[i] = skill.CalculateDamageValue(GameManager.Instance.playerStatus) + " ";
+                    words[i] = ($"<link=\"0\"><color=#{ColorUtility.ToHtmlStringRGB(Color.red)}>" + words[i] + "</color>" + "</link>");
+                }
+                if (words[i].Contains("DMGMOD"))
+                {
+                    if (GameManager.Instance == null)
+                        words[i] = skill.GetModifier(null) + " ";
+                    else
+                        words[i] = skill.GetModifier(GameManager.Instance.playerStatus) + " ";
                     words[i] = ($"<link=\"0\"><color=#{ColorUtility.ToHtmlStringRGB(Color.red)}>" + words[i] + "</color>" + "</link>");
                 }
                 if (words[i].Contains("STATS"))
@@ -530,6 +538,7 @@ public class SkillManager : MonoBehaviour
     {
         return "";
     }
+    #endregion
     #region RNG calculation
 
 
@@ -637,7 +646,6 @@ public class SkillManager : MonoBehaviour
         }
     }
 #endif
-    #endregion
 
 }
 

@@ -14,7 +14,12 @@ public class UniqueSkillProperty : ScriptableObject
     {
         return -1;
     }
-    public virtual float RarityModifier(Rank r) {
+    public virtual float GetModifier(Status status = null, Rank rank = Rank.D)
+    {
+        return (RarityModifier(rank));
+    }
+    public virtual float RarityModifier(Rank r)
+    {
         float rarityModifier = (1 + (int)r * 0.25f);
         return rarityModifier;
     }
@@ -26,13 +31,14 @@ public class UniqueSkillProperty : ScriptableObject
         {
             counter = delay;
             OnTimer(handler);
-           // Debug.Log(counter + " " + delay);
+            // Debug.Log(counter + " " + delay);
         }
-        
+
     }
 
-    public virtual void OnTimer(SkillHandler handler) {
-    
+    public virtual void OnTimer(SkillHandler handler)
+    {
+
     }
 
     public virtual void ActivateBehaviour(SkillHandler handler)
@@ -55,11 +61,16 @@ public class UniqueSkillProperty : ScriptableObject
     public virtual void AttackingBehaviour(SkillHandler handler, Rank rank)
     {
     }
+    public virtual void OnHitboxSpawnBehaviour(SkillHandler handler, Rank rank, Hitbox hitbox)
+    {
+        if (propertyType != UniquePropertyType.StartupFrame) return;
+    }
     public virtual void ActiveFrameBehaviour(SkillHandler handler)
     {
     }
-    public virtual void OnRecoveryBehaviour() { 
-    
+    public virtual void OnRecoveryBehaviour()
+    {
+
     }
     public virtual void WaveBehaviour(SkillHandler handler, SkillSO skill)
     {
@@ -72,6 +83,6 @@ public class UniqueSkillProperty : ScriptableObject
     }
     public enum UniquePropertyType
     {
-        StartupFrame, ActiveFrames, OnHit, OnDeath, Timer
+        StartupFrame, ActiveFrames, OnHit, OnDeath, Timer, OnHitboxSpawn
     }
 }

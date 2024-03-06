@@ -193,6 +193,16 @@ public class SkillHandler : MonoBehaviour
     void ActivateBehaviour()
     {
     }
+    public void OnHitboxSpawnBehaviour(Hitbox hitbox)
+    {
+        foreach (var item in learnedSkills)
+        {
+            foreach (var prop in item.skillProperties)
+            {
+                prop.OnHitboxSpawnBehaviour(this, item.skillRank, hitbox);
+            }
+        }
+    }
     public StatusEffect ModifyStatusEffect(StatusEffect statusEffect)
     {
         foreach (var item in learnedSkills)
@@ -206,7 +216,6 @@ public class SkillHandler : MonoBehaviour
                 }
             }
         }
-
         return statusEffect;
     }
     void LateBehaviour()
@@ -236,14 +245,12 @@ public class SkillHandler : MonoBehaviour
             LearnSkill(item, true);
         }
     }
-
     public void RemoveAllSkills()
     {
         learnedSkills.Clear();
         status.RestoreStats();
         UpdateStats();
     }
-
     public void UpdateStats(bool loading = false)
     {
         modifiedStats = new Stats();
@@ -256,8 +263,6 @@ public class SkillHandler : MonoBehaviour
         ApplySkillEffects(loading);
         status.UpdateStats();
     }
-
-
     public bool CanGetSkill(SkillSO skillSO)
     {
         bool allowedCharacter = false;

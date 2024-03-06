@@ -17,8 +17,14 @@ MonoBehaviour:
   elemental: 3
   title: Ice Mastery
   sprite: {fileID: 21300000, guid: 89d6fcf1b6e03be45b794182ea1e0de7, type: 3}
+  rngWeight: 1
   damageValue: 0
-  prerequisiteSkills: []
+  allowedCharacters: []
+  prerequisiteSkills:
+  - {fileID: 11400000, guid: 504f945161918bb4cb6d7cd20fbf9ae5, type: 2}
+  - {fileID: 11400000, guid: 3cdc11b2f4c341f49b5bddbed37447ec, type: 2}
+  - {fileID: 11400000, guid: 2980f67e8b8839349882dc0f62a8b4db, type: 2}
+  replaceMoves: 0
   prerequisiteMoves: []
   bannedMoves: []
   newMoves: []
@@ -64,3 +70,7 @@ MonoBehaviour:
     knockbackModifier: 0
     critChance: 0
     critMultiplier: 0
+    lifesteal: 0
+    spellSpeed: 0
+  allChance: 0
+  typeChance: 0

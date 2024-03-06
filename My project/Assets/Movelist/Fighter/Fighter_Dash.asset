@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
   m_Name: Fighter_Dash
   m_EditorClassIdentifier: 
+  moves: []
   animationID: 100
   meterCost: 0
   meterGain: 10
@@ -19,9 +20,9 @@ MonoBehaviour:
   icon: {fileID: 0}
   firstStartupFrame: 15
   lastActiveFrame: 15
-  totalMoveDuration: 25
-  firstGatlingFrame: 15
-  recoveryFrames: 10
+  totalMoveDuration: 27
+  firstGatlingFrame: 20
+  recoveryFrames: 12
   attacks: []
   type: 0
   screenShake: []
@@ -60,7 +61,6 @@ MonoBehaviour:
     audioClips: []
     volume: 1
     pitchRange: 0
-  uniqueProperties: []
   skillProperties: []
   useAttackSpeed: 1
   keepVelocity: 0
@@ -85,6 +85,9 @@ MonoBehaviour:
   airInvul: 0
   airInvulStart: 1
   airInvulDuration: 0
+  hideGraphics: 0
+  hideGraphicsStart: 1
+  hideGraphicsDuration: 0
   targetComboMoves:
   - {fileID: 11400000, guid: 37391d90e34a3c04d9b26278e1cbb6d9, type: 2}
   fullCancel: 0

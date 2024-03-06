@@ -12,20 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41f2923ec284c6840a8cd468af82cb4d, type: 3}
   m_Name: Earth Attack
   m_EditorClassIdentifier: 
-  skillRank: 2
+  skillRank: 3
   type: 1
   elemental: 1
   title: Earth Attack
   sprite: {fileID: 21300000, guid: 85f6633326b0ca44ebfc454ec65d2730, type: 3}
+  rngWeight: 1
   damageValue: 0
+  allowedCharacters: []
   prerequisiteSkills: []
+  replaceMoves: 0
   prerequisiteMoves: []
   bannedMoves: []
   newMoves: []
   skillProperties:
+  - {fileID: 11400000, guid: 9c973e8b5bbcac849ab090ac503f6fcd, type: 2}
   - {fileID: 11400000, guid: 22c52f966a43e03459dbf89237ebb14b, type: 2}
-  description: Your attacks gets increased knockback and pushed enemies will hurt
+  description: '[(Attack)] gets increased knockback and pushed enemies will hurt
     other enemies upon collision
+
+
+    Damage increased with DMGMOD'
   stats:
     currentHealth: 0
     maxHealth: 0
@@ -66,3 +73,7 @@ MonoBehaviour:
     knockbackModifier: 0
     critChance: 0
     critMultiplier: 0
+    lifesteal: 0
+    spellSpeed: 0
+  allChance: 0
+  typeChance: 0

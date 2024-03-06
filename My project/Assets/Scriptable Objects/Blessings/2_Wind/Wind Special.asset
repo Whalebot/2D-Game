@@ -12,21 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41f2923ec284c6840a8cd468af82cb4d, type: 3}
   m_Name: Wind Special
   m_EditorClassIdentifier: 
-  skillRank: 2
+  skillRank: 3
   type: 1
   elemental: 5
   title: Wind Special
   sprite: {fileID: 21300000, guid: 07ba602ad4450ea48b3f49f924110fba, type: 3}
   rngWeight: 1
   damageValue: 0
+  allowedCharacters: []
   prerequisiteSkills: []
+  replaceMoves: 0
   prerequisiteMoves: []
   bannedMoves: []
   newMoves: []
   skillProperties:
-  - {fileID: 11400000, guid: beb26dc9d0da35d4da30bd1bdd12f63a, type: 2}
-  description: Your attack applies a chain lightning dealing 2 dmg to enemies around
-    it.
+  - {fileID: 11400000, guid: 9c163855febf2a141aa4eb9eeec3ccf4, type: 2}
+  description: Your [(special)] deflects projectiles and damage is increased with
+    DMGMOD
   stats:
     currentHealth: 0
     maxHealth: 0
@@ -68,5 +70,6 @@ MonoBehaviour:
     critChance: 0
     critMultiplier: 0
     lifesteal: 0
+    spellSpeed: 0
   allChance: 0
   typeChance: 0

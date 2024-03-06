@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 public class Projectile : Hitbox
 {
@@ -78,7 +79,11 @@ public class Projectile : Hitbox
 
     protected new void Awake()
     {
-        base.Awake();
+        if (mr == null)
+            mr = GetComponent<MeshRenderer>();
+
+        status = GetComponentInParent<Status>();
+        enemyList = new List<Status>();
         rb = GetComponent<Rigidbody>();
         body = transform;
     }

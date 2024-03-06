@@ -54,11 +54,13 @@ MonoBehaviour:
   attack: {fileID: 0}
   move: {fileID: 0}
   status: {fileID: 0}
+  alignment: 1
   canClash: 1
   relativePushback: 0
   resetTimer: 0
   col: {fileID: 0}
   enemyList: []
+  mr: {fileID: 0}
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
   life: 1
@@ -70,6 +72,7 @@ MonoBehaviour:
   onStartVelocity: 1
   updateVelocty: 0
   updateVelocity: 2
+  deflectable: 1
   rotateSpeed: 200
   waitForTarget: 0
   willDelayReaim: 0
@@ -584,6 +587,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 19808152, guid: f2c7cd139e83ae14e9911fec989558e4, type: 3}
+      propertyPath: ShapeModule.m_MeshRenderer
+      value: 
+      objectReference: {fileID: 2719625830767368269}
     - target: {fileID: 19824758, guid: f2c7cd139e83ae14e9911fec989558e4, type: 3}
       propertyPath: moveWithTransform
       value: 1

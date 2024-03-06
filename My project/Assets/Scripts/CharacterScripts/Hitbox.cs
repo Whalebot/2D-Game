@@ -21,7 +21,7 @@ public class Hitbox : MonoBehaviour
     Vector3 pushbackDirection;
     [HideInInspector] protected Transform body;
     [HideInInspector] public List<Status> enemyList;
-    [TabGroup("Debug")] [SerializeField] MeshRenderer mr;
+    [TabGroup("Debug")] [SerializeField] protected MeshRenderer mr;
     protected Transform colPos;
 
     protected void Awake()
@@ -112,6 +112,11 @@ public class Hitbox : MonoBehaviour
         attack = a;
         status = s;
         move = m;
+
+        if (s.TryGetComponent(out SkillHandler skillHandler))
+        {
+            skillHandler.OnHitboxSpawnBehaviour(this);
+        }
     }
     public void ResetHitbox()
     {

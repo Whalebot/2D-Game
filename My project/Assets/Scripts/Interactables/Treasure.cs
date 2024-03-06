@@ -14,7 +14,7 @@ public class Treasure : Interactable
     public TextMeshProUGUI treasureText;
     public GameObject treasure;
     public Transform visualContainer;
-    public GameObject woodChest, silverChest, goldChest;
+    public GameObject woodChest, silverChest, goldChest, shrine;
     public SFX treasureSFX;
     public float treasureDelayOpen = 1f;
     protected Status status;
@@ -27,6 +27,7 @@ public class Treasure : Interactable
         base.Start();
 
         AutoSetupTreasure();
+        SetupVisuals();
 
         SetupText();
         AIManager.Instance.roomClearEvent += SpawnTreasure;
@@ -89,25 +90,30 @@ public class Treasure : Interactable
                 default:
                     break;
             }
-
-            SetupChest();
         }
     }
 
-    void SetupChest()
+    void SetupVisuals()
     {
-        if (autoSetup)
+
+
+        visualContainer.localScale = new Vector3(Mathf.Sign(transform.eulerAngles.y) * Mathf.Abs(visualContainer.localScale.x), visualContainer.localScale.y, visualContainer.localScale.z);
+        float angle = visualContainer.localEulerAngles.y;
+        angle = (angle > 180) ? angle - 360 : angle;
+        visualContainer.localRotation = Quaternion.Euler(0, Mathf.Sign(transform.rotation.y) * Mathf.Abs(visualContainer.localEulerAngles.y), 0);
+
+
+        woodChest.SetActive(false);
+        silverChest.SetActive(false);
+        goldChest.SetActive(false);
+        shrine.SetActive(false);
+
+        if (reward == RewardType.Blessing)
         {
-
-            visualContainer.localScale = new Vector3(Mathf.Sign(transform.eulerAngles.y) * Mathf.Abs(visualContainer.localScale.x), visualContainer.localScale.y, visualContainer.localScale.z);
-            float angle = visualContainer.localEulerAngles.y;
-            angle = (angle > 180) ? angle - 360 : angle;
-            visualContainer.localRotation = Quaternion.Euler(0, Mathf.Sign(transform.rotation.y) * Mathf.Abs(visualContainer.localEulerAngles.y), 0);
-
-            woodChest.SetActive(false);
-            silverChest.SetActive(false);
-            goldChest.SetActive(false);
-
+            shrine.SetActive(true);
+        }
+        else
+        {
             switch (rank)
             {
                 case Rank.D:
@@ -133,7 +139,7 @@ public class Treasure : Interactable
 
     private void OnValidate()
     {
-        SetupChest();
+        SetupVisuals();
     }
 
     void SpawnTreasure()
