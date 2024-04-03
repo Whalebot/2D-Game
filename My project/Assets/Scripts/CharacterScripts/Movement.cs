@@ -143,6 +143,16 @@ public class Movement : MonoBehaviour
         if (_rb.velocity.y < 0) SetVelocity(_rb.velocity + Physics.gravity * fallMultiplier);
     }
 
+    public void SetVelocityGround(Vector3 v)
+    {
+        if (ground && v.y != 0)
+        {
+            Vector3 groundDirection = hit.collider ? Vector3.Cross(new Vector3(0, 0, -v.x), hit.normal) : Vector3.Cross(new Vector3(0, 0, -v.x), hit2.normal);
+            _rb.velocity = new Vector3(groundDirection.x, groundDirection.y, 0);
+        }
+        else _rb.velocity = new Vector3(v.x, v.y, 0);
+    }
+
     public void SetVelocity(Vector3 v)
     {
         _rb.velocity = new Vector3(v.x, v.y, 0);
@@ -178,9 +188,9 @@ public class Movement : MonoBehaviour
         else
         {
             if (ground)
-                currentVel = runSpeed * status.currentStats.movementSpeedModifier/2;
+                currentVel = runSpeed * status.currentStats.movementSpeedModifier / 2;
             else
-                currentVel = airSpeed * status.currentStats.movementSpeedModifier/2;
+                currentVel = airSpeed * status.currentStats.movementSpeedModifier / 2;
         }
         CalculateVelocity();
         Rotation();
@@ -203,7 +213,13 @@ public class Movement : MonoBehaviour
         {
             if (direction != Vector3.zero)
             {
-                Quaternion desiredRotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, new Vector3(direction.x, 0, direction.z), Vector3.up), 0);
+
+                Vector3 tempDir = new Vector3(direction.x, 0, direction.z);
+                if (direction.x == 0)
+                {
+                    tempDir.x = Mathf.Sign(transform.localRotation.y);
+                }
+                Quaternion desiredRotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, tempDir, Vector3.up), 0);
                 transform.rotation = desiredRotation;
             }
         }
@@ -412,7 +428,7 @@ public class Movement : MonoBehaviour
         //Check collission for landing
         if (!ground)
         {
-            if (_rb.velocity.y <= 0.01f)
+            if (_rb.velocity.y <= 1f)
             {
                 if (check || check2)
                 {
@@ -434,6 +450,9 @@ public class Movement : MonoBehaviour
                 ground = false;
             }
         }
+
+        if (isFlying)
+            _rb.useGravity = !ground;
 
         if (ground) status.col.material = groundMat;
         else status.col.material = airMat;
@@ -504,7 +523,13 @@ public class Movement : MonoBehaviour
 
                 }
                 else
-                    SetVelocity(new Vector3(transform.forward.x * actualVelocity, _rb.velocity.y, 0));
+                {
+                    //_rb.velocity = hit.collider ? Vector3.Cross(new Vector3(temp.z, 0, -temp.x), hit.normal) * actualVelocity
+
+                    Vector3 groundDirection = hit.collider ? _rb.velocity = Vector3.Cross(new Vector3(0, 0, -direction.x), hit.normal) * actualVelocity : _rb.velocity = Vector3.Cross(new Vector3(0, 0, -direction.x), hit2.normal) * actualVelocity;
+                    SetVelocity(groundDirection);
+                    //SetVelocity(new Vector3(transform.forward.x * actualVelocity, _rb.velocity.y, 0));
+                }
             }
         }
     }

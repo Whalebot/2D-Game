@@ -122,8 +122,22 @@ public class AI : MonoBehaviour
         if (elapsed > pathUpdateTime && target != null && seeker.IsDone())
         {
             if (currentState != State.Combat)
+            {
+                ////Find ground position under player
+                //if (Physics.Raycast(target.position, Vector3.down * 10f, out RaycastHit hitInfo, 10f, movement.groundMask))
+                //{
+                //    currentTarget = hit.point + movementOffset;
+                //}
+                //else
+                //{
+
+                //}
                 currentTarget = target.position + movementOffset;
-            else currentTarget = target.position;
+            }
+            else
+            {
+                currentTarget = target.position;
+            }
             elapsed -= pathUpdateTime;
             seeker.StartPath(transform.position, currentTarget, OnPathComplete);
         }

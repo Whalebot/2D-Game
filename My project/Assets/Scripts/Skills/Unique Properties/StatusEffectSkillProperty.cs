@@ -59,9 +59,12 @@ public class StatusEffectSkillProperty : UniqueSkillProperty
 
         foreach (var item in appliedEffects)
         {
-            SkillHandler skillHandler = hitInfo.attackerStatus.GetComponent<SkillHandler>();
             StatusEffect clone = Instantiate(item);
-            clone = skillHandler.ModifyStatusEffect(clone);
+            if (hitInfo.attackerStatus.TryGetComponent(out SkillHandler handler))
+            {
+                clone = handler.ModifyStatusEffect(clone);
+            }
+
             if (skill == null)
                 hitInfo.enemyStatus.ApplyStatusEffect(clone, hitInfo, Rank.D);
             else

@@ -17,8 +17,16 @@ MonoBehaviour:
   elemental: 2
   title: Wildfire
   sprite: {fileID: 21300000, guid: 03281c94f9924fa47a72404b965890f6, type: 3}
+  rngWeight: 1
   damageValue: 2
-  prerequisiteSkills: []
+  allowedCharacters: []
+  prerequisiteSkills:
+  - {fileID: 11400000, guid: 000efc70b267c8d4bac9095524ec49ad, type: 2}
+  - {fileID: 11400000, guid: 16968421366a88a47a01cd06485dbb9c, type: 2}
+  - {fileID: 11400000, guid: 1b5c77a47bb1b9842936c7340ecf09ab, type: 2}
+  - {fileID: 11400000, guid: b03b7b9bce14f0e4b87a915d03a5b68f, type: 2}
+  - {fileID: 11400000, guid: a65603c89de64cc4a88dc1c85dc1c099, type: 2}
+  replaceMoves: 0
   prerequisiteMoves: []
   bannedMoves: []
   newMoves: []
@@ -65,3 +73,7 @@ MonoBehaviour:
     knockbackModifier: 0
     critChance: 0
     critMultiplier: 0
+    lifesteal: 0
+    spellSpeed: 0
+  allChance: 0
+  typeChance: 0

@@ -23,7 +23,7 @@ public class UniqueSkillProperty : ScriptableObject
         float rarityModifier = (1 + (int)r * 0.25f);
         return rarityModifier;
     }
-    public virtual void OnFrameBehaviour(SkillHandler handler)
+    public virtual void OnFrameBehaviour(SkillHandler handler, SkillSO skill = null)
     {
         if (propertyType != UniquePropertyType.Timer) return;
         counter--;

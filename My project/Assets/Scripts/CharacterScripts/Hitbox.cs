@@ -294,16 +294,16 @@ public class Hitbox : MonoBehaviour
         switch (atk.attackLevel)
         {
             case AttackLevel.Level1:
-                other.TakeHit(damageDealt, pushbackDirection, CombatManager.Instance.lvl1.stun, CombatManager.Instance.lvl1.poiseBreak, pushbackDirection, CombatManager.Instance.lvl1.hitstop, hit.hitState, crit);
+                other.TakeHit(damageDealt, pushbackDirection, CombatManager.Instance.lvl1.stun, CombatManager.Instance.lvl1.poiseBreak, pushbackDirection, CombatManager.Instance.lvl1.hitstop, hit.hitState, hitInfo);
                 break;
             case AttackLevel.Level2:
-                other.TakeHit(damageDealt, pushbackDirection, CombatManager.Instance.lvl2.stun, CombatManager.Instance.lvl2.poiseBreak, pushbackDirection, CombatManager.Instance.lvl2.hitstop, hit.hitState, crit);
+                other.TakeHit(damageDealt, pushbackDirection, CombatManager.Instance.lvl2.stun, CombatManager.Instance.lvl2.poiseBreak, pushbackDirection, CombatManager.Instance.lvl2.hitstop, hit.hitState, hitInfo);
                 break;
             case AttackLevel.Level3:
-                other.TakeHit(damageDealt, pushbackDirection, CombatManager.Instance.lvl3.stun, CombatManager.Instance.lvl3.poiseBreak, pushbackDirection, CombatManager.Instance.lvl3.hitstop, hit.hitState, crit);
+                other.TakeHit(damageDealt, pushbackDirection, CombatManager.Instance.lvl3.stun, CombatManager.Instance.lvl3.poiseBreak, pushbackDirection, CombatManager.Instance.lvl3.hitstop, hit.hitState, hitInfo);
                 break;
             case AttackLevel.Custom:
-                other.TakeHit(damageDealt, pushbackDirection, atk.stun, atk.poiseBreak, pushbackDirection, atk.hitstop, hit.hitState, crit);
+                other.TakeHit(damageDealt, pushbackDirection, atk.stun, atk.poiseBreak, pushbackDirection, atk.hitstop, hit.hitState, hitInfo);
                 break;
         }
     }

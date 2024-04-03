@@ -8,16 +8,12 @@ public class AIEnemy : AI
 {
     [HideInInspector] public Character character;
     public EnemyType enemyType;
-
     public AIAction currentAction;
-
     bool detectOnce;
-
 
     [TabGroup("Debug")] public List<Move> attackQueue;
     [TabGroup("Debug")] public int cooldown = 0;
     [TabGroup("Debug")] public int recoveryCooldown = 30;
-
 
     protected void Awake()
     {
@@ -97,10 +93,7 @@ public class AIEnemy : AI
 
     void RemoveFromAIManager()
     {
-
-
         AIManager.Instance.EnemyKilled(this);
-
         Destroy(this);
     }
 
@@ -184,7 +177,7 @@ public class AIEnemy : AI
         {
             if (Distance() < item.distance && Distance() > item.minDistance && HeightDistance() < item.maxHeight)
             {
-                if (item.actionType == AIAction.ActionType.Attack && !ClearLine()) continue;
+                if (!item.ConditionsMet(this)) continue;
                 temp.Add(item);
             }
         }
@@ -192,7 +185,6 @@ public class AIEnemy : AI
         int RNG = Random.Range(0, temp.Count);
         if (temp.Count > 0)
         {
-            //Debug.Log(RNG);
             currentAction = temp[RNG];
             ExecuteAction(temp[RNG]);
         }
@@ -205,14 +197,11 @@ public class AIEnemy : AI
         switch (aiAction.actionType)
         {
             case AIAction.ActionType.Attack:
-
                 for (int i = 0; i < aiAction.combo.moves.Count; i++)
                 {
                     attackQueue.Add(aiAction.combo.moves[i]);
                 }
-
                 currentState = State.Combat;
-
                 break;
             case AIAction.ActionType.Approach:
                 endDistance = aiAction.targetDistance;

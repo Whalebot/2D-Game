@@ -726,7 +726,7 @@ MonoBehaviour:
   northType: 2
   eastType: 2
   rank: 3
-  reward: 0
+  reward: 1
   autoSetup: 0
   canInteract: 1
   open: 0
@@ -936,6 +936,7 @@ MonoBehaviour:
   knockbackDirection: {x: 0, y: 0, z: 0}
   isDead: 0
   blocking: 0
+  autoBlock: 0
   parrying: 0
   poiseBroken: 0
   parryStun: 0
@@ -1413,7 +1414,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1756378651263567143, guid: 6d445398f86750f45951a65829c8eaa9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1545,7 +1546,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 166584, guid: 184f44cf58e82434ab30e27aaaf9b05f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 461008, guid: 184f44cf58e82434ab30e27aaaf9b05f, type: 3}
       propertyPath: m_LocalPosition.x

@@ -192,6 +192,7 @@ public class CharacterData
     public string characterName;
 
     public int rngSeed;
+    public float shopPriceMultiplier = 1;
     public Stats stats;
     public int currentRoomID = 0;
     public int currentArea = 1;

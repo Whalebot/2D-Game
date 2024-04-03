@@ -1,0 +1,154 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
+  m_Name: Shielder Attack
+  m_EditorClassIdentifier: 
+  moves: []
+  animationID: 82
+  meterCost: 0
+  meterGain: 10
+  consumeMeterOnActiveFrame: 0
+  icon: {fileID: 0}
+  firstStartupFrame: 40
+  lastActiveFrame: 44
+  totalMoveDuration: 89
+  firstGatlingFrame: 42
+  recoveryFrames: 45
+  attacks:
+  - attackLevel: 0
+    attackType: 0
+    damageType: 0
+    hitbox: {fileID: 5860963072138344223, guid: b5e90cee3ac0a8748b3859367773447f, type: 3}
+    damage: 1
+    stun: 20
+    hitstop: 5
+    poiseBreak: 0
+    startupFrame: 40
+    activeFrames: 5
+    gatlingFrames: 2
+    groundHitProperty:
+      pushback: {x: 2, y: 0}
+      hitState: 0
+    airHitProperty:
+      pushback: {x: 0, y: 0}
+      hitState: 0
+  type: 0
+  screenShake: []
+  vfx:
+  - type: 0
+    startup: 36
+    prefab: {fileID: 1320683006971348, guid: 83ea291b15cd5ed46be1077c6b047713, type: 3}
+    deattachFromPlayer: 0
+    destroyOnRecovery: 0
+    position: {x: 0, y: 1, z: 0}
+    rotation: {x: -5.44, y: 180, z: 90}
+    scale: {x: 0.5, y: 0.5, z: 0.5}
+  sfx: []
+  hitFX:
+    type: 0
+    startup: 1
+    prefab: {fileID: 1416824176164296, guid: dc1397204bb5ee84895af2b49dac2d49, type: 3}
+    deattachFromPlayer: 1
+    destroyOnRecovery: 0
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+    scale: {x: 0.5, y: 0.5, z: 0.5}
+  blockFX: {fileID: 0}
+  hitSFX:
+    startup: 1
+    audioClips: []
+    volume: 1
+    pitchRange: 0
+  blockSFX:
+    startup: 1
+    audioClips: []
+    volume: 1
+    pitchRange: 0
+  skillProperties: []
+  useAttackSpeed: 1
+  keepVelocity: 0
+  particleID: 0
+  holdAttack: 0
+  releaseAttackMove: {fileID: 0}
+  autoAim: 0
+  keepComboCount: 0
+  armor: 0
+  resetGatling: 0
+  hitsGroundOnly: 0
+  isDashing: 0
+  noClip: 0
+  noClipStart: 1
+  noClipDuration: 0
+  invincible: 0
+  invincibleStart: 1
+  invincibleDuration: 0
+  projectileInvul: 0
+  projectileInvulStart: 1
+  projectileInvulDuration: 0
+  airInvul: 0
+  airInvulStart: 1
+  airInvulDuration: 0
+  hideGraphics: 0
+  hideGraphicsStart: 1
+  hideGraphicsDuration: 0
+  targetComboMoves: []
+  fullCancel: 0
+  gatlingCancel: 1
+  uncancelable: 0
+  useAirAction: 0
+  landCancel: 0
+  recoverOnlyOnLand: 0
+  m:
+  - startFrame: 15
+    duration: 2
+    momentum: {x: 5, y: 5}
+    resetVelocityDuringRecovery: 0
+    xMovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    movementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    freeMovement: 0
+    useCurve: 0
+    teleport: 0
+  - startFrame: 30
+    duration: 2
+    momentum: {x: 5, y: 5}
+    resetVelocityDuringRecovery: 0
+    xMovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    movementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    freeMovement: 0
+    useCurve: 0
+    teleport: 0
+  instantStartupRotation: 1
+  overrideVelocity: 0
+  runMomentum: 0
+  inheritForwardVelocity: 0
+  stopAtEdges: 1
+  homing: 0

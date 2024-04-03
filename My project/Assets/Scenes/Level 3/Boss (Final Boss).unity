@@ -4744,6 +4744,68 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 366894078}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &375305207
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 657161092}
+    m_Modifications:
+    - target: {fileID: 416194153621683736, guid: c540b03517c32e6498003a9fc0923864, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 416194153621683736, guid: c540b03517c32e6498003a9fc0923864, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 416194153621683736, guid: c540b03517c32e6498003a9fc0923864, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 416194153621683736, guid: c540b03517c32e6498003a9fc0923864, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 416194153621683736, guid: c540b03517c32e6498003a9fc0923864, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 416194153621683736, guid: c540b03517c32e6498003a9fc0923864, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 416194153621683736, guid: c540b03517c32e6498003a9fc0923864, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 416194153621683736, guid: c540b03517c32e6498003a9fc0923864, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 416194153621683736, guid: c540b03517c32e6498003a9fc0923864, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 416194153621683736, guid: c540b03517c32e6498003a9fc0923864, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 416194153621683741, guid: c540b03517c32e6498003a9fc0923864, type: 3}
+      propertyPath: m_Name
+      value: Hollow Knight (HARD) Prefab Variant Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c540b03517c32e6498003a9fc0923864, type: 3}
+--- !u!4 &375305208 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 416194153621683736, guid: c540b03517c32e6498003a9fc0923864, type: 3}
+  m_PrefabInstance: {fileID: 375305207}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &395947411 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5797937292719071770, guid: 149c35565e503f444bc57a247d7dab4d, type: 3}
@@ -6768,7 +6830,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 375305208}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &658884038

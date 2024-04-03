@@ -7,6 +7,7 @@ public class EnemySummoner : MonoBehaviour
     public int summonTime = 60;
     int summonCounter;
     public bool isSummoning;
+    public int wave;
     public GameObject enemyPrefab;
     public GameObject vfx;
 

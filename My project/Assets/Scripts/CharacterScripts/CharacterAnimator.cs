@@ -41,6 +41,7 @@ public class CharacterAnimator : MonoBehaviour
         {
             //character = status.character;
             status.hitstunEvent += HitStun;
+            status.blockstunEvent += Block;
         }
 
         if (movement != null)
@@ -70,7 +71,8 @@ public class CharacterAnimator : MonoBehaviour
 
         if (status != null)
         {
-            status.hitstunEvent += HitStun;
+            status.hitstunEvent -= HitStun;
+            status.blockstunEvent -= Block;
         }
         if (attack != null)
         {
@@ -217,13 +219,16 @@ public class CharacterAnimator : MonoBehaviour
         anim.SetFloat("AttackSpeed", status.currentStats.attackSpeed);
         anim.SetFloat("MovementSpeed", status.currentStats.movementSpeedModifier);
     }
+    void Block()
+    {
+        anim.SetTrigger("Block");
+    }
 
     void HitStun()
     {
         anim.SetFloat("HitX", status.knockbackDirection.x);
         anim.SetFloat("HitY", status.knockbackDirection.y);
         anim.SetTrigger("Hit");
-
     }
 
     void PreLand()
@@ -242,6 +247,7 @@ public class CharacterAnimator : MonoBehaviour
         y = Mathf.Lerp(y, movement.RelativeToForward().normalized.z, maxSpeed);
 
         anim.SetBool("Ground", movement.ground);
+        anim.SetBool("Flying", movement.isFlying);
 
         anim.SetFloat("Horizontal", x);
         anim.SetFloat("Vertical", y);

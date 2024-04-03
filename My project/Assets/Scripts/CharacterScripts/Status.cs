@@ -55,6 +55,7 @@ public class Status : MonoBehaviour
     [HideInInspector] public Vector3 knockbackDirection;
     [HideInInspector] public bool isDead;
     [HideInInspector] public bool blocking;
+    [TabGroup("Settings")] public bool autoBlock;
     [HideInInspector] public bool parrying;
     [HideInInspector] public bool poiseBroken;
     [HideInInspector] public int parryStun;
@@ -85,7 +86,7 @@ public class Status : MonoBehaviour
     {
 
         rb = GetComponent<Rigidbody>();
-        currentState = State.Neutral;
+        GoToState(State.Neutral);
 
         ApplyCharacter();
     }
@@ -374,6 +375,10 @@ public class Status : MonoBehaviour
             case State.Neutral:
                 if (rb != null && !isFlying)
                     rb.useGravity = true;
+
+                if (autoBlock)
+                    blocking = true;
+
                 invincible = false;
                 currentState = State.Neutral;
                 neutralEvent?.Invoke();
@@ -412,7 +417,7 @@ public class Status : MonoBehaviour
             ReplaceStats(currentStats, baseStats);
         }
     }
-    public void TakeHit(int damage, Vector3 kb, int stunVal, int poiseBreak, Vector3 dir, float slowDur, HitState hitState, bool crit = false)
+    public void TakeHit(int damage, Vector3 kb, int stunVal, int poiseBreak, Vector3 dir, float slowDur, HitState hitState, HitInfo hitInfo = null)
     {
         if (isDead) return;
 
@@ -420,10 +425,15 @@ public class Status : MonoBehaviour
         {
             return;
         }
-        float angle = Mathf.Abs(Vector3.SignedAngle(transform.forward, dir, Vector3.up));
+        bool crit = false;
+        bool backstab = false;
+        if (hitInfo != null)
+        {
+            crit = hitInfo.crit;
+            backstab = hitInfo.backstab;
+        }
 
-
-        if (angle > 90)
+        if (!backstab && !inHitStun)
         {
             if (parrying)
             {
@@ -437,6 +447,7 @@ public class Status : MonoBehaviour
                 return;
             }
         }
+
 
         GameManager.Instance.DamageNumbers(transform, damage, crit, alignment);
         damageEvent?.Invoke(damage);
@@ -664,6 +675,11 @@ public class Status : MonoBehaviour
         if (newStats.agility != 0)
         {
             oldStats.movementSpeedModifier += newStats.agility * 0.1F;
+        }
+        if (newStats.luck != 0)
+        {
+            oldStats.critChance += newStats.luck * 0.05F;
+            oldStats.critMultiplier += newStats.luck * 0.10F;
         }
         if (newStats.faith != 0)
         {

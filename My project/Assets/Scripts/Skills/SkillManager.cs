@@ -99,7 +99,6 @@ public class SkillManager : MonoBehaviour
 
         return null;
     }
-    #region Roll Skills
     public void RemoveSkill(SkillSO skillToRemove)
     {
 
@@ -140,6 +139,8 @@ public class SkillManager : MonoBehaviour
     {
         SaveManager.Instance.LearnedSkills = new List<SkillSO>(learnedSkills);
     }
+
+    #region Roll Skills
 
     [Button]
     public void Reroll()
@@ -516,11 +517,15 @@ public class SkillManager : MonoBehaviour
                 if ((float)var1 != 0)
                 {
                     if ((float)var1 > 0)
-                        d += $"Increase [{defInfo1[i].Name}] with {(float)var1 * blessingModifier} \n";
+                    {
+                        d += $"Increase [{defInfo1[i].Name}] with ";
+                    }
                     else
                     {
-                        d += $"Decrease [{defInfo1[i].Name}] with {(float)var1 * blessingModifier} \n";
+                        d += $"Increase [{defInfo1[i].Name}] with ";
                     }
+                    string value = (((float)var1 * blessingModifier) * 100).ToString("0.0");
+                    d += $"{value}% \n";
                 }
             }
 

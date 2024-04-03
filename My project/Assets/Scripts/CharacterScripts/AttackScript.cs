@@ -311,7 +311,7 @@ public class AttackScript : MonoBehaviour
                                     status.EnableCollider();
                             }
                             else
-                                movement.SetVelocity((activeMove.m[i].momentum.x * transform.forward + transform.up * activeMove.m[i].momentum.y));
+                                movement.SetVelocityGround((activeMove.m[i].momentum.x * transform.forward + transform.up * activeMove.m[i].momentum.y));
                         }
 
                     }

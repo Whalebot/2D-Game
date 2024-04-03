@@ -1,0 +1,213 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
+  m_Name: Buffer_Projectile
+  m_EditorClassIdentifier: 
+  moves: []
+  animationID: 0
+  meterCost: 0
+  meterGain: 10
+  consumeMeterOnActiveFrame: 0
+  icon: {fileID: 0}
+  firstStartupFrame: 44
+  lastActiveFrame: 68
+  totalMoveDuration: 88
+  firstGatlingFrame: 46
+  recoveryFrames: 20
+  attacks:
+  - attackLevel: 0
+    attackType: 1
+    damageType: 0
+    hitbox: {fileID: 5860963072138344223, guid: a254496dd5c02a9428407ef853adfb46, type: 3}
+    damage: 0.4
+    stun: 20
+    hitstop: 5
+    poiseBreak: 0
+    startupFrame: 44
+    activeFrames: 1
+    gatlingFrames: 2
+    groundHitProperty:
+      pushback: {x: 2, y: 0}
+      hitState: 0
+    airHitProperty:
+      pushback: {x: 0, y: 0}
+      hitState: 0
+  - attackLevel: 0
+    attackType: 1
+    damageType: 0
+    hitbox: {fileID: 5860963072138344223, guid: e4619d5e098744b4ba7e428e87c54e2f, type: 3}
+    damage: 0.4
+    stun: 20
+    hitstop: 5
+    poiseBreak: 0
+    startupFrame: 46
+    activeFrames: 1
+    gatlingFrames: 2
+    groundHitProperty:
+      pushback: {x: 2, y: 0}
+      hitState: 0
+    airHitProperty:
+      pushback: {x: 0, y: 0}
+      hitState: 0
+  - attackLevel: 0
+    attackType: 1
+    damageType: 0
+    hitbox: {fileID: 5860963072138344223, guid: 0ab29497855283847bb83af3e0dc9f88, type: 3}
+    damage: 0.4
+    stun: 20
+    hitstop: 5
+    poiseBreak: 0
+    startupFrame: 48
+    activeFrames: 1
+    gatlingFrames: 2
+    groundHitProperty:
+      pushback: {x: 2, y: 0}
+      hitState: 0
+    airHitProperty:
+      pushback: {x: 0, y: 0}
+      hitState: 0
+  - attackLevel: 0
+    attackType: 1
+    damageType: 0
+    hitbox: {fileID: 5860963072138344223, guid: a254496dd5c02a9428407ef853adfb46, type: 3}
+    damage: 0.4
+    stun: 20
+    hitstop: 5
+    poiseBreak: 0
+    startupFrame: 64
+    activeFrames: 1
+    gatlingFrames: 2
+    groundHitProperty:
+      pushback: {x: 2, y: 0}
+      hitState: 0
+    airHitProperty:
+      pushback: {x: 0, y: 0}
+      hitState: 0
+  - attackLevel: 0
+    attackType: 1
+    damageType: 0
+    hitbox: {fileID: 5860963072138344223, guid: e4619d5e098744b4ba7e428e87c54e2f, type: 3}
+    damage: 0.4
+    stun: 20
+    hitstop: 5
+    poiseBreak: 0
+    startupFrame: 66
+    activeFrames: 1
+    gatlingFrames: 2
+    groundHitProperty:
+      pushback: {x: 2, y: 0}
+      hitState: 0
+    airHitProperty:
+      pushback: {x: 0, y: 0}
+      hitState: 0
+  - attackLevel: 0
+    attackType: 1
+    damageType: 0
+    hitbox: {fileID: 5860963072138344223, guid: 0ab29497855283847bb83af3e0dc9f88, type: 3}
+    damage: 0.4
+    stun: 20
+    hitstop: 5
+    poiseBreak: 0
+    startupFrame: 68
+    activeFrames: 1
+    gatlingFrames: 2
+    groundHitProperty:
+      pushback: {x: 2, y: 0}
+      hitState: 0
+    airHitProperty:
+      pushback: {x: 0, y: 0}
+      hitState: 0
+  type: 0
+  screenShake:
+  - type: 0
+    startup: 40
+    amplitude: 1
+    duration: 1
+  vfx:
+  - type: 0
+    startup: 1
+    prefab: {fileID: 194346, guid: 18ca0b65eadca7c46b9b94e7d23cab44, type: 3}
+    deattachFromPlayer: 0
+    destroyOnRecovery: 0
+    position: {x: 0, y: 0.01, z: 0}
+    rotation: {x: -90, y: 0, z: 0}
+    scale: {x: 0.1, y: 0.1, z: 0.1}
+  - type: 0
+    startup: 40
+    prefab: {fileID: 194346, guid: 18ca0b65eadca7c46b9b94e7d23cab44, type: 3}
+    deattachFromPlayer: 0
+    destroyOnRecovery: 0
+    position: {x: 0, y: 0.7, z: 1.5}
+    rotation: {x: -30, y: 0, z: 0}
+    scale: {x: 0.1, y: 0.1, z: 0.1}
+  sfx: []
+  hitFX:
+    type: 0
+    startup: 1
+    prefab: {fileID: 1416824176164296, guid: dc1397204bb5ee84895af2b49dac2d49, type: 3}
+    deattachFromPlayer: 1
+    destroyOnRecovery: 0
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+    scale: {x: 0.5, y: 0.5, z: 0.5}
+  blockFX: {fileID: 0}
+  hitSFX:
+    startup: 1
+    audioClips: []
+    volume: 1
+    pitchRange: 0
+  blockSFX:
+    startup: 1
+    audioClips: []
+    volume: 1
+    pitchRange: 0
+  skillProperties: []
+  useAttackSpeed: 1
+  keepVelocity: 0
+  particleID: 0
+  holdAttack: 0
+  releaseAttackMove: {fileID: 0}
+  autoAim: 0
+  keepComboCount: 0
+  armor: 0
+  resetGatling: 0
+  hitsGroundOnly: 0
+  isDashing: 0
+  noClip: 0
+  noClipStart: 1
+  noClipDuration: 0
+  invincible: 0
+  invincibleStart: 1
+  invincibleDuration: 0
+  projectileInvul: 0
+  projectileInvulStart: 1
+  projectileInvulDuration: 0
+  airInvul: 0
+  airInvulStart: 1
+  airInvulDuration: 0
+  hideGraphics: 0
+  hideGraphicsStart: 1
+  hideGraphicsDuration: 0
+  targetComboMoves: []
+  fullCancel: 0
+  gatlingCancel: 1
+  uncancelable: 0
+  useAirAction: 0
+  landCancel: 0
+  recoverOnlyOnLand: 0
+  m: []
+  instantStartupRotation: 1
+  overrideVelocity: 1
+  runMomentum: 0
+  inheritForwardVelocity: 0
+  stopAtEdges: 1
+  homing: 0

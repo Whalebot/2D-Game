@@ -12,26 +12,100 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46ec16e6fccabdf47a64617756758efe, type: 3}
   m_Name: Stat tags
   m_EditorClassIdentifier: 
-  tagColor: {r: 1, g: 0.9712056, b: 0, a: 1}
+  tagColor: {r: 1, g: 0.17098704, b: 0, a: 1}
   tags:
   - tag: '[strength]'
     title: Strength
     description: 'Stat: Increases health and physical attack damage.'
   - tag: '[intelligence]'
     title: Intelligence
-    description: 'Stat: Increases health and physical attack damage.'
+    description: 'Stat: Increases mana and magic attack damage.'
   - tag: '[agility]'
     title: Agility
-    description: 'Stat: Increases health and physical attack damage.'
+    description: 'Stat: Increases movement speed.'
   - tag: '[faith]'
     title: Faith
-    description: 'Stat: Increases health and physical attack damage.'
+    description: 'Stat: Increases the effect of blessings'
   - tag: '[luck]'
     title: Luck
-    description: 'Stat: Increases health and physical attack damage.'
+    description: 'Stat: Increases crit chance, crit damage and the chance of good
+      stuff happening'
   - tag: '[attack]'
     title: Physical Attack
     description: 'Stat: Physical attack damage.'
   - tag: '[magic]'
     title: Magic Attack
     description: 'Stat: Magical attack damage.'
+  - tag: '[faithModifier]'
+    title: Faith Modifier
+    description: 'Stat: Effectiveness of all blessings'
+  - tag: '[reroll]'
+    title: Rerolls
+    description: 'Resource: Number of available rerolls'
+  - tag: '[fireModifier]'
+    title: Fire Mastery
+    description: 'Stat: Effectiveness of fire blessings'
+  - tag: '[iceModifier]'
+    title: Ice Mastery
+    description: 'Stat: Effectiveness of ice blessings'
+  - tag: '[lightningModifier]'
+    title: Lightning Mastery
+    description: 'Stat: Effectiveness of lightning blessings'
+  - tag: '[earthModifier]'
+    title: Earth Mastery
+    description: 'Stat: Effectiveness of earth blessings'
+  - tag: '[windModifier]'
+    title: Wind Mastery
+    description: 'Stat: Effectiveness of wind blessings'
+  - tag: '[poisonModifier]'
+    title: Poison Mastery
+    description: 'Stat: Effectiveness of poison blessings'
+  - tag: '[movementSpeedModifier]'
+    title: Movement Speed
+    description: 'Stat: The speed of moving around'
+  - tag: '[meterGainModifier]'
+    title: Mana Gain
+    description: 'Stat: The speed of mana recovered when hitting enemies.'
+  - tag: '[defense]'
+    title: Defense
+    description: 'Stat: % damage reduction of damage taken.'
+  - tag: '[resistance]'
+    title: Resistance
+    description: 'Stat: Damage taken is reduced by 1 for each resistance.'
+  - tag: '[damageModifierPercentage]'
+    title: Damage Modifier
+    description: 'Stat: % Increase of damage inflicted.'
+  - tag: '[damageModifierFlat]'
+    title: Damage Bonus
+    description: 'Stat: Damage inflicted is increased by +1.'
+  - tag: '[backstabModifier]'
+    title: Backstab
+    description: 'Stat: Does increased damage when attacking enemies'' backs.'
+  - tag: '[critChance]'
+    title: Critical Chance
+    description: 'Stat: Chance to inflict critical damage when inflicting damage.'
+  - tag: '[critMultiplier]'
+    title: Critical Damage
+    description: 'Stat: The damage increase when inflicting a critical hit.'
+  - tag: '[critMultiplier]'
+    title: Critical Damage
+    description: 'Stat: The damage increase when inflicting a critical hit.'
+  - tag: '[spellSpeed]'
+    title: Cooldown
+    description: 'Stat: Decrease the cooldown of blessings.'
+  - tag: '[lifesteal]'
+    title: Lifesteal
+    description: 'Stat: When inflicting damage, recover % hp based on damage inflicted,
+      rounded down.'
+  - tag: '[currentHealth]'
+    title: Health
+    description: 'Stat: Current health.'
+  - tag: '[currentMeter]'
+    title: Mana
+    description: 'Stat: Current mana.'
+  - tag: '[maxHealth]'
+    title: Max Health
+    description: 'Stat: Maximum health capacity.'
+  - tag: '[maxHealth'
+    title: Max Mana
+    description: 'Stat: Maximum mana capacity.'

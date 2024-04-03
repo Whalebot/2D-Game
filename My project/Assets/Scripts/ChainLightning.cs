@@ -49,8 +49,6 @@ public class ChainLightning : MonoBehaviour
                     if (ClearLine(fromPosition, tempStatus.transform))
                     {
                         enemyList.Add(tempStatus);
-
-                        Debug.Log("si");
                         Vector2 v = tempStatus.transform.position - fromPosition;
                         float dist = v.x + (v.y * v.y);
 

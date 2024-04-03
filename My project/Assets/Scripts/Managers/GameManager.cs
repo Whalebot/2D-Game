@@ -86,7 +86,14 @@ public class GameManager : MonoBehaviour
             goldChangeEvent?.Invoke(change);
         }
     }
-
+    public float ShopMultiplier
+    {
+        get { return SaveManager.Instance.CurrentData.shopPriceMultiplier; }
+        set
+        {
+            SaveManager.Instance.CurrentData.shopPriceMultiplier = value;
+        }
+    }
     private void Awake()
     {
         Instance = this;
@@ -174,7 +181,6 @@ public class GameManager : MonoBehaviour
                 //Instantiate small gold coin
                 remainingGold -= 10;
             }
-            Debug.Log(remainingGold);
         }
     }
     public void OpenGetSkillWindow(RewardType rewardType)

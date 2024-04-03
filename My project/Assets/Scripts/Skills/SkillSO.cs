@@ -34,6 +34,17 @@ public class SkillSO : ScriptableObject
     public virtual void ActivateBehaviour(SkillHandler handler)
     {
         //Debug.Log("Set behaviour");
+        foreach (var item in skillProperties)
+        {
+            item.ActivateBehaviour(handler);
+        }
+    }
+    public virtual void OnFrameBehaviour(SkillHandler handler)
+    {
+        foreach (var item in skillProperties)
+        {
+            item.OnFrameBehaviour(handler, this);
+        }
     }
     public virtual void LateBehaviour(SkillHandler handler)
     {

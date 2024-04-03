@@ -67,10 +67,7 @@ public class SkillHandler : MonoBehaviour
         //Every frame
         foreach (var item in learnedSkills)
         {
-            foreach (var prop in item.skillProperties)
-            {
-                prop.OnFrameBehaviour(this);
-            }
+            item.OnFrameBehaviour(this);
         }
 
         if (attackScript.attacking)
@@ -190,8 +187,9 @@ public class SkillHandler : MonoBehaviour
             }
         }
     }
-    void ActivateBehaviour()
+    void ActivateBehaviour(SkillSO skill)
     {
+        skill.ActivateBehaviour(this);
     }
     public void OnHitboxSpawnBehaviour(Hitbox hitbox)
     {
@@ -393,11 +391,12 @@ public class SkillHandler : MonoBehaviour
                 }
             }
         }
-
+   
         if (!loading)
         {
             status.Health += skill.stats.maxHealth;
             status.Meter += skill.stats.maxMeter;
+            ActivateBehaviour(skill);
         }
         UpdateStats(loading);
         LateBehaviour();

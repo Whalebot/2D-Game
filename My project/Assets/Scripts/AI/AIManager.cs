@@ -8,7 +8,10 @@ public class AIManager : MonoBehaviour
     public static AIManager Instance { get; private set; }
 
     public int enemyCount;
+    public int wave;
     public bool encounterFinished;
+    public SFX roomClearSFX;
+
 
     public static float aimOffset = 1F;
 
@@ -18,6 +21,7 @@ public class AIManager : MonoBehaviour
     public event Action<Character> killEvent;
 
     public event Action allEnemiesKilledEvent;
+    public event Action<int> waveFinishEvent;
     public event Action roomClearEvent;
 
     public List<EnemySummoner> wave1;
@@ -57,6 +61,11 @@ public class AIManager : MonoBehaviour
 
         enemyCount = allEnemies.Count;
 
+    }
+
+    public int EnemyCount()
+    {
+        return allEnemies.Count;
     }
 
     public bool HasEnemies()
@@ -101,6 +110,8 @@ public class AIManager : MonoBehaviour
     {
         if (wave1.Count > 0)
         {
+            wave++;
+            waveFinishEvent?.Invoke(wave);
             //Spawn Wave
             allEnemiesKilledEvent?.Invoke();
         }
@@ -109,6 +120,7 @@ public class AIManager : MonoBehaviour
             //if (combatEncounter)
             //    Instantiate(clearSFX);
             encounterFinished = true;
+            AudioManager.Instance.PlaySFX(roomClearSFX);
             roomClearEvent?.Invoke();
         }
     }

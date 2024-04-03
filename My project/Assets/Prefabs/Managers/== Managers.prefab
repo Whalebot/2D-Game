@@ -45,7 +45,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyCount: 0
+  wave: 0
   encounterFinished: 0
+  roomClearSFX:
+    startup: 1
+    audioClips: []
+    volume: 1
+    pitchRange: 0
   clearSFX: {fileID: 0}
   wave1: []
   respawningEnemies: []
@@ -104,6 +110,7 @@ MonoBehaviour:
     currrentCharacter:
       characterName: 
       rngSeed: 0
+      shopPriceMultiplier: 1
       stats:
         currentHealth: 0
         maxHealth: 0
@@ -663,14 +670,15 @@ MonoBehaviour:
   treasureRoomLvl1:
   - {fileID: 11400000, guid: 7ec88067dc8679d4d9560e9bf519ddf0, type: 2}
   - {fileID: 11400000, guid: f14804339dd9d4a42ad089b668722821, type: 2}
+  - {fileID: 11400000, guid: 510dbd49ddbc5134aaa2e48a680c9730, type: 2}
   eventRoomLvl1:
+  - {fileID: 11400000, guid: 510dbd49ddbc5134aaa2e48a680c9730, type: 2}
   - {fileID: 11400000, guid: a1218c6cdbf05c2439c0628231f1f783, type: 2}
   - {fileID: 11400000, guid: 138a4c545816e0644907ebc50eef18a8, type: 2}
   - {fileID: 11400000, guid: df0f60cbc0391f648baebd98eee1351f, type: 2}
-  - {fileID: 11400000, guid: 6ea05efd188a4344ca260a9c12389aca, type: 2}
-  - {fileID: 11400000, guid: cd65eb591a13ba8468376ab75c7f5f9b, type: 2}
   - {fileID: 11400000, guid: d0492c17123ef28438c0db944c52e8db, type: 2}
   - {fileID: 11400000, guid: 6f1242a20acb80c4db62a3b89887002e, type: 2}
+  - {fileID: 11400000, guid: f74ae6b3a80a52647beb3412a047b92f, type: 2}
   restRoomLvl1:
   - {fileID: 11400000, guid: 24a4bcd54472639428088d33d56b8c94, type: 2}
   stairwayRoom:

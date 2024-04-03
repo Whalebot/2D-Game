@@ -68,7 +68,7 @@ public class PlayerInputHandler : MonoBehaviour
             return;
         }
 
-        if (input.inputDirection.x == 0)
+        if (input.inputDirection.x == 0 && !mov.isFlying || input.inputDirection == Vector2.zero)
         {
             mov.isMoving = false;
 
@@ -76,7 +76,7 @@ public class PlayerInputHandler : MonoBehaviour
         else
         {
             mov.isMoving = true;
-            mov.direction = new Vector2(input.inputDirection.x, 0);
+            mov.direction = new Vector2(input.inputDirection.x, input.inputDirection.y);
         }
 
         switch (status.currentState)

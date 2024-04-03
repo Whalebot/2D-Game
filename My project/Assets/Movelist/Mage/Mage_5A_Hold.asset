@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad9aba1b41775f45a2f6cf13799dfa6, type: 3}
   m_Name: Mage_5A_Hold
   m_EditorClassIdentifier: 
+  moves: []
   animationID: 511
   meterCost: 0
   meterGain: 5
@@ -82,13 +83,11 @@ MonoBehaviour:
     scale: {x: 0.5, y: 0.3, z: 0.6}
   sfx:
   - startup: 16
-    audioClip: {fileID: 8300000, guid: 7ebc3edc309281c4f94808a3d37fac9b, type: 3}
     audioClips:
     - {fileID: 8300000, guid: 7ebc3edc309281c4f94808a3d37fac9b, type: 3}
     volume: 1
     pitchRange: 0.2
   - startup: 40
-    audioClip: {fileID: 8300000, guid: e0cd8d02ee159ee4ab2be506b7a17c39, type: 3}
     audioClips:
     - {fileID: 8300000, guid: e0cd8d02ee159ee4ab2be506b7a17c39, type: 3}
     volume: 1
@@ -105,17 +104,14 @@ MonoBehaviour:
   blockFX: {fileID: 0}
   hitSFX:
     startup: 1
-    audioClip: {fileID: 0}
     audioClips: []
     volume: 1
     pitchRange: 0
   blockSFX:
     startup: 1
-    audioClip: {fileID: 0}
     audioClips: []
     volume: 1
     pitchRange: 0
-  uniqueProperties: []
   skillProperties: []
   useAttackSpeed: 1
   keepVelocity: 0
@@ -123,6 +119,7 @@ MonoBehaviour:
   holdAttack: 1
   releaseAttackMove: {fileID: 11400000, guid: 96f200068a403654daf94b680b282289, type: 2}
   autoAim: 0
+  keepComboCount: 0
   armor: 0
   resetGatling: 0
   hitsGroundOnly: 0
@@ -139,6 +136,9 @@ MonoBehaviour:
   airInvul: 0
   airInvulStart: 1
   airInvulDuration: 0
+  hideGraphics: 0
+  hideGraphicsStart: 1
+  hideGraphicsDuration: 0
   targetComboMoves:
   - {fileID: 11400000, guid: 846265f9525a33948b942cb5e5fc0ae3, type: 2}
   fullCancel: 0
@@ -170,7 +170,7 @@ MonoBehaviour:
   - startFrame: 24
     duration: 2
     momentum: {x: 2, y: 0}
-    resetVelocityDuringRecovery: 0
+    resetVelocityDuringRecovery: 1
     xMovementCurve:
       serializedVersion: 2
       m_Curve: []

@@ -59,7 +59,8 @@ public class ShopButton : MonoBehaviour
 
         SetupSkill();
     }
-    void GoldChanged(int changedMoney) {
+    void GoldChanged(int changedMoney)
+    {
         SetupSkill();
     }
     [Button]
@@ -97,7 +98,7 @@ public class ShopButton : MonoBehaviour
             default:
                 break;
         }
-
+        price = (int)(price * GameManager.Instance.ShopMultiplier);
         priceText.text = "" + price;
         if (price > GameManager.Instance.Gold)
             priceText.color = Color.red;
@@ -129,7 +130,7 @@ public class ShopButton : MonoBehaviour
         if (GameManager.Instance.Gold >= price)
         {
             GameManager.Instance.Gold -= price;
-            AudioManager.Instance.PlaySFX(buySFX); 
+            AudioManager.Instance.PlaySFX(buySFX);
             UIManager.Instance.DisableTooltip();
             skillManager.GetSkill(skillSO);
             gameObject.SetActive(false);
