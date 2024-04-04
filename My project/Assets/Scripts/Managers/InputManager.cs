@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
 public class InputManager : MonoBehaviour
 {
     public static InputManager Instance { get; private set; }
     public static ControlScheme controlScheme = ControlScheme.PS4;
-
+    public Joystick phoneJoystick;
     public delegate void InputEvent();
     public Controls controls = null;
 
@@ -125,6 +126,7 @@ public class InputManager : MonoBehaviour
         controls.Default._2.performed += _ => On2();
         controls.Default._3.performed += _ => On3();
         controls.Default._4.performed += _ => On4();
+
     }
     private void Start()
     {
@@ -227,6 +229,7 @@ public class InputManager : MonoBehaviour
             return;
         }
         inputDirection = controls.Default.LAnalog.ReadValue<Vector2>();
+        //inputDirection = phoneJoystick.Direction;
         lookDirection = controls.Default.RAnalog.ReadValue<Vector2>();
         mouseScroll = controls.Default.ScrollWheel.ReadValue<Vector2>();
 
@@ -364,9 +367,16 @@ public class InputManager : MonoBehaviour
             //else
             InputBuffer(1);
         }
-
     }
-
+    public void OnWest()
+    {
+ 
+        westInput?.Invoke();
+        if (!GameManager.isPaused && !GameManager.menuOpen)
+        {
+            InputBuffer(1);
+        }
+    }
     public void OnNorth(InputAction.CallbackContext context)
     {
         if (debug) print("Triangle");
@@ -388,6 +398,17 @@ public class InputManager : MonoBehaviour
         }
 
     }
+    public void OnNorth()
+    {
+
+        northInput?.Invoke();
+        if (!GameManager.isPaused && !GameManager.menuOpen)
+        {
+
+            InputBuffer(2);
+        }
+
+    }
     public void OnSouth(InputAction.CallbackContext context)
     {
         ChangeControlScheme(context);
@@ -403,7 +424,16 @@ public class InputManager : MonoBehaviour
         }
 
     }
+    public void OnSouth()
+    {
+        southInput?.Invoke();
+        if (!GameManager.isPaused && !GameManager.menuOpen)
+        {
 
+            InputBuffer(3);
+        }
+
+    }
     public void OnEast(InputAction.CallbackContext context)
     {
         ChangeControlScheme(context);
@@ -423,7 +453,16 @@ public class InputManager : MonoBehaviour
             InputBuffer(4);
         }
     }
+    public void OnEast()
+    {
 
+        eastInput?.Invoke();
+
+        if (!GameManager.isPaused && !GameManager.menuOpen)
+        {
+            InputBuffer(4);
+        }
+    }
     public void OnStart()
     {
         startInput?.Invoke();

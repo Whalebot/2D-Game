@@ -145,7 +145,7 @@ public class Movement : MonoBehaviour
 
     public void SetVelocityGround(Vector3 v)
     {
-        if (ground && v.y != 0)
+        if (ground && v.y == 0)
         {
             Vector3 groundDirection = hit.collider ? Vector3.Cross(new Vector3(0, 0, -v.x), hit.normal) : Vector3.Cross(new Vector3(0, 0, -v.x), hit2.normal);
             _rb.velocity = new Vector3(groundDirection.x, groundDirection.y, 0);
@@ -467,6 +467,20 @@ public class Movement : MonoBehaviour
             status.airCol.gameObject.layer = LayerMask.NameToLayer("CollisionPassthrough");
             passthroughPlatforms = true;
         }
+    }
+
+    public bool OnPlatform()
+    {
+        if (hit.collider)
+        { return ground && !Physics.Raycast(transform.position + Vector3.up * groundCheckHeightOffset - transform.forward * groundBackOffset, Vector3.down, groundRayLength, LayerMask.NameToLayer("Platforms")); }
+        else
+        {
+            return ground && !Physics.Raycast(transform.position + Vector3.up * groundCheckHeightOffset + transform.forward * groundFrontOffset, Vector3.down, groundRayLength, LayerMask.NameToLayer("Platforms"));
+        }
+
+        //return ground && hit.collider ?
+        //    !Physics.Raycast(transform.position + Vector3.up * groundCheckHeightOffset - transform.forward * groundBackOffset, Vector3.down, groundRayLength, LayerMask.NameToLayer("Platforms")) :
+        //    !Physics.Raycast(transform.position + Vector3.up * groundCheckHeightOffset + transform.forward * groundFrontOffset, Vector3.down, groundRayLength, LayerMask.NameToLayer("Platforms"));
     }
     public void FallThroughPlatforms()
     {

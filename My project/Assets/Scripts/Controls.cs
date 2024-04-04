@@ -1060,8 +1060,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b13abaf8-6da7-4f2b-93d5-2c632f41f9cf"",
-                    ""path"": ""<Touchscreen>/touch*/position"",
+                    ""id"": ""94bfaa69-a5ae-4c08-96cb-78dbb2bb7e09"",
+                    ""path"": ""<Touchscreen>/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -1082,8 +1082,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""75426fc0-9a6f-4655-85dd-2f272a24ad0f"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""id"": ""3ef08a24-7400-4683-a065-95e9bb43c8ba"",
+                    ""path"": ""<Touchscreen>/touch*/Press"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

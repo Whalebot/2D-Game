@@ -68,7 +68,7 @@ public class PlayerInputHandler : MonoBehaviour
             return;
         }
 
-        if (input.inputDirection.x == 0 && !mov.isFlying || input.inputDirection == Vector2.zero)
+        if (Mathf.Abs(input.inputDirection.x) < 0.5f && !mov.isFlying || input.inputDirection == Vector2.zero)
         {
             mov.isMoving = false;
 
@@ -76,7 +76,10 @@ public class PlayerInputHandler : MonoBehaviour
         else
         {
             mov.isMoving = true;
-            mov.direction = new Vector2(input.inputDirection.x, input.inputDirection.y);
+
+            int x = input.inputDirection.x > 0 ? x = 1 : x = -1;
+            int y = input.inputDirection.y > 0 ? y = 1 : y = -1;
+            mov.direction = new Vector2(x, y);
         }
 
         switch (status.currentState)
@@ -374,15 +377,11 @@ public class PlayerInputHandler : MonoBehaviour
                     break;
 
                 case 3:
-                    if (input.bufferedInputs[i].dir == 2)
+                    if (input.bufferedInputs[i].dir == 2 && mov.OnPlatform())
                     {
-
-                        if (mov.ground)
-                        {
-                            mov.FallThroughPlatforms();
-                            DeleteInputs(i);
-                            break;
-                        }
+                        mov.FallThroughPlatforms();
+                        DeleteInputs(i);
+                        break;
                     }
                     if (SouthButton())
                     {

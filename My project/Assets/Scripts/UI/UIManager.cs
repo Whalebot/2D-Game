@@ -151,7 +151,7 @@ public class UIManager : MonoBehaviour
 
         UpdateSkillIcon();
 
-        tooltip.position = Input.mousePosition + tooltipOffset;
+        //tooltip.position = Input.mousePosition + tooltipOffset;
         tooltip.gameObject.SetActive(tooltipEnabled);
     }
 

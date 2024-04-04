@@ -27,15 +27,15 @@ public class SkillSelectionButton : MonoBehaviour
     private void FixedUpdate()
     {
 
-        int linkIndex = TMP_TextUtilities.FindIntersectingLink(descriptionText, Input.mousePosition, null);  // If you are not in a Canvas using Screen Overlay, put your camera instead of null
-        if (linkIndex != -1)
-        {
-            tooltip = true;
-            TMP_LinkInfo linkInfo = descriptionText.textInfo.linkInfo[linkIndex];
-            //Debug.Log(linkInfo.GetLinkText());
-            UIManager.Instance.EnableTooltip(linkInfo.GetLinkText());
-        }
-        else if (tooltip)
+        //int linkIndex = TMP_TextUtilities.FindIntersectingLink(descriptionText, UnityEngine.Input.mousePosition, null);  // If you are not in a Canvas using Screen Overlay, put your camera instead of null
+        //if (linkIndex != -1)
+        //{
+        //    tooltip = true;
+        //    TMP_LinkInfo linkInfo = descriptionText.textInfo.linkInfo[linkIndex];
+        //    //Debug.Log(linkInfo.GetLinkText());
+        //    UIManager.Instance.EnableTooltip(linkInfo.GetLinkText());
+        //}
+        //else if (tooltip)
         {
             tooltip = false;
             UIManager.Instance.DisableTooltip();
