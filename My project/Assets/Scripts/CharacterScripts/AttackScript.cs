@@ -340,7 +340,6 @@ public class AttackScript : MonoBehaviour
                         fx.transform.localRotation = Quaternion.Euler(item.rotation);
                         fx.transform.localRotation = Quaternion.Euler(fx.transform.localRotation.eulerAngles.x, fx.transform.localRotation.eulerAngles.y, Mathf.Sign(transform.rotation.y) * fx.transform.localRotation.eulerAngles.z);
                         fx.transform.localScale = item.scale;
-                        fx.transform.localScale = new Vector3(Mathf.Sign(transform.rotation.y) * Mathf.Abs(fx.transform.localScale.x), fx.transform.localScale.y, fx.transform.localScale.z);
 
                         if (item.destroyOnRecovery)
                             fx.GetComponent<VFXScript>().SetupVFX(status);
