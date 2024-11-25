@@ -557,7 +557,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a33322e7a16629a4a9a3808fb13e04b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phoneJoystick: {fileID: 0}
   upToJump: 0
   bufferedInputs: []
   bufferWindow: 0
@@ -872,7 +871,6 @@ MonoBehaviour:
     currrentCharacter:
       characterName: 
       rngSeed: 0
-      shopPriceMultiplier: 1
       stats:
         currentHealth: 0
         maxHealth: 0
@@ -1310,10 +1308,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: == UI
       objectReference: {fileID: 0}
-    - target: {fileID: 1492762014988521181, guid: 1f6846fbf3d1a2a42935257776871191, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3682664002815334024, guid: 1f6846fbf3d1a2a42935257776871191, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1325,14 +1319,6 @@ PrefabInstance:
     - target: {fileID: 6699449586001472406, guid: 1f6846fbf3d1a2a42935257776871191, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -57.785645
-      objectReference: {fileID: 0}
-    - target: {fileID: 7528108906391554150, guid: 1f6846fbf3d1a2a42935257776871191, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8702786252675771638, guid: 1f6846fbf3d1a2a42935257776871191, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2742,18 +2728,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1368073978559327720, guid: 4335d4993ce570840b6d53280ecf0a13, type: 3}
-      propertyPath: m_MatchWidthOrHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1368073978559327720, guid: 4335d4993ce570840b6d53280ecf0a13, type: 3}
-      propertyPath: m_ReferenceResolution.x
-      value: 2340
-      objectReference: {fileID: 0}
-    - target: {fileID: 1368073978559327720, guid: 4335d4993ce570840b6d53280ecf0a13, type: 3}
-      propertyPath: m_ReferenceResolution.y
-      value: 1080
-      objectReference: {fileID: 0}
     - target: {fileID: 1775199720777189386, guid: 4335d4993ce570840b6d53280ecf0a13, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2965,10 +2939,6 @@ PrefabInstance:
     - target: {fileID: 6105243649579533778, guid: 4335d4993ce570840b6d53280ecf0a13, type: 3}
       propertyPath: m_Name
       value: Character Creator Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 6105243649579533778, guid: 4335d4993ce570840b6d53280ecf0a13, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6739057020449646085, guid: 4335d4993ce570840b6d53280ecf0a13, type: 3}
       propertyPath: m_AnchorMax.y
