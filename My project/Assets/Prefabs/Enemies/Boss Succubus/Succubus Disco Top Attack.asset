@@ -119,7 +119,26 @@ MonoBehaviour:
   useAirAction: 0
   landCancel: 0
   recoverOnlyOnLand: 0
-  m: []
+  m:
+  - startFrame: 1
+    duration: 80
+    momentum: {x: 0, y: 0}
+    resetVelocityDuringRecovery: 1
+    xMovementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    movementCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    freeMovement: 0
+    useCurve: 0
+    teleport: 0
   instantStartupRotation: 1
   overrideVelocity: 1
   runMomentum: 0

@@ -11,6 +11,11 @@ public class SkillIcon : MonoBehaviour
 
     public void SetupIcon(SkillSO skill)
     {
+        if (skill == null)
+        {
+            Debug.Log("error");
+            return;
+        }
         skillSO = skill;
         skillIcon.sprite = skill.sprite;
     }
@@ -20,7 +25,8 @@ public class SkillIcon : MonoBehaviour
         UIManager.Instance.DisplaySkillDescription(this);
     }
 
-    public void HideDescription() {
+    public void HideDescription()
+    {
         UIManager.Instance.HideSkillDescription();
     }
 }

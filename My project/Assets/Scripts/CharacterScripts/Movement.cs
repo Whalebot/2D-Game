@@ -145,7 +145,7 @@ public class Movement : MonoBehaviour
 
     public void SetVelocityGround(Vector3 v)
     {
-        if (ground && v.y != 0)
+        if (ground && v.y == 0)
         {
             Vector3 groundDirection = hit.collider ? Vector3.Cross(new Vector3(0, 0, -v.x), hit.normal) : Vector3.Cross(new Vector3(0, 0, -v.x), hit2.normal);
             _rb.velocity = new Vector3(groundDirection.x, groundDirection.y, 0);
@@ -452,7 +452,7 @@ public class Movement : MonoBehaviour
         }
 
         if (isFlying)
-            _rb.useGravity = !ground;
+            _rb.useGravity = ground;
 
         if (ground) status.col.material = groundMat;
         else status.col.material = airMat;
